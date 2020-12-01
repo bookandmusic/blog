@@ -1,0 +1,1308 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="经典排序算法总结与实现, Bookandmusic">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>经典排序算法总结与实现 | Bookandmusic</title>
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/hexo/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="/hexo/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/css/my.css">
+
+    <script src="/hexo/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/hexo/atom.xml" title="Bookandmusic" type="application/atom+xml">
+<link rel="stylesheet" href="/hexo/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/hexo/" class="waves-effect waves-light">
+                    
+                    <img src="/hexo/medias/favicon.ico" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Bookandmusic</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/hexo/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/hexo/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/hexo/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/hexo/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/hexo/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/hexo/medias/favicon.ico" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Bookandmusic</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/hexo/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/hexo/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/hexo/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/hexo/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/hexo/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/hexo/medias/featureimages/12.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">经典排序算法总结与实现</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/hexo/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/hexo/tags/%E6%8E%92%E5%BA%8F/">
+                                <span class="chip bg-color">排序</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                技术
+                            </a>
+                        
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/%E7%AE%97%E6%B3%95/" class="post-category">
+                                算法
+                            </a>
+                        
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/" class="post-category">
+                                排序
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-05-09
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2020-12-01
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.9k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    11 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>经典排序算法在面试中占有很大的比重，也是基础，为了未雨绸缪，整理并用Python实现了七大经典排序算法，包括冒泡排序，插入排序，选择排序，希尔排序，归并排序，快速排序，堆排序。之所以用Python实现，主要是因为它更接近伪代码，能用更少的代码实现算法，更利于理解。</p>
+<a id="more"></a>
+
+<p>本篇博客所有排序实现均默认从小到大。</p>
+<h2 id="一、冒泡排序-BubbleSort"><a href="#一、冒泡排序-BubbleSort" class="headerlink" title="一、冒泡排序 BubbleSort"></a>一、冒泡排序 <code>BubbleSort</code></h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>冒泡排序的原理非常简单，它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序逆序就把他们交换过来。</p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li>比较相邻的元素。如果第一个比第二个大，就交换他们两个。</li>
+<li>对第0个到第n-1个数据做同样的工作。这时，最大的数就“浮”到了数组最后的位置上。</li>
+<li>针对所有的元素重复以上的步骤，除了最后一个。</li>
+<li>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。</li>
+</ol>
+<p>不过针对上述实现过程还有两种优化方案。</p>
+<ul>
+<li>优化1：某一趟遍历如果没有数据交换，则说明已经排好序了，因此不用再进行迭代了。用一个标记记录这个状态即可。</li>
+<li>优化2：记录某次遍历时最后发生数据交换的位置，这个位置之后的数据显然已经有序，不用再排序了。因此通过记录最后发生数据交换的位置就可以确定下次循环的范围了。</li>
+</ul>
+<h3 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">bubble_sort</span><span class="token punctuation">(</span>ary<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    n <span class="token operator">=</span> len<span class="token punctuation">(</span>ary<span class="token punctuation">)</span>                   <span class="token comment" spellcheck="true">#获得数组的长度</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>n<span class="token operator">-</span>i<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span>  ary<span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span> <span class="token operator">></span> ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token punctuation">:</span>       <span class="token comment" spellcheck="true">#如果前者比后者大</span>
+                ary<span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span>       <span class="token comment" spellcheck="true">#则交换两者</span>
+    <span class="token keyword">return</span> ary
+
+
+<span class="token comment" spellcheck="true">#优化1：某一趟遍历如果没有数据交换，则说明已经排好序了，因此不用再进行迭代了。</span>
+<span class="token comment" spellcheck="true">#用一个标记记录这个状态即可。</span>
+<span class="token keyword">def</span> <span class="token function">bubble_sort2</span><span class="token punctuation">(</span>ary<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    n <span class="token operator">=</span> len<span class="token punctuation">(</span>ary<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        flag <span class="token operator">=</span> <span class="token number">1</span>                    <span class="token comment" spellcheck="true">#标记</span>
+        <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>n<span class="token operator">-</span>i<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span>  ary<span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span> <span class="token operator">></span> ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token punctuation">:</span>
+                ary<span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span>
+                flag <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword">if</span> flag <span class="token punctuation">:</span>                   <span class="token comment" spellcheck="true">#全排好序了，直接跳出</span>
+            <span class="token keyword">break</span>
+    <span class="token keyword">return</span> ary
+
+<span class="token comment" spellcheck="true">#优化2：记录某次遍历时最后发生数据交换的位置，这个位置之后的数据显然已经有序了。</span>
+<span class="token comment" spellcheck="true"># 因此通过记录最后发生数据交换的位置就可以确定下次循环的范围了。</span>
+<span class="token keyword">def</span> <span class="token function">bubble_sort3</span><span class="token punctuation">(</span>ary<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    n <span class="token operator">=</span> len<span class="token punctuation">(</span>ary<span class="token punctuation">)</span>
+    k <span class="token operator">=</span> n                           <span class="token comment" spellcheck="true">#k为循环的范围，初始值n</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        flag <span class="token operator">=</span> <span class="token number">1</span>
+        <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>        <span class="token comment" spellcheck="true">#只遍历到最后交换的位置即可</span>
+            <span class="token keyword">if</span>  ary<span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span> <span class="token operator">></span> ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token punctuation">:</span>
+                ary<span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span>
+                k <span class="token operator">=</span> j               <span class="token comment" spellcheck="true">#记录最后交换的位置</span>
+                flag <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword">if</span> flag <span class="token punctuation">:</span>
+            <span class="token keyword">break</span>
+    <span class="token keyword">return</span> ary</code></pre>
+<h2 id="二、选择排序-SelectionSort"><a href="#二、选择排序-SelectionSort" class="headerlink" title="二、选择排序 SelectionSort"></a>二、选择排序 <code>SelectionSort</code></h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><p>选择排序无疑是最简单直观的排序。它的工作原理如下。</p>
+<h3 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li>在未排序序列中找到最小（大）元素，存放到排序序列的起始位置。</li>
+<li>再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。</li>
+<li>以此类推，直到所有元素均排序完毕。</li>
+</ol>
+<h3 id="源代码-1"><a href="#源代码-1" class="headerlink" title="源代码"></a>源代码</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">select_sort</span><span class="token punctuation">(</span>ary<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    n <span class="token operator">=</span> len<span class="token punctuation">(</span>ary<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        min <span class="token operator">=</span> i                             <span class="token comment" spellcheck="true">#最小元素下标标记</span>
+        <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">&lt;</span> ary<span class="token punctuation">[</span>min<span class="token punctuation">]</span> <span class="token punctuation">:</span>
+                min <span class="token operator">=</span> j                     <span class="token comment" spellcheck="true">#找到最小值的下标</span>
+        ary<span class="token punctuation">[</span>min<span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> ary<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>min<span class="token punctuation">]</span>   <span class="token comment" spellcheck="true">#交换两者</span>
+    <span class="token keyword">return</span> ary</code></pre>
+<h2 id="三、插入排序-InsertionSort"><a href="#三、插入排序-InsertionSort" class="headerlink" title="三、插入排序 InsertionSort"></a>三、插入排序 <code>InsertionSort</code></h2><h3 id="介绍-2"><a href="#介绍-2" class="headerlink" title="介绍"></a>介绍</h3><p>插入排序的工作原理是，对于每个未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。</p>
+<h3 id="步骤-2"><a href="#步骤-2" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li>从第一个元素开始，该元素可以认为已经被排序</li>
+<li>取出下一个元素，在已经排序的元素序列中从后向前扫描</li>
+<li>如果被扫描的元素（已排序）大于新元素，将该元素后移一位</li>
+<li>重复步骤3，直到找到已排序的元素小于或者等于新元素的位置</li>
+<li>将新元素插入到该位置后</li>
+<li>重复步骤2~5</li>
+</ol>
+<h3 id="排序演示"><a href="#排序演示" class="headerlink" title="排序演示"></a>排序演示</h3><p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190509200851-Insertion-sort-example-300px%20.gif" alt="20190509200851-Insertion-sort-example-300px"></p>
+<h3 id="源代码-2"><a href="#源代码-2" class="headerlink" title="源代码"></a>源代码</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">insert_sort</span><span class="token punctuation">(</span>ary<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    n <span class="token operator">=</span> len<span class="token punctuation">(</span>ary<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> ary<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;</span> ary<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+            temp <span class="token operator">=</span> ary<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+            index <span class="token operator">=</span> i           <span class="token comment" spellcheck="true">#待插入的下标</span>
+            <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span>i<span class="token number">-1</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true">#从i-1 循环到 0 (包括0)</span>
+                <span class="token keyword">if</span> ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">></span> temp <span class="token punctuation">:</span>
+                    ary<span class="token punctuation">[</span>j<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span>
+                    index <span class="token operator">=</span> j   <span class="token comment" spellcheck="true">#记录待插入下标</span>
+                <span class="token keyword">else</span> <span class="token punctuation">:</span>
+                    <span class="token keyword">break</span>
+            ary<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> temp
+    <span class="token keyword">return</span> ary</code></pre>
+<h2 id="四、希尔排序-ShellSort"><a href="#四、希尔排序-ShellSort" class="headerlink" title="四、希尔排序 ShellSort"></a>四、希尔排序 <code>ShellSort</code></h2><h3 id="介绍："><a href="#介绍：" class="headerlink" title="介绍："></a>介绍：</h3><p>希尔排序，也称递减增量排序算法，实质是分组插入排序。由 Donald Shell 于1959年提出。希尔排序是非稳定排序算法。</p>
+<h3 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h3><p>希尔排序的基本思想是：将数组列在一个表中并对列分别进行插入排序，重复这过程，不过每次用更长的列（步长更长了，列数更少了）来进行。最后整个表就只有一列了。将数组转换至表是为了更好地理解这算法，算法本身还是使用数组进行排序。</p>
+<ol>
+<li>例如，假设有这样一组数<code>[ 13 14 94 33 82 25 59 94 65 23 45 27 73 25 39 10 ]</code>，如果我们以步长为5开始进行排序，我们可以通过将这列表放在有5列的表中来更好地描述算法，这样他们就应该看起来是这样：<pre><code> 13 14 94 33 82
+ 25 59 94 65 23
+ 45 27 73 25 39
+ 10</code></pre></li>
+<li>然后我们对每列进行排序：<pre><code> 10 14 73 25 23
+ 13 27 94 33 39
+ 25 59 94 65 82
+ 45</code></pre></li>
+<li>将上述四行数字，依序接在一起时我们得到：<code>[ 10 14 73 25 23 13 27 94 33 39 25 59 94 65 82 45 ]</code>。这时10已经移至正确位置了，然后再以3为步长进行排序：<pre><code> 10 14 73
+ 25 23 13
+ 27 94 33
+ 39 25 59
+ 94 65 82
+ 45</code></pre> 排序之后变为：<pre><code> 10 14 13
+ 25 23 33
+ 27 25 59
+ 39 65 73
+ 45 94 82
+ 94</code></pre></li>
+<li>最后以1步长进行排序（此时就是简单的插入排序了）。</li>
+</ol>
+<h3 id="源代码-3"><a href="#源代码-3" class="headerlink" title="源代码"></a>源代码</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">shell_sort</span><span class="token punctuation">(</span>ary<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    n <span class="token operator">=</span> len<span class="token punctuation">(</span>ary<span class="token punctuation">)</span>
+    gap <span class="token operator">=</span> round<span class="token punctuation">(</span>n<span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">)</span>       <span class="token comment" spellcheck="true">#初始步长 , 用round四舍五入取整</span>
+    <span class="token keyword">while</span> gap <span class="token operator">></span> <span class="token number">0</span> <span class="token punctuation">:</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>gap<span class="token punctuation">,</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>        <span class="token comment" spellcheck="true">#每一列进行插入排序 , 从gap 到 n-1</span>
+            temp <span class="token operator">=</span> ary<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+            j <span class="token operator">=</span> i
+            <span class="token keyword">while</span> <span class="token punctuation">(</span> j <span class="token operator">>=</span> gap <span class="token operator">and</span> ary<span class="token punctuation">[</span>j<span class="token operator">-</span>gap<span class="token punctuation">]</span> <span class="token operator">></span> temp <span class="token punctuation">)</span><span class="token punctuation">:</span>    <span class="token comment" spellcheck="true">#插入排序</span>
+                ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> ary<span class="token punctuation">[</span>j<span class="token operator">-</span>gap<span class="token punctuation">]</span>
+                j <span class="token operator">=</span> j <span class="token operator">-</span> gap
+            ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> temp
+        gap <span class="token operator">=</span> round<span class="token punctuation">(</span>gap<span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">)</span>                     <span class="token comment" spellcheck="true">#重新设置步长</span>
+    <span class="token keyword">return</span> ary</code></pre>
+<h2 id="五、归并排序-MergeSort"><a href="#五、归并排序-MergeSort" class="headerlink" title="五、归并排序 MergeSort"></a>五、归并排序 <code>MergeSort</code></h2><h3 id="介绍-3"><a href="#介绍-3" class="headerlink" title="介绍"></a>介绍</h3><p>归并排序是采用分治法的一个非常典型的应用。归并排序的思想就是先递归分解数组，再合并数组。</p>
+<p>先考虑合并两个有序数组，基本思路是比较两个数组的最前面的数，谁小就先取谁，取了后相应的指针就往后移一位。然后再比较，直至一个数组为空，最后把另一个数组的剩余部分复制过来即可。</p>
+<p>再考虑递归分解，基本思路是将数组分解成left和right，如果这两个数组内部数据是有序的，那么就可以用上面合并数组的方法将这两个数组合并排序。如何让这两个数组内部是有序的？可以再二分，直至分解出的小组只含有一个元素时为止，此时认为该小组内部已有序。然后合并排序相邻二个小组即可。</p>
+<h3 id="排序演示-1"><a href="#排序演示-1" class="headerlink" title="排序演示"></a>排序演示</h3><p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190509201729-Merge-sort-example-300px%20.gif" alt="20190509201729-Merge-sort-example-300px"></p>
+<h3 id="源代码-4"><a href="#源代码-4" class="headerlink" title="源代码"></a>源代码</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">merge_sort</span><span class="token punctuation">(</span>ary<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> len<span class="token punctuation">(</span>ary<span class="token punctuation">)</span> <span class="token operator">&lt;=</span> <span class="token number">1</span> <span class="token punctuation">:</span> <span class="token keyword">return</span> ary
+    num <span class="token operator">=</span> int<span class="token punctuation">(</span>len<span class="token punctuation">(</span>ary<span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">)</span>       <span class="token comment" spellcheck="true">#二分分解</span>
+    left <span class="token operator">=</span> merge_sort<span class="token punctuation">(</span>ary<span class="token punctuation">[</span><span class="token punctuation">:</span>num<span class="token punctuation">]</span><span class="token punctuation">)</span>
+    right <span class="token operator">=</span> merge_sort<span class="token punctuation">(</span>ary<span class="token punctuation">[</span>num<span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> merge<span class="token punctuation">(</span>left<span class="token punctuation">,</span>right<span class="token punctuation">)</span>    <span class="token comment" spellcheck="true">#合并数组</span>
+
+<span class="token keyword">def</span> <span class="token function">merge</span><span class="token punctuation">(</span>left<span class="token punctuation">,</span>right<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''合并操作，
+    将两个有序数组left[]和right[]合并成一个大的有序数组'''</span>
+    l<span class="token punctuation">,</span>r <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span>           <span class="token comment" spellcheck="true">#left与right数组的下标指针</span>
+    result <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">while</span> l<span class="token operator">&lt;</span>len<span class="token punctuation">(</span>left<span class="token punctuation">)</span> <span class="token operator">and</span> r<span class="token operator">&lt;</span>len<span class="token punctuation">(</span>right<span class="token punctuation">)</span> <span class="token punctuation">:</span>
+        <span class="token keyword">if</span> left<span class="token punctuation">[</span>l<span class="token punctuation">]</span> <span class="token operator">&lt;</span> right<span class="token punctuation">[</span>r<span class="token punctuation">]</span><span class="token punctuation">:</span>
+            result<span class="token punctuation">.</span>append<span class="token punctuation">(</span>left<span class="token punctuation">[</span>l<span class="token punctuation">]</span><span class="token punctuation">)</span>
+            l <span class="token operator">+=</span> <span class="token number">1</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            result<span class="token punctuation">.</span>append<span class="token punctuation">(</span>right<span class="token punctuation">[</span>r<span class="token punctuation">]</span><span class="token punctuation">)</span>
+            r <span class="token operator">+=</span> <span class="token number">1</span>
+    result <span class="token operator">+=</span> left<span class="token punctuation">[</span>l<span class="token punctuation">:</span><span class="token punctuation">]</span>
+    result <span class="token operator">+=</span> right<span class="token punctuation">[</span>r<span class="token punctuation">:</span><span class="token punctuation">]</span>
+    <span class="token keyword">return</span> result</code></pre>
+<h2 id="六、快速排序-QuickSort"><a href="#六、快速排序-QuickSort" class="headerlink" title="六、快速排序 QuickSort"></a>六、快速排序 <code>QuickSort</code></h2><h3 id="介绍-4"><a href="#介绍-4" class="headerlink" title="介绍"></a>介绍</h3><p>快速排序通常明显比同为<code>Ο(n log n)</code>的其他算法更快，因此常被采用，而且快排采用了分治法的思想，所以在很多笔试面试中能经常看到快排的影子。可见掌握快排的重要性。</p>
+<h3 id="步骤-3"><a href="#步骤-3" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li>从数列中挑出一个元素作为基准数。</li>
+<li>分区过程，将比基准数大的放到右边，小于或等于它的数都放到左边。</li>
+<li>再对左右区间递归执行第二步，直至各区间只有一个数。</li>
+</ol>
+<h3 id="排序演示-2"><a href="#排序演示-2" class="headerlink" title="排序演示"></a>排序演示</h3><p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190509202100-Quicksort-example%20.gif" alt="20190509202100-Quicksort-example"></p>
+<h3 id="源代码-5"><a href="#源代码-5" class="headerlink" title="源代码"></a>源代码</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">quick_sort</span><span class="token punctuation">(</span>ary<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> qsort<span class="token punctuation">(</span>ary<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>len<span class="token punctuation">(</span>ary<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">qsort</span><span class="token punctuation">(</span>ary<span class="token punctuation">,</span>left<span class="token punctuation">,</span>right<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true">#快排函数，ary为待排序数组，left为待排序的左边界，right为右边界</span>
+    <span class="token keyword">if</span> left <span class="token operator">>=</span> right <span class="token punctuation">:</span> <span class="token keyword">return</span> ary
+    key <span class="token operator">=</span> ary<span class="token punctuation">[</span>left<span class="token punctuation">]</span>     <span class="token comment" spellcheck="true">#取最左边的为基准数</span>
+    lp <span class="token operator">=</span> left           <span class="token comment" spellcheck="true">#左指针</span>
+    rp <span class="token operator">=</span> right          <span class="token comment" spellcheck="true">#右指针</span>
+    <span class="token keyword">while</span> lp <span class="token operator">&lt;</span> rp <span class="token punctuation">:</span>
+        <span class="token keyword">while</span> ary<span class="token punctuation">[</span>rp<span class="token punctuation">]</span> <span class="token operator">>=</span> key <span class="token operator">and</span> lp <span class="token operator">&lt;</span> rp <span class="token punctuation">:</span>
+            rp <span class="token operator">-=</span> <span class="token number">1</span>
+        <span class="token keyword">while</span> ary<span class="token punctuation">[</span>lp<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> key <span class="token operator">and</span> lp <span class="token operator">&lt;</span> rp <span class="token punctuation">:</span>
+            lp <span class="token operator">+=</span> <span class="token number">1</span>
+        ary<span class="token punctuation">[</span>lp<span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>rp<span class="token punctuation">]</span> <span class="token operator">=</span> ary<span class="token punctuation">[</span>rp<span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>lp<span class="token punctuation">]</span>
+    ary<span class="token punctuation">[</span>left<span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>lp<span class="token punctuation">]</span> <span class="token operator">=</span> ary<span class="token punctuation">[</span>lp<span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>left<span class="token punctuation">]</span>
+    qsort<span class="token punctuation">(</span>ary<span class="token punctuation">,</span>left<span class="token punctuation">,</span>lp<span class="token number">-1</span><span class="token punctuation">)</span>
+    qsort<span class="token punctuation">(</span>ary<span class="token punctuation">,</span>rp<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>right<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> ary
+</code></pre>
+<h2 id="七、堆排序-HeapSort"><a href="#七、堆排序-HeapSort" class="headerlink" title="七、堆排序 HeapSort"></a>七、堆排序 <code>HeapSort</code></h2><h3 id="介绍：-1"><a href="#介绍：-1" class="headerlink" title="介绍："></a>介绍：</h3><p>堆排序在 <code>top K</code> 问题中使用比较频繁。堆排序是采用二叉堆的数据结构来实现的，虽然实质上还是一维数组。二叉堆是一个近似完全二叉树 。</p>
+<blockquote>
+<p>二叉堆具有以下性质：</p>
+</blockquote>
+<p>父节点的键值总是大于或等于（小于或等于）任何一个子节点的键值。<br>每个节点的左右子树都是一个二叉堆（都是最大堆或最小堆）。</p>
+<h3 id="步骤-4"><a href="#步骤-4" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li><p>构造最大堆（<code>Build_Max_Heap</code>）：若数组下标范围为<code>0~n</code>，考虑到单独一个元素是大根堆，则从下标n/2开始的元素均为大根堆。于是只要从<code>n/2-1</code>开始，向前依次构造大根堆，这样就能保证，构造到某个节点时，它的左右子树都已经是大根堆。</p>
+</li>
+<li><p>堆排序（<code>HeapSort</code>）：由于堆是用数组模拟的。得到一个大根堆后，数组内部并不是有序的。因此需要将堆化数组有序化。思想是移除根节点，并做最大堆调整的递归运算。第一次将<code>heap[0]</code>与<code>heap[n-1]</code>交换，再对<code>heap[0...n-2]</code>做最大堆调整。第二次将<code>heap[0]</code>与<code>heap[n-2]</code>交换，再对<code>heap[0...n-3]</code>做最大堆调整。重复该操作直至<code>heap[0]</code>和<code>heap[1]</code>交换。由于每次都是将最大的数并入到后面的有序区间，故操作完后整个数组就是有序的了。</p>
+</li>
+<li><p>最大堆调整（<code>Max_Heapify</code>）：该方法是提供给上述两个过程调用的。目的是将堆的末端子节点作调整，使得子节点永远小于父节点 。</p>
+</li>
+</ol>
+<h3 id="排序演示-3"><a href="#排序演示-3" class="headerlink" title="排序演示"></a>排序演示</h3><p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190509203202-Heapsort-example%20.gif" alt="20190509203202-Heapsort-example"></p>
+<h3 id="源代码-6"><a href="#源代码-6" class="headerlink" title="源代码"></a>源代码</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">heap_sort</span><span class="token punctuation">(</span>ary<span class="token punctuation">)</span> <span class="token punctuation">:</span>
+    n <span class="token operator">=</span> len<span class="token punctuation">(</span>ary<span class="token punctuation">)</span>
+    first <span class="token operator">=</span> int<span class="token punctuation">(</span>n<span class="token operator">/</span><span class="token number">2</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>       <span class="token comment" spellcheck="true">#最后一个非叶子节点</span>
+    <span class="token keyword">for</span> start <span class="token keyword">in</span> range<span class="token punctuation">(</span>first<span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">:</span>     <span class="token comment" spellcheck="true">#构造大根堆</span>
+        max_heapify<span class="token punctuation">(</span>ary<span class="token punctuation">,</span>start<span class="token punctuation">,</span>n<span class="token number">-1</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> end <span class="token keyword">in</span> range<span class="token punctuation">(</span>n<span class="token number">-1</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>           <span class="token comment" spellcheck="true">#堆排，将大根堆转换成有序数组</span>
+        ary<span class="token punctuation">[</span>end<span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> ary<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>end<span class="token punctuation">]</span>
+        max_heapify<span class="token punctuation">(</span>ary<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>end<span class="token number">-1</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> ary
+
+
+<span class="token comment" spellcheck="true">#最大堆调整：将堆的末端子节点作调整，使得子节点永远小于父节点</span>
+<span class="token comment" spellcheck="true">#start为当前需要调整最大堆的位置，end为调整边界</span>
+<span class="token keyword">def</span> <span class="token function">max_heapify</span><span class="token punctuation">(</span>ary<span class="token punctuation">,</span>start<span class="token punctuation">,</span>end<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    root <span class="token operator">=</span> start
+    <span class="token keyword">while</span> <span class="token boolean">True</span> <span class="token punctuation">:</span>
+        child <span class="token operator">=</span> root<span class="token operator">*</span><span class="token number">2</span> <span class="token operator">+</span><span class="token number">1</span>               <span class="token comment" spellcheck="true">#调整节点的子节点</span>
+        <span class="token keyword">if</span> child <span class="token operator">></span> end <span class="token punctuation">:</span> <span class="token keyword">break</span>
+        <span class="token keyword">if</span> child<span class="token operator">+</span><span class="token number">1</span> <span class="token operator">&lt;=</span> end <span class="token operator">and</span> ary<span class="token punctuation">[</span>child<span class="token punctuation">]</span> <span class="token operator">&lt;</span> ary<span class="token punctuation">[</span>child<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token punctuation">:</span>
+            child <span class="token operator">=</span> child<span class="token operator">+</span><span class="token number">1</span>             <span class="token comment" spellcheck="true">#取较大的子节点</span>
+        <span class="token keyword">if</span> ary<span class="token punctuation">[</span>root<span class="token punctuation">]</span> <span class="token operator">&lt;</span> ary<span class="token punctuation">[</span>child<span class="token punctuation">]</span> <span class="token punctuation">:</span>     <span class="token comment" spellcheck="true">#较大的子节点成为父节点</span>
+            ary<span class="token punctuation">[</span>root<span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>child<span class="token punctuation">]</span> <span class="token operator">=</span> ary<span class="token punctuation">[</span>child<span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>root<span class="token punctuation">]</span>     <span class="token comment" spellcheck="true">#交换</span>
+            root <span class="token operator">=</span> child
+        <span class="token keyword">else</span> <span class="token punctuation">:</span>
+            <span class="token keyword">break</span>
+</code></pre>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>下面为七种经典排序算法指标对比情况：<br><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190509203208-81b78497jw1emncvtdf1qj20u10afn0r%20.jpg" alt="20190509203208-81b78497jw1emncvtdf1qj20u10afn0r"></p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/hexo/about" rel="external nofollow noreferrer">bookandmusic</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://liushaofeng2018.gitee.io/hexo/hexo/2019/05/09/suan-fa-pai-xu/">http://liushaofeng2018.gitee.io/hexo/hexo/2019/05/09/suan-fa-pai-xu/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/hexo/about" target="_blank">bookandmusic</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/hexo/tags/%E6%8E%92%E5%BA%8F/">
+                                    <span class="chip bg-color">排序</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/hexo/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/hexo/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/hexo/medias/reward/Alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/hexo/medias/reward/Wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/hexo/2019/05/09/wang-luo-tong-xin-02-jian-dan-jie-shao-http-xie-yi-jie-gou/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/hexo/medias/featureimages/14.jpg" class="responsive-img" alt="02-简单介绍 HTTP 协议结构">
+                        
+                        <span class="card-title">02-简单介绍 HTTP 协议结构</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            首先，应用 HTTP 协议时，必定有客户端和服务器端。其中，发起请求的是客户端，响应请求并返回的是服务端。
+1、请求报文请求报文是由请求方法、请求 URI、协议版本、可选的请求首部字段和内容实体构成的。
+
+2、响应报文服务器以响应的形式返回
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-05-09
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                    技术
+                                </a>
+                            
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/" class="post-category">
+                                    网络通信
+                                </a>
+                            
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/" class="post-category">
+                                    TCP
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/hexo/tags/HTTP/">
+                        <span class="chip bg-color">HTTP</span>
+                    </a>
+                    
+                    <a href="/hexo/tags/TCP/">
+                        <span class="chip bg-color">TCP</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/hexo/2019/05/09/wang-luo-tong-xin-01-liao-jie-web-ji-wang-luo-ji-chu/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/hexo/medias/featureimages/15.jpg" class="responsive-img" alt="01—了解web及网络基础">
+                        
+                        <span class="card-title">01—了解web及网络基础</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            HTTP 的出现主要是为了解决文本传输的难题
+
+
+TCP/IP 协议族：是互联网相关的各类协议族的总称
+重要的一点是分层: 应用层、传输层、网络层、数据链路层
+层次化的优点：1、修改某个地方只用改相应的层2、设计变简单，各层管理自己的职责
+
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-05-09
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                    技术
+                                </a>
+                            
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/" class="post-category">
+                                    网络通信
+                                </a>
+                            
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/" class="post-category">
+                                    TCP
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/hexo/tags/HTTP/">
+                        <span class="chip bg-color">HTTP</span>
+                    </a>
+                    
+                    <a href="/hexo/tags/TCP/">
+                        <span class="chip bg-color">TCP</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/hexo/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/hexo/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/hexo/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/hexo/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/hexo/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/hexo/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="4943692268"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.3'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/hexo/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="/hexo/about" target="_blank">bookandmusic</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">87.4k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:1943288286@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1943288286" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1943288286" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/hexo/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/hexo/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/hexo/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/hexo/libs/materialize/materialize.min.js"></script>
+    <script src="/hexo/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/hexo/libs/aos/aos.js"></script>
+    <script src="/hexo/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/hexo/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/hexo/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/hexo/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/hexo/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/hexo/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

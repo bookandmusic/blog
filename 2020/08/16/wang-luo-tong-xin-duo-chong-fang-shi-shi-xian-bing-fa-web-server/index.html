@@ -1,0 +1,1522 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="网络通信-多种方式实现并发 Web Server, Bookandmusic">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>网络通信-多种方式实现并发 Web Server | Bookandmusic</title>
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/hexo/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="/hexo/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/css/my.css">
+
+    <script src="/hexo/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/hexo/atom.xml" title="Bookandmusic" type="application/atom+xml">
+<link rel="stylesheet" href="/hexo/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/hexo/" class="waves-effect waves-light">
+                    
+                    <img src="/hexo/medias/favicon.ico" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Bookandmusic</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/hexo/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/hexo/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/hexo/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/hexo/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/hexo/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/hexo/medias/favicon.ico" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Bookandmusic</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/hexo/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/hexo/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/hexo/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/hexo/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/hexo/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/hexo/medias/featureimages/6.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">网络通信-多种方式实现并发 Web Server</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/hexo/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/hexo/tags/TCP/">
+                                <span class="chip bg-color">TCP</span>
+                            </a>
+                        
+                            <a href="/hexo/tags/WEB-Server/">
+                                <span class="chip bg-color">WEB Server</span>
+                            </a>
+                        
+                            <a href="/hexo/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/">
+                                <span class="chip bg-color">高并发</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                技术
+                            </a>
+                        
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/" class="post-category">
+                                网络通信
+                            </a>
+                        
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/" class="post-category">
+                                TCP
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-08-16
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2020-12-01
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.7k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    15 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>下面我们使用 <code>Python</code> 来实现并发的 <code>Web Server</code>，其中采用了多进程、多线程、协程、单进程单线程非阻塞、<code>select</code>、<code>epoll</code>的方式。</p>
+<a id="more"></a>
+
+<h2 id="一、使用子进程来实现并发-Web-Server"><a href="#一、使用子进程来实现并发-Web-Server" class="headerlink" title="一、使用子进程来实现并发 Web Server"></a>一、使用子进程来实现并发 Web Server</h2><pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> socket
+<span class="token keyword">import</span> re
+<span class="token keyword">import</span> multiprocessing
+
+<span class="token comment" spellcheck="true">#  注意： 不同的实现方式，但是对请求的处理方式相同，只是主函数中对客户端请求的接收方式不同 </span>
+<span class="token keyword">def</span> <span class="token function">handle_request</span><span class="token punctuation">(</span>new_socket<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># 接收请求</span>
+        recv_msg <span class="token operator">=</span> new_socket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> recv_msg <span class="token operator">==</span> <span class="token string">""</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"recv null"</span><span class="token punctuation">)</span>
+            new_socket<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span>
+
+        <span class="token comment" spellcheck="true"># 从请求中解析出URI</span>
+        recv_lines <span class="token operator">=</span> recv_msg<span class="token punctuation">.</span>splitlines<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>recv_lines<span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true"># 使用正则表达式提取出URI</span>
+        ret <span class="token operator">=</span> re<span class="token punctuation">.</span>match<span class="token punctuation">(</span>r<span class="token string">"[^/]+(/[^ ]*)"</span><span class="token punctuation">,</span> recv_lines<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> ret<span class="token punctuation">:</span>
+            <span class="token comment" spellcheck="true"># 获取URI字符串</span>
+            file_name <span class="token operator">=</span> ret<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+            <span class="token comment" spellcheck="true"># 如果URI是/，则默认返回index.html的内容</span>
+            <span class="token keyword">if</span> file_name <span class="token operator">==</span> <span class="token string">"/"</span><span class="token punctuation">:</span>
+                file_name <span class="token operator">=</span> <span class="token string">"/index.html"</span>
+
+        <span class="token keyword">try</span><span class="token punctuation">:</span>
+            <span class="token comment" spellcheck="true"># 根据请求的URI，读取相应的文件</span>
+            fp <span class="token operator">=</span> open<span class="token punctuation">(</span><span class="token string">"."</span> <span class="token operator">+</span> file_name<span class="token punctuation">,</span> <span class="token string">"rb"</span><span class="token punctuation">)</span>
+        <span class="token keyword">except</span><span class="token punctuation">:</span>
+            <span class="token comment" spellcheck="true"># 找不到文件，响应404</span>
+            response_msg <span class="token operator">=</span> <span class="token string">"HTTP/1.1 404 NOT FOUND\r\n"</span>
+            response_msg <span class="token operator">+=</span> <span class="token string">"\r\n"</span>
+            response_msg <span class="token operator">+=</span> <span class="token string">"&lt;h1>----file not found----&lt;/h1>"</span>
+            new_socket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>response_msg<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            html_content <span class="token operator">=</span> fp<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            fp<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            response_body <span class="token operator">=</span> html_content
+
+            <span class="token comment" spellcheck="true"># 响应正确 200 OK</span>
+            response_header <span class="token operator">=</span> <span class="token string">"HTTP/1.1 200 OK\r\n"</span>
+            response_header <span class="token operator">+=</span> <span class="token string">"Content-Length:%d\r\n"</span> <span class="token operator">%</span> len<span class="token punctuation">(</span>response_body<span class="token punctuation">)</span>
+            response_header <span class="token operator">+=</span> <span class="token string">"\r\n"</span>
+
+            response <span class="token operator">=</span> response_header<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span> <span class="token operator">+</span> response_body
+
+            <span class="token comment" spellcheck="true"># 返回响应数据</span>
+            new_socket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>response<span class="token punctuation">)</span>
+
+
+<span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 创建TCP SOCKET实例</span>
+    tcp_server_socket <span class="token operator">=</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># # 设置重用地址</span>
+    <span class="token comment" spellcheck="true"># tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)</span>
+    <span class="token comment" spellcheck="true"># 绑定地址（默认本机IP）和端口</span>
+    tcp_server_socket<span class="token punctuation">.</span>bind<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">,</span> <span class="token number">7890</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 监听</span>
+    tcp_server_socket<span class="token punctuation">.</span>listen<span class="token punctuation">(</span><span class="token number">128</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 循环接收客户端连接</span>
+    <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+        new_socket<span class="token punctuation">,</span> client_addr <span class="token operator">=</span> tcp_server_socket<span class="token punctuation">.</span>accept<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true"># 启动一个子进程来处理客户端的请求</span>
+        sub_p <span class="token operator">=</span> multiprocessing<span class="token punctuation">.</span>Process<span class="token punctuation">(</span>target<span class="token operator">=</span>handle_request<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span>new_socket<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        sub_p<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true"># 这里要关闭父进程中的new_socket，因为创建子进程会复制一份new_socket给子进程</span>
+        new_socket<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># 关闭整个SOCKET</span>
+    tcp_server_socket<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    main<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p>我们使用进程来实现并发的 Web Server，也就是将 <code>accept</code> 到 <code>new_socket</code> 传递给子进程去处理，处理函数还是 <code>handle_request</code>。</p>
+<p>但是这里注意，子进程会从父进程中将所有的变量<strong>进行拷贝</strong>，也就是说父进程和子进程中<strong>各有一份 new_socket</strong>，而在 <code>Linux</code> 下，<code>socket</code> 对应的也是一个文件描述符，而这两个 <code>new_socket</code> 实际上是指向同一个 <code>fd</code> 的。所以我们将 <code>new_socket</code> 交给子进程后，父进程就可以马上关闭自己的 <code>new_socket</code> 了，当子进程服务完毕后，关闭子进程中的 <code>new_socket</code>，这样<strong>对应的 <code>FD</code> 才会正真关闭，此时才会触发四次挥手。所以父进程代码中的 <code>new_socket.close()</code> 非常重要。</strong></p>
+<h2 id="二、使用线程来实现并发-Web-Server"><a href="#二、使用线程来实现并发-Web-Server" class="headerlink" title="二、使用线程来实现并发 Web Server"></a>二、使用线程来实现并发 Web Server</h2><p>在第一节中，我们使用进程来实现并发，但是进程对资源消耗很大，一般不推荐使用。所以这里我们使用线程来实现并发，很简单，我们将 <code>multiprocessing.Process</code> 替换为 <code>threaing.Thread</code> 就可以了：</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> socket
+<span class="token keyword">import</span> re
+<span class="token keyword">import</span> threading
+<span class="token keyword">from</span> web_server <span class="token keyword">import</span> handle_request
+
+<span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 创建TCP SOCKET实例</span>
+    tcp_server_socket <span class="token operator">=</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 设置重用地址</span>
+    tcp_server_socket<span class="token punctuation">.</span>setsockopt<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>SOL_SOCKET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SO_REUSEADDR<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 绑定地址（默认本机IP）和端口</span>
+    tcp_server_socket<span class="token punctuation">.</span>bind<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">,</span> <span class="token number">7890</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 监听</span>
+    tcp_server_socket<span class="token punctuation">.</span>listen<span class="token punctuation">(</span><span class="token number">128</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 循环接收客户端连接</span>
+    <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+        new_socket<span class="token punctuation">,</span> client_addr <span class="token operator">=</span> tcp_server_socket<span class="token punctuation">.</span>accept<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true"># 启动一个线程来处理客户端的请求</span>
+        t <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>handle_request<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span>new_socket<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        t<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># 关闭整个SOCKET</span>
+    tcp_server_socket<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    main<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p>我们发现，除了将子进程的创建过程替换成了线程的创建过程，后面的 <code>new_socket.close(</code>) 也被删除了，这是因为线程是公用进程资源的，<code>new_socket</code> 不会被复制，所以 <code>socket</code> 对应的 FD，只有一个 new_socket 指向他。</p>
+<p>如果此时我们仍然在这里关闭 <code>new_socket</code>，那么在线程再使用 <code>new_socket</code> 就会报错。如下信息：</p>
+<pre class=" language-python"><code class="language-python">Exception <span class="token keyword">in</span> thread Thread<span class="token number">-1</span><span class="token punctuation">:</span>
+Traceback <span class="token punctuation">(</span>most recent call last<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  File <span class="token string">"/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py"</span><span class="token punctuation">,</span> line <span class="token number">926</span><span class="token punctuation">,</span> <span class="token keyword">in</span> _bootstrap_inner
+    self<span class="token punctuation">.</span>run<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  File <span class="token string">"/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py"</span><span class="token punctuation">,</span> line <span class="token number">870</span><span class="token punctuation">,</span> <span class="token keyword">in</span> run
+    self<span class="token punctuation">.</span>_target<span class="token punctuation">(</span><span class="token operator">*</span>self<span class="token punctuation">.</span>_args<span class="token punctuation">,</span> <span class="token operator">**</span>self<span class="token punctuation">.</span>_kwargs<span class="token punctuation">)</span>
+  File <span class="token string">"/Users/mac/PycharmProjects/Month2/web_server.py"</span><span class="token punctuation">,</span> line <span class="token number">9</span><span class="token punctuation">,</span> <span class="token keyword">in</span> handle_request
+    recv_msg <span class="token operator">=</span> new_socket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span>
+OSError<span class="token punctuation">:</span> <span class="token punctuation">[</span>Errno <span class="token number">9</span><span class="token punctuation">]</span> Bad file descriptor</code></pre>
+<h2 id="三、使用协程来实现并发-Web-Server"><a href="#三、使用协程来实现并发-Web-Server" class="headerlink" title="三、使用协程来实现并发 Web Server"></a>三、使用协程来实现并发 Web Server</h2><p>使用进程和线程来实现的并发 Web Server，当并发访问量很大时，资源消耗都很高。所以这里使用协程来实现并发服务器。</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> socket
+<span class="token keyword">import</span> re
+<span class="token keyword">import</span> gevent
+<span class="token keyword">from</span> gevent <span class="token keyword">import</span> monkey
+monkey<span class="token punctuation">.</span>patch_all<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">from</span> web_server <span class="token keyword">import</span> handle_request
+
+
+<span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 创建TCP SOCKET实例</span>
+    tcp_server_socket <span class="token operator">=</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># # 设置重用地址</span>
+    <span class="token comment" spellcheck="true"># tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)</span>
+    <span class="token comment" spellcheck="true"># 绑定地址（默认本机IP）和端口</span>
+    tcp_server_socket<span class="token punctuation">.</span>bind<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">,</span> <span class="token number">7890</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 监听</span>
+    tcp_server_socket<span class="token punctuation">.</span>listen<span class="token punctuation">(</span><span class="token number">128</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 循环接收客户端连接</span>
+    <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+        new_socket<span class="token punctuation">,</span> client_addr <span class="token operator">=</span> tcp_server_socket<span class="token punctuation">.</span>accept<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true"># 启动一个协程来处理客户端的请求</span>
+        gevent<span class="token punctuation">.</span>spawn<span class="token punctuation">(</span>handle_request<span class="token punctuation">,</span> new_socket<span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># 关闭整个SOCKET</span>
+    tcp_server_socket<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    main<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p>使用 gevent 来实现协程，并发处理请求。</p>
+<h2 id="四、使用单进程单线程非阻塞模拟实现高并发HTTP服务器"><a href="#四、使用单进程单线程非阻塞模拟实现高并发HTTP服务器" class="headerlink" title="四、使用单进程单线程非阻塞模拟实现高并发HTTP服务器"></a>四、使用单进程单线程非阻塞模拟实现高并发HTTP服务器</h2><p>前面我们使用的多进程和多线程来处理并发，是因为 <code>socket.recv()</code> 是阻塞的，每次 <code>accept</code> 一个连接，就需要交给一个新的进程或线程去处理，从而不影响下一个 <code>socket</code> 连接。</p>
+<p>但是我们可以通过单进程单线程和非阻塞的方式来完成并发 <code>socket</code> 的处理：</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> socket
+<span class="token keyword">import</span> time
+<span class="token keyword">import</span> re
+
+
+<span class="token keyword">def</span> <span class="token function">handle_request</span><span class="token punctuation">(</span>new_socket<span class="token punctuation">,</span> recv_msg<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 从请求中解析出URI</span>
+    recv_lines <span class="token operator">=</span> recv_msg<span class="token punctuation">.</span>splitlines<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># 使用正则表达式提取出URI</span>
+    ret <span class="token operator">=</span> re<span class="token punctuation">.</span>match<span class="token punctuation">(</span>r<span class="token string">"[^/]+(/[^ ]*)"</span><span class="token punctuation">,</span> recv_lines<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> ret<span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># 获取URI字符串</span>
+        file_name <span class="token operator">=</span> ret<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true"># 如果URI是/，则默认返回index.html的内容</span>
+        <span class="token keyword">if</span> file_name <span class="token operator">==</span> <span class="token string">"/"</span><span class="token punctuation">:</span>
+            file_name <span class="token operator">=</span> <span class="token string">"/index.html"</span>
+
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># 根据请求的URI，读取相应的文件</span>
+        fp <span class="token operator">=</span> open<span class="token punctuation">(</span><span class="token string">"."</span> <span class="token operator">+</span> file_name<span class="token punctuation">,</span> <span class="token string">"rb"</span><span class="token punctuation">)</span>
+    <span class="token keyword">except</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># 找不到文件，响应404</span>
+        response_msg <span class="token operator">=</span> <span class="token string">"HTTP/1.1 404 NOT FOUND\r\n"</span>
+        response_msg <span class="token operator">+=</span> <span class="token string">"\r\n"</span>
+        response_msg <span class="token operator">+=</span> <span class="token string">"&lt;h1>----file not found----&lt;/h1>"</span>
+        new_socket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>response_msg<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        html_content <span class="token operator">=</span> fp<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        fp<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        response_body <span class="token operator">=</span> html_content
+
+        <span class="token comment" spellcheck="true"># 响应正确 200 OK</span>
+        response_header <span class="token operator">=</span> <span class="token string">"HTTP/1.1 200 OK\r\n"</span>
+        response_header <span class="token operator">+=</span> <span class="token string">"Content-Length:%d\r\n"</span> <span class="token operator">%</span> len<span class="token punctuation">(</span>response_body<span class="token punctuation">)</span>
+        response_header <span class="token operator">+=</span> <span class="token string">"\r\n"</span>
+
+        response <span class="token operator">=</span> response_header<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span> <span class="token operator">+</span> response_body
+
+        <span class="token comment" spellcheck="true"># 返回响应数据</span>
+        new_socket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>response<span class="token punctuation">)</span>
+
+
+<span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 创建TCP SOCKET实例</span>
+    tcp_server_socket <span class="token operator">=</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 设置重用地址</span>
+    tcp_server_socket<span class="token punctuation">.</span>setsockopt<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>SOL_SOCKET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SO_REUSEADDR<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 绑定地址（默认本机IP）和端口</span>
+    tcp_server_socket<span class="token punctuation">.</span>bind<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">,</span> <span class="token number">7890</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 监听</span>
+    tcp_server_socket<span class="token punctuation">.</span>listen<span class="token punctuation">(</span><span class="token number">128</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># 将accept设置为非阻塞,这里设置一次，后面不管调多少次accept都是非阻塞的</span>
+    tcp_server_socket<span class="token punctuation">.</span>setblocking<span class="token punctuation">(</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 定义一个列表，将每次连接的socket加入该列表</span>
+    client_socket_list <span class="token operator">=</span> list<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    fd_to_addr <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true"># 循环接收客户端连接</span>
+    <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+        time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">try</span><span class="token punctuation">:</span>
+            new_socket<span class="token punctuation">,</span> client_addr <span class="token operator">=</span> tcp_server_socket<span class="token punctuation">.</span>accept<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">except</span> Exception <span class="token keyword">as</span> ret<span class="token punctuation">:</span>
+            <span class="token comment" spellcheck="true"># 当没有客户端链接的时候，抛出异常</span>
+            <span class="token keyword">pass</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"客户端{} OnLine。。。。"</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>client_addr<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token comment" spellcheck="true"># 当有客户端链接的时候</span>
+            <span class="token comment" spellcheck="true"># 将new_socket.recv()设置为非阻塞的</span>
+            new_socket<span class="token punctuation">.</span>setblocking<span class="token punctuation">(</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+            <span class="token comment" spellcheck="true"># 将new_socket加入列表</span>
+            client_socket_list<span class="token punctuation">.</span>append<span class="token punctuation">(</span>new_socket<span class="token punctuation">)</span>
+
+            <span class="token comment" spellcheck="true"># 将 conn 和 addr 信息分别保存起来</span>
+            fd_to_addr<span class="token punctuation">[</span>new_socket<span class="token punctuation">.</span>fileno<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> client_addr
+
+        <span class="token comment" spellcheck="true"># 遍历socket列表，检查每一个socket是否有数据到达，或者客户端是否断开</span>
+        <span class="token keyword">for</span> client_socket <span class="token keyword">in</span> client_socket_list<span class="token punctuation">:</span>
+            <span class="token keyword">try</span><span class="token punctuation">:</span>
+                recv_content <span class="token operator">=</span> client_socket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span>
+            <span class="token keyword">except</span> Exception <span class="token keyword">as</span> ret<span class="token punctuation">:</span>
+                <span class="token comment" spellcheck="true"># 异常，表示该客户端没有发数据过来</span>
+                <span class="token keyword">pass</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                <span class="token comment" spellcheck="true"># 正常，表示客户端发了数据，或者客户端断开连接（断开连接会导致recv正常返回）</span>
+                <span class="token keyword">if</span> recv_content<span class="token punctuation">:</span>
+                    <span class="token comment" spellcheck="true"># 有数据，调用请求处理代码</span>
+                    handle_request<span class="token punctuation">(</span>client_socket<span class="token punctuation">,</span> recv_content<span class="token punctuation">)</span>
+                <span class="token keyword">else</span><span class="token punctuation">:</span>
+                    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"客户端{}OffLine。。。。"</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>fd_to_addr<span class="token punctuation">[</span>client_socket<span class="token punctuation">.</span>fileno<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token comment" spellcheck="true"># recv正常返回，且数据为空，表示客户端断开了链接</span>
+                    <span class="token comment" spellcheck="true"># 将该socket踢出列表</span>
+                    client_socket_list<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>client_socket<span class="token punctuation">)</span>
+                    <span class="token comment" spellcheck="true"># 服务器也关闭连接</span>
+                    client_socket<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># 关闭整个SOCKET</span>
+    tcp_server_socket<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    main<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<p>上面代码主要是说明在单进程单线程情况下，如何将 <code>accept</code> 和 <code>recv</code> 分开，并且都用非阻塞的方式来处理，这样每次查看是否有客户端链接进来的时候，都会去检查所有已链接的 <code>socket</code> 是否有数据发送过来。</p>
+<p>在这种方式中，我们使用单进程单线程模拟了并发处理 <code>socket</code> 连接的功能，但这些 <code>socket</code> 连接的处理不是并行的。当一个 <code>socket</code> 处理数据时间比较长时，也会<strong>造成整个程序的等待。</strong></p>
+<p>特别注意的是，在请求处理函数 <code>handle_request</code> 中，我们将请求内容作为参数一并传递进去。然后在返回 <code>200 OK</code> 的时候，在响应头中添加了 <code>Content-Length</code> 字段，这个字段用于告诉客户端，此次发送的响应体有多大。当客户端收完指定大小的数据，就认为这次服务器发送的数据已经发送完毕。他就可以继续发送下一个新的请求。</p>
+<p>在 <code>handle_request</code> 中可以看到，<code>new_socket.close()</code> 已经被删除，也就是说服务器不会自动关闭连接，而直到客户端断开连接之前，服务器都保持<code>长连接</code>。断开连接由客户端来发起。</p>
+<h2 id="五、使用select实现高并发HTTP服务器"><a href="#五、使用select实现高并发HTTP服务器" class="headerlink" title="五、使用select实现高并发HTTP服务器"></a>五、使用select实现高并发HTTP服务器</h2><p>在编写了单进程非阻塞式服务器之后，还有另外种写服务器的方法，便是利用<code>select</code>。<br><code>select</code>是对底层操作系统的一个访问操作，因而效率较高，比单进程非阻塞中的<code>for</code>循环遍历效率要高，可以利用<code>select</code>进行选择，选择出来可以读取信息的套接字、可以发送信息的套接字、以及产生的异常（分别是三个返回值）。</p>
+<pre class=" language-python"><code class="language-python">readable<span class="token punctuation">,</span> writable<span class="token punctuation">,</span> exceptionable <span class="token operator">=</span> select<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre>
+<p>以上即为<code>select</code>的使用方法，程序执行到该语句后进行阻塞等待，接收到新的套接字之后便解阻塞。<br>程序思路便是利用<code>select</code>检测、选择出能读取的套接字（包括服务器套接字、客户端套接字），将接收到消息的客户端套接字存入列表（列表中本来只有服务器套接字），之后进行<code>for</code>循环遍历，读取套接字中的信息或者进行与客户端的连接。</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> socket <span class="token keyword">import</span> <span class="token operator">*</span>
+<span class="token keyword">from</span> select <span class="token keyword">import</span> select
+<span class="token keyword">from</span> web_server <span class="token keyword">import</span> handle_request
+
+
+<span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 创建套接字</span>
+    server_socket <span class="token operator">=</span> socket<span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_STREAM<span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># 设置可以重复使用绑定的信息</span>
+    server_socket<span class="token punctuation">.</span>setsockopt<span class="token punctuation">(</span>SOL_SOCKET<span class="token punctuation">,</span> SO_REUSEADDR<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># 绑定本机信息</span>
+    server_socket<span class="token punctuation">.</span>bind<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">,</span> <span class="token number">8080</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># 主动监听</span>
+    server_socket<span class="token punctuation">.</span>listen<span class="token punctuation">(</span><span class="token number">128</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># 将accept设置为非阻塞</span>
+    server_socket<span class="token punctuation">.</span>setblocking<span class="token punctuation">(</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+
+    inputs <span class="token operator">=</span> <span class="token punctuation">[</span>server_socket<span class="token punctuation">]</span>
+    fd_to_addr <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+        readable<span class="token punctuation">,</span> writable<span class="token punctuation">,</span> exceptionable <span class="token operator">=</span> select<span class="token punctuation">(</span>inputs<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> sock <span class="token keyword">in</span> readable<span class="token punctuation">:</span>
+
+            <span class="token keyword">if</span> sock <span class="token operator">==</span> server_socket<span class="token punctuation">:</span>
+                clientSocket<span class="token punctuation">,</span> clientAddr <span class="token operator">=</span> server_socket<span class="token punctuation">.</span>accept<span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token comment" spellcheck="true"># 当有客户端链接的时候</span>
+                <span class="token comment" spellcheck="true"># 将new_socket.recv()设置为非阻塞的</span>
+                clientSocket<span class="token punctuation">.</span>setblocking<span class="token punctuation">(</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+
+                inputs<span class="token punctuation">.</span>append<span class="token punctuation">(</span>clientSocket<span class="token punctuation">)</span>
+                <span class="token comment" spellcheck="true"># 将 addr 信息保存起来</span>
+                fd_to_addr<span class="token punctuation">[</span>clientSocket<span class="token punctuation">.</span>fileno<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> clientAddr
+                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"客户端{} OnLine。。。。"</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>clientAddr<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                message <span class="token operator">=</span> sock<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+                <span class="token keyword">if</span> message<span class="token punctuation">:</span>
+                    <span class="token comment" spellcheck="true"># print('message from [%s] is %s' % (str(sock), message.decode('utf-8')))</span>
+                    handle_request<span class="token punctuation">(</span>sock<span class="token punctuation">,</span> message<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">"utf8"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token keyword">else</span><span class="token punctuation">:</span>
+                    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'[%s] OffLine。。。。'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>fd_to_addr<span class="token punctuation">[</span>sock<span class="token punctuation">.</span>fileno<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    inputs<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>sock<span class="token punctuation">)</span>
+                    sock<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    main<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<p><code>select</code>版服务器有一定的缺点，便是只能处理1024个并发客户端，因而其效率还是有一定的局限性。</p>
+<h2 id="六、使用epoll实现高并发HTTP服务器"><a href="#六、使用epoll实现高并发HTTP服务器" class="headerlink" title="六、使用epoll实现高并发HTTP服务器"></a>六、使用epoll实现高并发HTTP服务器</h2><p>我们在最后使用单进程+单线程+非阻塞+长连接实现了一个可并发处理客户端连接的服务器。他的原理可以用以下的图来描述：</p>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/08/P4p4aJ.png" alt="P4p4aJ"></p>
+<p><strong>解释：</strong></p>
+<ol>
+<li><p>HTTP服务器是我们使用 单进程+单线程+非阻塞+长连接实现 的<code>web</code>服务器。</p>
+</li>
+<li><p>在实现的时候，我们创建了一个存放已接受<code>Socket</code>连接的列表，该列表是在应用程序的内存空间中的。如图中深蓝色部分</p>
+</li>
+<li><p>当有3个客户端接入的时候，列表中一共存在3个对应的<code>socket</code>句柄，分别对应三个小黄框。</p>
+</li>
+<li><p>灰色小框代表服务器接收请求的<code>socket</code>。</p>
+</li>
+<li><p>我们在进行无限循环的时候，首先是检查是否有新的客户端接入，相当于检查灰色小框是否有数据到达。然后轮询3个小黄框对应<code>socket</code>是否有数据到达。轮询的效率是很低的。</p>
+</li>
+<li><p>服务器在使用<code>accept</code>和<code>recv</code>时，实际上是委托操作系统帮他检查是否有数据到达，由于这个列表的<code>socket</code>都处于用户内存空间，所以需要将其复制到内核空间。操作系统检查完毕后，如果有数据就返回数据给应用程序，如果没有数据就以异常的方式通知应用程序。而且不光这样，操作系统可能还同时在运行其他的应用程序，这样效率会非常低。</p>
+</li>
+</ol>
+<p><strong>我们再来看epoll的图：</strong></p>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/08/5TcU6B.png" alt="5TcU6B"></p>
+<p><strong>解释：</strong></p>
+<p>1.我们可以看到，在结构上，最大的区别在于，存放<code>socket</code>的列表不处于应用程序内部。在<code>epoll</code>中，这个存放<code>socket</code>的列表处于一个<strong>特殊的内存空间，这个内存空间是应用程序与内核共享的空间</strong>。也就是说，当应用程序委托操作系统检查是否有数据到达时，无需将复制数据给内核空间，操作系统可以直接进行检查。</p>
+<p>2.操作系统检查到某个<code>socket</code>有数据到达，使用<strong>事件通知</strong>的形式，直接告诉应用程序，而不是以轮询的方式。打个比方，一个厨师挨个问50个人饿了没，如果饿了就给他东西吃，这是轮询。而50个人中，谁饿了谁举手，厨师就给吃的，这叫事件通知。很明显，事件通知的效率会特别高。</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> socket <span class="token keyword">import</span> <span class="token operator">*</span>
+<span class="token keyword">import</span> select
+<span class="token keyword">from</span> web_server <span class="token keyword">import</span> handle_request
+
+
+<span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 创建套接字</span>
+    server_socket <span class="token operator">=</span> socket<span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_STREAM<span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># 设置可以重复使用绑定的信息</span>
+    server_socket<span class="token punctuation">.</span>setsockopt<span class="token punctuation">(</span>SOL_SOCKET<span class="token punctuation">,</span> SO_REUSEADDR<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># 绑定本机信息</span>
+    server_socket<span class="token punctuation">.</span>bind<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">,</span> <span class="token number">8080</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># 主动监听</span>
+    server_socket<span class="token punctuation">.</span>listen<span class="token punctuation">(</span><span class="token number">128</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 将accept设置为非阻塞</span>
+    server_socket<span class="token punctuation">.</span>setblocking<span class="token punctuation">(</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 创建epoll对象</span>
+    epoll <span class="token operator">=</span> select<span class="token punctuation">.</span>epoll<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># 注册事件到epoll中</span>
+    <span class="token comment" spellcheck="true"># epoll.register(fd[, eventmask])</span>
+    <span class="token comment" spellcheck="true"># 注意，如果fd已经注册过，则会发生异常</span>
+    <span class="token comment" spellcheck="true"># 将创建的套接字添加到epoll的事件监听中</span>
+
+    <span class="token comment" spellcheck="true"># 注册tcp套接字</span>
+    epoll<span class="token punctuation">.</span>register<span class="token punctuation">(</span>server_socket<span class="token punctuation">.</span>fileno<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> select<span class="token punctuation">.</span>EPOLLIN<span class="token punctuation">)</span>
+
+    <span class="token triple-quoted-string string">'''因为epoll返回的触发事件对应的是套接字文件描述符，所以需要在字典中加入对应关系'''</span>
+
+    <span class="token comment" spellcheck="true"># 定义一个字典，用于存放fd和套接字的对应关系，因为操作系统在事件通知的时候，使用的是fd，而不是套接字，我们需要使用fd来找到对应</span>
+    <span class="token comment" spellcheck="true"># 的套接字，从而可以调用accept和recv</span>
+    fd_to_socket <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    fd_to_addr <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true"># 循环接收客户端连接</span>
+    <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># 使用一个列表来接受操作系统的事件通知，poll()是阻塞的，当有数据到达时，poll才会解开阻塞</span>
+        epoll_list <span class="token operator">=</span> epoll<span class="token punctuation">.</span>poll<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">for</span> fd<span class="token punctuation">,</span> event <span class="token keyword">in</span> epoll_list<span class="token punctuation">:</span>
+            <span class="token comment" spellcheck="true"># 首先判断事件通知中的fd是否对应监听套接字（监听套接字调用accept）</span>
+            <span class="token keyword">if</span> fd <span class="token operator">==</span> server_socket<span class="token punctuation">.</span>fileno<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+                conn<span class="token punctuation">,</span> addr <span class="token operator">=</span> server_socket<span class="token punctuation">.</span>accept<span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token comment" spellcheck="true"># 监听到一个新的客户端连接，将conn也注册到epoll中</span>
+                epoll<span class="token punctuation">.</span>register<span class="token punctuation">(</span>conn<span class="token punctuation">.</span>fileno<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> select<span class="token punctuation">.</span>EPOLLIN<span class="token punctuation">)</span>
+
+                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'有新的客户端到来%s'</span> <span class="token operator">%</span> str<span class="token punctuation">(</span>addr<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+                <span class="token comment" spellcheck="true"># 将 conn 和 addr 信息分别保存起来</span>
+                fd_to_socket<span class="token punctuation">[</span>conn<span class="token punctuation">.</span>fileno<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> conn
+                fd_to_addr<span class="token punctuation">[</span>conn<span class="token punctuation">.</span>fileno<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> addr
+
+            <span class="token keyword">else</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># 如果不是监听套接字，那么都是客户端对应的套接字</span>
+                <span class="token comment" spellcheck="true"># 接收数据</span>
+                recvData <span class="token operator">=</span> fd_to_socket<span class="token punctuation">[</span>fd<span class="token punctuation">]</span><span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf8'</span><span class="token punctuation">)</span>
+
+                <span class="token keyword">if</span> recvData<span class="token punctuation">:</span>
+                    handle_request<span class="token punctuation">(</span>fd_to_socket<span class="token punctuation">[</span>fd<span class="token punctuation">]</span><span class="token punctuation">,</span> recvData<span class="token punctuation">)</span>
+
+                <span class="token comment" spellcheck="true"># 如果没有数据，则表示客户端断开连接</span>
+                <span class="token keyword">else</span><span class="token punctuation">:</span>
+                    <span class="token comment" spellcheck="true"># 从 epoll 中移除该 连接 fd</span>
+                    epoll<span class="token punctuation">.</span>unregister<span class="token punctuation">(</span>fd<span class="token punctuation">)</span>
+
+                    <span class="token comment" spellcheck="true">#  关闭fd对应的socket</span>
+                    fd_to_socket<span class="token punctuation">[</span>fd<span class="token punctuation">]</span><span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+                    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"%s---offline---"</span> <span class="token operator">%</span> str<span class="token punctuation">(</span>fd_to_addr<span class="token punctuation">[</span>fd<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    main<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/hexo/about" rel="external nofollow noreferrer">bookandmusic</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://liushaofeng2018.gitee.io/hexo/hexo/2020/08/16/wang-luo-tong-xin-duo-chong-fang-shi-shi-xian-bing-fa-web-server/">http://liushaofeng2018.gitee.io/hexo/hexo/2020/08/16/wang-luo-tong-xin-duo-chong-fang-shi-shi-xian-bing-fa-web-server/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/hexo/about" target="_blank">bookandmusic</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/hexo/tags/TCP/">
+                                    <span class="chip bg-color">TCP</span>
+                                </a>
+                            
+                                <a href="/hexo/tags/WEB-Server/">
+                                    <span class="chip bg-color">WEB Server</span>
+                                </a>
+                            
+                                <a href="/hexo/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/">
+                                    <span class="chip bg-color">高并发</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/hexo/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/hexo/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/hexo/medias/reward/Alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/hexo/medias/reward/Wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/hexo/2020/09/03/xi-tong-deepin-os-an-zhuang-nvidia-qu-dong/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/hexo/medias/featureimages/23.jpg" class="responsive-img" alt="Deepin OS 安装 NVIDIA驱动">
+                        
+                        <span class="card-title">Deepin OS 安装 NVIDIA驱动</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            工具 / 原料
+一台电脑
+Deepin15.10.2 系统
+N 卡官网驱动
+
+
+
+方法 / 步骤一、驱动下载本教程以 GTX1050 为例，前往 N 卡官网下载对应的驱动 :
+
+然后选择一个下载即可，我下载的是NVIDIA-Linux-x8
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-09-03
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/hexo/categories/%E7%B3%BB%E7%BB%9F/" class="post-category">
+                                    系统
+                                </a>
+                            
+                            <a href="/hexo/categories/%E7%B3%BB%E7%BB%9F/linux/" class="post-category">
+                                    linux
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/hexo/tags/deepin/">
+                        <span class="chip bg-color">deepin</span>
+                    </a>
+                    
+                    <a href="/hexo/tags/nvidia/">
+                        <span class="chip bg-color">nvidia</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/hexo/2020/08/16/wang-luo-tong-xin-simple-web-server/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/hexo/medias/featureimages/16.jpg" class="responsive-img" alt="网络通信-简单WEB服务器">
+                        
+                        <span class="card-title">网络通信-简单WEB服务器</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本篇文章介绍如何实现一个简单 的Web Server 以及对应的问题解决方案。
+
+
+一、如何使用Python实现一个返回固定页面的Web Server
+使用socket创建一个TCP Server
+
+接受来自浏览器的TCP链接，并接收HTT
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-08-16
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                    技术
+                                </a>
+                            
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/" class="post-category">
+                                    网络通信
+                                </a>
+                            
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/" class="post-category">
+                                    TCP
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/hexo/tags/TCP/">
+                        <span class="chip bg-color">TCP</span>
+                    </a>
+                    
+                    <a href="/hexo/tags/WEB-Server/">
+                        <span class="chip bg-color">WEB Server</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/hexo/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/hexo/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/hexo/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/hexo/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/hexo/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/hexo/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="4943692268"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.3'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/hexo/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="/hexo/about" target="_blank">bookandmusic</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">87.4k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:1943288286@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1943288286" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1943288286" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/hexo/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/hexo/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/hexo/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/hexo/libs/materialize/materialize.min.js"></script>
+    <script src="/hexo/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/hexo/libs/aos/aos.js"></script>
+    <script src="/hexo/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/hexo/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/hexo/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/hexo/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/hexo/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/hexo/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

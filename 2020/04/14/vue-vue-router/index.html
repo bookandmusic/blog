@@ -1,0 +1,1331 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="vue-router, Bookandmusic">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>vue-router | Bookandmusic</title>
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/hexo/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="/hexo/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/css/my.css">
+
+    <script src="/hexo/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/hexo/atom.xml" title="Bookandmusic" type="application/atom+xml">
+<link rel="stylesheet" href="/hexo/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/hexo/" class="waves-effect waves-light">
+                    
+                    <img src="/hexo/medias/favicon.ico" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Bookandmusic</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/hexo/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/hexo/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/hexo/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/hexo/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/hexo/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/hexo/medias/favicon.ico" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Bookandmusic</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/hexo/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/hexo/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/hexo/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/hexo/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/hexo/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/hexo/medias/featureimages/8.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">vue-router</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/hexo/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/hexo/tags/vue/">
+                                <span class="chip bg-color">vue</span>
+                            </a>
+                        
+                            <a href="/hexo/tags/vue-router/">
+                                <span class="chip bg-color">vue-router</span>
+                            </a>
+                        
+                            <a href="/hexo/tags/%E8%B7%AF%E7%94%B1/">
+                                <span class="chip bg-color">路由</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                技术
+                            </a>
+                        
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/vue/" class="post-category">
+                                vue
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-04-14
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2020-12-01
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    8 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>Vue.js官方提供了一套专用的路由工具库 Vue Router,其使用和配置都非常简单。</p>
+<h2 id="安装路由"><a href="#安装路由" class="headerlink" title="安装路由"></a>安装路由</h2><p>可以使用npm包的方式来安装路由</p>
+<pre class=" language-bash"><code class="language-bash">cnpm <span class="token function">install</span> vue-router --save</code></pre>
+<blockquote>
+<p>其实通过Vue-cli脚手架快速搭建项目时，命令行会询问是否安装路由功能，从而并不需要额外安装路由功能</p>
+</blockquote>
+<p>通过Vue-cli脚手架搭建的项目，在<code>src/router</code>文件夹内部有<code>index.js</code>文件，打开index.js文件会看到以下引用。</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">import</span> Router <span class="token keyword">from</span> <span class="token string">'vue-router'</span>
+
+Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>Router<span class="token punctuation">)</span></code></pre>
+<p>在入口文件<code>src/main.js</code>中导入<code>src/router/index.js</code>文件，即可使用路由配置的信息</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">import</span> router <span class="token keyword">from</span> <span class="token string">'./router'</span>
+<span class="token comment" spellcheck="true">//等效于</span>
+<span class="token comment" spellcheck="true">//import router from './router/index.js'</span></code></pre>
+<h2 id="建立路由模块"><a href="#建立路由模块" class="headerlink" title="建立路由模块"></a>建立路由模块</h2><p>先建立一个路由器模块,主要用来配置和绑定相关信息。</p>
+<p>在<code>src/router/index.js</code>文件中使用<code>new Router</code>命令创建一个路由,一个路由是一个对象。</p>
+<p>一条路由的实现需要三部分:<code>name</code> 、<code>path</code>和<code>component</code>。<code>name</code>是命名,<code>path</code>是路径,<code>component</code>是组件</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// src/router/index.js</span>
+
+<span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">import</span> Router <span class="token keyword">from</span> <span class="token string">'vue-router'</span>
+<span class="token keyword">import</span> HelloWorld <span class="token keyword">from</span> <span class="token string">'@/components/HelloWorld'</span>
+<span class="token comment" spellcheck="true">// 把对应的组件或页面引入进来</span>
+<span class="token keyword">import</span> Login <span class="token keyword">from</span> <span class="token string">'@/pages/login'</span> <span class="token comment" spellcheck="true">// @指src根路径</span>
+
+Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>Router<span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">new</span> <span class="token class-name">Router</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  routes<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      path<span class="token punctuation">:</span> <span class="token string">'/'</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// 这里默认是跳转到HelloWorld 组件， 后期会改为项目首页</span>
+      name<span class="token punctuation">:</span> <span class="token string">'HelloWorld'</span><span class="token punctuation">,</span>
+      component<span class="token punctuation">:</span> HelloWorld
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      path<span class="token punctuation">:</span><span class="token string">'/login'</span><span class="token punctuation">,</span>
+      name<span class="token punctuation">:</span> <span class="token string">'Login'</span><span class="token punctuation">,</span>
+      component<span class="token punctuation">:</span> Login  <span class="token comment" spellcheck="true">// 后续如果还有页面要跳转，就按照这样的格式继续书写</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre>
+<blockquote>
+<p>导入<code>HelloWorld</code>组件的时候，实际上导入的是<code>src/components/HelloWorld.vue</code>.因为在<code>Webpack</code>中配置了，所以可以省略vue后缀。<code>*.vue</code>文件是Vue的单文件组件格式，可以同时包括模板定义、样式定义和组件模块定义。</p>
+</blockquote>
+<h2 id="启动路由器"><a href="#启动路由器" class="headerlink" title="启动路由器"></a>启动路由器</h2><ol>
+<li><p>在<code>main.js</code>入口文件中启用该路由器。</p>
+<p> <code>main.js</code>作为入口文件，使用<code>import</code>可以把所有要用到的包都导入到这里，然后在Vue项目中去运用它们。</p>
+<p> 创建和挂载根实例，通过<code>router</code>配置参数注入路由，从而让整个应用都有路由功能</p>
+<pre class=" language-javascript"><code class="language-javascript"> <span class="token comment" spellcheck="true">// src/main.js</span>
+
+ <span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+ <span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./App'</span>
+ <span class="token keyword">import</span> router <span class="token keyword">from</span> <span class="token string">'./router'</span>
+
+ <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+ el<span class="token punctuation">:</span> <span class="token string">'#app'</span><span class="token punctuation">,</span>
+ router<span class="token punctuation">,</span>
+ components<span class="token punctuation">:</span> <span class="token punctuation">{</span> App <span class="token punctuation">}</span><span class="token punctuation">,</span>
+ template<span class="token punctuation">:</span> <span class="token string">'&lt;App/>'</span>
+ <span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre>
+<blockquote>
+<p>浅析 导包方式</p>
+</blockquote>
+<p> 这个不是vue的规定而是node加载模块的方式,当require(‘./router’)(import会被转为require),node是这样的寻找目标的:</p>
+<ol>
+<li><p>首先寻找目录下有没有router.js或者router.node,如果有就导入</p>
+</li>
+<li><p>如果没有看是否有router目录,如果没有就require失败,抛出异常”Cannot find module ‘./router’”</p>
+</li>
+<li><p>如果有router目录会在其下寻找package.json文件,如果有则按照package的配置来导入</p>
+</li>
+<li><p>如果没有package.json,看是否有index.js或者index.node,如果有就导入没有就失败</p>
+<p> 详细见node文档：<a href="https://nodejs.org/api/modules.html#modules_folders_as_module" target="_blank" rel="noopener">https://nodejs.org/api/modules.html#modules_folders_as_module</a></p>
+</li>
+</ol>
+</li>
+</ol>
+<ol start="2">
+<li><p>配置之后，路由匹配到的组件将会渲染到<code>App.vue</code>的<code>＜router-view&gt;&lt;/router-view&gt;</code></p>
+<pre class=" language-javascript"><code class="language-javascript"> <span class="token comment" spellcheck="true">// src/App.vue</span>
+
+ <span class="token operator">&lt;</span>template<span class="token operator">></span>
+ <span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">"app"</span><span class="token operator">></span>
+     <span class="token operator">&lt;</span>router<span class="token operator">-</span>view<span class="token operator">/</span><span class="token operator">></span>
+ <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+ <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span></code></pre>
+</li>
+<li><p>最后App.vue 会渲染到<code>index.html</code></p>
+<pre class=" language-html"><code class="language-html"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span>”app”</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span></code></pre>
+<p> 这样就会把渲染出来的页面挂载到id为app的div里了</p>
+</li>
+</ol>
+<h2 id="路由重定向"><a href="#路由重定向" class="headerlink" title="路由重定向"></a>路由重定向</h2><ol>
+<li><p>项目应用通常都会有一个首页，默认首先打开的是首页，要跳转到哪个页面都可以设置路由路径发生跳转。重定向也是通过<code>routes</code>配置来完成的</p>
+<pre class=" language-javascript"><code class="language-javascript"> routes<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+     <span class="token punctuation">{</span>
+     path<span class="token punctuation">:</span> <span class="token string">'/index'</span><span class="token punctuation">,</span>
+     name<span class="token punctuation">:</span> <span class="token string">'index'</span><span class="token punctuation">,</span>
+     component<span class="token punctuation">:</span> HelloWorld
+     <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+     <span class="token comment" spellcheck="true">// 从"/"重定向到"/index"</span>
+     <span class="token punctuation">{</span>
+     path<span class="token punctuation">:</span><span class="token string">"/"</span><span class="token punctuation">,</span>
+     redirect<span class="token punctuation">:</span><span class="token string">'/index'</span>
+     <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+     <span class="token comment" spellcheck="true">// 重定向的目标也可以是一个命名的路由</span>
+     <span class="token punctuation">{</span>
+     path<span class="token punctuation">:</span><span class="token string">"/p1"</span><span class="token punctuation">,</span>
+     redirect<span class="token punctuation">:</span> <span class="token punctuation">{</span> name<span class="token punctuation">:</span><span class="token string">"index"</span> <span class="token punctuation">}</span>
+     <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+     <span class="token comment" spellcheck="true">// 重定向的目标甚至可以是一个方法，动态返回重定向目标</span>
+     <span class="token punctuation">{</span>
+     path<span class="token punctuation">:</span><span class="token string">"/p2"</span><span class="token punctuation">,</span>
+     redirect<span class="token punctuation">:</span>to<span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>
+         <span class="token comment" spellcheck="true">// 方法接收 "目标路由" 作为参数</span>
+         <span class="token comment" spellcheck="true">// return 重定向的 "字符串路径／路径对象"</span>
+
+         <span class="token comment" spellcheck="true">// return '/index'</span>
+         <span class="token keyword">return</span> <span class="token punctuation">{</span>name<span class="token punctuation">:</span> <span class="token string">'index'</span><span class="token punctuation">}</span>
+     <span class="token punctuation">}</span>
+     <span class="token punctuation">}</span>
+ <span class="token punctuation">]</span></code></pre>
+</li>
+</ol>
+<h2 id="lt-router-link-gt"><a href="#lt-router-link-gt" class="headerlink" title="&lt;router-link&gt;"></a><code>&lt;router-link&gt;</code></h2><ol>
+<li><p><code>&lt;router-link＞</code>组件支持用户在具有路由功能的应用中单击导航。</p>
+<p> 通过<code>to</code>属性可以指定目标地址,默认渲染成带有正确链接的<code>＜a＞</code>标签,通过配置<code>tag</code>属性可以生成别的标签。</p>
+<p> 另外,当目标路由成功激活时,链接元素会自动设置一个表示激活的<code>css</code>类名。</p>
+<pre class=" language-html"><code class="language-html"> <span class="token comment" spellcheck="true">&lt;!-- 直接给to指定属性值, 不提倡使用，尽量使用属性绑定 --></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>router-link</span> <span class="token attr-name">to</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>/goods<span class="token punctuation">'</span></span><span class="token punctuation">></span></span>商品<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>router-link</span><span class="token punctuation">></span></span>
+
+ <span class="token comment" spellcheck="true">&lt;!-- 使用v-bind 绑定 JS表达式--></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>router-link</span> <span class="token attr-name">:to</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">'</span>/goods<span class="token punctuation">'</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>商品<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>router-link</span><span class="token punctuation">></span></span>
+
+ <span class="token comment" spellcheck="true">&lt;!-- 绑定data中的变量path --></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>router-link</span> <span class="token attr-name">:to</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>path<span class="token punctuation">'</span></span><span class="token punctuation">></span></span>商品<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>router-link</span><span class="token punctuation">></span></span>
+
+ <span class="token comment" spellcheck="true">&lt;!-- 绑定对象，自定义网址，携带查询参数 ==> /goods?id=1 --></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>router-link</span> <span class="token attr-name">:to</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{<span class="token punctuation">'</span>path<span class="token punctuation">'</span>:<span class="token punctuation">'</span>/goods<span class="token punctuation">'</span>, , query:{<span class="token punctuation">'</span>id<span class="token punctuation">'</span>:1}}}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>商品<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>router-link</span><span class="token punctuation">></span></span>
+
+ <span class="token comment" spellcheck="true">&lt;!-- 绑定 对象，命名路由，携带params参数 ==> /goods/1 --></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>router-link</span> <span class="token attr-name">:to</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{name:<span class="token punctuation">'</span>goods<span class="token punctuation">'</span>, params:{<span class="token punctuation">'</span>id<span class="token punctuation">'</span>:1}}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>商品<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>router-link</span><span class="token punctuation">></span></span></code></pre>
+</li>
+</ol>
+<h2 id="路由对象属性"><a href="#路由对象属性" class="headerlink" title="路由对象属性"></a>路由对象属性</h2><blockquote>
+<p><code>route</code>和<code>router</code>区别:<code>vue-router</code>中经常会操作的两个对象<code>router</code>和<code>route</code>两个</p>
+</blockquote>
+<ol>
+<li><p><code>route</code>是一个跳转的路由对象，每一个路由都会有一个<code>route</code>对象，是一个局部的对象，可以获取对应的<code>name</code>,<code>path</code>,<code>params</code>,<code>query</code>等</p>
+<p> 下面列出了常用的路由信息对象属性</p>
+<ul>
+<li><code>$route.path</code>: 字符串，对应当前路由的路径，总是解析为绝对路径,如<code>&quot;/goods&quot;</code></li>
+<li><code>$route.params</code>: 一个<code>key/value</code>对象, 包含了动态片段和全匹配片段，如果没有路由参数，就为空对象。</li>
+<li><code>$route.query</code>: 一个<code>key/value</code>对象, 表示URL查询参数。例如: 对于路径<code>/goods?cate_id=1</code>,则有<code>$route.query.cate_id == 1</code>；如果没有查询参数,则为空对象</li>
+<li><code>$route.hash</code>: 当前路由的<code>hash</code>值(不带#)，如果没有<code>hash</code>值，则为空字符串。</li>
+<li><code>$route.ful1Path</code>: 完成解析后的URL，包含查询参数和hash的完整路径。</li>
+<li><code>$route.matched</code>: 一个数组，包含当前路由的所有嵌套路径片段的路由记录。路由记录就是<code>routes</code>配置数组中的对象副本(还有一些在children数组)。</li>
+</ul>
+</li>
+<li><p><code>router</code>是<code>VueRouter</code>的一个对象，通过<code>Vue.use(VueRouter)</code>和<code>VueRouter</code>构造函数得到一个<code>router</code>的实例对象，这个对象中是一个全局的对象，他包含了所有的路由包含了许多关键的对象和属性。</p>
+<p> 下面列出了常用的路由信息对象方法</p>
+<ul>
+<li><p><code>router.push(location)</code>: 要导航到不同的URL，则使用<code>router.push</code>方法。该方法会向<code>history</code>栈添加一个新的记录，当用户单击浏览器的后退按钮时，回到之前的URL。</p>
+<pre class=" language-javascript"><code class="language-javascript">  router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">'/goods'</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 字符串</span>
+  router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>path<span class="token punctuation">:</span> <span class="token string">'/goods'</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 对象</span>
+
+  <span class="token comment" spellcheck="true">// 自定义网址，携带查询参数</span>
+  router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span> path<span class="token punctuation">:</span> <span class="token string">"/goods"</span><span class="token punctuation">,</span> query<span class="token punctuation">:</span> <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">1</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// -> /goods?id=1</span>
+
+  <span class="token comment" spellcheck="true">// 命名路由，携带params参数</span>
+  router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">"goods"</span><span class="token punctuation">,</span> params<span class="token punctuation">:</span> <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">1</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// -> /goods/1</span></code></pre>
+<p>  由一个页面跳转到另一个页面时，需要携带一些数据，这时就需要用到这种带参数的路由跳转方式了。</p>
+<blockquote>
+<p>当单击<code>＜router-link＞</code>时，会在内部调用<code>router.push(...)</code>方法，所以说单击<code>＜router-link:to＝&quot;...&quot;&gt;</code>等同于调用<code>router.push(...)</code>。</p>
+</blockquote>
+<pre class=" language-javascript"><code class="language-javascript">  <span class="token comment" spellcheck="true">// 当跳转之前，两种方式可以携带params参数</span>
+  <span class="token comment" spellcheck="true">// &lt;router-link :to="{name:'goods', params:{'id':1}}">商品&lt;/router-link></span>
+  <span class="token comment" spellcheck="true">// router.push({ name: "goods", params: { id: 1 } })</span>
+
+  <span class="token comment" spellcheck="true">// 对应的路由配置有两种方式:</span>
+  <span class="token comment" spellcheck="true">// 1. 将参数获取直接体现在网址上</span>
+  routes<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+      path<span class="token punctuation">:</span> <span class="token string">'/goods/:id'</span><span class="token punctuation">,</span>
+      name<span class="token punctuation">:</span> <span class="token string">'goods'</span><span class="token punctuation">,</span>
+      component<span class="token punctuation">:</span> goods
+      <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+  <span class="token comment" spellcheck="true">// 此时会导致之前的params参数拼接在网址上， 为"/goods/1"，刷新不丢失数据</span>
+
+  <span class="token comment" spellcheck="true">// 2. 不在网址上体现</span>
+  routes<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+      path<span class="token punctuation">:</span> <span class="token string">'/goods'</span><span class="token punctuation">,</span>
+      name<span class="token punctuation">:</span> <span class="token string">'goods'</span><span class="token punctuation">,</span>
+      component<span class="token punctuation">:</span> goods
+      <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+  <span class="token comment" spellcheck="true">// 此时会导致之前的参数不能表现出来，网址仍为"/goods"，刷新之后，参数丢失</span>
+
+  <span class="token comment" spellcheck="true">// 但是不管怎么配置路由，参数获取方式相同</span></code></pre>
+</li>
+<li><p><code>router.replace(location)</code>: <code>router.replace</code>与<code>router.push</code>很像，唯一的不同是它不会向<code>history</code>栈添加新记录，而是跟它的方法名一样只替换掉当前的history 记录。<code>router.replace(...)</code>等价于<code>＜router-link :to＝&quot;...&quot; replace＞</code></p>
+</li>
+<li><p><code>router.go(n)</code>: 参数是一个整数，表示在<code>history</code>记录中向前进多少步或向后退多少步</p>
+<pre class=" language-javascript"><code class="language-javascript">  <span class="token comment" spellcheck="true">// 在浏览器记录中前进一步，等同于history.forward()</span>
+  router<span class="token punctuation">.</span><span class="token function">go</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+  <span class="token comment" spellcheck="true">// 后退一步，等同于history.back()</span>
+  router<span class="token punctuation">.</span><span class="token function">go</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+  <span class="token comment" spellcheck="true">// 前进三步</span>
+  router<span class="token punctuation">.</span><span class="token function">go</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
+  <span class="token comment" spellcheck="true">// 如果history记录不够，就会失败</span>
+  router<span class="token punctuation">.</span><span class="token function">go</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">100</span><span class="token punctuation">)</span>
+  router<span class="token punctuation">.</span><span class="token function">go</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span></code></pre>
+</li>
+</ul>
+</li>
+</ol>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/hexo/about" rel="external nofollow noreferrer">bookandmusic</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://liushaofeng2018.gitee.io/hexo/hexo/2020/04/14/vue-vue-router/">http://liushaofeng2018.gitee.io/hexo/hexo/2020/04/14/vue-vue-router/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/hexo/about" target="_blank">bookandmusic</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/hexo/tags/vue/">
+                                    <span class="chip bg-color">vue</span>
+                                </a>
+                            
+                                <a href="/hexo/tags/vue-router/">
+                                    <span class="chip bg-color">vue-router</span>
+                                </a>
+                            
+                                <a href="/hexo/tags/%E8%B7%AF%E7%94%B1/">
+                                    <span class="chip bg-color">路由</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/hexo/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/hexo/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/hexo/medias/reward/Alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/hexo/medias/reward/Wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/hexo/2020/04/21/shu-ju-ku-mysql-chang-jian-cuo-wu/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/hexo/medias/featureimages/17.jpg" class="responsive-img" alt="Mysql常见错误">
+                        
+                        <span class="card-title">Mysql常见错误</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            简单对常见错误进行总结、归纳。
+
+
+Ubuntu系统1698 只能root用户登录Mysql一、问题描述如果mysql安装时，没有提示输入密码，则会随机分配密码，直接mysql -u root -p则无法登录，报错：
+ERROR 1698 
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-21
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                    技术
+                                </a>
+                            
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
+                                    数据库
+                                </a>
+                            
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/" class="post-category">
+                                    mysql
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/hexo/tags/%E9%94%99%E8%AF%AF%E8%AF%B4%E6%98%8E/">
+                        <span class="chip bg-color">错误说明</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/hexo/2020/04/12/js-es6-yu-fa/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/hexo/medias/featureimages/0.jpg" class="responsive-img" alt="ES6语法">
+                        
+                        <span class="card-title">ES6语法</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            变量声明1. let
+let作用域只局限于当前代码块
+   {
+      var a = 10
+      let b = 20
+   }
+
+   console.log(a)  // 输出 10
+   console.log(b)  /
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                    技术
+                                </a>
+                            
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/JS/" class="post-category">
+                                    JS
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/hexo/tags/JS/">
+                        <span class="chip bg-color">JS</span>
+                    </a>
+                    
+                    <a href="/hexo/tags/ES6/">
+                        <span class="chip bg-color">ES6</span>
+                    </a>
+                    
+                    <a href="/hexo/tags/var/">
+                        <span class="chip bg-color">var</span>
+                    </a>
+                    
+                    <a href="/hexo/tags/let/">
+                        <span class="chip bg-color">let</span>
+                    </a>
+                    
+                    <a href="/hexo/tags/const/">
+                        <span class="chip bg-color">const</span>
+                    </a>
+                    
+                    <a href="/hexo/tags/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/">
+                        <span class="chip bg-color">箭头函数</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/hexo/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/hexo/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/hexo/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/hexo/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/hexo/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/hexo/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="4943692268"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.3'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/hexo/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="/hexo/about" target="_blank">bookandmusic</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">87.4k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:1943288286@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1943288286" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1943288286" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/hexo/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/hexo/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/hexo/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/hexo/libs/materialize/materialize.min.js"></script>
+    <script src="/hexo/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/hexo/libs/aos/aos.js"></script>
+    <script src="/hexo/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/hexo/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/hexo/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/hexo/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/hexo/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/hexo/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

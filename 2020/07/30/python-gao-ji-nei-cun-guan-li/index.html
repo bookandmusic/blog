@@ -1,0 +1,1252 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="python高级-内存管理, Bookandmusic">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>python高级-内存管理 | Bookandmusic</title>
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/hexo/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="/hexo/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/css/my.css">
+
+    <script src="/hexo/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/hexo/atom.xml" title="Bookandmusic" type="application/atom+xml">
+<link rel="stylesheet" href="/hexo/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/hexo/" class="waves-effect waves-light">
+                    
+                    <img src="/hexo/medias/favicon.ico" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Bookandmusic</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/hexo/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/hexo/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/hexo/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/hexo/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/hexo/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/hexo/medias/favicon.ico" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Bookandmusic</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/hexo/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/hexo/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/hexo/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/hexo/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/hexo/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/hexo/medias/featureimages/18.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">python高级-内存管理</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/hexo/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/hexo/tags/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/">
+                                <span class="chip bg-color">引用计数</span>
+                            </a>
+                        
+                            <a href="/hexo/tags/%E5%8F%AF%E5%8F%98%E7%B1%BB%E5%9E%8B%E4%B8%8E%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%B1%BB%E5%9E%8B/">
+                                <span class="chip bg-color">可变类型与不可变类型</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                技术
+                            </a>
+                        
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/python/" class="post-category">
+                                python
+                            </a>
+                        
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/python/%E9%AB%98%E7%BA%A7/" class="post-category">
+                                高级
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-07-30
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2020-12-01
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    1.9k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    7 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="内存管理机制"><a href="#内存管理机制" class="headerlink" title="内存管理机制"></a>内存管理机制</h2><blockquote>
+<p>Python中不但变量名无需事先声明，而且也无需类型声明。在Python语言中，对象的类型和内存占用都是运行时确定的。在赋值时解释器会根据语法和右侧的操作数来决定新对象的类型。在对象创建后，一个该对象的引用会被赋值给左侧的变量。</p>
+</blockquote>
+<a id="more"></a>
+
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/python%E9%92%88%E5%AF%B9%E5%8F%98%E9%87%8F%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6%20.png" alt="python针对变量的内存管理机制"></p>
+<h3 id="id-函数"><a href="#id-函数" class="headerlink" title="id()函数"></a>id()函数</h3><blockquote>
+<p>python的内置函数 id()可以用来查看对象的内存地址</p>
+</blockquote>
+<pre class=" language-python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span> a <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token operator">>></span><span class="token operator">></span> id<span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+<span class="token number">24834392</span>
+<span class="token operator">>></span><span class="token operator">></span> a <span class="token operator">=</span> <span class="token string">'banana'</span>
+<span class="token operator">>></span><span class="token operator">></span> id<span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+<span class="token number">139990659655312</span>
+
+
+<span class="token operator">>></span><span class="token operator">></span> a <span class="token operator">=</span> <span class="token number">3</span>
+<span class="token operator">>></span><span class="token operator">></span> b <span class="token operator">=</span> <span class="token number">3</span>
+<span class="token operator">>></span><span class="token operator">></span> id<span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+<span class="token number">10289448</span>
+<span class="token operator">>></span><span class="token operator">></span> id<span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+<span class="token number">10289448</span></code></pre>
+<h3 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h3><ul>
+<li><p>要保持追踪内存中的对象，Python使用了引用计数这一简单技术。</p>
+</li>
+<li><p>也就是说Python内部记录着所有使用中的对象各有多少引用。</p>
+<ul>
+<li>一个内部跟踪变量，称为引用计数器。</li>
+<li>每个对象各有多少个引用，简称引用计数。</li>
+<li>当对象被创建时，就创建了一个引用计数，当这个对象不再需要时，也就是说，这个对象的引用计数变为0时，它通常会被垃圾回收。</li>
+</ul>
+</li>
+</ul>
+<h4 id="增加引用计数"><a href="#增加引用计数" class="headerlink" title="增加引用计数"></a>增加引用计数</h4><p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/%E5%A2%9E%E5%8A%A0%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%20.png" alt="增加引用计数"></p>
+<h4 id="减少引用计数"><a href="#减少引用计数" class="headerlink" title="减少引用计数"></a>减少引用计数</h4><p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/%E5%87%8F%E5%B0%91%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%20.png" alt="减少引用计数"></p>
+<h3 id="is和"><a href="#is和" class="headerlink" title="is和=="></a>is和==</h3><p>在讲is和==这两种运算符区别之前，首先要知道Python中对象包含的三个基本要素，分别是：<code>id</code>(身份标识)、<code>type</code>(数据类型)和<code>value</code>(值)。</p>
+<p><code>is</code>和<code>==</code>都是对对象进行比较判断作用的，但对对象比较判断的内容并不相同。</p>
+<p><code>is</code>也被叫做同一性运算符，这个运算符比较判断的是对象间的唯一身份标识，也就是<code>id</code>是否相同。</p>
+<p><code>==</code>是python标准操作符中的比较操作符，用来比较判断两个对象的<code>value</code>(值)是否相等</p>
+<h3 id="可变类型与不可变类型"><a href="#可变类型与不可变类型" class="headerlink" title="可变类型与不可变类型"></a>可变类型与不可变类型</h3><ol>
+<li><code>list</code>、<code>dict</code>、<code>set</code>属于可变类型</li>
+<li><code>number</code>、<code>str</code>、<code>tuple</code>、<code>bool</code>属于不可变类型</li>
+</ol>
+<p>不可变数据类型在第一次声明赋值声明的时候, 会在内存中开辟一块空间, 用来存放这个变量被赋的值, 而这个变量实际上存储的, 并不是被赋予的这个值, 而是存放这个值所在空间的内存地址, 通过这个地址, 变量就可以在内存中取出数据了. 所谓不可变就是说, 我们不能改变这个数据在内存中的值, 所以当我们改变这个变量的赋值时, 只是在内存中重新开辟了一块空间, 将这一条新的数据存放在这一个新的内存地址里, 而原来的那个变量就不在引用原数据的内存地址而转为引用新数据的内存地址了。</p>
+<p>结合不可变数据类型，可变数据类型就很好理解来，可变数据类型是指变量所指向的内存地址处的值是可以被改变的。</p>
+<p><strong>从另外一个角度来看：</strong></p>
+<p>可变类型：当该数据类型的对应变量的值发生了改变，那么它对应的内存地址也会发生改变，对于这种数据类型，就称不可变数据类型。</p>
+<p>可变数据类型：当该数据类型的对应变量的值发生了改变，那么它对应的内存地址不发生改变，对于这种数据类型，就称可变数据类型。</p>
+<h3 id="内存管理优化"><a href="#内存管理优化" class="headerlink" title="内存管理优化"></a>内存管理优化</h3><p>Python采用基于值的内存管理模式，相同的值在内存中只有一份。这是很多Python教程上都会提到的一句话，但实际情况要复杂的多。什么才是值？什么样的值才会在内存中只保存一份？这是个非常复杂的问题。</p>
+<h4 id="在python交互环境中"><a href="#在python交互环境中" class="headerlink" title="在python交互环境中"></a>在python交互环境中</h4><p>首先明确一点，整数、实数、字符串是真正意义上的值，而上面那句话中的“值”主要指<strong>不可变类型</strong>中的整数和字符串。对于列表、元组、字典、集合以及range对象、map对象等容器类对象，它们不是普通的“值”，即使看起来是一样的，在内存中也不会只保存一份。</p>
+<h5 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h5><pre class=" language-python"><code class="language-python">In <span class="token punctuation">[</span><span class="token number">51</span><span class="token punctuation">]</span><span class="token punctuation">:</span> a <span class="token operator">=</span> <span class="token number">12</span>
+
+In <span class="token punctuation">[</span><span class="token number">52</span><span class="token punctuation">]</span><span class="token punctuation">:</span> b <span class="token operator">=</span> <span class="token number">12</span>
+
+In <span class="token punctuation">[</span><span class="token number">53</span><span class="token punctuation">]</span><span class="token punctuation">:</span> a <span class="token keyword">is</span> b
+Out<span class="token punctuation">[</span><span class="token number">53</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token boolean">True</span></code></pre>
+<p>python中对于小的整数存在一个缓存池。为了避免因创建相同的值而重复申请内存空间所带来的效率问题， Python解释器会在启动时创建出小整数池，范围是<code>[-5,256]</code>，该范围内的小整数对象是全局解释器范围内被重复使用，永远不会被垃圾回收机制回收。</p>
+<h5 id="实数"><a href="#实数" class="headerlink" title="实数"></a>实数</h5><pre class=" language-python"><code class="language-python">In <span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">:</span> a <span class="token operator">=</span> <span class="token number">12.5</span>
+
+In <span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">:</span> b <span class="token operator">=</span> <span class="token number">12.5</span>
+
+In <span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">:</span> a <span class="token keyword">is</span> b
+Out<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token boolean">False</span></code></pre>
+<p>对于实数，由于计算机存储实数会有精度问题，很难精确存储，所以不进行缓存，也就是说，即使看起来是一样的实数，在内存中也不是一份。</p>
+<h5 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h5><pre class=" language-python"><code class="language-python">In <span class="token punctuation">[</span><span class="token number">63</span><span class="token punctuation">]</span><span class="token punctuation">:</span> a <span class="token operator">=</span> <span class="token string">"abc123_"</span>
+
+In <span class="token punctuation">[</span><span class="token number">64</span><span class="token punctuation">]</span><span class="token punctuation">:</span> b <span class="token operator">=</span> <span class="token string">"abc123_"</span>
+
+In <span class="token punctuation">[</span><span class="token number">65</span><span class="token punctuation">]</span><span class="token punctuation">:</span> a <span class="token keyword">is</span> b
+Out<span class="token punctuation">[</span><span class="token number">65</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token boolean">True</span>
+
+In <span class="token punctuation">[</span><span class="token number">66</span><span class="token punctuation">]</span><span class="token punctuation">:</span> a <span class="token operator">=</span> <span class="token string">"12 3"</span>
+
+In <span class="token punctuation">[</span><span class="token number">67</span><span class="token punctuation">]</span><span class="token punctuation">:</span> b <span class="token operator">=</span> <span class="token string">"12 3"</span>
+
+In <span class="token punctuation">[</span><span class="token number">68</span><span class="token punctuation">]</span><span class="token punctuation">:</span> a <span class="token keyword">is</span> b
+Out<span class="token punctuation">[</span><span class="token number">68</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token boolean">False</span></code></pre>
+<p>由于变量的存储机制，python增加了字符串的<code>intern</code>机制。也就是说，值同样的字符串对象（<strong>整数也使用</strong>）仅仅会保存一份，是共用的，这也决定了字符串必须是不可变对象。</p>
+<pre class=" language-python"><code class="language-python">In <span class="token punctuation">[</span><span class="token number">70</span><span class="token punctuation">]</span><span class="token punctuation">:</span> c <span class="token operator">=</span> <span class="token string">"a"</span> <span class="token operator">+</span> <span class="token string">"b"</span>  <span class="token comment" spellcheck="true"># 在 compile-time（编译时）已经求完值，被替换成了'ab', </span>
+
+In <span class="token punctuation">[</span><span class="token number">71</span><span class="token punctuation">]</span><span class="token punctuation">:</span> id<span class="token punctuation">(</span>c<span class="token punctuation">)</span>
+Out<span class="token punctuation">[</span><span class="token number">71</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token number">4489029232</span>
+
+In <span class="token punctuation">[</span><span class="token number">72</span><span class="token punctuation">]</span><span class="token punctuation">:</span> d <span class="token operator">=</span> <span class="token string">"ab"</span>  <span class="token comment" spellcheck="true"># 此时，内存中已经有 'ab', 因此直接引用即可</span>
+
+In <span class="token punctuation">[</span><span class="token number">73</span><span class="token punctuation">]</span><span class="token punctuation">:</span> id<span class="token punctuation">(</span>d<span class="token punctuation">)</span>
+Out<span class="token punctuation">[</span><span class="token number">73</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token number">4489029232</span>
+
+
+In <span class="token punctuation">[</span><span class="token number">74</span><span class="token punctuation">]</span><span class="token punctuation">:</span> id<span class="token punctuation">(</span>a <span class="token operator">+</span> <span class="token string">"b"</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 在run-time（运行时）拼接的，导致没有被主动intern</span>
+Out<span class="token punctuation">[</span><span class="token number">74</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token number">4519083312</span>
+
+
+In <span class="token punctuation">[</span><span class="token number">75</span><span class="token punctuation">]</span><span class="token punctuation">:</span> a <span class="token operator">=</span> <span class="token string">'hello world'</span>
+In <span class="token punctuation">[</span><span class="token number">76</span><span class="token punctuation">]</span><span class="token punctuation">:</span> b <span class="token operator">=</span> <span class="token string">'hello world'</span>
+
+In <span class="token punctuation">[</span><span class="token number">77</span><span class="token punctuation">]</span><span class="token punctuation">:</span> a <span class="token keyword">is</span> b  <span class="token comment" spellcheck="true"># intern机制仅仅对那些看起来像是Python标识符的字符串对象才会触发</span>
+Out<span class="token punctuation">[</span><span class="token number">77</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token boolean">False</span></code></pre>
+<p><strong>intern机制</strong></p>
+<p>　　<strong>优点</strong>：在创建新的字符对象时，如果内存中已经存在，则直接引用，避免频繁的创建和销毁内存，提升效率。</p>
+<p>　　<strong>缺点</strong>：在拼接字符串时，或者在改动字符串时会极大的影响性能。原因是字符串在Python当中是不可变对象，所以对字符串的改动不是inplace（原地）操作，需要新开辟内存地址，新建对象。这也是为什么拼接字符串的时候不建议用<code>+</code>而是用<code>join()</code>。<code>join()</code>是先计算出全部字符串的长度，然后再一一拷贝，仅仅创建一次对象。</p>
+<p><strong>总结</strong></p>
+<ol>
+<li>单词，即Python标识符，不可修改，默认开启intern机制，共用对象，引用计数为0时自动被回收。</li>
+<li>字符串（包含了除Python标识符以外的字符），不可修改，默认没有开启intern机制，引用计数为0时自动被回收。</li>
+<li>特殊情况下（动态拼接），不会被主动intern。</li>
+</ol>
+<h5 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h5><pre class=" language-python"><code class="language-python">In <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">:</span> a <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+
+In <span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">:</span> b <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+
+In <span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">:</span> a <span class="token keyword">is</span> b
+Out<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token boolean">False</span></code></pre>
+<p>对于元组等容器类对象，它们不是普通的“值”，即使看起来是一样的，在内存中也不会只保存一份。</p>
+<h4 id="在Python代码中"><a href="#在Python代码中" class="headerlink" title="在Python代码中"></a>在Python代码中</h4><p>在同一模块文件中，不可变类型的数字、字符串、元组， 在值相同时，只会保存一份;而不同模块中的不同值，才会重新生成。</p>
+<p><strong>模块 <code>bbb.py</code></strong></p>
+<pre class=" language-python"><code class="language-python">c1 <span class="token operator">=</span> <span class="token number">1000</span>
+c2 <span class="token operator">=</span> <span class="token string">"hello world % "</span>
+c3 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+c4 <span class="token operator">=</span> <span class="token number">12.3</span>
+</code></pre>
+<p><strong>模块 <code>aaa.py</code></strong></p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> bbb <span class="token keyword">import</span> <span class="token operator">*</span>
+
+a <span class="token operator">=</span> <span class="token number">1000</span>
+b <span class="token operator">=</span> <span class="token number">1000</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>a <span class="token keyword">is</span> b<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># True</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>a <span class="token keyword">is</span> c1<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># False</span>
+
+a <span class="token operator">=</span> <span class="token string">"hello world % "</span>
+b <span class="token operator">=</span> <span class="token string">"hello world % "</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>a <span class="token keyword">is</span> b<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># True</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>a <span class="token keyword">is</span> c2<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># False</span>
+
+a <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+b <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>a <span class="token keyword">is</span> b<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># True</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>a <span class="token keyword">is</span> c3<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># False</span>
+
+a <span class="token operator">=</span> <span class="token number">12.3</span>
+b <span class="token operator">=</span> <span class="token number">12.3</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>a <span class="token keyword">is</span> b<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># True</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>a <span class="token keyword">is</span> c4<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># False</span>
+</code></pre>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/hexo/about" rel="external nofollow noreferrer">bookandmusic</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://liushaofeng2018.gitee.io/hexo/hexo/2020/07/30/python-gao-ji-nei-cun-guan-li/">http://liushaofeng2018.gitee.io/hexo/hexo/2020/07/30/python-gao-ji-nei-cun-guan-li/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/hexo/about" target="_blank">bookandmusic</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/hexo/tags/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/">
+                                    <span class="chip bg-color">引用计数</span>
+                                </a>
+                            
+                                <a href="/hexo/tags/%E5%8F%AF%E5%8F%98%E7%B1%BB%E5%9E%8B%E4%B8%8E%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%B1%BB%E5%9E%8B/">
+                                    <span class="chip bg-color">可变类型与不可变类型</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/hexo/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/hexo/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/hexo/medias/reward/Alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/hexo/medias/reward/Wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/hexo/2020/08/16/wang-luo-tong-xin-chang-lian-jie-yu-duan-lian-jie/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/hexo/medias/featureimages/9.jpg" class="responsive-img" alt="网络通信-长连接与短连接">
+                        
+                        <span class="card-title">网络通信-长连接与短连接</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            简单介绍长连接与短连接的优缺点。
+
+
+1. 短连接：  
+
+client 向 server 发起连接请求  
+server 接到请求，双方建立连接  
+client 向 server 发送消息  
+server 回应 client  
+一次
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-08-16
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                    技术
+                                </a>
+                            
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/" class="post-category">
+                                    网络通信
+                                </a>
+                            
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/" class="post-category">
+                                    TCP
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/hexo/tags/TCP/">
+                        <span class="chip bg-color">TCP</span>
+                    </a>
+                    
+                    <a href="/hexo/tags/%E7%9F%AD%E8%BF%9E%E6%8E%A5/">
+                        <span class="chip bg-color">短连接</span>
+                    </a>
+                    
+                    <a href="/hexo/tags/%E9%95%BF%E8%BF%9E%E6%8E%A5/">
+                        <span class="chip bg-color">长连接</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/hexo/2020/07/08/drf-xu-lie-hua-yu-fan-xu-lie-hua/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/hexo/medias/featureimages/22.jpg" class="responsive-img" alt="DRF-序列化与反序列化">
+                        
+                        <span class="card-title">DRF-序列化与反序列化</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            DRF内置的序列化类，可以对整个模型类进行序列化与反序列化，简化了繁杂的工作。
+
+
+内置字段序列化模型类from django.db import models
+
+
+# Create your models here.
+class Auth
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-08
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                    技术
+                                </a>
+                            
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/python/" class="post-category">
+                                    python
+                                </a>
+                            
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/python/web/" class="post-category">
+                                    web
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/hexo/tags/DRF/">
+                        <span class="chip bg-color">DRF</span>
+                    </a>
+                    
+                    <a href="/hexo/tags/%E5%BA%8F%E5%88%97%E5%8C%96/">
+                        <span class="chip bg-color">序列化</span>
+                    </a>
+                    
+                    <a href="/hexo/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+                        <span class="chip bg-color">反序列化</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/hexo/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/hexo/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/hexo/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/hexo/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/hexo/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/hexo/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="4943692268"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.3'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/hexo/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="/hexo/about" target="_blank">bookandmusic</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">87.4k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:1943288286@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1943288286" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1943288286" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/hexo/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/hexo/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/hexo/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/hexo/libs/materialize/materialize.min.js"></script>
+    <script src="/hexo/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/hexo/libs/aos/aos.js"></script>
+    <script src="/hexo/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/hexo/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/hexo/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/hexo/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/hexo/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/hexo/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

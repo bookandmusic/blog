@@ -1,0 +1,1455 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="装饰器, Bookandmusic">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>装饰器 | Bookandmusic</title>
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/hexo/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="/hexo/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/hexo/css/my.css">
+
+    <script src="/hexo/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/hexo/atom.xml" title="Bookandmusic" type="application/atom+xml">
+<link rel="stylesheet" href="/hexo/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/hexo/" class="waves-effect waves-light">
+                    
+                    <img src="/hexo/medias/favicon.ico" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Bookandmusic</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/hexo/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/hexo/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/hexo/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/hexo/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/hexo/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/hexo/medias/favicon.ico" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Bookandmusic</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/hexo/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/hexo/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/hexo/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/hexo/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/hexo/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/hexo/medias/featureimages/5.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">装饰器</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/hexo/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/hexo/tags/%E9%97%AD%E5%8C%85/">
+                                <span class="chip bg-color">闭包</span>
+                            </a>
+                        
+                            <a href="/hexo/tags/%E8%A3%85%E9%A5%B0%E5%99%A8/">
+                                <span class="chip bg-color">装饰器</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                技术
+                            </a>
+                        
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/python/" class="post-category">
+                                python
+                            </a>
+                        
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/python/%E5%87%BD%E6%95%B0/" class="post-category">
+                                函数
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-05-02
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2020-12-01
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.1k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    8 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h3 id="返回函数"><a href="#返回函数" class="headerlink" title="返回函数"></a>返回函数</h3><blockquote>
+<p><code>python</code>的常识，函数和其他任何东西一样，都是对象。这意味着可以将<code>函数</code>当做<code>实参</code>传递给函数，或者在函数中将<code>函数</code>作为<code>返回值</code>返回。</p>
+</blockquote>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">lazy_sum</span><span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        ax <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword">for</span> n <span class="token keyword">in</span> args<span class="token punctuation">:</span>
+            ax <span class="token operator">=</span> ax <span class="token operator">+</span> n
+        <span class="token keyword">return</span> ax
+    <span class="token keyword">return</span> sum
+f <span class="token operator">=</span> lazy_sum<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">)</span>
+f<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><ul>
+<li><p>闭包是“返回函数”的一个典型应用</p>
+</li>
+<li><p>闭包的定义：</p>
+<blockquote>
+<p>在一个外函数(<code>outer</code>)中定义了一个内函数(<code>inner</code>)</p>
+<p>内函数里运用了外函数的临时变量</p>
+<p>并且外函数的返回值是内函数的引用</p>
+</blockquote>
+</li>
+<li><p>闭包的使用，可以隐藏内部函数的工作细节，只给外部使用者提供一个可以执行的内部函数的引用。</p>
+</li>
+</ul>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true">#闭包函数的实例</span>
+  <span class="token comment" spellcheck="true"># outer是外部函数 a和b都是外函数的临时变量</span>
+  <span class="token keyword">def</span> <span class="token function">outer</span><span class="token punctuation">(</span> a <span class="token punctuation">)</span><span class="token punctuation">:</span>
+    b <span class="token operator">=</span> <span class="token number">10</span>
+    <span class="token keyword">def</span> <span class="token function">inner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># inner是内函数</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>a<span class="token operator">+</span>b<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">#在内函数中 用到了外函数的临时变量</span>
+    <span class="token keyword">return</span> inner  <span class="token comment" spellcheck="true"># 外函数的返回值是内函数的引用</span>
+
+  <span class="token comment" spellcheck="true"># 在这里我们调用外函数传入参数5</span>
+  <span class="token comment" spellcheck="true">#此时外函数两个临时变量 a是5 b是10 ，并创建了内函数，然后把内函数的引用返回存给了demo</span>
+  <span class="token comment" spellcheck="true"># 外函数结束的时候发现内部函数将会用到自己的临时变量，这两个临时变量就不会释放，会绑定给这个内部函数</span>
+  demo <span class="token operator">=</span> outer<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
+
+  <span class="token comment" spellcheck="true"># 我们调用内部函数，看一看内部函数是不是能使用外部函数的临时变量</span>
+  <span class="token comment" spellcheck="true"># demo存了外函数的返回值，也就是inner函数的引用，这里相当于执行inner函数</span>
+  demo<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 15</span></code></pre>
+<blockquote>
+<p><code>inner</code>函数修改<code>outer</code>函数变量</p>
+</blockquote>
+<pre class=" language-python"><code class="language-python">  <span class="token keyword">def</span> <span class="token function">createCounter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    i <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">def</span> <span class="token function">counter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+       nonlocal i <span class="token comment" spellcheck="true"># 指定外部函数的局部变量</span>
+       i <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span>
+       <span class="token keyword">return</span> i
+    <span class="token keyword">return</span> counter
+
+  counterA <span class="token operator">=</span> createCounter<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">print</span><span class="token punctuation">(</span>counterA<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> counterA<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> counterA<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> counterA<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> counterA<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 1 2 3 4 5</span>
+  counterB <span class="token operator">=</span> createCounter<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">if</span> <span class="token punctuation">[</span>counterB<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> counterB<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> counterB<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> counterB<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'测试通过!'</span><span class="token punctuation">)</span>
+  <span class="token keyword">else</span><span class="token punctuation">:</span>
+     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'测试失败!'</span><span class="token punctuation">)</span></code></pre>
+<h3 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h3><h4 id="装饰器介绍"><a href="#装饰器介绍" class="headerlink" title="装饰器介绍"></a>装饰器介绍</h4><p>要了解python中<code>@</code>装饰器的作用，首先要记住这么几点：</p>
+<ol>
+<li><p>装饰器符号<code>@</code>属于语法糖</p>
+<ul>
+<li>什么意思呢？</li>
+<li>就是说，我不按照<code>@</code>装饰器的语法要求来写，而是按照一般<code>python</code>的语法要求来写完全可以。</li>
+<li>那么用<code>@</code>装饰器的格式来写的目的就是为了书写简单方便</li>
+</ul>
+<blockquote>
+<p>注意：装饰器是用于拓展已有函数功能的一种函数，这个函数的特殊之处在于它的返回值也是一个函数，实际上就是利用闭包语法实现的。</p>
+</blockquote>
+</li>
+<li><p>装饰器的作用是什么呢？ 简单的理解就是：装饰原有的函数。什么意思呢？</p>
+<ul>
+<li><p>比如有一个函数<code>func(a, b)</code>，它的功能是求<code>a</code>,<code>b</code>的差值</p>
+</li>
+<li><p>现在有一个新需求，就是想对函数功能再装饰下，求完差值后再取绝对值，但是不能能修改原有函数，这时候就需要装饰器装饰函数     </p>
+<pre class=" language-python"><code class="language-python">   <span class="token triple-quoted-string string">"""
+   函数闭包实现求差值之后，再求绝对值
+   """</span>
+   <span class="token keyword">def</span> <span class="token function">func</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">:</span>
+       <span class="token keyword">return</span> a<span class="token operator">-</span> b
+
+   <span class="token keyword">def</span> <span class="token function">abs_num</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
+       <span class="token keyword">def</span> <span class="token function">inner</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">:</span>
+           ret <span class="token operator">=</span> func<span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span>
+           <span class="token keyword">return</span> abs<span class="token punctuation">(</span>ret<span class="token punctuation">)</span>
+       <span class="token keyword">return</span> inner
+
+   @abs_num
+   func<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span></code></pre>
+<ul>
+<li><p>当<code>abs_num</code>装饰函数<code>func</code>时，类似于将函数<code>func</code>作为参数传给<code>abs_num</code>,并将返回值即内层函数(<code>inner</code>)名重新赋值给变量<code>func</code></p>
+</li>
+<li><p>当调用函数<code>func</code>时，实质是调用内层函数<code>inner</code>，在内层函数中执行<code>func</code>函数，即最原始的函数<code>func</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="被装饰函数有参数"><a href="#被装饰函数有参数" class="headerlink" title="被装饰函数有参数"></a>被装饰函数有参数</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">outer</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">inner</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        func<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 新版的 func  才是 原来的 add</span>
+
+    <span class="token keyword">return</span> inner
+
+
+@outer
+<span class="token keyword">def</span> <span class="token function">add</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>x <span class="token operator">+</span> y<span class="token punctuation">)</span>
+
+
+add<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 新版的 add  是 内层 inner</span>
+
+<span class="token comment" spellcheck="true"># add(1, 2)   ====>  inner(1, 2)  ====>  func(1, 2)  ===> 3</span></code></pre>
+<blockquote>
+<p>被装饰函数 有参数，<code>inner</code>和 <code>func</code>需要同样的参数</p>
+</blockquote>
+<h4 id="被装饰函数有返回值"><a href="#被装饰函数有返回值" class="headerlink" title="被装饰函数有返回值"></a>被装饰函数有返回值</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">outer</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">inner</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        r <span class="token operator">=</span> func<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 装饰器装饰之后， func才是真正的add求和函数</span>
+
+        r <span class="token operator">+=</span> <span class="token number">10</span>  <span class="token comment" spellcheck="true"># 将两数之和再加 10</span>
+
+        <span class="token keyword">return</span> r
+
+    <span class="token keyword">return</span> inner
+
+
+@outer
+<span class="token keyword">def</span> <span class="token function">add</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> x <span class="token operator">+</span> y
+
+
+<span class="token comment" spellcheck="true"># 在装饰器中 对函数的执行结果 加10 处理</span>
+r <span class="token operator">=</span> add<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># add实际是inner</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span></code></pre>
+<blockquote>
+<p>被装饰函数有返回值， <code>inner</code>需要将 <code>func</code> 的结果 返回</p>
+</blockquote>
+<h4 id="被装饰的函数有不定长参数"><a href="#被装饰的函数有不定长参数" class="headerlink" title="被装饰的函数有不定长参数"></a>被装饰的函数有不定长参数</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">set_func</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">call_func</span><span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        <span class="token comment" spellcheck="true"># func(args, kwargs),此时得到的是元组和字典</span>
+        <span class="token comment" spellcheck="true"># func(*args, **kwargs),此时则是把元素拆包为单个数值和键值对</span>
+        <span class="token keyword">return</span> func<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> call_func
+
+@set_func
+<span class="token keyword">def</span> <span class="token function">s</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> args<span class="token punctuation">,</span> kwargs<span class="token punctuation">)</span>
+
+
+s<span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">34</span><span class="token punctuation">,</span> c<span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">,</span> d<span class="token operator">=</span><span class="token number">56</span><span class="token punctuation">)</span></code></pre>
+<ul>
+<li>形参<ul>
+<li>*args：接收多余的参数，得到元组(args)</li>
+<li>**kwargs:接收多余的关键字参数，得到字典(kwargs)</li>
+</ul>
+</li>
+<li>实参<ul>
+<li>*args：对元组(args)进行拆包，得到单个数值</li>
+<li>**kwargs：对字典(kwargs)拆包，得到单个的键值对</li>
+</ul>
+</li>
+</ul>
+<h4 id="多个装饰器装饰函数"><a href="#多个装饰器装饰函数" class="headerlink" title="多个装饰器装饰函数"></a>多个装饰器装饰函数</h4><ul>
+<li><p>多个装饰器装饰同一个函数，装饰顺序和执行顺序正好相反</p>
+</li>
+<li><p>装饰器函数的执行顺序和装饰器的顺序有关</p>
+</li>
+</ul>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">set_func1</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"这是测试1..."</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">call_func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"这是装饰器1..."</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> func<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> call_func1
+
+
+<span class="token keyword">def</span> <span class="token function">set_func2</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"这是测试2..."</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">call_func2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"这是装饰器2..."</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> func<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> call_func2
+
+
+@set_func1
+@set_func2
+<span class="token keyword">def</span> <span class="token function">s</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"hello..."</span><span class="token punctuation">)</span>
+
+
+s<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li><p>代码从上到下，依次执行，同时装饰器是用来装饰函数的</p>
+<ul>
+<li><p>执行到装饰器set_func1时，无法装饰，先跳过</p>
+</li>
+<li><p>执行装饰器set_func2时，装饰原始函数s，</p>
+<ul>
+<li>先执行set_func2,输出”这是测试2…”，</li>
+<li>然后得到s = call_func2(s)，此时的s是原始函数s</li>
+</ul>
+</li>
+<li><p>然后装饰器set_func1装饰新得到的函数s = call_func2(s)</p>
+<ul>
+<li>先执行set_func1,输出”这是测试1…”</li>
+<li>然后得到s = call_func1(s)，此时的s是新得到的函数s = call_func2(s)</li>
+</ul>
+</li>
+<li><p>最后得到函数s = call_func1(call_func(s))</p>
+</li>
+<li><p>最后执行函数s</p>
+<ul>
+<li>先执行call_func1,输出”这是装饰器1…”</li>
+<li>再执行call_func2,输出”这是装饰器2…”</li>
+<li>最后执行原始函数s，输出”hello…”</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="装饰器带参"><a href="#装饰器带参" class="headerlink" title="装饰器带参"></a>装饰器带参</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">set_pars</span><span class="token punctuation">(</span>pars<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">set_func</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">def</span> <span class="token function">call_func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"這是測試級別%d"</span> <span class="token operator">%</span> pars<span class="token punctuation">)</span>
+            <span class="token keyword">return</span> func<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> call_func
+    <span class="token keyword">return</span> set_func
+
+@set_pars<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 装饰分两步</span>
+<span class="token keyword">def</span> <span class="token function">s</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"hello..."</span><span class="token punctuation">)</span>
+
+s<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>装饰器带参时，装饰函数过程分两步：<ul>
+<li>将参数传给函数set_pars，进行执行</li>
+<li>将函数返回结果作为函数s的装饰器进行装饰</li>
+</ul>
+</li>
+</ul>
+<h4 id="类装饰器"><a href="#类装饰器" class="headerlink" title="类装饰器"></a>类装饰器</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Test</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> func<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>func <span class="token operator">=</span> func
+
+    <span class="token keyword">def</span> <span class="token function">__call__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>  
+        <span class="token triple-quoted-string string">'''
+        魔法方法__call__可以将对象设置为可调用对象（callable）,允许一个类的实例像函数一样被调用 
+        '''</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"这是类装饰器..."</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>func<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>
+
+@Test  <span class="token comment" spellcheck="true"># s = Test(s)</span>
+<span class="token keyword">def</span> <span class="token function">s</span><span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"hello python..."</span><span class="token punctuation">)</span>
+
+s<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>自定义的函数、内置函数和类都属于可调用对象，但凡是可以把一对括号()应用到某个对象身上都可称之为可调用对象</li>
+<li>判断对象是否为可调用对象可以用函数 callable</li>
+<li>如果在类中实现了 <strong>call</strong> 方法，那么实例对象也将成为一个可调用对象</li>
+</ul>
+<h4 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h4><ol>
+<li><p>函数input_str中，会获取用户输入字符串，并返回其结果，利用装饰器将其字符串先加上<code>&lt;b&gt;&lt;/b&gt;</code>标签，再添加<code>&lt;i&gt;&lt;/i&gt;</code>标签，如：<code>&lt;i&gt;&lt;b&gt;hello&lt;/b&gt;&lt;/&gt;</code>。注意：<strong>利用双层装饰器实现</strong>。</p>
+<pre class=" language-python"><code class="language-python"> <span class="token keyword">def</span> <span class="token function">set_func_b</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
+     <span class="token keyword">def</span> <span class="token function">call_func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+         <span class="token keyword">return</span> <span class="token string">"&lt;b>"</span> <span class="token operator">+</span> func<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"&lt;/b>"</span>
+
+     <span class="token keyword">return</span> call_func
+
+ <span class="token keyword">def</span> <span class="token function">set_func_i</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
+     <span class="token keyword">def</span> <span class="token function">call_func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+         <span class="token keyword">return</span> <span class="token string">"&lt;i>"</span> <span class="token operator">+</span> func<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"&lt;/i>"</span>
+
+     <span class="token keyword">return</span> call_func
+
+ @set_func_i
+ @set_func_b
+ <span class="token keyword">def</span> <span class="token function">input_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+     str <span class="token operator">=</span> input<span class="token punctuation">(</span><span class="token string">"输入："</span><span class="token punctuation">)</span>
+     <span class="token keyword">return</span> str
+
+ <span class="token keyword">print</span><span class="token punctuation">(</span>input_str<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+</li>
+<li><p>请实现一个装饰器,限制该函数被调用的频率,如10秒一次</p>
+<pre class=" language-python"><code class="language-python"> <span class="token keyword">import</span> time
+
+ <span class="token keyword">def</span> <span class="token function">set_time</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+     <span class="token keyword">def</span> <span class="token function">set_num</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
+         dic <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"last_time"</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">"time_interval"</span><span class="token punctuation">:</span> t<span class="token punctuation">}</span>
+
+         <span class="token keyword">def</span> <span class="token function">call_func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+             now_time <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+             finall_time <span class="token operator">=</span> dic<span class="token punctuation">[</span><span class="token string">"last_time"</span><span class="token punctuation">]</span> <span class="token operator">+</span> dic<span class="token punctuation">[</span><span class="token string">"time_interval"</span><span class="token punctuation">]</span>
+             <span class="token keyword">if</span> finall_time <span class="token operator">&lt;=</span> now_time<span class="token punctuation">:</span>
+                 dic<span class="token punctuation">[</span><span class="token string">"last_time"</span><span class="token punctuation">]</span> <span class="token operator">=</span> now_time
+                 ret <span class="token operator">=</span> func<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+                 <span class="token keyword">return</span> ret
+             <span class="token keyword">else</span><span class="token punctuation">:</span>
+                 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"还有%.2fs才能调用该函数"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>finall_time <span class="token operator">-</span> now_time<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+         <span class="token keyword">return</span> call_func
+     <span class="token keyword">return</span> set_num
+
+ @set_time<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
+ <span class="token keyword">def</span> <span class="token function">s</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"hello..."</span><span class="token punctuation">)</span></code></pre>
+</li>
+<li><p>请实现一个装饰器,限制该函数每个间隔被调用的频率,如1分钟5次</p>
+<pre class=" language-python"><code class="language-python"> <span class="token keyword">import</span> time
+
+ <span class="token keyword">def</span> <span class="token function">set_time</span><span class="token punctuation">(</span>t<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+     <span class="token keyword">def</span> <span class="token function">set_num</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
+         dic <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"last_time"</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">"time_interval"</span><span class="token punctuation">:</span> t<span class="token punctuation">,</span> <span class="token string">"num"</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">}</span>
+
+         <span class="token keyword">def</span> <span class="token function">call_func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+             now_time <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+             finall_time <span class="token operator">=</span> dic<span class="token punctuation">[</span><span class="token string">"last_time"</span><span class="token punctuation">]</span> <span class="token operator">+</span> dic<span class="token punctuation">[</span><span class="token string">"time_interval"</span><span class="token punctuation">]</span> <span class="token comment" spellcheck="true"># 代表可以重新调用的时间</span>
+             finall_num <span class="token operator">=</span> dic<span class="token punctuation">[</span><span class="token string">"num"</span><span class="token punctuation">]</span> <span class="token comment" spellcheck="true"># 代表调用的次数</span>
+
+             <span class="token keyword">if</span> finall_num <span class="token operator">&lt;</span> n<span class="token punctuation">:</span> <span class="token comment" spellcheck="true"># 当次数不满足时，可以继续调用</span>
+                 <span class="token keyword">if</span> finall_num <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+                     dic<span class="token punctuation">[</span><span class="token string">"last_time"</span><span class="token punctuation">]</span> <span class="token operator">=</span> now_time
+                 dic<span class="token punctuation">[</span><span class="token string">"num"</span><span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token number">1</span>
+
+                 <span class="token keyword">return</span> func<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+             <span class="token keyword">elif</span> now_time <span class="token operator">>=</span> finall_time<span class="token punctuation">:</span> <span class="token comment" spellcheck="true"># 已经超出时间，可以重新调用</span>
+                 dic<span class="token punctuation">[</span><span class="token string">"num"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span>
+                 dic<span class="token punctuation">[</span><span class="token string">"last_time"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span>
+
+                 <span class="token keyword">return</span> func<span class="token punctuation">(</span><span class="token punctuation">)</span>
+             <span class="token keyword">else</span><span class="token punctuation">:</span>
+                 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"还有%.2fs才能调用该函数"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>finall_time <span class="token operator">-</span> now_time<span class="token punctuation">)</span><span class="token punctuation">)</span>
+         <span class="token keyword">return</span> call_func
+     <span class="token keyword">return</span> set_num
+
+ @set_time<span class="token punctuation">(</span><span class="token number">60</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span>
+ <span class="token keyword">def</span> <span class="token function">s</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"hello..."</span><span class="token punctuation">)</span>
+
+ s<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ s<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ s<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+ s<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+</li>
+</ol>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/hexo/about" rel="external nofollow noreferrer">bookandmusic</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://liushaofeng2018.gitee.io/hexo/hexo/2019/05/02/python-han-shu-zhuang-shi-qi/">http://liushaofeng2018.gitee.io/hexo/hexo/2019/05/02/python-han-shu-zhuang-shi-qi/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/hexo/about" target="_blank">bookandmusic</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/hexo/tags/%E9%97%AD%E5%8C%85/">
+                                    <span class="chip bg-color">闭包</span>
+                                </a>
+                            
+                                <a href="/hexo/tags/%E8%A3%85%E9%A5%B0%E5%99%A8/">
+                                    <span class="chip bg-color">装饰器</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/hexo/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/hexo/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/hexo/medias/reward/Alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/hexo/medias/reward/Wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/hexo/2019/05/03/python-mo-kuai-time-timeit-mo-kuai/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/hexo/medias/featureimages/11.jpg" class="responsive-img" alt="time与timeit 模块">
+                        
+                        <span class="card-title">time与timeit 模块</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            一、time 模块1. 时间表现形式
+timestamp：时间戳，时间戳表示的是从1970年1月1日00:00:00开始按秒计算的偏移量
+struct_time： 时间元组，共有九个元素组
+format time： 格式化时间，已格式化的结
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-05-03
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                    技术
+                                </a>
+                            
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/python/" class="post-category">
+                                    python
+                                </a>
+                            
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/python/%E6%A8%A1%E5%9D%97/" class="post-category">
+                                    模块
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/hexo/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                    <a href="/hexo/tags/%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">基础</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/hexo/2019/03/31/gong-ju-git-cao-zuo/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/hexo/medias/featureimages/9.jpg" class="responsive-img" alt="Git操作">
+                        
+                        <span class="card-title">Git操作</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Git是目前世界上最先进的分布式版本控制系统，可以有效、高速的处理从很小到非常大的项目版本管理。也就是用来管理你的hexo博客文章，上传到GitHub的工具。Git非常强大，开发人员必备技能。
+
+
+1. 安装Git
+windows：到git
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-03-31
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/hexo/categories/%E5%B7%A5%E5%85%B7/" class="post-category">
+                                    工具
+                                </a>
+                            
+                            <a href="/hexo/categories/%E5%B7%A5%E5%85%B7/Git/" class="post-category">
+                                    Git
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/hexo/tags/Git/">
+                        <span class="chip bg-color">Git</span>
+                    </a>
+                    
+                    <a href="/hexo/tags/%E5%AF%86%E9%92%A5/">
+                        <span class="chip bg-color">密钥</span>
+                    </a>
+                    
+                    <a href="/hexo/tags/%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E5%85%B3%E8%81%94/">
+                        <span class="chip bg-color">远程仓库关联</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/hexo/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/hexo/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/hexo/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/hexo/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/hexo/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/hexo/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="4943692268"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.3'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/hexo/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="/hexo/about" target="_blank">bookandmusic</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">87.4k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:1943288286@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1943288286" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1943288286" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/hexo/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/hexo/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/hexo/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/hexo/libs/materialize/materialize.min.js"></script>
+    <script src="/hexo/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/hexo/libs/aos/aos.js"></script>
+    <script src="/hexo/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/hexo/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/hexo/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/hexo/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/hexo/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/hexo/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
