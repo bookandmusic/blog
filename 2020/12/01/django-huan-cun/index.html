@@ -830,31 +830,31 @@ CACHE__MIDDLEWARE_SECONDS<span class="token operator">=</span><span class="token
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/hexo/2020/12/01/django-huan-cun/">
+                <a href="/hexo/2020/12/03/django-you-jian-fa-song/">
                     <div class="card-image">
                         
                         
-                        <img src="/hexo/medias/featureimages/7.jpg" class="responsive-img" alt="Django-缓存">
+                        <img src="/hexo/medias/featureimages/22.jpg" class="responsive-img" alt="Django-邮件发送">
                         
-                        <span class="card-title">Django-缓存</span>
+                        <span class="card-title">Django-邮件发送</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            缓存简介在动态网站中,用户所有的请求,服务器都会去数据库中进行相应的增,删,查,改,渲染模板,执行业务逻辑,最后生成用户看到的页面.
-当一个网站的用户访问量很大的时候,每一次的的后台操作,都会消耗很多的服务端资源,所以必须使用缓存来减轻后端
+                            我们常常会用到一些发送邮件的功能，比如：有人注册网站之后，需要向其邮箱中发送激活链接，只有点击激活链接，激活账户之后，才允许登录。
+配置相关参数在 settings.py 的最后面加上类似这些
+EMAIL_BACKEND = 'django
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-01
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-12-03
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -867,20 +867,27 @@ CACHE__MIDDLEWARE_SECONDS<span class="token operator">=</span><span class="token
                                     python
                                 </a>
                             
-                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/python/web/" class="post-category">
-                                    web
+                            <a href="/hexo/categories/%E6%8A%80%E6%9C%AF/python/Django/" class="post-category">
+                                    Django
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/hexo/tags/%E7%BC%93%E5%AD%98/">
-                        <span class="chip bg-color">缓存</span>
+                    <a href="/hexo/tags/%E9%82%AE%E4%BB%B6/">
+                        <span class="chip bg-color">邮件</span>
+                    </a>
+                    
+                    <a href="/hexo/tags/itsdangerous/">
+                        <span class="chip bg-color">itsdangerous</span>
+                    </a>
+                    
+                    <a href="/hexo/tags/%E4%B8%B4%E6%97%B6%E8%BA%AB%E4%BB%BD%E4%BB%A4%E7%89%8C/">
+                        <span class="chip bg-color">临时身份令牌</span>
                     </a>
                     
                 </div>
@@ -906,7 +913,8 @@ CACHE__MIDDLEWARE_SECONDS<span class="token operator">=</span><span class="token
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            当页面因需要展示的数据条目过多，导致无法在一个页面全部显示。这时，页面经常会采用分页形式进行展示，然后每页显示 20 或者 50 等条数据。分页经常在网站上随处可见，
+分页的实现不仅提高了用户体验，还是减轻数据库读取数据的压力。Django
                         
                     </div>
                     <div class="publish-info">
@@ -1140,7 +1148,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">87.4k</span>&nbsp;字
+                class="white-color">89.3k</span>&nbsp;字
             
             
             

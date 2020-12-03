@@ -6,7 +6,7 @@
   <link href="/hexo/atom.xml" rel="self"/>
   
   <link href="http://liushaofeng2018.gitee.io/hexo/"/>
-  <updated>2020-12-01T15:25:25.326Z</updated>
+  <updated>2020-12-03T15:05:13.143Z</updated>
   <id>http://liushaofeng2018.gitee.io/hexo/</id>
   
   <author>
@@ -15,6 +15,42 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Django-邮件发送</title>
+    <link href="http://liushaofeng2018.gitee.io/hexo/2020/12/03/django-you-jian-fa-song/"/>
+    <id>http://liushaofeng2018.gitee.io/hexo/2020/12/03/django-you-jian-fa-song/</id>
+    <published>2020-12-03T14:07:31.000Z</published>
+    <updated>2020-12-03T15:05:13.143Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;我们常常会用到一些发送邮件的功能，比如：有人注册网站之后，需要向其邮箱中发送激活链接，只有点击激活链接，激活账户之后，才允许登录。&lt;/p&gt;
+&lt;h2 id=&quot;配置相关参数&quot;&gt;&lt;a href=&quot;#配置相关参数&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="技术" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="python" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/"/>
+    
+      <category term="Django" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/Django/"/>
+    
+    
+      <category term="邮件" scheme="http://liushaofeng2018.gitee.io/hexo/tags/%E9%82%AE%E4%BB%B6/"/>
+    
+      <category term="itsdangerous" scheme="http://liushaofeng2018.gitee.io/hexo/tags/itsdangerous/"/>
+    
+      <category term="临时身份令牌" scheme="http://liushaofeng2018.gitee.io/hexo/tags/%E4%B8%B4%E6%97%B6%E8%BA%AB%E4%BB%BD%E4%BB%A4%E7%89%8C/"/>
+    
+  </entry>
   
   <entry>
     <title>Django-缓存</title>
@@ -52,9 +88,18 @@
     <link href="http://liushaofeng2018.gitee.io/hexo/2020/11/30/django-shu-ju-fen-ye/"/>
     <id>http://liushaofeng2018.gitee.io/hexo/2020/11/30/django-shu-ju-fen-ye/</id>
     <published>2020-11-30T13:45:42.000Z</published>
-    <updated>2020-12-01T14:23:48.396Z</updated>
+    <updated>2020-12-03T14:06:19.286Z</updated>
     
     <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;当页面因需要展示的数据条目过多，导致无法在一个页面全部显示。这时，页面经常会采用分页形式进行展示，然后每页显示 20 或者 50 等条数据。分页经常在网站上随处可见，&lt;/p&gt;
+&lt;p&gt;分页的实现不仅提高了用户体验，还是减轻数据库读取数据的压力。Django 自带名为
+        
+      
     
     </summary>
     
@@ -574,45 +619,6 @@
       <category term="vue-router" scheme="http://liushaofeng2018.gitee.io/hexo/tags/vue-router/"/>
     
       <category term="路由" scheme="http://liushaofeng2018.gitee.io/hexo/tags/%E8%B7%AF%E7%94%B1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ES6语法</title>
-    <link href="http://liushaofeng2018.gitee.io/hexo/2020/04/12/js-es6-yu-fa/"/>
-    <id>http://liushaofeng2018.gitee.io/hexo/2020/04/12/js-es6-yu-fa/</id>
-    <published>2020-04-12T15:13:05.000Z</published>
-    <updated>2020-12-01T14:23:48.397Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;变量声明&quot;&gt;&lt;a href=&quot;#变量声明&quot; class=&quot;headerlink&quot; title=&quot;变量声明&quot;&gt;&lt;/a&gt;变量声明&lt;/h2&gt;&lt;h3 id=&quot;1-let&quot;&gt;&lt;a href=&quot;#1-let&quot; class=&quot;headerlink&quot; title=&quot;1.
-        
-      
-    
-    </summary>
-    
-    
-      <category term="技术" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-      <category term="JS" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/JS/"/>
-    
-    
-      <category term="JS" scheme="http://liushaofeng2018.gitee.io/hexo/tags/JS/"/>
-    
-      <category term="ES6" scheme="http://liushaofeng2018.gitee.io/hexo/tags/ES6/"/>
-    
-      <category term="var" scheme="http://liushaofeng2018.gitee.io/hexo/tags/var/"/>
-    
-      <category term="let" scheme="http://liushaofeng2018.gitee.io/hexo/tags/let/"/>
-    
-      <category term="const" scheme="http://liushaofeng2018.gitee.io/hexo/tags/const/"/>
-    
-      <category term="箭头函数" scheme="http://liushaofeng2018.gitee.io/hexo/tags/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/"/>
     
   </entry>
   
