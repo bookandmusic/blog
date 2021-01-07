@@ -1,0 +1,143 @@
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: Bookandmusic  #网站标题
+subtitle: 踮起脚尖，另一种高度  #网站副标题
+description:        #网站描述
+author: bookandmusic    #作者
+language: zh-CN       #语言
+timezone: Asia/Shanghai      #网站时区
+
+# URL
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+# url: https://bookandmusic.github.io
+url: http://bookandmusic.gitee.io/  #你的站点Url
+root: /                     #站点的根目录
+permalink: :year/:month/:day/:title/      #文章的 永久链接 格式 
+permalink_defaults:                       #永久链接中各部分的默认值
+
+# Directory
+source_dir: source               #资源文件夹，这个文件夹用来存放内容
+public_dir: public               #公共文件夹，这个文件夹用于存放生成的站点文件
+tag_dir: tags                    # 标签文件夹 
+archive_dir: archives           #归档文件夹
+category_dir: categories        #分类文件夹
+code_dir: downloads/code        #Include code 文件夹
+i18n_dir: :lang                 #国际化（i18n）文件夹
+skip_render:                    #跳过指定文件的渲染，您可使用 glob 表达式来匹配路径。 
+
+# Writing
+new_post_name: :title.md # 新文章的文件名称
+default_layout: post      #预设布局
+titlecase: false # 把标题转换为 titlecase
+external_link: true # 在新标签中打开链接
+filename_case: 0   #把文件名称转换为 (1) 小写或 (2) 大写
+render_drafts: false   #是否显示草稿
+post_asset_folder: false   #是否启动 Asset 文件夹,也就是创建新文章时，是否创建对应的资源文件夹
+relative_link: false     #把链接改为与根目录的相对位址  
+future: true        #显示未来的文章
+  
+# Home page setting
+# path: Root path for your blogs index page. (default = '')
+# per_page: Posts displayed per page. (0 = disable pagination)
+# order_by: Posts order. (Order by date descending by default)
+index_generator:
+  path: ''
+  per_page: 12
+  order_by: -date
+  
+# Category & Tag
+default_category: uncategorized   # 默认分类:未分类
+category_map:              #分类别名
+tag_map:                   #标签别名
+
+# Date / Time format
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD   #日期格式
+time_format: HH:mm:ss     #时间格式  
+
+# Pagination/分页
+## Set per_page to 0 to disable pagination
+per_page: 12    #分页数量
+pagination_dir: page
+
+# 插件/Extensions
+## Plugins: https://hexo.io/plugins/
+plugin:
+- hexo-generator-feed # 生成RSS
+- hexo-deployer-git # hexo d 部署到服务器
+- hexo-permalink-pinyin # 中文链接转拼音
+- hexo-prism-plugin # 代码高亮插件
+- hexo-wordcount # 文章字数统计插件
+- hexo-renderer-markdown-it # Markdown 解析和渲染的插件， hexo-renderer-marked 默认
+
+# Markdown-it/Markdown解析器 高级配置
+markdown:
+  render:
+    html: true
+    xhtmlOut: false
+    breaks: true
+    linkify: true
+    typographer: true
+    quotes: '“”‘’'
+  plugins:
+    - markdown-it-abbr
+    - markdown-it-footnote
+    - markdown-it-ins
+    - markdown-it-sub
+    - markdown-it-sup
+  anchors:
+    level: 2
+    collisionSuffix: 'v'
+    permalink: true
+    permalinkClass: header-anchor
+    permalinkSymbol: ¶
+
+# 搜索
+search:
+  path: search.xml
+  field: post
+  content: true
+
+# 中文链接转拼音
+permalink_pinyin:
+  enable: true
+  separator: '-'
+
+
+
+# RSS订阅
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content:
+  content_limit: 140
+  content_limit_delim: ' '
+  order_by: -date
+  
+## 主题配置
+theme: matery
+
+# 代码高亮
+highlight:
+  enable: false
+
+prism_plugin:
+  mode: 'preprocess'    # realtime/preprocess
+  theme: 'tomorrow'
+  line_number: false    # default false
+  custom_css:
+
+
+
+# 部署/Deployment
+## Docs: https://hexo.io/docs/deployment.html
+deploy:
+  type: git   #类型，常用的git
+  # repository: git@github.com:bookandmusic/bookandmusic.github.io.git
+  repository: https://gitee.com/bookandmusic/bookandmusic.git
+  branch: master

@@ -1,0 +1,264 @@
+---
+title: 内置函数
+categories:
+  - 技术
+  - python
+  - 函数
+tags:
+  - python
+  - 函数
+  - 基础
+date: 2019-05-25 10:45:27
+---
+### python内置函数
+
+> Python 内置函数就是 python 标准库里（语言自身携带的）函数（公共函数）。
+
+那么，接下来就来谈一谈 python 里的内置函数
+
+#### 1、`abs()`    
+
+> 此函数返回数字的绝对值。
+
+```python
+a = 5
+b = -10
+print(abs(a))  #输出3
+print(abs(b))  #输出5
+```
+
+#### 2、`all()`
+
+> 此函数用于判断给定的可迭代参数 `iterable` 中的所有元素是否都不为 `0`、都不为 `False` 或者 `iterable` 都 为空,如果是返回 `True`, 否则返回 `False`。
+
+```python
+print(all(['a', 'b', 'c', 'd']))  # True
+print(all(['a', 'b', '', 'd']))   # False
+print(all([0, 1,2, 3]))          # False
+print(all(('a', 'b', '', 'd')))   # False
+print(all((0, 1,2, 3)))          # False
+print(all([]))  # True
+print(all(()))  # True
+```
+
+#### 3、`any()`     
+
+>函数用于判断给定的可迭代参数 `iterable` 是否全部为空对象,如果都为空、都为 0、或者都为 `false`，则返回 `False`,如果不都为空、不都为 `0`、不都为 `false`，则返回 `True`。
+
+```python
+print(any(['a', 'b', 'c', 'd']))  # True
+print(any(['a', 'b', '', 'd']))   # True
+print(any([0, 1,2, 3]))          # True
+print(any(('a', 'b', '', 'd')))   # True
+print(any((0, 1,2, 3)))          # True
+print(any([]))  # False
+print(any(()))  # False
+```
+
+#### 4、`bin()`     
+
+> 返回一个整数 `int` 或者长整数 `long int` 的二进制表示。
+
+```python
+print(bin(10))  #0b1010
+print(bin(20))  #0b10100
+```
+
+#### 5、`bool()`    
+
+> 函数用于将给定参数转换为布尔类型，如果没有参数，返回 `False`。
+
+- 传入布尔类型时，按原值返回
+
+- 参数如果缺省，则返回 `False`
+
+- 传入字符串时，空字符串返回 `False`，否则返回 `True`
+
+- 传入数值时，0 值返回 `False`，否则返回 `True`
+
+- 传入元组、列表、字典等对象时，元素个数为空返回 `False`，否则返回 `True`.
+
+```python
+print(bool())  #False
+print(bool(True))  #True
+print(bool(""))  #False
+print(bool("123"))  #True
+print(bool(0))  #False
+print(bool(1))  #True
+print(bool([])) #False  若元祖和字典为空时 也为False ，不为空 则为True
+```
+
+#### 6、`chr()`   
+
+> 用一个范围在 `range(256)`内的（就是 `0～255`）整数作参数，返回一个对应的字符。(**只能输入数字**)
+
+```python
+print(chr(65))   #A
+print(chr(97))   #a
+print(chr(100))  #d
+```
+
+#### 7、`cmp(x,y)`    
+
+> 函数用于比较 2 个对象，如果` x <y `返回` -1`, 如果 `x == y` 返回 `0`, 如果 `x> y `返回 1。（`python3` 已经删除了）
+
+#### 8、`compile()`    
+
+>  函数将一个字符串编译为字节代码。语法：`compile(source, filename, mode[, flags[, dont_inherit]])`
+
+```python
+import re
+pattern=re.compile('[a-zA-Z]')
+result=pattern.findall('as3SiOPdj#@23awe')
+print(result)
+```
+
+#### 9、`complex(real,imag)`    
+
+> 函数用于创建一个值为 `real + imag * j` 的复数或者转化一个字符串或数为复数。如果第一个参数为字符串，则不需要指定第二个参数。
+
+```python
+print(complex(1, 2))  #(1 + 2j)
+print(complex(1))  #(1 + 0j)
+print(complex("3")) #(3+0j)
+```
+
+#### 10、`dict(**kwarg)`
+
+> 返回一个字典
+
+```python
+>>>dict()                        # 创建空字典
+{}
+>>> dict(a='a', b='b', t='t')     # 传入关键字
+{'a': 'a', 'b': 'b', 't': 't'}
+>>> dict(zip(['one', 'two', 'three'], [1, 2, 3]))   # 映射函数方式来构造字典
+{'three': 3, 'two': 2, 'one': 1} 
+>>> dict([('one', 1), ('two', 2), ('three', 3)])    # 可迭代对象方式来构造字典
+{'three': 3, 'two': 2, 'one': 1}
+>>>
+```
+
+#### 11、`dir([object])   `  
+
+> 函数不带参数时，返回当前范围内的变量、方法和定义的类型列表；
+>
+> 带参数时，返回参数的属性、方法列表。
+>
+> 如果参数包含方法`__dir__()`，该方法将被调用。
+>
+> 如果参数不包含`__dir__()`，该方法将最大限度地收集参数信息。
+
+```python
+>>>dir()   #  获得当前模块的属性列表
+['__builtins__', '__doc__', '__name__', '__package__', 'arr', 'myslice']
+>>> dir([ ])    # 查看列表的方法
+['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__delslice__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getslice__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__setslice__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
+>>>
+```
+
+#### 12、`divmod(a, b)`    
+
+> 函数把除数和余数运算结果结合起来，返回一个包含商和余数的元组` (a // b, a % b)`。
+
+```python
+>>>divmod(7, 2)
+(3, 1)
+>>> divmod(8, 2)
+(4, 0)
+>>> divmod(1+2j,1+0.5j)
+((1+0j), 1.5j)
+```
+
+#### 13、`enumerate(sequence, [start=0]) `   
+
+> 函数用于将一个可遍历的数据对象 (如列表、元组或字符串) 组合为一个索引序列，同时列出数据和数据下标，一般用在` for` 循环当中。
+
+```python
+>>>seasons = ['Spring', 'Summer', 'Fall', 'Winter']
+>>> list(enumerate(seasons))
+[(0, 'Spring'), (1, 'Summer'), (2, 'Fall'), (3, 'Winter')]
+>>> list(enumerate(seasons, start=1))       # 下标从 1 开始
+[(1, 'Spring'), (2, 'Summer'), (3, 'Fall'), (4, 'Winter')]
+```
+
+#### 14、eval()    函数用来执行一个字符串表达式，并返回表达式的值。
+
+#### 15、execfile()    函数可以用来执行一个文件。
+
+#### 16、float()    函数用于将整数和字符串转换成浮点数。
+
+#### 17、frozenset()    返回一个冻结的集合，冻结后集合不能再添加或删除任何元素。
+
+#### 18、getattr()    函数用于返回一个对象属性值。
+
+#### 19、hash()    用于获取取一个对象（字符串或者数值等）的哈希值。
+
+#### 20、help()    函数用于查看函数或模块用途的详细说明。
+
+#### 21、hex()    函数用于将 10 进制整数转换成 16 进制整数。
+
+#### 22、id()    函数用于获取对象的内存地址。
+
+#### 23、input()    输入函数
+
+#### 24、int()    函数用于将一个字符串会数字转换为整型。
+
+#### 25、isinstance()    函数来判断一个对象是否是一个已知的类型，类似 type()。
+
+　　 **isinstance() 与 type() 区别：**
+
+- type() 不会认为子类是一种父类类型，不考虑继承关系。
+- isinstance() 会认为子类是一种父类类型，考虑继承关系。
+
+- 如果要判断两个类型是否相同推荐使用 isinstance()。
+
+#### 26、len()    方法返回对象（字符、列表、元组等）长度或项目个数。
+
+#### 27、list()    方法用于将元组转换为列表。
+
+#### 28、locals()    函数会以字典类型返回当前位置的全部局部变量。
+
+#### 29、long()    函数将数字或字符串转换为一个长整型。
+
+#### 30、max()    方法返回给定参数的最大值，参数可以为序列。
+
+#### 31、memoryview()    函数返回给定参数的内存查看对象 (Momory view)。
+
+#### 32、min()    方法返回给定参数的最小值，参数可以为序列。
+
+#### 33、oct()    函数将一个整数转换成 8 进制字符串。
+
+#### 34、open()    函数用于打开一个文件，创建一个 file 对象，相关的方法才可以调用它进行读写。
+
+#### 35、ord()    函数与 chr() 函数相反，输入字符返回数字
+
+#### 36、pow()    方法返回 xy（x 的 y 次方） 的值。函数是计算 x 的 y 次方，如果 z 在存在，则再对结果进行取模，其结果等效于 pow(x,y) %z
+
+#### 37、print()    输出函数
+
+#### 38、range()    函数可创建一个整数列表，一般用在 for 循环中。
+
+#### 39、reload()    用于重新载入之前载入的模块。
+
+#### 40、everse()    函数用于反向列表中元素。
+
+#### 41、round()    方法返回浮点数 x 的四舍五入值。
+
+#### 42、set()    函数创建一个无序不重复元素集，可进行关系测试，删除重复数据，还可以计算交集、差集、并集等。
+
+#### 43、str()    函数将对象转化字符串
+
+#### 44、sum()    方法对系列进行求和计算。
+
+#### 45、tuple()   元组 tuple() 函数将列表转换为元组。
+
+#### 46、type()   返回对象类型。
+
+#### 47、unichr()    该函数和 chr() 函数功能基本一样， 只不过是返回 unicode 的字符。
+
+#### 48、vars()    函数返回对象 object 的属性和属性值的字典对象。
+
+#### 49、xrange()    函数用法与 range 完全相同，所不同的是生成的不是一个数组，而是一个生成器。
+
+#### 50、__import__()    函数用于动态加载类和函数 。如果一个模块经常变化就可以使用 __import__() 来动态载入。
