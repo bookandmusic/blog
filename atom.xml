@@ -5,9 +5,9 @@
   <subtitle>踮起脚尖，另一种高度</subtitle>
   <link href="/hexo/atom.xml" rel="self"/>
   
-  <link href="http://liushaofeng2018.gitee.io/hexo/"/>
+  <link href="http://liushaofeng2018.gitee.io/"/>
   <updated>2020-12-27T14:10:26.631Z</updated>
-  <id>http://liushaofeng2018.gitee.io/hexo/</id>
+  <id>http://liushaofeng2018.gitee.io/</id>
   
   <author>
     <name>bookandmusic</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>好用的CLI工具</title>
-    <link href="http://liushaofeng2018.gitee.io/hexo/2020/12/27/gong-ju-hao-yong-de-cli-gong-ju/"/>
-    <id>http://liushaofeng2018.gitee.io/hexo/2020/12/27/gong-ju-hao-yong-de-cli-gong-ju/</id>
+    <link href="http://liushaofeng2018.gitee.io/2020/12/27/gong-ju-hao-yong-de-cli-gong-ju/"/>
+    <id>http://liushaofeng2018.gitee.io/2020/12/27/gong-ju-hao-yong-de-cli-gong-ju/</id>
     <published>2020-12-27T14:10:35.000Z</published>
     <updated>2020-12-27T14:10:26.631Z</updated>
     
@@ -36,21 +36,21 @@
     </summary>
     
     
-      <category term="系统" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E7%B3%BB%E7%BB%9F/"/>
+      <category term="系统" scheme="http://liushaofeng2018.gitee.io/categories/%E7%B3%BB%E7%BB%9F/"/>
     
-      <category term="Mac" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E7%B3%BB%E7%BB%9F/Mac/"/>
+      <category term="Mac" scheme="http://liushaofeng2018.gitee.io/categories/%E7%B3%BB%E7%BB%9F/Mac/"/>
     
     
-      <category term="CLI" scheme="http://liushaofeng2018.gitee.io/hexo/tags/CLI/"/>
+      <category term="CLI" scheme="http://liushaofeng2018.gitee.io/tags/CLI/"/>
     
-      <category term="终端工具" scheme="http://liushaofeng2018.gitee.io/hexo/tags/%E7%BB%88%E7%AB%AF%E5%B7%A5%E5%85%B7/"/>
+      <category term="终端工具" scheme="http://liushaofeng2018.gitee.io/tags/%E7%BB%88%E7%AB%AF%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
   <entry>
     <title>Vue组件间通信方式</title>
-    <link href="http://liushaofeng2018.gitee.io/hexo/2020/12/27/vue-zu-jian-jian-tong-xin-liu-chong-fang-shi-wan-zheng-ban/"/>
-    <id>http://liushaofeng2018.gitee.io/hexo/2020/12/27/vue-zu-jian-jian-tong-xin-liu-chong-fang-shi-wan-zheng-ban/</id>
+    <link href="http://liushaofeng2018.gitee.io/2020/12/27/vue-zu-jian-jian-tong-xin-liu-chong-fang-shi-wan-zheng-ban/"/>
+    <id>http://liushaofeng2018.gitee.io/2020/12/27/vue-zu-jian-jian-tong-xin-liu-chong-fang-shi-wan-zheng-ban/</id>
     <published>2020-12-27T13:56:48.000Z</published>
     <updated>2020-12-27T13:59:12.649Z</updated>
     
@@ -67,21 +67,21 @@
     </summary>
     
     
-      <category term="技术" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
-      <category term="vue" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/vue/"/>
+      <category term="vue" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/vue/"/>
     
     
-      <category term="Vue" scheme="http://liushaofeng2018.gitee.io/hexo/tags/Vue/"/>
+      <category term="Vue" scheme="http://liushaofeng2018.gitee.io/tags/Vue/"/>
     
-      <category term="组件" scheme="http://liushaofeng2018.gitee.io/hexo/tags/%E7%BB%84%E4%BB%B6/"/>
+      <category term="组件" scheme="http://liushaofeng2018.gitee.io/tags/%E7%BB%84%E4%BB%B6/"/>
     
   </entry>
   
   <entry>
     <title>Django-中间件</title>
-    <link href="http://liushaofeng2018.gitee.io/hexo/2020/12/10/django-zhong-jian-jian/"/>
-    <id>http://liushaofeng2018.gitee.io/hexo/2020/12/10/django-zhong-jian-jian/</id>
+    <link href="http://liushaofeng2018.gitee.io/2020/12/10/django-zhong-jian-jian/"/>
+    <id>http://liushaofeng2018.gitee.io/2020/12/10/django-zhong-jian-jian/</id>
     <published>2020-12-09T23:50:31.000Z</published>
     <updated>2020-12-09T23:51:45.879Z</updated>
     
@@ -98,21 +98,21 @@
     </summary>
     
     
-      <category term="技术" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
-      <category term="python" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/"/>
+      <category term="python" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
     
-      <category term="Django" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/Django/"/>
+      <category term="Django" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/python/Django/"/>
     
     
-      <category term="中间件" scheme="http://liushaofeng2018.gitee.io/hexo/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
+      <category term="中间件" scheme="http://liushaofeng2018.gitee.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
     
   </entry>
   
   <entry>
     <title>Django-模板</title>
-    <link href="http://liushaofeng2018.gitee.io/hexo/2020/12/09/django-mo-ban/"/>
-    <id>http://liushaofeng2018.gitee.io/hexo/2020/12/09/django-mo-ban/</id>
+    <link href="http://liushaofeng2018.gitee.io/2020/12/09/django-mo-ban/"/>
+    <id>http://liushaofeng2018.gitee.io/2020/12/09/django-mo-ban/</id>
     <published>2020-12-09T09:27:02.000Z</published>
     <updated>2020-12-09T09:27:02.809Z</updated>
     
@@ -126,8 +126,8 @@
   
   <entry>
     <title>Django-邮件发送</title>
-    <link href="http://liushaofeng2018.gitee.io/hexo/2020/12/03/django-you-jian-fa-song/"/>
-    <id>http://liushaofeng2018.gitee.io/hexo/2020/12/03/django-you-jian-fa-song/</id>
+    <link href="http://liushaofeng2018.gitee.io/2020/12/03/django-you-jian-fa-song/"/>
+    <id>http://liushaofeng2018.gitee.io/2020/12/03/django-you-jian-fa-song/</id>
     <published>2020-12-03T14:07:31.000Z</published>
     <updated>2020-12-03T15:05:13.143Z</updated>
     
@@ -145,25 +145,25 @@
     </summary>
     
     
-      <category term="技术" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
-      <category term="python" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/"/>
+      <category term="python" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
     
-      <category term="Django" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/Django/"/>
+      <category term="Django" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/python/Django/"/>
     
     
-      <category term="邮件" scheme="http://liushaofeng2018.gitee.io/hexo/tags/%E9%82%AE%E4%BB%B6/"/>
+      <category term="邮件" scheme="http://liushaofeng2018.gitee.io/tags/%E9%82%AE%E4%BB%B6/"/>
     
-      <category term="itsdangerous" scheme="http://liushaofeng2018.gitee.io/hexo/tags/itsdangerous/"/>
+      <category term="itsdangerous" scheme="http://liushaofeng2018.gitee.io/tags/itsdangerous/"/>
     
-      <category term="临时身份令牌" scheme="http://liushaofeng2018.gitee.io/hexo/tags/%E4%B8%B4%E6%97%B6%E8%BA%AB%E4%BB%BD%E4%BB%A4%E7%89%8C/"/>
+      <category term="临时身份令牌" scheme="http://liushaofeng2018.gitee.io/tags/%E4%B8%B4%E6%97%B6%E8%BA%AB%E4%BB%BD%E4%BB%A4%E7%89%8C/"/>
     
   </entry>
   
   <entry>
     <title>Django-缓存</title>
-    <link href="http://liushaofeng2018.gitee.io/hexo/2020/12/01/django-huan-cun/"/>
-    <id>http://liushaofeng2018.gitee.io/hexo/2020/12/01/django-huan-cun/</id>
+    <link href="http://liushaofeng2018.gitee.io/2020/12/01/django-huan-cun/"/>
+    <id>http://liushaofeng2018.gitee.io/2020/12/01/django-huan-cun/</id>
     <published>2020-12-01T13:49:38.000Z</published>
     <updated>2020-12-01T15:25:25.326Z</updated>
     
@@ -180,21 +180,21 @@
     </summary>
     
     
-      <category term="技术" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
-      <category term="python" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/"/>
+      <category term="python" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
     
-      <category term="web" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/web/"/>
+      <category term="web" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/python/web/"/>
     
     
-      <category term="缓存" scheme="http://liushaofeng2018.gitee.io/hexo/tags/%E7%BC%93%E5%AD%98/"/>
+      <category term="缓存" scheme="http://liushaofeng2018.gitee.io/tags/%E7%BC%93%E5%AD%98/"/>
     
   </entry>
   
   <entry>
     <title>Django-数据分页</title>
-    <link href="http://liushaofeng2018.gitee.io/hexo/2020/11/30/django-shu-ju-fen-ye/"/>
-    <id>http://liushaofeng2018.gitee.io/hexo/2020/11/30/django-shu-ju-fen-ye/</id>
+    <link href="http://liushaofeng2018.gitee.io/2020/11/30/django-shu-ju-fen-ye/"/>
+    <id>http://liushaofeng2018.gitee.io/2020/11/30/django-shu-ju-fen-ye/</id>
     <published>2020-11-30T13:45:42.000Z</published>
     <updated>2020-12-03T14:06:19.286Z</updated>
     
@@ -212,21 +212,21 @@
     </summary>
     
     
-      <category term="技术" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
-      <category term="python" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/"/>
+      <category term="python" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
     
-      <category term="web" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/web/"/>
+      <category term="web" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/python/web/"/>
     
     
-      <category term="分页" scheme="http://liushaofeng2018.gitee.io/hexo/tags/%E5%88%86%E9%A1%B5/"/>
+      <category term="分页" scheme="http://liushaofeng2018.gitee.io/tags/%E5%88%86%E9%A1%B5/"/>
     
   </entry>
   
   <entry>
     <title>JWT浅析</title>
-    <link href="http://liushaofeng2018.gitee.io/hexo/2020/10/24/drf-jwt-qian-xi/"/>
-    <id>http://liushaofeng2018.gitee.io/hexo/2020/10/24/drf-jwt-qian-xi/</id>
+    <link href="http://liushaofeng2018.gitee.io/2020/10/24/drf-jwt-qian-xi/"/>
+    <id>http://liushaofeng2018.gitee.io/2020/10/24/drf-jwt-qian-xi/</id>
     <published>2020-10-24T12:38:26.000Z</published>
     <updated>2020-12-09T16:12:09.729Z</updated>
     
@@ -244,23 +244,23 @@
     </summary>
     
     
-      <category term="技术" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
-      <category term="python" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/"/>
+      <category term="python" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
     
-      <category term="web" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/web/"/>
+      <category term="web" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/python/web/"/>
     
     
-      <category term="DRF" scheme="http://liushaofeng2018.gitee.io/hexo/tags/DRF/"/>
+      <category term="DRF" scheme="http://liushaofeng2018.gitee.io/tags/DRF/"/>
     
-      <category term="JWT" scheme="http://liushaofeng2018.gitee.io/hexo/tags/JWT/"/>
+      <category term="JWT" scheme="http://liushaofeng2018.gitee.io/tags/JWT/"/>
     
   </entry>
   
   <entry>
     <title>Vue引入本地资源</title>
-    <link href="http://liushaofeng2018.gitee.io/hexo/2020/10/23/vue-yin-ru-ben-di-zi-yuan/"/>
-    <id>http://liushaofeng2018.gitee.io/hexo/2020/10/23/vue-yin-ru-ben-di-zi-yuan/</id>
+    <link href="http://liushaofeng2018.gitee.io/2020/10/23/vue-yin-ru-ben-di-zi-yuan/"/>
+    <id>http://liushaofeng2018.gitee.io/2020/10/23/vue-yin-ru-ben-di-zi-yuan/</id>
     <published>2020-10-23T14:28:48.000Z</published>
     <updated>2020-12-27T13:53:54.685Z</updated>
     
@@ -271,21 +271,21 @@
     </summary>
     
     
-      <category term="技术" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
-      <category term="vue" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/vue/"/>
+      <category term="vue" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/vue/"/>
     
     
-      <category term="图片" scheme="http://liushaofeng2018.gitee.io/hexo/tags/%E5%9B%BE%E7%89%87/"/>
+      <category term="图片" scheme="http://liushaofeng2018.gitee.io/tags/%E5%9B%BE%E7%89%87/"/>
     
-      <category term="样式" scheme="http://liushaofeng2018.gitee.io/hexo/tags/%E6%A0%B7%E5%BC%8F/"/>
+      <category term="样式" scheme="http://liushaofeng2018.gitee.io/tags/%E6%A0%B7%E5%BC%8F/"/>
     
   </entry>
   
   <entry>
     <title>Deepin OS 安装 NVIDIA驱动</title>
-    <link href="http://liushaofeng2018.gitee.io/hexo/2020/09/03/xi-tong-deepin-os-an-zhuang-nvidia-qu-dong/"/>
-    <id>http://liushaofeng2018.gitee.io/hexo/2020/09/03/xi-tong-deepin-os-an-zhuang-nvidia-qu-dong/</id>
+    <link href="http://liushaofeng2018.gitee.io/2020/09/03/xi-tong-deepin-os-an-zhuang-nvidia-qu-dong/"/>
+    <id>http://liushaofeng2018.gitee.io/2020/09/03/xi-tong-deepin-os-an-zhuang-nvidia-qu-dong/</id>
     <published>2020-09-03T10:20:35.000Z</published>
     <updated>2020-12-01T14:23:48.405Z</updated>
     
@@ -300,21 +300,21 @@
     </summary>
     
     
-      <category term="系统" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E7%B3%BB%E7%BB%9F/"/>
+      <category term="系统" scheme="http://liushaofeng2018.gitee.io/categories/%E7%B3%BB%E7%BB%9F/"/>
     
-      <category term="linux" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E7%B3%BB%E7%BB%9F/linux/"/>
+      <category term="linux" scheme="http://liushaofeng2018.gitee.io/categories/%E7%B3%BB%E7%BB%9F/linux/"/>
     
     
-      <category term="deepin" scheme="http://liushaofeng2018.gitee.io/hexo/tags/deepin/"/>
+      <category term="deepin" scheme="http://liushaofeng2018.gitee.io/tags/deepin/"/>
     
-      <category term="nvidia" scheme="http://liushaofeng2018.gitee.io/hexo/tags/nvidia/"/>
+      <category term="nvidia" scheme="http://liushaofeng2018.gitee.io/tags/nvidia/"/>
     
   </entry>
   
   <entry>
     <title>网络通信-多种方式实现并发 Web Server</title>
-    <link href="http://liushaofeng2018.gitee.io/hexo/2020/08/16/wang-luo-tong-xin-duo-chong-fang-shi-shi-xian-bing-fa-web-server/"/>
-    <id>http://liushaofeng2018.gitee.io/hexo/2020/08/16/wang-luo-tong-xin-duo-chong-fang-shi-shi-xian-bing-fa-web-server/</id>
+    <link href="http://liushaofeng2018.gitee.io/2020/08/16/wang-luo-tong-xin-duo-chong-fang-shi-shi-xian-bing-fa-web-server/"/>
+    <id>http://liushaofeng2018.gitee.io/2020/08/16/wang-luo-tong-xin-duo-chong-fang-shi-shi-xian-bing-fa-web-server/</id>
     <published>2020-08-16T13:40:36.000Z</published>
     <updated>2020-12-01T14:23:48.407Z</updated>
     
@@ -325,25 +325,25 @@
     </summary>
     
     
-      <category term="技术" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
-      <category term="网络通信" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/"/>
+      <category term="网络通信" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/"/>
     
-      <category term="TCP" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/"/>
+      <category term="TCP" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/"/>
     
     
-      <category term="TCP" scheme="http://liushaofeng2018.gitee.io/hexo/tags/TCP/"/>
+      <category term="TCP" scheme="http://liushaofeng2018.gitee.io/tags/TCP/"/>
     
-      <category term="WEB Server" scheme="http://liushaofeng2018.gitee.io/hexo/tags/WEB-Server/"/>
+      <category term="WEB Server" scheme="http://liushaofeng2018.gitee.io/tags/WEB-Server/"/>
     
-      <category term="高并发" scheme="http://liushaofeng2018.gitee.io/hexo/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/"/>
+      <category term="高并发" scheme="http://liushaofeng2018.gitee.io/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/"/>
     
   </entry>
   
   <entry>
     <title>网络通信-简单WEB服务器</title>
-    <link href="http://liushaofeng2018.gitee.io/hexo/2020/08/16/wang-luo-tong-xin-simple-web-server/"/>
-    <id>http://liushaofeng2018.gitee.io/hexo/2020/08/16/wang-luo-tong-xin-simple-web-server/</id>
+    <link href="http://liushaofeng2018.gitee.io/2020/08/16/wang-luo-tong-xin-simple-web-server/"/>
+    <id>http://liushaofeng2018.gitee.io/2020/08/16/wang-luo-tong-xin-simple-web-server/</id>
     <published>2020-08-16T13:23:36.000Z</published>
     <updated>2020-12-01T14:23:48.406Z</updated>
     
@@ -354,23 +354,23 @@
     </summary>
     
     
-      <category term="技术" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
-      <category term="网络通信" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/"/>
+      <category term="网络通信" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/"/>
     
-      <category term="TCP" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/"/>
+      <category term="TCP" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/"/>
     
     
-      <category term="TCP" scheme="http://liushaofeng2018.gitee.io/hexo/tags/TCP/"/>
+      <category term="TCP" scheme="http://liushaofeng2018.gitee.io/tags/TCP/"/>
     
-      <category term="WEB Server" scheme="http://liushaofeng2018.gitee.io/hexo/tags/WEB-Server/"/>
+      <category term="WEB Server" scheme="http://liushaofeng2018.gitee.io/tags/WEB-Server/"/>
     
   </entry>
   
   <entry>
     <title>网络通信-长连接与短连接</title>
-    <link href="http://liushaofeng2018.gitee.io/hexo/2020/08/16/wang-luo-tong-xin-chang-lian-jie-yu-duan-lian-jie/"/>
-    <id>http://liushaofeng2018.gitee.io/hexo/2020/08/16/wang-luo-tong-xin-chang-lian-jie-yu-duan-lian-jie/</id>
+    <link href="http://liushaofeng2018.gitee.io/2020/08/16/wang-luo-tong-xin-chang-lian-jie-yu-duan-lian-jie/"/>
+    <id>http://liushaofeng2018.gitee.io/2020/08/16/wang-luo-tong-xin-chang-lian-jie-yu-duan-lian-jie/</id>
     <published>2020-08-16T10:27:27.000Z</published>
     <updated>2020-12-01T14:23:48.407Z</updated>
     
@@ -381,25 +381,25 @@
     </summary>
     
     
-      <category term="技术" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
-      <category term="网络通信" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/"/>
+      <category term="网络通信" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/"/>
     
-      <category term="TCP" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/"/>
+      <category term="TCP" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/"/>
     
     
-      <category term="TCP" scheme="http://liushaofeng2018.gitee.io/hexo/tags/TCP/"/>
+      <category term="TCP" scheme="http://liushaofeng2018.gitee.io/tags/TCP/"/>
     
-      <category term="短连接" scheme="http://liushaofeng2018.gitee.io/hexo/tags/%E7%9F%AD%E8%BF%9E%E6%8E%A5/"/>
+      <category term="短连接" scheme="http://liushaofeng2018.gitee.io/tags/%E7%9F%AD%E8%BF%9E%E6%8E%A5/"/>
     
-      <category term="长连接" scheme="http://liushaofeng2018.gitee.io/hexo/tags/%E9%95%BF%E8%BF%9E%E6%8E%A5/"/>
+      <category term="长连接" scheme="http://liushaofeng2018.gitee.io/tags/%E9%95%BF%E8%BF%9E%E6%8E%A5/"/>
     
   </entry>
   
   <entry>
     <title>RESTful规范的API接口设计</title>
-    <link href="http://liushaofeng2018.gitee.io/hexo/2020/08/14/restful-gui-fan-de-api-jie-kou-she-ji/"/>
-    <id>http://liushaofeng2018.gitee.io/hexo/2020/08/14/restful-gui-fan-de-api-jie-kou-she-ji/</id>
+    <link href="http://liushaofeng2018.gitee.io/2020/08/14/restful-gui-fan-de-api-jie-kou-she-ji/"/>
+    <id>http://liushaofeng2018.gitee.io/2020/08/14/restful-gui-fan-de-api-jie-kou-she-ji/</id>
     <published>2020-08-14T12:38:26.000Z</published>
     <updated>2020-12-06T03:05:13.647Z</updated>
     
@@ -416,23 +416,23 @@
     </summary>
     
     
-      <category term="技术" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
-      <category term="python" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/"/>
+      <category term="python" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
     
-      <category term="web" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/web/"/>
+      <category term="web" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/python/web/"/>
     
     
-      <category term="API" scheme="http://liushaofeng2018.gitee.io/hexo/tags/API/"/>
+      <category term="API" scheme="http://liushaofeng2018.gitee.io/tags/API/"/>
     
-      <category term="RESTful" scheme="http://liushaofeng2018.gitee.io/hexo/tags/RESTful/"/>
+      <category term="RESTful" scheme="http://liushaofeng2018.gitee.io/tags/RESTful/"/>
     
   </entry>
   
   <entry>
     <title>python高级-内存管理</title>
-    <link href="http://liushaofeng2018.gitee.io/hexo/2020/07/30/python-gao-ji-nei-cun-guan-li/"/>
-    <id>http://liushaofeng2018.gitee.io/hexo/2020/07/30/python-gao-ji-nei-cun-guan-li/</id>
+    <link href="http://liushaofeng2018.gitee.io/2020/07/30/python-gao-ji-nei-cun-guan-li/"/>
+    <id>http://liushaofeng2018.gitee.io/2020/07/30/python-gao-ji-nei-cun-guan-li/</id>
     <published>2020-07-30T13:53:24.000Z</published>
     <updated>2020-12-01T14:23:48.400Z</updated>
     
@@ -445,23 +445,23 @@
     </summary>
     
     
-      <category term="技术" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
-      <category term="python" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/"/>
+      <category term="python" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
     
-      <category term="高级" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/%E9%AB%98%E7%BA%A7/"/>
+      <category term="高级" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/python/%E9%AB%98%E7%BA%A7/"/>
     
     
-      <category term="引用计数" scheme="http://liushaofeng2018.gitee.io/hexo/tags/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/"/>
+      <category term="引用计数" scheme="http://liushaofeng2018.gitee.io/tags/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/"/>
     
-      <category term="可变类型与不可变类型" scheme="http://liushaofeng2018.gitee.io/hexo/tags/%E5%8F%AF%E5%8F%98%E7%B1%BB%E5%9E%8B%E4%B8%8E%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%B1%BB%E5%9E%8B/"/>
+      <category term="可变类型与不可变类型" scheme="http://liushaofeng2018.gitee.io/tags/%E5%8F%AF%E5%8F%98%E7%B1%BB%E5%9E%8B%E4%B8%8E%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%B1%BB%E5%9E%8B/"/>
     
   </entry>
   
   <entry>
     <title>DRF-序列化与反序列化</title>
-    <link href="http://liushaofeng2018.gitee.io/hexo/2020/07/08/drf-xu-lie-hua-yu-fan-xu-lie-hua/"/>
-    <id>http://liushaofeng2018.gitee.io/hexo/2020/07/08/drf-xu-lie-hua-yu-fan-xu-lie-hua/</id>
+    <link href="http://liushaofeng2018.gitee.io/2020/07/08/drf-xu-lie-hua-yu-fan-xu-lie-hua/"/>
+    <id>http://liushaofeng2018.gitee.io/2020/07/08/drf-xu-lie-hua-yu-fan-xu-lie-hua/</id>
     <published>2020-07-08T02:26:57.000Z</published>
     <updated>2020-12-01T14:23:48.395Z</updated>
     
@@ -472,25 +472,25 @@
     </summary>
     
     
-      <category term="技术" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
-      <category term="python" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/"/>
+      <category term="python" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
     
-      <category term="web" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/web/"/>
+      <category term="web" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/python/web/"/>
     
     
-      <category term="DRF" scheme="http://liushaofeng2018.gitee.io/hexo/tags/DRF/"/>
+      <category term="DRF" scheme="http://liushaofeng2018.gitee.io/tags/DRF/"/>
     
-      <category term="序列化" scheme="http://liushaofeng2018.gitee.io/hexo/tags/%E5%BA%8F%E5%88%97%E5%8C%96/"/>
+      <category term="序列化" scheme="http://liushaofeng2018.gitee.io/tags/%E5%BA%8F%E5%88%97%E5%8C%96/"/>
     
-      <category term="反序列化" scheme="http://liushaofeng2018.gitee.io/hexo/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"/>
+      <category term="反序列化" scheme="http://liushaofeng2018.gitee.io/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"/>
     
   </entry>
   
   <entry>
     <title>递归函数</title>
-    <link href="http://liushaofeng2018.gitee.io/hexo/2020/06/06/python-han-shu-di-gui-han-shu/"/>
-    <id>http://liushaofeng2018.gitee.io/hexo/2020/06/06/python-han-shu-di-gui-han-shu/</id>
+    <link href="http://liushaofeng2018.gitee.io/2020/06/06/python-han-shu-di-gui-han-shu/"/>
+    <id>http://liushaofeng2018.gitee.io/2020/06/06/python-han-shu-di-gui-han-shu/</id>
     <published>2020-06-06T03:16:01.000Z</published>
     <updated>2020-12-01T14:23:48.399Z</updated>
     
@@ -501,21 +501,21 @@
     </summary>
     
     
-      <category term="技术" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
-      <category term="python" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/"/>
+      <category term="python" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
     
-      <category term="函数" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/%E5%87%BD%E6%95%B0/"/>
+      <category term="函数" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/python/%E5%87%BD%E6%95%B0/"/>
     
     
-      <category term="递归函数" scheme="http://liushaofeng2018.gitee.io/hexo/tags/%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0/"/>
+      <category term="递归函数" scheme="http://liushaofeng2018.gitee.io/tags/%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0/"/>
     
   </entry>
   
   <entry>
     <title>匿名函数</title>
-    <link href="http://liushaofeng2018.gitee.io/hexo/2020/06/06/python-han-shu-ni-ming-han-shu/"/>
-    <id>http://liushaofeng2018.gitee.io/hexo/2020/06/06/python-han-shu-ni-ming-han-shu/</id>
+    <link href="http://liushaofeng2018.gitee.io/2020/06/06/python-han-shu-ni-ming-han-shu/"/>
+    <id>http://liushaofeng2018.gitee.io/2020/06/06/python-han-shu-ni-ming-han-shu/</id>
     <published>2020-06-06T03:14:42.000Z</published>
     <updated>2020-12-01T14:23:48.399Z</updated>
     
@@ -528,23 +528,23 @@
     </summary>
     
     
-      <category term="技术" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
-      <category term="python" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/"/>
+      <category term="python" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
     
-      <category term="函数" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/%E5%87%BD%E6%95%B0/"/>
+      <category term="函数" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/python/%E5%87%BD%E6%95%B0/"/>
     
     
-      <category term="lambda" scheme="http://liushaofeng2018.gitee.io/hexo/tags/lambda/"/>
+      <category term="lambda" scheme="http://liushaofeng2018.gitee.io/tags/lambda/"/>
     
-      <category term="匿名函数" scheme="http://liushaofeng2018.gitee.io/hexo/tags/%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/"/>
+      <category term="匿名函数" scheme="http://liushaofeng2018.gitee.io/tags/%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/"/>
     
   </entry>
   
   <entry>
     <title>高阶函数</title>
-    <link href="http://liushaofeng2018.gitee.io/hexo/2020/06/06/python-han-shu-gao-jie-han-shu/"/>
-    <id>http://liushaofeng2018.gitee.io/hexo/2020/06/06/python-han-shu-gao-jie-han-shu/</id>
+    <link href="http://liushaofeng2018.gitee.io/2020/06/06/python-han-shu-gao-jie-han-shu/"/>
+    <id>http://liushaofeng2018.gitee.io/2020/06/06/python-han-shu-gao-jie-han-shu/</id>
     <published>2020-06-06T03:13:12.000Z</published>
     <updated>2020-12-01T14:23:48.399Z</updated>
     
@@ -559,29 +559,29 @@
     </summary>
     
     
-      <category term="技术" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
-      <category term="python" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/"/>
+      <category term="python" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
     
-      <category term="函数" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/%E5%87%BD%E6%95%B0/"/>
+      <category term="函数" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/python/%E5%87%BD%E6%95%B0/"/>
     
     
-      <category term="高阶函数" scheme="http://liushaofeng2018.gitee.io/hexo/tags/%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/"/>
+      <category term="高阶函数" scheme="http://liushaofeng2018.gitee.io/tags/%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/"/>
     
-      <category term="sorted" scheme="http://liushaofeng2018.gitee.io/hexo/tags/sorted/"/>
+      <category term="sorted" scheme="http://liushaofeng2018.gitee.io/tags/sorted/"/>
     
-      <category term="map" scheme="http://liushaofeng2018.gitee.io/hexo/tags/map/"/>
+      <category term="map" scheme="http://liushaofeng2018.gitee.io/tags/map/"/>
     
-      <category term="reduce" scheme="http://liushaofeng2018.gitee.io/hexo/tags/reduce/"/>
+      <category term="reduce" scheme="http://liushaofeng2018.gitee.io/tags/reduce/"/>
     
-      <category term="filter" scheme="http://liushaofeng2018.gitee.io/hexo/tags/filter/"/>
+      <category term="filter" scheme="http://liushaofeng2018.gitee.io/tags/filter/"/>
     
   </entry>
   
   <entry>
     <title>变量进阶</title>
-    <link href="http://liushaofeng2018.gitee.io/hexo/2020/06/06/python-han-shu-bian-liang-jie-xi/"/>
-    <id>http://liushaofeng2018.gitee.io/hexo/2020/06/06/python-han-shu-bian-liang-jie-xi/</id>
+    <link href="http://liushaofeng2018.gitee.io/2020/06/06/python-han-shu-bian-liang-jie-xi/"/>
+    <id>http://liushaofeng2018.gitee.io/2020/06/06/python-han-shu-bian-liang-jie-xi/</id>
     <published>2020-06-06T03:10:17.000Z</published>
     <updated>2020-12-01T14:23:48.399Z</updated>
     
@@ -594,20 +594,20 @@
     </summary>
     
     
-      <category term="技术" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
-      <category term="python" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/"/>
+      <category term="python" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
     
-      <category term="函数" scheme="http://liushaofeng2018.gitee.io/hexo/categories/%E6%8A%80%E6%9C%AF/python/%E5%87%BD%E6%95%B0/"/>
+      <category term="函数" scheme="http://liushaofeng2018.gitee.io/categories/%E6%8A%80%E6%9C%AF/python/%E5%87%BD%E6%95%B0/"/>
     
     
-      <category term="LEGB" scheme="http://liushaofeng2018.gitee.io/hexo/tags/LEGB/"/>
+      <category term="LEGB" scheme="http://liushaofeng2018.gitee.io/tags/LEGB/"/>
     
-      <category term="引用计数" scheme="http://liushaofeng2018.gitee.io/hexo/tags/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/"/>
+      <category term="引用计数" scheme="http://liushaofeng2018.gitee.io/tags/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/"/>
     
-      <category term="global" scheme="http://liushaofeng2018.gitee.io/hexo/tags/global/"/>
+      <category term="global" scheme="http://liushaofeng2018.gitee.io/tags/global/"/>
     
-      <category term="nonlocal" scheme="http://liushaofeng2018.gitee.io/hexo/tags/nonlocal/"/>
+      <category term="nonlocal" scheme="http://liushaofeng2018.gitee.io/tags/nonlocal/"/>
     
   </entry>
   
