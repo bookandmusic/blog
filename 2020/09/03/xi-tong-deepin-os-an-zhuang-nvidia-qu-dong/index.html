@@ -393,24 +393,30 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="工具-原料"><a href="#工具-原料" class="headerlink" title="工具 / 原料"></a>工具 / 原料</h2><ul>
+                <h2 id="工具-原料"><a class="header-anchor" href="#工具-原料">¶</a>工具 / 原料</h2>
+<ul>
 <li>一台电脑</li>
 <li>Deepin15.10.2 系统</li>
 <li>N 卡官网驱动</li>
 </ul>
 <a id="more"></a>
-
-<h2 id="方法-步骤"><a href="#方法-步骤" class="headerlink" title="方法 / 步骤"></a>方法 / 步骤</h2><h3 id="一、驱动下载"><a href="#一、驱动下载" class="headerlink" title="一、驱动下载"></a>一、驱动下载</h3><p>本教程以 <code>GTX1050</code> 为例，前往 <a href="https://www.nvidia.cn/geforce/drivers/" target="_blank" rel="noopener">N 卡官网</a>下载对应的驱动 :</p>
+<h2 id="方法-步骤"><a class="header-anchor" href="#方法-步骤">¶</a>方法 / 步骤</h2>
+<h3 id="一、驱动下载"><a class="header-anchor" href="#一、驱动下载">¶</a>一、驱动下载</h3>
+<p>本教程以 <code>GTX1050</code> 为例，前往 <a href="https://www.nvidia.cn/geforce/drivers/" target="_blank" rel="noopener">N 卡官网</a>下载对应的驱动 :</p>
 <p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/08/20200826215347.png" alt="20200826215347"></p>
 <p>然后选择一个下载即可，我下载的是<code>NVIDIA-Linux-x86_64-430.26.run</code>，最好不要下载最新的驱动，有可能有 Bug。(为可方便起见，建议更改文件名为 <code>001.run</code>，千万别忘了<code>. run</code>，该文件名只是为了好敲入命令。)</p>
-<h3 id="二、禁用-nouveau-驱动"><a href="#二、禁用-nouveau-驱动" class="headerlink" title="二、禁用 nouveau 驱动"></a>二、禁用 nouveau 驱动</h3><ol>
-<li><p>如果之前在 Deepin 中安装过 NVIDIA 驱动，请将其全部删除：</p>
+<h3 id="二、禁用-nouveau-驱动"><a class="header-anchor" href="#二、禁用-nouveau-驱动">¶</a>二、禁用 nouveau 驱动</h3>
+<ol>
+<li>
+<p>如果之前在 Deepin 中安装过 NVIDIA 驱动，请将其全部删除：</p>
 <p>在终端执行命令: <code>sudo apt autoremove  nvidia</code>(没有可以跳过)</p>
 </li>
-<li><p>在终端执行命令:</p>
-<pre class=" language-shell"><code class="language-shell">sudo dedit /etc/modprobe.d/blacklist.conf</code></pre>
+<li>
+<p>在终端执行命令:</p>
+<pre class=" language-language-shell"><code class="language-language-shell">sudo dedit /etc/modprobe.d/blacklist.conf
+</code></pre>
 <p>然后在将以下内容复制到文件中</p>
-<pre class=" language-shell"><code class="language-shell">blacklist nouveau
+<pre class=" language-language-shell"><code class="language-language-shell">blacklist nouveau
 
 blacklist lbm-nouveau
 
@@ -418,40 +424,58 @@ options nouveau modeset=0
 
 alias nouveau off
 
-alias lbm-nouveau off</code></pre>
-<p>  保存退出</p>
+alias lbm-nouveau off
+</code></pre>
+<p>保存退出</p>
 </li>
-<li><p>接下来在终端执行命令:</p>
-<pre><code> sudo update-initramfs -u</code></pre></li>
-<li><p>重启系统，再次进入系统，可能会发现分  辨率异常。(分辨率异常就说明成功禁用 nouveau 驱动重启系统，重启后查看是否生效，</p>
-<pre class=" language-shell"><code class="language-shell">lsmod |grep -i nouveau</code></pre>
+<li>
+<p>接下来在终端执行命令:</p>
+<pre><code>sudo update-initramfs -u
+</code></pre>
 </li>
-</ol>
-<h3 id="三、NVIDIA-安装过程"><a href="#三、NVIDIA-安装过程" class="headerlink" title="三、NVIDIA 安装过程"></a>三、NVIDIA 安装过程</h3><ol>
-<li><p>使用快捷键 <code>CTRL+ALT+F2</code> 进入终端，登录自己的账号 (就是用户名和密码)。</p>
-</li>
-<li><p>暂时关闭图形界面：</p>
-<pre class=" language-bash"><code class="language-bash"> <span class="token function">sudo</span> <span class="token function">service</span> lightdm stop</code></pre>
-</li>
-<li><p>给下载好的 nvidia 驱动文件设置执行权限 (文件默认在 <code>/home/用户名/Downloads/</code> 目录下，用户名为你自己的用户名，如果你改文件名了，就填你改后的文件名，千万别填 <code>NVIDIA-Linux-x86_64-430.26.run</code>)。</p>
-<pre class=" language-bash"><code class="language-bash"> <span class="token function">sudo</span> <span class="token function">chmod</span> a+x  /home/用户名/Downloads/NVIDIA-Linux-x86_64-430.26.run</code></pre>
-</li>
-<li><p>驱动安装：</p>
-<pre class=" language-bash"><code class="language-bash"> <span class="token function">sudo</span>  sh  /home / 用户名 / Downloads/NVIDIA-Linux-x86_64-430.26.run</code></pre>
-<p> (一系列 yes，还有一个界面选择 <code>install and cover</code>，意为安装和覆盖。)</p>
-</li>
-<li><p>重启系统：</p>
-<pre class=" language-bash"><code class="language-bash"> <span class="token function">sudo</span> <span class="token function">reboot</span></code></pre>
-<p> 安装完成后重启，执行 <code>nvidia-smi</code></p>
-<p> <img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/08/20190922111147368.png" alt="20190922111147368"></p>
-<p> 发现这时候其实 NVIDIA 的显卡并没有工作，<strong>显存一点都没占用</strong>。主要是由于我的电脑是双显卡，这时候其实依然是 intel 集成显卡在工作，所以还要做下面的工作。</p>
+<li>
+<p>重启系统，再次进入系统，可能会发现分  辨率异常。(分辨率异常就说明成功禁用 nouveau 驱动重启系统，重启后查看是否生效，</p>
+<pre class=" language-language-shell"><code class="language-language-shell">lsmod |grep -i nouveau
+</code></pre>
 </li>
 </ol>
-<h3 id="四、设置默认-nvidia-显卡工作"><a href="#四、设置默认-nvidia-显卡工作" class="headerlink" title="四、设置默认 nvidia 显卡工作"></a>四、设置默认 nvidia 显卡工作</h3><pre class=" language-shell"><code class="language-shell">lspci | egrep 'VGA|3D'</code></pre>
+<h3 id="三、NVIDIA-安装过程"><a class="header-anchor" href="#三、NVIDIA-安装过程">¶</a>三、NVIDIA 安装过程</h3>
+<ol>
+<li>
+<p>使用快捷键 <code>CTRL+ALT+F2</code> 进入终端，登录自己的账号 (就是用户名和密码)。</p>
+</li>
+<li>
+<p>暂时关闭图形界面：</p>
+<pre class=" language-language-bash"><code class="language-language-bash">sudo service lightdm stop
+</code></pre>
+</li>
+<li>
+<p>给下载好的 nvidia 驱动文件设置执行权限 (文件默认在 <code>/home/用户名/Downloads/</code> 目录下，用户名为你自己的用户名，如果你改文件名了，就填你改后的文件名，千万别填 <code>NVIDIA-Linux-x86_64-430.26.run</code>)。</p>
+<pre class=" language-language-bash"><code class="language-language-bash">sudo chmod a+x  /home/用户名/Downloads/NVIDIA-Linux-x86_64-430.26.run
+</code></pre>
+</li>
+<li>
+<p>驱动安装：</p>
+<pre class=" language-language-bash"><code class="language-language-bash">sudo  sh  /home / 用户名 / Downloads/NVIDIA-Linux-x86_64-430.26.run
+</code></pre>
+<p>(一系列 yes，还有一个界面选择 <code>install and cover</code>，意为安装和覆盖。)</p>
+</li>
+<li>
+<p>重启系统：</p>
+<pre class=" language-language-bash"><code class="language-language-bash">sudo reboot
+</code></pre>
+<p>安装完成后重启，执行 <code>nvidia-smi</code></p>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/08/20190922111147368.png" alt="20190922111147368"></p>
+<p>发现这时候其实 NVIDIA 的显卡并没有工作，<strong>显存一点都没占用</strong>。主要是由于我的电脑是双显卡，这时候其实依然是 intel 集成显卡在工作，所以还要做下面的工作。</p>
+</li>
+</ol>
+<h3 id="四、设置默认-nvidia-显卡工作"><a class="header-anchor" href="#四、设置默认-nvidia-显卡工作">¶</a>四、设置默认 nvidia 显卡工作</h3>
+<pre class=" language-language-shell"><code class="language-language-shell">lspci | egrep 'VGA|3D'
+</code></pre>
 <p>执行上述命令获取 <code>nvidia</code> 显卡设备 <code>BusID</code>，例如: <code>01:00.0</code> 填写 <code>PCI:1:0:0</code>，</p>
 <p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/08/20190922111306609.png" alt="20190922111306609"></p>
-<p> 然后编辑 <code>/etc/X11/xorg.conf</code>，注意其中 PCI 部分填写 <code>PCI:1:0:0</code>，</p>
-<pre class=" language-shell"><code class="language-shell">Section "Module"
+<p>然后编辑 <code>/etc/X11/xorg.conf</code>，注意其中 PCI 部分填写 <code>PCI:1:0:0</code>，</p>
+<pre class=" language-language-shell"><code class="language-language-shell">Section "Module"
     Load "modesetting"
 EndSection
 
@@ -460,19 +484,25 @@ Section "Device"
     Driver "nvidia"
     BusID "PCI:X:X:X"       
     Option "AllowEmptyInitialConfiguration"
-EndSection</code></pre>
+EndSection
+</code></pre>
 <p>编辑<code>~/.xinitrc</code>，</p>
-<pre class=" language-shell"><code class="language-shell">xrandr --setprovideroutputsource modesetting NVIDIA-0
+<pre class=" language-language-shell"><code class="language-language-shell">xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --auto
-xrandr --dpi 96</code></pre>
+xrandr --dpi 96
+</code></pre>
 <p>编辑<code>/etc/lightdm/display_setup.sh</code>，</p>
 <pre><code>#!/bin/sh
 xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --auto
-xrandr --dpi 96</code></pre><p>然后执行</p>
-<pre class=" language-shell"><code class="language-shell">sudo chmod +x  /etc/lightdm/display_setup.sh</code></pre>
+xrandr --dpi 96
+</code></pre>
+<p>然后执行</p>
+<pre class=" language-language-shell"><code class="language-language-shell">sudo chmod +x  /etc/lightdm/display_setup.sh
+</code></pre>
 <p>编辑 <code>/etc/lightdm/lightdm.conf</code> 在 <code>[Seat:*]</code> 行下添加，</p>
-<pre class=" language-shell"><code class="language-shell">display-setup-script=/etc/lightdm/display_setup.sh</code></pre>
+<pre class=" language-language-shell"><code class="language-language-shell">display-setup-script=/etc/lightdm/display_setup.sh
+</code></pre>
 <p>重启动后，查看是否生效，<code>nvidia-smi</code></p>
 <p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/08/20190922111512515.png" alt="20190922111512515"></p>
 <p>发现已经生效。</p>
@@ -501,7 +531,7 @@ xrandr --dpi 96</code></pre><p>然后执行</p>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bookandmusic.gitee.io/2020/09/03/xi-tong-deepin-os-an-zhuang-nvidia-qu-dong/">http://bookandmusic.gitee.io/2020/09/03/xi-tong-deepin-os-an-zhuang-nvidia-qu-dong/</a>
+                    <a href="https://bookandmusic.github.io/2020/09/03/xi-tong-deepin-os-an-zhuang-nvidia-qu-dong/">https://bookandmusic.github.io/2020/09/03/xi-tong-deepin-os-an-zhuang-nvidia-qu-dong/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -729,9 +759,13 @@ xrandr --dpi 96</code></pre><p>然后执行</p>
                     <div class="summary block-with-text">
                         
                             简单介绍一下在Vue项目中引入本地资源的实现方式: 
-引入本地图片使用 @引入：这是在组件内直接引用和普通的 html 方法一样，代码如下
-&lt;img src="@/assets/test.png" alt="test.png">
-使用
+¶引入本地图片
+¶使用 @引入：
+这是在组件内直接引用和普通的 html 方法一样，代码如下
+
+
+¶使用 vue 的方法引入：
+这是典型的 vue 思想，使用数据来操纵 dom； 首先在
                         
                     </div>
                     <div class="publish-info">
@@ -790,9 +824,9 @@ xrandr --dpi 96</code></pre><p>然后执行</p>
                         
                             下面我们使用 Python 来实现并发的 Web Server，其中采用了多进程、多线程、协程、单进程单线程非阻塞、select、epoll的方式。
 
-
-一、使用子进程来实现并发 Web Serverimport socket
-import
+¶一、使用子进程来实现并发 Web Server
+import socket
+impor
                         
                     </div>
                     <div class="publish-info">
@@ -1034,7 +1068,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

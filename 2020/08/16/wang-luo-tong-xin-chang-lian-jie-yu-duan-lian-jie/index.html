@@ -403,35 +403,42 @@
             <div id="articleContent">
                 <p>简单介绍长连接与短连接的优缺点。</p>
 <a id="more"></a>
-
-<h2 id="1-短连接："><a href="#1-短连接：" class="headerlink" title="1. 短连接："></a>1. 短连接：</h2><p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/08/%E7%9F%AD%E8%BF%9E%E6%8E%A5.png" alt="短连接">  </p>
+<h2 id="1-短连接："><a class="header-anchor" href="#1-短连接：">¶</a>1. 短连接：</h2>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/08/%E7%9F%AD%E8%BF%9E%E6%8E%A5.png" alt="短连接"></p>
 <ol>
-<li>client 向 server 发起连接请求  </li>
-<li>server 接到请求，双方建立连接  </li>
-<li>client 向 server 发送消息  </li>
-<li>server 回应 client  </li>
+<li>client 向 server 发起连接请求</li>
+<li>server 接到请求，双方建立连接</li>
+<li>client 向 server 发送消息</li>
+<li>server 回应 client</li>
 <li>一次读写完成，此时双方任何一个都可以发起 close 操作</li>
 </ol>
-<h2 id="2-长连接："><a href="#2-长连接：" class="headerlink" title="2. 长连接："></a>2. 长连接：</h2><p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/08/%E9%95%BF%E8%BF%9E%E6%8E%A5.png" alt="长连接">  </p>
+<h2 id="2-长连接："><a class="header-anchor" href="#2-长连接：">¶</a>2. 长连接：</h2>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/08/%E9%95%BF%E8%BF%9E%E6%8E%A5.png" alt="长连接"></p>
 <ol>
-<li>client 向 server 发起连接  </li>
-<li>server 接到请求，双方建立连接  </li>
-<li>client 向 server 发送消息  </li>
-<li>server 回应 client  </li>
-<li>一次读写完成，连接不关闭  </li>
-<li>后续读写操作…  </li>
+<li>client 向 server 发起连接</li>
+<li>server 接到请求，双方建立连接</li>
+<li>client 向 server 发送消息</li>
+<li>server 回应 client</li>
+<li>一次读写完成，连接不关闭</li>
+<li>后续读写操作…</li>
 <li>长时间操作之后 client 发起关闭请求</li>
 </ol>
-<h2 id="3-优缺点分析"><a href="#3-优缺点分析" class="headerlink" title="3. 优缺点分析"></a>3. 优缺点分析</h2><ol>
-<li><p>长连接可以省去较多的 TCP 建立和关闭的操作，节约时间。但是如果用户量太大容易造成服务器负载过高最终导致服务不可用</p>
+<h2 id="3-优缺点分析"><a class="header-anchor" href="#3-优缺点分析">¶</a>3. 优缺点分析</h2>
+<ol>
+<li>
+<p>长连接可以省去较多的 TCP 建立和关闭的操作，节约时间。但是如果用户量太大容易造成服务器负载过高最终导致服务不可用</p>
 </li>
-<li><p>短连接对于服务器来说实现起来较为简单，存在的连接都是有用的连接，不需要额外的控制手段。但是如果用户访问量很大, 往往可能在很短时间内需要创建大量的连接，造成服务器响应速度过慢</p>
+<li>
+<p>短连接对于服务器来说实现起来较为简单，存在的连接都是有用的连接，不需要额外的控制手段。但是如果用户访问量很大, 往往可能在很短时间内需要创建大量的连接，造成服务器响应速度过慢</p>
 </li>
 </ol>
-<h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h2><ol>
-<li><p>小的 WEB 网站的 http 服务一般都用短链接，因为长连接对于服务端来说会耗费一定的资源来让套接字保持存活。</p>
+<h2 id="4-总结"><a class="header-anchor" href="#4-总结">¶</a>4. 总结</h2>
+<ol>
+<li>
+<p>小的 WEB 网站的 http 服务一般都用短链接，因为长连接对于服务端来说会耗费一定的资源来让套接字保持存活。</p>
 </li>
-<li><p>对于中大型 WEB 网站一般都采用长连接，好处是响应用户请求的时间更短，用户体验更好，虽然更耗硬件资源一些，但这都不是事儿。另外，数据库的连接用长连接，如果用短连接频繁的通信会造成 socket 错误。</p>
+<li>
+<p>对于中大型 WEB 网站一般都采用长连接，好处是响应用户请求的时间更短，用户体验更好，虽然更耗硬件资源一些，但这都不是事儿。另外，数据库的连接用长连接，如果用短连接频繁的通信会造成 socket 错误。</p>
 </li>
 </ol>
 
@@ -459,7 +466,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bookandmusic.gitee.io/2020/08/16/wang-luo-tong-xin-chang-lian-jie-yu-duan-lian-jie/">http://bookandmusic.gitee.io/2020/08/16/wang-luo-tong-xin-chang-lian-jie-yu-duan-lian-jie/</a>
+                    <a href="https://bookandmusic.github.io/2020/08/16/wang-luo-tong-xin-chang-lian-jie-yu-duan-lian-jie/">https://bookandmusic.github.io/2020/08/16/wang-luo-tong-xin-chang-lian-jie-yu-duan-lian-jie/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -692,11 +699,13 @@
                         
                             本篇文章介绍如何实现一个简单 的Web Server 以及对应的问题解决方案。
 
+¶一、如何使用Python实现一个返回固定页面的Web Server
 
-一、如何使用Python实现一个返回固定页面的Web Server
+
 使用socket创建一个TCP Server
 
-接受来自浏览器的TCP链接，并接收HTT
+
+接受来自浏览器的TCP链接，并接收
                         
                     </div>
                     <div class="publish-info">
@@ -995,7 +1004,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

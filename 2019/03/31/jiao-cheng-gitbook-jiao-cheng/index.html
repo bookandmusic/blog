@@ -363,7 +363,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    481
+                    466
                 </div>
                 
 
@@ -391,36 +391,50 @@
 <p>支持输出<code>静态站点</code>、<code>PDF</code>、<code>eBook</code>、<code>HTML网页</code>等格式。</p>
 <p>安装 GitBook 需要 Node 环境，具体怎么安装 Node 这里就不多说了。</p>
 <a id="more"></a>
-
-<h2 id="安装-GitBook"><a href="#安装-GitBook" class="headerlink" title="安装 GitBook"></a>安装 GitBook</h2><pre class=" language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> -g gitbook-cli
-<span class="token comment" spellcheck="true"># OR</span>
-yarn global add gitbook-cli</code></pre>
+<h2 id="安装-GitBook"><a class="header-anchor" href="#安装-GitBook">¶</a>安装 GitBook</h2>
+<pre class=" language-language-bash"><code class="language-language-bash">npm install -g gitbook-cli
+# OR
+yarn global add gitbook-cli
+</code></pre>
 <p>检查是否安装成功</p>
-<pre class=" language-bash"><code class="language-bash">gitbook -V</code></pre>
-<h2 id="导出电子书"><a href="#导出电子书" class="headerlink" title="导出电子书"></a>导出电子书</h2><p>打开到 gitbook 的目录下</p>
-<h3 id="1、输出静态网页"><a href="#1、输出静态网页" class="headerlink" title="1、输出静态网页"></a>1、输出静态网页</h3><pre class=" language-bash"><code class="language-bash">$ gitbook serve <span class="token keyword">.</span>
-Press CTRL+C to quit <span class="token punctuation">..</span>.
+<pre class=" language-language-bash"><code class="language-language-bash">gitbook -V
+</code></pre>
+<h2 id="导出电子书"><a class="header-anchor" href="#导出电子书">¶</a>导出电子书</h2>
+<p>打开到 gitbook 的目录下</p>
+<h3 id="1、输出静态网页"><a class="header-anchor" href="#1、输出静态网页">¶</a>1、输出静态网页</h3>
+<pre class=" language-language-bash"><code class="language-language-bash">$ gitbook serve .
+Press CTRL+C to quit ...
 
-Starting build <span class="token punctuation">..</span>.
-Successfuly built <span class="token operator">!</span>
+Starting build ...
+Successfuly built !
 
-Starting server <span class="token punctuation">..</span>.
-Serving book on http://localhost:4000   </code></pre>
+Starting server ...
+Serving book on http://localhost:4000   
+</code></pre>
 <p>这时候就可以打开 <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000</a>：进行预览</p>
 <p>同时在项目的目录中多了一个 <code>_book</code> 的文件夹，其中的文件就是生成的静态网页的内容。</p>
-<h3 id="2、导出-PDF"><a href="#2、导出-PDF" class="headerlink" title="2、导出 PDF"></a>2、导出 PDF</h3><p>在项目的目录中执行</p>
-<pre class=" language-bash"><code class="language-bash">gitbook pdf <span class="token keyword">.</span></code></pre>
+<h3 id="2、导出-PDF"><a class="header-anchor" href="#2、导出-PDF">¶</a>2、导出 PDF</h3>
+<p>在项目的目录中执行</p>
+<pre class=" language-language-bash"><code class="language-language-bash">gitbook pdf .
+</code></pre>
 <p>项目目录下就会生成 <code>book.pdf</code></p>
-<h3 id="3、导出-epub"><a href="#3、导出-epub" class="headerlink" title="3、导出 epub"></a>3、导出 epub</h3><p>在项目目录中执行</p>
-<pre class=" language-bash"><code class="language-bash">gitbook epub <span class="token keyword">.</span>  </code></pre>
+<h3 id="3、导出-epub"><a class="header-anchor" href="#3、导出-epub">¶</a>3、导出 epub</h3>
+<p>在项目目录中执行</p>
+<pre class=" language-language-bash"><code class="language-language-bash">gitbook epub .  
+</code></pre>
 <p>项目目录下就会生成 <code>book.epub</code></p>
-<h2 id="解决静态网页不能跳转问题"><a href="#解决静态网页不能跳转问题" class="headerlink" title="解决静态网页不能跳转问题"></a>解决静态网页不能跳转问题</h2><ul>
-<li><p>在导出的文件夹目录下找到gitbook-&gt;theme.js文件</p>
+<h2 id="解决静态网页不能跳转问题"><a class="header-anchor" href="#解决静态网页不能跳转问题">¶</a>解决静态网页不能跳转问题</h2>
+<ul>
+<li>
+<p>在导出的文件夹目录下找到gitbook-&gt;theme.js文件</p>
 </li>
-<li><p>找到下面的代码搜索<code>if(m)for(n.handler&amp;&amp;</code></p>
+<li>
+<p>找到下面的代码搜索<code>if(m)for(n.handler&amp;&amp;</code></p>
 </li>
-<li><p>将if(m)改成if(false)</p>
-<pre class=" language-js"><code class="language-js"><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token keyword">for</span><span class="token punctuation">(</span>n<span class="token punctuation">.</span>handler<span class="token operator">&amp;&amp;</span><span class="token punctuation">(</span>i<span class="token operator">=</span>n<span class="token punctuation">,</span>n<span class="token operator">=</span>i<span class="token punctuation">.</span>handler<span class="token punctuation">,</span>o<span class="token operator">=</span>i<span class="token punctuation">.</span>selector<span class="token punctuation">)</span><span class="token punctuation">,</span>o<span class="token operator">&amp;&amp;</span>de<span class="token punctuation">.</span>find<span class="token punctuation">.</span><span class="token function">matchesSelector</span><span class="token punctuation">(</span>Ye<span class="token punctuation">,</span>o<span class="token punctuation">)</span><span class="token punctuation">,</span>n<span class="token punctuation">.</span>guid<span class="token operator">||</span><span class="token punctuation">(</span>n<span class="token punctuation">.</span>guid<span class="token operator">=</span>de<span class="token punctuation">.</span>guid<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span>u<span class="token operator">=</span>m<span class="token punctuation">.</span>events<span class="token punctuation">)</span><span class="token operator">||</span><span class="token punctuation">(</span>u<span class="token operator">=</span>m<span class="token punctuation">.</span>events<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span>a<span class="token operator">=</span>m<span class="token punctuation">.</span>handle<span class="token punctuation">)</span><span class="token operator">||</span><span class="token punctuation">(</span>a<span class="token operator">=</span>m<span class="token punctuation">.</span>handle<span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">return</span><span class="token string">"undefined"</span><span class="token operator">!=</span><span class="token keyword">typeof</span> de<span class="token operator">&amp;&amp;</span>de<span class="token punctuation">.</span>event<span class="token punctuation">.</span>triggered<span class="token operator">!==</span>t<span class="token punctuation">.</span>type<span class="token operator">?</span>de<span class="token punctuation">.</span>event<span class="token punctuation">.</span>dispatch<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span>arguments<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token keyword">void</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>t<span class="token operator">=</span><span class="token punctuation">(</span>t<span class="token operator">||</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">match</span><span class="token punctuation">(</span>qe<span class="token punctuation">)</span><span class="token operator">||</span><span class="token punctuation">[</span><span class="token string">""</span><span class="token punctuation">]</span><span class="token punctuation">,</span>l<span class="token operator">=</span>t<span class="token punctuation">.</span>length<span class="token punctuation">;</span>l<span class="token operator">--</span><span class="token punctuation">;</span><span class="token punctuation">)</span>s<span class="token operator">=</span>Ze<span class="token punctuation">.</span><span class="token function">exec</span><span class="token punctuation">(</span>t<span class="token punctuation">[</span>l<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">||</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>h<span class="token operator">=</span>g<span class="token operator">=</span>s<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>d<span class="token operator">=</span><span class="token punctuation">(</span>s<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token operator">||</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">"."</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>h<span class="token operator">&amp;&amp;</span><span class="token punctuation">(</span>f<span class="token operator">=</span>de<span class="token punctuation">.</span>event<span class="token punctuation">.</span>special<span class="token punctuation">[</span>h<span class="token punctuation">]</span><span class="token operator">||</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>h<span class="token operator">=</span><span class="token punctuation">(</span>o<span class="token operator">?</span>f<span class="token punctuation">.</span>delegateType<span class="token punctuation">:</span>f<span class="token punctuation">.</span>bindType<span class="token punctuation">)</span><span class="token operator">||</span>h<span class="token punctuation">,</span>f<span class="token operator">=</span>de<span class="token punctuation">.</span>event<span class="token punctuation">.</span>special<span class="token punctuation">[</span>h<span class="token punctuation">]</span><span class="token operator">||</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>c<span class="token operator">=</span>de<span class="token punctuation">.</span><span class="token function">extend</span><span class="token punctuation">(</span><span class="token punctuation">{</span>type<span class="token punctuation">:</span>h<span class="token punctuation">,</span>origType<span class="token punctuation">:</span>g<span class="token punctuation">,</span>data<span class="token punctuation">:</span>r<span class="token punctuation">,</span>handler<span class="token punctuation">:</span>n<span class="token punctuation">,</span>guid<span class="token punctuation">:</span>n<span class="token punctuation">.</span>guid<span class="token punctuation">,</span>selector<span class="token punctuation">:</span>o<span class="token punctuation">,</span>needsContext<span class="token punctuation">:</span>o<span class="token operator">&amp;&amp;</span>de<span class="token punctuation">.</span>expr<span class="token punctuation">.</span>match<span class="token punctuation">.</span>needsContext<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">,</span>namespace<span class="token punctuation">:</span>d<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">"."</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">,</span>i<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span>p<span class="token operator">=</span>u<span class="token punctuation">[</span>h<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">||</span><span class="token punctuation">(</span>p<span class="token operator">=</span>u<span class="token punctuation">[</span>h<span class="token punctuation">]</span><span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>p<span class="token punctuation">.</span>delegateCount<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>f<span class="token punctuation">.</span>setup<span class="token operator">&amp;&amp;</span>f<span class="token punctuation">.</span>setup<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span>r<span class="token punctuation">,</span>d<span class="token punctuation">,</span>a<span class="token punctuation">)</span><span class="token operator">!==</span><span class="token operator">!</span><span class="token number">1</span><span class="token operator">||</span>e<span class="token punctuation">.</span>addEventListener<span class="token operator">&amp;&amp;</span>e<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span>h<span class="token punctuation">,</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>f<span class="token punctuation">.</span>add<span class="token operator">&amp;&amp;</span><span class="token punctuation">(</span>f<span class="token punctuation">.</span>add<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span>c<span class="token punctuation">)</span><span class="token punctuation">,</span>c<span class="token punctuation">.</span>handler<span class="token punctuation">.</span>guid<span class="token operator">||</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>handler<span class="token punctuation">.</span>guid<span class="token operator">=</span>n<span class="token punctuation">.</span>guid<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>o<span class="token operator">?</span>p<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span>p<span class="token punctuation">.</span>delegateCount<span class="token operator">++</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>c<span class="token punctuation">)</span><span class="token punctuation">:</span>p<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">,</span>de<span class="token punctuation">.</span>event<span class="token punctuation">.</span>global<span class="token punctuation">[</span>h<span class="token punctuation">]</span><span class="token operator">=</span><span class="token operator">!</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">}</span></code></pre>
+<li>
+<p>将if(m)改成if(false)</p>
+<pre class=" language-language-js"><code class="language-language-js">if(false)for(n.handler&&(i=n,n=i.handler,o=i.selector),o&&de.find.matchesSelector(Ye,o),n.guid||(n.guid=de.guid++),(u=m.events)||(u=m.events={}),(a=m.handle)||(a=m.handle=function(t){return"undefined"!=typeof de&&de.event.triggered!==t.type?de.event.dispatch.apply(e,arguments):void 0}),t=(t||"").match(qe)||[""],l=t.length;l--;)s=Ze.exec(t[l])||[],h=g=s[1],d=(s[2]||"").split(".").sort(),h&&(f=de.event.special[h]||{},h=(o?f.delegateType:f.bindType)||h,f=de.event.special[h]||{},c=de.extend({type:h,origType:g,data:r,handler:n,guid:n.guid,selector:o,needsContext:o&&de.expr.match.needsContext.test(o),namespace:d.join(".")},i),(p=u[h])||(p=u[h]=[],p.delegateCount=0,f.setup&&f.setup.call(e,r,d,a)!==!1||e.addEventListener&&e.addEventListener(h,a)),f.add&&(f.add.call(e,c),c.handler.guid||(c.handler.guid=n.guid)),o?p.splice(p.delegateCount++,0,c):p.push(c),de.event.global[h]=!0)}
+</code></pre>
 </li>
 </ul>
 
@@ -448,7 +462,7 @@ Serving book on http://localhost:4000   </code></pre>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bookandmusic.gitee.io/2019/03/31/jiao-cheng-gitbook-jiao-cheng/">http://bookandmusic.gitee.io/2019/03/31/jiao-cheng-gitbook-jiao-cheng/</a>
+                    <a href="https://bookandmusic.github.io/2019/03/31/jiao-cheng-gitbook-jiao-cheng/">https://bookandmusic.github.io/2019/03/31/jiao-cheng-gitbook-jiao-cheng/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -740,8 +754,8 @@ Node.js是一个事件驱动I/O服务端JavaScript环境，基于Google的
                         
                             
 
-
-关于晚安的事有一天，天堂放假，一个天使来到人间，为了化解自己的无聊，对一个女孩说，我可以实现你一个愿望，权利，金钱，美貌，爱情……女孩想得很认真，天使有些害怕，如果她说一些他实现不了的愿望，会很没面子。总之一定要让她看到天使是多么厉害
+¶关于晚安的事
+有一天，天堂放假，一个天使来到人间，为了化解自己的无聊，对一个女孩说，我可以实现你一个愿望，权利，金钱，美貌，爱情……女孩想得很认真，天使有些害怕，如果她说一些他实现不了的愿望，会很没面子。总之一定要让她看到天使是多么厉
                         
                     </div>
                     <div class="publish-info">
@@ -971,7 +985,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

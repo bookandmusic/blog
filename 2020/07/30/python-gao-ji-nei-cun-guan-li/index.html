@@ -397,33 +397,38 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="内存管理机制"><a href="#内存管理机制" class="headerlink" title="内存管理机制"></a>内存管理机制</h2><blockquote>
+                <h2 id="内存管理机制"><a class="header-anchor" href="#内存管理机制">¶</a>内存管理机制</h2>
+<blockquote>
 <p>Python中不但变量名无需事先声明，而且也无需类型声明。在Python语言中，对象的类型和内存占用都是运行时确定的。在赋值时解释器会根据语法和右侧的操作数来决定新对象的类型。在对象创建后，一个该对象的引用会被赋值给左侧的变量。</p>
 </blockquote>
 <a id="more"></a>
-
 <p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/python%E9%92%88%E5%AF%B9%E5%8F%98%E9%87%8F%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6%20.png" alt="python针对变量的内存管理机制"></p>
-<h3 id="id-函数"><a href="#id-函数" class="headerlink" title="id()函数"></a>id()函数</h3><blockquote>
+<h3 id="id-函数"><a class="header-anchor" href="#id-函数">¶</a>id()函数</h3>
+<blockquote>
 <p>python的内置函数 id()可以用来查看对象的内存地址</p>
 </blockquote>
-<pre class=" language-python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span> a <span class="token operator">=</span> <span class="token number">1</span>
-<span class="token operator">>></span><span class="token operator">></span> id<span class="token punctuation">(</span>a<span class="token punctuation">)</span>
-<span class="token number">24834392</span>
-<span class="token operator">>></span><span class="token operator">></span> a <span class="token operator">=</span> <span class="token string">'banana'</span>
-<span class="token operator">>></span><span class="token operator">></span> id<span class="token punctuation">(</span>a<span class="token punctuation">)</span>
-<span class="token number">139990659655312</span>
+<pre class=" language-language-python"><code class="language-language-python">>>> a = 1
+>>> id(a)
+24834392
+>>> a = 'banana'
+>>> id(a)
+139990659655312
 
 
-<span class="token operator">>></span><span class="token operator">></span> a <span class="token operator">=</span> <span class="token number">3</span>
-<span class="token operator">>></span><span class="token operator">></span> b <span class="token operator">=</span> <span class="token number">3</span>
-<span class="token operator">>></span><span class="token operator">></span> id<span class="token punctuation">(</span>a<span class="token punctuation">)</span>
-<span class="token number">10289448</span>
-<span class="token operator">>></span><span class="token operator">></span> id<span class="token punctuation">(</span>b<span class="token punctuation">)</span>
-<span class="token number">10289448</span></code></pre>
-<h3 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h3><ul>
-<li><p>要保持追踪内存中的对象，Python使用了引用计数这一简单技术。</p>
+>>> a = 3
+>>> b = 3
+>>> id(a)
+10289448
+>>> id(b)
+10289448
+</code></pre>
+<h3 id="引用计数"><a class="header-anchor" href="#引用计数">¶</a>引用计数</h3>
+<ul>
+<li>
+<p>要保持追踪内存中的对象，Python使用了引用计数这一简单技术。</p>
 </li>
-<li><p>也就是说Python内部记录着所有使用中的对象各有多少引用。</p>
+<li>
+<p>也就是说Python内部记录着所有使用中的对象各有多少引用。</p>
 <ul>
 <li>一个内部跟踪变量，称为引用计数器。</li>
 <li>每个对象各有多少个引用，简称引用计数。</li>
@@ -431,13 +436,17 @@
 </ul>
 </li>
 </ul>
-<h4 id="增加引用计数"><a href="#增加引用计数" class="headerlink" title="增加引用计数"></a>增加引用计数</h4><p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/%E5%A2%9E%E5%8A%A0%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%20.png" alt="增加引用计数"></p>
-<h4 id="减少引用计数"><a href="#减少引用计数" class="headerlink" title="减少引用计数"></a>减少引用计数</h4><p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/%E5%87%8F%E5%B0%91%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%20.png" alt="减少引用计数"></p>
-<h3 id="is和"><a href="#is和" class="headerlink" title="is和=="></a>is和==</h3><p>在讲is和==这两种运算符区别之前，首先要知道Python中对象包含的三个基本要素，分别是：<code>id</code>(身份标识)、<code>type</code>(数据类型)和<code>value</code>(值)。</p>
+<h4 id="增加引用计数"><a class="header-anchor" href="#增加引用计数">¶</a>增加引用计数</h4>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/%E5%A2%9E%E5%8A%A0%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%20.png" alt="增加引用计数"></p>
+<h4 id="减少引用计数"><a class="header-anchor" href="#减少引用计数">¶</a>减少引用计数</h4>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/%E5%87%8F%E5%B0%91%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%20.png" alt="减少引用计数"></p>
+<h3 id="is和"><a class="header-anchor" href="#is和">¶</a>is和==</h3>
+<p>在讲is和==这两种运算符区别之前，首先要知道Python中对象包含的三个基本要素，分别是：<code>id</code>(身份标识)、<code>type</code>(数据类型)和<code>value</code>(值)。</p>
 <p><code>is</code>和<code>==</code>都是对对象进行比较判断作用的，但对对象比较判断的内容并不相同。</p>
 <p><code>is</code>也被叫做同一性运算符，这个运算符比较判断的是对象间的唯一身份标识，也就是<code>id</code>是否相同。</p>
 <p><code>==</code>是python标准操作符中的比较操作符，用来比较判断两个对象的<code>value</code>(值)是否相等</p>
-<h3 id="可变类型与不可变类型"><a href="#可变类型与不可变类型" class="headerlink" title="可变类型与不可变类型"></a>可变类型与不可变类型</h3><ol>
+<h3 id="可变类型与不可变类型"><a class="header-anchor" href="#可变类型与不可变类型">¶</a>可变类型与不可变类型</h3>
+<ol>
 <li><code>list</code>、<code>dict</code>、<code>set</code>属于可变类型</li>
 <li><code>number</code>、<code>str</code>、<code>tuple</code>、<code>bool</code>属于不可变类型</li>
 </ol>
@@ -446,101 +455,115 @@
 <p><strong>从另外一个角度来看：</strong></p>
 <p>可变类型：当该数据类型的对应变量的值发生了改变，那么它对应的内存地址也会发生改变，对于这种数据类型，就称不可变数据类型。</p>
 <p>可变数据类型：当该数据类型的对应变量的值发生了改变，那么它对应的内存地址不发生改变，对于这种数据类型，就称可变数据类型。</p>
-<h3 id="内存管理优化"><a href="#内存管理优化" class="headerlink" title="内存管理优化"></a>内存管理优化</h3><p>Python采用基于值的内存管理模式，相同的值在内存中只有一份。这是很多Python教程上都会提到的一句话，但实际情况要复杂的多。什么才是值？什么样的值才会在内存中只保存一份？这是个非常复杂的问题。</p>
-<h4 id="在python交互环境中"><a href="#在python交互环境中" class="headerlink" title="在python交互环境中"></a>在python交互环境中</h4><p>首先明确一点，整数、实数、字符串是真正意义上的值，而上面那句话中的“值”主要指<strong>不可变类型</strong>中的整数和字符串。对于列表、元组、字典、集合以及range对象、map对象等容器类对象，它们不是普通的“值”，即使看起来是一样的，在内存中也不会只保存一份。</p>
-<h5 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h5><pre class=" language-python"><code class="language-python">In <span class="token punctuation">[</span><span class="token number">51</span><span class="token punctuation">]</span><span class="token punctuation">:</span> a <span class="token operator">=</span> <span class="token number">12</span>
+<h3 id="内存管理优化"><a class="header-anchor" href="#内存管理优化">¶</a>内存管理优化</h3>
+<p>Python采用基于值的内存管理模式，相同的值在内存中只有一份。这是很多Python教程上都会提到的一句话，但实际情况要复杂的多。什么才是值？什么样的值才会在内存中只保存一份？这是个非常复杂的问题。</p>
+<h4 id="在python交互环境中"><a class="header-anchor" href="#在python交互环境中">¶</a>在python交互环境中</h4>
+<p>首先明确一点，整数、实数、字符串是真正意义上的值，而上面那句话中的“值”主要指<strong>不可变类型</strong>中的整数和字符串。对于列表、元组、字典、集合以及range对象、map对象等容器类对象，它们不是普通的“值”，即使看起来是一样的，在内存中也不会只保存一份。</p>
+<h5 id="整数"><a class="header-anchor" href="#整数">¶</a>整数</h5>
+<pre class=" language-language-python"><code class="language-language-python">In [51]: a = 12
 
-In <span class="token punctuation">[</span><span class="token number">52</span><span class="token punctuation">]</span><span class="token punctuation">:</span> b <span class="token operator">=</span> <span class="token number">12</span>
+In [52]: b = 12
 
-In <span class="token punctuation">[</span><span class="token number">53</span><span class="token punctuation">]</span><span class="token punctuation">:</span> a <span class="token keyword">is</span> b
-Out<span class="token punctuation">[</span><span class="token number">53</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token boolean">True</span></code></pre>
+In [53]: a is b
+Out[53]: True
+</code></pre>
 <p>python中对于小的整数存在一个缓存池。为了避免因创建相同的值而重复申请内存空间所带来的效率问题， Python解释器会在启动时创建出小整数池，范围是<code>[-5,256]</code>，该范围内的小整数对象是全局解释器范围内被重复使用，永远不会被垃圾回收机制回收。</p>
-<h5 id="实数"><a href="#实数" class="headerlink" title="实数"></a>实数</h5><pre class=" language-python"><code class="language-python">In <span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">:</span> a <span class="token operator">=</span> <span class="token number">12.5</span>
+<h5 id="实数"><a class="header-anchor" href="#实数">¶</a>实数</h5>
+<pre class=" language-language-python"><code class="language-language-python">In [8]: a = 12.5
 
-In <span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">:</span> b <span class="token operator">=</span> <span class="token number">12.5</span>
+In [9]: b = 12.5
 
-In <span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">:</span> a <span class="token keyword">is</span> b
-Out<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token boolean">False</span></code></pre>
+In [10]: a is b
+Out[10]: False
+</code></pre>
 <p>对于实数，由于计算机存储实数会有精度问题，很难精确存储，所以不进行缓存，也就是说，即使看起来是一样的实数，在内存中也不是一份。</p>
-<h5 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h5><pre class=" language-python"><code class="language-python">In <span class="token punctuation">[</span><span class="token number">63</span><span class="token punctuation">]</span><span class="token punctuation">:</span> a <span class="token operator">=</span> <span class="token string">"abc123_"</span>
+<h5 id="字符串"><a class="header-anchor" href="#字符串">¶</a>字符串</h5>
+<pre class=" language-language-python"><code class="language-language-python">In [63]: a = "abc123_"
 
-In <span class="token punctuation">[</span><span class="token number">64</span><span class="token punctuation">]</span><span class="token punctuation">:</span> b <span class="token operator">=</span> <span class="token string">"abc123_"</span>
+In [64]: b = "abc123_"
 
-In <span class="token punctuation">[</span><span class="token number">65</span><span class="token punctuation">]</span><span class="token punctuation">:</span> a <span class="token keyword">is</span> b
-Out<span class="token punctuation">[</span><span class="token number">65</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token boolean">True</span>
+In [65]: a is b
+Out[65]: True
 
-In <span class="token punctuation">[</span><span class="token number">66</span><span class="token punctuation">]</span><span class="token punctuation">:</span> a <span class="token operator">=</span> <span class="token string">"12 3"</span>
+In [66]: a = "12 3"
 
-In <span class="token punctuation">[</span><span class="token number">67</span><span class="token punctuation">]</span><span class="token punctuation">:</span> b <span class="token operator">=</span> <span class="token string">"12 3"</span>
+In [67]: b = "12 3"
 
-In <span class="token punctuation">[</span><span class="token number">68</span><span class="token punctuation">]</span><span class="token punctuation">:</span> a <span class="token keyword">is</span> b
-Out<span class="token punctuation">[</span><span class="token number">68</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token boolean">False</span></code></pre>
+In [68]: a is b
+Out[68]: False
+</code></pre>
 <p>由于变量的存储机制，python增加了字符串的<code>intern</code>机制。也就是说，值同样的字符串对象（<strong>整数也使用</strong>）仅仅会保存一份，是共用的，这也决定了字符串必须是不可变对象。</p>
-<pre class=" language-python"><code class="language-python">In <span class="token punctuation">[</span><span class="token number">70</span><span class="token punctuation">]</span><span class="token punctuation">:</span> c <span class="token operator">=</span> <span class="token string">"a"</span> <span class="token operator">+</span> <span class="token string">"b"</span>  <span class="token comment" spellcheck="true"># 在 compile-time（编译时）已经求完值，被替换成了'ab', </span>
+<pre class=" language-language-python"><code class="language-language-python">In [70]: c = "a" + "b"  # 在 compile-time（编译时）已经求完值，被替换成了'ab', 
 
-In <span class="token punctuation">[</span><span class="token number">71</span><span class="token punctuation">]</span><span class="token punctuation">:</span> id<span class="token punctuation">(</span>c<span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">71</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token number">4489029232</span>
+In [71]: id(c)
+Out[71]: 4489029232
 
-In <span class="token punctuation">[</span><span class="token number">72</span><span class="token punctuation">]</span><span class="token punctuation">:</span> d <span class="token operator">=</span> <span class="token string">"ab"</span>  <span class="token comment" spellcheck="true"># 此时，内存中已经有 'ab', 因此直接引用即可</span>
+In [72]: d = "ab"  # 此时，内存中已经有 'ab', 因此直接引用即可
 
-In <span class="token punctuation">[</span><span class="token number">73</span><span class="token punctuation">]</span><span class="token punctuation">:</span> id<span class="token punctuation">(</span>d<span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">73</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token number">4489029232</span>
+In [73]: id(d)
+Out[73]: 4489029232
 
+  
+In [74]: id(a + "b")  # 在run-time（运行时）拼接的，导致没有被主动intern
+Out[74]: 4519083312
 
-In <span class="token punctuation">[</span><span class="token number">74</span><span class="token punctuation">]</span><span class="token punctuation">:</span> id<span class="token punctuation">(</span>a <span class="token operator">+</span> <span class="token string">"b"</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 在run-time（运行时）拼接的，导致没有被主动intern</span>
-Out<span class="token punctuation">[</span><span class="token number">74</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token number">4519083312</span>
+ 
+In [75]: a = 'hello world'
+In [76]: b = 'hello world'
 
-
-In <span class="token punctuation">[</span><span class="token number">75</span><span class="token punctuation">]</span><span class="token punctuation">:</span> a <span class="token operator">=</span> <span class="token string">'hello world'</span>
-In <span class="token punctuation">[</span><span class="token number">76</span><span class="token punctuation">]</span><span class="token punctuation">:</span> b <span class="token operator">=</span> <span class="token string">'hello world'</span>
-
-In <span class="token punctuation">[</span><span class="token number">77</span><span class="token punctuation">]</span><span class="token punctuation">:</span> a <span class="token keyword">is</span> b  <span class="token comment" spellcheck="true"># intern机制仅仅对那些看起来像是Python标识符的字符串对象才会触发</span>
-Out<span class="token punctuation">[</span><span class="token number">77</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token boolean">False</span></code></pre>
+In [77]: a is b  # intern机制仅仅对那些看起来像是Python标识符的字符串对象才会触发
+Out[77]: False
+</code></pre>
 <p><strong>intern机制</strong></p>
-<p>　　<strong>优点</strong>：在创建新的字符对象时，如果内存中已经存在，则直接引用，避免频繁的创建和销毁内存，提升效率。</p>
-<p>　　<strong>缺点</strong>：在拼接字符串时，或者在改动字符串时会极大的影响性能。原因是字符串在Python当中是不可变对象，所以对字符串的改动不是inplace（原地）操作，需要新开辟内存地址，新建对象。这也是为什么拼接字符串的时候不建议用<code>+</code>而是用<code>join()</code>。<code>join()</code>是先计算出全部字符串的长度，然后再一一拷贝，仅仅创建一次对象。</p>
+<p><strong>优点</strong>：在创建新的字符对象时，如果内存中已经存在，则直接引用，避免频繁的创建和销毁内存，提升效率。</p>
+<p><strong>缺点</strong>：在拼接字符串时，或者在改动字符串时会极大的影响性能。原因是字符串在Python当中是不可变对象，所以对字符串的改动不是inplace（原地）操作，需要新开辟内存地址，新建对象。这也是为什么拼接字符串的时候不建议用<code>+</code>而是用<code>join()</code>。<code>join()</code>是先计算出全部字符串的长度，然后再一一拷贝，仅仅创建一次对象。</p>
 <p><strong>总结</strong></p>
 <ol>
 <li>单词，即Python标识符，不可修改，默认开启intern机制，共用对象，引用计数为0时自动被回收。</li>
 <li>字符串（包含了除Python标识符以外的字符），不可修改，默认没有开启intern机制，引用计数为0时自动被回收。</li>
 <li>特殊情况下（动态拼接），不会被主动intern。</li>
 </ol>
-<h5 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h5><pre class=" language-python"><code class="language-python">In <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">:</span> a <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+<h5 id="元组"><a class="header-anchor" href="#元组">¶</a>元组</h5>
+<pre class=" language-language-python"><code class="language-language-python">In [4]: a = (1, 2)
 
-In <span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">:</span> b <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+In [5]: b = (1, 2)
 
-In <span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">:</span> a <span class="token keyword">is</span> b
-Out<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token boolean">False</span></code></pre>
+In [6]: a is b
+Out[6]: False
+</code></pre>
 <p>对于元组等容器类对象，它们不是普通的“值”，即使看起来是一样的，在内存中也不会只保存一份。</p>
-<h4 id="在Python代码中"><a href="#在Python代码中" class="headerlink" title="在Python代码中"></a>在Python代码中</h4><p>在同一模块文件中，不可变类型的数字、字符串、元组， 在值相同时，只会保存一份;而不同模块中的不同值，才会重新生成。</p>
+<h4 id="在Python代码中"><a class="header-anchor" href="#在Python代码中">¶</a>在Python代码中</h4>
+<p>在同一模块文件中，不可变类型的数字、字符串、元组， 在值相同时，只会保存一份;而不同模块中的不同值，才会重新生成。</p>
 <p><strong>模块 <code>bbb.py</code></strong></p>
-<pre class=" language-python"><code class="language-python">c1 <span class="token operator">=</span> <span class="token number">1000</span>
-c2 <span class="token operator">=</span> <span class="token string">"hello world % "</span>
-c3 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
-c4 <span class="token operator">=</span> <span class="token number">12.3</span>
+<pre class=" language-language-python"><code class="language-language-python">c1 = 1000
+c2 = "hello world % "
+c3 = (1, 2)
+c4 = 12.3
+
 </code></pre>
 <p><strong>模块 <code>aaa.py</code></strong></p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> bbb <span class="token keyword">import</span> <span class="token operator">*</span>
+<pre class=" language-language-python"><code class="language-language-python">from bbb import *
 
-a <span class="token operator">=</span> <span class="token number">1000</span>
-b <span class="token operator">=</span> <span class="token number">1000</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>a <span class="token keyword">is</span> b<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># True</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>a <span class="token keyword">is</span> c1<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># False</span>
+a = 1000
+b = 1000
+print(a is b)  # True
+print(a is c1)  # False
 
-a <span class="token operator">=</span> <span class="token string">"hello world % "</span>
-b <span class="token operator">=</span> <span class="token string">"hello world % "</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>a <span class="token keyword">is</span> b<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># True</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>a <span class="token keyword">is</span> c2<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># False</span>
+a = "hello world % "
+b = "hello world % "
+print(a is b)  # True
+print(a is c2)  # False
 
-a <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
-b <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>a <span class="token keyword">is</span> b<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># True</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>a <span class="token keyword">is</span> c3<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># False</span>
+a = (1, 2)
+b = (1, 2)
+print(a is b)  # True
+print(a is c3)  # False
 
-a <span class="token operator">=</span> <span class="token number">12.3</span>
-b <span class="token operator">=</span> <span class="token number">12.3</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>a <span class="token keyword">is</span> b<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># True</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>a <span class="token keyword">is</span> c4<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># False</span>
+a = 12.3
+b = 12.3
+print(a is b)  # True
+print(a is c4)  # False
+
 </code></pre>
 
             </div>
@@ -567,7 +590,7 @@ b <span class="token operator">=</span> <span class="token number">12.3</span>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bookandmusic.gitee.io/2020/07/30/python-gao-ji-nei-cun-guan-li/">http://bookandmusic.gitee.io/2020/07/30/python-gao-ji-nei-cun-guan-li/</a>
+                    <a href="https://bookandmusic.github.io/2020/07/30/python-gao-ji-nei-cun-guan-li/">https://bookandmusic.github.io/2020/07/30/python-gao-ji-nei-cun-guan-li/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -857,12 +880,13 @@ b <span class="token operator">=</span> <span class="token number">12.3</span>
                         
                             DRF内置的序列化类，可以对整个模型类进行序列化与反序列化，简化了繁杂的工作。
 
-
-内置字段序列化模型类from django.db import models
+¶内置字段序列化
+¶模型类
+from django.db import models
 
 
 # Create your models here.
-class Auth
+class A
                         
                     </div>
                     <div class="publish-info">
@@ -1104,7 +1128,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

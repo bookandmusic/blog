@@ -409,148 +409,179 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="用户模型类相关"><a href="#用户模型类相关" class="headerlink" title="用户模型类相关"></a>用户模型类相关</h2><h3 id="模型类的定义"><a href="#模型类的定义" class="headerlink" title="模型类的定义"></a>模型类的定义</h3><p>在此，我们借用django自带的用户认证系统实现目的</p>
+                <h2 id="用户模型类相关"><a class="header-anchor" href="#用户模型类相关">¶</a>用户模型类相关</h2>
+<h3 id="模型类的定义"><a class="header-anchor" href="#模型类的定义">¶</a>模型类的定义</h3>
+<p>在此，我们借用django自带的用户认证系统实现目的</p>
 <ul>
-<li><p>在<code>models.py</code>中定义用户类</p>
-<pre class=" language-python"><code class="language-python">  <span class="token keyword">from</span> django<span class="token punctuation">.</span>db <span class="token keyword">import</span> models
-  <span class="token keyword">from</span> django<span class="token punctuation">.</span>contrib<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>models <span class="token keyword">import</span> AbstractUser
+<li>
+<p>在<code>models.py</code>中定义用户类</p>
+<pre class=" language-language-python"><code class="language-language-python">from django.db import models
+from django.contrib.auth.models import AbstractUser
 
-  <span class="token keyword">class</span> <span class="token class-name">User</span><span class="token punctuation">(</span>AbstractUser<span class="token punctuation">)</span><span class="token punctuation">:</span>
-      phone <span class="token operator">=</span> models<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span>max_length<span class="token operator">=</span><span class="token number">11</span><span class="token punctuation">,</span> unique<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> verbose_name<span class="token operator">=</span><span class="token string">"手机号"</span><span class="token punctuation">)</span>
+class User(AbstractUser):
+    phone = models.CharField(max_length=11, unique=True, verbose_name="手机号")
 
-      <span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span>
-          db_table <span class="token operator">=</span> <span class="token string">"tb_users"</span>
-          verbose_name <span class="token operator">=</span> <span class="token string">"用户"</span>
-          verbose_name_plural <span class="token operator">=</span> <span class="token string">"用户"</span>
+    class Meta:
+        db_table = "tb_users"
+        verbose_name = "用户"
+        verbose_name_plural = "用户"
 
-      <span class="token keyword">def</span> <span class="token function">__str__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-          <span class="token keyword">return</span> self<span class="token punctuation">.</span>username</code></pre>
+    def __str__(self):
+        return self.username
+</code></pre>
 </li>
 </ul>
-<h3 id="系统模型类的指定"><a href="#系统模型类的指定" class="headerlink" title="系统模型类的指定"></a>系统模型类的指定</h3><ul>
-<li><p>在项目的配置文件<code>settings.py</code>中指定</p>
-<pre class=" language-python"><code class="language-python">  <span class="token comment" spellcheck="true"># AUTH_USER_MODEL = '应用名.模型类名'</span>
-  AUTH_USER_MODEL <span class="token operator">=</span> <span class="token string">'users.user'</span></code></pre>
+<h3 id="系统模型类的指定"><a class="header-anchor" href="#系统模型类的指定">¶</a>系统模型类的指定</h3>
+<ul>
+<li>
+<p>在项目的配置文件<code>settings.py</code>中指定</p>
+<pre class=" language-language-python"><code class="language-language-python"># AUTH_USER_MODEL = '应用名.模型类名'
+AUTH_USER_MODEL = 'users.user'
+</code></pre>
 </li>
 </ul>
-<h3 id="序列化器的实现"><a href="#序列化器的实现" class="headerlink" title="序列化器的实现"></a>序列化器的实现</h3><ul>
-<li><p>在 <code>serializer.py</code>中定义用户类对应的序列化器</p>
-<pre class=" language-python"><code class="language-python">  <span class="token keyword">from</span> django<span class="token punctuation">.</span>contrib<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>hashers <span class="token keyword">import</span> make_password
-  <span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>serializers <span class="token keyword">import</span> ModelSerializer
-  <span class="token keyword">from</span> <span class="token punctuation">.</span>models <span class="token keyword">import</span> User
+<h3 id="序列化器的实现"><a class="header-anchor" href="#序列化器的实现">¶</a>序列化器的实现</h3>
+<ul>
+<li>
+<p>在 <code>serializer.py</code>中定义用户类对应的序列化器</p>
+<pre class=" language-language-python"><code class="language-language-python">from django.contrib.auth.hashers import make_password
+from rest_framework.serializers import ModelSerializer
+from .models import User
 
-  <span class="token keyword">class</span> <span class="token class-name">UserSerializer</span><span class="token punctuation">(</span>ModelSerializer<span class="token punctuation">)</span><span class="token punctuation">:</span>
+class UserSerializer(ModelSerializer):
 
-      <span class="token keyword">def</span> <span class="token function">create</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> validated_data<span class="token punctuation">)</span><span class="token punctuation">:</span>
-          <span class="token comment" spellcheck="true"># 重写创建用户方法，将密码进行加密</span>
-          validated_data<span class="token punctuation">[</span><span class="token string">"password"</span><span class="token punctuation">]</span> <span class="token operator">=</span> make_password<span class="token punctuation">(</span>validated_data<span class="token punctuation">[</span><span class="token string">"password"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-          super<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>create<span class="token punctuation">(</span>validated_data<span class="token punctuation">)</span>
+    def create(self, validated_data):
+        # 重写创建用户方法，将密码进行加密
+        validated_data["password"] = make_password(validated_data["password"])
+        super().create(validated_data)
 
-          <span class="token keyword">return</span> validated_data
+        return validated_data
 
-      <span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span>
-          model <span class="token operator">=</span> User
-          fields <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">'id'</span><span class="token punctuation">,</span> <span class="token string">'username'</span><span class="token punctuation">,</span> <span class="token string">'password'</span><span class="token punctuation">,</span> <span class="token string">'phone'</span><span class="token punctuation">)</span>
-          read_only_fields <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">'id'</span><span class="token punctuation">,</span><span class="token punctuation">)</span></code></pre>
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'password', 'phone')
+        read_only_fields = ('id',)
+</code></pre>
 </li>
 </ul>
-<h2 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h2><p>在用户注册或登录后，我们想记录用户的登录状态，或者为用户创建身份认证的凭证。我们不再使用Session认证机制，而使用JWT(Json Web Token)认证机制</p>
-<h3 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h3><ul>
-<li><p>安装插件</p>
-<pre class=" language-bash"><code class="language-bash">  pip <span class="token function">install</span> djangorestframework-jwt django-restframework</code></pre>
+<h2 id="JWT"><a class="header-anchor" href="#JWT">¶</a>JWT</h2>
+<p>在用户注册或登录后，我们想记录用户的登录状态，或者为用户创建身份认证的凭证。我们不再使用Session认证机制，而使用JWT(Json Web Token)认证机制</p>
+<h3 id="安装配置"><a class="header-anchor" href="#安装配置">¶</a>安装配置</h3>
+<ul>
+<li>
+<p>安装插件</p>
+<pre class=" language-language-bash"><code class="language-language-bash">pip install djangorestframework-jwt django-restframework
+</code></pre>
 </li>
-<li><p>重写JWT响应处理函数</p>
-<p>  在应用users中新建一个<code>utils.py</code>文件</p>
-<pre class=" language-python"><code class="language-python">  <span class="token keyword">def</span> <span class="token function">jwt_response_payload_handler</span><span class="token punctuation">(</span>token<span class="token punctuation">,</span> user<span class="token operator">=</span>None<span class="token punctuation">,</span> request<span class="token operator">=</span>None<span class="token punctuation">)</span><span class="token punctuation">:</span>
-      <span class="token triple-quoted-string string">"""
-      自定义jwt认证成功返回数据
-      """</span>
-      <span class="token keyword">return</span> <span class="token punctuation">{</span>
-          <span class="token string">'token'</span><span class="token punctuation">:</span> token<span class="token punctuation">,</span>
-          <span class="token string">'id'</span><span class="token punctuation">:</span> user<span class="token punctuation">.</span>id<span class="token punctuation">,</span>
-          <span class="token string">'username'</span><span class="token punctuation">:</span> user<span class="token punctuation">.</span>username
-      <span class="token punctuation">}</span></code></pre>
+<li>
+<p>重写JWT响应处理函数</p>
+<p>在应用users中新建一个<code>utils.py</code>文件</p>
+<pre class=" language-language-python"><code class="language-language-python">def jwt_response_payload_handler(token, user=None, request=None):
+    """
+    自定义jwt认证成功返回数据
+    """
+    return {
+        'token': token,
+        'id': user.id,
+        'username': user.username
+    }
+</code></pre>
 </li>
-<li><p>配置JWT认证机制</p>
-<pre class=" language-python"><code class="language-python">  REST_FRAMEWORK <span class="token operator">=</span> <span class="token punctuation">{</span>
-      <span class="token comment" spellcheck="true"># 指定drf认证机制</span>
-      <span class="token string">'DEFAULT_AUTHENTICATION_CLASSES'</span><span class="token punctuation">:</span> <span class="token punctuation">(</span>
-          <span class="token string">'rest_framework_jwt.authentication.JSONWebTokenAuthentication'</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true"># JWT认证</span>
-          <span class="token string">'rest_framework.authentication.SessionAuthentication'</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true"># session认证</span>
-          <span class="token string">'rest_framework.authentication.BasicAuthentication'</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true"># 基本认证</span>
-      <span class="token punctuation">)</span><span class="token punctuation">,</span>
-  <span class="token punctuation">}</span>
+<li>
+<p>配置JWT认证机制</p>
+<pre class=" language-language-python"><code class="language-language-python">REST_FRAMEWORK = {
+    # 指定drf认证机制
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication', # JWT认证
+        'rest_framework.authentication.SessionAuthentication', # session认证
+        'rest_framework.authentication.BasicAuthentication', # 基本认证
+    ),
+}
 
-  JWT_AUTH <span class="token operator">=</span> <span class="token punctuation">{</span>
-      <span class="token comment" spellcheck="true"># 指明token的有效期</span>
-      <span class="token string">'JWT_EXPIRATION_DELTA'</span><span class="token punctuation">:</span> datetime<span class="token punctuation">.</span>timedelta<span class="token punctuation">(</span>days<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-      <span class="token comment" spellcheck="true"># 自定义jwt认证成功返回数据</span>
-      <span class="token string">'JWT_RESPONSE_PAYLOAD_HANDLER'</span><span class="token punctuation">:</span> <span class="token string">'apps.users.utils.jwt_response_payload_handler'</span><span class="token punctuation">,</span>
-  <span class="token punctuation">}</span></code></pre>
+JWT_AUTH = {
+    # 指明token的有效期
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+    # 自定义jwt认证成功返回数据
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'apps.users.utils.jwt_response_payload_handler',
+}
+</code></pre>
 </li>
 </ul>
-<h3 id="注册登录"><a href="#注册登录" class="headerlink" title="注册登录"></a>注册登录</h3><ul>
-<li><p>定义视图</p>
+<h3 id="注册登录"><a class="header-anchor" href="#注册登录">¶</a>注册登录</h3>
+<ul>
+<li>
+<p>定义视图</p>
 <blockquote>
 <p>注意：登录视图，使用JWT默认视图即可，只需实现注册视图</p>
 </blockquote>
-<pre class=" language-python"><code class="language-python">  <span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>generics <span class="token keyword">import</span> GenericAPIView
-  <span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>mixins <span class="token keyword">import</span> CreateModelMixin
-  <span class="token keyword">from</span> <span class="token punctuation">.</span>serializer <span class="token keyword">import</span> UserSerializer<span class="token punctuation">,</span> User
+<pre class=" language-language-python"><code class="language-language-python">from rest_framework.generics import GenericAPIView
+from rest_framework.mixins import CreateModelMixin
+from .serializer import UserSerializer, User
 
-  <span class="token comment" spellcheck="true"># Create your views here.</span>
-  <span class="token keyword">class</span> <span class="token class-name">RegisterView</span><span class="token punctuation">(</span>CreateModelMixin<span class="token punctuation">,</span> GenericAPIView<span class="token punctuation">)</span><span class="token punctuation">:</span>
-      queryset <span class="token operator">=</span> User
-      serializer_class <span class="token operator">=</span> UserSerializer
+# Create your views here.
+class RegisterView(CreateModelMixin, GenericAPIView):
+    queryset = User
+    serializer_class = UserSerializer
 
-      <span class="token keyword">def</span> <span class="token function">post</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
-          <span class="token keyword">return</span> self<span class="token punctuation">.</span>create<span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span></code></pre>
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+</code></pre>
 </li>
-<li><p>配置路由</p>
-<pre class=" language-python"><code class="language-python">  <span class="token keyword">from</span> django<span class="token punctuation">.</span>urls <span class="token keyword">import</span> path
-  <span class="token keyword">from</span> <span class="token punctuation">.</span>views <span class="token keyword">import</span> RegisterView
-  <span class="token keyword">from</span> rest_framework_jwt<span class="token punctuation">.</span>views <span class="token keyword">import</span> obtain_jwt_token
+<li>
+<p>配置路由</p>
+<pre class=" language-language-python"><code class="language-language-python">from django.urls import path
+from .views import RegisterView
+from rest_framework_jwt.views import obtain_jwt_token
 
-  urlpatterns <span class="token operator">=</span> <span class="token punctuation">[</span>
-      path<span class="token punctuation">(</span><span class="token string">'register/'</span><span class="token punctuation">,</span> RegisterView<span class="token punctuation">.</span>as_view<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-      path<span class="token punctuation">(</span><span class="token string">'login/'</span><span class="token punctuation">,</span> obtain_jwt_token<span class="token punctuation">)</span><span class="token punctuation">,</span>
-  <span class="token punctuation">]</span></code></pre>
+urlpatterns = [
+    path('register/', RegisterView.as_view()),
+    path('login/', obtain_jwt_token),
+]
+</code></pre>
 </li>
 </ul>
-<h3 id="权限Permissions"><a href="#权限Permissions" class="headerlink" title="权限Permissions"></a>权限Permissions</h3><p>权限控制可以限制用户对于视图的访问和对于具体数据对象的访问。</p>
-<p>在执行视图的dispatch()方法前，会先进行视图访问权限的判断<br>在通过get_object()获取具体对象时，会进行对象访问权限的判断</p>
+<h3 id="权限Permissions"><a class="header-anchor" href="#权限Permissions">¶</a>权限Permissions</h3>
+<p>权限控制可以限制用户对于视图的访问和对于具体数据对象的访问。</p>
+<p>在执行视图的dispatch()方法前，会先进行视图访问权限的判断<br>
+在通过get_object()获取具体对象时，会进行对象访问权限的判断</p>
 <ol>
-<li><p>全局配置</p>
-<p> 可以在项目的配置文件<code>settings.py</code>中设置默认的权限管理类</p>
-<pre class=" language-python"><code class="language-python"> REST_FRAMEWORK <span class="token operator">=</span> <span class="token punctuation">{</span>
-     <span class="token string">'DEFAULT_PERMISSION_CLASSES'</span><span class="token punctuation">:</span> <span class="token punctuation">(</span>
-         <span class="token string">'rest_framework.permissions.IsAuthenticated'</span><span class="token punctuation">,</span>
-     <span class="token punctuation">)</span>
- <span class="token punctuation">}</span></code></pre>
-<p> 如果未指明，则采用如下默认配置</p>
-<pre class=" language-python"><code class="language-python"> REST_FRAMEWORK <span class="token operator">=</span> <span class="token punctuation">{</span>
-     <span class="token string">'DEFAULT_PERMISSION_CLASSES'</span><span class="token punctuation">:</span> <span class="token punctuation">(</span>
-         <span class="token string">'rest_framework.permissions.AllowAny'</span><span class="token punctuation">,</span>
-     <span class="token punctuation">)</span>
- <span class="token punctuation">}</span></code></pre>
+<li>
+<p>全局配置</p>
+<p>可以在项目的配置文件<code>settings.py</code>中设置默认的权限管理类</p>
+<pre class=" language-language-python"><code class="language-language-python">REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
+</code></pre>
+<p>如果未指明，则采用如下默认配置</p>
+<pre class=" language-language-python"><code class="language-language-python">REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    )
+}
+</code></pre>
 </li>
-<li><p>局部配置</p>
-<p> 可以在具体的视图中通过permission_classes属性来设置，如</p>
-<pre class=" language-python"><code class="language-python"> <span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>generics <span class="token keyword">import</span> GenericAPIView
- <span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>mixins <span class="token keyword">import</span> ListModelMixin
- <span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>permissions <span class="token keyword">import</span> IsAuthenticated
+<li>
+<p>局部配置</p>
+<p>可以在具体的视图中通过permission_classes属性来设置，如</p>
+<pre class=" language-language-python"><code class="language-language-python">from rest_framework.generics import GenericAPIView
+from rest_framework.mixins import ListModelMixin
+from rest_framework.permissions import IsAuthenticated
 
- <span class="token keyword">from</span> <span class="token punctuation">.</span>serializer <span class="token keyword">import</span> UserSerializer<span class="token punctuation">,</span> User
+from .serializer import UserSerializer, User
 
- <span class="token keyword">class</span> <span class="token class-name">UserView</span><span class="token punctuation">(</span>GenericAPIView<span class="token punctuation">,</span> ListModelMixin<span class="token punctuation">)</span><span class="token punctuation">:</span>
-     queryset <span class="token operator">=</span> User<span class="token punctuation">.</span>objects<span class="token punctuation">.</span>all<span class="token punctuation">(</span><span class="token punctuation">)</span>
-     serializer_class <span class="token operator">=</span> UserSerializer
-     permission_classes <span class="token operator">=</span> <span class="token punctuation">(</span>IsAuthenticated<span class="token punctuation">,</span><span class="token punctuation">)</span>
+class UserView(GenericAPIView, ListModelMixin):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (IsAuthenticated,)
 
-     <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
-         <span class="token keyword">return</span> self<span class="token punctuation">.</span>list<span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span></code></pre>
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+</code></pre>
 </li>
-<li><p>提供的权限</p>
+<li>
+<p>提供的权限</p>
 <ul>
 <li><code>AllowAny</code>: 允许所有用户</li>
 <li><code>IsAuthenticated</code>: 仅通过认证的用户</li>
@@ -559,79 +590,91 @@
 </ul>
 </li>
 </ol>
-<h3 id="限流Throttling"><a href="#限流Throttling" class="headerlink" title="限流Throttling"></a>限流Throttling</h3><p>可以对接口访问的频次进行限制，以减轻服务器压力。特别是限制爬虫的抓取。</p>
+<h3 id="限流Throttling"><a class="header-anchor" href="#限流Throttling">¶</a>限流Throttling</h3>
+<p>可以对接口访问的频次进行限制，以减轻服务器压力。特别是限制爬虫的抓取。</p>
 <blockquote>
 <p>可以在配置文件中，使用DEFAULT_THROTTLE_CLASSES 和 DEFAULT_THROTTLE_RATES进行全局配置</p>
 </blockquote>
 <ol>
-<li><p>针对用户进行限制</p>
+<li>
+<p>针对用户进行限制</p>
 <ul>
-<li><p>全局配置</p>
-<pre class=" language-python"><code class="language-python">  REST_FRAMEWORK <span class="token operator">=</span> <span class="token punctuation">{</span>
-      <span class="token string">'DEFAULT_THROTTLE_CLASSES'</span><span class="token punctuation">:</span> <span class="token punctuation">(</span>
-          <span class="token comment" spellcheck="true"># 限制所有匿名未认证用户，使用IP区分用户</span>
-          <span class="token string">'rest_framework.throttling.AnonRateThrottle'</span><span class="token punctuation">,</span>
-          <span class="token comment" spellcheck="true"># 限制认证用户，使用User id 来区分</span>
-          <span class="token string">'rest_framework.throttling.UserRateThrottle'</span>
-      <span class="token punctuation">)</span><span class="token punctuation">,</span>
-      <span class="token string">'DEFAULT_THROTTLE_RATES'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
-          <span class="token comment" spellcheck="true"># 可以使用 second, minute, hour 或day来指明周期</span>
-          <span class="token string">'anon'</span><span class="token punctuation">:</span> <span class="token string">'3/minute'</span><span class="token punctuation">,</span>
-          <span class="token string">'user'</span><span class="token punctuation">:</span> <span class="token string">'5/minute'</span>
-      <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span></code></pre>
+<li>
+<p>全局配置</p>
+<pre class=" language-language-python"><code class="language-language-python">REST_FRAMEWORK = {
+    'DEFAULT_THROTTLE_CLASSES': (
+        # 限制所有匿名未认证用户，使用IP区分用户
+        'rest_framework.throttling.AnonRateThrottle',
+        # 限制认证用户，使用User id 来区分
+        'rest_framework.throttling.UserRateThrottle'
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        # 可以使用 second, minute, hour 或day来指明周期
+        'anon': '3/minute',
+        'user': '5/minute'
+    }
+}
+</code></pre>
 </li>
-<li><p>局部配置</p>
-<p>  视图中使用<code>throttle_classes</code>属性设置限流用户类型</p>
-<pre class=" language-python"><code class="language-python">  <span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>generics <span class="token keyword">import</span> GenericAPIView
-  <span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>mixins <span class="token keyword">import</span> ListModelMixin
-  <span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>throttling <span class="token keyword">import</span> UserRateThrottle<span class="token punctuation">,</span> AnonRateThrottle
+<li>
+<p>局部配置</p>
+<p>视图中使用<code>throttle_classes</code>属性设置限流用户类型</p>
+<pre class=" language-language-python"><code class="language-language-python">from rest_framework.generics import GenericAPIView
+from rest_framework.mixins import ListModelMixin
+from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 
-  <span class="token keyword">from</span> <span class="token punctuation">.</span>serializer <span class="token keyword">import</span> UserSerializer<span class="token punctuation">,</span> User
+from .serializer import UserSerializer, User
 
-  <span class="token keyword">class</span> <span class="token class-name">UserView</span><span class="token punctuation">(</span>GenericAPIView<span class="token punctuation">,</span> ListModelMixin<span class="token punctuation">)</span><span class="token punctuation">:</span>
-      queryset <span class="token operator">=</span> User<span class="token punctuation">.</span>objects<span class="token punctuation">.</span>all<span class="token punctuation">(</span><span class="token punctuation">)</span>
-      serializer_class <span class="token operator">=</span> UserSerializer
-      throttle_classes <span class="token operator">=</span> <span class="token punctuation">(</span>UserRateThrottle<span class="token punctuation">,</span> AnonRateThrottle<span class="token punctuation">)</span>
+class UserView(GenericAPIView, ListModelMixin):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    throttle_classes = (UserRateThrottle, AnonRateThrottle)
 
-      <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
-          <span class="token keyword">return</span> self<span class="token punctuation">.</span>list<span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span></code></pre>
-<p>  在项目配置文件中针对用户类型设置具体频率</p>
-<pre class=" language-python"><code class="language-python">  REST_FRAMEWORK <span class="token operator">=</span> <span class="token punctuation">{</span>
-      <span class="token string">'DEFAULT_THROTTLE_RATES'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
-          <span class="token comment" spellcheck="true"># 可以使用 second, minute, hour 或day来指明周期</span>
-          <span class="token string">'anon'</span><span class="token punctuation">:</span> <span class="token string">'3/minute'</span><span class="token punctuation">,</span>
-          <span class="token string">'user'</span><span class="token punctuation">:</span> <span class="token string">'5/minute'</span>
-      <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span></code></pre>
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+</code></pre>
+<p>在项目配置文件中针对用户类型设置具体频率</p>
+<pre class=" language-language-python"><code class="language-language-python">REST_FRAMEWORK = {
+    'DEFAULT_THROTTLE_RATES': {
+        # 可以使用 second, minute, hour 或day来指明周期
+        'anon': '3/minute',
+        'user': '5/minute'
+    }
+}
+</code></pre>
 </li>
 </ul>
 </li>
-<li><p>针对视图限制</p>
+<li>
+<p>针对视图限制</p>
 <ul>
-<li><p>视图中使用<code>throttle_scope</code>属性设置具体配置信息</p>
-<pre class=" language-python"><code class="language-python">  <span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>generics <span class="token keyword">import</span> GenericAPIView
-  <span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>mixins <span class="token keyword">import</span> ListModelMixin
-  <span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>permissions <span class="token keyword">import</span> IsAuthenticated
+<li>
+<p>视图中使用<code>throttle_scope</code>属性设置具体配置信息</p>
+<pre class=" language-language-python"><code class="language-language-python">from rest_framework.generics import GenericAPIView
+from rest_framework.mixins import ListModelMixin
+from rest_framework.permissions import IsAuthenticated
 
-  <span class="token keyword">from</span> <span class="token punctuation">.</span>serializer <span class="token keyword">import</span> UserSerializer<span class="token punctuation">,</span> User
+from .serializer import UserSerializer, User
 
-  <span class="token keyword">class</span> <span class="token class-name">UserView</span><span class="token punctuation">(</span>GenericAPIView<span class="token punctuation">,</span> ListModelMixin<span class="token punctuation">)</span><span class="token punctuation">:</span>
-      queryset <span class="token operator">=</span> User<span class="token punctuation">.</span>objects<span class="token punctuation">.</span>all<span class="token punctuation">(</span><span class="token punctuation">)</span>
-      serializer_class <span class="token operator">=</span> UserSerializer
-      throttle_scope <span class="token operator">=</span> <span class="token string">'downloads'</span>
+class UserView(GenericAPIView, ListModelMixin):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    throttle_scope = 'downloads'
 
-      <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
-          <span class="token keyword">return</span> self<span class="token punctuation">.</span>list<span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span></code></pre>
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+</code></pre>
 </li>
-<li><p>在项目配置文件中设置具体频率</p>
-<pre class=" language-python"><code class="language-python">  <span class="token string">'DEFAULT_THROTTLE_CLASSES'</span><span class="token punctuation">:</span> <span class="token punctuation">(</span>
-      <span class="token comment" spellcheck="true"># 限制用户对于每个视图的访问频次，使用ip或user id</span>
-      <span class="token string">'rest_framework.throttling.ScopedRateThrottle'</span><span class="token punctuation">,</span>
-  <span class="token punctuation">)</span><span class="token punctuation">,</span>
-  <span class="token string">'DEFAULT_THROTTLE_RATES'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
-      <span class="token string">'downloads'</span><span class="token punctuation">:</span> <span class="token string">'3/minute'</span>
-  <span class="token punctuation">}</span></code></pre>
+<li>
+<p>在项目配置文件中设置具体频率</p>
+<pre class=" language-language-python"><code class="language-language-python">'DEFAULT_THROTTLE_CLASSES': (
+    # 限制用户对于每个视图的访问频次，使用ip或user id
+    'rest_framework.throttling.ScopedRateThrottle',
+),
+'DEFAULT_THROTTLE_RATES': {
+    'downloads': '3/minute'
+}
+</code></pre>
 </li>
 </ul>
 </li>
@@ -661,7 +704,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bookandmusic.gitee.io/2020/03/15/drf-jwt-ren-zheng-quan-xian-xian-liu/">http://bookandmusic.gitee.io/2020/03/15/drf-jwt-ren-zheng-quan-xian-xian-liu/</a>
+                    <a href="https://bookandmusic.github.io/2020/03/15/drf-jwt-ren-zheng-quan-xian-xian-liu/">https://bookandmusic.github.io/2020/03/15/drf-jwt-ren-zheng-quan-xian-xian-liu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -900,9 +943,12 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            图片上传static 和 media 都是存放文件的地方，但是又有区别，以下是两个文件夹的区别和用法
-static定义static 是静态文件，主要存的是 CSS, JavaScript, 网站 logo 等不变的文件。
-配置配置 sett
+                            ¶图片上传
+static 和 media 都是存放文件的地方，但是又有区别，以下是两个文件夹的区别和用法
+¶static
+¶定义
+static 是静态文件，主要存的是 CSS, JavaScript, 网站 logo 等不变的文件。
+¶配置
                         
                     </div>
                     <div class="publish-info">
@@ -959,15 +1005,17 @@ static定义static 是静态文件，主要存的是 CSS, JavaScript, 网站 log
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            项目框架
+                            ¶项目框架
+
+
 项目结构
- .
- ├── users
- │    ├── __init__.py
- │    ├── admin.py
- │    ├── apps.py
- │    ├── migrations
- │    │   └── __
+.
+├── users
+│    ├── __init__.py
+│    ├── admin.py
+│    ├── apps.py
+│    ├── migrations
+│    │   └── __init
                         
                     </div>
                     <div class="publish-info">
@@ -1209,7 +1257,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

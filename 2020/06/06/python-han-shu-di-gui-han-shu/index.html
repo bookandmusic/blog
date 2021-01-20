@@ -393,102 +393,112 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="1-定义"><a href="#1-定义" class="headerlink" title="1. 定义"></a>1. 定义</h3><p>函数调用函数自身，这种方式称为递归，这种函数称为递归函数</p>
+                <h3 id="1-定义"><a class="header-anchor" href="#1-定义">¶</a>1. 定义</h3>
+<p>函数调用函数自身，这种方式称为递归，这种函数称为递归函数</p>
 <a id="more"></a>
-
 <blockquote>
-<p>递归函数使用过程中，需要找到<code>不变的规律</code>和停止递归的<code>边界条件</code>， </p>
+<p>递归函数使用过程中，需要找到<code>不变的规律</code>和停止递归的<code>边界条件</code>，</p>
 <p>因为函数自身调用自身，函数本身的结构不变，只是<code>每次传的参数改变</code>啦</p>
 <p>递归实现过程(<strong>扩展</strong>)：利用栈的思想，先找边界条件，同时将后面的任务存起来，一直到最前面的边界条件，然后回去，每次从栈中取任务，进行计算，一直到最后一个任务取完，结果也计算完毕</p>
 </blockquote>
-<h3 id="2-递归过程"><a href="#2-递归过程" class="headerlink" title="2. 递归过程:"></a>2. 递归过程:</h3><ul>
+<h3 id="2-递归过程"><a class="header-anchor" href="#2-递归过程">¶</a>2. 递归过程:</h3>
+<ul>
 <li>递归前进段</li>
 <li>递归边界条件</li>
 <li>递归返回段</li>
 </ul>
-<h3 id="3-案例讲解"><a href="#3-案例讲解" class="headerlink" title="3. 案例讲解"></a>3. 案例讲解</h3><h4 id="递归求100以内偶数和"><a href="#递归求100以内偶数和" class="headerlink" title="递归求100以内偶数和"></a>递归求100以内偶数和</h4><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># f(100) = 0 + 2 + 4 + ... + 98  + 100</span>
-<span class="token comment" spellcheck="true"># f(98)  = 0 + 2 + ... + 98</span>
-<span class="token comment" spellcheck="true"># f(96) = 0 + 2 + ...  + 96</span>
-<span class="token comment" spellcheck="true"># ...</span>
-<span class="token comment" spellcheck="true"># f(2) = f(0) + 2</span>
-<span class="token comment" spellcheck="true"># f(0) = 0</span>
+<h3 id="3-案例讲解"><a class="header-anchor" href="#3-案例讲解">¶</a>3. 案例讲解</h3>
+<h4 id="递归求100以内偶数和"><a class="header-anchor" href="#递归求100以内偶数和">¶</a>递归求100以内偶数和</h4>
+<pre class=" language-language-python"><code class="language-language-python"># f(100) = 0 + 2 + 4 + ... + 98  + 100
+# f(98)  = 0 + 2 + ... + 98
+# f(96) = 0 + 2 + ...  + 96
+# ...
+# f(2) = f(0) + 2
+# f(0) = 0
 
-<span class="token comment" spellcheck="true"># n!=0: f(n) = f(n - 2) + n</span>
-<span class="token comment" spellcheck="true"># n = 0  f(0) = 0</span>
-
-
-<span class="token keyword">def</span> <span class="token function">mysum</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token triple-quoted-string string">"""n以内所有偶数和"""</span>
-    <span class="token keyword">if</span> n <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token number">0</span>
-    <span class="token keyword">else</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> mysum<span class="token punctuation">(</span>n<span class="token number">-2</span><span class="token punctuation">)</span> <span class="token operator">+</span> n
+# n!=0: f(n) = f(n - 2) + n
+# n = 0  f(0) = 0
 
 
-r <span class="token operator">=</span> mysum<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span></code></pre>
+def mysum(n):
+    """n以内所有偶数和"""
+    if n == 0:
+        return 0
+    else:
+        return mysum(n-2) + n
+
+
+r = mysum(100)
+print(r)
+</code></pre>
 <blockquote>
 <p>100以内奇数和, 100以内所有数字和类似</p>
 </blockquote>
-<h4 id="10以内所有数字之积-10的阶乘"><a href="#10以内所有数字之积-10的阶乘" class="headerlink" title="10以内所有数字之积(10的阶乘)"></a>10以内所有数字之积(<code>10的阶乘</code>)</h4><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 1! = 1</span>
-<span class="token comment" spellcheck="true"># 2！= 1*2</span>
-<span class="token comment" spellcheck="true"># 3！= 1*2*3</span>
-<span class="token comment" spellcheck="true"># 。。。</span>
-<span class="token comment" spellcheck="true"># 10! = 1 * 2 * 3 * 4 * ... * 10</span>
+<h4 id="10以内所有数字之积-10的阶乘"><a class="header-anchor" href="#10以内所有数字之积-10的阶乘">¶</a>10以内所有数字之积(<code>10的阶乘</code>)</h4>
+<pre class=" language-language-python"><code class="language-language-python"># 1! = 1
+# 2！= 1*2
+# 3！= 1*2*3
+# 。。。
+# 10! = 1 * 2 * 3 * 4 * ... * 10
 
-<span class="token comment" spellcheck="true"># f(10) = f(9) * 10</span>
-<span class="token comment" spellcheck="true"># n!=1 :  f(n)  = f(n-1) * n</span>
-<span class="token comment" spellcheck="true"># n==1: f(1) = 1</span>
-
-
-<span class="token keyword">def</span> <span class="token function">f</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">if</span> n <span class="token operator">!=</span> <span class="token number">1</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> f<span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> n
-    <span class="token keyword">else</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token number">1</span>
+# f(10) = f(9) * 10
+# n!=1 :  f(n)  = f(n-1) * n
+# n==1: f(1) = 1
 
 
-r <span class="token operator">=</span> f<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span></code></pre>
-<h4 id="递归实现斐波那契数列"><a href="#递归实现斐波那契数列" class="headerlink" title="递归实现斐波那契数列"></a>递归实现斐波那契数列</h4><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 1  1  2  3  5  8  13  21</span>
-<span class="token comment" spellcheck="true"># f(n) = f(n-1) + f(n-2)</span>
-<span class="token comment" spellcheck="true"># n=1 : 1</span>
-<span class="token comment" spellcheck="true"># n=2 : 1</span>
+def f(n):
+    if n != 1:
+        return f(n - 1) * n
+    else:
+        return 1
 
 
-<span class="token keyword">def</span> <span class="token function">fibonacci</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">if</span> n <span class="token operator">==</span> <span class="token number">1</span> <span class="token operator">or</span> n <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token number">1</span>
-    <span class="token keyword">else</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> fibonacci<span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> fibonacci<span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span>
+r = f(10)
+print(r)
+</code></pre>
+<h4 id="递归实现斐波那契数列"><a class="header-anchor" href="#递归实现斐波那契数列">¶</a>递归实现斐波那契数列</h4>
+<pre class=" language-language-python"><code class="language-language-python"># 1  1  2  3  5  8  13  21
+# f(n) = f(n-1) + f(n-2)
+# n=1 : 1
+# n=2 : 1
 
 
-r <span class="token operator">=</span> fibonacci<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span></code></pre>
-<h4 id="递归实现吸烟问题"><a href="#递归实现吸烟问题" class="headerlink" title="递归实现吸烟问题"></a>递归实现吸烟问题</h4><p>吸烟有危害，不仅仅危害人体健康，还会对社会产生不良的影响。吸烟还很容易引起喉头炎、气管炎，肺气肿等问题； 那么现在假设人一生抽烟10000根达到极限峰值，再抽一根烟就像压倒骆驼的最后一根稻草，会使人体爆发疾病问题； 每天一个人抽烟的个数都比前天多一根（第一天抽一根），且一周只有工作日（周一~周五）会吸烟； 请使用递归的方式求出一个人按照以上方式抽烟达到10000根，爆发疾病需要历经多少天</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">smoker</span><span class="token punctuation">(</span>day<span class="token punctuation">,</span> count<span class="token punctuation">,</span> amount<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token triple-quoted-string string">"""
+def fibonacci(n):
+    if n == 1 or n == 2:
+        return 1
+    else:
+        return fibonacci(n - 1) + fibonacci(n - 2)
+
+
+r = fibonacci(5)
+print(r)
+</code></pre>
+<h4 id="递归实现吸烟问题"><a class="header-anchor" href="#递归实现吸烟问题">¶</a>递归实现吸烟问题</h4>
+<p>吸烟有危害，不仅仅危害人体健康，还会对社会产生不良的影响。吸烟还很容易引起喉头炎、气管炎，肺气肿等问题； 那么现在假设人一生抽烟10000根达到极限峰值，再抽一根烟就像压倒骆驼的最后一根稻草，会使人体爆发疾病问题； 每天一个人抽烟的个数都比前天多一根（第一天抽一根），且一周只有工作日（周一~周五）会吸烟； 请使用递归的方式求出一个人按照以上方式抽烟达到10000根，爆发疾病需要历经多少天</p>
+<pre class=" language-language-python"><code class="language-language-python">def smoker(day, count, amount):
+    """
     递归解决吸烟问题
     :param day: 当前的天数
     :param count: 当天的吸烟数量
     :param amount: 总计的吸烟数量
     :return: 吸到10000根烟的天数
-    """</span>
-    <span class="token keyword">if</span> amount <span class="token operator">>=</span> <span class="token number">10000</span><span class="token punctuation">:</span>
-        <span class="token comment" spellcheck="true"># 如果吸烟总数大于10000， 返回天数</span>
-        <span class="token keyword">return</span> day
+    """
+    if amount >= 10000:
+        # 如果吸烟总数大于10000， 返回天数
+        return day
 
-    <span class="token keyword">else</span><span class="token punctuation">:</span>
-        day <span class="token operator">+=</span> <span class="token number">1</span> <span class="token comment" spellcheck="true"># 每吸一次烟，天数加1</span>
-        <span class="token keyword">if</span> day <span class="token operator">%</span> <span class="token number">7</span> <span class="token operator">!=</span> <span class="token number">6</span> <span class="token operator">and</span> day <span class="token operator">%</span> <span class="token number">7</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">:</span>
-            <span class="token comment" spellcheck="true"># 只有周六，周日不吸烟，判断不是周六，也不是周日</span>
-            count <span class="token operator">+=</span> <span class="token number">1</span> <span class="token comment" spellcheck="true"># 当天吸烟的数量</span>
-            amount <span class="token operator">+=</span> count <span class="token comment" spellcheck="true"># 目前为止，吸烟的总数量</span>
+    else:
+        day += 1 # 每吸一次烟，天数加1
+        if day % 7 != 6 and day % 7 != 0:
+            # 只有周六，周日不吸烟，判断不是周六，也不是周日
+            count += 1 # 当天吸烟的数量
+            amount += count # 目前为止，吸烟的总数量
 
-        <span class="token keyword">return</span> smoker<span class="token punctuation">(</span>day<span class="token punctuation">,</span> count<span class="token punctuation">,</span> amount<span class="token punctuation">)</span>
+        return smoker(day, count, amount)
 
 
-<span class="token keyword">print</span><span class="token punctuation">(</span>smoker<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 第1天，吸了1根烟，总共吸了1根烟</span></code></pre>
+print(smoker(1, 1, 1)) # 第1天，吸了1根烟，总共吸了1根烟
+</code></pre>
 
             </div>
             <hr/>
@@ -514,7 +524,7 @@ r <span class="token operator">=</span> fibonacci<span class="token punctuation"
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bookandmusic.gitee.io/2020/06/06/python-han-shu-di-gui-han-shu/">http://bookandmusic.gitee.io/2020/06/06/python-han-shu-di-gui-han-shu/</a>
+                    <a href="https://bookandmusic.github.io/2020/06/06/python-han-shu-di-gui-han-shu/">https://bookandmusic.github.io/2020/06/06/python-han-shu-di-gui-han-shu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -739,12 +749,13 @@ r <span class="token operator">=</span> fibonacci<span class="token punctuation"
                         
                             DRF内置的序列化类，可以对整个模型类进行序列化与反序列化，简化了繁杂的工作。
 
-
-内置字段序列化模型类from django.db import models
+¶内置字段序列化
+¶模型类
+from django.db import models
 
 
 # Create your models here.
-class Auth
+class A
                         
                     </div>
                     <div class="publish-info">
@@ -818,7 +829,8 @@ class Auth
 lambda表达式的语法：
 lambda argument_list: expression
 
-argument_list是参数列表。它的结构与Python中函数(function)的参数
+
+argument_list是参数列表。它的结构与Python中函数(function)的参
                         
                     </div>
                     <div class="publish-info">
@@ -1056,7 +1068,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

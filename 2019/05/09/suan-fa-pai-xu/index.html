@@ -371,14 +371,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.9k
+                    1.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    11 分
+                    7 分
                 </div>
                 
 
@@ -395,10 +395,12 @@
             <div id="articleContent">
                 <p>经典排序算法在面试中占有很大的比重，也是基础，为了未雨绸缪，整理并用Python实现了七大经典排序算法，包括冒泡排序，插入排序，选择排序，希尔排序，归并排序，快速排序，堆排序。之所以用Python实现，主要是因为它更接近伪代码，能用更少的代码实现算法，更利于理解。</p>
 <a id="more"></a>
-
 <p>本篇博客所有排序实现均默认从小到大。</p>
-<h2 id="一、冒泡排序-BubbleSort"><a href="#一、冒泡排序-BubbleSort" class="headerlink" title="一、冒泡排序 BubbleSort"></a>一、冒泡排序 <code>BubbleSort</code></h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>冒泡排序的原理非常简单，它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序逆序就把他们交换过来。</p>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<h2 id="一、冒泡排序-BubbleSort"><a class="header-anchor" href="#一、冒泡排序-BubbleSort">¶</a>一、冒泡排序 <code>BubbleSort</code></h2>
+<h3 id="介绍"><a class="header-anchor" href="#介绍">¶</a>介绍</h3>
+<p>冒泡排序的原理非常简单，它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序逆序就把他们交换过来。</p>
+<h3 id="步骤"><a class="header-anchor" href="#步骤">¶</a>步骤</h3>
+<ol>
 <li>比较相邻的元素。如果第一个比第二个大，就交换他们两个。</li>
 <li>对第0个到第n-1个数据做同样的工作。这时，最大的数就“浮”到了数组最后的位置上。</li>
 <li>针对所有的元素重复以上的步骤，除了最后一个。</li>
@@ -409,61 +411,71 @@
 <li>优化1：某一趟遍历如果没有数据交换，则说明已经排好序了，因此不用再进行迭代了。用一个标记记录这个状态即可。</li>
 <li>优化2：记录某次遍历时最后发生数据交换的位置，这个位置之后的数据显然已经有序，不用再排序了。因此通过记录最后发生数据交换的位置就可以确定下次循环的范围了。</li>
 </ul>
-<h3 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">bubble_sort</span><span class="token punctuation">(</span>ary<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    n <span class="token operator">=</span> len<span class="token punctuation">(</span>ary<span class="token punctuation">)</span>                   <span class="token comment" spellcheck="true">#获得数组的长度</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>n<span class="token operator">-</span>i<span class="token punctuation">)</span><span class="token punctuation">:</span>
-            <span class="token keyword">if</span>  ary<span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span> <span class="token operator">></span> ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token punctuation">:</span>       <span class="token comment" spellcheck="true">#如果前者比后者大</span>
-                ary<span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span>       <span class="token comment" spellcheck="true">#则交换两者</span>
-    <span class="token keyword">return</span> ary
+<h3 id="源代码"><a class="header-anchor" href="#源代码">¶</a>源代码</h3>
+<pre class=" language-language-python"><code class="language-language-python">def bubble_sort(ary):
+    n = len(ary)                   #获得数组的长度
+    for i in range(n):
+        for j in range(1,n-i):
+            if  ary[j-1] > ary[j] :       #如果前者比后者大
+                ary[j-1],ary[j] = ary[j],ary[j-1]       #则交换两者
+    return ary
 
 
-<span class="token comment" spellcheck="true">#优化1：某一趟遍历如果没有数据交换，则说明已经排好序了，因此不用再进行迭代了。</span>
-<span class="token comment" spellcheck="true">#用一个标记记录这个状态即可。</span>
-<span class="token keyword">def</span> <span class="token function">bubble_sort2</span><span class="token punctuation">(</span>ary<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    n <span class="token operator">=</span> len<span class="token punctuation">(</span>ary<span class="token punctuation">)</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        flag <span class="token operator">=</span> <span class="token number">1</span>                    <span class="token comment" spellcheck="true">#标记</span>
-        <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>n<span class="token operator">-</span>i<span class="token punctuation">)</span><span class="token punctuation">:</span>
-            <span class="token keyword">if</span>  ary<span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span> <span class="token operator">></span> ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token punctuation">:</span>
-                ary<span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span>
-                flag <span class="token operator">=</span> <span class="token number">0</span>
-        <span class="token keyword">if</span> flag <span class="token punctuation">:</span>                   <span class="token comment" spellcheck="true">#全排好序了，直接跳出</span>
-            <span class="token keyword">break</span>
-    <span class="token keyword">return</span> ary
+#优化1：某一趟遍历如果没有数据交换，则说明已经排好序了，因此不用再进行迭代了。
+#用一个标记记录这个状态即可。
+def bubble_sort2(ary):
+    n = len(ary)
+    for i in range(n):
+        flag = 1                    #标记
+        for j in range(1,n-i):
+            if  ary[j-1] > ary[j] :
+                ary[j-1],ary[j] = ary[j],ary[j-1]
+                flag = 0
+        if flag :                   #全排好序了，直接跳出
+            break
+    return ary
 
-<span class="token comment" spellcheck="true">#优化2：记录某次遍历时最后发生数据交换的位置，这个位置之后的数据显然已经有序了。</span>
-<span class="token comment" spellcheck="true"># 因此通过记录最后发生数据交换的位置就可以确定下次循环的范围了。</span>
-<span class="token keyword">def</span> <span class="token function">bubble_sort3</span><span class="token punctuation">(</span>ary<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    n <span class="token operator">=</span> len<span class="token punctuation">(</span>ary<span class="token punctuation">)</span>
-    k <span class="token operator">=</span> n                           <span class="token comment" spellcheck="true">#k为循环的范围，初始值n</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        flag <span class="token operator">=</span> <span class="token number">1</span>
-        <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>        <span class="token comment" spellcheck="true">#只遍历到最后交换的位置即可</span>
-            <span class="token keyword">if</span>  ary<span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span> <span class="token operator">></span> ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token punctuation">:</span>
-                ary<span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span>
-                k <span class="token operator">=</span> j               <span class="token comment" spellcheck="true">#记录最后交换的位置</span>
-                flag <span class="token operator">=</span> <span class="token number">0</span>
-        <span class="token keyword">if</span> flag <span class="token punctuation">:</span>
-            <span class="token keyword">break</span>
-    <span class="token keyword">return</span> ary</code></pre>
-<h2 id="二、选择排序-SelectionSort"><a href="#二、选择排序-SelectionSort" class="headerlink" title="二、选择排序 SelectionSort"></a>二、选择排序 <code>SelectionSort</code></h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><p>选择排序无疑是最简单直观的排序。它的工作原理如下。</p>
-<h3 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h3><ol>
+#优化2：记录某次遍历时最后发生数据交换的位置，这个位置之后的数据显然已经有序了。
+# 因此通过记录最后发生数据交换的位置就可以确定下次循环的范围了。
+def bubble_sort3(ary):
+    n = len(ary)
+    k = n                           #k为循环的范围，初始值n
+    for i in range(n):
+        flag = 1
+        for j in range(1,k):        #只遍历到最后交换的位置即可
+            if  ary[j-1] > ary[j] :
+                ary[j-1],ary[j] = ary[j],ary[j-1]
+                k = j               #记录最后交换的位置
+                flag = 0
+        if flag :
+            break
+    return ary
+</code></pre>
+<h2 id="二、选择排序-SelectionSort"><a class="header-anchor" href="#二、选择排序-SelectionSort">¶</a>二、选择排序 <code>SelectionSort</code></h2>
+<h3 id="介绍-v2"><a class="header-anchor" href="#介绍-v2">¶</a>介绍</h3>
+<p>选择排序无疑是最简单直观的排序。它的工作原理如下。</p>
+<h3 id="步骤-v2"><a class="header-anchor" href="#步骤-v2">¶</a>步骤</h3>
+<ol>
 <li>在未排序序列中找到最小（大）元素，存放到排序序列的起始位置。</li>
 <li>再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。</li>
 <li>以此类推，直到所有元素均排序完毕。</li>
 </ol>
-<h3 id="源代码-1"><a href="#源代码-1" class="headerlink" title="源代码"></a>源代码</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">select_sort</span><span class="token punctuation">(</span>ary<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    n <span class="token operator">=</span> len<span class="token punctuation">(</span>ary<span class="token punctuation">)</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        min <span class="token operator">=</span> i                             <span class="token comment" spellcheck="true">#最小元素下标标记</span>
-        <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
-            <span class="token keyword">if</span> ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">&lt;</span> ary<span class="token punctuation">[</span>min<span class="token punctuation">]</span> <span class="token punctuation">:</span>
-                min <span class="token operator">=</span> j                     <span class="token comment" spellcheck="true">#找到最小值的下标</span>
-        ary<span class="token punctuation">[</span>min<span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> ary<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>min<span class="token punctuation">]</span>   <span class="token comment" spellcheck="true">#交换两者</span>
-    <span class="token keyword">return</span> ary</code></pre>
-<h2 id="三、插入排序-InsertionSort"><a href="#三、插入排序-InsertionSort" class="headerlink" title="三、插入排序 InsertionSort"></a>三、插入排序 <code>InsertionSort</code></h2><h3 id="介绍-2"><a href="#介绍-2" class="headerlink" title="介绍"></a>介绍</h3><p>插入排序的工作原理是，对于每个未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。</p>
-<h3 id="步骤-2"><a href="#步骤-2" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<h3 id="源代码-v2"><a class="header-anchor" href="#源代码-v2">¶</a>源代码</h3>
+<pre class=" language-language-python"><code class="language-language-python">def select_sort(ary):
+    n = len(ary)
+    for i in range(0,n):
+        min = i                             #最小元素下标标记
+        for j in range(i+1,n):
+            if ary[j] < ary[min] :
+                min = j                     #找到最小值的下标
+        ary[min],ary[i] = ary[i],ary[min]   #交换两者
+    return ary
+</code></pre>
+<h2 id="三、插入排序-InsertionSort"><a class="header-anchor" href="#三、插入排序-InsertionSort">¶</a>三、插入排序 <code>InsertionSort</code></h2>
+<h3 id="介绍-v3"><a class="header-anchor" href="#介绍-v3">¶</a>介绍</h3>
+<p>插入排序的工作原理是，对于每个未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。</p>
+<h3 id="步骤-v3"><a class="header-anchor" href="#步骤-v3">¶</a>步骤</h3>
+<ol>
 <li>从第一个元素开始，该元素可以认为已经被排序</li>
 <li>取出下一个元素，在已经排序的元素序列中从后向前扫描</li>
 <li>如果被扫描的元素（已排序）大于新元素，将该元素后移一位</li>
@@ -471,152 +483,191 @@
 <li>将新元素插入到该位置后</li>
 <li>重复步骤2~5</li>
 </ol>
-<h3 id="排序演示"><a href="#排序演示" class="headerlink" title="排序演示"></a>排序演示</h3><p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190509200851-Insertion-sort-example-300px%20.gif" alt="20190509200851-Insertion-sort-example-300px"></p>
-<h3 id="源代码-2"><a href="#源代码-2" class="headerlink" title="源代码"></a>源代码</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">insert_sort</span><span class="token punctuation">(</span>ary<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    n <span class="token operator">=</span> len<span class="token punctuation">(</span>ary<span class="token punctuation">)</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">if</span> ary<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;</span> ary<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
-            temp <span class="token operator">=</span> ary<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
-            index <span class="token operator">=</span> i           <span class="token comment" spellcheck="true">#待插入的下标</span>
-            <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span>i<span class="token number">-1</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true">#从i-1 循环到 0 (包括0)</span>
-                <span class="token keyword">if</span> ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">></span> temp <span class="token punctuation">:</span>
-                    ary<span class="token punctuation">[</span>j<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span>
-                    index <span class="token operator">=</span> j   <span class="token comment" spellcheck="true">#记录待插入下标</span>
-                <span class="token keyword">else</span> <span class="token punctuation">:</span>
-                    <span class="token keyword">break</span>
-            ary<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> temp
-    <span class="token keyword">return</span> ary</code></pre>
-<h2 id="四、希尔排序-ShellSort"><a href="#四、希尔排序-ShellSort" class="headerlink" title="四、希尔排序 ShellSort"></a>四、希尔排序 <code>ShellSort</code></h2><h3 id="介绍："><a href="#介绍：" class="headerlink" title="介绍："></a>介绍：</h3><p>希尔排序，也称递减增量排序算法，实质是分组插入排序。由 Donald Shell 于1959年提出。希尔排序是非稳定排序算法。</p>
-<h3 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h3><p>希尔排序的基本思想是：将数组列在一个表中并对列分别进行插入排序，重复这过程，不过每次用更长的列（步长更长了，列数更少了）来进行。最后整个表就只有一列了。将数组转换至表是为了更好地理解这算法，算法本身还是使用数组进行排序。</p>
+<h3 id="排序演示"><a class="header-anchor" href="#排序演示">¶</a>排序演示</h3>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190509200851-Insertion-sort-example-300px%20.gif" alt="20190509200851-Insertion-sort-example-300px"></p>
+<h3 id="源代码-v3"><a class="header-anchor" href="#源代码-v3">¶</a>源代码</h3>
+<pre class=" language-language-python"><code class="language-language-python">def insert_sort(ary):
+    n = len(ary)
+    for i in range(1,n):
+        if ary[i] < ary[i-1]:
+            temp = ary[i]
+            index = i           #待插入的下标
+            for j in range(i-1,-1,-1):  #从i-1 循环到 0 (包括0)
+                if ary[j] > temp :
+                    ary[j+1] = ary[j]
+                    index = j   #记录待插入下标
+                else :
+                    break
+            ary[index] = temp
+    return ary
+</code></pre>
+<h2 id="四、希尔排序-ShellSort"><a class="header-anchor" href="#四、希尔排序-ShellSort">¶</a>四、希尔排序 <code>ShellSort</code></h2>
+<h3 id="介绍："><a class="header-anchor" href="#介绍：">¶</a>介绍：</h3>
+<p>希尔排序，也称递减增量排序算法，实质是分组插入排序。由 Donald Shell 于1959年提出。希尔排序是非稳定排序算法。</p>
+<h3 id="步骤："><a class="header-anchor" href="#步骤：">¶</a>步骤：</h3>
+<p>希尔排序的基本思想是：将数组列在一个表中并对列分别进行插入排序，重复这过程，不过每次用更长的列（步长更长了，列数更少了）来进行。最后整个表就只有一列了。将数组转换至表是为了更好地理解这算法，算法本身还是使用数组进行排序。</p>
 <ol>
-<li>例如，假设有这样一组数<code>[ 13 14 94 33 82 25 59 94 65 23 45 27 73 25 39 10 ]</code>，如果我们以步长为5开始进行排序，我们可以通过将这列表放在有5列的表中来更好地描述算法，这样他们就应该看起来是这样：<pre><code> 13 14 94 33 82
- 25 59 94 65 23
- 45 27 73 25 39
- 10</code></pre></li>
-<li>然后我们对每列进行排序：<pre><code> 10 14 73 25 23
- 13 27 94 33 39
- 25 59 94 65 82
- 45</code></pre></li>
-<li>将上述四行数字，依序接在一起时我们得到：<code>[ 10 14 73 25 23 13 27 94 33 39 25 59 94 65 82 45 ]</code>。这时10已经移至正确位置了，然后再以3为步长进行排序：<pre><code> 10 14 73
- 25 23 13
- 27 94 33
- 39 25 59
- 94 65 82
- 45</code></pre> 排序之后变为：<pre><code> 10 14 13
- 25 23 33
- 27 25 59
- 39 65 73
- 45 94 82
- 94</code></pre></li>
+<li>例如，假设有这样一组数<code>[ 13 14 94 33 82 25 59 94 65 23 45 27 73 25 39 10 ]</code>，如果我们以步长为5开始进行排序，我们可以通过将这列表放在有5列的表中来更好地描述算法，这样他们就应该看起来是这样：<pre><code>13 14 94 33 82
+25 59 94 65 23
+45 27 73 25 39
+10
+</code></pre>
+</li>
+<li>然后我们对每列进行排序：<pre><code>10 14 73 25 23
+13 27 94 33 39
+25 59 94 65 82
+45
+</code></pre>
+</li>
+<li>将上述四行数字，依序接在一起时我们得到：<code>[ 10 14 73 25 23 13 27 94 33 39 25 59 94 65 82 45 ]</code>。这时10已经移至正确位置了，然后再以3为步长进行排序：<pre><code>10 14 73
+25 23 13
+27 94 33
+39 25 59
+94 65 82
+45
+</code></pre>
+排序之后变为：<pre><code>10 14 13
+25 23 33
+27 25 59
+39 65 73
+45 94 82
+94
+</code></pre>
+</li>
 <li>最后以1步长进行排序（此时就是简单的插入排序了）。</li>
 </ol>
-<h3 id="源代码-3"><a href="#源代码-3" class="headerlink" title="源代码"></a>源代码</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">shell_sort</span><span class="token punctuation">(</span>ary<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    n <span class="token operator">=</span> len<span class="token punctuation">(</span>ary<span class="token punctuation">)</span>
-    gap <span class="token operator">=</span> round<span class="token punctuation">(</span>n<span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">)</span>       <span class="token comment" spellcheck="true">#初始步长 , 用round四舍五入取整</span>
-    <span class="token keyword">while</span> gap <span class="token operator">></span> <span class="token number">0</span> <span class="token punctuation">:</span>
-        <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>gap<span class="token punctuation">,</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>        <span class="token comment" spellcheck="true">#每一列进行插入排序 , 从gap 到 n-1</span>
-            temp <span class="token operator">=</span> ary<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
-            j <span class="token operator">=</span> i
-            <span class="token keyword">while</span> <span class="token punctuation">(</span> j <span class="token operator">>=</span> gap <span class="token operator">and</span> ary<span class="token punctuation">[</span>j<span class="token operator">-</span>gap<span class="token punctuation">]</span> <span class="token operator">></span> temp <span class="token punctuation">)</span><span class="token punctuation">:</span>    <span class="token comment" spellcheck="true">#插入排序</span>
-                ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> ary<span class="token punctuation">[</span>j<span class="token operator">-</span>gap<span class="token punctuation">]</span>
-                j <span class="token operator">=</span> j <span class="token operator">-</span> gap
-            ary<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> temp
-        gap <span class="token operator">=</span> round<span class="token punctuation">(</span>gap<span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">)</span>                     <span class="token comment" spellcheck="true">#重新设置步长</span>
-    <span class="token keyword">return</span> ary</code></pre>
-<h2 id="五、归并排序-MergeSort"><a href="#五、归并排序-MergeSort" class="headerlink" title="五、归并排序 MergeSort"></a>五、归并排序 <code>MergeSort</code></h2><h3 id="介绍-3"><a href="#介绍-3" class="headerlink" title="介绍"></a>介绍</h3><p>归并排序是采用分治法的一个非常典型的应用。归并排序的思想就是先递归分解数组，再合并数组。</p>
+<h3 id="源代码-v4"><a class="header-anchor" href="#源代码-v4">¶</a>源代码</h3>
+<pre class=" language-language-python"><code class="language-language-python">def shell_sort(ary):
+    n = len(ary)
+    gap = round(n/2)       #初始步长 , 用round四舍五入取整
+    while gap > 0 :
+        for i in range(gap,n):        #每一列进行插入排序 , 从gap 到 n-1
+            temp = ary[i]
+            j = i
+            while ( j >= gap and ary[j-gap] > temp ):    #插入排序
+                ary[j] = ary[j-gap]
+                j = j - gap
+            ary[j] = temp
+        gap = round(gap/2)                     #重新设置步长
+    return ary
+</code></pre>
+<h2 id="五、归并排序-MergeSort"><a class="header-anchor" href="#五、归并排序-MergeSort">¶</a>五、归并排序 <code>MergeSort</code></h2>
+<h3 id="介绍-v4"><a class="header-anchor" href="#介绍-v4">¶</a>介绍</h3>
+<p>归并排序是采用分治法的一个非常典型的应用。归并排序的思想就是先递归分解数组，再合并数组。</p>
 <p>先考虑合并两个有序数组，基本思路是比较两个数组的最前面的数，谁小就先取谁，取了后相应的指针就往后移一位。然后再比较，直至一个数组为空，最后把另一个数组的剩余部分复制过来即可。</p>
 <p>再考虑递归分解，基本思路是将数组分解成left和right，如果这两个数组内部数据是有序的，那么就可以用上面合并数组的方法将这两个数组合并排序。如何让这两个数组内部是有序的？可以再二分，直至分解出的小组只含有一个元素时为止，此时认为该小组内部已有序。然后合并排序相邻二个小组即可。</p>
-<h3 id="排序演示-1"><a href="#排序演示-1" class="headerlink" title="排序演示"></a>排序演示</h3><p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190509201729-Merge-sort-example-300px%20.gif" alt="20190509201729-Merge-sort-example-300px"></p>
-<h3 id="源代码-4"><a href="#源代码-4" class="headerlink" title="源代码"></a>源代码</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">merge_sort</span><span class="token punctuation">(</span>ary<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">if</span> len<span class="token punctuation">(</span>ary<span class="token punctuation">)</span> <span class="token operator">&lt;=</span> <span class="token number">1</span> <span class="token punctuation">:</span> <span class="token keyword">return</span> ary
-    num <span class="token operator">=</span> int<span class="token punctuation">(</span>len<span class="token punctuation">(</span>ary<span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">)</span>       <span class="token comment" spellcheck="true">#二分分解</span>
-    left <span class="token operator">=</span> merge_sort<span class="token punctuation">(</span>ary<span class="token punctuation">[</span><span class="token punctuation">:</span>num<span class="token punctuation">]</span><span class="token punctuation">)</span>
-    right <span class="token operator">=</span> merge_sort<span class="token punctuation">(</span>ary<span class="token punctuation">[</span>num<span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span> merge<span class="token punctuation">(</span>left<span class="token punctuation">,</span>right<span class="token punctuation">)</span>    <span class="token comment" spellcheck="true">#合并数组</span>
+<h3 id="排序演示-v2"><a class="header-anchor" href="#排序演示-v2">¶</a>排序演示</h3>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190509201729-Merge-sort-example-300px%20.gif" alt="20190509201729-Merge-sort-example-300px"></p>
+<h3 id="源代码-v5"><a class="header-anchor" href="#源代码-v5">¶</a>源代码</h3>
+<pre class=" language-language-python"><code class="language-language-python">def merge_sort(ary):
+    if len(ary) <= 1 : return ary
+    num = int(len(ary)/2)       #二分分解
+    left = merge_sort(ary[:num])
+    right = merge_sort(ary[num:])
+    return merge(left,right)    #合并数组
 
-<span class="token keyword">def</span> <span class="token function">merge</span><span class="token punctuation">(</span>left<span class="token punctuation">,</span>right<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token triple-quoted-string string">'''合并操作，
-    将两个有序数组left[]和right[]合并成一个大的有序数组'''</span>
-    l<span class="token punctuation">,</span>r <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span>           <span class="token comment" spellcheck="true">#left与right数组的下标指针</span>
-    result <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-    <span class="token keyword">while</span> l<span class="token operator">&lt;</span>len<span class="token punctuation">(</span>left<span class="token punctuation">)</span> <span class="token operator">and</span> r<span class="token operator">&lt;</span>len<span class="token punctuation">(</span>right<span class="token punctuation">)</span> <span class="token punctuation">:</span>
-        <span class="token keyword">if</span> left<span class="token punctuation">[</span>l<span class="token punctuation">]</span> <span class="token operator">&lt;</span> right<span class="token punctuation">[</span>r<span class="token punctuation">]</span><span class="token punctuation">:</span>
-            result<span class="token punctuation">.</span>append<span class="token punctuation">(</span>left<span class="token punctuation">[</span>l<span class="token punctuation">]</span><span class="token punctuation">)</span>
-            l <span class="token operator">+=</span> <span class="token number">1</span>
-        <span class="token keyword">else</span><span class="token punctuation">:</span>
-            result<span class="token punctuation">.</span>append<span class="token punctuation">(</span>right<span class="token punctuation">[</span>r<span class="token punctuation">]</span><span class="token punctuation">)</span>
-            r <span class="token operator">+=</span> <span class="token number">1</span>
-    result <span class="token operator">+=</span> left<span class="token punctuation">[</span>l<span class="token punctuation">:</span><span class="token punctuation">]</span>
-    result <span class="token operator">+=</span> right<span class="token punctuation">[</span>r<span class="token punctuation">:</span><span class="token punctuation">]</span>
-    <span class="token keyword">return</span> result</code></pre>
-<h2 id="六、快速排序-QuickSort"><a href="#六、快速排序-QuickSort" class="headerlink" title="六、快速排序 QuickSort"></a>六、快速排序 <code>QuickSort</code></h2><h3 id="介绍-4"><a href="#介绍-4" class="headerlink" title="介绍"></a>介绍</h3><p>快速排序通常明显比同为<code>Ο(n log n)</code>的其他算法更快，因此常被采用，而且快排采用了分治法的思想，所以在很多笔试面试中能经常看到快排的影子。可见掌握快排的重要性。</p>
-<h3 id="步骤-3"><a href="#步骤-3" class="headerlink" title="步骤"></a>步骤</h3><ol>
+def merge(left,right):
+    '''合并操作，
+    将两个有序数组left[]和right[]合并成一个大的有序数组'''
+    l,r = 0,0           #left与right数组的下标指针
+    result = []
+    while l<len(left) and r<len(right) :
+        if left[l] < right[r]:
+            result.append(left[l])
+            l += 1
+        else:
+            result.append(right[r])
+            r += 1
+    result += left[l:]
+    result += right[r:]
+    return result
+</code></pre>
+<h2 id="六、快速排序-QuickSort"><a class="header-anchor" href="#六、快速排序-QuickSort">¶</a>六、快速排序 <code>QuickSort</code></h2>
+<h3 id="介绍-v5"><a class="header-anchor" href="#介绍-v5">¶</a>介绍</h3>
+<p>快速排序通常明显比同为<code>Ο(n log n)</code>的其他算法更快，因此常被采用，而且快排采用了分治法的思想，所以在很多笔试面试中能经常看到快排的影子。可见掌握快排的重要性。</p>
+<h3 id="步骤-v4"><a class="header-anchor" href="#步骤-v4">¶</a>步骤</h3>
+<ol>
 <li>从数列中挑出一个元素作为基准数。</li>
 <li>分区过程，将比基准数大的放到右边，小于或等于它的数都放到左边。</li>
 <li>再对左右区间递归执行第二步，直至各区间只有一个数。</li>
 </ol>
-<h3 id="排序演示-2"><a href="#排序演示-2" class="headerlink" title="排序演示"></a>排序演示</h3><p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190509202100-Quicksort-example%20.gif" alt="20190509202100-Quicksort-example"></p>
-<h3 id="源代码-5"><a href="#源代码-5" class="headerlink" title="源代码"></a>源代码</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">quick_sort</span><span class="token punctuation">(</span>ary<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">return</span> qsort<span class="token punctuation">(</span>ary<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>len<span class="token punctuation">(</span>ary<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+<h3 id="排序演示-v3"><a class="header-anchor" href="#排序演示-v3">¶</a>排序演示</h3>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190509202100-Quicksort-example%20.gif" alt="20190509202100-Quicksort-example"></p>
+<h3 id="源代码-v6"><a class="header-anchor" href="#源代码-v6">¶</a>源代码</h3>
+<pre class=" language-language-python"><code class="language-language-python">def quick_sort(ary):
+    return qsort(ary,0,len(ary)-1)
 
-<span class="token keyword">def</span> <span class="token function">qsort</span><span class="token punctuation">(</span>ary<span class="token punctuation">,</span>left<span class="token punctuation">,</span>right<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token comment" spellcheck="true">#快排函数，ary为待排序数组，left为待排序的左边界，right为右边界</span>
-    <span class="token keyword">if</span> left <span class="token operator">>=</span> right <span class="token punctuation">:</span> <span class="token keyword">return</span> ary
-    key <span class="token operator">=</span> ary<span class="token punctuation">[</span>left<span class="token punctuation">]</span>     <span class="token comment" spellcheck="true">#取最左边的为基准数</span>
-    lp <span class="token operator">=</span> left           <span class="token comment" spellcheck="true">#左指针</span>
-    rp <span class="token operator">=</span> right          <span class="token comment" spellcheck="true">#右指针</span>
-    <span class="token keyword">while</span> lp <span class="token operator">&lt;</span> rp <span class="token punctuation">:</span>
-        <span class="token keyword">while</span> ary<span class="token punctuation">[</span>rp<span class="token punctuation">]</span> <span class="token operator">>=</span> key <span class="token operator">and</span> lp <span class="token operator">&lt;</span> rp <span class="token punctuation">:</span>
-            rp <span class="token operator">-=</span> <span class="token number">1</span>
-        <span class="token keyword">while</span> ary<span class="token punctuation">[</span>lp<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> key <span class="token operator">and</span> lp <span class="token operator">&lt;</span> rp <span class="token punctuation">:</span>
-            lp <span class="token operator">+=</span> <span class="token number">1</span>
-        ary<span class="token punctuation">[</span>lp<span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>rp<span class="token punctuation">]</span> <span class="token operator">=</span> ary<span class="token punctuation">[</span>rp<span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>lp<span class="token punctuation">]</span>
-    ary<span class="token punctuation">[</span>left<span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>lp<span class="token punctuation">]</span> <span class="token operator">=</span> ary<span class="token punctuation">[</span>lp<span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>left<span class="token punctuation">]</span>
-    qsort<span class="token punctuation">(</span>ary<span class="token punctuation">,</span>left<span class="token punctuation">,</span>lp<span class="token number">-1</span><span class="token punctuation">)</span>
-    qsort<span class="token punctuation">(</span>ary<span class="token punctuation">,</span>rp<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>right<span class="token punctuation">)</span>
-    <span class="token keyword">return</span> ary
+def qsort(ary,left,right):
+    #快排函数，ary为待排序数组，left为待排序的左边界，right为右边界
+    if left >= right : return ary
+    key = ary[left]     #取最左边的为基准数
+    lp = left           #左指针
+    rp = right          #右指针
+    while lp < rp :
+        while ary[rp] >= key and lp < rp :
+            rp -= 1
+        while ary[lp] <= key and lp < rp :
+            lp += 1
+        ary[lp],ary[rp] = ary[rp],ary[lp]
+    ary[left],ary[lp] = ary[lp],ary[left]
+    qsort(ary,left,lp-1)
+    qsort(ary,rp+1,right)
+    return ary
+
 </code></pre>
-<h2 id="七、堆排序-HeapSort"><a href="#七、堆排序-HeapSort" class="headerlink" title="七、堆排序 HeapSort"></a>七、堆排序 <code>HeapSort</code></h2><h3 id="介绍：-1"><a href="#介绍：-1" class="headerlink" title="介绍："></a>介绍：</h3><p>堆排序在 <code>top K</code> 问题中使用比较频繁。堆排序是采用二叉堆的数据结构来实现的，虽然实质上还是一维数组。二叉堆是一个近似完全二叉树 。</p>
+<h2 id="七、堆排序-HeapSort"><a class="header-anchor" href="#七、堆排序-HeapSort">¶</a>七、堆排序 <code>HeapSort</code></h2>
+<h3 id="介绍：-v2"><a class="header-anchor" href="#介绍：-v2">¶</a>介绍：</h3>
+<p>堆排序在 <code>top K</code> 问题中使用比较频繁。堆排序是采用二叉堆的数据结构来实现的，虽然实质上还是一维数组。二叉堆是一个近似完全二叉树 。</p>
 <blockquote>
 <p>二叉堆具有以下性质：</p>
 </blockquote>
-<p>父节点的键值总是大于或等于（小于或等于）任何一个子节点的键值。<br>每个节点的左右子树都是一个二叉堆（都是最大堆或最小堆）。</p>
-<h3 id="步骤-4"><a href="#步骤-4" class="headerlink" title="步骤"></a>步骤</h3><ol>
-<li><p>构造最大堆（<code>Build_Max_Heap</code>）：若数组下标范围为<code>0~n</code>，考虑到单独一个元素是大根堆，则从下标n/2开始的元素均为大根堆。于是只要从<code>n/2-1</code>开始，向前依次构造大根堆，这样就能保证，构造到某个节点时，它的左右子树都已经是大根堆。</p>
+<p>父节点的键值总是大于或等于（小于或等于）任何一个子节点的键值。<br>
+每个节点的左右子树都是一个二叉堆（都是最大堆或最小堆）。</p>
+<h3 id="步骤-v5"><a class="header-anchor" href="#步骤-v5">¶</a>步骤</h3>
+<ol>
+<li>
+<p>构造最大堆（<code>Build_Max_Heap</code>）：若数组下标范围为<code>0~n</code>，考虑到单独一个元素是大根堆，则从下标n/2开始的元素均为大根堆。于是只要从<code>n/2-1</code>开始，向前依次构造大根堆，这样就能保证，构造到某个节点时，它的左右子树都已经是大根堆。</p>
 </li>
-<li><p>堆排序（<code>HeapSort</code>）：由于堆是用数组模拟的。得到一个大根堆后，数组内部并不是有序的。因此需要将堆化数组有序化。思想是移除根节点，并做最大堆调整的递归运算。第一次将<code>heap[0]</code>与<code>heap[n-1]</code>交换，再对<code>heap[0...n-2]</code>做最大堆调整。第二次将<code>heap[0]</code>与<code>heap[n-2]</code>交换，再对<code>heap[0...n-3]</code>做最大堆调整。重复该操作直至<code>heap[0]</code>和<code>heap[1]</code>交换。由于每次都是将最大的数并入到后面的有序区间，故操作完后整个数组就是有序的了。</p>
+<li>
+<p>堆排序（<code>HeapSort</code>）：由于堆是用数组模拟的。得到一个大根堆后，数组内部并不是有序的。因此需要将堆化数组有序化。思想是移除根节点，并做最大堆调整的递归运算。第一次将<code>heap[0]</code>与<code>heap[n-1]</code>交换，再对<code>heap[0...n-2]</code>做最大堆调整。第二次将<code>heap[0]</code>与<code>heap[n-2]</code>交换，再对<code>heap[0...n-3]</code>做最大堆调整。重复该操作直至<code>heap[0]</code>和<code>heap[1]</code>交换。由于每次都是将最大的数并入到后面的有序区间，故操作完后整个数组就是有序的了。</p>
 </li>
-<li><p>最大堆调整（<code>Max_Heapify</code>）：该方法是提供给上述两个过程调用的。目的是将堆的末端子节点作调整，使得子节点永远小于父节点 。</p>
+<li>
+<p>最大堆调整（<code>Max_Heapify</code>）：该方法是提供给上述两个过程调用的。目的是将堆的末端子节点作调整，使得子节点永远小于父节点 。</p>
 </li>
 </ol>
-<h3 id="排序演示-3"><a href="#排序演示-3" class="headerlink" title="排序演示"></a>排序演示</h3><p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190509203202-Heapsort-example%20.gif" alt="20190509203202-Heapsort-example"></p>
-<h3 id="源代码-6"><a href="#源代码-6" class="headerlink" title="源代码"></a>源代码</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">heap_sort</span><span class="token punctuation">(</span>ary<span class="token punctuation">)</span> <span class="token punctuation">:</span>
-    n <span class="token operator">=</span> len<span class="token punctuation">(</span>ary<span class="token punctuation">)</span>
-    first <span class="token operator">=</span> int<span class="token punctuation">(</span>n<span class="token operator">/</span><span class="token number">2</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>       <span class="token comment" spellcheck="true">#最后一个非叶子节点</span>
-    <span class="token keyword">for</span> start <span class="token keyword">in</span> range<span class="token punctuation">(</span>first<span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">:</span>     <span class="token comment" spellcheck="true">#构造大根堆</span>
-        max_heapify<span class="token punctuation">(</span>ary<span class="token punctuation">,</span>start<span class="token punctuation">,</span>n<span class="token number">-1</span><span class="token punctuation">)</span>
-    <span class="token keyword">for</span> end <span class="token keyword">in</span> range<span class="token punctuation">(</span>n<span class="token number">-1</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>           <span class="token comment" spellcheck="true">#堆排，将大根堆转换成有序数组</span>
-        ary<span class="token punctuation">[</span>end<span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> ary<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>end<span class="token punctuation">]</span>
-        max_heapify<span class="token punctuation">(</span>ary<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>end<span class="token number">-1</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span> ary
+<h3 id="排序演示-v4"><a class="header-anchor" href="#排序演示-v4">¶</a>排序演示</h3>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190509203202-Heapsort-example%20.gif" alt="20190509203202-Heapsort-example"></p>
+<h3 id="源代码-v7"><a class="header-anchor" href="#源代码-v7">¶</a>源代码</h3>
+<pre class=" language-language-python"><code class="language-language-python">def heap_sort(ary) :
+    n = len(ary)
+    first = int(n/2-1)       #最后一个非叶子节点
+    for start in range(first,-1,-1) :     #构造大根堆
+        max_heapify(ary,start,n-1)
+    for end in range(n-1,0,-1):           #堆排，将大根堆转换成有序数组
+        ary[end],ary[0] = ary[0],ary[end]
+        max_heapify(ary,0,end-1)
+    return ary
 
 
-<span class="token comment" spellcheck="true">#最大堆调整：将堆的末端子节点作调整，使得子节点永远小于父节点</span>
-<span class="token comment" spellcheck="true">#start为当前需要调整最大堆的位置，end为调整边界</span>
-<span class="token keyword">def</span> <span class="token function">max_heapify</span><span class="token punctuation">(</span>ary<span class="token punctuation">,</span>start<span class="token punctuation">,</span>end<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    root <span class="token operator">=</span> start
-    <span class="token keyword">while</span> <span class="token boolean">True</span> <span class="token punctuation">:</span>
-        child <span class="token operator">=</span> root<span class="token operator">*</span><span class="token number">2</span> <span class="token operator">+</span><span class="token number">1</span>               <span class="token comment" spellcheck="true">#调整节点的子节点</span>
-        <span class="token keyword">if</span> child <span class="token operator">></span> end <span class="token punctuation">:</span> <span class="token keyword">break</span>
-        <span class="token keyword">if</span> child<span class="token operator">+</span><span class="token number">1</span> <span class="token operator">&lt;=</span> end <span class="token operator">and</span> ary<span class="token punctuation">[</span>child<span class="token punctuation">]</span> <span class="token operator">&lt;</span> ary<span class="token punctuation">[</span>child<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token punctuation">:</span>
-            child <span class="token operator">=</span> child<span class="token operator">+</span><span class="token number">1</span>             <span class="token comment" spellcheck="true">#取较大的子节点</span>
-        <span class="token keyword">if</span> ary<span class="token punctuation">[</span>root<span class="token punctuation">]</span> <span class="token operator">&lt;</span> ary<span class="token punctuation">[</span>child<span class="token punctuation">]</span> <span class="token punctuation">:</span>     <span class="token comment" spellcheck="true">#较大的子节点成为父节点</span>
-            ary<span class="token punctuation">[</span>root<span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>child<span class="token punctuation">]</span> <span class="token operator">=</span> ary<span class="token punctuation">[</span>child<span class="token punctuation">]</span><span class="token punctuation">,</span>ary<span class="token punctuation">[</span>root<span class="token punctuation">]</span>     <span class="token comment" spellcheck="true">#交换</span>
-            root <span class="token operator">=</span> child
-        <span class="token keyword">else</span> <span class="token punctuation">:</span>
-            <span class="token keyword">break</span>
+#最大堆调整：将堆的末端子节点作调整，使得子节点永远小于父节点
+#start为当前需要调整最大堆的位置，end为调整边界
+def max_heapify(ary,start,end):
+    root = start
+    while True :
+        child = root*2 +1               #调整节点的子节点
+        if child > end : break
+        if child+1 <= end and ary[child] < ary[child+1] :
+            child = child+1             #取较大的子节点
+        if ary[root] < ary[child] :     #较大的子节点成为父节点
+            ary[root],ary[child] = ary[child],ary[root]     #交换
+            root = child
+        else :
+            break
+
 </code></pre>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>下面为七种经典排序算法指标对比情况：<br><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190509203208-81b78497jw1emncvtdf1qj20u10afn0r%20.jpg" alt="20190509203208-81b78497jw1emncvtdf1qj20u10afn0r"></p>
+<h2 id="总结"><a class="header-anchor" href="#总结">¶</a>总结</h2>
+<p>下面为七种经典排序算法指标对比情况：<br>
+<img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190509203208-81b78497jw1emncvtdf1qj20u10afn0r%20.jpg" alt="20190509203208-81b78497jw1emncvtdf1qj20u10afn0r"></p>
 
             </div>
             <hr/>
@@ -642,7 +693,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bookandmusic.gitee.io/2019/05/09/suan-fa-pai-xu/">http://bookandmusic.gitee.io/2019/05/09/suan-fa-pai-xu/</a>
+                    <a href="https://bookandmusic.github.io/2019/05/09/suan-fa-pai-xu/">https://bookandmusic.github.io/2019/05/09/suan-fa-pai-xu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -853,25 +904,25 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/05/09/wang-luo-tong-xin-01-liao-jie-web-ji-wang-luo-ji-chu/">
+                <a href="/2019/05/09/wang-luo-tong-xin-02-jian-dan-jie-shao-http-xie-yi-jie-gou/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="01—了解web及网络基础">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="02-简单介绍 HTTP 协议结构">
                         
-                        <span class="card-title">01—了解web及网络基础</span>
+                        <span class="card-title">02-简单介绍 HTTP 协议结构</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            HTTP 的出现主要是为了解决文本传输的难题
+                            首先，应用 HTTP 协议时，必定有客户端和服务器端。
+其中，发起请求的是客户端，响应请求并返回的是服务端。
+¶1、请求报文
+请求报文是由请求方法、请求 URI、协议版本、可选的请求首部字段和内容实体构成的。
 
-
-TCP/IP 协议族：是互联网相关的各类协议族的总称
-重要的一点是分层: 应用层、传输层、网络层、数据链路层
-层次化的优点：1、修改某个地方只用改相应的层2、设计变简单，各层管理自己的职责
-
+¶2、响应报文
+服务器以响应
                         
                     </div>
                     <div class="publish-info">
@@ -920,27 +971,31 @@ TCP/IP 协议族：是互联网相关的各类协议族的总称
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/05/03/python-mo-kuai-time-timeit-mo-kuai/">
+                <a href="/2019/05/09/wang-luo-tong-xin-01-liao-jie-web-ji-wang-luo-ji-chu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="time与timeit 模块">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="01—了解web及网络基础">
                         
-                        <span class="card-title">time与timeit 模块</span>
+                        <span class="card-title">01—了解web及网络基础</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一、time 模块1. 时间表现形式
-timestamp：时间戳，时间戳表示的是从1970年1月1日00:00:00开始按秒计算的偏移量
-struct_time： 时间元组，共有九个元素组
-format time： 格式化时间，已格式化的结
+                            HTTP 的出现主要是为了解决文本传输的难题
+
+¶TCP/IP 协议族：
+是互联网相关的各类协议族的总称
+重要的一点是分层: 应用层、传输层、网络层、数据链路层
+层次化的优点：
+1、修改某个地方只用改相应的层
+2、设计变简单，各层管理自己的
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-05-03
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-05-09
                             </span>
                         <span class="publish-author">
                             
@@ -950,12 +1005,12 @@ format time： 格式化时间，已格式化的结
                                     技术
                                 </a>
                             
-                            <a href="/categories/%E6%8A%80%E6%9C%AF/python/" class="post-category">
-                                    python
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/" class="post-category">
+                                    网络通信
                                 </a>
                             
-                            <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E6%A8%A1%E5%9D%97/" class="post-category">
-                                    模块
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/" class="post-category">
+                                    TCP
                                 </a>
                             
                             
@@ -965,12 +1020,12 @@ format time： 格式化时间，已格式化的结
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/python/">
-                        <span class="chip bg-color">python</span>
+                    <a href="/tags/HTTP/">
+                        <span class="chip bg-color">HTTP</span>
                     </a>
                     
-                    <a href="/tags/%E5%9F%BA%E7%A1%80/">
-                        <span class="chip bg-color">基础</span>
+                    <a href="/tags/TCP/">
+                        <span class="chip bg-color">TCP</span>
                     </a>
                     
                 </div>
@@ -1173,7 +1228,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

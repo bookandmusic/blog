@@ -375,14 +375,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.1k
+                    1.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    7 分
                 </div>
                 
 
@@ -397,68 +397,79 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="返回函数"><a href="#返回函数" class="headerlink" title="返回函数"></a>返回函数</h3><blockquote>
+                <h3 id="返回函数"><a class="header-anchor" href="#返回函数">¶</a>返回函数</h3>
+<blockquote>
 <p><code>python</code>的常识，函数和其他任何东西一样，都是对象。这意味着可以将<code>函数</code>当做<code>实参</code>传递给函数，或者在函数中将<code>函数</code>作为<code>返回值</code>返回。</p>
 </blockquote>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">lazy_sum</span><span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        ax <span class="token operator">=</span> <span class="token number">0</span>
-        <span class="token keyword">for</span> n <span class="token keyword">in</span> args<span class="token punctuation">:</span>
-            ax <span class="token operator">=</span> ax <span class="token operator">+</span> n
-        <span class="token keyword">return</span> ax
-    <span class="token keyword">return</span> sum
-f <span class="token operator">=</span> lazy_sum<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">)</span>
-f<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
-<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><ul>
-<li><p>闭包是“返回函数”的一个典型应用</p>
+<pre class=" language-language-python"><code class="language-language-python">def lazy_sum(*args):
+    def sum():
+        ax = 0
+        for n in args:
+            ax = ax + n
+        return ax
+    return sum
+f = lazy_sum(1, 3, 5, 7, 9)
+f()
+</code></pre>
+<h3 id="闭包"><a class="header-anchor" href="#闭包">¶</a>闭包</h3>
+<ul>
+<li>
+<p>闭包是“返回函数”的一个典型应用</p>
 </li>
-<li><p>闭包的定义：</p>
+<li>
+<p>闭包的定义：</p>
 <blockquote>
 <p>在一个外函数(<code>outer</code>)中定义了一个内函数(<code>inner</code>)</p>
 <p>内函数里运用了外函数的临时变量</p>
 <p>并且外函数的返回值是内函数的引用</p>
 </blockquote>
 </li>
-<li><p>闭包的使用，可以隐藏内部函数的工作细节，只给外部使用者提供一个可以执行的内部函数的引用。</p>
+<li>
+<p>闭包的使用，可以隐藏内部函数的工作细节，只给外部使用者提供一个可以执行的内部函数的引用。</p>
 </li>
 </ul>
-<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true">#闭包函数的实例</span>
-  <span class="token comment" spellcheck="true"># outer是外部函数 a和b都是外函数的临时变量</span>
-  <span class="token keyword">def</span> <span class="token function">outer</span><span class="token punctuation">(</span> a <span class="token punctuation">)</span><span class="token punctuation">:</span>
-    b <span class="token operator">=</span> <span class="token number">10</span>
-    <span class="token keyword">def</span> <span class="token function">inner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># inner是内函数</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span>a<span class="token operator">+</span>b<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">#在内函数中 用到了外函数的临时变量</span>
-    <span class="token keyword">return</span> inner  <span class="token comment" spellcheck="true"># 外函数的返回值是内函数的引用</span>
+<pre class=" language-language-python"><code class="language-language-python">#闭包函数的实例
+  # outer是外部函数 a和b都是外函数的临时变量
+  def outer( a ):
+    b = 10
+    def inner():  # inner是内函数
+        print(a+b)  #在内函数中 用到了外函数的临时变量
+    return inner  # 外函数的返回值是内函数的引用
 
-  <span class="token comment" spellcheck="true"># 在这里我们调用外函数传入参数5</span>
-  <span class="token comment" spellcheck="true">#此时外函数两个临时变量 a是5 b是10 ，并创建了内函数，然后把内函数的引用返回存给了demo</span>
-  <span class="token comment" spellcheck="true"># 外函数结束的时候发现内部函数将会用到自己的临时变量，这两个临时变量就不会释放，会绑定给这个内部函数</span>
-  demo <span class="token operator">=</span> outer<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
+  # 在这里我们调用外函数传入参数5
+  #此时外函数两个临时变量 a是5 b是10 ，并创建了内函数，然后把内函数的引用返回存给了demo
+  # 外函数结束的时候发现内部函数将会用到自己的临时变量，这两个临时变量就不会释放，会绑定给这个内部函数
+  demo = outer(5)
 
-  <span class="token comment" spellcheck="true"># 我们调用内部函数，看一看内部函数是不是能使用外部函数的临时变量</span>
-  <span class="token comment" spellcheck="true"># demo存了外函数的返回值，也就是inner函数的引用，这里相当于执行inner函数</span>
-  demo<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 15</span></code></pre>
+  # 我们调用内部函数，看一看内部函数是不是能使用外部函数的临时变量
+  # demo存了外函数的返回值，也就是inner函数的引用，这里相当于执行inner函数
+  demo() # 15
+</code></pre>
 <blockquote>
 <p><code>inner</code>函数修改<code>outer</code>函数变量</p>
 </blockquote>
-<pre class=" language-python"><code class="language-python">  <span class="token keyword">def</span> <span class="token function">createCounter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    i <span class="token operator">=</span> <span class="token number">0</span>
-    <span class="token keyword">def</span> <span class="token function">counter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-       nonlocal i <span class="token comment" spellcheck="true"># 指定外部函数的局部变量</span>
-       i <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span>
-       <span class="token keyword">return</span> i
-    <span class="token keyword">return</span> counter
+<pre class=" language-language-python"><code class="language-language-python">def createCounter():
+  i = 0
+  def counter():
+     nonlocal i # 指定外部函数的局部变量
+     i = i + 1
+     return i
+  return counter
 
-  counterA <span class="token operator">=</span> createCounter<span class="token punctuation">(</span><span class="token punctuation">)</span>
-  <span class="token keyword">print</span><span class="token punctuation">(</span>counterA<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> counterA<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> counterA<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> counterA<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> counterA<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 1 2 3 4 5</span>
-  counterB <span class="token operator">=</span> createCounter<span class="token punctuation">(</span><span class="token punctuation">)</span>
-  <span class="token keyword">if</span> <span class="token punctuation">[</span>counterB<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> counterB<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> counterB<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> counterB<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
-     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'测试通过!'</span><span class="token punctuation">)</span>
-  <span class="token keyword">else</span><span class="token punctuation">:</span>
-     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'测试失败!'</span><span class="token punctuation">)</span></code></pre>
-<h3 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h3><h4 id="装饰器介绍"><a href="#装饰器介绍" class="headerlink" title="装饰器介绍"></a>装饰器介绍</h4><p>要了解python中<code>@</code>装饰器的作用，首先要记住这么几点：</p>
+counterA = createCounter()
+print(counterA(), counterA(), counterA(), counterA(), counterA()) # 1 2 3 4 5
+counterB = createCounter()
+if [counterB(), counterB(), counterB(), counterB()] == [1, 2, 3, 4]:
+   print('测试通过!')
+else:
+   print('测试失败!')
+</code></pre>
+<h3 id="装饰器"><a class="header-anchor" href="#装饰器">¶</a>装饰器</h3>
+<h4 id="装饰器介绍"><a class="header-anchor" href="#装饰器介绍">¶</a>装饰器介绍</h4>
+<p>要了解python中<code>@</code>装饰器的作用，首先要记住这么几点：</p>
 <ol>
-<li><p>装饰器符号<code>@</code>属于语法糖</p>
+<li>
+<p>装饰器符号<code>@</code>属于语法糖</p>
 <ul>
 <li>什么意思呢？</li>
 <li>就是说，我不按照<code>@</code>装饰器的语法要求来写，而是按照一般<code>python</code>的语法要求来写完全可以。</li>
@@ -468,298 +479,332 @@ f<span class="token punctuation">(</span><span class="token punctuation">)</span
 <p>注意：装饰器是用于拓展已有函数功能的一种函数，这个函数的特殊之处在于它的返回值也是一个函数，实际上就是利用闭包语法实现的。</p>
 </blockquote>
 </li>
-<li><p>装饰器的作用是什么呢？ 简单的理解就是：装饰原有的函数。什么意思呢？</p>
+<li>
+<p>装饰器的作用是什么呢？ 简单的理解就是：装饰原有的函数。什么意思呢？</p>
 <ul>
-<li><p>比如有一个函数<code>func(a, b)</code>，它的功能是求<code>a</code>,<code>b</code>的差值</p>
+<li>
+<p>比如有一个函数<code>func(a, b)</code>，它的功能是求<code>a</code>,<code>b</code>的差值</p>
 </li>
-<li><p>现在有一个新需求，就是想对函数功能再装饰下，求完差值后再取绝对值，但是不能能修改原有函数，这时候就需要装饰器装饰函数     </p>
-<pre class=" language-python"><code class="language-python">   <span class="token triple-quoted-string string">"""
-   函数闭包实现求差值之后，再求绝对值
-   """</span>
-   <span class="token keyword">def</span> <span class="token function">func</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">:</span>
-       <span class="token keyword">return</span> a<span class="token operator">-</span> b
+<li>
+<p>现在有一个新需求，就是想对函数功能再装饰下，求完差值后再取绝对值，但是不能能修改原有函数，这时候就需要装饰器装饰函数</p>
+<pre class=" language-language-python"><code class="language-language-python">"""
+函数闭包实现求差值之后，再求绝对值
+"""
+def func(a, b):
+    return a- b
 
-   <span class="token keyword">def</span> <span class="token function">abs_num</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
-       <span class="token keyword">def</span> <span class="token function">inner</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">:</span>
-           ret <span class="token operator">=</span> func<span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span>
-           <span class="token keyword">return</span> abs<span class="token punctuation">(</span>ret<span class="token punctuation">)</span>
-       <span class="token keyword">return</span> inner
+def abs_num(func):
+    def inner(a, b):
+        ret = func(a, b)
+        return abs(ret)
+    return inner
 
-   @abs_num
-   func<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span></code></pre>
-<ul>
-<li><p>当<code>abs_num</code>装饰函数<code>func</code>时，类似于将函数<code>func</code>作为参数传给<code>abs_num</code>,并将返回值即内层函数(<code>inner</code>)名重新赋值给变量<code>func</code></p>
+@abs_num
+func(2, 3)
+</code></pre>
 </li>
-<li><p>当调用函数<code>func</code>时，实质是调用内层函数<code>inner</code>，在内层函数中执行<code>func</code>函数，即最原始的函数<code>func</code></p>
+<li>
+<p>当<code>abs_num</code>装饰函数<code>func</code>时，类似于将函数<code>func</code>作为参数传给<code>abs_num</code>,并将返回值即内层函数(<code>inner</code>)名重新赋值给变量<code>func</code></p>
 </li>
-</ul>
+<li>
+<p>当调用函数<code>func</code>时，实质是调用内层函数<code>inner</code>，在内层函数中执行<code>func</code>函数，即最原始的函数<code>func</code></p>
 </li>
 </ul>
 </li>
 </ol>
-<h4 id="被装饰函数有参数"><a href="#被装饰函数有参数" class="headerlink" title="被装饰函数有参数"></a>被装饰函数有参数</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">outer</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">inner</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        func<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 新版的 func  才是 原来的 add</span>
+<h4 id="被装饰函数有参数"><a class="header-anchor" href="#被装饰函数有参数">¶</a>被装饰函数有参数</h4>
+<pre class=" language-language-python"><code class="language-language-python">def outer(func):
+    def inner(x, y):
+        func(x, y)  # 新版的 func  才是 原来的 add
 
-    <span class="token keyword">return</span> inner
+    return inner
 
 
 @outer
-<span class="token keyword">def</span> <span class="token function">add</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>x <span class="token operator">+</span> y<span class="token punctuation">)</span>
+def add(x, y):
+    print(x + y)
 
 
-add<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 新版的 add  是 内层 inner</span>
+add(1, 2)  # 新版的 add  是 内层 inner
 
-<span class="token comment" spellcheck="true"># add(1, 2)   ====>  inner(1, 2)  ====>  func(1, 2)  ===> 3</span></code></pre>
+# add(1, 2)   ====>  inner(1, 2)  ====>  func(1, 2)  ===> 3
+</code></pre>
 <blockquote>
-<p>被装饰函数 有参数，<code>inner</code>和 <code>func</code>需要同样的参数</p>
+<p>被装饰函数 有参数，<code>inner</code>和 <code>func </code>需要同样的参数</p>
 </blockquote>
-<h4 id="被装饰函数有返回值"><a href="#被装饰函数有返回值" class="headerlink" title="被装饰函数有返回值"></a>被装饰函数有返回值</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">outer</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">inner</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<h4 id="被装饰函数有返回值"><a class="header-anchor" href="#被装饰函数有返回值">¶</a>被装饰函数有返回值</h4>
+<pre class=" language-language-python"><code class="language-language-python">def outer(func):
+    def inner(x, y):
 
-        r <span class="token operator">=</span> func<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 装饰器装饰之后， func才是真正的add求和函数</span>
+        r = func(x, y)  # 装饰器装饰之后， func才是真正的add求和函数
+        
+        r += 10  # 将两数之和再加 10
+        
+        return r
 
-        r <span class="token operator">+=</span> <span class="token number">10</span>  <span class="token comment" spellcheck="true"># 将两数之和再加 10</span>
-
-        <span class="token keyword">return</span> r
-
-    <span class="token keyword">return</span> inner
+    return inner
 
 
 @outer
-<span class="token keyword">def</span> <span class="token function">add</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">return</span> x <span class="token operator">+</span> y
+def add(x, y):
+    return x + y
 
 
-<span class="token comment" spellcheck="true"># 在装饰器中 对函数的执行结果 加10 处理</span>
-r <span class="token operator">=</span> add<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># add实际是inner</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span></code></pre>
+# 在装饰器中 对函数的执行结果 加10 处理
+r = add(10, 200)  # add实际是inner
+print(r)
+</code></pre>
 <blockquote>
 <p>被装饰函数有返回值， <code>inner</code>需要将 <code>func</code> 的结果 返回</p>
 </blockquote>
-<h4 id="被装饰的函数有不定长参数"><a href="#被装饰的函数有不定长参数" class="headerlink" title="被装饰的函数有不定长参数"></a>被装饰的函数有不定长参数</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">set_func</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">call_func</span><span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<h4 id="被装饰的函数有不定长参数"><a class="header-anchor" href="#被装饰的函数有不定长参数">¶</a>被装饰的函数有不定长参数</h4>
+<pre class=" language-language-python"><code class="language-language-python">def set_func(func):
+    def call_func(*args, **kwargs):
+        
+        # func(args, kwargs),此时得到的是元组和字典
+        # func(*args, **kwargs),此时则是把元素拆包为单个数值和键值对
+        return func(*args, **kwargs)
 
-        <span class="token comment" spellcheck="true"># func(args, kwargs),此时得到的是元组和字典</span>
-        <span class="token comment" spellcheck="true"># func(*args, **kwargs),此时则是把元素拆包为单个数值和键值对</span>
-        <span class="token keyword">return</span> func<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>
-
-    <span class="token keyword">return</span> call_func
+    return call_func
 
 @set_func
-<span class="token keyword">def</span> <span class="token function">s</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+def s(a, b, *args, **kwargs):
 
-    <span class="token keyword">print</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> args<span class="token punctuation">,</span> kwargs<span class="token punctuation">)</span>
+    print(a, b, args, kwargs)
 
 
-s<span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">34</span><span class="token punctuation">,</span> c<span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">,</span> d<span class="token operator">=</span><span class="token number">56</span><span class="token punctuation">)</span></code></pre>
+s(12, 50, 34, c=20, d=56)
+</code></pre>
 <ul>
-<li>形参<ul>
+<li>形参
+<ul>
 <li>*args：接收多余的参数，得到元组(args)</li>
 <li>**kwargs:接收多余的关键字参数，得到字典(kwargs)</li>
 </ul>
 </li>
-<li>实参<ul>
+<li>实参
+<ul>
 <li>*args：对元组(args)进行拆包，得到单个数值</li>
 <li>**kwargs：对字典(kwargs)拆包，得到单个的键值对</li>
 </ul>
 </li>
 </ul>
-<h4 id="多个装饰器装饰函数"><a href="#多个装饰器装饰函数" class="headerlink" title="多个装饰器装饰函数"></a>多个装饰器装饰函数</h4><ul>
-<li><p>多个装饰器装饰同一个函数，装饰顺序和执行顺序正好相反</p>
+<h4 id="多个装饰器装饰函数"><a class="header-anchor" href="#多个装饰器装饰函数">¶</a>多个装饰器装饰函数</h4>
+<ul>
+<li>
+<p>多个装饰器装饰同一个函数，装饰顺序和执行顺序正好相反</p>
 </li>
-<li><p>装饰器函数的执行顺序和装饰器的顺序有关</p>
+<li>
+<p>装饰器函数的执行顺序和装饰器的顺序有关</p>
 </li>
 </ul>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">set_func1</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"这是测试1..."</span><span class="token punctuation">)</span>
+<pre class=" language-language-python"><code class="language-language-python">def set_func1(func):
+    print("这是测试1...")
 
-    <span class="token keyword">def</span> <span class="token function">call_func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"这是装饰器1..."</span><span class="token punctuation">)</span>
-        <span class="token keyword">return</span> func<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    def call_func1():
+        print("这是装饰器1...")
+        return func()
 
-    <span class="token keyword">return</span> call_func1
+    return call_func1
 
 
-<span class="token keyword">def</span> <span class="token function">set_func2</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"这是测试2..."</span><span class="token punctuation">)</span>
+def set_func2(func):
+    print("这是测试2...")
 
-    <span class="token keyword">def</span> <span class="token function">call_func2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"这是装饰器2..."</span><span class="token punctuation">)</span>
-        <span class="token keyword">return</span> func<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    def call_func2():
+        print("这是装饰器2...")
+        return func()
 
-    <span class="token keyword">return</span> call_func2
+    return call_func2
 
 
 @set_func1
 @set_func2
-<span class="token keyword">def</span> <span class="token function">s</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"hello..."</span><span class="token punctuation">)</span>
+def s():
+    print("hello...")
 
 
-s<span class="token punctuation">(</span><span class="token punctuation">)</span>
+s()
+
 </code></pre>
 <ul>
-<li><p>代码从上到下，依次执行，同时装饰器是用来装饰函数的</p>
+<li>
+<p>代码从上到下，依次执行，同时装饰器是用来装饰函数的</p>
 <ul>
-<li><p>执行到装饰器set_func1时，无法装饰，先跳过</p>
+<li>
+<p>执行到装饰器set_func1时，无法装饰，先跳过</p>
 </li>
-<li><p>执行装饰器set_func2时，装饰原始函数s，</p>
+<li>
+<p>执行装饰器set_func2时，装饰原始函数s，</p>
 <ul>
-<li>先执行set_func2,输出”这是测试2…”，</li>
+<li>先执行set_func2,输出&quot;这是测试2…&quot;，</li>
 <li>然后得到s = call_func2(s)，此时的s是原始函数s</li>
 </ul>
 </li>
-<li><p>然后装饰器set_func1装饰新得到的函数s = call_func2(s)</p>
+<li>
+<p>然后装饰器set_func1装饰新得到的函数s = call_func2(s)</p>
 <ul>
-<li>先执行set_func1,输出”这是测试1…”</li>
+<li>先执行set_func1,输出&quot;这是测试1…&quot;</li>
 <li>然后得到s = call_func1(s)，此时的s是新得到的函数s = call_func2(s)</li>
 </ul>
 </li>
-<li><p>最后得到函数s = call_func1(call_func(s))</p>
+<li>
+<p>最后得到函数s = call_func1(call_func(s))</p>
 </li>
-<li><p>最后执行函数s</p>
+<li>
+<p>最后执行函数s</p>
 <ul>
-<li>先执行call_func1,输出”这是装饰器1…”</li>
-<li>再执行call_func2,输出”这是装饰器2…”</li>
-<li>最后执行原始函数s，输出”hello…”</li>
+<li>先执行call_func1,输出&quot;这是装饰器1…&quot;</li>
+<li>再执行call_func2,输出&quot;这是装饰器2…&quot;</li>
+<li>最后执行原始函数s，输出&quot;hello…&quot;</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h4 id="装饰器带参"><a href="#装饰器带参" class="headerlink" title="装饰器带参"></a>装饰器带参</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">set_pars</span><span class="token punctuation">(</span>pars<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">set_func</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">def</span> <span class="token function">call_func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"這是測試級別%d"</span> <span class="token operator">%</span> pars<span class="token punctuation">)</span>
-            <span class="token keyword">return</span> func<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token keyword">return</span> call_func
-    <span class="token keyword">return</span> set_func
+<h4 id="装饰器带参"><a class="header-anchor" href="#装饰器带参">¶</a>装饰器带参</h4>
+<pre class=" language-language-python"><code class="language-language-python">def set_pars(pars):
+    def set_func(func):
+        def call_func():
+            print("這是測試級別%d" % pars)
+            return func()
+        return call_func
+    return set_func
 
-@set_pars<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 装饰分两步</span>
-<span class="token keyword">def</span> <span class="token function">s</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"hello..."</span><span class="token punctuation">)</span>
+@set_pars(10) # 装饰分两步
+def s():
+    print("hello...")
 
-s<span class="token punctuation">(</span><span class="token punctuation">)</span>
+s()
+
 </code></pre>
 <ul>
-<li>装饰器带参时，装饰函数过程分两步：<ul>
+<li>装饰器带参时，装饰函数过程分两步：
+<ul>
 <li>将参数传给函数set_pars，进行执行</li>
 <li>将函数返回结果作为函数s的装饰器进行装饰</li>
 </ul>
 </li>
 </ul>
-<h4 id="类装饰器"><a href="#类装饰器" class="headerlink" title="类装饰器"></a>类装饰器</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Test</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<h4 id="类装饰器"><a class="header-anchor" href="#类装饰器">¶</a>类装饰器</h4>
+<pre class=" language-language-python"><code class="language-language-python">class Test(object):
 
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> func<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        self<span class="token punctuation">.</span>func <span class="token operator">=</span> func
+    def __init__(self, func):
+        self.func = func
 
-    <span class="token keyword">def</span> <span class="token function">__call__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>  
-        <span class="token triple-quoted-string string">'''
+    def __call__(self, *args, **kwargs):  
+        '''
         魔法方法__call__可以将对象设置为可调用对象（callable）,允许一个类的实例像函数一样被调用 
-        '''</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"这是类装饰器..."</span><span class="token punctuation">)</span>
-        <span class="token keyword">return</span> self<span class="token punctuation">.</span>func<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>
+        '''
+        print("这是类装饰器...")
+        return self.func(*args, **kwargs)
 
-@Test  <span class="token comment" spellcheck="true"># s = Test(s)</span>
-<span class="token keyword">def</span> <span class="token function">s</span><span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"hello python..."</span><span class="token punctuation">)</span>
+@Test  # s = Test(s)
+def s(*args, **kwargs):
+    print("hello python...")
 
-s<span class="token punctuation">(</span><span class="token punctuation">)</span>
+s()
+
 </code></pre>
 <ul>
 <li>自定义的函数、内置函数和类都属于可调用对象，但凡是可以把一对括号()应用到某个对象身上都可称之为可调用对象</li>
 <li>判断对象是否为可调用对象可以用函数 callable</li>
 <li>如果在类中实现了 <strong>call</strong> 方法，那么实例对象也将成为一个可调用对象</li>
 </ul>
-<h4 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h4><ol>
-<li><p>函数input_str中，会获取用户输入字符串，并返回其结果，利用装饰器将其字符串先加上<code>&lt;b&gt;&lt;/b&gt;</code>标签，再添加<code>&lt;i&gt;&lt;/i&gt;</code>标签，如：<code>&lt;i&gt;&lt;b&gt;hello&lt;/b&gt;&lt;/&gt;</code>。注意：<strong>利用双层装饰器实现</strong>。</p>
-<pre class=" language-python"><code class="language-python"> <span class="token keyword">def</span> <span class="token function">set_func_b</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
-     <span class="token keyword">def</span> <span class="token function">call_func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-         <span class="token keyword">return</span> <span class="token string">"&lt;b>"</span> <span class="token operator">+</span> func<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"&lt;/b>"</span>
+<h4 id="练习题"><a class="header-anchor" href="#练习题">¶</a>练习题</h4>
+<ol>
+<li>
+<p>函数input_str中，会获取用户输入字符串，并返回其结果，利用装饰器将其字符串先加上<code>&lt;b&gt;&lt;/b&gt;</code>标签，再添加<code>&lt;i&gt;&lt;/i&gt;</code>标签，如：<code>&lt;i&gt;&lt;b&gt;hello&lt;/b&gt;&lt;/&gt;</code>。注意：<strong>利用双层装饰器实现</strong>。</p>
+<pre class=" language-language-python"><code class="language-language-python">def set_func_b(func):
+    def call_func():
+        return "<b>" + func() + "</b>"
 
-     <span class="token keyword">return</span> call_func
+    return call_func
 
- <span class="token keyword">def</span> <span class="token function">set_func_i</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
-     <span class="token keyword">def</span> <span class="token function">call_func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-         <span class="token keyword">return</span> <span class="token string">"&lt;i>"</span> <span class="token operator">+</span> func<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"&lt;/i>"</span>
+def set_func_i(func):
+    def call_func():
+        return "<i>" + func() + "</i>"
 
-     <span class="token keyword">return</span> call_func
+    return call_func
 
- @set_func_i
- @set_func_b
- <span class="token keyword">def</span> <span class="token function">input_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-     str <span class="token operator">=</span> input<span class="token punctuation">(</span><span class="token string">"输入："</span><span class="token punctuation">)</span>
-     <span class="token keyword">return</span> str
+@set_func_i
+@set_func_b
+def input_str():
+    str = input("输入：")
+    return str
 
- <span class="token keyword">print</span><span class="token punctuation">(</span>input_str<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+print(input_str())
+</code></pre>
 </li>
-<li><p>请实现一个装饰器,限制该函数被调用的频率,如10秒一次</p>
-<pre class=" language-python"><code class="language-python"> <span class="token keyword">import</span> time
+<li>
+<p>请实现一个装饰器,限制该函数被调用的频率,如10秒一次</p>
+<pre class=" language-language-python"><code class="language-language-python">import time
 
- <span class="token keyword">def</span> <span class="token function">set_time</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
-     <span class="token keyword">def</span> <span class="token function">set_num</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
-         dic <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"last_time"</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">"time_interval"</span><span class="token punctuation">:</span> t<span class="token punctuation">}</span>
+def set_time(t):
+    def set_num(func):
+        dic = {"last_time": 0, "time_interval": t}
 
-         <span class="token keyword">def</span> <span class="token function">call_func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-             now_time <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        def call_func():
+            now_time = time.time()
 
-             finall_time <span class="token operator">=</span> dic<span class="token punctuation">[</span><span class="token string">"last_time"</span><span class="token punctuation">]</span> <span class="token operator">+</span> dic<span class="token punctuation">[</span><span class="token string">"time_interval"</span><span class="token punctuation">]</span>
-             <span class="token keyword">if</span> finall_time <span class="token operator">&lt;=</span> now_time<span class="token punctuation">:</span>
-                 dic<span class="token punctuation">[</span><span class="token string">"last_time"</span><span class="token punctuation">]</span> <span class="token operator">=</span> now_time
-                 ret <span class="token operator">=</span> func<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            finall_time = dic["last_time"] + dic["time_interval"]
+            if finall_time <= now_time:
+                dic["last_time"] = now_time
+                ret = func()
 
-                 <span class="token keyword">return</span> ret
-             <span class="token keyword">else</span><span class="token punctuation">:</span>
-                 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"还有%.2fs才能调用该函数"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>finall_time <span class="token operator">-</span> now_time<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                return ret
+            else:
+                print("还有%.2fs才能调用该函数" % (finall_time - now_time))
 
-         <span class="token keyword">return</span> call_func
-     <span class="token keyword">return</span> set_num
+        return call_func
+    return set_num
 
- @set_time<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
- <span class="token keyword">def</span> <span class="token function">s</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"hello..."</span><span class="token punctuation">)</span></code></pre>
+@set_time(5)
+def s():
+    print("hello...")
+</code></pre>
 </li>
-<li><p>请实现一个装饰器,限制该函数每个间隔被调用的频率,如1分钟5次</p>
-<pre class=" language-python"><code class="language-python"> <span class="token keyword">import</span> time
+<li>
+<p>请实现一个装饰器,限制该函数每个间隔被调用的频率,如1分钟5次</p>
+<pre class=" language-language-python"><code class="language-language-python">import time
 
- <span class="token keyword">def</span> <span class="token function">set_time</span><span class="token punctuation">(</span>t<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">:</span>
-     <span class="token keyword">def</span> <span class="token function">set_num</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>
-         dic <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"last_time"</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">"time_interval"</span><span class="token punctuation">:</span> t<span class="token punctuation">,</span> <span class="token string">"num"</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">}</span>
+def set_time(t, n):
+    def set_num(func):
+        dic = {"last_time": 0, "time_interval": t, "num": 0}
 
-         <span class="token keyword">def</span> <span class="token function">call_func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-             now_time <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        def call_func():
+            now_time = time.time()
 
-             finall_time <span class="token operator">=</span> dic<span class="token punctuation">[</span><span class="token string">"last_time"</span><span class="token punctuation">]</span> <span class="token operator">+</span> dic<span class="token punctuation">[</span><span class="token string">"time_interval"</span><span class="token punctuation">]</span> <span class="token comment" spellcheck="true"># 代表可以重新调用的时间</span>
-             finall_num <span class="token operator">=</span> dic<span class="token punctuation">[</span><span class="token string">"num"</span><span class="token punctuation">]</span> <span class="token comment" spellcheck="true"># 代表调用的次数</span>
+            finall_time = dic["last_time"] + dic["time_interval"] # 代表可以重新调用的时间
+            finall_num = dic["num"] # 代表调用的次数
 
-             <span class="token keyword">if</span> finall_num <span class="token operator">&lt;</span> n<span class="token punctuation">:</span> <span class="token comment" spellcheck="true"># 当次数不满足时，可以继续调用</span>
-                 <span class="token keyword">if</span> finall_num <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
-                     dic<span class="token punctuation">[</span><span class="token string">"last_time"</span><span class="token punctuation">]</span> <span class="token operator">=</span> now_time
-                 dic<span class="token punctuation">[</span><span class="token string">"num"</span><span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token number">1</span>
+            if finall_num < n: # 当次数不满足时，可以继续调用
+                if finall_num == 0:
+                    dic["last_time"] = now_time
+                dic["num"] += 1
 
-                 <span class="token keyword">return</span> func<span class="token punctuation">(</span><span class="token punctuation">)</span>
+                return func()
 
-             <span class="token keyword">elif</span> now_time <span class="token operator">>=</span> finall_time<span class="token punctuation">:</span> <span class="token comment" spellcheck="true"># 已经超出时间，可以重新调用</span>
-                 dic<span class="token punctuation">[</span><span class="token string">"num"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span>
-                 dic<span class="token punctuation">[</span><span class="token string">"last_time"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span>
+            elif now_time >= finall_time: # 已经超出时间，可以重新调用
+                dic["num"] = 0
+                dic["last_time"] = 0
 
-                 <span class="token keyword">return</span> func<span class="token punctuation">(</span><span class="token punctuation">)</span>
-             <span class="token keyword">else</span><span class="token punctuation">:</span>
-                 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"还有%.2fs才能调用该函数"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>finall_time <span class="token operator">-</span> now_time<span class="token punctuation">)</span><span class="token punctuation">)</span>
-         <span class="token keyword">return</span> call_func
-     <span class="token keyword">return</span> set_num
+                return func()
+            else:
+                print("还有%.2fs才能调用该函数" % (finall_time - now_time))
+        return call_func
+    return set_num
 
- @set_time<span class="token punctuation">(</span><span class="token number">60</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span>
- <span class="token keyword">def</span> <span class="token function">s</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"hello..."</span><span class="token punctuation">)</span>
+@set_time(60, 5)
+def s():
+    print("hello...")
 
- s<span class="token punctuation">(</span><span class="token punctuation">)</span>
- s<span class="token punctuation">(</span><span class="token punctuation">)</span>
- s<span class="token punctuation">(</span><span class="token punctuation">)</span>
- time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
- s<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+s()
+s()
+s()
+time.sleep(2)
+s()
+</code></pre>
 </li>
 </ol>
 
@@ -787,7 +832,7 @@ s<span class="token punctuation">(</span><span class="token punctuation">)</span
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bookandmusic.gitee.io/2019/05/02/python-han-shu-zhuang-shi-qi/">http://bookandmusic.gitee.io/2019/05/02/python-han-shu-zhuang-shi-qi/</a>
+                    <a href="https://bookandmusic.github.io/2019/05/02/python-han-shu-zhuang-shi-qi/">https://bookandmusic.github.io/2019/05/02/python-han-shu-zhuang-shi-qi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1014,10 +1059,12 @@ s<span class="token punctuation">(</span><span class="token punctuation">)</span
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一、time 模块1. 时间表现形式
+                            一、time 模块
+¶1. 时间表现形式
+
 timestamp：时间戳，时间戳表示的是从1970年1月1日00:00:00开始按秒计算的偏移量
 struct_time： 时间元组，共有九个元素组
-format time： 格式化时间，已格式化的结
+format time： 格式化时间，已格式
                         
                     </div>
                     <div class="publish-info">
@@ -1080,9 +1127,10 @@ format time： 格式化时间，已格式化的结
                         
                             Git是目前世界上最先进的分布式版本控制系统，可以有效、高速的处理从很小到非常大的项目版本管理。也就是用来管理你的hexo博客文章，上传到GitHub的工具。Git非常强大，开发人员必备技能。
 
+¶1. 安装Git
 
-1. 安装Git
-windows：到git
+
+windows：到g
                         
                     </div>
                     <div class="publish-info">
@@ -1320,7 +1368,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

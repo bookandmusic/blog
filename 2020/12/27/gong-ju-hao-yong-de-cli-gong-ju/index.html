@@ -393,67 +393,75 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1-Starship"><a href="#1-Starship" class="headerlink" title="1 Starship"></a>1 Starship</h2><p>如果必须要从本篇文章中选择一个我最喜欢的终端工具——那非 <code>Starship</code> 莫属。<code>Starship</code> 可以适用于任何 Shell。你只需要安装它，然后在相应的配置文件<code>.bashrc</code>/<code>.zshrc</code>添加一行配置，剩下的工作交给它来完成就好了。  </p>
-<pre class=" language-bash"><code class="language-bash"><span class="token function">eval</span> <span class="token string">"<span class="token variable"><span class="token variable">$(</span>starship init <span class="token function">bash</span><span class="token variable">)</span></span>"</span></code></pre>
+                <h2 id="1-Starship"><a class="header-anchor" href="#1-Starship">¶</a>1 Starship</h2>
+<p>如果必须要从本篇文章中选择一个我最喜欢的终端工具——那非 <code>Starship</code> 莫属。<code>Starship</code> 可以适用于任何 Shell。你只需要安装它，然后在相应的配置文件<code>.bashrc</code>/<code>.zshrc</code>添加一行配置，剩下的工作交给它来完成就好了。</p>
+<pre class=" language-language-bash"><code class="language-language-bash">eval "$(starship init bash)"
+</code></pre>
 <p>它可以做到：</p>
 <ul>
-<li><p>根据你是否在代码仓库中添加了新文件、是否修改了文件、是否暂存了文件等情况，用相应的符号表示 <code>git</code> 仓库的状态。</p>
+<li>
+<p>根据你是否在代码仓库中添加了新文件、是否修改了文件、是否暂存了文件等情况，用相应的符号表示 <code>git</code> 仓库的状态。</p>
 </li>
-<li><p>根据你所在的 <code>Python</code> 项目目录，展示 Python 的版本号，这也适用于 <code>Go</code>/<code>Node</code>/<code>Rust</code>/<code>Elm</code> 等其他编程语言环境。</p>
+<li>
+<p>根据你所在的 <code>Python</code> 项目目录，展示 Python 的版本号，这也适用于 <code>Go</code>/<code>Node</code>/<code>Rust</code>/<code>Elm</code> 等其他编程语言环境。</p>
 </li>
-<li><p>展示上一个命令执行所用的时间，指令运行时间必须在毫秒级别。</p>
+<li>
+<p>展示上一个命令执行所用的时间，指令运行时间必须在毫秒级别。</p>
 </li>
-<li><p>如果上一个命令执行失败，会展示相应的错误提示符。</p>
+<li>
+<p>如果上一个命令执行失败，会展示相应的错误提示符。</p>
 </li>
 </ul>
-<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640.jpeg" alt="">  </p>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640.jpeg" alt=""></p>
 <p>还有不计其数的其他信息可以展示。但是，它能以更加友好的形式智能地给你呈现!</p>
-<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># startship 个性化配置</span>
-<span class="token punctuation">[</span>character<span class="token punctuation">]</span>      <span class="token comment" spellcheck="true"># 正在配置的组件名称是“character”</span>
-symbol <span class="token operator">=</span> <span class="token string">">"</span>  <span class="token comment" spellcheck="true"># 提示符中在输入文本之前显示的符号</span>
-error_symbol <span class="token operator">=</span> <span class="token string">"✗"</span> <span class="token comment" spellcheck="true"># 如果上一条命令失败，提示符中在输入文本之前显示的符号</span>
-use_symbol_for_status <span class="token operator">=</span> <span class="token boolean">true</span> <span class="token comment" spellcheck="true"># 指示是否改变显示符号来指出错误状态</span>
-style_success <span class="token operator">=</span> <span class="token string">"bold green"</span>    <span class="token comment" spellcheck="true"># 上次命令成功时使用的样式</span>
-style_failure <span class="token operator">=</span> <span class="token string">"bold red"</span>    <span class="token comment" spellcheck="true"># 上次命令失败时使用的样式</span>
+<pre class=" language-language-bash"><code class="language-language-bash"># startship 个性化配置
+[character]      # 正在配置的组件名称是“character”
+symbol = ">"  # 提示符中在输入文本之前显示的符号
+error_symbol = "✗" # 如果上一条命令失败，提示符中在输入文本之前显示的符号
+use_symbol_for_status = true # 指示是否改变显示符号来指出错误状态
+style_success = "bold green"	# 上次命令成功时使用的样式
+style_failure = "bold red"	# 上次命令失败时使用的样式
 
-<span class="token comment" spellcheck="true"># 当 starship 扫描当前目录下的文件和文件夹时，最多使用 10 毫秒</span>
-scan_timeout <span class="token operator">=</span> 10
+# 当 starship 扫描当前目录下的文件和文件夹时，最多使用 10 毫秒
+scan_timeout = 10
 
-<span class="token punctuation">[</span>battery<span class="token punctuation">]</span>
-full_symbol <span class="token operator">=</span> <span class="token string">"🔋"</span> <span class="token comment" spellcheck="true"># 电量满标志</span>
-charging_symbol <span class="token operator">=</span> <span class="token string">"⚡️"</span> <span class="token comment" spellcheck="true"># 充电标志</span>
-discharging_symbol <span class="token operator">=</span> <span class="token string">"💀"</span> <span class="token comment" spellcheck="true"># 放电标志</span>
+[battery]
+full_symbol = "🔋" # 电量满标志
+charging_symbol = "⚡️" # 充电标志
+discharging_symbol = "💀" # 放电标志
 
-<span class="token punctuation">[</span><span class="token punctuation">[</span>battery.display<span class="token punctuation">]</span><span class="token punctuation">]</span>  <span class="token comment" spellcheck="true"># 当电量在 0% 到 30% 时以 "bold red" 样式显示</span>
-threshold <span class="token operator">=</span> 30
-style <span class="token operator">=</span> <span class="token string">"bold red"</span>
+[[battery.display]]  # 当电量在 0% 到 30% 时以 "bold red" 样式显示
+threshold = 30
+style = "bold red"
 
-<span class="token punctuation">[</span><span class="token punctuation">[</span>battery.display<span class="token punctuation">]</span><span class="token punctuation">]</span>  <span class="token comment" spellcheck="true"># 当电量在 30% 到 100% 时以 "bold yellow" 样式显示</span>
-threshold <span class="token operator">=</span> 100
-style <span class="token operator">=</span> <span class="token string">"bold yellow"</span>
+[[battery.display]]  # 当电量在 30% 到 100% 时以 "bold yellow" 样式显示
+threshold = 100
+style = "bold yellow"
 
 
-<span class="token punctuation">[</span>cmd_duration<span class="token punctuation">]</span>
-min_time <span class="token operator">=</span> 100 <span class="token comment" spellcheck="true"># 显示此组件所需的最短执行时长</span>
-prefix <span class="token operator">=</span> <span class="token string">"underwent "</span> <span class="token comment" spellcheck="true"># 直接在执行时长前显示的前缀</span>
-style <span class="token operator">=</span> <span class="token string">"bold yellow"</span> <span class="token comment" spellcheck="true"># 此组件的样式</span>
+[cmd_duration]
+min_time = 100 # 显示此组件所需的最短执行时长
+prefix = "underwent " # 直接在执行时长前显示的前缀
+style = "bold yellow" # 此组件的样式
 
-<span class="token punctuation">[</span>directory<span class="token punctuation">]</span> <span class="token comment" spellcheck="true"># 显示当前目录的路径</span>
-truncation_length <span class="token operator">=</span> 8 <span class="token comment" spellcheck="true"># 当前目录路径被截断后最多保留的父目录数量。</span>
-truncate_to_repo <span class="token operator">=</span> <span class="token boolean">true</span> <span class="token comment" spellcheck="true"># 是否只截断到您当前处于的 git 仓库根目录下。</span>
-prefix <span class="token operator">=</span> <span class="token string">"in"</span> <span class="token comment" spellcheck="true"># 直接在显示路径前显示的前缀。</span>
-style <span class="token operator">=</span> <span class="token string">"bold cyan"</span> <span class="token comment" spellcheck="true"># 此组件的样式。</span>
+[directory] # 显示当前目录的路径
+truncation_length = 8 # 当前目录路径被截断后最多保留的父目录数量。
+truncate_to_repo = true # 是否只截断到您当前处于的 git 仓库根目录下。
+prefix = "in" # 直接在显示路径前显示的前缀。
+style = "bold cyan" # 此组件的样式。
 
-<span class="token punctuation">[</span>time<span class="token punctuation">]</span>
-disabled <span class="token operator">=</span> <span class="token boolean">false</span> <span class="token comment" spellcheck="true"># 启用时间组件</span>
-use_12hr <span class="token operator">=</span> <span class="token boolean">false</span> <span class="token comment" spellcheck="true"># 禁用12小时制</span>
-<span class="token function">format</span> <span class="token operator">=</span> <span class="token string">"🕙[ %T ]"</span> <span class="token comment" spellcheck="true"># 时间格式</span>
-time_range <span class="token operator">=</span> <span class="token string">"-"</span> <span class="token comment" spellcheck="true"># 显示时间的范围，必须是24小时制</span></code></pre>
+[time]
+disabled = false # 启用时间组件
+use_12hr = false # 禁用12小时制
+format = "🕙[ %T ]" # 时间格式
+time_range = "-" # 显示时间的范围，必须是24小时制
+</code></pre>
 <p>官网地址：<a href="https://starship.rs/" target="_blank" rel="noopener">https://starship.rs/</a></p>
-<h2 id="2-fzf"><a href="#2-fzf" class="headerlink" title="2 fzf"></a>2 fzf</h2><p>fzf— fuzzy finder，即模糊查找器。它是一种通用工具，可让你使用模糊搜索来查找文件、历史命令、进程、git 提交等。你键入一些字母，它会尝试匹配结果列表中任何位置的字母。输入的字母越多，结果也就越准确。你可能在其他的代码编辑器中有过这种类型的搜索使用体验——当你想打开某个文件时，只键入文件名的一部分而不用输入完整路径就能进行查找——这就是模糊搜索。</p>
-<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220059861.jpeg" alt="">  </p>
+<h2 id="2-fzf"><a class="header-anchor" href="#2-fzf">¶</a>2 fzf</h2>
+<p>fzf— fuzzy finder，即模糊查找器。它是一种通用工具，可让你使用模糊搜索来查找文件、历史命令、进程、git 提交等。你键入一些字母，它会尝试匹配结果列表中任何位置的字母。输入的字母越多，结果也就越准确。你可能在其他的代码编辑器中有过这种类型的搜索使用体验——当你想打开某个文件时，只键入文件名的一部分而不用输入完整路径就能进行查找——这就是模糊搜索。</p>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220059861.jpeg" alt=""></p>
 <p>我通过 fish fzf 插件插件使用它，因此我可以搜索命令历史记录或快速打开文件。这是可以每天为我节省不少时间的一个非常棒的工具。</p>
-<p>fzf默认会以“extened-search”模式启动， 这种模式下你可以输入多个以空格分隔的搜索关键词， 如<code>^music .mp3$</code>, <code>sbtrkt !fire</code>.</p>
+<p>fzf默认会以“extened-search&quot;模式启动， 这种模式下你可以输入多个以空格分隔的搜索关键词， 如<code>^music .mp3$</code>, <code>sbtrkt !fire</code>.</p>
 <table>
 <thead>
 <tr>
@@ -462,7 +470,8 @@ time_range <span class="token operator">=</span> <span class="token string">"-"<
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>sbtrkt</td>
 <td>fuzzy-match</td>
 <td>匹配sbtrkt</td>
@@ -478,7 +487,7 @@ time_range <span class="token operator">=</span> <span class="token string">"-"<
 <td>以.mp3结尾</td>
 </tr>
 <tr>
-<td>‘wild</td>
+<td>'wild</td>
 <td>exact-match(quoted)</td>
 <td>精确包含wild</td>
 </tr>
@@ -492,84 +501,115 @@ time_range <span class="token operator">=</span> <span class="token string">"-"<
 <td>inverse-suffix-exact-match</td>
 <td>不以.mp3结尾</td>
 </tr>
-</tbody></table>
-<p>如果你不想用fuzzy match， 可以用<code>fzf -e</code>做精确匹配<br>符号”|”可以做or匹配， 比如</p>
-<pre class=" language-bash"><code class="language-bash">^core go$<span class="token operator">|</span>rb$<span class="token operator">|</span>py$</code></pre>
+</tbody>
+</table>
+<p>如果你不想用fuzzy match， 可以用<code>fzf -e</code>做精确匹配<br>
+符号&quot;|&quot;可以做or匹配， 比如</p>
+<pre class=" language-language-bash"><code class="language-language-bash">^core go$|rb$|py$
+</code></pre>
 <p>表示以core开头，以go或rb或py结尾的</p>
 <p>下载地址：<a href="https://github.com/junegunn/fzf" target="_blank" rel="noopener">https://github.com/junegunn/fzf</a></p>
-<h2 id="3-fd"><a href="#3-fd" class="headerlink" title="3 fd"></a>3 fd</h2><p>类似于系统自带的 <code>find</code> 命令，但使用起来更简单，查找速度更快，并且具有良好的默认设置。</p>
-<h3 id="简单搜索"><a href="#简单搜索" class="headerlink" title="简单搜索"></a>简单搜索</h3><p><em>fd<em>设计用于查找文件系统中的条目. 你可以执行的最基本的搜索就是运行一个参数:搜索模式的</em>fd</em>. 例如,假设您想查找您的旧脚本 (包括<code>netflix</code>) :</p>
-<pre class=" language-zsh"><code class="language-zsh">> fd netfl
-Software/python/imdb-ratings/netflix-details.py</code></pre>
+<h2 id="3-fd"><a class="header-anchor" href="#3-fd">¶</a>3 fd</h2>
+<p>类似于系统自带的 <code>find</code> 命令，但使用起来更简单，查找速度更快，并且具有良好的默认设置。</p>
+<h3 id="简单搜索"><a class="header-anchor" href="#简单搜索">¶</a>简单搜索</h3>
+<p><em>fd</em>设计用于查找文件系统中的条目. 你可以执行的最基本的搜索就是运行一个参数:搜索模式的<em>fd</em>. 例如,假设您想查找您的旧脚本 (包括<code>netflix</code>) :</p>
+<pre class=" language-language-zsh"><code class="language-language-zsh">> fd netfl
+Software/python/imdb-ratings/netflix-details.py
+</code></pre>
 <p>如果只调用一个这样的参数,<em>fd</em>递归检索当前目录中, <em>包含</em>模式<code>netfl</code>的任何条目.</p>
-<h3 id="正则表达式搜索"><a href="#正则表达式搜索" class="headerlink" title="正则表达式搜索"></a>正则表达式搜索</h3><p>搜索模式被视为正则表达式. 这里,我们搜索开始<code>x</code>并以<code>rc</code>结束的条目. :</p>
-<pre class=" language-zsh"><code class="language-zsh">> cd /etc
+<h3 id="正则表达式搜索"><a class="header-anchor" href="#正则表达式搜索">¶</a>正则表达式搜索</h3>
+<p>搜索模式被视为正则表达式. 这里,我们搜索开始<code>x</code>并以<code>rc</code>结束的条目. :</p>
+<pre class=" language-language-zsh"><code class="language-language-zsh">> cd /etc
 > fd '^x.*rc$'
 X11/xinit/xinitrc
-X11/xinit/xserverrc</code></pre>
-<h3 id="指定根目录"><a href="#指定根目录" class="headerlink" title="指定根目录"></a>指定根目录</h3><p>如果我们想搜索一个特定的目录,它可以作为第二个参数<em>fd</em>:</p>
+X11/xinit/xserverrc
+</code></pre>
+<h3 id="指定根目录"><a class="header-anchor" href="#指定根目录">¶</a>指定根目录</h3>
+<p>如果我们想搜索一个特定的目录,它可以作为第二个参数<em>fd</em>:</p>
 <pre><code>&gt; fd passwd /etc
 /etc/default/passwd
 /etc/pam.d/passwd
-/etc/passwd</code></pre><h3 id="仅运行fd"><a href="#仅运行fd" class="headerlink" title="仅运行fd"></a>仅运行<em>fd</em></h3><p><em>fd</em>可以不带参数调用. 这是非常有用的,以便快速地查看当前目录中的所有条目,递归地 (类似于<code>ls -R</code>) :</p>
-<pre class=" language-zsh"><code class="language-zsh">> cd fd/tests
+/etc/passwd
+</code></pre>
+<h3 id="仅运行fd"><a class="header-anchor" href="#仅运行fd">¶</a>仅运行<em>fd</em></h3>
+<p><em>fd</em>可以不带参数调用. 这是非常有用的,以便快速地查看当前目录中的所有条目,递归地 (类似于<code>ls -R</code>) :</p>
+<pre class=" language-language-zsh"><code class="language-language-zsh">> cd fd/tests
 > fd
 testenv
 testenv/mod.rs
-tests.rs</code></pre>
-<h3 id="搜索特定的文件扩展名"><a href="#搜索特定的文件扩展名" class="headerlink" title="搜索特定的文件扩展名"></a>搜索特定的文件扩展名</h3><p>通常,我们对特定类型的所有文件感兴趣. 这可以用<code>-e</code> (或) <code>--extension</code>选择权. 在这里,我们搜索FD仓库中的所有md文件:</p>
-<pre class=" language-zsh"><code class="language-zsh">> cd fd
+tests.rs
+</code></pre>
+<h3 id="搜索特定的文件扩展名"><a class="header-anchor" href="#搜索特定的文件扩展名">¶</a>搜索特定的文件扩展名</h3>
+<p>通常,我们对特定类型的所有文件感兴趣. 这可以用<code>-e</code> (或) <code>--extension</code>选择权. 在这里,我们搜索FD仓库中的所有md文件:</p>
+<pre class=" language-language-zsh"><code class="language-language-zsh">> cd fd
 > fd -e md
 CONTRIBUTING.md
-README.md</code></pre>
+README.md
+</code></pre>
 <p>这个<code>-e</code>选项可以与搜索模式结合使用:</p>
-<pre class=" language-zsh"><code class="language-zsh">> fd -e rs mod
+<pre class=" language-language-zsh"><code class="language-language-zsh">> fd -e rs mod
 src/fshelper/mod.rs
 src/lscolors/mod.rs
-tests/testenv/mod.rs</code></pre>
+tests/testenv/mod.rs
+</code></pre>
 <p>下载地址：<a href="https://github.com/sharkdp/fd" target="_blank" rel="noopener">https://github.com/sharkdp/fd</a></p>
-<h2 id="4-ripgrep"><a href="#4-ripgrep" class="headerlink" title="4 ripgrep"></a>4 ripgrep</h2><p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220618373.gif" alt=""></p>
+<h2 id="4-ripgrep"><a class="header-anchor" href="#4-ripgrep">¶</a>4 ripgrep</h2>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220618373.gif" alt=""></p>
 <p>上图为 grep（左）与 rg（右）命令执行时的对比。</p>
 <p>与上述<code>fd</code>指令类似，<code>ripgrep</code>是<code>grep</code>命令的替代方法， 不过<code>ripgrep</code>的执行速度更快，而且具有健全的默认配置以及丰富的彩色输出。</p>
-<p>它同样会跳过被<code>.gitignore</code>忽略以及隐藏的文件，因此如果有特殊需要，我们可以设置指令别名：<code>rga =&#39;rg -uuu&#39;</code>。它会禁用所有智能筛选，并使<code>ripgrep</code>的表现与标准的 grep 指令一致。</p>
-<h3 id="简单搜索-1"><a href="#简单搜索-1" class="headerlink" title="简单搜索"></a>简单搜索</h3><pre class=" language-bash"><code class="language-bash"><span class="token function">ls</span> <span class="token operator">|</span> rg App</code></pre>
-<h3 id="正则表达式搜索-1"><a href="#正则表达式搜索-1" class="headerlink" title="正则表达式搜索"></a>正则表达式搜索</h3><pre class=" language-bash"><code class="language-bash"><span class="token function">ls</span> <span class="token operator">|</span> rg ^App.*$</code></pre>
-<h3 id="指定文件搜索"><a href="#指定文件搜索" class="headerlink" title="指定文件搜索"></a>指定文件搜索</h3><pre class=" language-bash"><code class="language-bash">rg  ^def.*$ 01_two-sum.py</code></pre>
+<p>它同样会跳过被<code>.gitignore</code>忽略以及隐藏的文件，因此如果有特殊需要，我们可以设置指令别名：<code>rga ='rg -uuu'</code>。它会禁用所有智能筛选，并使<code>ripgrep</code>的表现与标准的 grep 指令一致。</p>
+<h3 id="简单搜索-v2"><a class="header-anchor" href="#简单搜索-v2">¶</a>简单搜索</h3>
+<pre class=" language-language-bash"><code class="language-language-bash">ls | rg App
+</code></pre>
+<h3 id="正则表达式搜索-v2"><a class="header-anchor" href="#正则表达式搜索-v2">¶</a>正则表达式搜索</h3>
+<pre class=" language-language-bash"><code class="language-language-bash">ls | rg ^App.*$
+</code></pre>
+<h3 id="指定文件搜索"><a class="header-anchor" href="#指定文件搜索">¶</a>指定文件搜索</h3>
+<pre class=" language-language-bash"><code class="language-language-bash">rg  ^def.*$ 01_two-sum.py
+</code></pre>
 <p>下载地址：<a href="https://github.com/BurntSushi/ripgrep" target="_blank" rel="noopener">https://github.com/BurntSushi/ripgrep</a></p>
-<h2 id="5-htop-和-glances"><a href="#5-htop-和-glances" class="headerlink" title="5 htop 和 glances"></a>5 htop 和 glances</h2><p>在 Linux 或 Mac 上显示进程运行状态信息最常用工具是我们熟悉的<code>top</code>，它是每位系统管理员的好帮手。而且，即使是像我一样主要从事网络开发，查看计算机的运行状况也很有用。你知道，只是看一下当前到底是 Docker 进程还是 Chrome 进程吃掉了你所有的 RAM，应该如何做吗？</p>
-<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220647892.jpeg" alt="">  </p>
+<h2 id="5-htop-和-glances"><a class="header-anchor" href="#5-htop-和-glances">¶</a>5 htop 和 glances</h2>
+<p>在 Linux 或 Mac 上显示进程运行状态信息最常用工具是我们熟悉的<code>top</code>，它是每位系统管理员的好帮手。而且，即使是像我一样主要从事网络开发，查看计算机的运行状况也很有用。你知道，只是看一下当前到底是 Docker 进程还是 Chrome 进程吃掉了你所有的 RAM，应该如何做吗？</p>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220647892.jpeg" alt=""></p>
 <p><code>htop</code>工具是<code>top</code>工具的绝佳替代品。</p>
 <p><code>top</code>工具是非常基础的监控工具，提供的功能有限，因此很多人转去使用 htop。<code>htop</code>比起<code>top</code>，优势很明显——除了功能更加完善以外，它的色彩搭配也很丰富，整体上使用起来更加友好。</p>
-<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220657583.jpeg" alt="">  </p>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220657583.jpeg" alt=""></p>
 <p>借助 glances，还可以让你一目了然地快速了解系统当前状态。</p>
 <p>glances 是<code>htop</code>的补充工具。除了列出所有进程及其 CPU 和内存使用情况之外，它还可以显示有关系统的其他信息，比如：</p>
 <ul>
-<li><p>网络及磁盘使用情况</p>
+<li>
+<p>网络及磁盘使用情况</p>
 </li>
-<li><p>文件系统已使用的空间和总空间</p>
+<li>
+<p>文件系统已使用的空间和总空间</p>
 </li>
-<li><p>来自不同传感器（例如电池）的数据</p>
+<li>
+<p>来自不同传感器（例如电池）的数据</p>
 </li>
-<li><p>以及最近消耗过多资源的进程列表</p>
+<li>
+<p>以及最近消耗过多资源的进程列表</p>
 </li>
 </ul>
 <p>我选择使用<code>htop</code>来筛选和终止进程，因为对我来讲，效率提高了不少，我也使用 <code>glances</code>可以快速浏览一下计算机的运行状况。它提供 API 接口、Web UI 以及支持各种导出格式，因此你可以将系统监视提高到一个新 Level。因此我在这里强烈推荐一波！</p>
 <p>htop 下载地址：<a href="https://hisham.hm/htop/" target="_blank" rel="noopener">https://hisham.hm/htop/</a></p>
 <p>glances 下载地址：<a href="https://nicolargo.github.io/glances/" target="_blank" rel="noopener">https://nicolargo.github.io/glances/</a></p>
-<h2 id="6-virtualenv"><a href="#6-virtualenv" class="headerlink" title="6 virtualenv"></a>6 virtualenv</h2><p>Virtualenv 是用于在 Python 中创建虚拟环境的工具（比起内置的<code>venv</code>模块，我更喜欢 Virtualenv）。</p>
-<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220804528.jpeg" alt="">  </p>
+<h2 id="6-virtualenv"><a class="header-anchor" href="#6-virtualenv">¶</a>6 virtualenv</h2>
+<p>Virtualenv 是用于在 Python 中创建虚拟环境的工具（比起内置的<code>venv</code>模块，我更喜欢 Virtualenv）。</p>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220804528.jpeg" alt=""></p>
 <p>virtualenvwrapper 是 virtualenv 的虚拟环境管理器。它提供了许多命令来执行快速创建、列出或删除虚拟环境等操作。</p>
 <p>virtualenv 下载地址：</p>
 <p><a href="https://pypi.org/project/virtualenv/" target="_blank" rel="noopener">https://pypi.org/project/virtualenv/</a></p>
-<h2 id="7-Homebrew"><a href="#7-Homebrew" class="headerlink" title="7 Homebrew"></a>7 Homebrew</h2><p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220810324.jpeg" alt=""></p>
+<h2 id="7-Homebrew"><a class="header-anchor" href="#7-Homebrew">¶</a>7 Homebrew</h2>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220810324.jpeg" alt=""></p>
 <p>如果你使用的是 Mac，那我就无需再介绍 Homebrew 了。它是 macOS 上被业界普遍认可的软件包管理器。</p>
-<p>下载地址：<a href="https://brew.sh/" target="_blank" rel="noopener">https://brew.sh/</a>  </p>
+<p>下载地址：<a href="https://brew.sh/" target="_blank" rel="noopener">https://brew.sh/</a></p>
 <p>在Mac下面安装Mysql、Redis、Node之类软件的时候，比较方便的方式是使用Homebrew（号称是The missing package manager for OS X）。不过Homebrew是命令行方式，用起来不是那么的友好，所以就有了Cakebrew。</p>
 <p>网站：<a href="https://www.cakebrew.com/" target="_blank" rel="noopener">https://www.cakebrew.com/</a></p>
 <p>非常友好的图形界面，使用起来简单快捷。</p>
 <p>而LaunchRocket呢，则是一个帮助管理Homebrew安装的服务的软件，比如你使用Homebrew安装的Mysql、Redis、MongoDB，是让它自启动呢，还是手动启动，传统方式需要使用命令行的命令，而使用LaunchRocket则可以在图形界面中进行管理了！</p>
 <p>网站：<a href="https://github.com/jimbojsb/launchrocket" target="_blank" rel="noopener">https://github.com/jimbojsb/launchrocket</a></p>
-<h2 id="8-tree"><a href="#8-tree" class="headerlink" title="8 tree"></a>8 tree</h2><p>你可以通过<code>brew install tree</code>安装该工具。如果要查看给定目录的内容，那么 tree 是执行此操作的必备工具。它能以漂亮的树状结构显示所有子目录及文件：</p>
+<h2 id="8-tree"><a class="header-anchor" href="#8-tree">¶</a>8 tree</h2>
+<p>你可以通过<code>brew install tree</code>安装该工具。如果要查看给定目录的内容，那么 tree 是执行此操作的必备工具。它能以漂亮的树状结构显示所有子目录及文件：</p>
 <pre><code>$ tree .
 .
 ├── recovery.md
@@ -583,28 +623,36 @@ tests/testenv/mod.rs</code></pre>
 │   │       │   └── Thumbnail.png
 │   │       └── document.wflow
 │   └── Start\\ Screen\\ Saver.workflow
-├── brew-cask.sh</code></pre><h2 id="9-bat"><a href="#9-bat" class="headerlink" title="9 bat"></a>9 bat</h2><p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220820634.jpeg" alt=""></p>
+├── brew-cask.sh
+</code></pre>
+<h2 id="9-bat"><a class="header-anchor" href="#9-bat">¶</a>9 bat</h2>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220820634.jpeg" alt=""></p>
 <p>类似于在终端中常用的用于显示文件内容的<code>cat</code>命令，但是<code>bat</code>效果更佳。</p>
 <p>它增加了语法高亮显示，git gutter 标记（如果适用），自动分页（如果文件很大）等功能，并且使得输出的内容阅读起来更加友好。</p>
 <p>bat 下载地址：<a href="https://github.com/sharkdp/bat" target="_blank" rel="noopener">https://github.com/sharkdp/bat</a></p>
-<h2 id="10-httpie"><a href="#10-httpie" class="headerlink" title="10 httpie"></a>10 httpie</h2><p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220827622.gif" alt=""></p>
+<h2 id="10-httpie"><a class="header-anchor" href="#10-httpie">¶</a>10 httpie</h2>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220827622.gif" alt=""></p>
 <p>如果你需要发送一些 HTTP 请求，但发现使用<code>curl</code>不够直观，那么请尝试一下<code>httpie</code>。这是一款非常好用的<code>curl</code>替代工具。合理的默认配置以及简洁的语法使它更易于使用，命令返回也是彩色输出，甚至支持为不同类型的身份验证安装相应的插件。</p>
 <p>httpie 下载地址：<a href="https://httpie.org/" target="_blank" rel="noopener">https://httpie.org/</a></p>
-<h2 id="11-tldr"><a href="#11-tldr" class="headerlink" title="11 tldr"></a>11 tldr</h2><p>简化版的命令帮助手册。“man pages” 包含了 Linux 软件的手册，这些手册解释了如何使用给定的命令。你可以尝试运行<code>man cat</code>或<code>man grep</code>来查看相关命令的帮助手册。它们描述的非常详细，有时可能难以掌握。因此，<code>tldr</code>社区的目的，就是将每个命令的帮助手册进行简化，方便用户查阅。</p>
+<h2 id="11-tldr"><a class="header-anchor" href="#11-tldr">¶</a>11 tldr</h2>
+<p>简化版的命令帮助手册。“man pages” 包含了 Linux 软件的手册，这些手册解释了如何使用给定的命令。你可以尝试运行<code>man cat</code>或<code>man grep</code>来查看相关命令的帮助手册。它们描述的非常详细，有时可能难以掌握。因此，<code>tldr</code>社区的目的，就是将每个命令的帮助手册进行简化，方便用户查阅。</p>
 <p><code>tldr</code>适用于几乎所有的受欢迎的软件。正如我提到的，这是社区的努力和功劳，虽然不太可能包含所有的软件的简化帮助手册。但是当某个帮助手册被纳入管理并起作用时，它提供的信息通常就是你要查找的内容。</p>
 <p>比如，如果你要创建一些文件的 gzip 压缩存档，<code>man tar</code>可以为你提供可能的参数选择。而<code>tldr tar</code>会列出一些我们常见的示例——如图所示，第二个示例正是你要执行的操作：</p>
-<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220836708.jpeg" alt="">  </p>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220836708.jpeg" alt=""></p>
 <p>“man pages” 展示的信息太全面了，但是很多时候使用<code>tldr</code>可以更快地帮你找到特定信息，这才是用户真正想要的。</p>
 <p>tldr 下载地址：<a href="https://tldr.sh/" target="_blank" rel="noopener">https://tldr.sh/</a></p>
-<h2 id="12-exa"><a href="#12-exa" class="headerlink" title="12 exa"></a>12 exa</h2><p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220843370.jpeg" alt=""></p>
+<h2 id="12-exa"><a class="header-anchor" href="#12-exa">¶</a>12 exa</h2>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220843370.jpeg" alt=""></p>
 <p><code>exa</code>是<code>ls</code>命令的一个可替代方案。</p>
 <p>它色彩艳丽，还可以显示 git 状态等其他信息，自动将文件大小转换为方便人们阅读的单位，并且所有这些都保持与<code>ls</code>几乎相同的执行速度。虽然我很喜欢这个工具并推荐给你们，但由于某种原因，我仍然坚持使用 ls。</p>
 <p>exa 下载地址：<a href="https://the.exa.website/" target="_blank" rel="noopener">https://the.exa.website/</a></p>
-<h2 id="13-litecli-和-mycli"><a href="#13-litecli-和-mycli" class="headerlink" title="13 litecli 和 mycli"></a>13 litecli 和 mycli</h2><p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220850333.gif" alt=""></p>
+<h2 id="13-litecli-和-mycli"><a class="header-anchor" href="#13-litecli-和-mycli">¶</a>13 litecli 和 mycli</h2>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220850333.gif" alt=""></p>
 <p>这是我首选的 SQLite 和 mysql的解决方案。借助自动提示和语法突出显示，它们比默认的<code>sqlite3</code>和<code>mysql</code>工具要好用很多。</p>
 <p>litecli 下载地址：<a href="https://litecli.com/" target="_blank" rel="noopener">https://litecli.com/</a></p>
 <p>mycli 下载地址：<a href="https://www.mycli.net/" target="_blank" rel="noopener">https://www.mycli.net/</a></p>
-<h2 id="14-ncdu"><a href="#14-ncdu" class="headerlink" title="14 ncdu"></a>14 ncdu</h2><p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220855650.jpeg" alt=""></p>
+<h2 id="14-ncdu"><a class="header-anchor" href="#14-ncdu">¶</a>14 ncdu</h2>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220855650.jpeg" alt=""></p>
 <p>这是在终端进行磁盘分析时使用的工具，它使用起来简单快捷。当我需要释放一些硬盘空间时，会默认使用这款工具。</p>
 <p>ncdu 下载地址：<a href="https://dev.yorhel.nl/ncdu" target="_blank" rel="noopener">https://dev.yorhel.nl/ncdu</a></p>
 
@@ -632,7 +680,7 @@ tests/testenv/mod.rs</code></pre>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bookandmusic.gitee.io/2020/12/27/gong-ju-hao-yong-de-cli-gong-ju/">http://bookandmusic.gitee.io/2020/12/27/gong-ju-hao-yong-de-cli-gong-ju/</a>
+                    <a href="https://bookandmusic.github.io/2020/12/27/gong-ju-hao-yong-de-cli-gong-ju/">https://bookandmusic.github.io/2020/12/27/gong-ju-hao-yong-de-cli-gong-ju/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -860,7 +908,8 @@ tests/testenv/mod.rs</code></pre>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            1 Starship如果必须要从本篇文章中选择一个我最喜欢的终端工具——那非 Starship 莫属。Starship 可以适用于任何 Shell。你只需要安装它，然后在相应的配置文件.bashrc/.zshrc添加一行配置，剩下的工作交给
+                            ¶1 Starship
+如果必须要从本篇文章中选择一个我最喜欢的终端工具——那非 Starship 莫属。Starship 可以适用于任何 Shell。你只需要安装它，然后在相应的配置文件.bashrc/.zshrc添加一行配置，剩下的工作
                         
                     </div>
                     <div class="publish-info">
@@ -918,8 +967,9 @@ tests/testenv/mod.rs</code></pre>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            前言组件是 vue.js 最强大的功能之一，而组件实例的作用域是相互独立的，这就意味着不同组件之间的数据无法相互引用。一般来说，组件可以有以下几种关系：
-  
+                            ¶前言
+组件是 vue.js 最强大的功能之一，而组件实例的作用域是相互独立的，这就意味着不同组件之间的数据无法相互引用。一般来说，组件可以有以下几种关系：
+
 如上图所示，A 和 B、B 和 C、B 和 D 都是父子关系，C 和 D 是兄弟
                         
                     </div>
@@ -1154,7 +1204,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

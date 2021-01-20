@@ -375,7 +375,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    841
+                    835
                 </div>
                 
 
@@ -397,80 +397,96 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>我们在Mysql中存字段的时候，比如，一些与金钱有关的数据。这个时候就会对精确到的要求非常高。那么这个时候，就会发现我们之前所学的八大基本类型不再能够满足需求，无论是整形还是浮点型，有人会说存整形有什么不可，但是你要知道不是每个人的金额都是整数的；这样不行的话，存浮点型的就可以了嘛，对于银行存钱来说，一个小数点的问题都会将一笔钱的金额变得很大或者很小……So，这个时候你可以尝试一下Decimal类型，你会发现能够很好地解决你的问题。</p>
+                <p>我们在Mysql中存字段的时候，比如，一些与金钱有关的数据。这个时候就会对精确到的要求非常高。那么这个时候，就会发现我们之前所学的八大基本类型不再能够满足需求，无论是整形还是浮点型，有人会说存整形有什么不可，但是你要知道不是每个人的金额都是整数的；这样不行的话，存浮点型的就可以了嘛，对于银行存钱来说，一个小数点的问题都会将一笔钱的金额变得很大或者很小…So，这个时候你可以尝试一下Decimal类型，你会发现能够很好地解决你的问题。</p>
 <a id="more"></a>
-
-<h3 id="decimal详细介绍："><a href="#decimal详细介绍：" class="headerlink" title="decimal详细介绍："></a>decimal详细介绍：</h3><p><strong>decimal(a,b)</strong></p>
+<h3 id="decimal详细介绍："><a class="header-anchor" href="#decimal详细介绍：">¶</a>decimal详细介绍：</h3>
+<p><strong>decimal(a,b)</strong></p>
 <ul>
-<li><p>参数说明：</p>
+<li>
+<p>参数说明：</p>
 <ul>
-<li><p>a:指定小数点左边和右边可以存储的十进制数字的最大个数，最大精度为38.</p>
+<li>
+<p>a:指定小数点左边和右边可以存储的十进制数字的最大个数，最大精度为38.</p>
 </li>
-<li><p>b:指定小数点右边可以存储的十进制数字的最大个数。小数位数必须是从0~a之间的值，默认小数位数是0.</p>
+<li>
+<p>b:指定小数点右边可以存储的十进制数字的最大个数。小数位数必须是从0~a之间的值，默认小数位数是0.</p>
 </li>
 </ul>
 </li>
-<li><p>举例说明，11615.23653234568这个数存你说的三个格式</p>
+<li>
+<p>举例说明，11615.23653234568这个数存你说的三个格式</p>
 <ul>
 <li>decimal：11615</li>
 <li>decimal(3)：999</li>
 <li>decdimal(3,2)：9.99</li>
-<li>decimal(10,5)11615.23653</li>
+<li>decimal(10,5)11615.23653<br>
+<strong>超出精度范围的数会被强制进位并只显示数据类型定义的格式</strong></li>
 </ul>
-<p><strong>超出精度范围的数会被强制进位并只显示数据类型定义的格式</strong></p>
 </li>
-<li><p>备注：</p>
+<li>
+<p>备注：</p>
 <p>decimal数据类型用于要求非常高的精确计算中，这些类型允许指定数值的精确度和计算方法作为选择参数。精确度在这里指为这个值保存的有效数字的总个数。而计数方法指的是小数点后数字的个数。例如：decimal(5,2)规定了存储的值将不会超过五位数字 ，而且小数点后面有两位数字。</p>
 </li>
 </ul>
-<h4 id="实例1："><a href="#实例1：" class="headerlink" title="实例1："></a>实例1：</h4><pre class=" language-bash"><code class="language-bash">mysql<span class="token operator">></span> create table t1<span class="token punctuation">(</span>c1 float<span class="token punctuation">(</span>10,2<span class="token punctuation">)</span>, c3decimal<span class="token punctuation">(</span>10,2<span class="token punctuation">))</span><span class="token punctuation">;</span>
+<h4 id="实例1："><a class="header-anchor" href="#实例1：">¶</a>实例1：</h4>
+<pre class=" language-language-bash"><code class="language-language-bash">mysql> create table t1(c1 float(10,2), c3decimal(10,2));
 
-Query OK, 0 rows affected <span class="token punctuation">(</span>0.02 sec<span class="token punctuation">)</span>
+Query OK, 0 rows affected (0.02 sec)
 
-mysql<span class="token operator">></span> insert into t1 values<span class="token punctuation">(</span>9876543.21, 9876543.12<span class="token punctuation">)</span><span class="token punctuation">;</span>
+mysql> insert into t1 values(9876543.21, 9876543.12);
 
-Query OK, 1 row affected <span class="token punctuation">(</span>0.00 sec<span class="token punctuation">)</span>
+Query OK, 1 row affected (0.00 sec)
 
-mysql<span class="token operator">></span> <span class="token keyword">select</span> * from t1<span class="token punctuation">;</span>
+mysql> select * from t1;
 
 +------------+------------+
-<span class="token operator">|</span> c1         <span class="token operator">|</span> c3         <span class="token operator">|</span>
+| c1         | c3         |
 +------------+------------+
-<span class="token operator">|</span> 9876543.00 <span class="token operator">|</span> 9876543.12 <span class="token operator">|</span>
+| 9876543.00 | 9876543.12 |
 +------------+------------+
-1 row <span class="token keyword">in</span> <span class="token keyword">set</span> <span class="token punctuation">(</span>0.00 sec<span class="token punctuation">)</span></code></pre>
-<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;会发现，flocat类型的字段会自动将值四舍五入，而decimal类型的不会，如果用flocat类型的去存与金额有关的数据的时候就会出现问题，而decimal类型的就不会。</strong></p>
-<h4 id="实例2：decimal-5-2"><a href="#实例2：decimal-5-2" class="headerlink" title="实例2：decimal(5,2)"></a>实例2：decimal(5,2)</h4><pre class=" language-bash"><code class="language-bash">mysql<span class="token operator">></span> create table t1<span class="token punctuation">(</span>id1 float<span class="token punctuation">(</span>5,2<span class="token punctuation">)</span> default null,id2 double<span class="token punctuation">(</span>5,2<span class="token punctuation">)</span> default null,
-id3 decimal<span class="token punctuation">(</span>5,2<span class="token punctuation">)</span> default null <span class="token punctuation">)</span><span class="token punctuation">;</span>
-Query OK, 0 rows affected <span class="token punctuation">(</span>0.03 sec<span class="token punctuation">)</span>
+1 row in set (0.00 sec)
+</code></pre>
+<p><strong>      会发现，flocat类型的字段会自动将值四舍五入，而decimal类型的不会，如果用flocat类型的去存与金额有关的数据的时候就会出现问题，而decimal类型的就不会。</strong></p>
+<h4 id="实例2：decimal-5-2"><a class="header-anchor" href="#实例2：decimal-5-2">¶</a>实例2：decimal(5,2)</h4>
+<pre class=" language-language-bash"><code class="language-language-bash">mysql> create table t1(id1 float(5,2) default null,id2 double(5,2) default null,
+id3 decimal(5,2) default null );
+Query OK, 0 rows affected (0.03 sec)
 
-mysql<span class="token operator">></span> insert into t1 values<span class="token punctuation">(</span>1.2345,1.2345,1.2345<span class="token punctuation">)</span><span class="token punctuation">;</span>
-Query OK, 1 row affected, 1 warning <span class="token punctuation">(</span>0.04 sec<span class="token punctuation">)</span>
+mysql> insert into t1 values(1.2345,1.2345,1.2345);
+Query OK, 1 row affected, 1 warning (0.04 sec)
 
-mysql<span class="token operator">></span> show warnings<span class="token punctuation">;</span>
+mysql> show warnings;
 +-------+------+------------------------------------------+
-<span class="token operator">|</span> Level <span class="token operator">|</span> Code <span class="token operator">|</span> Message                                  <span class="token operator">|</span>
+| Level | Code | Message                                  |
 +-------+------+------------------------------------------+
-<span class="token operator">|</span> Note  <span class="token operator">|</span> 1265 <span class="token operator">|</span> Data truncated <span class="token keyword">for</span> column <span class="token string">'id3'</span> at row 1 <span class="token operator">|</span>
+| Note  | 1265 | Data truncated for column 'id3' at row 1 |
 +-------+------+------------------------------------------+
-1 row <span class="token keyword">in</span> <span class="token keyword">set</span> <span class="token punctuation">(</span>0.00 sec<span class="token punctuation">)</span></code></pre>
+1 row in set (0.00 sec)
+</code></pre>
 <ul>
-<li><p>1.2345 — 小数点后最多2位，所以保存可以，自动四舍五入数据截断,但会报waning</p>
+<li>
+<p>1.2345 — 小数点后最多2位，所以保存可以，自动四舍五入数据截断,但会报waning</p>
 </li>
-<li><p>12.34 — OK</p>
+<li>
+<p>12.34 — OK</p>
 </li>
-<li><p>1234.5 — 因为小数部分未满2位，要补0.所以保存应该1234.50。所以整个位数超出了5，保存报错。</p>
+<li>
+<p>1234.5 — 因为小数部分未满2位，要补0.所以保存应该1234.50。所以整个位数超出了5，保存报错。</p>
 </li>
-<li><p>1.2 — 小数未满部分补0。按照1.20保存。</p>
+<li>
+<p>1.2 — 小数未满部分补0。按照1.20保存。</p>
 </li>
 </ul>
-<h3 id="默认状态比较："><a href="#默认状态比较：" class="headerlink" title="默认状态比较："></a>默认状态比较：</h3><ul>
-<li>浮点数<ul>
+<h3 id="默认状态比较："><a class="header-anchor" href="#默认状态比较：">¶</a>默认状态比较：</h3>
+<ul>
+<li>浮点数
+<ul>
 <li>如果不写精度和标度，会按照实际精度值保存</li>
 <li>如果有精度和标度，则会自动将四舍五入后的结果插入，系统不会报错</li>
 </ul>
 </li>
-<li>定点数<ul>
+<li>定点数
+<ul>
 <li>如果不写精度和标度，则按照默认值decimal(10,0)来操作</li>
 <li>如果数据超过了精度和标度值，系统会报错</li>
 </ul>
@@ -501,7 +517,7 @@ mysql<span class="token operator">></span> show warnings<span class="token punct
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bookandmusic.gitee.io/2019/06/01/shu-ju-ku-mysql-zhong-de-decimal-lei-xing-shuo-ming/">http://bookandmusic.gitee.io/2019/06/01/shu-ju-ku-mysql-zhong-de-decimal-lei-xing-shuo-ming/</a>
+                    <a href="https://bookandmusic.github.io/2019/06/01/shu-ju-ku-mysql-zhong-de-decimal-lei-xing-shuo-ming/">https://bookandmusic.github.io/2019/06/01/shu-ju-ku-mysql-zhong-de-decimal-lei-xing-shuo-ming/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -800,9 +816,9 @@ binary与varb
                         
                             学习数据库安装后，最重要的就是学习SQL语句。
 
-
-1. 数据语句操作类型SQL是操作数据库的核心，
-结构化查询语言(Structured Query Language)简称SQL，是一种特殊目的的编程语言，是一种数据库查询和程序设计语言，
+¶1. 数据语句操作类型
+SQL是操作数据库的核心，
+结构化查询语言(Structured Query Language)简称SQL，是一种特殊目的的编程语言，是一种数据库查询和程序设计语言
                         
                     </div>
                     <div class="publish-info">
@@ -1036,7 +1052,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

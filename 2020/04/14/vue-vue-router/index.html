@@ -375,14 +375,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2k
+                    1.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    7 分
                 </div>
                 
 
@@ -398,159 +398,184 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>Vue.js官方提供了一套专用的路由工具库 Vue Router,其使用和配置都非常简单。</p>
-<h2 id="安装路由"><a href="#安装路由" class="headerlink" title="安装路由"></a>安装路由</h2><p>可以使用npm包的方式来安装路由</p>
-<pre class=" language-bash"><code class="language-bash">cnpm <span class="token function">install</span> vue-router --save</code></pre>
+<h2 id="安装路由"><a class="header-anchor" href="#安装路由">¶</a>安装路由</h2>
+<p>可以使用npm包的方式来安装路由</p>
+<pre class=" language-language-bash"><code class="language-language-bash">cnpm install vue-router --save
+</code></pre>
 <blockquote>
 <p>其实通过Vue-cli脚手架快速搭建项目时，命令行会询问是否安装路由功能，从而并不需要额外安装路由功能</p>
 </blockquote>
 <p>通过Vue-cli脚手架搭建的项目，在<code>src/router</code>文件夹内部有<code>index.js</code>文件，打开index.js文件会看到以下引用。</p>
-<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
-<span class="token keyword">import</span> Router <span class="token keyword">from</span> <span class="token string">'vue-router'</span>
+<pre class=" language-language-javascript"><code class="language-language-javascript">import Vue from 'vue'
+import Router from 'vue-router'
 
-Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>Router<span class="token punctuation">)</span></code></pre>
+Vue.use(Router)
+</code></pre>
 <p>在入口文件<code>src/main.js</code>中导入<code>src/router/index.js</code>文件，即可使用路由配置的信息</p>
-<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">import</span> router <span class="token keyword">from</span> <span class="token string">'./router'</span>
-<span class="token comment" spellcheck="true">//等效于</span>
-<span class="token comment" spellcheck="true">//import router from './router/index.js'</span></code></pre>
-<h2 id="建立路由模块"><a href="#建立路由模块" class="headerlink" title="建立路由模块"></a>建立路由模块</h2><p>先建立一个路由器模块,主要用来配置和绑定相关信息。</p>
+<pre class=" language-language-javascript"><code class="language-language-javascript">import router from './router'
+//等效于
+//import router from './router/index.js'
+</code></pre>
+<h2 id="建立路由模块"><a class="header-anchor" href="#建立路由模块">¶</a>建立路由模块</h2>
+<p>先建立一个路由器模块,主要用来配置和绑定相关信息。</p>
 <p>在<code>src/router/index.js</code>文件中使用<code>new Router</code>命令创建一个路由,一个路由是一个对象。</p>
 <p>一条路由的实现需要三部分:<code>name</code> 、<code>path</code>和<code>component</code>。<code>name</code>是命名,<code>path</code>是路径,<code>component</code>是组件</p>
-<pre class=" language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// src/router/index.js</span>
+<pre class=" language-language-javascript"><code class="language-language-javascript">// src/router/index.js
 
-<span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
-<span class="token keyword">import</span> Router <span class="token keyword">from</span> <span class="token string">'vue-router'</span>
-<span class="token keyword">import</span> HelloWorld <span class="token keyword">from</span> <span class="token string">'@/components/HelloWorld'</span>
-<span class="token comment" spellcheck="true">// 把对应的组件或页面引入进来</span>
-<span class="token keyword">import</span> Login <span class="token keyword">from</span> <span class="token string">'@/pages/login'</span> <span class="token comment" spellcheck="true">// @指src根路径</span>
+import Vue from 'vue'
+import Router from 'vue-router'
+import HelloWorld from '@/components/HelloWorld'
+// 把对应的组件或页面引入进来
+import Login from '@/pages/login' // @指src根路径
 
-Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>Router<span class="token punctuation">)</span>
+Vue.use(Router)
 
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">new</span> <span class="token class-name">Router</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  routes<span class="token punctuation">:</span> <span class="token punctuation">[</span>
-    <span class="token punctuation">{</span>
-      path<span class="token punctuation">:</span> <span class="token string">'/'</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// 这里默认是跳转到HelloWorld 组件， 后期会改为项目首页</span>
-      name<span class="token punctuation">:</span> <span class="token string">'HelloWorld'</span><span class="token punctuation">,</span>
-      component<span class="token punctuation">:</span> HelloWorld
-    <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token punctuation">{</span>
-      path<span class="token punctuation">:</span><span class="token string">'/login'</span><span class="token punctuation">,</span>
-      name<span class="token punctuation">:</span> <span class="token string">'Login'</span><span class="token punctuation">,</span>
-      component<span class="token punctuation">:</span> Login  <span class="token comment" spellcheck="true">// 后续如果还有页面要跳转，就按照这样的格式继续书写</span>
-    <span class="token punctuation">}</span>
-  <span class="token punctuation">]</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre>
+export default new Router({
+  routes: [
+    {
+      path: '/', // 这里默认是跳转到HelloWorld 组件， 后期会改为项目首页
+      name: 'HelloWorld',
+      component: HelloWorld
+    },
+    {
+      path:'/login',
+      name: 'Login',
+      component: Login  // 后续如果还有页面要跳转，就按照这样的格式继续书写
+    }
+  ]
+})
+</code></pre>
 <blockquote>
 <p>导入<code>HelloWorld</code>组件的时候，实际上导入的是<code>src/components/HelloWorld.vue</code>.因为在<code>Webpack</code>中配置了，所以可以省略vue后缀。<code>*.vue</code>文件是Vue的单文件组件格式，可以同时包括模板定义、样式定义和组件模块定义。</p>
 </blockquote>
-<h2 id="启动路由器"><a href="#启动路由器" class="headerlink" title="启动路由器"></a>启动路由器</h2><ol>
-<li><p>在<code>main.js</code>入口文件中启用该路由器。</p>
-<p> <code>main.js</code>作为入口文件，使用<code>import</code>可以把所有要用到的包都导入到这里，然后在Vue项目中去运用它们。</p>
-<p> 创建和挂载根实例，通过<code>router</code>配置参数注入路由，从而让整个应用都有路由功能</p>
-<pre class=" language-javascript"><code class="language-javascript"> <span class="token comment" spellcheck="true">// src/main.js</span>
+<h2 id="启动路由器"><a class="header-anchor" href="#启动路由器">¶</a>启动路由器</h2>
+<ol>
+<li>
+<p>在<code>main.js</code>入口文件中启用该路由器。</p>
+<p><code>main.js</code>作为入口文件，使用<code>import</code>可以把所有要用到的包都导入到这里，然后在Vue项目中去运用它们。</p>
+<p>创建和挂载根实例，通过<code>router</code>配置参数注入路由，从而让整个应用都有路由功能</p>
+<pre class=" language-language-javascript"><code class="language-language-javascript"> // src/main.js
 
- <span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
- <span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./App'</span>
- <span class="token keyword">import</span> router <span class="token keyword">from</span> <span class="token string">'./router'</span>
+ import Vue from 'vue'
+ import App from './App'
+ import router from './router'
 
- <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
- el<span class="token punctuation">:</span> <span class="token string">'#app'</span><span class="token punctuation">,</span>
- router<span class="token punctuation">,</span>
- components<span class="token punctuation">:</span> <span class="token punctuation">{</span> App <span class="token punctuation">}</span><span class="token punctuation">,</span>
- template<span class="token punctuation">:</span> <span class="token string">'&lt;App/>'</span>
- <span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre>
+ new Vue({
+ el: '#app',
+ router,
+ components: { App },
+ template: '<App/>'
+ })
+</code></pre>
 <blockquote>
 <p>浅析 导包方式</p>
 </blockquote>
-<p> 这个不是vue的规定而是node加载模块的方式,当require(‘./router’)(import会被转为require),node是这样的寻找目标的:</p>
+<p>这个不是vue的规定而是node加载模块的方式,当require(’./router’)(import会被转为require),node是这样的寻找目标的:</p>
 <ol>
-<li><p>首先寻找目录下有没有router.js或者router.node,如果有就导入</p>
+<li>
+<p>首先寻找目录下有没有router.js或者router.node,如果有就导入</p>
 </li>
-<li><p>如果没有看是否有router目录,如果没有就require失败,抛出异常”Cannot find module ‘./router’”</p>
+<li>
+<p>如果没有看是否有router目录,如果没有就require失败,抛出异常&quot;Cannot find module ‘./router’&quot;</p>
 </li>
-<li><p>如果有router目录会在其下寻找package.json文件,如果有则按照package的配置来导入</p>
+<li>
+<p>如果有router目录会在其下寻找package.json文件,如果有则按照package的配置来导入</p>
 </li>
-<li><p>如果没有package.json,看是否有index.js或者index.node,如果有就导入没有就失败</p>
-<p> 详细见node文档：<a href="https://nodejs.org/api/modules.html#modules_folders_as_module" target="_blank" rel="noopener">https://nodejs.org/api/modules.html#modules_folders_as_module</a></p>
-</li>
-</ol>
-</li>
-<li><p>配置之后，路由匹配到的组件将会渲染到<code>App.vue</code>的<code>＜router-view&gt;&lt;/router-view&gt;</code></p>
-<pre class=" language-javascript"><code class="language-javascript"> <span class="token comment" spellcheck="true">// src/App.vue</span>
-
- <span class="token operator">&lt;</span>template<span class="token operator">></span>
- <span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">"app"</span><span class="token operator">></span>
-     <span class="token operator">&lt;</span>router<span class="token operator">-</span>view<span class="token operator">/</span><span class="token operator">></span>
- <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
- <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span></code></pre>
-</li>
-<li><p>最后App.vue 会渲染到<code>index.html</code></p>
-<pre class=" language-html"><code class="language-html"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
- <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span>”app”</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
- <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span></code></pre>
-<p> 这样就会把渲染出来的页面挂载到id为app的div里了</p>
+<li>
+<p>如果没有package.json,看是否有index.js或者index.node,如果有就导入没有就失败</p>
+<p>详细见node文档：<a href="https://nodejs.org/api/modules.html#modules_folders_as_module" target="_blank" rel="noopener">https://nodejs.org/api/modules.html#modules_folders_as_module</a></p>
 </li>
 </ol>
-<h2 id="路由重定向"><a href="#路由重定向" class="headerlink" title="路由重定向"></a>路由重定向</h2><ol>
-<li><p>项目应用通常都会有一个首页，默认首先打开的是首页，要跳转到哪个页面都可以设置路由路径发生跳转。重定向也是通过<code>routes</code>配置来完成的</p>
-<pre class=" language-javascript"><code class="language-javascript"> routes<span class="token punctuation">:</span> <span class="token punctuation">[</span>
-     <span class="token punctuation">{</span>
-     path<span class="token punctuation">:</span> <span class="token string">'/index'</span><span class="token punctuation">,</span>
-     name<span class="token punctuation">:</span> <span class="token string">'index'</span><span class="token punctuation">,</span>
-     component<span class="token punctuation">:</span> HelloWorld
-     <span class="token punctuation">}</span><span class="token punctuation">,</span>
+</li>
+<li>
+<p>配置之后，路由匹配到的组件将会渲染到<code>App.vue</code>的<code>＜router-view&gt;&lt;/router-view&gt;</code></p>
+<pre class=" language-language-javascript"><code class="language-language-javascript"> // src/App.vue
 
-     <span class="token comment" spellcheck="true">// 从"/"重定向到"/index"</span>
-     <span class="token punctuation">{</span>
-     path<span class="token punctuation">:</span><span class="token string">"/"</span><span class="token punctuation">,</span>
-     redirect<span class="token punctuation">:</span><span class="token string">'/index'</span>
-     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-
-     <span class="token comment" spellcheck="true">// 重定向的目标也可以是一个命名的路由</span>
-     <span class="token punctuation">{</span>
-     path<span class="token punctuation">:</span><span class="token string">"/p1"</span><span class="token punctuation">,</span>
-     redirect<span class="token punctuation">:</span> <span class="token punctuation">{</span> name<span class="token punctuation">:</span><span class="token string">"index"</span> <span class="token punctuation">}</span>
-     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-
-     <span class="token comment" spellcheck="true">// 重定向的目标甚至可以是一个方法，动态返回重定向目标</span>
-     <span class="token punctuation">{</span>
-     path<span class="token punctuation">:</span><span class="token string">"/p2"</span><span class="token punctuation">,</span>
-     redirect<span class="token punctuation">:</span>to<span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>
-         <span class="token comment" spellcheck="true">// 方法接收 "目标路由" 作为参数</span>
-         <span class="token comment" spellcheck="true">// return 重定向的 "字符串路径／路径对象"</span>
-
-         <span class="token comment" spellcheck="true">// return '/index'</span>
-         <span class="token keyword">return</span> <span class="token punctuation">{</span>name<span class="token punctuation">:</span> <span class="token string">'index'</span><span class="token punctuation">}</span>
-     <span class="token punctuation">}</span>
-     <span class="token punctuation">}</span>
- <span class="token punctuation">]</span></code></pre>
+ <template>
+ <div id="app">
+     <router-view/>
+ </div>
+ </template>
+</code></pre>
+</li>
+<li>
+<p>最后App.vue 会渲染到<code>index.html</code></p>
+<pre class=" language-language-html"><code class="language-language-html"> <body>
+ <div id=”app”></div>
+ </body>
+</code></pre>
+<p>这样就会把渲染出来的页面挂载到id为app的div里了</p>
 </li>
 </ol>
-<h2 id="lt-router-link-gt"><a href="#lt-router-link-gt" class="headerlink" title="&lt;router-link&gt;"></a><code>&lt;router-link&gt;</code></h2><ol>
-<li><p><code>&lt;router-link＞</code>组件支持用户在具有路由功能的应用中单击导航。</p>
-<p> 通过<code>to</code>属性可以指定目标地址,默认渲染成带有正确链接的<code>＜a＞</code>标签,通过配置<code>tag</code>属性可以生成别的标签。</p>
-<p> 另外,当目标路由成功激活时,链接元素会自动设置一个表示激活的<code>css</code>类名。</p>
-<pre class=" language-html"><code class="language-html"> <span class="token comment" spellcheck="true">&lt;!-- 直接给to指定属性值, 不提倡使用，尽量使用属性绑定 --></span>
- <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>router-link</span> <span class="token attr-name">to</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>/goods<span class="token punctuation">'</span></span><span class="token punctuation">></span></span>商品<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>router-link</span><span class="token punctuation">></span></span>
+<h2 id="路由重定向"><a class="header-anchor" href="#路由重定向">¶</a>路由重定向</h2>
+<ol>
+<li>
+<p>项目应用通常都会有一个首页，默认首先打开的是首页，要跳转到哪个页面都可以设置路由路径发生跳转。重定向也是通过<code>routes</code>配置来完成的</p>
+<pre class=" language-language-javascript"><code class="language-language-javascript"> routes: [
+     {
+     path: '/index',
+     name: 'index',
+     component: HelloWorld
+     },
 
- <span class="token comment" spellcheck="true">&lt;!-- 使用v-bind 绑定 JS表达式--></span>
- <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>router-link</span> <span class="token attr-name">:to</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">'</span>/goods<span class="token punctuation">'</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>商品<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>router-link</span><span class="token punctuation">></span></span>
+     // 从"/"重定向到"/index"
+     {
+     path:"/",
+     redirect:'/index'
+     },
 
- <span class="token comment" spellcheck="true">&lt;!-- 绑定data中的变量path --></span>
- <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>router-link</span> <span class="token attr-name">:to</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>path<span class="token punctuation">'</span></span><span class="token punctuation">></span></span>商品<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>router-link</span><span class="token punctuation">></span></span>
+     // 重定向的目标也可以是一个命名的路由
+     {
+     path:"/p1",
+     redirect: { name:"index" }
+     },
 
- <span class="token comment" spellcheck="true">&lt;!-- 绑定对象，自定义网址，携带查询参数 ==> /goods?id=1 --></span>
- <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>router-link</span> <span class="token attr-name">:to</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{<span class="token punctuation">'</span>path<span class="token punctuation">'</span>:<span class="token punctuation">'</span>/goods<span class="token punctuation">'</span>, , query:{<span class="token punctuation">'</span>id<span class="token punctuation">'</span>:1}}}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>商品<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>router-link</span><span class="token punctuation">></span></span>
+     // 重定向的目标甚至可以是一个方法，动态返回重定向目标
+     {
+     path:"/p2",
+     redirect:to=>{
+         // 方法接收 "目标路由" 作为参数
+         // return 重定向的 "字符串路径／路径对象"
 
- <span class="token comment" spellcheck="true">&lt;!-- 绑定 对象，命名路由，携带params参数 ==> /goods/1 --></span>
- <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>router-link</span> <span class="token attr-name">:to</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{name:<span class="token punctuation">'</span>goods<span class="token punctuation">'</span>, params:{<span class="token punctuation">'</span>id<span class="token punctuation">'</span>:1}}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>商品<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>router-link</span><span class="token punctuation">></span></span></code></pre>
+         // return '/index'
+         return {name: 'index'}
+     }
+     }
+ ]
+</code></pre>
 </li>
 </ol>
-<h2 id="路由对象属性"><a href="#路由对象属性" class="headerlink" title="路由对象属性"></a>路由对象属性</h2><blockquote>
+<h2 id="router-link"><a class="header-anchor" href="#router-link">¶</a><code>&lt;router-link&gt;</code></h2>
+<ol>
+<li>
+<p><code>&lt;router-link＞</code>组件支持用户在具有路由功能的应用中单击导航。</p>
+<p>通过<code>to</code>属性可以指定目标地址,默认渲染成带有正确链接的<code>＜a＞</code>标签,通过配置<code>tag</code>属性可以生成别的标签。</p>
+<p>另外,当目标路由成功激活时,链接元素会自动设置一个表示激活的<code>css</code>类名。</p>
+<pre class=" language-language-html"><code class="language-language-html"> <!-- 直接给to指定属性值, 不提倡使用，尽量使用属性绑定 -->
+ <router-link to='/goods'>商品</router-link>
+
+ <!-- 使用v-bind 绑定 JS表达式-->
+ <router-link :to="'/goods'">商品</router-link>
+
+ <!-- 绑定data中的变量path -->
+ <router-link :to='path'>商品</router-link>
+
+ <!-- 绑定对象，自定义网址，携带查询参数 ==> /goods?id=1 -->
+ <router-link :to="{'path':'/goods', , query:{'id':1}}}">商品</router-link>
+
+ <!-- 绑定 对象，命名路由，携带params参数 ==> /goods/1 -->
+ <router-link :to="{name:'goods', params:{'id':1}}">商品</router-link>
+</code></pre>
+</li>
+</ol>
+<h2 id="路由对象属性"><a class="header-anchor" href="#路由对象属性">¶</a>路由对象属性</h2>
+<blockquote>
 <p><code>route</code>和<code>router</code>区别:<code>vue-router</code>中经常会操作的两个对象<code>router</code>和<code>route</code>两个</p>
 </blockquote>
 <ol>
-<li><p><code>route</code>是一个跳转的路由对象，每一个路由都会有一个<code>route</code>对象，是一个局部的对象，可以获取对应的<code>name</code>,<code>path</code>,<code>params</code>,<code>query</code>等</p>
-<p> 下面列出了常用的路由信息对象属性</p>
+<li>
+<p><code>route</code>是一个跳转的路由对象，每一个路由都会有一个<code>route</code>对象，是一个局部的对象，可以获取对应的<code>name</code>,<code>path</code>,<code>params</code>,<code>query</code>等</p>
+<p>下面列出了常用的路由信息对象属性</p>
 <ul>
 <li><code>$route.path</code>: 字符串，对应当前路由的路径，总是解析为绝对路径,如<code>&quot;/goods&quot;</code></li>
 <li><code>$route.params</code>: 一个<code>key/value</code>对象, 包含了动态片段和全匹配片段，如果没有路由参数，就为空对象。</li>
@@ -560,61 +585,68 @@ Vue<span class="token punctuation">.</span><span class="token function">use</spa
 <li><code>$route.matched</code>: 一个数组，包含当前路由的所有嵌套路径片段的路由记录。路由记录就是<code>routes</code>配置数组中的对象副本(还有一些在children数组)。</li>
 </ul>
 </li>
-<li><p><code>router</code>是<code>VueRouter</code>的一个对象，通过<code>Vue.use(VueRouter)</code>和<code>VueRouter</code>构造函数得到一个<code>router</code>的实例对象，这个对象中是一个全局的对象，他包含了所有的路由包含了许多关键的对象和属性。</p>
-<p> 下面列出了常用的路由信息对象方法</p>
+<li>
+<p><code>router</code>是<code>VueRouter</code>的一个对象，通过<code>Vue.use(VueRouter)</code>和<code>VueRouter</code>构造函数得到一个<code>router</code>的实例对象，这个对象中是一个全局的对象，他包含了所有的路由包含了许多关键的对象和属性。</p>
+<p>下面列出了常用的路由信息对象方法</p>
 <ul>
-<li><p><code>router.push(location)</code>: 要导航到不同的URL，则使用<code>router.push</code>方法。该方法会向<code>history</code>栈添加一个新的记录，当用户单击浏览器的后退按钮时，回到之前的URL。</p>
-<pre class=" language-javascript"><code class="language-javascript">  router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">'/goods'</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 字符串</span>
-  router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>path<span class="token punctuation">:</span> <span class="token string">'/goods'</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 对象</span>
+<li>
+<p><code>router.push(location)</code>: 要导航到不同的URL，则使用<code>router.push</code>方法。该方法会向<code>history</code>栈添加一个新的记录，当用户单击浏览器的后退按钮时，回到之前的URL。</p>
+<pre class=" language-language-javascript"><code class="language-language-javascript">  router.push('/goods') // 字符串
+  router.push({path: '/goods'}) // 对象
 
-  <span class="token comment" spellcheck="true">// 自定义网址，携带查询参数</span>
-  router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span> path<span class="token punctuation">:</span> <span class="token string">"/goods"</span><span class="token punctuation">,</span> query<span class="token punctuation">:</span> <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">1</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// -> /goods?id=1</span>
+  // 自定义网址，携带查询参数
+  router.push({ path: "/goods", query: { id: 1 } }) // -> /goods?id=1
 
-  <span class="token comment" spellcheck="true">// 命名路由，携带params参数</span>
-  router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">"goods"</span><span class="token punctuation">,</span> params<span class="token punctuation">:</span> <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">1</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// -> /goods/1</span></code></pre>
-<p>  由一个页面跳转到另一个页面时，需要携带一些数据，这时就需要用到这种带参数的路由跳转方式了。</p>
+  // 命名路由，携带params参数
+  router.push({ name: "goods", params: { id: 1 } }) // -> /goods/1
+</code></pre>
+<p>由一个页面跳转到另一个页面时，需要携带一些数据，这时就需要用到这种带参数的路由跳转方式了。</p>
 <blockquote>
 <p>当单击<code>＜router-link＞</code>时，会在内部调用<code>router.push(...)</code>方法，所以说单击<code>＜router-link:to＝&quot;...&quot;&gt;</code>等同于调用<code>router.push(...)</code>。</p>
 </blockquote>
-<pre class=" language-javascript"><code class="language-javascript">  <span class="token comment" spellcheck="true">// 当跳转之前，两种方式可以携带params参数</span>
-  <span class="token comment" spellcheck="true">// &lt;router-link :to="{name:'goods', params:{'id':1}}">商品&lt;/router-link></span>
-  <span class="token comment" spellcheck="true">// router.push({ name: "goods", params: { id: 1 } })</span>
+<pre class=" language-language-javascript"><code class="language-language-javascript">  // 当跳转之前，两种方式可以携带params参数
+  // <router-link :to="{name:'goods', params:{'id':1}}">商品</router-link>
+  // router.push({ name: "goods", params: { id: 1 } })
 
-  <span class="token comment" spellcheck="true">// 对应的路由配置有两种方式:</span>
-  <span class="token comment" spellcheck="true">// 1. 将参数获取直接体现在网址上</span>
-  routes<span class="token punctuation">:</span> <span class="token punctuation">[</span>
-      <span class="token punctuation">{</span>
-      path<span class="token punctuation">:</span> <span class="token string">'/goods/:id'</span><span class="token punctuation">,</span>
-      name<span class="token punctuation">:</span> <span class="token string">'goods'</span><span class="token punctuation">,</span>
-      component<span class="token punctuation">:</span> goods
-      <span class="token punctuation">}</span>
-  <span class="token punctuation">]</span>
-  <span class="token comment" spellcheck="true">// 此时会导致之前的params参数拼接在网址上， 为"/goods/1"，刷新不丢失数据</span>
+  // 对应的路由配置有两种方式:
+  // 1. 将参数获取直接体现在网址上
+  routes: [
+      {
+      path: '/goods/:id',
+      name: 'goods',
+      component: goods
+      }
+  ]
+  // 此时会导致之前的params参数拼接在网址上， 为"/goods/1"，刷新不丢失数据
 
-  <span class="token comment" spellcheck="true">// 2. 不在网址上体现</span>
-  routes<span class="token punctuation">:</span> <span class="token punctuation">[</span>
-      <span class="token punctuation">{</span>
-      path<span class="token punctuation">:</span> <span class="token string">'/goods'</span><span class="token punctuation">,</span>
-      name<span class="token punctuation">:</span> <span class="token string">'goods'</span><span class="token punctuation">,</span>
-      component<span class="token punctuation">:</span> goods
-      <span class="token punctuation">}</span>
-  <span class="token punctuation">]</span>
-  <span class="token comment" spellcheck="true">// 此时会导致之前的参数不能表现出来，网址仍为"/goods"，刷新之后，参数丢失</span>
+  // 2. 不在网址上体现
+  routes: [
+      {
+      path: '/goods',
+      name: 'goods',
+      component: goods
+      }
+  ]
+  // 此时会导致之前的参数不能表现出来，网址仍为"/goods"，刷新之后，参数丢失
 
-  <span class="token comment" spellcheck="true">// 但是不管怎么配置路由，参数获取方式相同</span></code></pre>
+  // 但是不管怎么配置路由，参数获取方式相同
+</code></pre>
 </li>
-<li><p><code>router.replace(location)</code>: <code>router.replace</code>与<code>router.push</code>很像，唯一的不同是它不会向<code>history</code>栈添加新记录，而是跟它的方法名一样只替换掉当前的history 记录。<code>router.replace(...)</code>等价于<code>＜router-link :to＝&quot;...&quot; replace＞</code></p>
+<li>
+<p><code>router.replace(location)</code>: <code>router.replace</code>与<code>router.push</code>很像，唯一的不同是它不会向<code>history</code>栈添加新记录，而是跟它的方法名一样只替换掉当前的history 记录。<code>router.replace(...)</code>等价于<code>＜router-link :to＝&quot;...&quot; replace＞</code></p>
 </li>
-<li><p><code>router.go(n)</code>: 参数是一个整数，表示在<code>history</code>记录中向前进多少步或向后退多少步</p>
-<pre class=" language-javascript"><code class="language-javascript">  <span class="token comment" spellcheck="true">// 在浏览器记录中前进一步，等同于history.forward()</span>
-  router<span class="token punctuation">.</span><span class="token function">go</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-  <span class="token comment" spellcheck="true">// 后退一步，等同于history.back()</span>
-  router<span class="token punctuation">.</span><span class="token function">go</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
-  <span class="token comment" spellcheck="true">// 前进三步</span>
-  router<span class="token punctuation">.</span><span class="token function">go</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
-  <span class="token comment" spellcheck="true">// 如果history记录不够，就会失败</span>
-  router<span class="token punctuation">.</span><span class="token function">go</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">100</span><span class="token punctuation">)</span>
-  router<span class="token punctuation">.</span><span class="token function">go</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span></code></pre>
+<li>
+<p><code>router.go(n)</code>: 参数是一个整数，表示在<code>history</code>记录中向前进多少步或向后退多少步</p>
+<pre class=" language-language-javascript"><code class="language-language-javascript">  // 在浏览器记录中前进一步，等同于history.forward()
+  router.go(1)
+  // 后退一步，等同于history.back()
+  router.go(-1)
+  // 前进三步
+  router.go(3)
+  // 如果history记录不够，就会失败
+  router.go(-100)
+  router.go(100)
+</code></pre>
 </li>
 </ul>
 </li>
@@ -644,7 +676,7 @@ Vue<span class="token punctuation">.</span><span class="token function">use</spa
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bookandmusic.gitee.io/2020/04/14/vue-vue-router/">http://bookandmusic.gitee.io/2020/04/14/vue-vue-router/</a>
+                    <a href="https://bookandmusic.github.io/2020/04/14/vue-vue-router/">https://bookandmusic.github.io/2020/04/14/vue-vue-router/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -877,9 +909,11 @@ Vue<span class="token punctuation">.</span><span class="token function">use</spa
                         
                             简单对常见错误进行总结、归纳。
 
-
-Ubuntu系统1698 只能root用户登录Mysql一、问题描述如果mysql安装时，没有提示输入密码，则会随机分配密码，直接mysql -u root -p则无法登录，报错：
-ERROR 1698 
+¶Ubuntu系统
+¶1698 只能root用户登录Mysql
+¶一、问题描述
+如果mysql安装时，没有提示输入密码，则会随机分配密码，直接mysql -u root -p则无法登录，报错：
+ERROR 
                         
                     </div>
                     <div class="publish-info">
@@ -936,15 +970,18 @@ ERROR 1698
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            变量声明1. let
-let作用域只局限于当前代码块
-   {
-      var a = 10
-      let b = 20
-   }
+                            ¶变量声明
+¶1. let
 
-   console.log(a)  // 输出 10
-   console.log(b)  /
+
+let作用域只局限于当前代码块
+{
+   var a = 10
+   let b = 20
+}
+
+console.log(a)  // 输出 10
+console.log(b)  // 报错 b is not
                         
                     </div>
                     <div class="publish-info">
@@ -1194,7 +1231,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

@@ -398,56 +398,74 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>REST framework提供了分页的支持。有以下两种方式实现:</p>
-<h2 id="全局配置"><a href="#全局配置" class="headerlink" title="全局配置"></a>全局配置</h2><ul>
-<li><p>修改<code>settings.py</code>文件</p>
-<pre class=" language-python"><code class="language-python">REST_FRAMEWORK <span class="token operator">=</span> <span class="token punctuation">{</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    <span class="token string">'DEFAULT_PAGINATION_CLASS'</span><span class="token punctuation">:</span>  <span class="token string">'rest_framework.pagination.PageNumberPagination'</span><span class="token punctuation">,</span>
-    <span class="token string">'PAGE_SIZE'</span><span class="token punctuation">:</span> <span class="token number">100</span>  <span class="token comment" spellcheck="true"># 每页数目</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">}</span></code></pre>
-</li>
-</ul>
-<h2 id="类视图中定义"><a href="#类视图中定义" class="headerlink" title="类视图中定义"></a>类视图中定义</h2><p>自定义分页器,有两种分页器可选</p>
-<h3 id="PageNumberPagination"><a href="#PageNumberPagination" class="headerlink" title="PageNumberPagination"></a>PageNumberPagination</h3><ul>
-<li><p>前端访问形式</p>
-<pre class=" language-python"><code class="language-python">GET  http<span class="token punctuation">:</span><span class="token operator">//</span><span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token punctuation">:</span><span class="token number">8000</span><span class="token operator">/</span>books<span class="token operator">/</span>?page<span class="token operator">=</span><span class="token number">1</span><span class="token operator">&amp;</span>page_size<span class="token operator">=</span><span class="token number">2</span></code></pre>
-</li>
-<li><p>属性</p>
+<h2 id="全局配置"><a class="header-anchor" href="#全局配置">¶</a>全局配置</h2>
 <ul>
-<li><p>page_size 每页数目</p>
+<li>
+<p>修改<code>settings.py</code>文件</p>
+<pre class=" language-language-python"><code class="language-language-python">REST_FRAMEWORK = {
+    ...
+    'DEFAULT_PAGINATION_CLASS':  'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 100  # 每页数目
+    ...
+}
+</code></pre>
 </li>
-<li><p>page_query_param 前端发送的页数关键字名，默认为”page”</p>
+</ul>
+<h2 id="类视图中定义"><a class="header-anchor" href="#类视图中定义">¶</a>类视图中定义</h2>
+<p>自定义分页器,有两种分页器可选</p>
+<h3 id="PageNumberPagination"><a class="header-anchor" href="#PageNumberPagination">¶</a>PageNumberPagination</h3>
+<ul>
+<li>
+<p>前端访问形式</p>
+<pre class=" language-language-python"><code class="language-language-python">GET  http://127.0.0.1:8000/books/?page=1&page_size=2
+</code></pre>
 </li>
-<li><p>page_size_query_param 前端发送的每页数目关键字名，默认为None</p>
+<li>
+<p>属性</p>
+<ul>
+<li>
+<p>page_size 每页数目</p>
 </li>
-<li><p>max_page_size 前端最多能设置的每页数量</p>
+<li>
+<p>page_query_param 前端发送的页数关键字名，默认为&quot;page&quot;</p>
+</li>
+<li>
+<p>page_size_query_param 前端发送的每页数目关键字名，默认为None</p>
+</li>
+<li>
+<p>max_page_size 前端最多能设置的每页数量</p>
 </li>
 </ul>
 </li>
-<li><p>实例展示</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>pagination <span class="token keyword">import</span> PageNumberPagination
+<li>
+<p>实例展示</p>
+<pre class=" language-language-python"><code class="language-language-python">from rest_framework.pagination import PageNumberPagination
 
-<span class="token keyword">class</span> <span class="token class-name">StandardPageNumberPagination</span><span class="token punctuation">(</span>PageNumberPagination<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    page_size_query_param <span class="token operator">=</span> <span class="token string">'page_size'</span>  <span class="token comment" spellcheck="true"># 前端发送的每页数目关键字名，默认为None</span>
-    max_page_size <span class="token operator">=</span> <span class="token number">10</span>  <span class="token comment" spellcheck="true"># 前端最多能设置的每页数量</span>
-    page_size <span class="token operator">=</span> <span class="token number">3</span>  <span class="token comment" spellcheck="true"># 每页数目</span>
-    page_query_param <span class="token operator">=</span> <span class="token string">'page'</span>  <span class="token comment" spellcheck="true"># 前端发送的页数关键字名，默认为"page"</span>
+class StandardPageNumberPagination(PageNumberPagination):
+    page_size_query_param = 'page_size'  # 前端发送的每页数目关键字名，默认为None
+    max_page_size = 10  # 前端最多能设置的每页数量
+    page_size = 3  # 每页数目
+    page_query_param = 'page'  # 前端发送的页数关键字名，默认为"page"
 
-<span class="token keyword">class</span> <span class="token class-name">BookListView</span><span class="token punctuation">(</span>ListAPIView<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    queryset <span class="token operator">=</span> BookInfo<span class="token punctuation">.</span>objects<span class="token punctuation">.</span>all<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>order_by<span class="token punctuation">(</span><span class="token string">'id'</span><span class="token punctuation">)</span>
-    serializer_class <span class="token operator">=</span> BookInfoSerializer
-    pagination_class <span class="token operator">=</span> StandardPageNumberPagination
+class BookListView(ListAPIView):
+    queryset = BookInfo.objects.all().order_by('id')
+    serializer_class = BookInfoSerializer
+    pagination_class = StandardPageNumberPagination
 
-    <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> self<span class="token punctuation">.</span>list<span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span></code></pre>
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+</code></pre>
 </li>
 </ul>
-<h3 id="LimitOffsetPagination"><a href="#LimitOffsetPagination" class="headerlink" title="LimitOffsetPagination"></a>LimitOffsetPagination</h3><ul>
-<li><p>前端访问形式</p>
-<pre class=" language-python"><code class="language-python">GET  http<span class="token punctuation">:</span><span class="token operator">//</span><span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token punctuation">:</span><span class="token number">8000</span><span class="token operator">/</span>books<span class="token operator">/</span>?limit<span class="token operator">=</span><span class="token number">2</span><span class="token operator">&amp;</span>offset<span class="token operator">=</span><span class="token number">0</span></code></pre>
+<h3 id="LimitOffsetPagination"><a class="header-anchor" href="#LimitOffsetPagination">¶</a>LimitOffsetPagination</h3>
+<ul>
+<li>
+<p>前端访问形式</p>
+<pre class=" language-language-python"><code class="language-language-python">GET  http://127.0.0.1:8000/books/?limit=2&offset=0
+</code></pre>
 </li>
-<li><p>属性</p>
+<li>
+<p>属性</p>
 <ul>
 <li><code>default_limit</code>: 默认限制，默认值与PAGE_SIZE设置一致</li>
 <li><code>limit_query_param</code>: <code>limit</code>参数名，默认’limit’</li>
@@ -455,20 +473,22 @@
 <li><code>max_limit</code>: 最大<code>limit</code>限制，默认None</li>
 </ul>
 </li>
-<li><p>实例展示</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">LimitOffsetNumberPagination</span><span class="token punctuation">(</span>LimitOffsetPagination<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    default_limit <span class="token operator">=</span> <span class="token number">2</span>  <span class="token comment" spellcheck="true"># 默认限制，默认值与PAGE_SIZE设置一直</span>
-    limit_query_param <span class="token operator">=</span> <span class="token string">'limit'</span>  <span class="token comment" spellcheck="true"># limit参数名，默认'limit'</span>
-    offset_query_param <span class="token operator">=</span> <span class="token string">'offset'</span>  <span class="token comment" spellcheck="true"># offset参数名，默认'offset'</span>
-    max_limit <span class="token operator">=</span> <span class="token number">3</span>  <span class="token comment" spellcheck="true"># 最大limit限制，默认None</span>
+<li>
+<p>实例展示</p>
+<pre class=" language-language-python"><code class="language-language-python">class LimitOffsetNumberPagination(LimitOffsetPagination):
+    default_limit = 2  # 默认限制，默认值与PAGE_SIZE设置一直
+    limit_query_param = 'limit'  # limit参数名，默认'limit'
+    offset_query_param = 'offset'  # offset参数名，默认'offset'
+    max_limit = 3  # 最大limit限制，默认None
 
-<span class="token keyword">class</span> <span class="token class-name">GoodsView</span><span class="token punctuation">(</span>GenericAPIView<span class="token punctuation">,</span> CreateModelMixin<span class="token punctuation">,</span> ListModelMixin<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    queryset <span class="token operator">=</span> Goods<span class="token punctuation">.</span>objects<span class="token punctuation">.</span>all<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>order_by<span class="token punctuation">(</span><span class="token string">'id'</span><span class="token punctuation">)</span>
-    serializer_class <span class="token operator">=</span> GoodsSerializer
-    pagination_class <span class="token operator">=</span> LimitOffsetNumberPagination
+class GoodsView(GenericAPIView, CreateModelMixin, ListModelMixin):
+    queryset = Goods.objects.all().order_by('id')
+    serializer_class = GoodsSerializer
+    pagination_class = LimitOffsetNumberPagination
 
-    <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> self<span class="token punctuation">.</span>list<span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span></code></pre>
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+</code></pre>
 </li>
 </ul>
 
@@ -496,7 +516,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bookandmusic.gitee.io/2020/03/16/drf-shu-ju-fen-ye/">http://bookandmusic.gitee.io/2020/03/16/drf-shu-ju-fen-ye/</a>
+                    <a href="https://bookandmusic.github.io/2020/03/16/drf-shu-ju-fen-ye/">https://bookandmusic.github.io/2020/03/16/drf-shu-ju-fen-ye/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -785,9 +805,12 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            图片上传static 和 media 都是存放文件的地方，但是又有区别，以下是两个文件夹的区别和用法
-static定义static 是静态文件，主要存的是 CSS, JavaScript, 网站 logo 等不变的文件。
-配置配置 sett
+                            ¶图片上传
+static 和 media 都是存放文件的地方，但是又有区别，以下是两个文件夹的区别和用法
+¶static
+¶定义
+static 是静态文件，主要存的是 CSS, JavaScript, 网站 logo 等不变的文件。
+¶配置
                         
                     </div>
                     <div class="publish-info">
@@ -1021,7 +1044,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

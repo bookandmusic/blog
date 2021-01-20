@@ -371,7 +371,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    568
+                    560
                 </div>
                 
 
@@ -393,41 +393,47 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="正则匹配"><a href="#正则匹配" class="headerlink" title="正则匹配"></a>正则匹配</h2><ol>
+                <h2 id="正则匹配"><a class="header-anchor" href="#正则匹配">¶</a>正则匹配</h2>
+<ol>
 <li>题目描述：</li>
 </ol>
 <p>现公司要开发一个业务管理系统，要求注册环节的密码需要提示用户其安全等级，密码按如下规则进行计分，并根据不同的得分为密码进行安全等级划分；此外，密码的组成可以由字母，数字，以及符号构成。</p>
 <p>以下为密码分数判断选项，每项判断只能拿一个分项：</p>
 <ul>
-<li><p>密码长度:</p>
+<li>
+<p>密码长度:</p>
 <ul>
 <li>5 分: 小于等于4个字符</li>
 <li>10 分: 5到7字符</li>
 <li>25 分: 大于等于8个字符</li>
 </ul>
 </li>
-<li><p>字母:</p>
+<li>
+<p>字母:</p>
 <ul>
 <li>0 分: 没有字母</li>
 <li>10 分: 全都是小（大）写字母</li>
 <li>20 分: 大小写混合字母</li>
 </ul>
 </li>
-<li><p>数字:</p>
+<li>
+<p>数字:</p>
 <ul>
 <li>0 分: 没有数字</li>
 <li>10 分: 1个数字</li>
 <li>20 分: 大于1个数字</li>
 </ul>
 </li>
-<li><p>符号:</p>
+<li>
+<p>符号:</p>
 <ul>
 <li>0 分: 没有符号</li>
 <li>10 分: 1个符号</li>
 <li>25 分: 大于1个符号</li>
 </ul>
 </li>
-<li><p>奖励:</p>
+<li>
+<p>奖励:</p>
 <ul>
 <li>2 分: 字母和数字</li>
 <li>3 分: 字母、数字和符号</li>
@@ -436,82 +442,91 @@
 </li>
 </ul>
 <p>最后的评分标准:</p>
-<p>  大于等于90: 非常安全<br>  大于等于80: 安全<br>  大于等于70: 非常强<br>  大于等于 60: 强<br>  大于等于 50: 一般<br>  大于等于 25: 弱<br>  大于等于0:  非常弱</p>
+<p>大于等于90: 非常安全<br>
+大于等于80: 安全<br>
+大于等于70: 非常强<br>
+大于等于 60: 强<br>
+大于等于 50: 一般<br>
+大于等于 25: 弱<br>
+大于等于0:  非常弱</p>
 <p>当用户输入一个密码字符串后，判断密码等级，并输出</p>
 <p>输入描述：</p>
-<pre class=" language-shell"><code class="language-shell">b12A3%$123</code></pre>
+<pre class=" language-language-shell"><code class="language-language-shell">b12A3%$123
+</code></pre>
 <p>输出：</p>
-<pre class=" language-shell"><code class="language-shell">非常安全</code></pre>
+<pre class=" language-language-shell"><code class="language-language-shell">非常安全
+</code></pre>
 <p>代码实现如下：</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> re
+<pre class=" language-language-python"><code class="language-language-python">import re
 
 
-<span class="token keyword">def</span> <span class="token function">s1</span><span class="token punctuation">(</span>password<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">if</span> re<span class="token punctuation">.</span>match<span class="token punctuation">(</span>r<span class="token string">".{,4}$"</span><span class="token punctuation">,</span> password<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token number">5</span>
-    <span class="token keyword">if</span> re<span class="token punctuation">.</span>match<span class="token punctuation">(</span>r<span class="token string">".{5,7}$"</span><span class="token punctuation">,</span> password<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token number">10</span>
+def s1(password):
+    if re.match(r".{,4}$", password):
+        return 5
+    if re.match(r".{5,7}$", password):
+        return 10
 
-    <span class="token keyword">if</span> re<span class="token punctuation">.</span>match<span class="token punctuation">(</span>r<span class="token string">".{8,}$"</span><span class="token punctuation">,</span> password<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token number">25</span>
-
-
-<span class="token keyword">def</span> <span class="token function">s2</span><span class="token punctuation">(</span>password<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">if</span> re<span class="token punctuation">.</span>match<span class="token punctuation">(</span>r<span class="token string">"[^a-zA-Z]*$"</span><span class="token punctuation">,</span> password<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token number">0</span>
-    <span class="token keyword">if</span> re<span class="token punctuation">.</span>match<span class="token punctuation">(</span>r<span class="token string">"([a-z]*$)|([A-Z]*$)"</span><span class="token punctuation">,</span> password<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token number">10</span>
-
-    <span class="token keyword">if</span> re<span class="token punctuation">.</span>match<span class="token punctuation">(</span>r<span class="token string">".*(?=.*[a-z])(?=.*[A-Z]).*$"</span><span class="token punctuation">,</span> password<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token number">20</span>
+    if re.match(r".{8,}$", password):
+        return 25
 
 
-<span class="token keyword">def</span> <span class="token function">s3</span><span class="token punctuation">(</span>password<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">if</span> re<span class="token punctuation">.</span>match<span class="token punctuation">(</span>r<span class="token string">"[^\d]*$"</span><span class="token punctuation">,</span> password<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token number">0</span>
-    <span class="token keyword">if</span> re<span class="token punctuation">.</span>match<span class="token punctuation">(</span>r<span class="token string">"[^\d]*[\d][^\d]*$"</span><span class="token punctuation">,</span> password<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token number">10</span>
-    <span class="token keyword">if</span> re<span class="token punctuation">.</span>match<span class="token punctuation">(</span>r<span class="token string">".*[\d]+.*[\d]+.*$"</span><span class="token punctuation">,</span> password<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token number">20</span>
+def s2(password):
+    if re.match(r"[^a-zA-Z]*$", password):
+        return 0
+    if re.match(r"([a-z]*$)|([A-Z]*$)", password):
+        return 10
+
+    if re.match(r".*(?=.*[a-z])(?=.*[A-Z]).*$", password):
+        return 20
 
 
-<span class="token keyword">def</span> <span class="token function">s4</span><span class="token punctuation">(</span>password<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">if</span> re<span class="token punctuation">.</span>match<span class="token punctuation">(</span>r<span class="token string">"[^!@#$%^&amp;*?]*$"</span><span class="token punctuation">,</span> password<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token number">0</span>
-    <span class="token keyword">if</span> re<span class="token punctuation">.</span>match<span class="token punctuation">(</span>r<span class="token string">"[^!@#$%^&amp;*?]*[!@#$%^&amp;*?][^!@#$%^&amp;*?]*$"</span><span class="token punctuation">,</span> password<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token number">10</span>
-    <span class="token keyword">if</span> re<span class="token punctuation">.</span>match<span class="token punctuation">(</span>r<span class="token string">".*[!@#$%^&amp;*?]+.*[!@#$%^&amp;*?]+.*$"</span><span class="token punctuation">,</span> password<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token number">20</span>
+def s3(password):
+    if re.match(r"[^\d]*$", password):
+        return 0
+    if re.match(r"[^\d]*[\d][^\d]*$", password):
+        return 10
+    if re.match(r".*[\d]+.*[\d]+.*$", password):
+        return 20
 
 
-<span class="token keyword">def</span> <span class="token function">s5</span><span class="token punctuation">(</span>password<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">if</span> re<span class="token punctuation">.</span>match<span class="token punctuation">(</span>r<span class="token string">".*(?=.*\d.*$)(?=.*[!@#$%^&amp;*?].*$)(?=.*[a-z].*$)(?=.*[A-Z].*$).*$"</span><span class="token punctuation">,</span> password<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token number">5</span>
-
-    <span class="token keyword">if</span> re<span class="token punctuation">.</span>match<span class="token punctuation">(</span>r<span class="token string">"(?=.*\d.*$)(?=.*[!@#$%^&amp;*?].*$)(?=.*[a-zA-Z].*$).*$"</span><span class="token punctuation">,</span> password<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token number">3</span>
-
-    <span class="token keyword">if</span> re<span class="token punctuation">.</span>match<span class="token punctuation">(</span>r<span class="token string">".*(?=.*[\d].*$)(?=.*[a-zA-Z].*$).*$"</span><span class="token punctuation">,</span> password<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token number">2</span>
+def s4(password):
+    if re.match(r"[^!@#$%^&*?]*$", password):
+        return 0
+    if re.match(r"[^!@#$%^&*?]*[!@#$%^&*?][^!@#$%^&*?]*$", password):
+        return 10
+    if re.match(r".*[!@#$%^&*?]+.*[!@#$%^&*?]+.*$", password):
+        return 20
 
 
-password <span class="token operator">=</span> input<span class="token punctuation">(</span><span class="token string">"请输入密码："</span><span class="token punctuation">)</span>
-ret <span class="token operator">=</span> sum<span class="token punctuation">(</span><span class="token punctuation">(</span>s1<span class="token punctuation">(</span>password<span class="token punctuation">)</span><span class="token punctuation">,</span> s2<span class="token punctuation">(</span>password<span class="token punctuation">)</span><span class="token punctuation">,</span> s3<span class="token punctuation">(</span>password<span class="token punctuation">)</span><span class="token punctuation">,</span> s4<span class="token punctuation">(</span>password<span class="token punctuation">)</span><span class="token punctuation">,</span> s5<span class="token punctuation">(</span>password<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+def s5(password):
+    if re.match(r".*(?=.*\d.*$)(?=.*[!@#$%^&*?].*$)(?=.*[a-z].*$)(?=.*[A-Z].*$).*$", password):
+        return 5
 
-<span class="token keyword">if</span> ret <span class="token operator">>=</span> <span class="token number">90</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"非常安全"</span><span class="token punctuation">)</span>
-<span class="token keyword">elif</span> ret <span class="token operator">>=</span> <span class="token number">80</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"安全"</span><span class="token punctuation">)</span>
-<span class="token keyword">elif</span> ret <span class="token operator">>=</span> <span class="token number">70</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"非常强"</span><span class="token punctuation">)</span>
-<span class="token keyword">elif</span> ret <span class="token operator">>=</span> <span class="token number">60</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"强"</span><span class="token punctuation">)</span>
-<span class="token keyword">elif</span> ret <span class="token operator">>=</span> <span class="token number">50</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"一般"</span><span class="token punctuation">)</span>
-<span class="token keyword">elif</span> ret <span class="token operator">>=</span> <span class="token number">25</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"弱"</span><span class="token punctuation">)</span>
-<span class="token keyword">else</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"非常弱"</span><span class="token punctuation">)</span>
+    if re.match(r"(?=.*\d.*$)(?=.*[!@#$%^&*?].*$)(?=.*[a-zA-Z].*$).*$", password):
+        return 3
+
+    if re.match(r".*(?=.*[\d].*$)(?=.*[a-zA-Z].*$).*$", password):
+        return 2
+
+
+password = input("请输入密码：")
+ret = sum((s1(password), s2(password), s3(password), s4(password), s5(password)))
+
+if ret >= 90:
+    print("非常安全")
+elif ret >= 80:
+    print("安全")
+elif ret >= 70:
+    print("非常强")
+elif ret >= 60:
+    print("强")
+elif ret >= 50:
+    print("一般")
+elif ret >= 25:
+    print("弱")
+else:
+    print("非常弱")
+
 </code></pre>
 
             </div>
@@ -538,7 +553,7 @@ ret <span class="token operator">=</span> sum<span class="token punctuation">(</
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bookandmusic.gitee.io/2019/05/23/python-gao-ji-zheng-ze-pi-pei/">http://bookandmusic.gitee.io/2019/05/23/python-gao-ji-zheng-ze-pi-pei/</a>
+                    <a href="https://bookandmusic.github.io/2019/05/23/python-gao-ji-zheng-ze-pi-pei/">https://bookandmusic.github.io/2019/05/23/python-gao-ji-zheng-ze-pi-pei/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -749,25 +764,29 @@ ret <span class="token operator">=</span> sum<span class="token punctuation">(</
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/05/25/gong-ju-win10-pyhton2-he-3-gong-cun/">
+                <a href="/2019/05/25/python-han-shu-nei-zhi-han-shu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="win10 python2和python3共存问题">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="内置函数">
                         
-                        <span class="card-title">win10 python2和python3共存问题</span>
+                        <span class="card-title">内置函数</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
-特别说明，本文是在 Windows64 位系统下进行的，32 位系统请下载相应版本的安装包，安装方法类似。
+                            ¶python内置函数
 
+Python 内置函数就是 python 标准库里（语言自身携带的）函数（公共函数）。
 
+那么，接下来就来谈一谈 python 里的内置函数
+¶1、abs()
 
-1、下载 python3 和 python2进入 python 官网，链接 https://www.python.org/
+此函数返回数字的绝对值。
 
+a = 5
+b = -1
                         
                     </div>
                     <div class="publish-info">
@@ -778,12 +797,16 @@ ret <span class="token operator">=</span> sum<span class="token punctuation">(</
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%B7%A5%E5%85%B7/" class="post-category">
-                                    工具
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                    技术
                                 </a>
                             
-                            <a href="/categories/%E5%B7%A5%E5%85%B7/python/" class="post-category">
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/python/" class="post-category">
                                     python
+                                </a>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E5%87%BD%E6%95%B0/" class="post-category">
+                                    函数
                                 </a>
                             
                             
@@ -793,20 +816,16 @@ ret <span class="token operator">=</span> sum<span class="token punctuation">(</
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Windows/">
-                        <span class="chip bg-color">Windows</span>
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
                     </a>
                     
-                    <a href="/tags/python2/">
-                        <span class="chip bg-color">python2</span>
+                    <a href="/tags/%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">基础</span>
                     </a>
                     
-                    <a href="/tags/python3/">
-                        <span class="chip bg-color">python3</span>
-                    </a>
-                    
-                    <a href="/tags/pip/">
-                        <span class="chip bg-color">pip</span>
+                    <a href="/tags/%E5%87%BD%E6%95%B0/">
+                        <span class="chip bg-color">函数</span>
                     </a>
                     
                 </div>
@@ -832,11 +851,12 @@ ret <span class="token operator">=</span> sum<span class="token punctuation">(</
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            python 线程与进程简介1. 进程与线程的历史我们都知道计算机是由硬件和软件组成的。
+                            ¶python 线程与进程简介
+¶1. 进程与线程的历史
+我们都知道计算机是由硬件和软件组成的。
 
 硬件中的 CPU 是计算机的核心，它承担计算机的所有任务。
-操作系统是运行在硬件之上的软件，是计算机的管理者，它负责资源的管理和分配、任务的调度。
-
+操作系统是运行在硬件之上的软件，是计算机的管理者，它负责资源的管理和分配、任务的
                         
                     </div>
                     <div class="publish-info">
@@ -1082,7 +1102,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

@@ -410,144 +410,158 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <ol>
-<li><p>定义</p>
+<li>
+<p>定义</p>
 <p>当一个函数 接收 另一个函数作为参数， 它就是 <code>高阶函数</code></p>
 </li>
 </ol>
 <a id="more"></a>
-
 <ol start="2">
-<li><p>示例</p>
-<pre class=" language-python"><code class="language-python"> <span class="token keyword">def</span> <span class="token function">func</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
-     a<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># a就是传递的 函数参数f，  执行 a 相当于 执行  f</span>
+<li>
+<p>示例</p>
+<pre class=" language-language-python"><code class="language-language-python">def func(a, x, y):
+    a(x, y)  # a就是传递的 函数参数f，  执行 a 相当于 执行  f
 
- <span class="token keyword">def</span> <span class="token function">f</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
-     <span class="token keyword">print</span><span class="token punctuation">(</span>x <span class="token operator">+</span> y<span class="token punctuation">)</span>
+def f(x, y):
+    print(x + y)
 
- func<span class="token punctuation">(</span>f<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 3， 在函数f执行过程中，输出 3</span></code></pre>
+func(f, 1, 2)  # 3， 在函数f执行过程中，输出 3
+</code></pre>
 </li>
 </ol>
-<h2 id="四大高阶函数"><a href="#四大高阶函数" class="headerlink" title="四大高阶函数"></a>四大高阶函数</h2><h3 id="map-func-iterable"><a href="#map-func-iterable" class="headerlink" title="map(func, iterable)"></a><code>map(func, iterable)</code></h3><blockquote>
+<h2 id="四大高阶函数"><a class="header-anchor" href="#四大高阶函数">¶</a>四大高阶函数</h2>
+<h3 id="map-func-iterable"><a class="header-anchor" href="#map-func-iterable">¶</a><code>map(func, iterable)</code></h3>
+<blockquote>
 <p>将 <strong>可迭代对象</strong> 中的每个值 按照 第一个参数( <strong>函数</strong>)的 规则 依次 处理， 得到一个 新的 <strong>迭代器</strong> 对象</p>
 </blockquote>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">func</span><span class="token punctuation">(</span>alist<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token triple-quoted-string string">"""
+<pre class=" language-language-python"><code class="language-language-python">def func(alist):
+    """
     :param alist: 接收列表作为参数
     :return: 将列表中每个数字，求平方之后，返回一个新列表
-    """</span>
+    """
 
-    <span class="token keyword">def</span> <span class="token function">sqr</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> x <span class="token operator">*</span> x
+    def sqr(x):
+        return x * x
 
-    r <span class="token operator">=</span> map<span class="token punctuation">(</span>sqr<span class="token punctuation">,</span> alist<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># r是迭代器对象</span>
+    r = map(sqr, alist) # r是迭代器对象
 
-    <span class="token keyword">return</span> list<span class="token punctuation">(</span>r<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 将迭代器对象转换为列表</span>
-
-
-r <span class="token operator">=</span> func<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">22</span><span class="token punctuation">,</span> <span class="token number">33</span><span class="token punctuation">,</span> <span class="token number">44</span><span class="token punctuation">,</span> <span class="token number">55</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span></code></pre>
-<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 定义函数， 接收 列表 作为参数 ， 返回一个 包含 绝对值  的新列表</span>
-<span class="token comment" spellcheck="true"># abs()：python内置函数，求一个数的绝对值</span>
-<span class="token keyword">def</span> <span class="token function">func</span><span class="token punctuation">(</span>alist<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token comment" spellcheck="true"># map 高阶函数需要的参数，不用管是内置的，还是自定义的</span>
-    r <span class="token operator">=</span> map<span class="token punctuation">(</span>abs<span class="token punctuation">,</span> alist<span class="token punctuation">)</span>
-    <span class="token keyword">return</span> list<span class="token punctuation">(</span>r<span class="token punctuation">)</span>
+    return list(r)  # 将迭代器对象转换为列表
 
 
-r <span class="token operator">=</span> func<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">34</span><span class="token punctuation">,</span> <span class="token number">56</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">98</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-
-<span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># [12, 34, 56, 98]</span></code></pre>
-<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 定义函数，接收 一个 包含 单词的字符串， 返回 一个 每个单词 首字母大写 的字符串</span>
-<span class="token keyword">def</span> <span class="token function">func</span><span class="token punctuation">(</span>astr<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token comment" spellcheck="true"># 将字符串切分为单词列表</span>
-    wlist <span class="token operator">=</span> astr<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-    <span class="token keyword">def</span> <span class="token function">toUpper</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> x<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-    r <span class="token operator">=</span> map<span class="token punctuation">(</span>toUpper<span class="token punctuation">,</span> wlist<span class="token punctuation">)</span>
-
-    <span class="token comment" spellcheck="true"># 将单词拼接为字符串</span>
-    s <span class="token operator">=</span> <span class="token string">" "</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>r<span class="token punctuation">)</span>
-
-    <span class="token keyword">return</span> s
+r = func([11, 22, 33, 44, 55])
+print(r)
+</code></pre>
+<pre class=" language-language-python"><code class="language-language-python"># 定义函数， 接收 列表 作为参数 ， 返回一个 包含 绝对值  的新列表
+# abs()：python内置函数，求一个数的绝对值
+def func(alist):
+    # map 高阶函数需要的参数，不用管是内置的，还是自定义的
+    r = map(abs, alist)
+    return list(r)
 
 
-r <span class="token operator">=</span> func<span class="token punctuation">(</span><span class="token string">"a good  fruit apple"</span><span class="token punctuation">)</span>
+r = func([-12, 34, 56, -98])
 
-<span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># " A Good  Fruit Apple"</span>
+print(r)  # [12, 34, 56, 98]
+</code></pre>
+<pre class=" language-language-python"><code class="language-language-python"># 定义函数，接收 一个 包含 单词的字符串， 返回 一个 每个单词 首字母大写 的字符串
+def func(astr):
+    # 将字符串切分为单词列表
+    wlist = astr.split()
 
-<span class="token comment" spellcheck="true"># 提示： 可以考虑 将 字符串按照 单词 切分， map处理之后， 再 重新拼接为字符串</span></code></pre>
-<h3 id="reduce-func-iterable"><a href="#reduce-func-iterable" class="headerlink" title="reduce(func, iterable)"></a><code>reduce(func, iterable)</code></h3><blockquote>
+    def toUpper(x):
+        return x.title()
+
+    r = map(toUpper, wlist)
+
+    # 将单词拼接为字符串
+    s = " ".join(r)
+
+    return s
+
+
+r = func("a good  fruit apple")
+
+print(r)  # " A Good  Fruit Apple"
+
+# 提示： 可以考虑 将 字符串按照 单词 切分， map处理之后， 再 重新拼接为字符串
+</code></pre>
+<h3 id="reduce-func-iterable"><a class="header-anchor" href="#reduce-func-iterable">¶</a><code>reduce(func, iterable)</code></h3>
+<blockquote>
 <p>将可迭代对象中所有的元素，按照第一个 函数的规则， 连续操作，得到一个  <strong>具体的数据</strong></p>
 </blockquote>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> functools <span class="token keyword">import</span> reduce
+<pre class=" language-language-python"><code class="language-language-python">from functools import reduce
 
 
-<span class="token comment" spellcheck="true"># 自定义一个Mysum()函数，接收一个列表作为参数， 返回列表中所有元素之和</span>
-<span class="token keyword">def</span> <span class="token function">mysum</span><span class="token punctuation">(</span>alist<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">add</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> x <span class="token operator">+</span> y
+# 自定义一个Mysum()函数，接收一个列表作为参数， 返回列表中所有元素之和
+def mysum(alist):
+    def add(x, y):
+        return x + y
 
-    r <span class="token operator">=</span> reduce<span class="token punctuation">(</span>add<span class="token punctuation">,</span> alist<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># reduce 的结果是一个具体的值</span>
+    r = reduce(add, alist) # reduce 的结果是一个具体的值
 
-    <span class="token keyword">return</span> r
+    return r
 
 
-r <span class="token operator">=</span> mysum<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 15</span></code></pre>
-<h3 id="filter-func-iterable"><a href="#filter-func-iterable" class="headerlink" title="filter(func, iterable)"></a><code>filter(func, iterable)</code></h3><blockquote>
+r = mysum([1, 2, 3, 4, 5])
+print(r)  # 15
+</code></pre>
+<h3 id="filter-func-iterable"><a class="header-anchor" href="#filter-func-iterable">¶</a><code>filter(func, iterable)</code></h3>
+<blockquote>
 <p>按照第一个 函数的 <strong>返回值</strong> 对 可迭代对象 中 所有的数据 进行 过滤， 得到一个 包含过滤后结果的 <strong>迭代器对象</strong></p>
 </blockquote>
-<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 自定义一个filterNumber()函数，接收一个列表作为参数， 返回一个 包含偶数 的列表</span>
+<pre class=" language-language-python"><code class="language-language-python"># 自定义一个filterNumber()函数，接收一个列表作为参数， 返回一个 包含偶数 的列表
 
-<span class="token keyword">def</span> <span class="token function">filterNumber</span><span class="token punctuation">(</span>alist<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">is_even</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">"""如果函数的返回结果为True, 对应的元素可以得到"""</span>
-        <span class="token keyword">if</span> x <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
-            <span class="token keyword">return</span> <span class="token boolean">True</span>
+def filterNumber(alist):
+    def is_even(x):
+        """如果函数的返回结果为True, 对应的元素可以得到"""
+        if x % 2 == 0:
+            return True
 
-    r <span class="token operator">=</span> filter<span class="token punctuation">(</span>is_even<span class="token punctuation">,</span> alist<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># r也是迭代器对象</span>
+    r = filter(is_even, alist)  # r也是迭代器对象
 
-    <span class="token keyword">return</span> list<span class="token punctuation">(</span>r<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 通过类型转换，将迭代器中数据取出</span>
-
-
-r <span class="token operator">=</span> filterNumber<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># [2, 4, 6]]</span></code></pre>
-<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 自定义一个函数 sevenNumber()函数，接收一个列表作为参数， 返回一个 包含 "逢7必过" 数字的新列表</span>
-<span class="token keyword">def</span> <span class="token function">sevenNumber</span><span class="token punctuation">(</span>alist<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">f</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token comment" spellcheck="true"># 判断为7的倍数，返回True</span>
-        <span class="token keyword">if</span> x <span class="token operator">%</span> <span class="token number">7</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">or</span> <span class="token string">'7'</span> <span class="token keyword">in</span> str<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
-            <span class="token keyword">return</span> <span class="token boolean">True</span>
-
-    r <span class="token operator">=</span> filter<span class="token punctuation">(</span>f<span class="token punctuation">,</span> alist<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># r是迭代器对象</span>
-
-    <span class="token keyword">return</span> list<span class="token punctuation">(</span>r<span class="token punctuation">)</span>
+    return list(r)  # 通过类型转换，将迭代器中数据取出
 
 
-r <span class="token operator">=</span> sevenNumber<span class="token punctuation">(</span>range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">101</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span></code></pre>
-<h3 id="sorted-iterable-key-func-reverse-False"><a href="#sorted-iterable-key-func-reverse-False" class="headerlink" title="sorted(iterable, key=func, reverse=False)"></a><code>sorted(iterable, key=func, reverse=False)</code></h3><blockquote>
+r = filterNumber([1, 2, 3, 4, 5, 6])
+print(r)  # [2, 4, 6]]
+</code></pre>
+<pre class=" language-language-python"><code class="language-language-python"># 自定义一个函数 sevenNumber()函数，接收一个列表作为参数， 返回一个 包含 "逢7必过" 数字的新列表
+def sevenNumber(alist):
+    def f(x):
+        # 判断为7的倍数，返回True
+        if x % 7 == 0 or '7' in str(x):
+            return True
+
+    r = filter(f, alist)  # r是迭代器对象
+
+    return list(r)
+
+
+r = sevenNumber(range(1, 101))
+print(r)
+</code></pre>
+<h3 id="sorted-iterable-key-func-reverse-False"><a class="header-anchor" href="#sorted-iterable-key-func-reverse-False">¶</a><code>sorted(iterable, key=func, reverse=False)</code></h3>
+<blockquote>
 <p>默认将列表 按照 升序 排序</p>
 </blockquote>
-<pre class=" language-python"><code class="language-python">alist <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">21</span><span class="token punctuation">,</span> <span class="token number">14</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">67</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">34</span><span class="token punctuation">,</span> <span class="token number">19</span><span class="token punctuation">]</span>
+<pre class=" language-language-python"><code class="language-language-python">alist = [21, 14, -67, -34, 19]
 
-<span class="token comment" spellcheck="true"># 按照 数字大小 升序 排序</span>
-r <span class="token operator">=</span> sorted<span class="token punctuation">(</span>alist<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># [-67, -34, 14, 19, 21]</span>
+# 按照 数字大小 升序 排序
+r = sorted(alist)
+print(r)  # [-67, -34, 14, 19, 21]
 
-<span class="token comment" spellcheck="true"># 按照 数字大小 降序 排序</span>
-r <span class="token operator">=</span> sorted<span class="token punctuation">(</span>alist<span class="token punctuation">,</span> reverse<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># [21, 19, 14, -34, -67]</span>
+# 按照 数字大小 降序 排序
+r = sorted(alist, reverse=True)
+print(r)  # [21, 19, 14, -34, -67]
 
-<span class="token comment" spellcheck="true"># 按照每 个数字的绝对值 升序 排序</span>
-r <span class="token operator">=</span> sorted<span class="token punctuation">(</span>alist<span class="token punctuation">,</span> key<span class="token operator">=</span>abs<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># [14, 19, 21, -34, -67]</span>
+# 按照每 个数字的绝对值 升序 排序
+r = sorted(alist, key=abs)
+print(r)  # [14, 19, 21, -34, -67]
 
-<span class="token comment" spellcheck="true"># 按照 每个数字的绝对值 降序 排序</span>
-r <span class="token operator">=</span> sorted<span class="token punctuation">(</span>alist<span class="token punctuation">,</span> key<span class="token operator">=</span>abs<span class="token punctuation">,</span> reverse<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># [-67, -34, 21, 19, 14]</span></code></pre>
+# 按照 每个数字的绝对值 降序 排序
+r = sorted(alist, key=abs, reverse=True)
+print(r)  # [-67, -34, 21, 19, 14]
+</code></pre>
 
             </div>
             <hr/>
@@ -573,7 +587,7 @@ r <span class="token operator">=</span> sorted<span class="token punctuation">(<
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bookandmusic.gitee.io/2020/06/06/python-han-shu-gao-jie-han-shu/">http://bookandmusic.gitee.io/2020/06/06/python-han-shu-gao-jie-han-shu/</a>
+                    <a href="https://bookandmusic.github.io/2020/06/06/python-han-shu-gao-jie-han-shu/">https://bookandmusic.github.io/2020/06/06/python-han-shu-gao-jie-han-shu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -821,7 +835,8 @@ r <span class="token operator">=</span> sorted<span class="token punctuation">(<
 lambda表达式的语法：
 lambda argument_list: expression
 
-argument_list是参数列表。它的结构与Python中函数(function)的参数
+
+argument_list是参数列表。它的结构与Python中函数(function)的参
                         
                     </div>
                     <div class="publish-info">
@@ -882,13 +897,13 @@ argument_list是参数列表。它的结构与Python中函数(function)的参数
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            变量的作用域
+                            ¶变量的作用域
+
 在Python程序中创建、改变、查找变量名时，都是在一个保存变量名的空间中进行，我们称之为命名空间，也被称之为作用域。
 
 
 
-
-Python的作用域是静态的，在源代码中变量名被赋值的位置决定了该变量能被访问的范围。即Pytho
+Python的作用域是静态的，在源代码中变量名被赋值的位置决定了该变量能被访问的范围。即Pyth
                         
                     </div>
                     <div class="publish-info">
@@ -1134,7 +1149,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

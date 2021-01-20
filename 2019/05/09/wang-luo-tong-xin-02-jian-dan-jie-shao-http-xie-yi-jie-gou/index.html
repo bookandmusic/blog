@@ -397,31 +397,53 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>首先，应用 <code>HTTP</code> 协议时，必定有客户端和服务器端。<br>其中，发起请求的是客户端，响应请求并返回的是服务端。</p>
-<h2 id="1、请求报文"><a href="#1、请求报文" class="headerlink" title="1、请求报文"></a>1、请求报文</h2><p>请求报文是由请求方法、请求 <code>URI</code>、协议版本、可选的请求首部字段和内容实体构成的。</p>
+                <p>首先，应用 <code>HTTP</code> 协议时，必定有客户端和服务器端。<br>
+其中，发起请求的是客户端，响应请求并返回的是服务端。</p>
+<h2 id="1、请求报文"><a class="header-anchor" href="#1、请求报文">¶</a>1、请求报文</h2>
+<p>请求报文是由请求方法、请求 <code>URI</code>、协议版本、可选的请求首部字段和内容实体构成的。</p>
 <p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526111207-%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%20.png" alt="20190526111207-请求报文"></p>
-<h2 id="2、响应报文"><a href="#2、响应报文" class="headerlink" title="2、响应报文"></a>2、响应报文</h2><p>服务器以响应的形式返回处理结果。</p>
+<h2 id="2、响应报文"><a class="header-anchor" href="#2、响应报文">¶</a>2、响应报文</h2>
+<p>服务器以响应的形式返回处理结果。</p>
 <p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526111215-%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87%20.png" alt="20190526111215-响应报文"></p>
-<p><code>200 OK</code> 是状态码（<code>status</code> <code>code</code>）和 原因短语。<br>下一行是创建相应的日期，是首部字段 (<code>header</code> <code>field</code>) 的一个属性。<br>下一行是返回内容的总长度。<br>下一行是返回内容的类型。<br>空行后的是资源实体的主体内容。</p>
+<p><code>200 OK</code> 是状态码（<code>status</code> <code>code</code>）和 原因短语。<br>
+下一行是创建相应的日期，是首部字段 (<code>header</code> <code>field</code>) 的一个属性。<br>
+下一行是返回内容的总长度。<br>
+下一行是返回内容的类型。<br>
+空行后的是资源实体的主体内容。</p>
 <p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526111221-%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%8702%20.png" alt="20190526111221-响应报文02"></p>
-<h2 id="3、HTTP-是无状态（stateless）协议。"><a href="#3、HTTP-是无状态（stateless）协议。" class="headerlink" title="3、HTTP 是无状态（stateless）协议。"></a>3、HTTP 是无状态（stateless）协议。</h2><p>  HTTP 自身不对请求和相应之间的通信状态进行保存，即不对发送过的请求或响应进行持久化处理。<br>  这是为了更快地处理大量事务，确保协议的可伸缩性。<br>  这一技术的<strong>问题</strong>就是当访问一家网站的多个页面时，无法保存其登陆状态，所以根据这一问题，引入了 <code>Cookie</code> 技术来管理状态。</p>
-<h2 id="4、HTTP-方法"><a href="#4、HTTP-方法" class="headerlink" title="4、HTTP 方法"></a>4、HTTP 方法</h2><p>  下面就简单介绍一下常用的几种方法，<code>GET</code>、<code>POST</code> 和 <code>HEAD</code> 除此之外的还有 <code>PUT</code>、<code>DELETE</code>、<code>OPTIONS</code>、<code>TRACE</code> 和 <code>CONNECT</code>，这些不太常用，所以不在这里赘述了。</p>
-<h3 id="GET"><a href="#GET" class="headerlink" title="GET"></a><code>GET</code></h3><p>  获取资源。请求已被 <code>URI</code> 识别的资源，就是经过服务器解析后返回的响应内容，文本就保持原样返回，如果是可执行程序，就返回结果。</p>
+<h2 id="3、HTTP-是无状态（stateless）协议。"><a class="header-anchor" href="#3、HTTP-是无状态（stateless）协议。">¶</a>3、HTTP 是无状态（stateless）协议。</h2>
+<p>HTTP 自身不对请求和相应之间的通信状态进行保存，即不对发送过的请求或响应进行持久化处理。<br>
+  这是为了更快地处理大量事务，确保协议的可伸缩性。<br>
+  这一技术的<strong>问题</strong>就是当访问一家网站的多个页面时，无法保存其登陆状态，所以根据这一问题，引入了 <code>Cookie</code> 技术来管理状态。</p>
+<h2 id="4、HTTP-方法"><a class="header-anchor" href="#4、HTTP-方法">¶</a>4、HTTP 方法</h2>
+<p>下面就简单介绍一下常用的几种方法，<code>GET</code>、<code>POST</code> 和 <code>HEAD</code> 除此之外的还有 <code>PUT</code>、<code>DELETE</code>、<code>OPTIONS</code>、<code>TRACE</code> 和 <code>CONNECT</code>，这些不太常用，所以不在这里赘述了。</p>
+<h3 id="GET"><a class="header-anchor" href="#GET">¶</a><code>GET</code></h3>
+<p>获取资源。请求已被 <code>URI</code> 识别的资源，就是经过服务器解析后返回的响应内容，文本就保持原样返回，如果是可执行程序，就返回结果。</p>
 <p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526111129-GET%E6%96%B9%E5%BC%8F%20.png" alt="20190526111129-GET方式"></p>
-<h3 id="POST"><a href="#POST" class="headerlink" title="POST"></a><code>POST</code></h3><p>  传输实体主体。</p>
+<h3 id="POST"><a class="header-anchor" href="#POST">¶</a><code>POST</code></h3>
+<p>传输实体主体。</p>
 <p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526111137-POST%E6%96%B9%E5%BC%8F%20.png" alt="20190526111137-POST方式"></p>
-<h3 id="HEAD"><a href="#HEAD" class="headerlink" title="HEAD"></a><code>HEAD</code></h3><p>  获得报文首部。和 <code>GET</code> 一样，但是不返回主体部分，只用于确认 <code>URI</code> 的有效性和资源更新的日期等。</p>
+<h3 id="HEAD"><a class="header-anchor" href="#HEAD">¶</a><code>HEAD</code></h3>
+<p>获得报文首部。和 <code>GET</code> 一样，但是不返回主体部分，只用于确认 <code>URI</code> 的有效性和资源更新的日期等。</p>
 <p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526111155-%E6%8A%A5%E6%96%87%E5%A4%B4%20.png" alt="20190526111155-报文头"></p>
 <blockquote>
-<p><strong>注意：</strong>方法名区分大小写，注意要用<strong>大写字母</strong>。</p>
+<p><strong>注意：<strong>方法名区分大小写，注意要用</strong>大写字母</strong>。</p>
 </blockquote>
-<h2 id="5、持久化连接"><a href="#5、持久化连接" class="headerlink" title="5、持久化连接"></a>5、持久化连接</h2><p>  当请求的资源有很多时，会发生多次的 <code>TCP</code> 连接和断开过程，增加了通信量的开销。于是产生了持久链接（<code>HTTP</code> <code>Persistent</code> <code>connections</code>）。<br>  <strong>特点：</strong> 只要任意一端没有明确提出断开连接，则保持 <code>TCP</code> 连接状态。</p>
+<h2 id="5、持久化连接"><a class="header-anchor" href="#5、持久化连接">¶</a>5、持久化连接</h2>
+<p>当请求的资源有很多时，会发生多次的 <code>TCP</code> 连接和断开过程，增加了通信量的开销。于是产生了持久链接（<code>HTTP</code> <code>Persistent</code> <code>connections</code>）。<br>
+  <strong>特点：</strong> 只要任意一端没有明确提出断开连接，则保持 <code>TCP</code> 连接状态。</p>
 <p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526111143-TCP%E9%93%BE%E6%8E%A5%20.png" alt="20190526111143-TCP链接"></p>
-<h2 id="6、管线化"><a href="#6、管线化" class="headerlink" title="6、管线化"></a>6、管线化</h2><p>  持久化连接需要等待上一个发送请求得到响应之后才能发送下一个请求，但是管线化技术可以直接发送，这样就能同时并发发送多个请求。</p>
+<h2 id="6、管线化"><a class="header-anchor" href="#6、管线化">¶</a>6、管线化</h2>
+<p>持久化连接需要等待上一个发送请求得到响应之后才能发送下一个请求，但是管线化技术可以直接发送，这样就能同时并发发送多个请求。</p>
 <p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526111200-%E7%AE%A1%E7%BA%BF%E5%8C%96%20.png" alt="20190526111200-管线化"></p>
-<h2 id="7、Cookie"><a href="#7、Cookie" class="headerlink" title="7、Cookie"></a>7、Cookie</h2><p>  状态管理。为了解决 <code>HTTP</code> 的无状态，<code>Cookie</code> 技术通过在请求和响应报文中写入 <code>Cookie</code> 信息来控制客户端的状态。具体实现是 <code>Cookie</code> 根据响应报文内 <code>Set-Cookie</code> 的首部字段信息，通知客户端保存 <code>Cookie</code>，当下一次再像<strong>该</strong>服务器发送请求，客户端会自动在请求报文中添加 <code>Cookie</code> 值后发送。服务端发现客户端发送的 <code>Cookie</code> 后，回去检查对比记录，得到状态信息。</p>
+<h2 id="7、Cookie"><a class="header-anchor" href="#7、Cookie">¶</a>7、Cookie</h2>
+<p>状态管理。为了解决 <code>HTTP</code> 的无状态，<code>Cookie</code> 技术通过在请求和响应报文中写入 <code>Cookie</code> 信息来控制客户端的状态。具体实现是 <code>Cookie</code> 根据响应报文内 <code>Set-Cookie</code> 的首部字段信息，通知客户端保存 <code>Cookie</code>，当下一次再像<strong>该</strong>服务器发送请求，客户端会自动在请求报文中添加 <code>Cookie</code> 值后发送。服务端发现客户端发送的 <code>Cookie</code> 后，回去检查对比记录，得到状态信息。</p>
 <p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526111108-Cookie%20.png" alt="20190526111108-Cookie"></p>
-<h2 id="自我回顾"><a href="#自我回顾" class="headerlink" title="自我回顾"></a>自我回顾</h2><p>1、请求报文、响应报文的基本组成？<br>2、什么是无状态协议，怎么解决的？<br>3、<code>HTTP</code> 的基本方法？分别有什么功能？<br>4、为了加快资源访问速度出现了什么方法？</p>
+<h2 id="自我回顾"><a class="header-anchor" href="#自我回顾">¶</a>自我回顾</h2>
+<p>1、请求报文、响应报文的基本组成？<br>
+2、什么是无状态协议，怎么解决的？<br>
+3、<code>HTTP</code> 的基本方法？分别有什么功能？<br>
+4、为了加快资源访问速度出现了什么方法？</p>
 
             </div>
             <hr/>
@@ -447,7 +469,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bookandmusic.gitee.io/2019/05/09/wang-luo-tong-xin-02-jian-dan-jie-shao-http-xie-yi-jie-gou/">http://bookandmusic.gitee.io/2019/05/09/wang-luo-tong-xin-02-jian-dan-jie-shao-http-xie-yi-jie-gou/</a>
+                    <a href="https://bookandmusic.github.io/2019/05/09/wang-luo-tong-xin-02-jian-dan-jie-shao-http-xie-yi-jie-gou/">https://bookandmusic.github.io/2019/05/09/wang-luo-tong-xin-02-jian-dan-jie-shao-http-xie-yi-jie-gou/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -675,7 +697,9 @@
                     <div class="summary block-with-text">
                         
                             HTTP 通信过程包括从客户端发往服务器端的请求以及从服务端返回客户端的响应。
-1、HTTP 报文就是一大串通信过程里经过 HTTP 处理后添加的报文。其大致分为报文首部和报文主体两块。两者由最初出现的空行（CR+LF）来划分，通常并不一定
+¶1、HTTP 报文
+就是一大串通信过程里经过 HTTP 处理后添加的报文。
+其大致分为报文首部和报文主体两块。两者由最初出现的空行（CR+LF）来划分，通常并
                         
                     </div>
                     <div class="publish-info">
@@ -724,25 +748,19 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/05/09/wang-luo-tong-xin-01-liao-jie-web-ji-wang-luo-ji-chu/">
+                <a href="/2019/05/09/suan-fa-pai-xu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="01—了解web及网络基础">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="经典排序算法总结与实现">
                         
-                        <span class="card-title">01—了解web及网络基础</span>
+                        <span class="card-title">经典排序算法总结与实现</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            HTTP 的出现主要是为了解决文本传输的难题
-
-
-TCP/IP 协议族：是互联网相关的各类协议族的总称
-重要的一点是分层: 应用层、传输层、网络层、数据链路层
-层次化的优点：1、修改某个地方只用改相应的层2、设计变简单，各层管理自己的职责
-
+                            经典排序算法在面试中占有很大的比重，也是基础，为了未雨绸缪，整理并用Python实现了七大经典排序算法，包括冒泡排序，插入排序，选择排序，希尔排序，归并排序，快速排序，堆排序。之所以用Python实现，主要是因为它更接近伪代码，能用更少的代
                         
                     </div>
                     <div class="publish-info">
@@ -757,12 +775,12 @@ TCP/IP 协议族：是互联网相关的各类协议族的总称
                                     技术
                                 </a>
                             
-                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/" class="post-category">
-                                    网络通信
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%AE%97%E6%B3%95/" class="post-category">
+                                    算法
                                 </a>
                             
-                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/" class="post-category">
-                                    TCP
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/" class="post-category">
+                                    排序
                                 </a>
                             
                             
@@ -772,12 +790,8 @@ TCP/IP 协议族：是互联网相关的各类协议族的总称
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/HTTP/">
-                        <span class="chip bg-color">HTTP</span>
-                    </a>
-                    
-                    <a href="/tags/TCP/">
-                        <span class="chip bg-color">TCP</span>
+                    <a href="/tags/%E6%8E%92%E5%BA%8F/">
+                        <span class="chip bg-color">排序</span>
                     </a>
                     
                 </div>
@@ -980,7 +994,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

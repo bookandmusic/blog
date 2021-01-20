@@ -371,7 +371,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    505
+                    503
                 </div>
                 
 
@@ -396,23 +396,32 @@
                 <p>很多函数都有自己的很多方法，其中有些方法的功能类似，但是其复杂度有时却大不相同</p>
 <p>本节我们将引入一个新模块 <code>timeit</code> ，其功能是来测试一小段 <code>Python</code> 代码的执行速度。</p>
 <a id="more"></a>
-
-<h3 id="1、timeit"><a href="#1、timeit" class="headerlink" title="1、timeit"></a>1、timeit</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">timeit</span><span class="token punctuation">.</span>Timer<span class="token punctuation">(</span>stmt<span class="token operator">=</span><span class="token string">'pass'</span><span class="token punctuation">,</span> setup<span class="token operator">=</span><span class="token string">'pass'</span><span class="token punctuation">,</span>timer<span class="token operator">=</span><span class="token operator">&lt;</span>timer function<span class="token operator">></span><span class="token punctuation">)</span></code></pre>
+<h3 id="1、timeit"><a class="header-anchor" href="#1、timeit">¶</a>1、timeit</h3>
+<pre class=" language-language-python"><code class="language-language-python">class timeit.Timer(stmt='pass', setup='pass',timer=<timer function>)
+</code></pre>
 <ul>
-<li><p><code>Timer</code> 是测量小段代码执行速度的类</p>
+<li>
+<p><code>Timer</code> 是测量小段代码执行速度的类</p>
 </li>
-<li><p><code>stmt</code> 是要测试的代码语句 (<code>statment</code>), 字符串类型,</p>
+<li>
+<p><code>stmt</code> 是要测试的代码语句 (<code>statment</code>), 字符串类型,</p>
 </li>
-<li><p><code>setup</code> 是运行代码时需要的设置 , 字符串类型, 就是从 <code>__main__</code> 引入需要的是的方法名</p>
+<li>
+<p><code>setup</code> 是运行代码时需要的设置 , 字符串类型, 就是从 <code>__main__</code> 引入需要的是的方法名</p>
 </li>
-<li><p><code>timer</code> 参数是一个定时器函数, 与平台有关, 不用去管</p>
+<li>
+<p><code>timer</code> 参数是一个定时器函数, 与平台有关, 不用去管</p>
 </li>
-<li><p><code>timeit.Timer.timeit(numer=1000000)</code>，<code>numer</code>-&gt; 测算次数, 返回平均耗时, 一个 <code>float</code> 类型的秒数</p>
+<li>
+<p><code>timeit.Timer.timeit(numer=1000000)</code>，<code>numer</code>-&gt; 测算次数, 返回平均耗时, 一个 <code>float</code> 类型的秒数</p>
 </li>
 </ul>
-<h4 id="部分测试示例"><a href="#部分测试示例" class="headerlink" title="部分测试示例"></a>部分测试示例</h4><p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526105816-timeit%E6%B5%8B%E8%AF%95%E7%A4%BA%E4%BE%8B%20.png" alt="20190526105816-timeit测试示例"></p>
-<h4 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h4><p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526105825-timeit%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C%20.png" alt="20190526105825-timeit测试结果"></p>
-<h3 id="2、list-的内置函数时间复杂度"><a href="#2、list-的内置函数时间复杂度" class="headerlink" title="2、list 的内置函数时间复杂度"></a>2、list 的内置函数时间复杂度</h3><table>
+<h4 id="部分测试示例"><a class="header-anchor" href="#部分测试示例">¶</a>部分测试示例</h4>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526105816-timeit%E6%B5%8B%E8%AF%95%E7%A4%BA%E4%BE%8B%20.png" alt="20190526105816-timeit测试示例"></p>
+<h4 id="测试结果"><a class="header-anchor" href="#测试结果">¶</a>测试结果</h4>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526105825-timeit%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C%20.png" alt="20190526105825-timeit测试结果"></p>
+<h3 id="2、list-的内置函数时间复杂度"><a class="header-anchor" href="#2、list-的内置函数时间复杂度">¶</a>2、list 的内置函数时间复杂度</h3>
+<table>
 <thead>
 <tr>
 <th>方法</th>
@@ -420,7 +429,8 @@
 <th>简介</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>index[x]</td>
 <td>O(1)</td>
 <td>索引</td>
@@ -500,8 +510,10 @@
 <td>O(nk)</td>
 <td>相乘 li=[1, 2] -&gt; n li * 10 -&gt; k</td>
 </tr>
-</tbody></table>
-<h3 id="3、dict-的内置函数时间复杂度"><a href="#3、dict-的内置函数时间复杂度" class="headerlink" title="3、dict 的内置函数时间复杂度"></a>3、dict 的内置函数时间复杂度</h3><table>
+</tbody>
+</table>
+<h3 id="3、dict-的内置函数时间复杂度"><a class="header-anchor" href="#3、dict-的内置函数时间复杂度">¶</a>3、dict 的内置函数时间复杂度</h3>
+<table>
 <thead>
 <tr>
 <th>方法</th>
@@ -509,7 +521,8 @@
 <th>简介</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>copy</td>
 <td>O(n)</td>
 <td>复制</td>
@@ -539,7 +552,8 @@
 <td>O(n)</td>
 <td>迭代</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
             </div>
             <hr/>
@@ -565,7 +579,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bookandmusic.gitee.io/2019/05/25/suan-fa-shi-jian-fu-za-du-02-chang-jian-han-shu-de-shi-jian-fu-za-du/">http://bookandmusic.gitee.io/2019/05/25/suan-fa-shi-jian-fu-za-du-02-chang-jian-han-shu-de-shi-jian-fu-za-du/</a>
+                    <a href="https://bookandmusic.github.io/2019/05/25/suan-fa-shi-jian-fu-za-du-02-chang-jian-han-shu-de-shi-jian-fu-za-du/">https://bookandmusic.github.io/2019/05/25/suan-fa-shi-jian-fu-za-du-02-chang-jian-han-shu-de-shi-jian-fu-za-du/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -791,7 +805,10 @@
                             
 Django2.0 新增了在 urls.py 中 app_name 来指定 namespace。我们之前通过 reverse 函数来反向获取 url
 
-reverse 语法reverse("&lt;namespace>:&lt;url-n
+¶reverse 语法
+reverse(":", kwargs={"": ""})
+
+
                         
                     </div>
                     <div class="publish-info">
@@ -864,8 +881,8 @@ reverse 语法reverse("&lt;namespace>:&lt;url-n
 算法 : 内功心法, 是解决问题的一种思想
 
 
-
-1、时间复杂度 $T(n)$由于每台机器的性能有所差别，所有其执行相同代码的时间也长短不一，故而推出一种计量方式，统计代码执行基本运算（函数调用需要看其源码的基本运算）的数量（n) 来确定
+¶1、时间复杂度 $T(n)$
+由于每台机器的性能有所差别，所有其执行相同代码的时间也长短不一，故而推出一种计量方式，统计代码执行基本运算（函数调用需要看其源码的基本运算）的数量（n) 来确
                         
                     </div>
                     <div class="publish-info">
@@ -1099,7 +1116,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

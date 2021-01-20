@@ -375,7 +375,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    302
+                    294
                 </div>
                 
 
@@ -397,11 +397,24 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>主键必然是唯一且不为空，但是唯一不一定是主键，而且主键只能有一个，但是唯一约束仅仅是为了保持某些列具有唯一性而已。所以可以有多列<br>一张表里只能有一个主键约束，可以有多个唯一约束<br>主键约束的字段不能为null，而唯一约束的字段可以为null值</p>
+                <p>主键必然是唯一且不为空，但是唯一不一定是主键，而且主键只能有一个，但是唯一约束仅仅是为了保持某些列具有唯一性而已。所以可以有多列<br>
+一张表里只能有一个主键约束，可以有多个唯一约束<br>
+主键约束的字段不能为null，而唯一约束的字段可以为null值</p>
 <a id="more"></a>
-
-<h3 id="主键约束（PRIMARY-KEY）"><a href="#主键约束（PRIMARY-KEY）" class="headerlink" title="主键约束（PRIMARY KEY）"></a>主键约束（PRIMARY KEY）</h3><p>1) 主键用于唯一地标识表中的每一条记录，可以定义一列或多列为主键。<br>2) 是不可能（或很难）更新．<br>3) 主键列上没有任何两行具有相同值（即重复值），不允许空（NULL）．<br>4) 主健可作外健，唯一索引不可；</p>
-<h3 id="唯一性约束（UNIQUE）"><a href="#唯一性约束（UNIQUE）" class="headerlink" title="唯一性约束（UNIQUE）"></a>唯一性约束（UNIQUE）</h3><p>1) 唯一性约束用来限制不受主键约束的列上的数据的唯一性，用于作为访问某行的可选手段，一个表上可以放置多个唯一性约束．<br>2) 只要唯一就可以更新．<br>3) 即表中任意两行在 指定列上都不允许有相同的值，允许空（NULL）．<br>4) 一个表上可以放置多个唯一性约束</p>
+<h3 id="主键约束（PRIMARY-KEY）"><a class="header-anchor" href="#主键约束（PRIMARY-KEY）">¶</a>主键约束（PRIMARY KEY）</h3>
+<ol>
+<li>主键用于唯一地标识表中的每一条记录，可以定义一列或多列为主键。</li>
+<li>是不可能（或很难）更新．</li>
+<li>主键列上没有任何两行具有相同值（即重复值），不允许空（NULL）．</li>
+<li>主健可作外健，唯一索引不可；</li>
+</ol>
+<h3 id="唯一性约束（UNIQUE）"><a class="header-anchor" href="#唯一性约束（UNIQUE）">¶</a>唯一性约束（UNIQUE）</h3>
+<ol>
+<li>唯一性约束用来限制不受主键约束的列上的数据的唯一性，用于作为访问某行的可选手段，一个表上可以放置多个唯一性约束．</li>
+<li>只要唯一就可以更新．</li>
+<li>即表中任意两行在 指定列上都不允许有相同的值，允许空（NULL）．</li>
+<li>一个表上可以放置多个唯一性约束</li>
+</ol>
 
             </div>
             <hr/>
@@ -427,7 +440,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bookandmusic.gitee.io/2020/02/26/shu-ju-ku-mysql-zhu-jian-yue-shu-he-wei-yi-xing-yue-shu-de-qu-bie/">http://bookandmusic.gitee.io/2020/02/26/shu-ju-ku-mysql-zhu-jian-yue-shu-he-wei-yi-xing-yue-shu-de-qu-bie/</a>
+                    <a href="https://bookandmusic.github.io/2020/02/26/shu-ju-ku-mysql-zhu-jian-yue-shu-he-wei-yi-xing-yue-shu-de-qu-bie/">https://bookandmusic.github.io/2020/02/26/shu-ju-ku-mysql-zhu-jian-yue-shu-he-wei-yi-xing-yue-shu-de-qu-bie/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -654,15 +667,19 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Axios API
+                            ¶Axios API
+
+
 可以通过向 axios 传递相关配置来创建请求
 
+
 axios配置全部参数
-  axios(config)
-  // 发送 POST 请求
-  axios({
-      method: 'post',
-      url
+axios(config)
+
+// 发送 POST 请求
+axios({
+    method: 'post',
+    url: '/u
                         
                     </div>
                     <div class="publish-info">
@@ -725,10 +742,12 @@ axios配置全部参数
                         
                             介绍如何在 Ubuntu系统上 安装mysql软件、以及如何创建用户信息。
 
+¶Mysql软件操作
+以下所有操作以Ubuntu为例
+¶mysql安装
+sudo apt install mysql-server # 安装mysql
 
-Mysql软件操作以下所有操作以Ubuntu为例
-mysql安装sudo apt install mysql-server # 安装mysql
-mysql删除s
+¶mys
                         
                     </div>
                     <div class="publish-info">
@@ -966,7 +985,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

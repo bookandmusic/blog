@@ -375,7 +375,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    291
+                    285
                 </div>
                 
 
@@ -401,62 +401,67 @@
 <li>匿名函数的另一个别称是<code>lambda表达式</code></li>
 </ul>
 <a id="more"></a>
-
 <ul>
-<li><p>lambda表达式的语法：</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">lambda</span> argument_list<span class="token punctuation">:</span> expression</code></pre>
+<li>
+<p>lambda表达式的语法：</p>
+<pre class=" language-language-python"><code class="language-language-python">lambda argument_list: expression
+</code></pre>
 <ul>
 <li><code>argument_list</code>是参数列表。它的结构与Python中函数(<code>function</code>)的参数列表是一样的。</li>
 <li><code>expression</code>是一个关于参数的表达式。表达式中出现的参数需要在<code>argument_list</code>中有定义，并且表达式只能是单行的。</li>
 </ul>
-<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># lambda x: x*x</span>
-<span class="token comment" spellcheck="true"># 这个lambda表达式实际等同于：</span>
-<span class="token comment" spellcheck="true"># def f(x):</span>
-<span class="token comment" spellcheck="true">#   return x*x</span>
-In <span class="token punctuation">[</span><span class="token number">15</span><span class="token punctuation">]</span><span class="token punctuation">:</span> f <span class="token operator">=</span> <span class="token keyword">lambda</span> x<span class="token punctuation">:</span> x <span class="token operator">*</span> x
+<pre class=" language-language-python"><code class="language-language-python"># lambda x: x*x
+# 这个lambda表达式实际等同于：
+# def f(x):
+#   return x*x
+In [15]: f = lambda x: x * x
 
-In <span class="token punctuation">[</span><span class="token number">16</span><span class="token punctuation">]</span><span class="token punctuation">:</span> f
-Out<span class="token punctuation">[</span><span class="token number">16</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token operator">&lt;</span>function __main__<span class="token punctuation">.</span><span class="token operator">&lt;</span><span class="token keyword">lambda</span><span class="token operator">></span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token operator">></span>
+In [16]: f
+Out[16]: <function __main__.<lambda>(x)>
 
-In <span class="token punctuation">[</span><span class="token number">17</span><span class="token punctuation">]</span><span class="token punctuation">:</span> f<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">17</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token number">25</span>
+In [17]: f(5)
+Out[17]: 25
+    
+In [24]: x2 = lambda *args: [x**2 for x in list(args)]
 
-In <span class="token punctuation">[</span><span class="token number">24</span><span class="token punctuation">]</span><span class="token punctuation">:</span> x2 <span class="token operator">=</span> <span class="token keyword">lambda</span> <span class="token operator">*</span>args<span class="token punctuation">:</span> <span class="token punctuation">[</span>x<span class="token operator">**</span><span class="token number">2</span> <span class="token keyword">for</span> x <span class="token keyword">in</span> list<span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">]</span>
-
-In <span class="token punctuation">[</span><span class="token number">25</span><span class="token punctuation">]</span><span class="token punctuation">:</span> x2<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">25</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">,</span> <span class="token number">25</span><span class="token punctuation">,</span> <span class="token number">36</span><span class="token punctuation">,</span> <span class="token number">49</span><span class="token punctuation">]</span></code></pre>
+In [25]: x2(1, 2, 3, 4, 5, 6, 7)
+Out[25]: [1, 4, 9, 16, 25, 36, 49]
+</code></pre>
 </li>
-<li><p>匿名函数作为参数</p>
-<pre class=" language-python"><code class="language-python">In <span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">:</span> s <span class="token operator">=</span> <span class="token punctuation">[</span>x <span class="token keyword">for</span> x <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<li>
+<p>匿名函数作为参数</p>
+<pre class=" language-language-python"><code class="language-language-python">In [7]: s = [x for x in range(10)]
 
-In <span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">:</span> s
-Out<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">]</span>
+In [8]: s
+Out[8]: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-In <span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">:</span> s<span class="token punctuation">.</span>sort<span class="token punctuation">(</span>key<span class="token operator">=</span><span class="token keyword">lambda</span> x <span class="token punctuation">:</span> abs<span class="token punctuation">(</span>x<span class="token number">-5</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+In [9]: s.sort(key=lambda x : abs(x-5))
 
-In <span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">:</span> s
-Out<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span></code></pre>
-<pre class=" language-python"><code class="language-python">In <span class="token punctuation">[</span><span class="token number">32</span><span class="token punctuation">]</span><span class="token punctuation">:</span> stus <span class="token operator">=</span> <span class="token punctuation">[</span>
-<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">:</span>     <span class="token punctuation">{</span><span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"zhangsan"</span><span class="token punctuation">,</span> <span class="token string">"age"</span><span class="token punctuation">:</span> <span class="token number">18</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">:</span>     <span class="token punctuation">{</span><span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"lisi"</span><span class="token punctuation">,</span> <span class="token string">"age"</span><span class="token punctuation">:</span> <span class="token number">19</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">:</span>     <span class="token punctuation">{</span><span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"wangwu"</span><span class="token punctuation">,</span> <span class="token string">"age"</span><span class="token punctuation">:</span> <span class="token number">17</span><span class="token punctuation">}</span>
-<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">:</span> <span class="token punctuation">]</span>
+In [10]: s
+Out[10]: [5, 4, 6, 3, 7, 2, 8, 1, 9, 0]
+</code></pre>
+<pre class=" language-language-python"><code class="language-language-python">In [32]: stus = [
+...:     {"name": "zhangsan", "age": 18},
+...:     {"name": "lisi", "age": 19},
+...:     {"name": "wangwu", "age": 17}
+...: ]
 
-In <span class="token punctuation">[</span><span class="token number">33</span><span class="token punctuation">]</span><span class="token punctuation">:</span> stus<span class="token punctuation">.</span>sort<span class="token punctuation">(</span>key<span class="token operator">=</span><span class="token keyword">lambda</span> x <span class="token punctuation">:</span> x<span class="token punctuation">[</span><span class="token string">"name"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+In [33]: stus.sort(key=lambda x : x["name"])
 
-In <span class="token punctuation">[</span><span class="token number">34</span><span class="token punctuation">]</span><span class="token punctuation">:</span> stus
-Out<span class="token punctuation">[</span><span class="token number">34</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
-<span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'lisi'</span><span class="token punctuation">,</span> <span class="token string">'age'</span><span class="token punctuation">:</span> <span class="token number">19</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
- <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'wangwu'</span><span class="token punctuation">,</span> <span class="token string">'age'</span><span class="token punctuation">:</span> <span class="token number">17</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
- <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'zhangsan'</span><span class="token punctuation">,</span> <span class="token string">'age'</span><span class="token punctuation">:</span> <span class="token number">18</span><span class="token punctuation">}</span><span class="token punctuation">]</span>
+In [34]: stus
+Out[34]:
+[{'name': 'lisi', 'age': 19},
+ {'name': 'wangwu', 'age': 17},
+ {'name': 'zhangsan', 'age': 18}]
 
-In <span class="token punctuation">[</span><span class="token number">35</span><span class="token punctuation">]</span><span class="token punctuation">:</span> stus<span class="token punctuation">.</span>sort<span class="token punctuation">(</span>key<span class="token operator">=</span><span class="token keyword">lambda</span> x <span class="token punctuation">:</span> x<span class="token punctuation">[</span><span class="token string">"age"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+In [35]: stus.sort(key=lambda x : x["age"])
 
-In <span class="token punctuation">[</span><span class="token number">36</span><span class="token punctuation">]</span><span class="token punctuation">:</span> stus
-Out<span class="token punctuation">[</span><span class="token number">36</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
-<span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'wangwu'</span><span class="token punctuation">,</span> <span class="token string">'age'</span><span class="token punctuation">:</span> <span class="token number">17</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
- <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'zhangsan'</span><span class="token punctuation">,</span> <span class="token string">'age'</span><span class="token punctuation">:</span> <span class="token number">18</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
- <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'lisi'</span><span class="token punctuation">,</span> <span class="token string">'age'</span><span class="token punctuation">:</span> <span class="token number">19</span><span class="token punctuation">}</span><span class="token punctuation">]</span></code></pre>
+In [36]: stus
+Out[36]:
+[{'name': 'wangwu', 'age': 17},
+ {'name': 'zhangsan', 'age': 18},
+ {'name': 'lisi', 'age': 19}]
+</code></pre>
 </li>
 </ul>
 
@@ -484,7 +489,7 @@ Out<span class="token punctuation">[</span><span class="token number">36</span><
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bookandmusic.gitee.io/2020/06/06/python-han-shu-ni-ming-han-shu/">http://bookandmusic.gitee.io/2020/06/06/python-han-shu-ni-ming-han-shu/</a>
+                    <a href="https://bookandmusic.github.io/2020/06/06/python-han-shu-ni-ming-han-shu/">https://bookandmusic.github.io/2020/06/06/python-han-shu-ni-ming-han-shu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -711,11 +716,11 @@ Out<span class="token punctuation">[</span><span class="token number">36</span><
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            1. 定义函数调用函数自身，这种方式称为递归，这种函数称为递归函数
+                            ¶1. 定义
+函数调用函数自身，这种方式称为递归，这种函数称为递归函数
 
 
-
-递归函数使用过程中，需要找到不变的规律和停止递归的边界条件， 
+递归函数使用过程中，需要找到不变的规律和停止递归的边界条件，
 因为函数自身调用自身，函数本身的结构不变，只是每次传的参数改变啦
 递归实现过程(扩展)：利用栈的思想，
                         
@@ -775,6 +780,7 @@ Out<span class="token punctuation">[</span><span class="token number">36</span><
                     <div class="summary block-with-text">
                         
                             
+
 定义
 当一个函数 接收 另一个函数作为参数， 它就是 高阶函数
 
@@ -783,10 +789,11 @@ Out<span class="token punctuation">[</span><span class="token number">36</span><
 
 
 示例
- def func(a, x, y):
-     a(x, y)  # a就是传递的 函数参数f，  执行 a 相当于 执行  f
+def func(a, x, y):
+    a(x, y)  # a就是传递的 函数参数f，  执行 a 相当于 执行  f
 
- def f(x, y)
+def f(x, y):
+
                         
                     </div>
                     <div class="publish-info">
@@ -1036,7 +1043,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

@@ -403,182 +403,202 @@
             <div id="articleContent">
                 <p>DRF内置的序列化类，可以对整个模型类进行序列化与反序列化，简化了繁杂的工作。</p>
 <a id="more"></a>
-
-<h2 id="内置字段序列化"><a href="#内置字段序列化" class="headerlink" title="内置字段序列化"></a>内置字段序列化</h2><h3 id="模型类"><a href="#模型类" class="headerlink" title="模型类"></a>模型类</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> django<span class="token punctuation">.</span>db <span class="token keyword">import</span> models
-
-
-<span class="token comment" spellcheck="true"># Create your models here.</span>
-<span class="token keyword">class</span> <span class="token class-name">Authors</span><span class="token punctuation">(</span>models<span class="token punctuation">.</span>Model<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    name <span class="token operator">=</span> models<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span>max_length<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span> verbose_name<span class="token operator">=</span><span class="token string">'姓名'</span><span class="token punctuation">)</span>
-
-    <span class="token keyword">def</span> <span class="token function">__str__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> self<span class="token punctuation">.</span>name
-
-    <span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span>
-        db_table <span class="token operator">=</span> <span class="token string">'db_authors'</span>
-        verbose_name <span class="token operator">=</span> <span class="token string">'作者'</span>
-        verbose_name_plural <span class="token operator">=</span> <span class="token string">'作者'</span>
+<h2 id="内置字段序列化"><a class="header-anchor" href="#内置字段序列化">¶</a>内置字段序列化</h2>
+<h3 id="模型类"><a class="header-anchor" href="#模型类">¶</a>模型类</h3>
+<pre class=" language-language-python"><code class="language-language-python">from django.db import models
 
 
-<span class="token keyword">class</span> <span class="token class-name">Books</span><span class="token punctuation">(</span>models<span class="token punctuation">.</span>Model<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    title <span class="token operator">=</span> models<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span>max_length<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span> verbose_name<span class="token operator">=</span><span class="token string">'标题'</span><span class="token punctuation">)</span>
-    price <span class="token operator">=</span> models<span class="token punctuation">.</span>DecimalField<span class="token punctuation">(</span>max_digits<span class="token operator">=</span><span class="token number">7</span><span class="token punctuation">,</span> decimal_places<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> verbose_name<span class="token operator">=</span><span class="token string">'单价'</span><span class="token punctuation">)</span>
-    publish <span class="token operator">=</span> models<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span>max_length<span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">,</span> verbose_name<span class="token operator">=</span><span class="token string">'出版社'</span><span class="token punctuation">)</span>
-    author <span class="token operator">=</span> models<span class="token punctuation">.</span>ForeignKey<span class="token punctuation">(</span>Authors<span class="token punctuation">,</span> on_delete<span class="token operator">=</span>models<span class="token punctuation">.</span>CASCADE<span class="token punctuation">)</span>
+# Create your models here.
+class Authors(models.Model):
+    name = models.CharField(max_length=10, verbose_name='姓名')
 
-    <span class="token keyword">def</span> <span class="token function">__str__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> self<span class="token punctuation">.</span>title
+    def __str__(self):
+        return self.name
 
-    <span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span>
-        db_table <span class="token operator">=</span> <span class="token string">'db_books'</span>
-        verbose_name <span class="token operator">=</span> <span class="token string">'图书'</span>
-        verbose_name_plural <span class="token operator">=</span> <span class="token string">'图书'</span>
+    class Meta:
+        db_table = 'db_authors'
+        verbose_name = '作者'
+        verbose_name_plural = '作者'
+
+
+class Books(models.Model):
+    title = models.CharField(max_length=10, verbose_name='标题')
+    price = models.DecimalField(max_digits=7, decimal_places=2, verbose_name='单价')
+    publish = models.CharField(max_length=20, verbose_name='出版社')
+    author = models.ForeignKey(Authors, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        db_table = 'db_books'
+        verbose_name = '图书'
+        verbose_name_plural = '图书'
+
 </code></pre>
-<h3 id="序列化类"><a href="#序列化类" class="headerlink" title="序列化类"></a>序列化类</h3><h4 id="1-全部字段序列化"><a href="#1-全部字段序列化" class="headerlink" title="1. 全部字段序列化"></a>1. 全部字段序列化</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>serializers <span class="token keyword">import</span> ModelSerializer
-<span class="token keyword">from</span> <span class="token punctuation">.</span>models <span class="token keyword">import</span> Books<span class="token punctuation">,</span> Authors
-<span class="token keyword">from</span> rest_framework <span class="token keyword">import</span> serializers
+<h3 id="序列化类"><a class="header-anchor" href="#序列化类">¶</a>序列化类</h3>
+<h4 id="1-全部字段序列化"><a class="header-anchor" href="#1-全部字段序列化">¶</a>1. 全部字段序列化</h4>
+<pre class=" language-language-python"><code class="language-language-python">from rest_framework.serializers import ModelSerializer
+from .models import Books, Authors
+from rest_framework import serializers
 
 
-<span class="token keyword">class</span> <span class="token class-name">AuthorsSerializer</span><span class="token punctuation">(</span>ModelSerializer<span class="token punctuation">)</span><span class="token punctuation">:</span>
+class AuthorsSerializer(ModelSerializer):
 
-    <span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span>
-        model <span class="token operator">=</span> Authors
-        fields <span class="token operator">=</span> <span class="token string">'__all__'</span>
+    class Meta:
+        model = Authors
+        fields = '__all__'
 
-
-<span class="token keyword">class</span> <span class="token class-name">BooksSerializer</span><span class="token punctuation">(</span>ModelSerializer<span class="token punctuation">)</span><span class="token punctuation">:</span>
-
-    <span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span>
-        model <span class="token operator">=</span> Books
-        fields <span class="token operator">=</span> <span class="token string">'__all__'</span>
+        
+class BooksSerializer(ModelSerializer):
+   
+    class Meta:
+        model = Books
+        fields = '__all__'
+        
 </code></pre>
-<h4 id="2-指定字段序列化"><a href="#2-指定字段序列化" class="headerlink" title="2. 指定字段序列化"></a>2. 指定字段序列化</h4><h5 id="lt-1-gt-外键字段内置方式序列化"><a href="#lt-1-gt-外键字段内置方式序列化" class="headerlink" title="&lt;1&gt; 外键字段内置方式序列化"></a>&lt;1&gt; 外键字段内置方式序列化</h5><p><strong>图书类序列化</strong></p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>serializers <span class="token keyword">import</span> ModelSerializer
-<span class="token keyword">from</span> <span class="token punctuation">.</span>models <span class="token keyword">import</span> Books<span class="token punctuation">,</span> Authors
-<span class="token keyword">from</span> rest_framework <span class="token keyword">import</span> serializers
+<h4 id="2-指定字段序列化"><a class="header-anchor" href="#2-指定字段序列化">¶</a>2. 指定字段序列化</h4>
+<h5 id="1-外键字段内置方式序列化"><a class="header-anchor" href="#1-外键字段内置方式序列化">¶</a>&lt;1&gt; 外键字段内置方式序列化</h5>
+<p><strong>图书类序列化</strong></p>
+<pre class=" language-language-python"><code class="language-language-python">from rest_framework.serializers import ModelSerializer
+from .models import Books, Authors
+from rest_framework import serializers
 
 
-<span class="token keyword">class</span> <span class="token class-name">BooksSerializer</span><span class="token punctuation">(</span>ModelSerializer<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token comment" spellcheck="true"># author = serializers.PrimaryKeyRelatedField(read_only=True)  # 内置关联字段，默认序列化方式，关联对象的主键</span>
+class BooksSerializer(ModelSerializer):
+    # author = serializers.PrimaryKeyRelatedField(read_only=True)  # 内置关联字段，默认序列化方式，关联对象的主键
+    
+    # author = serializers.StringRelatedField(read_only=True)  # 内置关联字段，此字段将被序列化为关联对象的字符串表示方式（即__str__方法的返回值）
+    
+    # author = serializers.HyperlinkedRelatedField(view_name='authors-detail', read_only=True)  # 内置关联字段，此字段被序列化为关联对象的路由地址
 
-    <span class="token comment" spellcheck="true"># author = serializers.StringRelatedField(read_only=True)  # 内置关联字段，此字段将被序列化为关联对象的字符串表示方式（即__str__方法的返回值）</span>
-
-    <span class="token comment" spellcheck="true"># author = serializers.HyperlinkedRelatedField(view_name='authors-detail', read_only=True)  # 内置关联字段，此字段被序列化为关联对象的路由地址</span>
-
-    <span class="token comment" spellcheck="true"># author = serializers.SlugRelatedField(read_only=True, slug_field='id')  # 内置关联字段，指定关联对象的字段</span>
-
-    <span class="token comment" spellcheck="true"># author = serializers.CharField(source='author.name', read_only=True)  # 指定关联对象的字段</span>
-
-    <span class="token comment" spellcheck="true"># author = AuthorsSerializer()  # 将关联对象所有字段全部序列化</span>
-    <span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span>
-        model <span class="token operator">=</span> Books
-        fields <span class="token operator">=</span> <span class="token string">'__all__'</span></code></pre>
+    # author = serializers.SlugRelatedField(read_only=True, slug_field='id')  # 内置关联字段，指定关联对象的字段
+    
+    # author = serializers.CharField(source='author.name', read_only=True)  # 指定关联对象的字段
+    
+    # author = AuthorsSerializer()  # 将关联对象所有字段全部序列化
+    class Meta:
+        model = Books
+        fields = '__all__'
+</code></pre>
 <p><strong>作者类序列化</strong></p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>serializers <span class="token keyword">import</span> ModelSerializer
-<span class="token keyword">from</span> <span class="token punctuation">.</span>models <span class="token keyword">import</span> Books<span class="token punctuation">,</span> Authors
-<span class="token keyword">from</span> rest_framework <span class="token keyword">import</span> serializers
+<pre class=" language-language-python"><code class="language-language-python">from rest_framework.serializers import ModelSerializer
+from .models import Books, Authors
+from rest_framework import serializers
 
 
-<span class="token keyword">class</span> <span class="token class-name">AuthorsSerializer</span><span class="token punctuation">(</span>ModelSerializer<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token comment" spellcheck="true"># books_set = serializers.PrimaryKeyRelatedField(read_only=True, many=True)</span>
-    <span class="token comment" spellcheck="true"># books_set = serializers.StringRelatedField(many=True)</span>
-    <span class="token comment" spellcheck="true"># books_set = serializers.HyperlinkedRelatedField(view_name='books-detail', read_only=True, many=True)</span>
-    <span class="token comment" spellcheck="true"># books_set = BookSerializer(many=True)</span>
-    <span class="token comment" spellcheck="true"># books_set = BookRelateField(read_only=True, many=True)  # 自定义关联字段</span>
+class AuthorsSerializer(ModelSerializer):
+    # books_set = serializers.PrimaryKeyRelatedField(read_only=True, many=True)
+    # books_set = serializers.StringRelatedField(many=True)
+    # books_set = serializers.HyperlinkedRelatedField(view_name='books-detail', read_only=True, many=True)
+    # books_set = BookSerializer(many=True)
+    # books_set = BookRelateField(read_only=True, many=True)  # 自定义关联字段
 
-    <span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span>
-        model <span class="token operator">=</span> Authors
-        fields <span class="token operator">=</span> <span class="token string">'__all__'</span>
+    class Meta:
+        model = Authors
+        fields = '__all__'
+
 </code></pre>
-<h5 id="lt-2-gt-外键字段自定义方式序列化"><a href="#lt-2-gt-外键字段自定义方式序列化" class="headerlink" title="&lt;2&gt; 外键字段自定义方式序列化"></a>&lt;2&gt; 外键字段自定义方式序列化</h5><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>serializers <span class="token keyword">import</span> ModelSerializer
-<span class="token keyword">from</span> <span class="token punctuation">.</span>models <span class="token keyword">import</span> Books<span class="token punctuation">,</span> Authors
-<span class="token keyword">from</span> rest_framework <span class="token keyword">import</span> serializers
+<h5 id="2-外键字段自定义方式序列化"><a class="header-anchor" href="#2-外键字段自定义方式序列化">¶</a>&lt;2&gt; 外键字段自定义方式序列化</h5>
+<pre class=" language-language-python"><code class="language-language-python">from rest_framework.serializers import ModelSerializer
+from .models import Books, Authors
+from rest_framework import serializers
 
 
-<span class="token keyword">class</span> <span class="token class-name">BookRelateField</span><span class="token punctuation">(</span>serializers<span class="token punctuation">.</span>RelatedField<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">to_representation</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token string">'Author: {}'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>value<span class="token punctuation">)</span>
+class BookRelateField(serializers.RelatedField):
+    def to_representation(self, value):
+        return 'Author: {}'.format(value)
 
 
-<span class="token keyword">class</span> <span class="token class-name">AuthorsSerializer</span><span class="token punctuation">(</span>ModelSerializer<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    books_set <span class="token operator">=</span> BookRelateField<span class="token punctuation">(</span>read_only<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> many<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 自定义关联字段</span>
+class AuthorsSerializer(ModelSerializer):
+    books_set = BookRelateField(read_only=True, many=True)  # 自定义关联字段
 
-    <span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span>
-        model <span class="token operator">=</span> Authors
-        fields <span class="token operator">=</span> <span class="token string">'__all__'</span>
+    class Meta:
+        model = Authors
+        fields = '__all__'
 
-<span class="token keyword">class</span> <span class="token class-name">AuthorRelateField</span><span class="token punctuation">(</span>serializers<span class="token punctuation">.</span>RelatedField<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">to_representation</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> <span class="token string">'Author: {} {}'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>value<span class="token punctuation">.</span>id<span class="token punctuation">,</span> value<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+class AuthorRelateField(serializers.RelatedField):
+    def to_representation(self, value):
+        return 'Author: {} {}'.format(value.id, value.name)
 
 
-<span class="token keyword">class</span> <span class="token class-name">BooksSerializer</span><span class="token punctuation">(</span>ModelSerializer<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    author <span class="token operator">=</span> AuthorRelateField<span class="token punctuation">(</span>read_only<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 自定义关联字段</span>
-
-    <span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span>
-        model <span class="token operator">=</span> Books
-        fields <span class="token operator">=</span> <span class="token string">'__all__'</span>
+class BooksSerializer(ModelSerializer):
+    author = AuthorRelateField(read_only=True) # 自定义关联字段
+    
+    class Meta:
+        model = Books
+        fields = '__all__'
+       
 </code></pre>
 <p>以上序列化方式，任选其一均可，但是注意，此时只能保证<strong>序列化成功</strong>，不能保证反序列化</p>
-<h2 id="自定义字段序列化"><a href="#自定义字段序列化" class="headerlink" title="自定义字段序列化"></a>自定义字段序列化</h2><blockquote>
+<h2 id="自定义字段序列化"><a class="header-anchor" href="#自定义字段序列化">¶</a>自定义字段序列化</h2>
+<blockquote>
 <p>最大好处, 在于将序列化字段与反序列化字段分离，互不影响</p>
 </blockquote>
-<h3 id="lt-1-gt-修改模型类"><a href="#lt-1-gt-修改模型类" class="headerlink" title="&lt;1&gt; 修改模型类"></a>&lt;1&gt; 修改模型类</h3><p>需要在模型类中用<code>@property</code>来实现，可插拔</p>
-<h4 id="模型类-1"><a href="#模型类-1" class="headerlink" title="模型类"></a>模型类</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Books</span><span class="token punctuation">(</span>models<span class="token punctuation">.</span>Model<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    title <span class="token operator">=</span> models<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span>max_length<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span> verbose_name<span class="token operator">=</span><span class="token string">'标题'</span><span class="token punctuation">)</span>
-    price <span class="token operator">=</span> models<span class="token punctuation">.</span>DecimalField<span class="token punctuation">(</span>max_digits<span class="token operator">=</span><span class="token number">7</span><span class="token punctuation">,</span> decimal_places<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> verbose_name<span class="token operator">=</span><span class="token string">'单价'</span><span class="token punctuation">)</span>
-    publish <span class="token operator">=</span> models<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span>max_length<span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">,</span> verbose_name<span class="token operator">=</span><span class="token string">'出版社'</span><span class="token punctuation">)</span>
-    author <span class="token operator">=</span> models<span class="token punctuation">.</span>ForeignKey<span class="token punctuation">(</span>Authors<span class="token punctuation">,</span> on_delete<span class="token operator">=</span>models<span class="token punctuation">.</span>CASCADE<span class="token punctuation">)</span>
+<h3 id="1-修改模型类"><a class="header-anchor" href="#1-修改模型类">¶</a>&lt;1&gt; 修改模型类</h3>
+<p>需要在模型类中用<code>@property</code>来实现，可插拔</p>
+<h4 id="模型类-v2"><a class="header-anchor" href="#模型类-v2">¶</a>模型类</h4>
+<pre class=" language-language-python"><code class="language-language-python">class Books(models.Model):
+    title = models.CharField(max_length=10, verbose_name='标题')
+    price = models.DecimalField(max_digits=7, decimal_places=2, verbose_name='单价')
+    publish = models.CharField(max_length=20, verbose_name='出版社')
+    author = models.ForeignKey(Authors, on_delete=models.CASCADE)
 
-    @property  <span class="token comment" spellcheck="true"># 插拔字段 - 默认为read_only(不需要考虑反序列化)，且不能修改</span>
-    <span class="token keyword">def</span> <span class="token function">author_name</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> self<span class="token punctuation">.</span>author<span class="token punctuation">.</span>name
+    @property  # 插拔字段 - 默认为read_only(不需要考虑反序列化)，且不能修改
+    def author_name(self):
+        return self.author.name
 
     @property
-    <span class="token keyword">def</span> <span class="token function">author_info</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">from</span> <span class="token punctuation">.</span>serializers <span class="token keyword">import</span> AuthorsSerializer
-        <span class="token keyword">return</span> AuthorsSerializer<span class="token punctuation">(</span>self<span class="token punctuation">.</span>author<span class="token punctuation">)</span><span class="token punctuation">.</span>data
+    def author_info(self):
+        from .serializers import AuthorsSerializer
+        return AuthorsSerializer(self.author).data
 
-    <span class="token keyword">def</span> <span class="token function">__str__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> self<span class="token punctuation">.</span>title
+    def __str__(self):
+        return self.title
+
 </code></pre>
-<h4 id="序列化类-1"><a href="#序列化类-1" class="headerlink" title="序列化类"></a>序列化类</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">BooksSerializer</span><span class="token punctuation">(</span>ModelSerializer<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<h4 id="序列化类-v2"><a class="header-anchor" href="#序列化类-v2">¶</a>序列化类</h4>
+<pre class=" language-language-python"><code class="language-language-python">class BooksSerializer(ModelSerializer):
 
-    <span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span>
-        model <span class="token operator">=</span> Books
-        fields <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">'id'</span><span class="token punctuation">,</span> <span class="token string">'title'</span><span class="token punctuation">,</span> <span class="token string">'price'</span><span class="token punctuation">,</span> <span class="token string">'author'</span><span class="token punctuation">,</span> <span class="token string">'author_name'</span><span class="token punctuation">,</span> <span class="token string">'author_info'</span><span class="token punctuation">)</span>
+    class Meta:
+        model = Books
+        fields = ('id', 'title', 'price', 'author', 'author_name', 'author_info')
 
-        extra_kwargs <span class="token operator">=</span> <span class="token punctuation">{</span>
-            <span class="token string">'author'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
-                <span class="token string">'write_only'</span><span class="token punctuation">:</span> <span class="token boolean">True</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
+        extra_kwargs = {
+            'author': {
+                'write_only': True
+            }
+        }
+
 </code></pre>
-<h3 id="lt-2-gt-修改序列化类"><a href="#lt-2-gt-修改序列化类" class="headerlink" title="&lt;2&gt;修改序列化类"></a>&lt;2&gt;修改序列化类</h3><blockquote>
+<h3 id="2-修改序列化类"><a class="header-anchor" href="#2-修改序列化类">¶</a>&lt;2&gt;修改序列化类</h3>
+<blockquote>
 <p>模型类不变，只在序列化器中添加序列化字段</p>
 </blockquote>
-<h4 id="序列化类-2"><a href="#序列化类-2" class="headerlink" title="序列化类"></a>序列化类</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">BooksSerializer</span><span class="token punctuation">(</span>ModelSerializer<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    author_url <span class="token operator">=</span> serializers<span class="token punctuation">.</span>HyperlinkedIdentityField<span class="token punctuation">(</span>view_name<span class="token operator">=</span><span class="token string">'authors-detail'</span><span class="token punctuation">,</span> read_only<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 内置序列化方式，关联对象的路由地址</span>
-
-    author_name <span class="token operator">=</span> serializers<span class="token punctuation">.</span>SerializerMethodField<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true"># author_name 字段在数据库中不能存在，下面写方法的时候前面加 get_  就可以，这样就得到我们需要的数据了。</span>
+<h4 id="序列化类-v3"><a class="header-anchor" href="#序列化类-v3">¶</a>序列化类</h4>
+<pre class=" language-language-python"><code class="language-language-python">class BooksSerializer(ModelSerializer):
+    author_url = serializers.HyperlinkedIdentityField(view_name='authors-detail', read_only=True)  # 内置序列化方式，关联对象的路由地址
+    
+    author_name = serializers.SerializerMethodField()
+    # author_name 字段在数据库中不能存在，下面写方法的时候前面加 get_  就可以，这样就得到我们需要的数据了。
 
     @staticmethod
-    <span class="token keyword">def</span> <span class="token function">get_author_name</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">"""
+    def get_author_name(obj):
+        """
         固定写法,obj代表Books实例对象,模型类配置了反向引用author代表作者对象
-        """</span>
-        <span class="token keyword">return</span> obj<span class="token punctuation">.</span>author<span class="token punctuation">.</span>id
+        """
+        return obj.author.id
 
-    <span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span>
-        model <span class="token operator">=</span> Books
-        fields <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">'id'</span><span class="token punctuation">,</span> <span class="token string">'title'</span><span class="token punctuation">,</span> <span class="token string">'price'</span><span class="token punctuation">,</span> <span class="token string">'author'</span><span class="token punctuation">,</span> <span class="token string">'author_name'</span><span class="token punctuation">,</span> <span class="token string">'author_url'</span><span class="token punctuation">)</span>
+    class Meta:
+        model = Books
+        fields = ('id', 'title', 'price', 'author', 'author_name', 'author_url')
 
-        extra_kwargs <span class="token operator">=</span> <span class="token punctuation">{</span>
-            <span class="token string">'author'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
-                <span class="token string">'write_only'</span><span class="token punctuation">:</span> <span class="token boolean">True</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
+        extra_kwargs = {
+            'author': {
+                'write_only': True
+            }
+        }
+
 </code></pre>
 
             </div>
@@ -605,7 +625,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bookandmusic.gitee.io/2020/07/08/drf-xu-lie-hua-yu-fan-xu-lie-hua/">http://bookandmusic.gitee.io/2020/07/08/drf-xu-lie-hua-yu-fan-xu-lie-hua/</a>
+                    <a href="https://bookandmusic.github.io/2020/07/08/drf-xu-lie-hua-yu-fan-xu-lie-hua/">https://bookandmusic.github.io/2020/07/08/drf-xu-lie-hua-yu-fan-xu-lie-hua/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -836,8 +856,9 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            内存管理机制
-Python中不但变量名无需事先声明，而且也无需类型声明。在Python语言中，对象的类型和内存占用都是运行时确定的。在赋值时解释器会根据语法和右侧的操作数来决定新对象的类型。在对象创建后，一个该对象的引用会被赋值给左侧的变量
+                            ¶内存管理机制
+
+Python中不但变量名无需事先声明，而且也无需类型声明。在Python语言中，对象的类型和内存占用都是运行时确定的。在赋值时解释器会根据语法和右侧的操作数来决定新对象的类型。在对象创建后，一个该对象的引用会被赋值给左侧的
                         
                     </div>
                     <div class="publish-info">
@@ -898,11 +919,11 @@ Python中不但变量名无需事先声明，而且也无需类型声明。在Py
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            1. 定义函数调用函数自身，这种方式称为递归，这种函数称为递归函数
+                            ¶1. 定义
+函数调用函数自身，这种方式称为递归，这种函数称为递归函数
 
 
-
-递归函数使用过程中，需要找到不变的规律和停止递归的边界条件， 
+递归函数使用过程中，需要找到不变的规律和停止递归的边界条件，
 因为函数自身调用自身，函数本身的结构不变，只是每次传的参数改变啦
 递归实现过程(扩展)：利用栈的思想，
                         
@@ -1138,7 +1159,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

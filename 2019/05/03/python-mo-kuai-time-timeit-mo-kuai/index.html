@@ -397,98 +397,110 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="一、time-模块"><a href="#一、time-模块" class="headerlink" title="一、time 模块"></a>一、time 模块</h1><h3 id="1-时间表现形式"><a href="#1-时间表现形式" class="headerlink" title="1. 时间表现形式"></a>1. 时间表现形式</h3><ul>
+                <h1>一、time 模块</h1>
+<h3 id="1-时间表现形式"><a class="header-anchor" href="#1-时间表现形式">¶</a>1. 时间表现形式</h3>
+<ul>
 <li>timestamp：时间戳，时间戳表示的是从1970年1月1日00:00:00开始按秒计算的偏移量</li>
 <li>struct_time： 时间元组，共有九个元素组</li>
-<li>format time： 格式化时间，已格式化的结构使时间更具可读性。包括自定义格式和固定格式<h3 id="2-时间格式转换图"><a href="#2-时间格式转换图" class="headerlink" title="2. 时间格式转换图"></a>2. 时间格式转换图</h3><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190503200750-%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2%E5%9B%BE%20.jpg" alt="20190503200750-时间格式转换图"></li>
+<li>format time： 格式化时间，已格式化的结构使时间更具可读性。包括自定义格式和固定格式</li>
 </ul>
-<h3 id="3-常用方法"><a href="#3-常用方法" class="headerlink" title="3. 常用方法"></a>3. 常用方法</h3><ol>
-<li><p>获取当前时间戳</p>
-<pre class=" language-python"><code class="language-python"> In <span class="token punctuation">[</span><span class="token number">26</span><span class="token punctuation">]</span><span class="token punctuation">:</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
- Out<span class="token punctuation">[</span><span class="token number">26</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token number">1556888776.3707364</span>
+<h3 id="2-时间格式转换图"><a class="header-anchor" href="#2-时间格式转换图">¶</a>2. 时间格式转换图</h3>
+<p><img src="https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190503200750-%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2%E5%9B%BE%20.jpg" alt="20190503200750-时间格式转换图"></p>
+<h3 id="3-常用方法"><a class="header-anchor" href="#3-常用方法">¶</a>3. 常用方法</h3>
+<ol>
+<li>
+<p>获取当前时间戳</p>
+<pre class=" language-language-python"><code class="language-language-python">In [26]: time.time()
+Out[26]: 1556888776.3707364
 
- In <span class="token punctuation">[</span><span class="token number">25</span><span class="token punctuation">]</span><span class="token punctuation">:</span> time<span class="token punctuation">.</span>mktime<span class="token punctuation">(</span>time<span class="token punctuation">.</span>localtime<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 元组->时间戳</span>
- Out<span class="token punctuation">[</span><span class="token number">25</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token number">1556888742.0</span></code></pre>
+In [25]: time.mktime(time.localtime()) # 元组->时间戳
+Out[25]: 1556888742.0
+</code></pre>
 </li>
-<li><p>当前时间的 struct_time 形式</p>
-<pre class=" language-python"><code class="language-python">In <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token keyword">import</span> time                                                                                      
+<li>
+<p>当前时间的 struct_time 形式</p>
+<pre class=" language-language-python"><code class="language-language-python">In [1]: import time                                                                                      
 
-In <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">:</span> time<span class="token punctuation">.</span>localtime<span class="token punctuation">(</span><span class="token punctuation">)</span>                 
-Out<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">:</span> time<span class="token punctuation">.</span>struct_time<span class="token punctuation">(</span>tm_year<span class="token operator">=</span><span class="token number">2019</span><span class="token punctuation">,</span> tm_mon<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">,</span> tm_mday<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> tm_hour<span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">,</span> tm_min<span class="token operator">=</span><span class="token number">48</span><span class="token punctuation">,</span> tm_sec<span class="token operator">=</span><span class="token number">32</span><span class="token punctuation">,</span> tm_wday<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">,</span> tm_yday<span class="token operator">=</span><span class="token number">123</span><span class="token punctuation">,</span> tm_isdst<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span> 
+In [2]: time.localtime()                 
+Out[2]: time.struct_time(tm_year=2019, tm_mon=5, tm_mday=3, tm_hour=20, tm_min=48, tm_sec=32, tm_wday=4, tm_yday=123, tm_isdst=0) 
 
-In <span class="token punctuation">[</span><span class="token number">29</span><span class="token punctuation">]</span><span class="token punctuation">:</span> time<span class="token punctuation">.</span>localtime<span class="token punctuation">(</span>time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 时间戳->元组     </span>
-Out<span class="token punctuation">[</span><span class="token number">29</span><span class="token punctuation">]</span><span class="token punctuation">:</span> time<span class="token punctuation">.</span>struct_time<span class="token punctuation">(</span>tm_year<span class="token operator">=</span><span class="token number">2019</span><span class="token punctuation">,</span> tm_mon<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">,</span> tm_mday<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> tm_hour<span class="token operator">=</span><span class="token number">21</span><span class="token punctuation">,</span> tm_min<span class="token operator">=</span><span class="token number">12</span><span class="token punctuation">,</span> tm_sec<span class="token operator">=</span><span class="token number">6</span><span class="token punctuation">,</span> tm_wday<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">,</span> tm_yday<span class="token operator">=</span><span class="token number">123</span><span class="token punctuation">,</span> tm_isdst<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>  
+In [29]: time.localtime(time.time()) # 时间戳->元组     
+Out[29]: time.struct_time(tm_year=2019, tm_mon=5, tm_mday=3, tm_hour=21, tm_min=12, tm_sec=6, tm_wday=4, tm_yday=123, tm_isdst=0)  
 
-In <span class="token punctuation">[</span><span class="token number">22</span><span class="token punctuation">]</span><span class="token punctuation">:</span> time<span class="token punctuation">.</span>gmtime<span class="token punctuation">(</span><span class="token punctuation">)</span>     
-Out<span class="token punctuation">[</span><span class="token number">22</span><span class="token punctuation">]</span><span class="token punctuation">:</span> time<span class="token punctuation">.</span>struct_time<span class="token punctuation">(</span>tm_year<span class="token operator">=</span><span class="token number">2019</span><span class="token punctuation">,</span> tm_mon<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">,</span> tm_mday<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> tm_hour<span class="token operator">=</span><span class="token number">13</span><span class="token punctuation">,</span> tm_min<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> tm_sec<span class="token operator">=</span><span class="token number">21</span><span class="token punctuation">,</span> tm_wday<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">,</span> tm_yday<span class="token operator">=</span><span class="token number">123</span><span class="token punctuation">,</span> tm_isdst<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>   
+In [22]: time.gmtime()     
+Out[22]: time.struct_time(tm_year=2019, tm_mon=5, tm_mday=3, tm_hour=13, tm_min=3, tm_sec=21, tm_wday=4, tm_yday=123, tm_isdst=0)   
 
-In <span class="token punctuation">[</span><span class="token number">30</span><span class="token punctuation">]</span><span class="token punctuation">:</span> time<span class="token punctuation">.</span>gmtime<span class="token punctuation">(</span>time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 时间戳->元组     </span>
-Out<span class="token punctuation">[</span><span class="token number">30</span><span class="token punctuation">]</span><span class="token punctuation">:</span> time<span class="token punctuation">.</span>struct_time<span class="token punctuation">(</span>tm_year<span class="token operator">=</span><span class="token number">2019</span><span class="token punctuation">,</span> tm_mon<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">,</span> tm_mday<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> tm_hour<span class="token operator">=</span><span class="token number">13</span><span class="token punctuation">,</span> tm_min<span class="token operator">=</span><span class="token number">12</span><span class="token punctuation">,</span> tm_sec<span class="token operator">=</span><span class="token number">21</span><span class="token punctuation">,</span> tm_wday<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">,</span> tm_yday<span class="token operator">=</span><span class="token number">123</span><span class="token punctuation">,</span> tm_isdst<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+In [30]: time.gmtime(time.time()) # 时间戳->元组     
+Out[30]: time.struct_time(tm_year=2019, tm_mon=5, tm_mday=3, tm_hour=13, tm_min=12, tm_sec=21, tm_wday=4, tm_yday=123, tm_isdst=0)
 
-In <span class="token punctuation">[</span><span class="token number">34</span><span class="token punctuation">]</span><span class="token punctuation">:</span> time<span class="token punctuation">.</span>strptime<span class="token punctuation">(</span>a<span class="token punctuation">,</span> <span class="token string">"%a %b %d %H:%M:%S %Y"</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 字符串->元组</span>
-Out<span class="token punctuation">[</span><span class="token number">34</span><span class="token punctuation">]</span><span class="token punctuation">:</span> time<span class="token punctuation">.</span>struct_time<span class="token punctuation">(</span>tm_year<span class="token operator">=</span><span class="token number">2019</span><span class="token punctuation">,</span> tm_mon<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">,</span> tm_mday<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> tm_hour<span class="token operator">=</span><span class="token number">21</span><span class="token punctuation">,</span> tm_min<span class="token operator">=</span><span class="token number">9</span><span class="token punctuation">,</span> tm_sec<span class="token operator">=</span><span class="token number">25</span><span class="token punctuation">,</span> tm_wday<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">,</span> tm_yday<span class="token operator">=</span><span class="token number">123</span><span class="token punctuation">,</span> tm_isdst<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span></code></pre>
+In [34]: time.strptime(a, "%a %b %d %H:%M:%S %Y") # 字符串->元组
+Out[34]: time.struct_time(tm_year=2019, tm_mon=5, tm_mday=3, tm_hour=21, tm_min=9, tm_sec=25, tm_wday=4, tm_yday=123, tm_isdst=-1)
+</code></pre>
 </li>
-<li><p>当前时间的字符串形式</p>
-<pre class=" language-python"><code class="language-python"> In <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">:</span> time<span class="token punctuation">.</span>ctime<span class="token punctuation">(</span><span class="token punctuation">)</span>
- Out<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token string">'Fri May  3 20:49:30 2019'</span>
+<li>
+<p>当前时间的字符串形式</p>
+<pre class=" language-language-python"><code class="language-language-python">In [3]: time.ctime()
+Out[3]: 'Fri May  3 20:49:30 2019'
 
- In <span class="token punctuation">[</span><span class="token number">27</span><span class="token punctuation">]</span><span class="token punctuation">:</span> time<span class="token punctuation">.</span>ctime<span class="token punctuation">(</span>time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 时间戳->字符串</span>
- Out<span class="token punctuation">[</span><span class="token number">27</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token string">'Fri May  3 21:08:20 2019'</span>
+In [27]: time.ctime(time.time()) # 时间戳->字符串
+Out[27]: 'Fri May  3 21:08:20 2019'
 
- In <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">:</span> time<span class="token punctuation">.</span>asctime<span class="token punctuation">(</span><span class="token punctuation">)</span>
- Out<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token string">'Fri May  3 20:49:45 2019'</span>
+In [4]: time.asctime()
+Out[4]: 'Fri May  3 20:49:45 2019'
 
- In <span class="token punctuation">[</span><span class="token number">28</span><span class="token punctuation">]</span><span class="token punctuation">:</span> time<span class="token punctuation">.</span>asctime<span class="token punctuation">(</span>time<span class="token punctuation">.</span>localtime<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 元组->默认字符串</span>
- Out<span class="token punctuation">[</span><span class="token number">28</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token string">'Fri May  3 21:09:25 2019'</span>
+In [28]: time.asctime(time.localtime()) # 元组->默认字符串
+Out[28]: 'Fri May  3 21:09:25 2019'
 
- In <span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">:</span> time<span class="token punctuation">.</span>strftime<span class="token punctuation">(</span><span class="token string">'%Y-%m-%d %H:%M"%S'</span><span class="token punctuation">,</span> time<span class="token punctuation">.</span>localtime<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 元组->格式化字符串</span>
- Out<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token string">'2019-05-03 20:52"47'</span>
+In [7]: time.strftime('%Y-%m-%d %H:%M"%S', time.localtime()) # 元组->格式化字符串
+Out[7]: '2019-05-03 20:52"47'
 
- In <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">]</span><span class="token punctuation">:</span> time<span class="token punctuation">.</span>strftime<span class="token punctuation">(</span><span class="token string">"%a %b %d %H:%M:%S %Y"</span><span class="token punctuation">,</span> time<span class="token punctuation">.</span>localtime<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
- Out<span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token string">'Fri May 03 21:15:50 2019'</span></code></pre>
+In [31]: time.strftime("%a %b %d %H:%M:%S %Y", time.localtime())
+Out[31]: 'Fri May 03 21:15:50 2019'
+</code></pre>
 </li>
 </ol>
-<h3 id="4-耗时统计"><a href="#4-耗时统计" class="headerlink" title="4. 耗时统计"></a>4. 耗时统计</h3><ul>
-<li><p>time.perf_counter() </p>
+<h3 id="4-耗时统计"><a class="header-anchor" href="#4-耗时统计">¶</a>4. 耗时统计</h3>
+<ul>
+<li>time.perf_counter()
 <ul>
 <li>调用一次 perf_counter()，从计算机系统里随机选一个时间点A，计算其距离当前时间点B1有多少秒</li>
 <li>当第二次调用该函数时，默认从第一次调用的时间点A算起，距离当前时间点B2有多少秒</li>
 <li>两个函数取差，即实现从时间点B1到B2的计时功能</li>
 </ul>
 </li>
-<li><p>time.process_time()</p>
+<li>time.process_time()
 <ul>
 <li>返回当前进程执行 CPU 的时间总和，不包含睡眠时间</li>
 <li>由于返回值的基准点是未定义的</li>
 <li>只有连续调用的结果之间的差才是有效的</li>
 </ul>
 </li>
-<li><p>time.time()</p>
+<li>time.time()
 <ul>
-<li><p>连续两次生成的时间戳之差即为耗时</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> time
+<li>连续两次生成的时间戳之差即为耗时<pre class=" language-language-python"><code class="language-language-python">import time
 
-<span class="token keyword">def</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+def test():
+    time.sleep(2)
 
-start1 <span class="token operator">=</span> time<span class="token punctuation">.</span>perf_counter<span class="token punctuation">(</span><span class="token punctuation">)</span>
-start2 <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
-start3 <span class="token operator">=</span> time<span class="token punctuation">.</span>process_time<span class="token punctuation">(</span><span class="token punctuation">)</span>
-test<span class="token punctuation">(</span><span class="token punctuation">)</span>
-finish1 <span class="token operator">=</span> time<span class="token punctuation">.</span>perf_counter<span class="token punctuation">(</span><span class="token punctuation">)</span>
-finish2 <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
-finish3 <span class="token operator">=</span> time<span class="token punctuation">.</span>process_time<span class="token punctuation">(</span><span class="token punctuation">)</span>
-t1 <span class="token operator">=</span> finish1 <span class="token operator">-</span> start1
-t2 <span class="token operator">=</span> finish2 <span class="token operator">-</span> start2
-t3 <span class="token operator">=</span> finish3 <span class="token operator">-</span> start3
+start1 = time.perf_counter()
+start2 = time.time()
+start3 = time.process_time()
+test()
+finish1 = time.perf_counter()
+finish2 = time.time()
+finish3 = time.process_time()
+t1 = finish1 - start1
+t2 = finish2 - start2
+t3 = finish3 - start3
 
-<span class="token keyword">print</span><span class="token punctuation">(</span>t1<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>t2<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>t3<span class="token punctuation">)</span></code></pre>
-<p>结果为：</p>
-<pre class=" language-shell"><code class="language-shell">1.9998265000000002 # perf_counter
+print(t1)
+print(t2)
+print(t3)
+</code></pre>
+结果为：<pre class=" language-language-shell"><code class="language-language-shell">1.9998265000000002 # perf_counter
 2.000767946243286  # time
-0.0                # process_time</code></pre>
+0.0                # process_time
+</code></pre>
 </li>
 </ul>
 </li>
@@ -518,7 +530,7 @@ t3 <span class="token operator">=</span> finish3 <span class="token operator">-<
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bookandmusic.gitee.io/2019/05/03/python-mo-kuai-time-timeit-mo-kuai/">http://bookandmusic.gitee.io/2019/05/03/python-mo-kuai-time-timeit-mo-kuai/</a>
+                    <a href="https://bookandmusic.github.io/2019/05/03/python-mo-kuai-time-timeit-mo-kuai/">https://bookandmusic.github.io/2019/05/03/python-mo-kuai-time-timeit-mo-kuai/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -733,19 +745,26 @@ t3 <span class="token operator">=</span> finish3 <span class="token operator">-<
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/05/09/suan-fa-pai-xu/">
+                <a href="/2019/05/09/wang-luo-tong-xin-01-liao-jie-web-ji-wang-luo-ji-chu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="经典排序算法总结与实现">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="01—了解web及网络基础">
                         
-                        <span class="card-title">经典排序算法总结与实现</span>
+                        <span class="card-title">01—了解web及网络基础</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            经典排序算法在面试中占有很大的比重，也是基础，为了未雨绸缪，整理并用Python实现了七大经典排序算法，包括冒泡排序，插入排序，选择排序，希尔排序，归并排序，快速排序，堆排序。之所以用Python实现，主要是因为它更接近伪代码，能用更少的代
+                            HTTP 的出现主要是为了解决文本传输的难题
+
+¶TCP/IP 协议族：
+是互联网相关的各类协议族的总称
+重要的一点是分层: 应用层、传输层、网络层、数据链路层
+层次化的优点：
+1、修改某个地方只用改相应的层
+2、设计变简单，各层管理自己的
                         
                     </div>
                     <div class="publish-info">
@@ -760,12 +779,12 @@ t3 <span class="token operator">=</span> finish3 <span class="token operator">-<
                                     技术
                                 </a>
                             
-                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%AE%97%E6%B3%95/" class="post-category">
-                                    算法
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/" class="post-category">
+                                    网络通信
                                 </a>
                             
-                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/" class="post-category">
-                                    排序
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/" class="post-category">
+                                    TCP
                                 </a>
                             
                             
@@ -775,8 +794,12 @@ t3 <span class="token operator">=</span> finish3 <span class="token operator">-<
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%8E%92%E5%BA%8F/">
-                        <span class="chip bg-color">排序</span>
+                    <a href="/tags/HTTP/">
+                        <span class="chip bg-color">HTTP</span>
+                    </a>
+                    
+                    <a href="/tags/TCP/">
+                        <span class="chip bg-color">TCP</span>
                     </a>
                     
                 </div>
@@ -802,12 +825,13 @@ t3 <span class="token operator">=</span> finish3 <span class="token operator">-<
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            返回函数
+                            ¶返回函数
+
 python的常识，函数和其他任何东西一样，都是对象。这意味着可以将函数当做实参传递给函数，或者在函数中将函数作为返回值返回。
 
 def lazy_sum(*args):
     def sum():
-        ax = 0
+        ax =
                         
                     </div>
                     <div class="publish-info">
@@ -1045,7 +1069,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

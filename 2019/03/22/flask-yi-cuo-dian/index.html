@@ -375,7 +375,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    782
+                    769
                 </div>
                 
 
@@ -397,56 +397,67 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h4 id="1-with上下文管理器"><a href="#1-with上下文管理器" class="headerlink" title="1 with上下文管理器"></a>1 with上下文管理器</h4><p>常用：</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">"file_name"</span><span class="token punctuation">,</span><span class="token string">"wb"</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
-    f<span class="token punctuation">.</span>write<span class="token punctuation">(</span><span class="token string">"hello flask"</span><span class="token punctuation">)</span></code></pre>
+                <h4 id="1-with上下文管理器"><a class="header-anchor" href="#1-with上下文管理器">¶</a>1 with上下文管理器</h4>
+<p>常用：</p>
+<pre class=" language-language-python"><code class="language-language-python">with open("file_name","wb") as f:
+	f.write("hello flask")
+</code></pre>
 <p>自定义：</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Foo</span><span class="token punctuation">(</span>gbiect<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">__enter__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">"""进入with语句的时候被with调用"""</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"enter called"</span><span class="token punctuation">)</span>
-    <span class="token keyword">def</span> <span class="token function">__exit_</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> exc_type<span class="token punctuation">,</span> exc_val<span class="token punctuation">,</span> exc_tb<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">"""离开with语句的时候被with调用"""</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"exit called"</span><span class="token punctuation">)</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"exc_type:%s"</span> <span class="token operator">%</span> exc_type<span class="token punctuation">)</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"exc_val:9%s"</span> <span class="token operator">%</span> exc_val<span class="token punctuation">)</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"exc_tb:%s"</span><span class="token operator">%</span>exc_tb<span class="token punctuation">)</span>
-
-<span class="token keyword">with</span> Foo<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">as</span> foo<span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"helto python"</span><span class="token punctuation">)</span>
-    a<span class="token operator">=</span><span class="token number">1</span><span class="token operator">/</span><span class="token number">0</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"hello end"</span><span class="token punctuation">)</span></code></pre>
+<pre class=" language-language-python"><code class="language-language-python">class Foo(gbiect):
+	def __enter__(self):
+		"""进入with语句的时候被with调用"""
+		print("enter called")
+	def __exit_(self, exc_type, exc_val, exc_tb):
+		"""离开with语句的时候被with调用"""
+        print("exit called")
+        print("exc_type:%s" % exc_type)
+        print("exc_val:9%s" % exc_val)
+		print("exc_tb:%s"%exc_tb)
+		
+with Foo() as foo:
+    print("helto python")
+    a=1/0
+    print("hello end")
+</code></pre>
 <p>运行结果：</p>
 <blockquote>
-<pre class=" language-bash"><code class="language-bash">enter called 
-Traceback <span class="token punctuation">(</span>most recent call last<span class="token punctuation">)</span>: 
+<pre class=" language-language-bash"><code class="language-language-bash">enter called 
+Traceback (most recent call last): 
 hello python 
-    File<span class="token string">"/Users/delron/Desktop/code/03 with. py"</span>, line 39, <span class="token keyword">in</span> <span class="token operator">&lt;</span>module<span class="token operator">></span>
-<span class="token keyword">exit</span> called
-     a<span class="token operator">=</span>1/0
+	File"/Users/delron/Desktop/code/03 with. py", line 39, in <module>
+exit called
+     a=1/0
 ZeroDivisionError: integer division or modulo by zero 
-exc_type:<span class="token operator">&lt;</span>type <span class="token string">' exceptions. ZeroDivisionError'</span><span class="token operator">></span>
+exc_type:<type ' exceptions. ZeroDivisionError'>
 exc_val: integer division or modulo by zero 
-exc_tb:<span class="token operator">&lt;</span>traceback object at 0x1097bc440<span class="token operator">></span>
+exc_tb:<traceback object at 0x1097bc440>
 
-Process finished with <span class="token keyword">exit</span> code 1</code></pre>
+Process finished with exit code 1
+</code></pre>
 </blockquote>
-<h4 id="2-json模块"><a href="#2-json模块" class="headerlink" title="2 json模块"></a>2 json模块</h4><p>dumps  —&gt; 可以将字典转换为字符串</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> json
-data <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"python"</span><span class="token punctuation">,</span> <span class="token string">"age"</span><span class="token punctuation">:</span> <span class="token number">18</span><span class="token punctuation">}</span>
-json_str <span class="token operator">=</span> json<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span>data<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>type<span class="token punctuation">(</span>json_str<span class="token punctuation">)</span><span class="token punctuation">,</span> json_str<span class="token punctuation">)</span></code></pre>
+<h4 id="2-json模块"><a class="header-anchor" href="#2-json模块">¶</a>2 json模块</h4>
+<p>dumps  —&gt; 可以将字典转换为字符串</p>
+<pre class=" language-language-python"><code class="language-language-python">import json
+data = {"name": "python", "age": 18}
+json_str = json.dumps(data)
+print(type(json_str), json_str)
+</code></pre>
 <p>运行结果：</p>
-<pre class=" language-python"><code class="language-python">str      <span class="token punctuation">{</span><span class="token string">"age"</span><span class="token punctuation">:</span> <span class="token number">18</span><span class="token punctuation">,</span> <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"python"</span><span class="token punctuation">}</span></code></pre>
+<pre class=" language-language-python"><code class="language-language-python">str      {"age": 18, "name": "python"}
+</code></pre>
 <p>loads ——&gt; 将字符串转换为字典</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> json
-a <span class="token operator">=</span> <span class="token string">'{"city": "sz", "country": "china"}'</span>
-b <span class="token operator">=</span> json<span class="token punctuation">.</span>loads<span class="token punctuation">(</span>a<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>type<span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">,</span> b<span class="token punctuation">)</span></code></pre>
+<pre class=" language-language-python"><code class="language-language-python">import json
+a = '{"city": "sz", "country": "china"}'
+b = json.loads(a)
+print(type(b), b)
+</code></pre>
 <p>运行结果：</p>
-<pre class=" language-python"><code class="language-python">dict      <span class="token punctuation">{</span><span class="token string">"city"</span><span class="token punctuation">:</span> <span class="token string">"sz"</span><span class="token punctuation">,</span> <span class="token string">"country"</span><span class="token punctuation">:</span> <span class="token string">"china"</span><span class="token punctuation">}</span></code></pre>
-<h4 id="3-xss攻击"><a href="#3-xss攻击" class="headerlink" title="3 xss攻击"></a>3 xss攻击</h4><p>当前段传送过来的数据默认进行转义，否则，则会默认执行前端传送的数据，则称为xss攻击</p>
-<h4 id="4-flask-和mysql"><a href="#4-flask-和mysql" class="headerlink" title="4 flask 和mysql"></a>4 flask 和mysql</h4><p><strong>Linux：</strong></p>
+<pre class=" language-language-python"><code class="language-language-python">dict      {"city": "sz", "country": "china"}
+</code></pre>
+<h4 id="3-xss攻击"><a class="header-anchor" href="#3-xss攻击">¶</a>3 xss攻击</h4>
+<p>当前段传送过来的数据默认进行转义，否则，则会默认执行前端传送的数据，则称为xss攻击</p>
+<h4 id="4-flask-和mysql"><a class="header-anchor" href="#4-flask-和mysql">¶</a>4 flask 和mysql</h4>
+<p><strong>Linux：</strong></p>
 <p><em>flask使用mysql数据库需要：</em></p>
 <ol>
 <li><strong>pymysql</strong></li>
@@ -454,93 +465,117 @@ b <span class="token operator">=</span> json<span class="token punctuation">.</s
 <li><strong>flask_sqlalchemy</strong></li>
 </ol>
 <p><strong>windows：</strong></p>
-<p><strong><em>Flask利用pymysql出现Warning：1366的解决办法</em></strong></p>
+<p><em><strong>Flask利用pymysql出现Warning：1366的解决办法</strong></em></p>
 <p><em>flask使用mysql数据库需要：</em></p>
 <ol>
-<li><p><strong>mysql-connector-python</strong></p>
+<li>
+<p><strong>mysql-connector-python</strong></p>
 </li>
-<li><p><strong>sqlalchemy</strong></p>
+<li>
+<p><strong>sqlalchemy</strong></p>
 </li>
-<li><p><strong>flask_sqlalchemy</strong></p>
-<pre class=" language-python"><code class="language-python">SQLALCHEMY_DATABASE_URI <span class="token operator">=</span> <span class="token string">"mysql+mysqlconnector://root:mysql@localhost/ihome01"</span></code></pre>
+<li>
+<p><strong>flask_sqlalchemy</strong></p>
+<pre class=" language-language-python"><code class="language-language-python">SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://root:mysql@localhost/ihome01"
+</code></pre>
 </li>
 </ol>
-<h4 id="5-装饰器"><a href="#5-装饰器" class="headerlink" title="5 装饰器"></a>5 装饰器</h4><pre class=" language-python"><code class="language-python">@app<span class="token punctuation">.</span>route<span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span>
-<span class="token keyword">def</span> <span class="token function">index</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-       <span class="token keyword">return</span> <span class="token string">"index page"</span></code></pre>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">index</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-       <span class="token keyword">return</span> <span class="token string">"index page"</span>
-app<span class="token punctuation">.</span>route<span class="token punctuation">(</span>"<span class="token operator">/</span><span class="token punctuation">)</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span></code></pre>
+<h4 id="5-装饰器"><a class="header-anchor" href="#5-装饰器">¶</a>5 装饰器</h4>
+<pre class=" language-language-python"><code class="language-language-python">@app.route("/")
+def index():
+   	return "index page"
+</code></pre>
+<pre class=" language-language-python"><code class="language-language-python">def index():
+   	return "index page"
+app.route("/)(index)
+</code></pre>
 <p>装饰器不仅仅是定义时可以用，还可以在定义完再使用</p>
-<h4 id="6-自定义正则转换器及蓝图"><a href="#6-自定义正则转换器及蓝图" class="headerlink" title="6 自定义正则转换器及蓝图"></a>6 自定义正则转换器及蓝图</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> werkzeug<span class="token punctuation">.</span>routing <span class="token keyword">import</span> BaseConverter
+<h4 id="6-自定义正则转换器及蓝图"><a class="header-anchor" href="#6-自定义正则转换器及蓝图">¶</a>6 自定义正则转换器及蓝图</h4>
+<pre class=" language-language-python"><code class="language-language-python">from werkzeug.routing import BaseConverter
 
-<span class="token comment" spellcheck="true"># 定义正则转换器</span>
-<span class="token keyword">class</span> <span class="token class-name">ReConverter</span><span class="token punctuation">(</span>BaseConverter<span class="token punctuation">)</span><span class="token punctuation">:</span>
+# 定义正则转换器
+class ReConverter(BaseConverter):
 
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> url_map<span class="token punctuation">,</span> regex<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token comment" spellcheck="true"># 调用父类初始化方法</span>
-        super<span class="token punctuation">(</span>ReConverter<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span>url_map<span class="token punctuation">)</span>
-        <span class="token comment" spellcheck="true"># 重新赋值</span>
-        self<span class="token punctuation">.</span>regex <span class="token operator">=</span> regex</code></pre>
-<pre class=" language-python"><code class="language-python">  <span class="token comment" spellcheck="true"># 添加自定义的转换器</span>
-    app<span class="token punctuation">.</span>url_map<span class="token punctuation">.</span>converters<span class="token punctuation">[</span><span class="token string">"re"</span><span class="token punctuation">]</span> <span class="token operator">=</span> ReConverter</code></pre>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> flask <span class="token keyword">import</span> Blueprint<span class="token punctuation">,</span> current_app
+    def __init__(self, url_map, regex):
+        # 调用父类初始化方法
+        super(ReConverter, self).__init__(url_map)
+        # 重新赋值
+        self.regex = regex
+</code></pre>
+<pre class=" language-language-python"><code class="language-language-python">  # 添加自定义的转换器
+    app.url_map.converters["re"] = ReConverter
+</code></pre>
+<pre class=" language-language-python"><code class="language-language-python">from flask import Blueprint, current_app
 
-html <span class="token operator">=</span> Blueprint<span class="token punctuation">(</span><span class="token string">"web_html"</span><span class="token punctuation">,</span> __name__<span class="token punctuation">)</span>
+html = Blueprint("web_html", __name__)
 
-@html<span class="token punctuation">.</span>route<span class="token punctuation">(</span><span class="token string">"/&lt;re(r'.*'):file_name>"</span><span class="token punctuation">)</span>
-<span class="token keyword">def</span> <span class="token function">web_html</span><span class="token punctuation">(</span>file_name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+@html.route("/<re(r'.*'):file_name>")
+def web_html(file_name):
 
-    <span class="token keyword">if</span> <span class="token operator">not</span> file_name<span class="token punctuation">:</span>
-        file_name <span class="token operator">=</span> <span class="token string">"index.html"</span>
+    if not file_name:
+        file_name = "index.html"
 
-    <span class="token keyword">if</span> file_name <span class="token operator">!=</span> <span class="token string">"favicon.ico"</span><span class="token punctuation">:</span>
-        file_name <span class="token operator">=</span> <span class="token string">"html/"</span> <span class="token operator">+</span> file_name
+    if file_name != "favicon.ico":
+        file_name = "html/" + file_name
 
-    <span class="token keyword">return</span> current_app<span class="token punctuation">.</span>send_static_file<span class="token punctuation">(</span>file_name<span class="token punctuation">)</span></code></pre>
-<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 注册蓝图</span>
-app<span class="token punctuation">.</span>register_blueprint<span class="token punctuation">(</span>html<span class="token punctuation">)</span></code></pre>
-<h4 id="7-登录装饰器"><a href="#7-登录装饰器" class="headerlink" title="7 登录装饰器"></a>7 登录装饰器</h4><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 定义验证登录状态的装饰器</span>
-<span class="token keyword">def</span> <span class="token function">login_required</span><span class="token punctuation">(</span>view_func<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token comment" spellcheck="true"># wraps函数的作用是将wrapper内层函数的属性设置为被装饰函数view_func的属性</span>
-    @functools<span class="token punctuation">.</span>wraps<span class="token punctuation">(</span>view_func<span class="token punctuation">)</span>
-    <span class="token keyword">def</span> <span class="token function">wrapper</span><span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token comment" spellcheck="true"># 判断用户登录状态</span>
-        user_id <span class="token operator">=</span> session<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"user_id"</span><span class="token punctuation">)</span>
+    return current_app.send_static_file(file_name)
+</code></pre>
+<pre class=" language-language-python"><code class="language-language-python"># 注册蓝图
+app.register_blueprint(html)
+</code></pre>
+<h4 id="7-登录装饰器"><a class="header-anchor" href="#7-登录装饰器">¶</a>7 登录装饰器</h4>
+<pre class=" language-language-python"><code class="language-language-python"># 定义验证登录状态的装饰器
+def login_required(view_func):
+    # wraps函数的作用是将wrapper内层函数的属性设置为被装饰函数view_func的属性
+    @functools.wraps(view_func)
+    def wrapper(*args, **kwargs):
+        # 判断用户登录状态
+        user_id = session.get("user_id")
 
-        <span class="token comment" spellcheck="true"># 如果用户是登录状态，则执行登录状态</span>
-        <span class="token keyword">if</span> user_id <span class="token keyword">is</span> <span class="token operator">not</span> None<span class="token punctuation">:</span>
-            <span class="token comment" spellcheck="true"># 将user_id保存到g对象中，在视图函数中，可以通过g对象获取保存数据</span>
-            g<span class="token punctuation">.</span>user_id <span class="token operator">=</span> user_id
-            <span class="token keyword">return</span> view_func<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>
-        <span class="token comment" spellcheck="true"># 如果未登录，则返回未登录信息</span>
-        <span class="token keyword">else</span><span class="token punctuation">:</span>
-            <span class="token keyword">return</span> jsonify<span class="token punctuation">(</span>errno<span class="token operator">=</span>RET<span class="token punctuation">.</span>SESSIONERR<span class="token punctuation">,</span> errmsg<span class="token operator">=</span><span class="token string">"用户未登录"</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span> wrapper</code></pre>
-<h4 id="8-视图函数"><a href="#8-视图函数" class="headerlink" title="8 视图函数"></a>8 视图函数</h4><ol>
+        # 如果用户是登录状态，则执行登录状态
+        if user_id is not None:
+            # 将user_id保存到g对象中，在视图函数中，可以通过g对象获取保存数据
+            g.user_id = user_id
+            return view_func(*args, **kwargs)
+        # 如果未登录，则返回未登录信息
+        else:
+            return jsonify(errno=RET.SESSIONERR, errmsg="用户未登录")
+    return wrapper
+</code></pre>
+<h4 id="8-视图函数"><a class="header-anchor" href="#8-视图函数">¶</a>8 视图函数</h4>
+<ol>
 <li>路由匹配不能出现相同的地址，即同一地址，不能出现两个视图函数</li>
 <li>路由匹配不能出现不同的函数，即不同的地址，不能出现相同的函数名</li>
 </ol>
-<h4 id="9-参数获取"><a href="#9-参数获取" class="headerlink" title="9 参数获取"></a>9 参数获取</h4><ol>
-<li><p>直接从request中获取json数据，并将其转换为字典</p>
-<pre class=" language-python"><code class="language-python">house_data <span class="token operator">=</span> request<span class="token punctuation">.</span>get_json<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<h4 id="9-参数获取"><a class="header-anchor" href="#9-参数获取">¶</a>9 参数获取</h4>
+<ol>
+<li>
+<p>直接从request中获取json数据，并将其转换为字典</p>
+<pre class=" language-language-python"><code class="language-language-python">house_data = request.get_json()
+</code></pre>
 </li>
-<li><p>从request中获取文件</p>
-<pre class=" language-python"><code class="language-python">image_file <span class="token operator">=</span> request<span class="token punctuation">.</span>files<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"house_image"</span><span class="token punctuation">)</span></code></pre>
+<li>
+<p>从request中获取文件</p>
+<pre class=" language-language-python"><code class="language-language-python">image_file = request.files.get("house_image")
+</code></pre>
 </li>
-<li><p>从request中的form表单中获取键值对</p>
-<pre class=" language-python"><code class="language-python">house_id <span class="token operator">=</span> request<span class="token punctuation">.</span>form<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"house_id"</span><span class="token punctuation">)</span></code></pre>
+<li>
+<p>从request中的form表单中获取键值对</p>
+<pre class=" language-language-python"><code class="language-language-python">house_id = request.form.get("house_id")
+</code></pre>
 </li>
 </ol>
-<h4 id="10-数据库操作"><a href="#10-数据库操作" class="headerlink" title="10 数据库操作"></a>10 数据库操作</h4><p>​    在同一视图函数中，可以对对象多次修改，只提交一次即可</p>
-<pre class=" language-python"><code class="language-python">db<span class="token punctuation">.</span>session<span class="token punctuation">.</span>add<span class="token punctuation">(</span>house_image<span class="token punctuation">)</span>
-db<span class="token punctuation">.</span>session<span class="token punctuation">.</span>add<span class="token punctuation">(</span>house<span class="token punctuation">)</span>
+<h4 id="10-数据库操作"><a class="header-anchor" href="#10-数据库操作">¶</a>10 数据库操作</h4>
+<p>​	在同一视图函数中，可以对对象多次修改，只提交一次即可</p>
+<pre class=" language-language-python"><code class="language-language-python">db.session.add(house_image)
+db.session.add(house)
 
-<span class="token keyword">try</span><span class="token punctuation">:</span>
-    db<span class="token punctuation">.</span>session<span class="token punctuation">.</span>commit<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">except</span> Exception <span class="token keyword">as</span> e<span class="token punctuation">:</span>
-    current_app<span class="token punctuation">.</span>logger<span class="token punctuation">.</span>error<span class="token punctuation">(</span>e<span class="token punctuation">)</span>
-    db<span class="token punctuation">.</span>session<span class="token punctuation">.</span>rollback<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+try:
+    db.session.commit()
+except Exception as e:
+    current_app.logger.error(e)
+    db.session.rollback()
+</code></pre>
 
             </div>
             <hr/>
@@ -566,7 +601,7 @@ db<span class="token punctuation">.</span>session<span class="token punctuation"
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bookandmusic.gitee.io/2019/03/22/flask-yi-cuo-dian/">http://bookandmusic.gitee.io/2019/03/22/flask-yi-cuo-dian/</a>
+                    <a href="https://bookandmusic.github.io/2019/03/22/flask-yi-cuo-dian/">https://bookandmusic.github.io/2019/03/22/flask-yi-cuo-dian/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -795,8 +830,8 @@ db<span class="token punctuation">.</span>session<span class="token punctuation"
                         
                             实现Hexo + GitHub 搭建博客。
 
-
-Hexo简介Hexo是一款基于Node.js的静态博客框架，依赖少易于安装使用，可以方便的生成静态网页托管在GitHub和Coding上，是搭建博客的首选框架。大家可以进入hexo官网进行详细
+¶Hexo简介
+Hexo是一款基于Node.js的静态博客框架，依赖少易于安装使用，可以方便的生成静态网页托管在GitHub和Coding上，是搭建博客的首选框架。大家可以进入hexo官网进行详
                         
                     </div>
                     <div class="publish-info">
@@ -845,10 +880,11 @@ Hexo简介Hexo是一款基于Node.js的静态博客框架，依赖少易于安�
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            基本流程使用命令django-admin startproject djangodemo,创建Django项目
+                            ¶基本流程
+使用命令django-admin startproject djangodemo,创建Django项目
 |-- djangodemo
 |    |-- __init__.py  # 说明booktest是一个python包。
-|  
+|
                         
                     </div>
                     <div class="publish-info">
@@ -1086,7 +1122,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             
