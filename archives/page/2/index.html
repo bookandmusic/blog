@@ -436,14 +436,14 @@
                                 
                                     简单介绍长连接与短连接的优缺点。
 
-¶1. 短连接：
 
+1. 短连接：  
 
-client 向 server 发起连接请求
-server 接到请求，双方建立连接
-client 向 server 发送消息
-server 回应 client
-一次读写完成，此时双方
+client 向 server 发起连接请求  
+server 接到请求，双方建立连接  
+client 向 server 发送消息  
+server 回应 client  
+一次
                                 
                             </div>
                             <div class="publish-info">
@@ -588,9 +588,8 @@ server 回应 client
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    ¶内存管理机制
-
-Python中不但变量名无需事先声明，而且也无需类型声明。在Python语言中，对象的类型和内存占用都是运行时确定的。在赋值时解释器会根据语法和右侧的操作数来决定新对象的类型。在对象创建后，一个该对象的引用会被赋值给左侧的
+                                    内存管理机制
+Python中不但变量名无需事先声明，而且也无需类型声明。在Python语言中，对象的类型和内存占用都是运行时确定的。在赋值时解释器会根据语法和右侧的操作数来决定新对象的类型。在对象创建后，一个该对象的引用会被赋值给左侧的变量
                                 
                             </div>
                             <div class="publish-info">
@@ -661,13 +660,12 @@ Python中不但变量名无需事先声明，而且也无需类型声明。在Py
                                 
                                     DRF内置的序列化类，可以对整个模型类进行序列化与反序列化，简化了繁杂的工作。
 
-¶内置字段序列化
-¶模型类
-from django.db import models
+
+内置字段序列化模型类from django.db import models
 
 
 # Create your models here.
-class A
+class Auth
                                 
                             </div>
                             <div class="publish-info">
@@ -743,11 +741,11 @@ class A
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    ¶1. 定义
-函数调用函数自身，这种方式称为递归，这种函数称为递归函数
+                                    1. 定义函数调用函数自身，这种方式称为递归，这种函数称为递归函数
 
 
-递归函数使用过程中，需要找到不变的规律和停止递归的边界条件，
+
+递归函数使用过程中，需要找到不变的规律和停止递归的边界条件， 
 因为函数自身调用自身，函数本身的结构不变，只是每次传的参数改变啦
 递归实现过程(扩展)：利用栈的思想，
                                 
@@ -825,8 +823,7 @@ class A
 lambda表达式的语法：
 lambda argument_list: expression
 
-
-argument_list是参数列表。它的结构与Python中函数(function)的参
+argument_list是参数列表。它的结构与Python中函数(function)的参数
                                 
                             </div>
                             <div class="publish-info">
@@ -896,7 +893,6 @@ argument_list是参数列表。它的结构与Python中函数(function)的参
                             <div class="summary block-with-text">
                                 
                                     
-
 定义
 当一个函数 接收 另一个函数作为参数， 它就是 高阶函数
 
@@ -905,11 +901,10 @@ argument_list是参数列表。它的结构与Python中函数(function)的参
 
 
 示例
-def func(a, x, y):
-    a(x, y)  # a就是传递的 函数参数f，  执行 a 相当于 执行  f
+ def func(a, x, y):
+     a(x, y)  # a就是传递的 函数参数f，  执行 a 相当于 执行  f
 
-def f(x, y):
-
+ def f(x, y)
                                 
                             </div>
                             <div class="publish-info">
@@ -984,13 +979,13 @@ def f(x, y):
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    ¶变量的作用域
-
+                                    变量的作用域
 在Python程序中创建、改变、查找变量名时，都是在一个保存变量名的空间中进行，我们称之为命名空间，也被称之为作用域。
 
 
 
-Python的作用域是静态的，在源代码中变量名被赋值的位置决定了该变量能被访问的范围。即Pyth
+
+Python的作用域是静态的，在源代码中变量名被赋值的位置决定了该变量能被访问的范围。即Pytho
                                 
                             </div>
                             <div class="publish-info">
@@ -1068,9 +1063,8 @@ Python的作用域是静态的，在源代码中变量名被赋值的位置决�
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    ¶HTTP 协议之 http 状态码详解
-HTTP状态码（HTTP Status Code）是用以表示网页服务器HTTP响应状态的3位数字代码。
-它由 RFC 2616 规范定义的，并得到RFC 2518、RFC 2817、RFC 2295
+                                    HTTP 协议之 http 状态码详解HTTP状态码（HTTP Status Code）是用以表示网页服务器HTTP响应状态的3位数字代码。
+它由 RFC 2616 规范定义的，并得到RFC 2518、RFC 2817、RFC 2295、R
                                 
                             </div>
                             <div class="publish-info">
@@ -1139,22 +1133,17 @@ HTTP状态码（HTTP Status Code）是用以表示网页服务器HTTP响应状�
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    ¶一、ORM介绍
-¶1. 什么是 ORM
+                                    一、ORM介绍1. 什么是 ORM
+ORM 全拼Object-Relation Mapping
 
-
-ORM 全拼Object-Relation Mapping
-
-
-中文意为 对象-关系映射
-
+中文意为 对象-关系映射
 
 在MVC/MVT设计模式中的Model模块中都包括ORM
 
 
 
-¶2.ORM 优势
-（1）只需要面向
+
+2.ORM 优势（1）只需要面向对象编程, 不需
                                 
                             </div>
                             <div class="publish-info">
@@ -1223,12 +1212,10 @@ ORM 全拼Object-Relation Mapping
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    ¶CSRF
-¶1. CSRF 的基本概念、缩写、全称
-CSRF（Cross-site request forgery）：跨站请求伪造。
-¶2. CSRF 的攻击原理
+                                    CSRF1. CSRF 的基本概念、缩写、全称CSRF（Cross-site request forgery）：跨站请求伪造。
+2. CSRF 的攻击原理
+用户是网站 A 的注册用户，且登录进去，于是网站 A 就给用户下发 cookie。
 
-用户是网站 A 的注册用户，且登录进去，于是网站 A 就给用户下发 co
                                 
                             </div>
                             <div class="publish-info">
@@ -1297,18 +1284,13 @@ CSRF（Cross-site request forgery）：跨站请求伪造。
                                 
                                     简单对redis 命令进行总结、归纳。
 
-¶键
 
-¶String
-
-¶List
-
-¶Hash
-
-¶Set
-
-¶Zset
-
+键
+String
+List
+Hash
+Set
+Zset
 更多命令参考Redis教程
 
                                 
@@ -1451,7 +1433,7 @@ CSRF（Cross-site request forgery）：跨站请求伪造。
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">104k</span>&nbsp;字
+                class="white-color">107.4k</span>&nbsp;字
             
             
             

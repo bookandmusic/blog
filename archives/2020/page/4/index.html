@@ -435,10 +435,9 @@
                             <div class="summary block-with-text">
                                 
                                     在 vue项目中使用axios分为局部使用和全局使用
-¶在vue中局部使用
-import axios from 'axios'
+在vue中局部使用import axios from 'axios'
 
-axios.get('/api/goods/add_info/?ID=12345&firstName=Fred
+axios.get('/api/goods/add_info/?ID=12345&amp;firstName=Fr
                                 
                             </div>
                             <div class="publish-info">
@@ -509,11 +508,9 @@ axios.get('/api/goods/add_info/?ID=12345&firstName=Fred
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    ¶GET 请求传递参数
-¶1、直接在 URL 上添加参数
-import axios from 'axios'
+                                    GET 请求传递参数1、直接在 URL 上添加参数import axios from 'axios'
 
-axios.get('/api/goods/add_info/?ID=12345&firstName=Fred&lastName
+axios.get('/api/goods/add_info/?ID=12345&amp;firstName=Fred&amp;last
                                 
                             </div>
                             <div class="publish-info">
@@ -582,19 +579,15 @@ axios.get('/api/goods/add_info/?ID=12345&firstName=Fred&lastName
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    ¶Axios API
-
-
+                                    Axios API
 可以通过向 axios 传递相关配置来创建请求
 
-
 axios配置全部参数
-axios(config)
-
-// 发送 POST 请求
-axios({
-    method: 'post',
-    url: '/u
+  axios(config)
+  // 发送 POST 请求
+  axios({
+      method: 'post',
+      url
                                 
                             </div>
                             <div class="publish-info">
@@ -666,9 +659,9 @@ axios({
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    主键必然是唯一且不为空，但是唯一不一定是主键，而且主键只能有一个，但是唯一约束仅仅是为了保持某些列具有唯一性而已。所以可以有多列
-一张表里只能有一个主键约束，可以有多个唯一约束
-主键约束的字段不能为null，而唯一约束的字段可以为null值
+                                    主键必然是唯一且不为空，但是唯一不一定是主键，而且主键只能有一个，但是唯一约束仅仅是为了保持某些列具有唯一性而已。所以可以有多列一张表里只能有一个主键约束，可以有多个唯一约束主键约束的字段不能为null，而唯一约束的字段可以为null值
+
+
                                 
                             </div>
                             <div class="publish-info">
@@ -810,7 +803,7 @@ axios({
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">104k</span>&nbsp;字
+                class="white-color">107.4k</span>&nbsp;字
             
             
             

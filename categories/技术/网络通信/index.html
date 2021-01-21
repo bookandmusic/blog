@@ -346,19 +346,10 @@
                 </a>
                 
                 
-                <a href="/categories/%E6%8A%80%E6%9C%AF/python/Django/" title="Django: 3">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #E8F8F5;">Django
-                        <span class="tag-length">3</span>
-                    </span>
-                </a>
-                
-                
                 <a href="/categories/%E6%8A%80%E6%9C%AF/vue/" title="vue: 8">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #FEF9E7;">vue
+                            style="background-color: #E8F8F5;">vue
                         <span class="tag-length">8</span>
                     </span>
                 </a>
@@ -367,7 +358,7 @@
                 <a href="/categories/Ebook/" title="Ebook: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #F8F9F9;">Ebook
+                            style="background-color: #FEF9E7;">Ebook
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -376,7 +367,7 @@
                 <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E5%87%BD%E6%95%B0/" title="函数: 6">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #82E0AA;">函数
+                            style="background-color: #F8F9F9;">函数
                         <span class="tag-length">6</span>
                     </span>
                 </a>
@@ -385,7 +376,7 @@
                 <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E6%A8%A1%E5%9D%97/" title="模块: 2">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #D7BDE2;">模块
+                            style="background-color: #82E0AA;">模块
                         <span class="tag-length">2</span>
                     </span>
                 </a>
@@ -394,8 +385,17 @@
                 <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" title="面向对象: 2">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #A3E4D7;">面向对象
+                            style="background-color: #D7BDE2;">面向对象
                         <span class="tag-length">2</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/%E6%8A%80%E6%9C%AF/python/Django/" title="Django: 3">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #A3E4D7;">Django
+                        <span class="tag-length">3</span>
                     </span>
                 </a>
                 
@@ -625,9 +625,9 @@
                             
                                 下面我们使用 Python 来实现并发的 Web Server，其中采用了多进程、多线程、协程、单进程单线程非阻塞、select、epoll的方式。
 
-¶一、使用子进程来实现并发 Web Server
-import socket
-impor
+
+一、使用子进程来实现并发 Web Serverimport socket
+import
                             
                         </div>
                         <div class="publish-info">
@@ -691,13 +691,11 @@ impor
                             
                                 本篇文章介绍如何实现一个简单 的Web Server 以及对应的问题解决方案。
 
-¶一、如何使用Python实现一个返回固定页面的Web Server
 
-
+一、如何使用Python实现一个返回固定页面的Web Server
 使用socket创建一个TCP Server
 
-
-接受来自浏览器的TCP链接，并接收
+接受来自浏览器的TCP链接，并接收HTT
                             
                         </div>
                         <div class="publish-info">
@@ -757,14 +755,14 @@ impor
                             
                                 简单介绍长连接与短连接的优缺点。
 
-¶1. 短连接：
 
+1. 短连接：  
 
-client 向 server 发起连接请求
-server 接到请求，双方建立连接
-client 向 server 发送消息
-server 回应 client
-一次读写完成，此时双方
+client 向 server 发起连接请求  
+server 接到请求，双方建立连接  
+client 向 server 发送消息  
+server 回应 client  
+一次
                             
                         </div>
                         <div class="publish-info">
@@ -827,9 +825,7 @@ server 回应 client
                         <div class="summary block-with-text">
                             
                                 HTTP 通信过程包括从客户端发往服务器端的请求以及从服务端返回客户端的响应。
-¶1、HTTP 报文
-就是一大串通信过程里经过 HTTP 处理后添加的报文。
-其大致分为报文首部和报文主体两块。两者由最初出现的空行（CR+LF）来划分，通常并
+1、HTTP 报文就是一大串通信过程里经过 HTTP 处理后添加的报文。其大致分为报文首部和报文主体两块。两者由最初出现的空行（CR+LF）来划分，通常并不一定
                             
                         </div>
                         <div class="publish-info">
@@ -887,13 +883,10 @@ server 回应 client
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                首先，应用 HTTP 协议时，必定有客户端和服务器端。
-其中，发起请求的是客户端，响应请求并返回的是服务端。
-¶1、请求报文
-请求报文是由请求方法、请求 URI、协议版本、可选的请求首部字段和内容实体构成的。
+                                首先，应用 HTTP 协议时，必定有客户端和服务器端。其中，发起请求的是客户端，响应请求并返回的是服务端。
+1、请求报文请求报文是由请求方法、请求 URI、协议版本、可选的请求首部字段和内容实体构成的。
 
-¶2、响应报文
-服务器以响应
+2、响应报文服务器以响应的形式返回
                             
                         </div>
                         <div class="publish-info">
@@ -953,12 +946,11 @@ server 回应 client
                             
                                 HTTP 的出现主要是为了解决文本传输的难题
 
-¶TCP/IP 协议族：
-是互联网相关的各类协议族的总称
+
+TCP/IP 协议族：是互联网相关的各类协议族的总称
 重要的一点是分层: 应用层、传输层、网络层、数据链路层
-层次化的优点：
-1、修改某个地方只用改相应的层
-2、设计变简单，各层管理自己的
+层次化的优点：1、修改某个地方只用改相应的层2、设计变简单，各层管理自己的职责
+
                             
                         </div>
                         <div class="publish-info">
@@ -1078,7 +1070,7 @@ server 回应 client
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">104k</span>&nbsp;字
+                class="white-color">107.4k</span>&nbsp;字
             
             
             

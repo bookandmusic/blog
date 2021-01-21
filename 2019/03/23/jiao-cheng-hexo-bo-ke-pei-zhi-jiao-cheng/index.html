@@ -427,7 +427,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    510
+                    509
                 </div>
                 
 
@@ -456,64 +456,47 @@
             <div id="articleContent">
                 <p>实现Hexo + GitHub 搭建博客。</p>
 <a id="more"></a>
-<h2 id="Hexo简介"><a class="header-anchor" href="#Hexo简介">¶</a>Hexo简介</h2>
-<p>Hexo是一款基于Node.js的静态博客框架，依赖少易于安装使用，可以方便的生成静态网页托管在GitHub和Coding上，是搭建博客的首选框架。大家可以进入hexo官网进行详细查看，因为Hexo的创建者是台湾人，对中文的支持很友好，可以选择中文进行查看。</p>
+
+<h2 id="Hexo简介"><a href="#Hexo简介" class="headerlink" title="Hexo简介"></a>Hexo简介</h2><p>Hexo是一款基于Node.js的静态博客框架，依赖少易于安装使用，可以方便的生成静态网页托管在GitHub和Coding上，是搭建博客的首选框架。大家可以进入hexo官网进行详细查看，因为Hexo的创建者是台湾人，对中文的支持很友好，可以选择中文进行查看。</p>
 <blockquote>
 <p>注意: 查看<a href="https://hexo.io/docs/" target="_blank" rel="noopener">文档</a>以获取更多信息。如果使用Hexo时遇到任何问题，可以在<a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">故障排除</a>中找到答案，或者可以在<a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>上询问。</p>
 </blockquote>
-<h2 id="hexo教程"><a class="header-anchor" href="#hexo教程">¶</a>hexo教程</h2>
-<ol>
-<li>git和nodejs安装好后，就可以安装hexo了</li>
-</ol>
-<pre class=" language-language-shell"><code class="language-language-shell">npm install hexo-cli -g
-npm install hexo --save
-</code></pre>
+<h2 id="hexo教程"><a href="#hexo教程" class="headerlink" title="hexo教程"></a>hexo教程</h2><ol>
+<li><p>git和nodejs安装好后，就可以安装hexo了</p>
+<pre class=" language-shell"><code class="language-shell">npm install hexo-cli -g
+npm install hexo --save</code></pre>
 <p>依旧用hexo -v查看一下版本</p>
 <p>至此就全部安装完了。</p>
-<ol start="2">
-<li>接下来初始化一下hexo</li>
-</ol>
-<pre class=" language-language-shell"><code class="language-language-shell">hexo init
-</code></pre>
-<ol start="3">
-<li>创建一个新帖子</li>
-</ol>
-<pre class=" language-language-bash"><code class="language-language-bash">$ hexo new "我的新帖子"
-</code></pre>
+</li>
+<li><p>接下来初始化一下hexo</p>
+<pre class=" language-shell"><code class="language-shell">hexo init</code></pre>
+</li>
+<li><p>创建一个新帖子</p>
+<pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"我的新帖子"</span></code></pre>
 <p>更多信息：<a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">写作</a></p>
-<ol start="4">
-<li>运行服务器</li>
-</ol>
-<pre class=" language-language-bash"><code class="language-language-bash">$ hexo server
-</code></pre>
+</li>
+<li><p>运行服务器</p>
+<pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre>
 <p>更多信息：<a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">服务器</a></p>
-<ol start="5">
-<li>生成静态文件</li>
-</ol>
-<pre class=" language-language-bash"><code class="language-language-bash">$ hexo generate
-</code></pre>
+</li>
+<li><p>生成静态文件</p>
+<pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre>
 <p>更多信息：<a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">生成</a></p>
-<ol start="6">
-<li>部署到远程站点</li>
-</ol>
-<pre class=" language-language-bash"><code class="language-language-bash">$ hexo deploy
-</code></pre>
+</li>
+<li><p>部署到远程站点</p>
+<pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre>
 <p>更多信息：<a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">部署</a></p>
-<h2 id="Hexo中添加本地图片"><a class="header-anchor" href="#Hexo中添加本地图片">¶</a>Hexo中添加本地图片</h2>
-<ol>
-<li>
-<p>把主页配置文件<code>_config.yml</code> 里的<code>post_asset_folder:</code>这个选项设置为<code>true</code></p>
 </li>
-<li>
-<p>在你的hexo目录下执行这样一句话<code>npm install hexo-asset-image --save</code>，这是下载安装一个可以上传本地图片的插件</p>
+</ol>
+<h2 id="Hexo中添加本地图片"><a href="#Hexo中添加本地图片" class="headerlink" title="Hexo中添加本地图片"></a>Hexo中添加本地图片</h2><ol>
+<li><p>把主页配置文件<code>_config.yml</code> 里的<code>post_asset_folder:</code>这个选项设置为<code>true</code></p>
 </li>
-<li>
-<p>等待一小段时间后，再运行<code>hexo n &quot;xxxx&quot;</code>来生成md博文时，<code>/source/_posts</code>文件夹内除了<code>xxxx.md</code>文件还有一个同名的文件夹</p>
+<li><p>在你的hexo目录下执行这样一句话<code>npm install hexo-asset-image --save</code>，这是下载安装一个可以上传本地图片的插件</p>
 </li>
-<li>
-<p>最后在<code>xxxx.md</code>中想引入图片时，先把图片复制到<code>xxxx</code>这个文件夹中，然后只需要在<code>xxxx.md</code>中按照markdown的格式引入图片：</p>
-<pre class=" language-language-markdown"><code class="language-language-markdown">![你想输入的替代文字](xxxx/图片名.jpg)
-</code></pre>
+<li><p>等待一小段时间后，再运行<code>hexo n &quot;xxxx&quot;</code>来生成md博文时，<code>/source/_posts</code>文件夹内除了<code>xxxx.md</code>文件还有一个同名的文件夹</p>
+</li>
+<li><p>最后在<code>xxxx.md</code>中想引入图片时，先把图片复制到<code>xxxx</code>这个文件夹中，然后只需要在<code>xxxx.md</code>中按照markdown的格式引入图片：</p>
+<pre class=" language-markdown"><code class="language-markdown"><span class="token url">![你想输入的替代文字](xxxx/图片名.jpg)</span></code></pre>
 <blockquote>
 <p><code>xxxx</code>是这个md文件的名字，也是同名文件夹的名字。只需要有文件夹名字即可，不需要有什么绝对路径。你想引入的图片就只需要放入<code>xxxx</code>这个文件夹内就好了，很像引用相对路径。</p>
 </blockquote>
@@ -1061,7 +1044,7 @@ npm install hexo --save
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">104k</span>&nbsp;字
+                class="white-color">107.4k</span>&nbsp;字
             
             
             

@@ -439,7 +439,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    604
+                    606
                 </div>
                 
 
@@ -468,79 +468,63 @@
             <div id="articleContent">
                 <p>在前后端开发过程中一直会伴随我们的问题就是跨域问题，因为这时候前端和后端的代码是在不同机器上运行的，两个地址不在一个域名下，这个时候前端脚本在进行axios访问的时候浏览器就会报跨域相关的错误。</p>
 <p>原因：浏览器的同源策略不允许跨域访问，所谓同源策略是指协议、域名、端口相同。</p>
-<h2 id="1-设置代理服务器-实现跨域请求转发"><a class="header-anchor" href="#1-设置代理服务器-实现跨域请求转发">¶</a>1. 设置代理服务器,实现跨域请求转发</h2>
-<p>方案：采用proxyTable解决。</p>
+<h2 id="1-设置代理服务器-实现跨域请求转发"><a href="#1-设置代理服务器-实现跨域请求转发" class="headerlink" title="1. 设置代理服务器,实现跨域请求转发"></a>1. 设置代理服务器,实现跨域请求转发</h2><p>方案：采用proxyTable解决。</p>
 <ol>
-<li>
-<p>proxyTable是什么？</p>
-<p>vue-cli提供的解决vue开发环境下跨域问题的方法，proxyTable的底层使用了<a href="https://github.com/chimurai/http-proxy-middleware" target="_blank" rel="noopener">http-proxy-middleware</a>,它是http代理中间件，它依赖node.js，基本原理是用服务端代理解决浏览器跨域</p>
-<p>实现的过程就是在我们前端的本地起一个服务，然后我们前端的所有ajax访问首选访问我们本地的服务，本地的服务不会对来的请求做加工处理，只是将请求转发到我们真实的后台服务上去。我们本地的服务其实你就是一个中转站。这种解决方案就是利用<strong>后端之间访问是不存在跨域的问题</strong>。</p>
+<li><p>proxyTable是什么？</p>
+<p> vue-cli提供的解决vue开发环境下跨域问题的方法，proxyTable的底层使用了<a href="https://github.com/chimurai/http-proxy-middleware" target="_blank" rel="noopener">http-proxy-middleware</a>,它是http代理中间件，它依赖node.js，基本原理是用服务端代理解决浏览器跨域</p>
+<p> 实现的过程就是在我们前端的本地起一个服务，然后我们前端的所有ajax访问首选访问我们本地的服务，本地的服务不会对来的请求做加工处理，只是将请求转发到我们真实的后台服务上去。我们本地的服务其实你就是一个中转站。这种解决方案就是利用<strong>后端之间访问是不存在跨域的问题</strong>。</p>
 </li>
-<li>
-<p>具体流程</p>
+<li><p>具体流程</p>
 <ol>
-<li>
-<p>首先在<code>config/index.js</code>里面找到<code>proxyTable:{}</code>,然后在里面加入</p>
-<pre class=" language-language-javascript"><code class="language-language-javascript">"/api":{
-    target: 'https://www.runoob.com',
-    changeOrigin: true,
-    pathRewrite:{
-        '^/api':''
-    }
-}
-</code></pre>
+<li><p>首先在<code>config/index.js</code>里面找到<code>proxyTable:{}</code>,然后在里面加入</p>
+<pre class=" language-javascript"><code class="language-javascript"> <span class="token string">"/api"</span><span class="token punctuation">:</span><span class="token punctuation">{</span>
+     target<span class="token punctuation">:</span> <span class="token string">'https://www.runoob.com'</span><span class="token punctuation">,</span>
+     changeOrigin<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+     pathRewrite<span class="token punctuation">:</span><span class="token punctuation">{</span>
+         <span class="token string">'^/api'</span><span class="token punctuation">:</span><span class="token string">''</span>
+     <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span></code></pre>
 <blockquote>
 <p>注意:</p>
 </blockquote>
 <ul>
-<li>
-<p><code>/api</code>: 是自定义的，写成什么都可以。</p>
+<li><p><code>/api</code>: 是自定义的，写成什么都可以。</p>
 </li>
-<li>
-<p><code>target</code>: 设置要调用的接口域名和端口号。</p>
+<li><p><code>target</code>: 设置要调用的接口域名和端口号。</p>
 </li>
-<li>
-<p><code>^/api</code>: 代替<code>target</code>里面的地址，后面组件中我们调接口时直接用<code>/api</code>代替</p>
+<li><p><code>^/api</code>: 代替<code>target</code>里面的地址，后面组件中我们调接口时直接用<code>/api</code>代替</p>
 </li>
 </ul>
 </li>
-<li>
-<p>在组件中实现跨域请求</p>
+<li><p>在组件中实现跨域请求</p>
 <ul>
-<li>
-<p>比如要访问<code>'https://www.runoob.com/ajax/json_demo.json'</code>，直接写<code>/api/ajax/json_demo.json</code>即可。</p>
-<pre class=" language-language-javascript"><code class="language-language-javascript">import axios from 'axios'
+<li><p>比如要访问<code>&#39;https://www.runoob.com/ajax/json_demo.json&#39;</code>，直接写<code>/api/ajax/json_demo.json</code>即可。</p>
+<pre class=" language-javascript"><code class="language-javascript">  <span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span>
 
-axios.get('/api/ajax/json_demo.json')
-    .then(resp=>{
-        console.log(resp.data)
-    })
-    .cath(err=>{
-        console.log(err)
-    })
-</code></pre>
+  axios<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'/api/ajax/json_demo.json'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>resp<span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>
+          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>resp<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">cath</span><span class="token punctuation">(</span>err<span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>
+          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre>
 </li>
-<li>
-<p>然而我们可以在<code>src/main.js</code>设置一个基础路径，这样你调用接口的时候可以不写<code>api</code>,直接写<code>/ajax/json_demo.json</code>即可。</p>
+<li><p>然而我们可以在<code>src/main.js</code>设置一个基础路径，这样你调用接口的时候可以不写<code>api</code>,直接写<code>/ajax/json_demo.json</code>即可。</p>
 <ul>
-<li>
-<p>在<code>src/main.js</code>设置<code>axios.defaults.baseURL=&quot;/api&quot;</code>;</p>
-<pre class=" language-language-javascript"><code class="language-language-javascript">import axios from 'axios'
-axios.defaults.baseURL="/api";
-</code></pre>
+<li><p>在<code>src/main.js</code>设置<code>axios.defaults.baseURL=&quot;/api&quot;</code>;</p>
+<pre class=" language-javascript"><code class="language-javascript">  <span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span>
+  axios<span class="token punctuation">.</span>defaults<span class="token punctuation">.</span>baseURL<span class="token operator">=</span><span class="token string">"/api"</span><span class="token punctuation">;</span></code></pre>
 </li>
-<li>
-<p>在组件中直接调用接口即可。</p>
-<pre class=" language-language-javascript"><code class="language-language-javascript">import axios from 'axios'
+<li><p>在组件中直接调用接口即可。</p>
+<pre class=" language-javascript"><code class="language-javascript">  <span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span>
 
-axios.get('/ajax/json_demo.json')
-    .then(resp=>{
-        console.log(resp.data)
-    })
-    .cath(err=>{
-        console.log(err)
-    })
-</code></pre>
+  axios<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'/ajax/json_demo.json'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>resp<span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>
+          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>resp<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">cath</span><span class="token punctuation">(</span>err<span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>
+          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre>
 </li>
 </ul>
 </li>
@@ -549,8 +533,7 @@ axios.get('/ajax/json_demo.json')
 </ol>
 </li>
 </ol>
-<h2 id="2-在后台django中配置跨域请求允许"><a class="header-anchor" href="#2-在后台django中配置跨域请求允许">¶</a>2. 在后台django中配置跨域请求允许</h2>
-<p>但是今天我们这里不讲这种方式，有兴趣的可以在我的另一篇博客看到</p>
+<h2 id="2-在后台django中配置跨域请求允许"><a href="#2-在后台django中配置跨域请求允许" class="headerlink" title="2. 在后台django中配置跨域请求允许"></a>2. 在后台django中配置跨域请求允许</h2><p>但是今天我们这里不讲这种方式，有兴趣的可以在我的另一篇博客看到</p>
 
                 
             </div>
@@ -1121,7 +1104,7 @@ axios.get('/ajax/json_demo.json')
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">104k</span>&nbsp;字
+                class="white-color">107.4k</span>&nbsp;字
             
             
             

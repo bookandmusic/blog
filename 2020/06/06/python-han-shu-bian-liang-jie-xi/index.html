@@ -447,7 +447,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    821
+                    893
                 </div>
                 
 
@@ -474,203 +474,159 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="变量的作用域"><a class="header-anchor" href="#变量的作用域">¶</a>变量的作用域</h3>
-<ul>
+                <h3 id="变量的作用域"><a href="#变量的作用域" class="headerlink" title="变量的作用域"></a>变量的作用域</h3><ul>
 <li>在Python程序中创建、改变、查找变量名时，都是在一个保存变量名的空间中进行，我们称之为命名空间，也被称之为作用域。</li>
 </ul>
 <a id="more"></a>
+
 <ul>
 <li>Python的作用域是静态的，在源代码中变量名被赋值的位置决定了该变量能被访问的范围。即Python变量的作用域由变量所在源代码中的位置决定。</li>
 </ul>
-<h3 id="作用域的产生"><a class="header-anchor" href="#作用域的产生">¶</a>作用域的产生</h3>
-<ul>
-<li>
-<p>只有当变量在<code>Module(模块)</code>、<code>Class(类)</code>、<code>def(函数)</code>中定义的时候，才会有作用域的概念。</p>
+<h3 id="作用域的产生"><a href="#作用域的产生" class="headerlink" title="作用域的产生"></a>作用域的产生</h3><ul>
+<li><p>只有当变量在<code>Module(模块)</code>、<code>Class(类)</code>、<code>def(函数)</code>中定义的时候，才会有作用域的概念。</p>
 </li>
-<li>
-<p>在作用域中定义的变量，一般只在该作用域中有效。</p>
+<li><p>在作用域中定义的变量，一般只在该作用域中有效。</p>
 </li>
-<li>
-<p>在<code>if-elif-else</code>、<code>for-else</code>、<code>while</code>、<code>try-except/try-finally</code>等关键字的语句块中并不会产生作用域</p>
+<li><p>在<code>if-elif-else</code>、<code>for-else</code>、<code>while</code>、<code>try-except/try-finally</code>等关键字的语句块中并不会产生作用域</p>
 </li>
 </ul>
-<h4 id="代码分析1"><a class="header-anchor" href="#代码分析1">¶</a>代码分析1</h4>
-<pre class=" language-language-python"><code class="language-language-python">def func():
-    variable = 100
-    print(variable)
-print(variable)
-</code></pre>
+<h4 id="代码分析1"><a href="#代码分析1" class="headerlink" title="代码分析1"></a>代码分析1</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    variable <span class="token operator">=</span> <span class="token number">100</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>variable<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>variable<span class="token punctuation">)</span></code></pre>
 <blockquote>
-<p>代码执行到第二个<code>print(variable)</code>时会报错 <code>NameError: name 'variable' is not defined</code></p>
+<p>代码执行到第二个<code>print(variable)</code>时会报错 <code>NameError: name &#39;variable&#39; is not defined</code></p>
 <p>变量<code>variable</code>只在函数<code>func()</code>的定义域内有效！</p>
 </blockquote>
-<h4 id="代码分析2"><a class="header-anchor" href="#代码分析2">¶</a>代码分析2</h4>
-<pre class=" language-language-python"><code class="language-language-python">if True:
-    variable = 100
-    print(variable)
-print("******")
-print(variable)
-</code></pre>
+<h4 id="代码分析2"><a href="#代码分析2" class="headerlink" title="代码分析2"></a>代码分析2</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">if</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    variable <span class="token operator">=</span> <span class="token number">100</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>variable<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"******"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>variable<span class="token punctuation">)</span></code></pre>
 <p>输出结果为：</p>
-<pre class=" language-language-shell"><code class="language-language-shell">100     
+<pre class=" language-shell"><code class="language-shell">100     
 ******
-100
-</code></pre>
+100</code></pre>
 <p>程序没有报错，因为if语句不产生作用域</p>
-<h3 id="变量作用域的类型"><a class="header-anchor" href="#变量作用域的类型">¶</a>变量作用域的类型</h3>
-<ul>
-<li>L(local)局部作用域
-<ul>
+<h3 id="变量作用域的类型"><a href="#变量作用域的类型" class="headerlink" title="变量作用域的类型"></a>变量作用域的类型</h3><ul>
+<li>L(local)局部作用域<ul>
 <li>√ 函数内的命名空间</li>
 </ul>
 </li>
-<li>E(enclosing)嵌套作用域
-<ul>
+<li>E(enclosing)嵌套作用域<ul>
 <li>√ 外部嵌套函数的命名空间</li>
 </ul>
 </li>
-<li>G(global)全局作用域
-<ul>
+<li>G(global)全局作用域<ul>
 <li>√ 所在模块（文件）的命名空间</li>
 </ul>
 </li>
-<li>B(built-in)内置作用域
-<ul>
+<li>B(built-in)内置作用域<ul>
 <li>√ Python内置模块的命名空间</li>
 </ul>
 </li>
 </ul>
-<h4 id="实例解析"><a class="header-anchor" href="#实例解析">¶</a>实例解析</h4>
-<pre class=" language-language-python"><code class="language-language-python">globalVar = 100  # 全局作用域     
+<h4 id="实例解析"><a href="#实例解析" class="headerlink" title="实例解析"></a>实例解析</h4><pre class=" language-python"><code class="language-python">globalVar <span class="token operator">=</span> <span class="token number">100</span>  <span class="token comment" spellcheck="true"># 全局作用域     </span>
 
 
-def test_scope():
-    enclosingVar = 200  # 嵌套作用域
+<span class="token keyword">def</span> <span class="token function">test_scope</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    enclosingVar <span class="token operator">=</span> <span class="token number">200</span>  <span class="token comment" spellcheck="true"># 嵌套作用域</span>
 
-    def func():
-        localVar = enclosingVar + 1  # 局部作用域
-        print(localVar)
+    <span class="token keyword">def</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        localVar <span class="token operator">=</span> enclosingVar <span class="token operator">+</span> <span class="token number">1</span>  <span class="token comment" spellcheck="true"># 局部作用域</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>localVar<span class="token punctuation">)</span>
 
 
-print(__name__)  # 内置作用域
-</code></pre>
-<h3 id="变量名解析LEGB法则"><a class="header-anchor" href="#变量名解析LEGB法则">¶</a>变量名解析LEGB法则</h3>
-<p>当在函数中使用未确定的变量名时，<code>Python</code>会按照优先级依次搜索4个作用域，以此来确定该变量名的意义。</p>
+<span class="token keyword">print</span><span class="token punctuation">(</span>__name__<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 内置作用域</span></code></pre>
+<h3 id="变量名解析LEGB法则"><a href="#变量名解析LEGB法则" class="headerlink" title="变量名解析LEGB法则"></a>变量名解析LEGB法则</h3><p>当在函数中使用未确定的变量名时，<code>Python</code>会按照优先级依次搜索4个作用域，以此来确定该变量名的意义。</p>
 <ul>
-<li>
-<p>首先搜索局部作用域(L)，</p>
+<li><p>首先搜索局部作用域(L)，</p>
 </li>
-<li>
-<p>之后是上一层嵌套结构中<code>def</code>或<code>lambda</code>函数的嵌套作用域(E)，</p>
+<li><p>之后是上一层嵌套结构中<code>def</code>或<code>lambda</code>函数的嵌套作用域(E)，</p>
 </li>
-<li>
-<p>之后是全局作用域(G)，</p>
+<li><p>之后是全局作用域(G)，</p>
 </li>
-<li>
-<p>最后是内置作用域(B)。</p>
+<li><p>最后是内置作用域(B)。</p>
 </li>
-<li>
-<p>按这个查找原则，在第一处找到的地方停止。如果没有找到，则会出发<code>NameError</code>错误。</p>
+<li><p>按这个查找原则，在第一处找到的地方停止。如果没有找到，则会出发<code>NameError</code>错误。</p>
 </li>
 </ul>
-<h3 id="搜索变量名的优先级："><a class="header-anchor" href="#搜索变量名的优先级：">¶</a>搜索变量名的优先级：</h3>
-<ul>
+<h3 id="搜索变量名的优先级："><a href="#搜索变量名的优先级：" class="headerlink" title="搜索变量名的优先级："></a>搜索变量名的优先级：</h3><ul>
 <li>局部作用域 &gt; 嵌套作用域 &gt; 全局作用域 &gt; 内置作用域</li>
 </ul>
-<h4 id="实例1"><a class="header-anchor" href="#实例1">¶</a>实例1</h4>
-<pre class=" language-language-python"><code class="language-language-python">def func():
-    variable = 300
-    print(variable)  #打印局部作用域的variable
+<h4 id="实例1"><a href="#实例1" class="headerlink" title="实例1"></a>实例1</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    variable <span class="token operator">=</span> <span class="token number">300</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>variable<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">#打印局部作用域的variable</span>
 
-variable = 100
-func()
-print(variable) #打印全局作用域的variable
-</code></pre>
+variable <span class="token operator">=</span> <span class="token number">100</span>
+func<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>variable<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">#打印全局作用域的variable</span></code></pre>
 <p>运行结果：</p>
-<pre class=" language-language-shell"><code class="language-language-shell">300
-100
-</code></pre>
-<h4 id="实例2"><a class="header-anchor" href="#实例2">¶</a>实例2</h4>
-<pre class=" language-language-python"><code class="language-language-python">def test_scopt():
-    variable = 200
-    print(variable)
-    def func():
-        print(variable) #此处打印的是上层嵌套函数
-    func()              #test_scopt()中的variable
-variable = 100
-test_scopt()
-print(variable)
-</code></pre>
+<pre class=" language-shell"><code class="language-shell">300
+100</code></pre>
+<h4 id="实例2"><a href="#实例2" class="headerlink" title="实例2"></a>实例2</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">test_scopt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    variable <span class="token operator">=</span> <span class="token number">200</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>variable<span class="token punctuation">)</span>
+    <span class="token keyword">def</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>variable<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">#此处打印的是上层嵌套函数</span>
+    func<span class="token punctuation">(</span><span class="token punctuation">)</span>              <span class="token comment" spellcheck="true">#test_scopt()中的variable</span>
+variable <span class="token operator">=</span> <span class="token number">100</span>
+test_scopt<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>variable<span class="token punctuation">)</span></code></pre>
 <p>运行结果：</p>
-<pre class=" language-language-shell"><code class="language-language-shell">200
+<pre class=" language-shell"><code class="language-shell">200
 200
-100
-</code></pre>
-<h4 id="实例3"><a class="header-anchor" href="#实例3">¶</a>实例3</h4>
-<pre class=" language-language-python"><code class="language-language-python">variable = 300
-def test_scopt():
-    print(variable) #此处的变量variable绑定的是下一行  
-    variable = 200  #语句中所声明的局部变量，但未被赋值所以报错
+100</code></pre>
+<h4 id="实例3"><a href="#实例3" class="headerlink" title="实例3"></a>实例3</h4><pre class=" language-python"><code class="language-python">variable <span class="token operator">=</span> <span class="token number">300</span>
+<span class="token keyword">def</span> <span class="token function">test_scopt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>variable<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">#此处的变量variable绑定的是下一行  </span>
+    variable <span class="token operator">=</span> <span class="token number">200</span>  <span class="token comment" spellcheck="true">#语句中所声明的局部变量，但未被赋值所以报错</span>
 
-test_scopt()
-print(variable)
-</code></pre>
+test_scopt<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>variable<span class="token punctuation">)</span></code></pre>
 <p>运行结果：</p>
-<pre class=" language-language-shell"><code class="language-language-shell">UnboundLocalError: local variable 'variable' referenced before assignment
-</code></pre>
-<h4 id="实例4"><a class="header-anchor" href="#实例4">¶</a>实例4</h4>
-<pre class=" language-language-python"><code class="language-language-python">variable = 300
-def test_scopt():
-    print(variable)  #此处打印的是全局变量variable
-    #variable = 200  #如果这行未被注释，那么上一句print打印的应是
-                     #此处定义的局部变量     
-test_scopt()
-print(variable)
-</code></pre>
+<pre class=" language-shell"><code class="language-shell">UnboundLocalError: local variable 'variable' referenced before assignment</code></pre>
+<h4 id="实例4"><a href="#实例4" class="headerlink" title="实例4"></a>实例4</h4><pre class=" language-python"><code class="language-python">variable <span class="token operator">=</span> <span class="token number">300</span>
+<span class="token keyword">def</span> <span class="token function">test_scopt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>variable<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">#此处打印的是全局变量variable</span>
+    <span class="token comment" spellcheck="true">#variable = 200  #如果这行未被注释，那么上一句print打印的应是</span>
+                     <span class="token comment" spellcheck="true">#此处定义的局部变量     </span>
+test_scopt<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>variable<span class="token punctuation">)</span></code></pre>
 <p>运行结果：</p>
-<pre class=" language-language-shell"><code class="language-language-shell">300
-300
-</code></pre>
+<pre class=" language-shell"><code class="language-shell">300
+300</code></pre>
 <p>仔细体会实例4和实例3的区别！</p>
-<h3 id="global与nonlocal关键字"><a class="header-anchor" href="#global与nonlocal关键字">¶</a>global与nonlocal关键字</h3>
-<ul>
-<li>
-<p>global适用于函数内部修改全局变量的值</p>
+<h3 id="global与nonlocal关键字"><a href="#global与nonlocal关键字" class="headerlink" title="global与nonlocal关键字"></a>global与nonlocal关键字</h3><ul>
+<li><p>global适用于函数内部修改全局变量的值</p>
 </li>
-<li>
-<p>nonlocal适用于嵌套函数中内部函数修改外部变量的值</p>
+<li><p>nonlocal适用于嵌套函数中内部函数修改外部变量的值</p>
 </li>
 </ul>
-<h4 id="实例1（global关键字）"><a class="header-anchor" href="#实例1（global关键字）">¶</a>实例1（global关键字）</h4>
-<pre class=" language-language-python"><code class="language-language-python">spam = 99   # <--
-def tester():
-    def nested():
-        global spam   #绑定到了第一行定义的spam
-        print('current=',spam)
-        spam = 200
-    return nested
-tester()()
-print(spam)
-</code></pre>
+<h4 id="实例1（global关键字）"><a href="#实例1（global关键字）" class="headerlink" title="实例1（global关键字）"></a>实例1（global关键字）</h4><pre class=" language-python"><code class="language-python">spam <span class="token operator">=</span> <span class="token number">99</span>   <span class="token comment" spellcheck="true"># &lt;--</span>
+<span class="token keyword">def</span> <span class="token function">tester</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">nested</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">global</span> spam   <span class="token comment" spellcheck="true">#绑定到了第一行定义的spam</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'current='</span><span class="token punctuation">,</span>spam<span class="token punctuation">)</span>
+        spam <span class="token operator">=</span> <span class="token number">200</span>
+    <span class="token keyword">return</span> nested
+tester<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>spam<span class="token punctuation">)</span></code></pre>
 <p>运行结果：</p>
-<pre class=" language-language-shell"><code class="language-language-shell">current= 99
-200
-</code></pre>
-<h4 id="实例2（nonlocal关键字）"><a class="header-anchor" href="#实例2（nonlocal关键字）">¶</a>实例2（nonlocal关键字）</h4>
-<pre class=" language-language-python"><code class="language-language-python">def outer():
-    count = 10 # <--
-    def inner():
-        nonlocal count #绑定到了第二行定义的count
-        count = 20
-        print(count)
-    inner()
-    print(count)
-outer()
-</code></pre>
+<pre class=" language-shell"><code class="language-shell">current= 99
+200</code></pre>
+<h4 id="实例2（nonlocal关键字）"><a href="#实例2（nonlocal关键字）" class="headerlink" title="实例2（nonlocal关键字）"></a>实例2（nonlocal关键字）</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">outer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    count <span class="token operator">=</span> <span class="token number">10</span> <span class="token comment" spellcheck="true"># &lt;--</span>
+    <span class="token keyword">def</span> <span class="token function">inner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        nonlocal count <span class="token comment" spellcheck="true">#绑定到了第二行定义的count</span>
+        count <span class="token operator">=</span> <span class="token number">20</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>count<span class="token punctuation">)</span>
+    inner<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>count<span class="token punctuation">)</span>
+outer<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
 <p>运行结果：</p>
-<pre class=" language-language-shell"><code class="language-language-shell">20
-20
-</code></pre>
+<pre class=" language-shell"><code class="language-shell">20
+20</code></pre>
 
                 
             </div>
@@ -935,7 +891,6 @@ outer()
                     <div class="summary block-with-text">
                         
                             
-
 定义
 当一个函数 接收 另一个函数作为参数， 它就是 高阶函数
 
@@ -1250,7 +1205,7 @@ outer()
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">104k</span>&nbsp;字
+                class="white-color">107.4k</span>&nbsp;字
             
             
             

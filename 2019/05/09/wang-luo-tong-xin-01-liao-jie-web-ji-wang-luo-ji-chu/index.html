@@ -468,83 +468,54 @@
             <div id="articleContent">
                 <p>HTTP 的出现主要是为了解决文本传输的难题</p>
 <a id="more"></a>
-<h2 id="TCP-IP-协议族："><a class="header-anchor" href="#TCP-IP-协议族：">¶</a>TCP/IP 协议族：</h2>
-<p>是互联网相关的各类协议族的总称</p>
+
+<h2 id="TCP-IP-协议族："><a href="#TCP-IP-协议族：" class="headerlink" title="TCP/IP 协议族："></a>TCP/IP 协议族：</h2><p>是互联网相关的各类协议族的总称</p>
 <p>重要的一点是<strong>分层</strong>: 应用层、传输层、网络层、数据链路层</p>
-<p>层次化的优点：<br>
-1、修改某个地方只用改相应的层<br>
-2、设计变简单，各层管理自己的职责</p>
-<h3 id="分层管理"><a class="header-anchor" href="#分层管理">¶</a>分层管理</h3>
-<p><strong>应用层</strong>：决定向用户提供应用服务时通信的活动，<br>
-<code>FTP(File Transfer Protocol)</code> 文件传输协议、<code>DNS</code>(<code>Domain Name System</code>) 域名系统、<code>HTTP</code>(<code>HyperText Transfer Protocol</code>)<br>
-<strong>传输层</strong>：提供处于网络连接中两台计算机之间的数据传输。<br>
-<code>TCP</code>(<code>Transmission Control Protocol</code>) 传输控制协议、<code>UDP</code>(<code>User Data Protocol</code>) 用户数据报协议<br>
-<strong>网络层（网络互联层）</strong>：处理在网络上流动的数据包（数据包是网络传输的最小数据单位）。该层规定了通过怎样的路径（传输路线）到达对方计算机，并传递数据。作用就是在与对方计算机之间通过多台计算机或网络设备进行传输时，选择一条传输路线。<br>
-<strong>链路层（数据链路层、网络接口层）</strong>：用来处理网络的硬件部分。包括控制操作系统、硬件设备驱动、<code>NIC</code>（<code>Network Interface Card</code>，网络适配器）、光纤等物理课件部分（连接器等一切传输媒介）。</p>
-<h3 id="通信传输流"><a class="header-anchor" href="#通信传输流">¶</a>通信传输流</h3>
-<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526110342-HTTP-%E4%BC%A0%E8%BE%93%E8%BF%87%E7%A8%8B%20.png" alt="20190526110342-HTTP-传输过程"></p>
-<p>应用发请求通过 <code>TCP</code> 处理报文进行分隔发送给网络层网络层增加 <code>MAC</code> 地址给链路, 之后反向操作, 请求数据的时候每一层处理完成后会给这个数据加上这个层的首部信息, 相反, 处理请求的时候, 每处理一层就删除一个首部, 这叫做数据信息的封装 (<code>encapsulate</code>)。</p>
+<p>层次化的优点：<br>1、修改某个地方只用改相应的层<br>2、设计变简单，各层管理自己的职责</p>
+<h3 id="分层管理"><a href="#分层管理" class="headerlink" title="分层管理"></a>分层管理</h3><p><strong>应用层</strong>：决定向用户提供应用服务时通信的活动，<br><code>FTP(File Transfer Protocol)</code> 文件传输协议、<code>DNS</code>(<code>Domain Name System</code>) 域名系统、<code>HTTP</code>(<code>HyperText Transfer Protocol</code>)<br><strong>传输层</strong>：提供处于网络连接中两台计算机之间的数据传输。<br><code>TCP</code>(<code>Transmission Control Protocol</code>) 传输控制协议、<code>UDP</code>(<code>User Data Protocol</code>) 用户数据报协议<br><strong>网络层（网络互联层）</strong>：处理在网络上流动的数据包（数据包是网络传输的最小数据单位）。该层规定了通过怎样的路径（传输路线）到达对方计算机，并传递数据。作用就是在与对方计算机之间通过多台计算机或网络设备进行传输时，选择一条传输路线。<br><strong>链路层（数据链路层、网络接口层）</strong>：用来处理网络的硬件部分。包括控制操作系统、硬件设备驱动、<code>NIC</code>（<code>Network Interface Card</code>，网络适配器）、光纤等物理课件部分（连接器等一切传输媒介）。</p>
+<h3 id="通信传输流"><a href="#通信传输流" class="headerlink" title="通信传输流"></a>通信传输流</h3><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526110342-HTTP-%E4%BC%A0%E8%BE%93%E8%BF%87%E7%A8%8B%20.png" alt="20190526110342-HTTP-传输过程"></p>
+<p>  应用发请求通过 <code>TCP</code> 处理报文进行分隔发送给网络层网络层增加 <code>MAC</code> 地址给链路, 之后反向操作, 请求数据的时候每一层处理完成后会给这个数据加上这个层的首部信息, 相反, 处理请求的时候, 每处理一层就删除一个首部, 这叫做数据信息的封装 (<code>encapsulate</code>)。</p>
 <p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526110348-HTTP-%E4%BC%A0%E8%BE%93%E8%BF%87%E7%A8%8B02%20.png" alt="20190526110348-HTTP-传输过程02"></p>
-<h2 id="IP、TCP-和-DNS"><a class="header-anchor" href="#IP、TCP-和-DNS">¶</a>IP、TCP 和 DNS</h2>
-<h3 id="IP-协议："><a class="header-anchor" href="#IP-协议：">¶</a>IP 协议：</h3>
-<p><code>IP</code>（<code>Internet Protocol</code>）网络协议处于网络层。几乎所有使用网络的系统都会用到 <code>IP</code> 协议。<code>IP</code> 不是 <code>IP</code> 地址，<code>IP</code> 只是一种协议名称。</p>
+<h2 id="IP、TCP-和-DNS"><a href="#IP、TCP-和-DNS" class="headerlink" title="IP、TCP 和 DNS"></a>IP、TCP 和 DNS</h2><h3 id="IP-协议："><a href="#IP-协议：" class="headerlink" title="IP 协议："></a>IP 协议：</h3><p><code>IP</code>（<code>Internet Protocol</code>）网络协议处于网络层。几乎所有使用网络的系统都会用到 <code>IP</code> 协议。<code>IP</code> 不是 <code>IP</code> 地址，<code>IP</code> 只是一种协议名称。</p>
 <ul>
-<li>
-<p>作用：把各种数据包传给对方，保证能传送到达需要多种条件，其中最重要的是 <code>IP</code> 地址和 <code>MAC</code>（<code>Media Access Control Address</code>) 地址。</p>
+<li><p>作用：把各种数据包传给对方，保证能传送到达需要多种条件，其中最重要的是 <code>IP</code> 地址和 <code>MAC</code>（<code>Media Access Control Address</code>) 地址。</p>
 </li>
-<li>
-<p><code>IP</code> 地址：指明节点被分配到的地址</p>
+<li><p><code>IP</code> 地址：指明节点被分配到的地址</p>
 </li>
-<li>
-<p><code>MAC</code> 地址： 网卡所属的固定地址</p>
+<li><p><code>MAC</code> 地址： 网卡所属的固定地址</p>
 </li>
-<li>
-<p><code>IP</code> 地址可以和 <code>MAC</code> 地址进行配对，<code>IP</code> 可变，但 <code>MAC</code> 基本不会更改。</p>
+<li><p><code>IP</code> 地址可以和 <code>MAC</code> 地址进行配对，<code>IP</code> 可变，但 <code>MAC</code> 基本不会更改。</p>
+<p>  不同局域网之间的通信需要经过多次中转，在中转时会利用下一站中转设备的 <code>MAC</code> 地址来搜索下一个中转目标，这时会采用 <code>ARP</code> 协议（<code>Addres s Resolution Protocol</code>)，这是用于解析地址的协议，可以根据对方 <code>IP</code> 地址就能反查处对应的 <code>MAC</code> 地址。<br>   信息传输的时候，并不是从一开始就设计好精确的路线，而是边走边瞧，到下一个中转点会自动判断下一个中转点，这叫做路由选择（<code>routing</code>）</p>
 </li>
 </ul>
-<p>不同局域网之间的通信需要经过多次中转，在中转时会利用下一站中转设备的 <code>MAC</code> 地址来搜索下一个中转目标，这时会采用 <code>ARP</code> 协议（<code>Addres s Resolution Protocol</code>)，这是用于解析地址的协议，可以根据对方 <code>IP</code> 地址就能反查处对应的 <code>MAC</code> 地址。<br>
-  信息传输的时候，并不是从一开始就设计好精确的路线，而是边走边瞧，到下一个中转点会自动判断下一个中转点，这叫做路由选择（<code>routing</code>）</p>
 <p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526110449-IP%E5%A4%84%E7%90%86%20.png" alt="20190526110449-IP处理"></p>
-<h3 id="TCP-协议"><a class="header-anchor" href="#TCP-协议">¶</a>TCP 协议</h3>
-<p>按层次位于传输层, 提供可靠的字节流服务 (<code>Byte Stream Service</code>), 意思是为了方便传输, 将大块数据分割成以报文段(<code>segment</code>) 为单位的数据包进行管理可靠的传输服务是指，能够把数据准确可靠的传给对方。</p>
+<h3 id="TCP-协议"><a href="#TCP-协议" class="headerlink" title="TCP 协议"></a>TCP 协议</h3><p>按层次位于传输层, 提供可靠的字节流服务 (<code>Byte Stream Service</code>), 意思是为了方便传输, 将大块数据分割成以报文段(<code>segment</code>) 为单位的数据包进行管理可靠的传输服务是指，能够把数据准确可靠的传给对方。</p>
 <blockquote>
 <p>如何确保数据到达目标</p>
 </blockquote>
-<h4 id="三次握手（three—way-handshaking）策略"><a class="header-anchor" href="#三次握手（three—way-handshaking）策略">¶</a>三次握手（<code>three—way handshaking</code>）策略</h4>
-<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526110500-%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%20.png" alt="20190526110500-三次握手"></p>
+<h4 id="三次握手（three—way-handshaking）策略"><a href="#三次握手（three—way-handshaking）策略" class="headerlink" title="  三次握手（three—way handshaking）策略"></a>  三次握手（<code>three—way handshaking</code>）策略</h4><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526110500-%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%20.png" alt="20190526110500-三次握手"></p>
 <ul>
 <li>发送端先发送一个带有 <code>SYN</code>（<code>synchronize</code> 同步）标识的数据包给对方</li>
 <li>对方接收到后回传一个带有  <code>SYN</code>/<code>ACK</code>（<code>acknowledgement</code>)标识的数据包已传达确认信息</li>
 <li>最后发送端再传回一个带有 <code>ACK</code> 标识的数据包代表 “握手” 结束。</li>
 <li>若期间在某个过程莫名中断, <code>TCP</code> 协议会在此以相同顺序发送相同数据包。</li>
 </ul>
-<h3 id="DNS-服务"><a class="header-anchor" href="#DNS-服务">¶</a>DNS 服务</h3>
-<p><code>DNS</code> 服务是和 <code>HTTP</code> 一样位于应用层, 提供<code>域名</code>到 <code>IP</code> 地址之间的解析服务。<br>
- 计算机可以有 <code>IP</code> 地址, 又可以有主机名和域名。比如可以使用 <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> 访问百度，也可以使用 <code>119.75.217.109</code> 访问百度。<code>DNS</code> 协议就是可以查询其对应关系的协议。</p>
+<h3 id="DNS-服务"><a href="#DNS-服务" class="headerlink" title="DNS 服务"></a>DNS 服务</h3><p>  <code>DNS</code> 服务是和 <code>HTTP</code> 一样位于应用层, 提供<code>域名</code>到 <code>IP</code> 地址之间的解析服务。<br> 计算机可以有 <code>IP</code> 地址, 又可以有主机名和域名。比如可以使用 <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> 访问百度，也可以使用 <code>119.75.217.109</code> 访问百度。<code>DNS</code> 协议就是可以查询其对应关系的协议。</p>
 <p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526110337-DNS%E8%A7%A3%E6%9E%90%20.png" alt="20190526110337-DNS解析"></p>
-<h3 id="各种协议与-HTTP-协议的关系"><a class="header-anchor" href="#各种协议与-HTTP-协议的关系">¶</a>各种协议与 HTTP 协议的关系</h3>
-<p>客户端发出对某 <code>www.</code> 网站的请求, 通过 <code>DNS</code> 协议获取对应的 <code>IP</code> 地址, 在通过 <code>HTTP</code> 协议生成请求报文, 通过 <code>TCP</code> 进行分隔划分成数据包, 通过三次握手把每个报文段可靠的传给对方, 再通过 <code>IP</code> 协议分配 <code>IP</code> 地址和 <code>MAC</code> 地址, 一遍中转一遍传送, 对方通过 <code>IP</code> 协议接收一段段报文, 通过 <code>TCP</code> 协议再一段段重组, 在通过 <code>HTTP</code> 协议对这些内容进行处理请求信息, 把请求结果再像上边的过程走回客户端。一次完整的传输就结束了。</p>
+<h3 id="各种协议与-HTTP-协议的关系"><a href="#各种协议与-HTTP-协议的关系" class="headerlink" title="各种协议与 HTTP 协议的关系"></a>各种协议与 HTTP 协议的关系</h3><p>  客户端发出对某 <code>www.</code> 网站的请求, 通过 <code>DNS</code> 协议获取对应的 <code>IP</code> 地址, 在通过 <code>HTTP</code> 协议生成请求报文, 通过 <code>TCP</code> 进行分隔划分成数据包, 通过三次握手把每个报文段可靠的传给对方, 再通过 <code>IP</code> 协议分配 <code>IP</code> 地址和 <code>MAC</code> 地址, 一遍中转一遍传送, 对方通过 <code>IP</code> 协议接收一段段报文, 通过 <code>TCP</code> 协议再一段段重组, 在通过 <code>HTTP</code> 协议对这些内容进行处理请求信息, 把请求结果再像上边的过程走回客户端。一次完整的传输就结束了。</p>
 <p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526110506-%E5%8D%8F%E8%AE%AE%E5%85%B3%E7%B3%BB%20.png" alt="20190526110506-协议关系"></p>
-<h2 id="URI-和-URL"><a class="header-anchor" href="#URI-和-URL">¶</a>URI 和 URL</h2>
-<ul>
+<h2 id="URI-和-URL"><a href="#URI-和-URL" class="headerlink" title="URI 和 URL"></a>URI 和 URL</h2><ul>
 <li><code>URL</code>（<code>Uniform</code> <code>Resource</code> <code>Locator</code>) 统一资源定位符，就是 <code>Web</code> 浏览器访问 <code>web</code> 页面时候的网页地址，<a href="http://www.baidu.com" target="_blank" rel="noopener">http://www.baidu.com</a></li>
 <li><code>URI</code>（<code>Uniform</code> <code>Resource</code> <code>Identifier</code>) 统一资源标识符</li>
 <li><em><code>Uniform</code></em> 规定统一格式可方便处理多种不同类型资源。</li>
 <li><em><code>Resouce</code></em> 资源定义是 “可标识的任何东西”。</li>
 <li><em><code>Identifier</code></em> 可标识的对象。也称作标识符。</li>
 </ul>
-<p>综上，<code>URI</code> 就是由某协议方案表示的资源的定位标识符，其中，访问资源所使用的协议类型， <code>HTTP</code> 协议时，协议方案就是 <code>http</code>，除此还有 <code>ftp</code>、<code>mailto</code>、<code>telent</code>、<code>file</code> 等。<br>
-  <code>URI</code> 用字符串标识某一互联网资源，<code>URL</code> 表示资源的地点，可见 <code>URL</code> 是 <code>URI</code> 的子集。</p>
-<h3 id="URI-格式"><a class="header-anchor" href="#URI-格式">¶</a>URI 格式</h3>
-<p>绝对 <code>URI</code> 格式：</p>
+<p>  综上，<code>URI</code> 就是由某协议方案表示的资源的定位标识符，其中，访问资源所使用的协议类型， <code>HTTP</code> 协议时，协议方案就是 <code>http</code>，除此还有 <code>ftp</code>、<code>mailto</code>、<code>telent</code>、<code>file</code> 等。<br>  <code>URI</code> 用字符串标识某一互联网资源，<code>URL</code> 表示资源的地点，可见 <code>URL</code> 是 <code>URI</code> 的子集。</p>
+<h3 id="URI-格式"><a href="#URI-格式" class="headerlink" title="URI 格式"></a>URI 格式</h3><p>绝对 <code>URI</code> 格式：</p>
 <p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526110455-URI%E6%A0%BC%E5%BC%8F%20.png" alt="20190526110455-URI格式"></p>
 <p>可选项：登录信息、服务器端口号、查询字符串、片段标识符</p>
-<h2 id="自我回顾"><a class="header-anchor" href="#自我回顾">¶</a>自我回顾</h2>
-<p>1、<code>HTTP</code>、<code>TCP</code>/<code>IP</code>、<code>DNS</code>、<code>URL</code>、<code>URI</code> 分别是什么?<br>
-2、<code>TCP</code>/<code>IP</code> 协议为什么进行分层管理，又分为哪些层?<br>
-3、客户端到服务端的请求过程是什么?<br>
-4、三次握手怎么进行的?<br>
-5、各个协议的关系是什么？</p>
+<h2 id="自我回顾"><a href="#自我回顾" class="headerlink" title="自我回顾"></a>自我回顾</h2><p>1、<code>HTTP</code>、<code>TCP</code>/<code>IP</code>、<code>DNS</code>、<code>URL</code>、<code>URI</code> 分别是什么?<br>2、<code>TCP</code>/<code>IP</code> 协议为什么进行分层管理，又分为哪些层?<br>3、客户端到服务端的请求过程是什么?<br>4、三次握手怎么进行的?<br>5、各个协议的关系是什么？</p>
 <p><strong><em>注： 本文图片均来自《图解 HTTP》一书</em></strong></p>
 
                 
@@ -1096,7 +1067,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">104k</span>&nbsp;字
+                class="white-color">107.4k</span>&nbsp;字
             
             
             

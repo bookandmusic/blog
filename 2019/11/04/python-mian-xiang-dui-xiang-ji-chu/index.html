@@ -439,7 +439,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.8k
+                    1.9k
                 </div>
                 
 
@@ -466,321 +466,286 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="类与实例"><a class="header-anchor" href="#类与实例">¶</a>类与实例</h2>
-<p>面向对象最重要的概念就是类（<code>Class</code>）和实例（<code>Instance</code>），必须牢记类是抽象的模板，比如Student类，而实例是根据类创建出来的一个个具体的“对象”，每个对象都拥有相同的方法，但各自的数据可能不同。</p>
+                <h2 id="类与实例"><a href="#类与实例" class="headerlink" title="类与实例"></a>类与实例</h2><p>面向对象最重要的概念就是类（<code>Class</code>）和实例（<code>Instance</code>），必须牢记类是抽象的模板，比如Student类，而实例是根据类创建出来的一个个具体的“对象”，每个对象都拥有相同的方法，但各自的数据可能不同。</p>
 <p>仍以Student类为例，在Python中，定义类是通过<code>class</code>关键字：</p>
-<pre class=" language-language-python"><code class="language-language-python">class Student(object):
-    pass
-</code></pre>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Student</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span></code></pre>
 <p><code>class</code>后面紧接着是类名，即<code>Student</code>，类名通常是大写开头的单词，紧接着是<code>(object)</code>，表示该类是从哪个类继承下来的，继承的概念我们后面再讲，通常，如果没有合适的继承类，就使用<code>object</code>类，这是所有类最终都会继承的类。</p>
 <p>定义好了<code>Student</code>类，就可以根据<code>Student</code>类创建出<code>Student</code>的实例，创建实例是通过<code>类名+()</code>实现的：</p>
-<pre class=" language-language-python"><code class="language-language-python">In [5]: s = Student()
+<pre class=" language-python"><code class="language-python">In <span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">:</span> s <span class="token operator">=</span> Student<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-In [6]: s
-Out[6]: <__main__.Student at 0x107615860>
+In <span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">:</span> s
+Out<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token operator">&lt;</span>__main__<span class="token punctuation">.</span>Student at <span class="token number">0x107615860</span><span class="token operator">></span>
 
-In [7]: Student
-Out[7]: <class '__main__.Student'>
-</code></pre>
+In <span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">:</span> Student
+Out<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token operator">&lt;</span><span class="token keyword">class</span> <span class="token string">'__main__.Student'</span><span class="token operator">></span></code></pre>
 <p>可以看到，变量<code>s</code>指向的就是一个<code>Student</code>的实例，后面的<code>0x107615860</code>是内存地址，每个object的地址都不一样，而<code>Student</code>本身则是一个类。</p>
 <p>可以自由地给一个实例变量绑定属性，比如，给实例<code>s</code>绑定一个<code>name</code>属性：</p>
-<pre class=" language-language-python"><code class="language-language-python">In [9]: s.name = 'Bart Simpson'
+<pre class=" language-python"><code class="language-python">In <span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">:</span> s<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'Bart Simpson'</span>
 
-In [10]: s.name
-Out[10]: 'Bart Simpson'
-</code></pre>
-<p>由于类可以起到模板的作用，因此，可以在创建实例的时候，把一些我们认为必须绑定的属性强制填写进去。通过定义一个特殊的<code>__init__</code>方法，在创建实例的时候，就把<code>name</code>，<code>score</code>等属性绑上去：</p>
-<pre class=" language-language-python"><code class="language-language-python">class Student(object):
+In <span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">:</span> s<span class="token punctuation">.</span>name
+Out<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token string">'Bart Simpson'</span></code></pre>
+<p> 由于类可以起到模板的作用，因此，可以在创建实例的时候，把一些我们认为必须绑定的属性强制填写进去。通过定义一个特殊的<code>__init__</code>方法，在创建实例的时候，就把<code>name</code>，<code>score</code>等属性绑上去：</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Student</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
 
-    def __init__(self, name, score):
-        self.name = name
-        self.score = score
-</code></pre>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">,</span> score<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>name <span class="token operator">=</span> name
+        self<span class="token punctuation">.</span>score <span class="token operator">=</span> score</code></pre>
 <blockquote>
 <p>注意：特殊方法“<strong>init</strong>”前后分别有两个下划线！！！</p>
 </blockquote>
 <p>注意到<code>__init__</code>方法的第一个参数永远是<code>self</code>，表示创建的实例本身，因此，在<code>__init__</code>方法内部，就可以把各种属性绑定到<code>self</code>，因为<code>self</code>就指向创建的实例本身。</p>
 <p>有了<code>__init__</code>方法，在创建实例的时候，就不能传入空的参数了，必须传入与<code>__init__</code>方法匹配的参数，但<code>self</code>不需要传，Python解释器自己会把实例变量传进去：</p>
-<pre class=" language-language-python"><code class="language-language-python">In [14]: class Student(object):
-    ...:
-    ...:     def __init__(self, name, score):
-    ...:         self.name = name
-    ...:         self.score = score
-    ...:
+<pre class=" language-python"><code class="language-python">In <span class="token punctuation">[</span><span class="token number">14</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token keyword">class</span> <span class="token class-name">Student</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">:</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">:</span>     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">,</span> score<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">:</span>         self<span class="token punctuation">.</span>name <span class="token operator">=</span> name
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">:</span>         self<span class="token punctuation">.</span>score <span class="token operator">=</span> score
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">:</span>
 
-In [15]: s = Student('Bart Simpson', 59)
+In <span class="token punctuation">[</span><span class="token number">15</span><span class="token punctuation">]</span><span class="token punctuation">:</span> s <span class="token operator">=</span> Student<span class="token punctuation">(</span><span class="token string">'Bart Simpson'</span><span class="token punctuation">,</span> <span class="token number">59</span><span class="token punctuation">)</span>
 
-In [16]: s.name
-Out[16]: 'Bart Simpson'
+In <span class="token punctuation">[</span><span class="token number">16</span><span class="token punctuation">]</span><span class="token punctuation">:</span> s<span class="token punctuation">.</span>name
+Out<span class="token punctuation">[</span><span class="token number">16</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token string">'Bart Simpson'</span>
 
-In [17]: s.score
-Out[17]: 59
-</code></pre>
+In <span class="token punctuation">[</span><span class="token number">17</span><span class="token punctuation">]</span><span class="token punctuation">:</span> s<span class="token punctuation">.</span>score
+Out<span class="token punctuation">[</span><span class="token number">17</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token number">59</span></code></pre>
 <p>和普通的函数相比，在类中定义的函数只有一点不同，就是第一个参数永远是实例变量<code>self</code>，并且，调用时，不用传递该参数。除此之外，类的方法和普通函数没有什么区别，所以，你仍然可以用默认参数、可变参数、关键字参数和命名关键字参数。</p>
-<h2 id="数据封装"><a class="header-anchor" href="#数据封装">¶</a>数据封装</h2>
-<p>面向对象编程的一个重要特点就是数据封装。在上面的<code>Student</code>类中，每个实例就拥有各自的<code>name</code>和<code>score</code>这些数据。我们可以通过函数来访问这些数据，比如打印一个学生的成绩：</p>
-<pre class=" language-language-python"><code class="language-language-python">In [19]: def print_score(std):
-    ...:     print('%s: %s' % (std.name, std.score))
-    ...:
+<h2 id="数据封装"><a href="#数据封装" class="headerlink" title="数据封装"></a>数据封装</h2><p>面向对象编程的一个重要特点就是数据封装。在上面的<code>Student</code>类中，每个实例就拥有各自的<code>name</code>和<code>score</code>这些数据。我们可以通过函数来访问这些数据，比如打印一个学生的成绩：</p>
+<pre class=" language-python"><code class="language-python">In <span class="token punctuation">[</span><span class="token number">19</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token keyword">def</span> <span class="token function">print_score</span><span class="token punctuation">(</span>std<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">:</span>     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'%s: %s'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>std<span class="token punctuation">.</span>name<span class="token punctuation">,</span> std<span class="token punctuation">.</span>score<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">:</span>
 
-In [20]: print_score(s)
-Bart Simpson: 59
-</code></pre>
+In <span class="token punctuation">[</span><span class="token number">20</span><span class="token punctuation">]</span><span class="token punctuation">:</span> print_score<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+Bart Simpson<span class="token punctuation">:</span> <span class="token number">59</span></code></pre>
 <p>但是，既然<code>Student</code>实例本身就拥有这些数据，要访问这些数据，就没有必要从外面的函数去访问，可以直接在<code>Student</code>类的内部定义访问数据的函数，这样，就把“数据”给封装起来了。这些封装数据的函数是和<code>Student</code>类本身是关联起来的，我们称之为类的方法：</p>
-<pre class=" language-language-python"><code class="language-language-python">In [23]: class Student(object):
-    ...:
-    ...:     def __init__(self, name, score):
-    ...:         self.name = name
-    ...:         self.score = score
-    ...:
-    ...:     def print_score(self):
-    ...:         print('%s: %s' % (self.name, self.score))
-    ...:
-</code></pre>
+<pre class=" language-python"><code class="language-python">In <span class="token punctuation">[</span><span class="token number">23</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token keyword">class</span> <span class="token class-name">Student</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">:</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">:</span>     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">,</span> score<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">:</span>         self<span class="token punctuation">.</span>name <span class="token operator">=</span> name
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">:</span>         self<span class="token punctuation">.</span>score <span class="token operator">=</span> score
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">:</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">:</span>     <span class="token keyword">def</span> <span class="token function">print_score</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">:</span>         <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'%s: %s'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>name<span class="token punctuation">,</span> self<span class="token punctuation">.</span>score<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">:</span></code></pre>
 <p>要定义一个方法，除了第一个参数是<code>self</code>外，其他和普通函数一样。要调用一个方法，只需要在实例变量上直接调用，除了<code>self</code>不用传递，其他参数正常传入：</p>
-<pre class=" language-language-python"><code class="language-language-python">In [24]: s = Student('Bart Simpson', 59)
+<pre class=" language-python"><code class="language-python">In <span class="token punctuation">[</span><span class="token number">24</span><span class="token punctuation">]</span><span class="token punctuation">:</span> s <span class="token operator">=</span> Student<span class="token punctuation">(</span><span class="token string">'Bart Simpson'</span><span class="token punctuation">,</span> <span class="token number">59</span><span class="token punctuation">)</span>
 
-In [25]: s.print_score()
-Bart Simpson: 59
-</code></pre>
+In <span class="token punctuation">[</span><span class="token number">25</span><span class="token punctuation">]</span><span class="token punctuation">:</span> s<span class="token punctuation">.</span>print_score<span class="token punctuation">(</span><span class="token punctuation">)</span>
+Bart Simpson<span class="token punctuation">:</span> <span class="token number">59</span></code></pre>
 <p>这样一来，我们从外部看<code>Student</code>类，就只需要知道，创建实例需要给出<code>name</code>和<code>score</code>，而如何打印，都是在<code>Student</code>类的内部定义的，这些数据和逻辑被“封装”起来了，调用很容易，但却不用知道内部实现的细节。</p>
 <p>封装的另一个好处是可以给<code>Student</code>类增加新的方法，比如<code>get_grade</code>：</p>
-<pre class=" language-language-python"><code class="language-language-python">class Student(object):
-    def __init__(self, name, score):
-        self.name = name
-        self.score = score
+<pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Student</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">,</span> score<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>name <span class="token operator">=</span> name
+        self<span class="token punctuation">.</span>score <span class="token operator">=</span> score
 
-    def get_grade(self):
-        if self.score >= 90:
-            return 'A'
-        elif self.score >= 60:
-            return 'B'
-        else:
-            return 'C'
- 
+    <span class="token keyword">def</span> <span class="token function">get_grade</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>score <span class="token operator">>=</span> <span class="token number">90</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token string">'A'</span>
+        <span class="token keyword">elif</span> self<span class="token punctuation">.</span>score <span class="token operator">>=</span> <span class="token number">60</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token string">'B'</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token string">'C'</span>
 </code></pre>
 <p>同样的，<code>get_grade</code>方法可以直接在实例变量上调用，不需要知道内部实现细节</p>
-<pre class=" language-language-python"><code class="language-language-python">lisa = Student('Lisa', 99)
-bart = Student('Bart', 59)
-print(lisa.name, lisa.get_grade())
-print(bart.name, bart.get_grade())
-</code></pre>
-<h2 id="继承"><a class="header-anchor" href="#继承">¶</a>继承</h2>
-<ul>
+<pre class=" language-python"><code class="language-python">lisa <span class="token operator">=</span> Student<span class="token punctuation">(</span><span class="token string">'Lisa'</span><span class="token punctuation">,</span> <span class="token number">99</span><span class="token punctuation">)</span>
+bart <span class="token operator">=</span> Student<span class="token punctuation">(</span><span class="token string">'Bart'</span><span class="token punctuation">,</span> <span class="token number">59</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>lisa<span class="token punctuation">.</span>name<span class="token punctuation">,</span> lisa<span class="token punctuation">.</span>get_grade<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>bart<span class="token punctuation">.</span>name<span class="token punctuation">,</span> bart<span class="token punctuation">.</span>get_grade<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><ul>
 <li>在程序中，继承描述的是多个类之间的所属关系。</li>
 <li>如果一个类A里面的属性和方法可以复用，则可以通过继承的方式，传递到类B里。那么类A就是基类，也叫做父类；类B就是派生类，也叫做子类。</li>
 </ul>
-<h3 id="1-单继承"><a class="header-anchor" href="#1-单继承">¶</a>1. 单继承</h3>
-<blockquote>
+<h3 id="1-单继承"><a href="#1-单继承" class="headerlink" title="1. 单继承"></a>1. 单继承</h3><blockquote>
 <p>子类A只继承了一个父类B, 那么此时两者之间的关系就是单继承</p>
 </blockquote>
 <ul>
-<li>
-<p>单继承，子类直接继承父类的<code>__init__</code>方法</p>
-<pre class=" language-language-python"><code class="language-language-python">class User(object):  # 创建用户类
-    def __init__(self, name):  # 给用户添加属性：name
-        self.name = name
+<li><p>单继承，子类直接继承父类的<code>__init__</code>方法</p>
+<pre class=" language-python"><code class="language-python">  <span class="token keyword">class</span> <span class="token class-name">User</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># 创建用户类</span>
+      <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># 给用户添加属性：name</span>
+          self<span class="token punctuation">.</span>name <span class="token operator">=</span> name
 
-class VipUser(User):
-    # 子类继承父类的__init__方法，添加name属性
-    pass
+  <span class="token keyword">class</span> <span class="token class-name">VipUser</span><span class="token punctuation">(</span>User<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      <span class="token comment" spellcheck="true"># 子类继承父类的__init__方法，添加name属性</span>
+      <span class="token keyword">pass</span>
 
-vip = VipUser("xw")  # vip初始化时，自己本身没有实现__init__方法,而是直接调用继承自User的__init__方法，vip有name属性
-print(vip.name)
-</code></pre>
+  vip <span class="token operator">=</span> VipUser<span class="token punctuation">(</span><span class="token string">"xw"</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># vip初始化时，自己本身没有实现__init__方法,而是直接调用继承自User的__init__方法，vip有name属性</span>
+  <span class="token keyword">print</span><span class="token punctuation">(</span>vip<span class="token punctuation">.</span>name<span class="token punctuation">)</span></code></pre>
 </li>
-<li>
-<p>单继承，子类自己实现<code>__init__</code>方法</p>
-<pre class=" language-language-python"><code class="language-language-python">class User():  # 创建用户类
-    def __init__(self, name):  # 给用户添加属性：name
-        self.name = name
+<li><p>单继承，子类自己实现<code>__init__</code>方法</p>
+<pre class=" language-python"><code class="language-python">  <span class="token keyword">class</span> <span class="token class-name">User</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># 创建用户类</span>
+      <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># 给用户添加属性：name</span>
+          self<span class="token punctuation">.</span>name <span class="token operator">=</span> name
 
-class VipUser(User):
-    # 子类自己实现__init__方法，并没有直接使用继承父类的__init__方法
-    def __init__(self, name):  # 给vip用户添加属性：name
-        self.name = name
+  <span class="token keyword">class</span> <span class="token class-name">VipUser</span><span class="token punctuation">(</span>User<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      <span class="token comment" spellcheck="true"># 子类自己实现__init__方法，并没有直接使用继承父类的__init__方法</span>
+      <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># 给vip用户添加属性：name</span>
+          self<span class="token punctuation">.</span>name <span class="token operator">=</span> name
 
-vip = VipUser("xw")  # vip初始化时，自己本身没有实现__init__方法,而是直接调用继承自User的__init__方法，vip有name属性
-print(vip.name)
-</code></pre>
+  vip <span class="token operator">=</span> VipUser<span class="token punctuation">(</span><span class="token string">"xw"</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># vip初始化时，自己本身没有实现__init__方法,而是直接调用继承自User的__init__方法，vip有name属性</span>
+  <span class="token keyword">print</span><span class="token punctuation">(</span>vip<span class="token punctuation">.</span>name<span class="token punctuation">)</span></code></pre>
 </li>
-<li>
-<p>单继承，子类在自己实现的<code>__init__</code>方法中，还调用了父类的<code>__init__</code>方法</p>
-<pre class=" language-language-python"><code class="language-language-python"># 对象初始化，__init__方法只会执行一次
+<li><p>单继承，子类在自己实现的<code>__init__</code>方法中，还调用了父类的<code>__init__</code>方法</p>
+<pre class=" language-python"><code class="language-python">  <span class="token comment" spellcheck="true"># 对象初始化，__init__方法只会执行一次</span>
 
-class User():  # 创建用户类
-    def __init__(self, name):  # 给用户添加属性：name
-        self.name = name
+  <span class="token keyword">class</span> <span class="token class-name">User</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># 创建用户类</span>
+      <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># 给用户添加属性：name</span>
+          self<span class="token punctuation">.</span>name <span class="token operator">=</span> name
 
-class VipUser(User):
-    def __init__(self, name, money):
-        # self.name = name
-        # User.__init__(self)   # 通过父类名直接调用父类的__init__方法实现name属性的添加
-        super().__init__(name)  # 通过super()调用父类的__init__方法添加name属性
-        self.money = money  # 自己添加money属性
+  <span class="token keyword">class</span> <span class="token class-name">VipUser</span><span class="token punctuation">(</span>User<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">,</span> money<span class="token punctuation">)</span><span class="token punctuation">:</span>
+          <span class="token comment" spellcheck="true"># self.name = name</span>
+          <span class="token comment" spellcheck="true"># User.__init__(self)   # 通过父类名直接调用父类的__init__方法实现name属性的添加</span>
+          super<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span>name<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 通过super()调用父类的__init__方法添加name属性</span>
+          self<span class="token punctuation">.</span>money <span class="token operator">=</span> money  <span class="token comment" spellcheck="true"># 自己添加money属性</span>
 
-vip = VipUser("xw", 300)  # vip初始化时，__init__方法执行一次
-print(vip.name, vip.money)
-
+  vip <span class="token operator">=</span> VipUser<span class="token punctuation">(</span><span class="token string">"xw"</span><span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># vip初始化时，__init__方法执行一次</span>
+  <span class="token keyword">print</span><span class="token punctuation">(</span>vip<span class="token punctuation">.</span>name<span class="token punctuation">,</span> vip<span class="token punctuation">.</span>money<span class="token punctuation">)</span>
 </code></pre>
 </li>
 </ul>
-<h3 id="2-多继承"><a class="header-anchor" href="#2-多继承">¶</a>2. 多继承</h3>
-<blockquote>
+<h3 id="2-多继承"><a href="#2-多继承" class="headerlink" title="2. 多继承"></a>2. 多继承</h3><blockquote>
 <p>多继承可以继承多个父类，也继承了所有父类的属性和方法</p>
 </blockquote>
 <ul>
-<li>
-<p>如果多个父类中有同名的 属性和方法，则默认使用第一个父类的属性和方法（根据类的魔法属性<code>__mro__</code>的顺序来查找）</p>
+<li><p>如果多个父类中有同名的 属性和方法，则默认使用第一个父类的属性和方法（根据类的魔法属性<code>__mro__</code>的顺序来查找）</p>
 </li>
-<li>
-<p>多个父类中，不重名的属性和方法，不会有任何影响。</p>
-<pre class=" language-language-python"><code class="language-language-python">class A():
-    def __init__(self):
-        self.name = "A"
+<li><p>多个父类中，不重名的属性和方法，不会有任何影响。</p>
+<pre class=" language-python"><code class="language-python"> <span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+         self<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">"A"</span>
 
-class B():
-    def __init__(self):
-        self.name = "B"
+ <span class="token keyword">class</span> <span class="token class-name">B</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+         self<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">"B"</span>
 
-class C(A, B):
-    pass
+ <span class="token keyword">class</span> <span class="token class-name">C</span><span class="token punctuation">(</span>A<span class="token punctuation">,</span> B<span class="token punctuation">)</span><span class="token punctuation">:</span>
+     <span class="token keyword">pass</span>
 
-c = C()
-print(C.mro())  # [<class '__main__.C'>, <class '__main__.A'>, <class '__main__.B'>, <class 'object'>]
-print(c.name)  # A
-</code></pre>
+ c <span class="token operator">=</span> C<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token keyword">print</span><span class="token punctuation">(</span>C<span class="token punctuation">.</span>mro<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># [&lt;class '__main__.C'>, &lt;class '__main__.A'>, &lt;class '__main__.B'>, &lt;class 'object'>]</span>
+ <span class="token keyword">print</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>name<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># A</span></code></pre>
 </li>
 </ul>
-<h3 id="3-多层继承"><a class="header-anchor" href="#3-多层继承">¶</a>3. 多层继承</h3>
-<blockquote>
-<p>多层继承主要说的是<code>super</code>的搜索顺序,而搜索顺序主要是根据类的魔法属性<code>__mro__</code>的顺序来查找</p>
+<h3 id="3-多层继承"><a href="#3-多层继承" class="headerlink" title="3. 多层继承"></a>3. 多层继承</h3><blockquote>
+<p> 多层继承主要说的是<code>super</code>的搜索顺序,而搜索顺序主要是根据类的魔法属性<code>__mro__</code>的顺序来查找</p>
 </blockquote>
 <ul>
-<li>
-<p><code>super()</code>调用方法顺序示例</p>
-<pre class=" language-language-python"><code class="language-language-python">class A():
-    def run(self):
-        print(">>>A<<<")
+<li><p><code>super()</code>调用方法顺序示例</p>
+<pre class=" language-python"><code class="language-python">  <span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+      <span class="token keyword">def</span> <span class="token function">run</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+          <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">">>>A&lt;&lt;&lt;"</span><span class="token punctuation">)</span>
 
-class B1(A):
-    def run(self):
-        print(">>>B1<<<")
-        super().run()
-        
-class B2(A):
-    def run(self):
-        print(">>>B2<<<")
-        super().run()
-        
-class C(B1, B2):
-    def run(self):
-        print(">>>C<<<")
-        super().run()
-        
-c= C()
-print(C.mro())
-c.run()
-</code></pre>
+  <span class="token keyword">class</span> <span class="token class-name">B1</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      <span class="token keyword">def</span> <span class="token function">run</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+          <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">">>>B1&lt;&lt;&lt;"</span><span class="token punctuation">)</span>
+          super<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>run<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+  <span class="token keyword">class</span> <span class="token class-name">B2</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      <span class="token keyword">def</span> <span class="token function">run</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+          <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">">>>B2&lt;&lt;&lt;"</span><span class="token punctuation">)</span>
+          super<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>run<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+  <span class="token keyword">class</span> <span class="token class-name">C</span><span class="token punctuation">(</span>B1<span class="token punctuation">,</span> B2<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      <span class="token keyword">def</span> <span class="token function">run</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+          <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">">>>C&lt;&lt;&lt;"</span><span class="token punctuation">)</span>
+          super<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>run<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+  c<span class="token operator">=</span> C<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">print</span><span class="token punctuation">(</span>C<span class="token punctuation">.</span>mro<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  c<span class="token punctuation">.</span>run<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
 <blockquote>
 <p>程序运行结果：</p>
 </blockquote>
-<pre class=" language-language-shell"><code class="language-language-shell">[<class '__main__.C'>, <class '__main__.B1'>, <class '__main__.B2'>, <class '__main__.A'>, <class 'object'>]
->>>C<<<
->>>B1<<<
->>>B2<<<
->>>A<<<
-</code></pre>
+<pre class=" language-shell"><code class="language-shell">  [<class '__main__.C'>, <class '__main__.B1'>, <class '__main__.B2'>, <class '__main__.A'>, <class 'object'>]
+  >>>C<<<
+  >>>B1<<<
+  >>>B2<<<
+  >>>A<<<</code></pre>
 </li>
-<li>
-<p>参数传递示例</p>
-<pre class=" language-language-python"><code class="language-language-python">class Father(object):
-    def __init__(self, name):
-        print('father')
-        self.name = name
+<li><p>参数传递示例</p>
+<pre class=" language-python"><code class="language-python">  <span class="token keyword">class</span> <span class="token class-name">Father</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+          <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'father'</span><span class="token punctuation">)</span>
+          self<span class="token punctuation">.</span>name <span class="token operator">=</span> name
 
-class Son1(Father):
-    def __init__(self, name, age, *args):
-        print('Son1')
-        self.age = age
-        super().__init__(name, *args)
+  <span class="token keyword">class</span> <span class="token class-name">Son1</span><span class="token punctuation">(</span>Father<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">,</span> age<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">)</span><span class="token punctuation">:</span>
+          <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Son1'</span><span class="token punctuation">)</span>
+          self<span class="token punctuation">.</span>age <span class="token operator">=</span> age
+          super<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span>name<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">)</span>
 
-class Son2(Father):
-    def __init__(self, name, gender):
-        print('Son2')
-        self.gender = gender
-        super().__init__(name)
+  <span class="token keyword">class</span> <span class="token class-name">Son2</span><span class="token punctuation">(</span>Father<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">,</span> gender<span class="token punctuation">)</span><span class="token punctuation">:</span>
+          <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Son2'</span><span class="token punctuation">)</span>
+          self<span class="token punctuation">.</span>gender <span class="token operator">=</span> gender
+          super<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span>name<span class="token punctuation">)</span>
 
-class Grandson(Son1, Son2):
-    def __init__(self, name, age, gender):
-        print("Grandson")
-        super().__init__(name, age, gender)
+  <span class="token keyword">class</span> <span class="token class-name">Grandson</span><span class="token punctuation">(</span>Son1<span class="token punctuation">,</span> Son2<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">,</span> age<span class="token punctuation">,</span> gender<span class="token punctuation">)</span><span class="token punctuation">:</span>
+          <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Grandson"</span><span class="token punctuation">)</span>
+          super<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span>name<span class="token punctuation">,</span> age<span class="token punctuation">,</span> gender<span class="token punctuation">)</span>
 
-print(Grandson.mro())
-print("+" * 30)
+  <span class="token keyword">print</span><span class="token punctuation">(</span>Grandson<span class="token punctuation">.</span>mro<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"+"</span> <span class="token operator">*</span> <span class="token number">30</span><span class="token punctuation">)</span>
 
-grand_son = Grandson('王明', 14, '男')
+  grand_son <span class="token operator">=</span> Grandson<span class="token punctuation">(</span><span class="token string">'王明'</span><span class="token punctuation">,</span> <span class="token number">14</span><span class="token punctuation">,</span> <span class="token string">'男'</span><span class="token punctuation">)</span>
 
-print("+" * 30)
-print(grand_son.name, grand_son.age, grand_son.gender)
-</code></pre>
+  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"+"</span> <span class="token operator">*</span> <span class="token number">30</span><span class="token punctuation">)</span>
+  <span class="token keyword">print</span><span class="token punctuation">(</span>grand_son<span class="token punctuation">.</span>name<span class="token punctuation">,</span> grand_son<span class="token punctuation">.</span>age<span class="token punctuation">,</span> grand_son<span class="token punctuation">.</span>gender<span class="token punctuation">)</span></code></pre>
 <blockquote>
 <p>程序运行结果：</p>
 </blockquote>
-<pre class=" language-language-shell"><code class="language-language-shell">++++++++++++++++++++++++++++++
-Grandson
-Son1
-Son2
-father
-++++++++++++++++++++++++++++++
-王明 14 男
-</code></pre>
+<pre class=" language-shell"><code class="language-shell">  ++++++++++++++++++++++++++++++
+  Grandson
+  Son1
+  Son2
+  father
+  ++++++++++++++++++++++++++++++
+  王明 14 男</code></pre>
 </li>
 </ul>
-<h2 id="多态"><a class="header-anchor" href="#多态">¶</a>多态</h2>
-<h3 id="1-多态"><a class="header-anchor" href="#1-多态">¶</a>1. 多态</h3>
-<p>所谓的多态就是同一类事物有不同的形态,(一个抽象类有多个子类，因而多态的概念依赖于继承)</p>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><h3 id="1-多态"><a href="#1-多态" class="headerlink" title="1. 多态"></a>1. 多态</h3><p>所谓的多态就是同一类事物有不同的形态,(一个抽象类有多个子类，因而多态的概念依赖于继承)</p>
 <ul>
 <li>序列类型有多种形态：字符串，列表，元组</li>
 <li>动物有多种形态：猫，狗</li>
 </ul>
-<pre class=" language-language-python"><code class="language-language-python"># 多态：同一种事物的多种形态，动物分为猫类，狗类（在定义角度）
-class Animal():
-    def __init__(self, name, foods):
-        self.name = name
-        self.foods = foods
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 多态：同一种事物的多种形态，动物分为猫类，狗类（在定义角度）</span>
+<span class="token keyword">class</span> <span class="token class-name">Animal</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">,</span> foods<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>name <span class="token operator">=</span> name
+        self<span class="token punctuation">.</span>foods <span class="token operator">=</span> foods
 
-    def eat(self):
-        print("%s的食物是%s" % (self.name, self.foods))
+    <span class="token keyword">def</span> <span class="token function">eat</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"%s的食物是%s"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>name<span class="token punctuation">,</span> self<span class="token punctuation">.</span>foods<span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-    def run(self):
-        print("%s跑的很快" % self.name)
+    <span class="token keyword">def</span> <span class="token function">run</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"%s跑的很快"</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
 
-    def call(self):
-        pass
-
-
-class Dog(Animal):
-    def call(self):
-        print("%s:汪汪大叫" % self.name)
+    <span class="token keyword">def</span> <span class="token function">call</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">pass</span>
 
 
-class Cat(Animal):
-    def call(self):
-        print("%s:喵喵大叫" % self.name)
+<span class="token keyword">class</span> <span class="token class-name">Dog</span><span class="token punctuation">(</span>Animal<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">call</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"%s:汪汪大叫"</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
 
 
-dog = Dog("哈士奇", "狗粮")
-dog.eat()
-dog.call()
+<span class="token keyword">class</span> <span class="token class-name">Cat</span><span class="token punctuation">(</span>Animal<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">call</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"%s:喵喵大叫"</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
 
-cat = Cat("九命妖猫", "仙露")
-cat.eat()
-cat.run()
 
+dog <span class="token operator">=</span> Dog<span class="token punctuation">(</span><span class="token string">"哈士奇"</span><span class="token punctuation">,</span> <span class="token string">"狗粮"</span><span class="token punctuation">)</span>
+dog<span class="token punctuation">.</span>eat<span class="token punctuation">(</span><span class="token punctuation">)</span>
+dog<span class="token punctuation">.</span>call<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+cat <span class="token operator">=</span> Cat<span class="token punctuation">(</span><span class="token string">"九命妖猫"</span><span class="token punctuation">,</span> <span class="token string">"仙露"</span><span class="token punctuation">)</span>
+cat<span class="token punctuation">.</span>eat<span class="token punctuation">(</span><span class="token punctuation">)</span>
+cat<span class="token punctuation">.</span>run<span class="token punctuation">(</span><span class="token punctuation">)</span>
 </code></pre>
-<h3 id="2-多态性"><a class="header-anchor" href="#2-多态性">¶</a>2. 多态性</h3>
-<blockquote>
+<h3 id="2-多态性"><a href="#2-多态性" class="headerlink" title="2. 多态性"></a>2. 多态性</h3><blockquote>
 <p>什么是多态性（注意：多态与多态性是两种概念）</p>
 </blockquote>
 <ul>
@@ -788,37 +753,29 @@ cat.run()
 <li>在面向对象方法中一般是这样表述多态性：向不同的对象发送同一条消息，不同的对象在接收时会产生不同的行为（即方法）。</li>
 <li>也就是说，每个对象可以用自己的方式去响应共同的消息。所谓消息，就是调用函数，不同的行为就是指不同的实现，即执行不同的函数。</li>
 </ul>
-<pre class=" language-language-python"><code class="language-language-python"># 多态性依赖于：继承
-##多态性：定义统一的接口，
-#多态性：一种调用方式，不同的执行效果（多态性）
-def func(obj): # obj这个参数没有类型限制，可以传入不同类型的值
-	obj.eat()  #调用的逻辑都一样，执行的结果却不一样
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 多态性依赖于：继承</span>
+<span class="token comment" spellcheck="true">##多态性：定义统一的接口，</span>
+<span class="token comment" spellcheck="true">#多态性：一种调用方式，不同的执行效果（多态性）</span>
+<span class="token keyword">def</span> <span class="token function">func</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token comment" spellcheck="true"># obj这个参数没有类型限制，可以传入不同类型的值</span>
+    obj<span class="token punctuation">.</span>eat<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">#调用的逻辑都一样，执行的结果却不一样</span>
 
-func(dog)
-func(cat)
-</code></pre>
+func<span class="token punctuation">(</span>dog<span class="token punctuation">)</span>
+func<span class="token punctuation">(</span>cat<span class="token punctuation">)</span></code></pre>
 <blockquote>
 <p>为什么要用多态性（多态性的好处）</p>
 </blockquote>
 <p>其实大家从上面多态性的例子可以看出，我们并没有增加上面新的知识，也就是说Python本身就是支持多态性的，这么做的好处是什么呢？</p>
 <ul>
-<li>增加了程序的灵活性<br>
-以不变应万变，不论对象千变万化，使用者都是同一种形式去调用，如func(animal)</li>
-<li>增加了程序额可扩展性<br>
-通过继承animal类创建了一个新的类，使用者无需更改自己的代码，还是用func(animal)去调用</li>
+<li>增加了程序的灵活性<br>以不变应万变，不论对象千变万化，使用者都是同一种形式去调用，如func(animal)</li>
+<li>增加了程序额可扩展性<br>通过继承animal类创建了一个新的类，使用者无需更改自己的代码，还是用func(animal)去调用</li>
 </ul>
 <blockquote>
 <ul>
-<li>多态：同一种事物的多种形态，动物分为猫类，狗类（在定义角度）</li>
+<li>多态：同一种事物的多种形态，动物分为猫类，狗类（在定义角度） </li>
 <li>多态性：一种调用方式，不同的执行效果（多态性）</li>
 </ul>
 </blockquote>
-<h2 id="类型判断"><a class="header-anchor" href="#类型判断">¶</a>类型判断</h2>
-<h2 id="访问权限"><a class="header-anchor" href="#访问权限">¶</a>访问权限</h2>
-<h2 id="实例属性与类属性"><a class="header-anchor" href="#实例属性与类属性">¶</a>实例属性与类属性</h2>
-<h2 id="实例方法、静态方法与类方法"><a class="header-anchor" href="#实例方法、静态方法与类方法">¶</a>实例方法、静态方法与类方法</h2>
-<h3 id="1-方法分类"><a class="header-anchor" href="#1-方法分类">¶</a>1. 方法分类</h3>
-<p>先看语法，<code>python</code> 类语法中有三种方法，实例方法，静态方法，类方法。</p>
+<h2 id="类型判断"><a href="#类型判断" class="headerlink" title="类型判断"></a>类型判断</h2><h2 id="访问权限"><a href="#访问权限" class="headerlink" title="访问权限"></a>访问权限</h2><h2 id="实例属性与类属性"><a href="#实例属性与类属性" class="headerlink" title="实例属性与类属性"></a>实例属性与类属性</h2><h2 id="实例方法、静态方法与类方法"><a href="#实例方法、静态方法与类方法" class="headerlink" title="实例方法、静态方法与类方法"></a>实例方法、静态方法与类方法</h2><h3 id="1-方法分类"><a href="#1-方法分类" class="headerlink" title="1. 方法分类"></a>1. 方法分类</h3><p>先看语法，<code>python</code> 类语法中有三种方法，实例方法，静态方法，类方法。</p>
 <blockquote>
 <p><code>python</code>中<code>self</code>，<code>cls</code>的区别:</p>
 </blockquote>
@@ -827,149 +784,139 @@ func(cat)
 <li>如果用了<code>staticmethod</code>，那么就可以无视这个<code>self</code>，而将这个方法当成一个普通的函数使用。</li>
 <li>而对于<code>classmethod</code>，它的第一个参数不是<code>self</code>，是<code>cls</code>，它表示这个类本身。</li>
 </ul>
-<pre class=" language-language-python"><code class="language-language-python"># coding:utf-8
-class Foo(object):
-    """类三种方法语法形式"""
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># coding:utf-8</span>
+<span class="token keyword">class</span> <span class="token class-name">Foo</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""类三种方法语法形式"""</span>
 
-    def instance_method(self):
-        print("是类{}的实例方法，只能被实例对象调用".format(Foo))
+    <span class="token keyword">def</span> <span class="token function">instance_method</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"是类{}的实例方法，只能被实例对象调用"</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>Foo<span class="token punctuation">)</span><span class="token punctuation">)</span>
 
     @staticmethod
-    def static_method():
-        print("是静态方法")
+    <span class="token keyword">def</span> <span class="token function">static_method</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"是静态方法"</span><span class="token punctuation">)</span>
 
     @classmethod
-    def class_method(cls):
-        print("是类方法")
+    <span class="token keyword">def</span> <span class="token function">class_method</span><span class="token punctuation">(</span>cls<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"是类方法"</span><span class="token punctuation">)</span>
 
 
-foo = Foo()
-foo.instance_method()
-foo.static_method()
-foo.class_method()
-print('----------------')
-Foo.static_method()
-Foo.class_method()
-
+foo <span class="token operator">=</span> Foo<span class="token punctuation">(</span><span class="token punctuation">)</span>
+foo<span class="token punctuation">.</span>instance_method<span class="token punctuation">(</span><span class="token punctuation">)</span>
+foo<span class="token punctuation">.</span>static_method<span class="token punctuation">(</span><span class="token punctuation">)</span>
+foo<span class="token punctuation">.</span>class_method<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'----------------'</span><span class="token punctuation">)</span>
+Foo<span class="token punctuation">.</span>static_method<span class="token punctuation">(</span><span class="token punctuation">)</span>
+Foo<span class="token punctuation">.</span>class_method<span class="token punctuation">(</span><span class="token punctuation">)</span>
 </code></pre>
 <p>运行结果：</p>
-<pre class=" language-language-shell"><code class="language-language-shell">是类<class '__main__.Foo'>的实例方法，只能被实例对象调用
+<pre class=" language-shell"><code class="language-shell">是类<class '__main__.Foo'>的实例方法，只能被实例对象调用
 是静态方法
 是类方法
 ----------------
 是静态方法
-是类方法
-</code></pre>
+是类方法</code></pre>
 <blockquote>
 <p>说明</p>
 </blockquote>
 <ul>
-<li>调用
-<ul>
+<li>调用<ul>
 <li>实例方法只能被实例对象调用</li>
 <li>静态方法(由<code>@staticmethod</code>装饰的方法)、类方法(由<code>@classmethod</code>装饰的方法)，可以被类或类的实例对象调用。</li>
 </ul>
 </li>
-<li>参数
-<ul>
+<li>参数<ul>
 <li>实例方法，第一个参数必须要默认传实例对象，一般习惯用<code>self</code>。</li>
 <li>静态方法，参数没有要求。</li>
 <li>类方法，第一个参数必须要默认传类，一般习惯用<code>cls</code>。</li>
 </ul>
 </li>
 </ul>
-<h3 id="2-方法调用"><a class="header-anchor" href="#2-方法调用">¶</a>2. 方法调用</h3>
-<blockquote>
+<h3 id="2-方法调用"><a href="#2-方法调用" class="headerlink" title="2. 方法调用"></a>2. 方法调用</h3><blockquote>
 <p>静态方法调用另一个静态方法，如果改用类方法调用静态方法，可以让<code>cls</code>代替类，让代码看起来精简一些。也防止类名修改了，不用在类定义中修改原来的类名。</p>
 </blockquote>
-<pre class=" language-language-python"><code class="language-language-python"># coding:utf-8
-class Foo(object):
-    X = 1
-    Y = 2
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># coding:utf-8</span>
+<span class="token keyword">class</span> <span class="token class-name">Foo</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    X <span class="token operator">=</span> <span class="token number">1</span>
+    Y <span class="token operator">=</span> <span class="token number">2</span>
 
     @staticmethod
-    def averag(*mixes):
-        return sum(mixes) / len(mixes)
+    <span class="token keyword">def</span> <span class="token function">averag</span><span class="token punctuation">(</span><span class="token operator">*</span>mixes<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> sum<span class="token punctuation">(</span>mixes<span class="token punctuation">)</span> <span class="token operator">/</span> len<span class="token punctuation">(</span>mixes<span class="token punctuation">)</span>
 
     @staticmethod
-    def static_method():  # 在静态方法中调用静态方法
-        print("在静态方法中调用静态方法")
-        return Foo.averag(Foo.X, Foo.Y)
+    <span class="token keyword">def</span> <span class="token function">static_method</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># 在静态方法中调用静态方法</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"在静态方法中调用静态方法"</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> Foo<span class="token punctuation">.</span>averag<span class="token punctuation">(</span>Foo<span class="token punctuation">.</span>X<span class="token punctuation">,</span> Foo<span class="token punctuation">.</span>Y<span class="token punctuation">)</span>
 
     @classmethod
-    def class_method(cls):  # 在类方法中使用静态方法
-        print("在类方法中使用静态方法")
-        return cls.averag(cls.X, cls.Y)
+    <span class="token keyword">def</span> <span class="token function">class_method</span><span class="token punctuation">(</span>cls<span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># 在类方法中使用静态方法</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"在类方法中使用静态方法"</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> cls<span class="token punctuation">.</span>averag<span class="token punctuation">(</span>cls<span class="token punctuation">.</span>X<span class="token punctuation">,</span> cls<span class="token punctuation">.</span>Y<span class="token punctuation">)</span>
 
-foo = Foo()
-print(foo.static_method())
-print(foo.class_method())
-</code></pre>
+foo <span class="token operator">=</span> Foo<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>foo<span class="token punctuation">.</span>static_method<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>foo<span class="token punctuation">.</span>class_method<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
 <blockquote>
 <p>运行结果：</p>
 </blockquote>
-<pre class=" language-language-shell"><code class="language-language-shell">在静态方法中调用静态方法
+<pre class=" language-shell"><code class="language-shell">在静态方法中调用静态方法
 1.5
 在类方法中使用静态方法
-1.5
-</code></pre>
-<h3 id="3-继承类中的区别"><a class="header-anchor" href="#3-继承类中的区别">¶</a>3.继承类中的区别</h3>
-<p>从下面代码可以看出，如果子类继承父类的方法，子类覆盖了父类的静态方法:</p>
+1.5</code></pre>
+<h3 id="3-继承类中的区别"><a href="#3-继承类中的区别" class="headerlink" title="3.继承类中的区别"></a>3.继承类中的区别</h3><p>从下面代码可以看出，如果子类继承父类的方法，子类覆盖了父类的静态方法:</p>
 <ul>
 <li>子类的实例继承了父类的<code>static_method</code>静态方法，调用该方法，还是调用的父类的方法和类属性。</li>
 <li>子类的实例继承了父类的<code>class_method</code>类方法，调用该方法，调用的是子类的方法和子类的类属性。</li>
 </ul>
-<pre class=" language-language-python"><code class="language-language-python">class Foo(object):
-    X = 1
-    Y = 14
+<pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Foo</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    X <span class="token operator">=</span> <span class="token number">1</span>
+    Y <span class="token operator">=</span> <span class="token number">14</span>
 
     @staticmethod
-    def averag(*mixes):  # "父类中的静态方法"
-        return sum(mixes) / len(mixes)
+    <span class="token keyword">def</span> <span class="token function">averag</span><span class="token punctuation">(</span><span class="token operator">*</span>mixes<span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># "父类中的静态方法"</span>
+        <span class="token keyword">return</span> sum<span class="token punctuation">(</span>mixes<span class="token punctuation">)</span> <span class="token operator">/</span> len<span class="token punctuation">(</span>mixes<span class="token punctuation">)</span>
 
     @staticmethod
-    def static_method():  # "父类中的静态方法"
-        print("父类中的静态方法")
-        return Foo.averag(Foo.X, Foo.Y)
+    <span class="token keyword">def</span> <span class="token function">static_method</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># "父类中的静态方法"</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"父类中的静态方法"</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> Foo<span class="token punctuation">.</span>averag<span class="token punctuation">(</span>Foo<span class="token punctuation">.</span>X<span class="token punctuation">,</span> Foo<span class="token punctuation">.</span>Y<span class="token punctuation">)</span>
 
     @classmethod
-    def class_method(cls):  # 父类中的类方法
-        print("父类中的类方法")
-        return cls.averag(cls.X, cls.Y)
+    <span class="token keyword">def</span> <span class="token function">class_method</span><span class="token punctuation">(</span>cls<span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># 父类中的类方法</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"父类中的类方法"</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> cls<span class="token punctuation">.</span>averag<span class="token punctuation">(</span>cls<span class="token punctuation">.</span>X<span class="token punctuation">,</span> cls<span class="token punctuation">.</span>Y<span class="token punctuation">)</span>
 
 
-class Son(Foo):
-    X = 3
-    Y = 5
+<span class="token keyword">class</span> <span class="token class-name">Son</span><span class="token punctuation">(</span>Foo<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    X <span class="token operator">=</span> <span class="token number">3</span>
+    Y <span class="token operator">=</span> <span class="token number">5</span>
 
     @staticmethod
-    def averag(*mixes):  # "子类中重载了父类的静态方法"
-        print("子类中重载了父类的静态方法")
-        return sum(mixes) / len(mixes)
+    <span class="token keyword">def</span> <span class="token function">averag</span><span class="token punctuation">(</span><span class="token operator">*</span>mixes<span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># "子类中重载了父类的静态方法"</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"子类中重载了父类的静态方法"</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> sum<span class="token punctuation">(</span>mixes<span class="token punctuation">)</span> <span class="token operator">/</span> len<span class="token punctuation">(</span>mixes<span class="token punctuation">)</span>
 
 
-p = Son()
-print("result of p.averag(1,5)")
-print(p.averag(1, 5))
-print("result of p.static_method()")
-print(p.static_method())
-print("result of p.class_method()")
-print(p.class_method())
-</code></pre>
+p <span class="token operator">=</span> Son<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"result of p.averag(1,5)"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>p<span class="token punctuation">.</span>averag<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"result of p.static_method()"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>p<span class="token punctuation">.</span>static_method<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"result of p.class_method()"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>p<span class="token punctuation">.</span>class_method<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
 <blockquote>
 <p>运行结果：</p>
 </blockquote>
-<pre class=" language-language-python"><code class="language-language-python">result of p.averag(1,5)
+<pre class=" language-python"><code class="language-python">result of p<span class="token punctuation">.</span>averag<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span>
 子类中重载了父类的静态方法
-3.0
-result of p.static_method()
+<span class="token number">3.0</span>
+result of p<span class="token punctuation">.</span>static_method<span class="token punctuation">(</span><span class="token punctuation">)</span>
 父类中的静态方法
-7.5
-result of p.class_method()
+<span class="token number">7.5</span>
+result of p<span class="token punctuation">.</span>class_method<span class="token punctuation">(</span><span class="token punctuation">)</span>
 父类中的类方法
 子类中重载了父类的静态方法
-4.0
-</code></pre>
+<span class="token number">4.0</span></code></pre>
 
                 
             </div>
@@ -1541,7 +1488,7 @@ binary与varb
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">104k</span>&nbsp;字
+                class="white-color">107.4k</span>&nbsp;字
             
             
             

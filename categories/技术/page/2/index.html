@@ -346,19 +346,10 @@
                 </a>
                 
                 
-                <a href="/categories/%E6%8A%80%E6%9C%AF/python/Django/" title="Django: 3">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #E8F8F5;">Django
-                        <span class="tag-length">3</span>
-                    </span>
-                </a>
-                
-                
                 <a href="/categories/%E6%8A%80%E6%9C%AF/vue/" title="vue: 8">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #FEF9E7;">vue
+                            style="background-color: #E8F8F5;">vue
                         <span class="tag-length">8</span>
                     </span>
                 </a>
@@ -367,7 +358,7 @@
                 <a href="/categories/Ebook/" title="Ebook: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #F8F9F9;">Ebook
+                            style="background-color: #FEF9E7;">Ebook
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -376,7 +367,7 @@
                 <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E5%87%BD%E6%95%B0/" title="函数: 6">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #82E0AA;">函数
+                            style="background-color: #F8F9F9;">函数
                         <span class="tag-length">6</span>
                     </span>
                 </a>
@@ -385,7 +376,7 @@
                 <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E6%A8%A1%E5%9D%97/" title="模块: 2">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #D7BDE2;">模块
+                            style="background-color: #82E0AA;">模块
                         <span class="tag-length">2</span>
                     </span>
                 </a>
@@ -394,8 +385,17 @@
                 <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" title="面向对象: 2">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #A3E4D7;">面向对象
+                            style="background-color: #D7BDE2;">面向对象
                         <span class="tag-length">2</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/%E6%8A%80%E6%9C%AF/python/Django/" title="Django: 3">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #A3E4D7;">Django
+                        <span class="tag-length">3</span>
                     </span>
                 </a>
                 
@@ -625,13 +625,12 @@
                             
                                 DRF内置的序列化类，可以对整个模型类进行序列化与反序列化，简化了繁杂的工作。
 
-¶内置字段序列化
-¶模型类
-from django.db import models
+
+内置字段序列化模型类from django.db import models
 
 
 # Create your models here.
-class A
+class Auth
                             
                         </div>
                         <div class="publish-info">
@@ -693,11 +692,11 @@ class A
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                ¶1. 定义
-函数调用函数自身，这种方式称为递归，这种函数称为递归函数
+                                1. 定义函数调用函数自身，这种方式称为递归，这种函数称为递归函数
 
 
-递归函数使用过程中，需要找到不变的规律和停止递归的边界条件，
+
+递归函数使用过程中，需要找到不变的规律和停止递归的边界条件， 
 因为函数自身调用自身，函数本身的结构不变，只是每次传的参数改变啦
 递归实现过程(扩展)：利用栈的思想，
                             
@@ -762,8 +761,7 @@ class A
 lambda表达式的语法：
 lambda argument_list: expression
 
-
-argument_list是参数列表。它的结构与Python中函数(function)的参
+argument_list是参数列表。它的结构与Python中函数(function)的参数
                             
                         </div>
                         <div class="publish-info">
@@ -822,7 +820,6 @@ argument_list是参数列表。它的结构与Python中函数(function)的参
                         <div class="summary block-with-text">
                             
                                 
-
 定义
 当一个函数 接收 另一个函数作为参数， 它就是 高阶函数
 
@@ -831,11 +828,10 @@ argument_list是参数列表。它的结构与Python中函数(function)的参
 
 
 示例
-def func(a, x, y):
-    a(x, y)  # a就是传递的 函数参数f，  执行 a 相当于 执行  f
+ def func(a, x, y):
+     a(x, y)  # a就是传递的 函数参数f，  执行 a 相当于 执行  f
 
-def f(x, y):
-
+ def f(x, y)
                             
                         </div>
                         <div class="publish-info">
@@ -905,13 +901,13 @@ def f(x, y):
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                ¶变量的作用域
-
+                                变量的作用域
 在Python程序中创建、改变、查找变量名时，都是在一个保存变量名的空间中进行，我们称之为命名空间，也被称之为作用域。
 
 
 
-Python的作用域是静态的，在源代码中变量名被赋值的位置决定了该变量能被访问的范围。即Pyth
+
+Python的作用域是静态的，在源代码中变量名被赋值的位置决定了该变量能被访问的范围。即Pytho
                             
                         </div>
                         <div class="publish-info">
@@ -977,12 +973,10 @@ Python的作用域是静态的，在源代码中变量名被赋值的位置决�
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                ¶CSRF
-¶1. CSRF 的基本概念、缩写、全称
-CSRF（Cross-site request forgery）：跨站请求伪造。
-¶2. CSRF 的攻击原理
+                                CSRF1. CSRF 的基本概念、缩写、全称CSRF（Cross-site request forgery）：跨站请求伪造。
+2. CSRF 的攻击原理
+用户是网站 A 的注册用户，且登录进去，于是网站 A 就给用户下发 cookie。
 
-用户是网站 A 的注册用户，且登录进去，于是网站 A 就给用户下发 co
                             
                         </div>
                         <div class="publish-info">
@@ -1024,79 +1018,6 @@ CSRF（Cross-site request forgery）：跨站请求伪造。
             
             <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2020/05/24/django-orm/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/medias/featureimages/16.jpg" class="responsive-img" alt="Django-ORM">
-                            
-                            <span class="card-title">Django-ORM</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                ¶一、ORM介绍
-¶1. 什么是 ORM
-
-
-ORM 全拼Object-Relation Mapping
-
-
-中文意为 对象-关系映射
-
-
-在MVC/MVT设计模式中的Model模块中都包括ORM
-
-
-
-¶2.ORM 优势
-（1）只需要面向
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-24
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
-                                    技术
-                                </a>
-                                
-                                <a href="/categories/%E6%8A%80%E6%9C%AF/python/" class="post-category">
-                                    python
-                                </a>
-                                
-                                <a href="/categories/%E6%8A%80%E6%9C%AF/python/web/" class="post-category">
-                                    web
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/django/">
-                            <span class="chip bg-color">django</span>
-                        </a>
-                        
-                        <a href="/tags/ORM/">
-                            <span class="chip bg-color">ORM</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
                     <a href="/2020/05/24/http-xie-yi-zhi-http-zhuang-tai-ma-xiang-jie/">
                         <div class="card-image tag-image">
                             
@@ -1109,9 +1030,8 @@ ORM 全拼Object-Relation Mapping
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                ¶HTTP 协议之 http 状态码详解
-HTTP状态码（HTTP Status Code）是用以表示网页服务器HTTP响应状态的3位数字代码。
-它由 RFC 2616 规范定义的，并得到RFC 2518、RFC 2817、RFC 2295
+                                HTTP 协议之 http 状态码详解HTTP状态码（HTTP Status Code）是用以表示网页服务器HTTP响应状态的3位数字代码。
+它由 RFC 2616 规范定义的，并得到RFC 2518、RFC 2817、RFC 2295、R
                             
                         </div>
                         <div class="publish-info">
@@ -1157,6 +1077,74 @@ HTTP状态码（HTTP Status Code）是用以表示网页服务器HTTP响应状�
             
             <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
+                    <a href="/2020/05/24/django-orm/">
+                        <div class="card-image tag-image">
+                            
+                            
+                            <img src="https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/medias/featureimages/16.jpg" class="responsive-img" alt="Django-ORM">
+                            
+                            <span class="card-title">Django-ORM</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                一、ORM介绍1. 什么是 ORM
+ORM 全拼Object-Relation Mapping
+
+中文意为 对象-关系映射
+
+在MVC/MVT设计模式中的Model模块中都包括ORM
+
+
+
+
+2.ORM 优势（1）只需要面向对象编程, 不需
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-24
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                    技术
+                                </a>
+                                
+                                <a href="/categories/%E6%8A%80%E6%9C%AF/python/" class="post-category">
+                                    python
+                                </a>
+                                
+                                <a href="/categories/%E6%8A%80%E6%9C%AF/python/web/" class="post-category">
+                                    web
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/django/">
+                            <span class="chip bg-color">django</span>
+                        </a>
+                        
+                        <a href="/tags/ORM/">
+                            <span class="chip bg-color">ORM</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
                     <a href="/2020/05/23/shu-ju-ku-redis-ming-ling/">
                         <div class="card-image tag-image">
                             
@@ -1171,18 +1159,13 @@ HTTP状态码（HTTP Status Code）是用以表示网页服务器HTTP响应状�
                             
                                 简单对redis 命令进行总结、归纳。
 
-¶键
 
-¶String
-
-¶List
-
-¶Hash
-
-¶Set
-
-¶Zset
-
+键
+String
+List
+Hash
+Set
+Zset
 更多命令参考Redis教程
 
                             
@@ -1238,11 +1221,9 @@ HTTP状态码（HTTP Status Code）是用以表示网页服务器HTTP响应状�
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                ¶事件
-要理解事件绑定，就得先了解事件。
+                                事件要理解事件绑定，就得先了解事件。
 浏览器是事件驱动型的，根据用户的行为触发不同的事件，根据事件执行相应的操作。我们较为熟悉的事件有三大类型：
-¶鼠标键盘事件
-
+鼠标键盘事件
 
 
 鼠标键盘事件
@@ -1250,11 +1231,11 @@ HTTP状态码（HTTP Status Code）是用以表示网页服务器HTTP响应状�
 
 
 
-
 onclick
 鼠标点击某个对象
 
 
+ondb
                             
                         </div>
                         <div class="publish-info">
@@ -1322,11 +1303,9 @@ onclick
                             
                                 简单对常见错误进行总结、归纳。
 
-¶Ubuntu系统
-¶1698 只能root用户登录Mysql
-¶一、问题描述
-如果mysql安装时，没有提示输入密码，则会随机分配密码，直接mysql -u root -p则无法登录，报错：
-ERROR 
+
+Ubuntu系统1698 只能root用户登录Mysql一、问题描述如果mysql安装时，没有提示输入密码，则会随机分配密码，直接mysql -u root -p则无法登录，报错：
+ERROR 1698 
                             
                         </div>
                         <div class="publish-info">
@@ -1381,12 +1360,10 @@ ERROR
                         <div class="summary block-with-text">
                             
                                 Vue.js官方提供了一套专用的路由工具库 Vue Router,其使用和配置都非常简单。
-¶安装路由
-可以使用npm包的方式来安装路由
+安装路由可以使用npm包的方式来安装路由
 cnpm install vue-router --save
 
-
-其实通过Vue-cli脚手架快速搭建
+其实通过Vue-cli脚手架快速搭建项目时
                             
                         </div>
                         <div class="publish-info">
@@ -1531,7 +1508,7 @@ cnpm install vue-router --save
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">104k</span>&nbsp;字
+                class="white-color">107.4k</span>&nbsp;字
             
             
             

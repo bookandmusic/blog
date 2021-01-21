@@ -435,7 +435,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    200
+                    220
                 </div>
                 
 
@@ -463,36 +463,24 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>简单介绍一下在Vue项目中引入本地资源的实现方式: <a id="more"></a></p>
-<h2 id="引入本地图片"><a class="header-anchor" href="#引入本地图片">¶</a>引入本地图片</h2>
-<h3 id="使用-引入："><a class="header-anchor" href="#使用-引入：">¶</a>使用 <code>@</code>引入：</h3>
-<p>这是在组件内直接引用和普通的 html 方法一样，代码如下</p>
-<pre class=" language-language-html"><code class="language-language-html"><img src="@/assets/test.png" alt="test.png">
-</code></pre>
-<h3 id="使用-vue-的方法引入："><a class="header-anchor" href="#使用-vue-的方法引入：">¶</a>使用 vue 的方法引入：</h3>
-<p>这是典型的 vue 思想，使用数据来操纵 dom； 首先在组件内使用 import … from 引入</p>
-<pre class=" language-language-js"><code class="language-language-js">import imgUrl from '../assets/test.png';
-</code></pre>
+<h2 id="引入本地图片"><a href="#引入本地图片" class="headerlink" title="引入本地图片"></a>引入本地图片</h2><h3 id="使用-引入："><a href="#使用-引入：" class="headerlink" title="使用 @引入："></a>使用 <code>@</code>引入：</h3><p>这是在组件内直接引用和普通的 html 方法一样，代码如下</p>
+<pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@/assets/test.png<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>test.png<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></code></pre>
+<h3 id="使用-vue-的方法引入："><a href="#使用-vue-的方法引入：" class="headerlink" title="使用 vue 的方法引入："></a>使用 vue 的方法引入：</h3><p>这是典型的 vue 思想，使用数据来操纵 dom； 首先在组件内使用 import … from 引入</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">import</span> imgUrl <span class="token keyword">from</span> <span class="token string">'../assets/test.png'</span><span class="token punctuation">;</span></code></pre>
 <p>然后在 data 里面声明</p>
-<pre class=" language-language-js"><code class="language-language-js">data: function () {
-      return {
-                  imgSrc: imgUrl
-            }
-       }
-</code></pre>
+<pre class=" language-js"><code class="language-js">data<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span>
+                  imgSrc<span class="token punctuation">:</span> imgUrl
+            <span class="token punctuation">}</span>
+       <span class="token punctuation">}</span></code></pre>
 <p>最后绑定数据</p>
-<pre class=" language-language-js"><code class="language-language-js"><img :src="imgSrc" alt="imgSrc">
-</code></pre>
-<h2 id="引入样式文件"><a class="header-anchor" href="#引入样式文件">¶</a>引入样式文件</h2>
-<p>在项目的 <code>src</code> 文件下，新建一个 <code>style</code> 文件夹，存放 <code>css</code> 文件。</p>
-<h3 id="全局引入"><a class="header-anchor" href="#全局引入">¶</a>全局引入</h3>
-<p>将外部的 css 文件放到 style 文件下，引入外部文件只需在 <code>main.js</code>文件中</p>
-<pre class=" language-language-js"><code class="language-language-js">import './style/reset.css'
-</code></pre>
-<h3 id="局部引入"><a class="header-anchor" href="#局部引入">¶</a>局部引入</h3>
-<pre class=" language-language-js"><code class="language-language-js"><style scoped>
-  @import '../assets/iconfont/iconfont.css'; // 这个分号一定要写，要不会报错
-</style>
-</code></pre>
+<pre class=" language-js"><code class="language-js"><span class="token operator">&lt;</span>img <span class="token punctuation">:</span>src<span class="token operator">=</span><span class="token string">"imgSrc"</span> alt<span class="token operator">=</span><span class="token string">"imgSrc"</span><span class="token operator">></span></code></pre>
+<h2 id="引入样式文件"><a href="#引入样式文件" class="headerlink" title="引入样式文件"></a>引入样式文件</h2><p>在项目的 <code>src</code> 文件下，新建一个 <code>style</code> 文件夹，存放 <code>css</code> 文件。</p>
+<h3 id="全局引入"><a href="#全局引入" class="headerlink" title="全局引入"></a>全局引入</h3><p>将外部的 css 文件放到 style 文件下，引入外部文件只需在 <code>main.js</code>文件中</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token string">'./style/reset.css'</span></code></pre>
+<h3 id="局部引入"><a href="#局部引入" class="headerlink" title="局部引入"></a>局部引入</h3><pre class=" language-js"><code class="language-js"><span class="token operator">&lt;</span>style scoped<span class="token operator">></span>
+  @<span class="token keyword">import</span> <span class="token string">'../assets/iconfont/iconfont.css'</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 这个分号一定要写，要不会报错</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>style<span class="token operator">></span></code></pre>
 
                 
             </div>
@@ -809,8 +797,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            ¶工具 / 原料
-
+                            工具 / 原料
 一台电脑
 Deepin15.10.2 系统
 N 卡官网驱动
@@ -1048,7 +1035,7 @@ N 卡官网驱动
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">104k</span>&nbsp;字
+                class="white-color">107.4k</span>&nbsp;字
             
             
             

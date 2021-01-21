@@ -29,8 +29,7 @@
       
         
         
-          &lt;h2 id=&quot;1-Starship&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#1-Starship&quot;&gt;¶&lt;/a&gt;1 Starship&lt;/h2&gt;
-&lt;p&gt;如果必须要从本篇文章中选择一个我最喜欢的终端工具——那非 &lt;code&gt;Starship&lt;/code&gt;
+          &lt;h2 id=&quot;1-Starship&quot;&gt;&lt;a href=&quot;#1-Starship&quot; class=&quot;headerlink&quot; title=&quot;1 Starship&quot;&gt;&lt;/a&gt;1 Starship&lt;/h2&gt;&lt;p&gt;如果必须要从本篇文章中选择一个我最喜欢的终端工具——那非
         
       
     
@@ -61,8 +60,7 @@
       
         
         
-          &lt;h2 id=&quot;前言&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#前言&quot;&gt;¶&lt;/a&gt;前言&lt;/h2&gt;
-&lt;p&gt;组件是 vue.js
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;组件是 vue.js
         
       
     
@@ -93,7 +91,7 @@
       
         
         
-          &lt;h1&gt;1
+          &lt;h1 id=&quot;1-中间件介绍&quot;&gt;&lt;a href=&quot;#1-中间件介绍&quot; class=&quot;headerlink&quot; title=&quot;1 中间件介绍&quot;&gt;&lt;/a&gt;1
         
       
     
@@ -140,7 +138,7 @@
         
         
           &lt;p&gt;我们常常会用到一些发送邮件的功能，比如：有人注册网站之后，需要向其邮箱中发送激活链接，只有点击激活链接，激活账户之后，才允许登录。&lt;/p&gt;
-&lt;h2 id=&quot;配置相关参数&quot;&gt;&lt;a class=&quot;header-anchor&quot;
+&lt;h2 id=&quot;配置相关参数&quot;&gt;&lt;a href=&quot;#配置相关参数&quot; class=&quot;headerlink&quot;
         
       
     
@@ -175,7 +173,7 @@
       
         
         
-          &lt;h2 id=&quot;缓存简介&quot;&gt;&lt;a class=&quot;header-anchor&quot;
+          &lt;h2 id=&quot;缓存简介&quot;&gt;&lt;a href=&quot;#缓存简介&quot; class=&quot;headerlink&quot;
         
       
     
@@ -238,9 +236,8 @@
       
         
         
-          &lt;h2 id=&quot;JWT起源&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#JWT起源&quot;&gt;¶&lt;/a&gt;JWT起源&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于 JSON
+          &lt;h2 id=&quot;JWT起源&quot;&gt;&lt;a href=&quot;#JWT起源&quot; class=&quot;headerlink&quot; title=&quot; JWT起源&quot;&gt;&lt;/a&gt; JWT起源&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;Json web token (JWT),
         
       
     
@@ -294,8 +291,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;工具-原料&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#工具-原料&quot;&gt;¶&lt;/a&gt;工具 / 原料&lt;/h2&gt;
-&lt;ul&gt;
+      &lt;h2 id=&quot;工具-原料&quot;&gt;&lt;a href=&quot;#工具-原料&quot; class=&quot;headerlink&quot; title=&quot;工具 / 原料&quot;&gt;&lt;/a&gt;工具 / 原料&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;一台电脑&lt;/li&gt;
 &lt;li&gt;Deepin15.10.2 系统&lt;/li&gt;
 &lt;li&gt;N 卡官网驱动&lt;/li&gt;
@@ -442,8 +438,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;内存管理机制&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#内存管理机制&quot;&gt;¶&lt;/a&gt;内存管理机制&lt;/h2&gt;
-&lt;blockquote&gt;
+      &lt;h2 id=&quot;内存管理机制&quot;&gt;&lt;a href=&quot;#内存管理机制&quot; class=&quot;headerlink&quot; title=&quot;内存管理机制&quot;&gt;&lt;/a&gt;内存管理机制&lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;Python中不但变量名无需事先声明，而且也无需类型声明。在Python语言中，对象的类型和内存占用都是运行时确定的。在赋值时解释器会根据语法和右侧的操作数来决定新对象的类型。在对象创建后，一个该对象的引用会被赋值给左侧的变量。&lt;/p&gt;
 &lt;/blockquote&gt;
     
@@ -501,8 +496,7 @@
     
     <summary type="html">
     
-      &lt;h3 id=&quot;1-定义&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#1-定义&quot;&gt;¶&lt;/a&gt;1. 定义&lt;/h3&gt;
-&lt;p&gt;函数调用函数自身，这种方式称为递归，这种函数称为递归函数&lt;/p&gt;
+      &lt;h3 id=&quot;1-定义&quot;&gt;&lt;a href=&quot;#1-定义&quot; class=&quot;headerlink&quot; title=&quot;1. 定义&quot;&gt;&lt;/a&gt;1. 定义&lt;/h3&gt;&lt;p&gt;函数调用函数自身，这种方式称为递归，这种函数称为递归函数&lt;/p&gt;
     
     </summary>
     
@@ -557,8 +551,7 @@
     <summary type="html">
     
       &lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;定义&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;定义&lt;/p&gt;
 &lt;p&gt;当一个函数 接收 另一个函数作为参数， 它就是 &lt;code&gt;高阶函数&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
@@ -594,8 +587,7 @@
     
     <summary type="html">
     
-      &lt;h3 id=&quot;变量的作用域&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#变量的作用域&quot;&gt;¶&lt;/a&gt;变量的作用域&lt;/h3&gt;
-&lt;ul&gt;
+      &lt;h3 id=&quot;变量的作用域&quot;&gt;&lt;a href=&quot;#变量的作用域&quot; class=&quot;headerlink&quot; title=&quot;变量的作用域&quot;&gt;&lt;/a&gt;变量的作用域&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;在Python程序中创建、改变、查找变量名时，都是在一个保存变量名的空间中进行，我们称之为命名空间，也被称之为作用域。&lt;/li&gt;
 &lt;/ul&gt;
     

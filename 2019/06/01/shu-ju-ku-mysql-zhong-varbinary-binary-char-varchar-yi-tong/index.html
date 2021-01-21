@@ -477,47 +477,40 @@
                 <p>binary 与 varbinary 类型和char与varchar类型是相似的，只是他们存储的是二进制数据，也就是说他们是包含字节流而不是字符流，他们有二进制字符的集合和顺序，他们的对比，排序是基于字节的数值进行的</p>
 <p>binary与varbinary的最大长度和char与varchar是一样的，只不过他们是定义<strong>字节长度</strong>，而char和varchar对应的是<strong>字符长度</strong>。</p>
 <a id="more"></a>
-<h4 id="存储和取出时对尾部空格的处理"><a class="header-anchor" href="#存储和取出时对尾部空格的处理">¶</a>存储和取出时对尾部空格的处理</h4>
-<ul>
-<li>
-<p>char(N)用来存储非二进制字符串，插入时，对于少于N个字符的会自动在尾部加空格，查询时，尾部的空格就会被丢弃掉</p>
+
+<h4 id="存储和取出时对尾部空格的处理"><a href="#存储和取出时对尾部空格的处理" class="headerlink" title="存储和取出时对尾部空格的处理"></a>存储和取出时对尾部空格的处理</h4><ul>
+<li><p>char(N)用来存储非二进制字符串，插入时，对于少于N个字符的会自动在尾部加空格，查询时，尾部的空格就会被丢弃掉</p>
 </li>
-<li>
-<p>vachar(N) 用来存储非二进制字符串，插入时，对于少于N个字符的不填补空格，查询时，尾部的空格不会被丢弃掉</p>
+<li><p>vachar(N) 用来存储非二进制字符串，插入时，对于少于N个字符的不填补空格，查询时，尾部的空格不会被丢弃掉</p>
 </li>
-<li>
-<p>binary(N)存储二进制字符串，插入进，少于N个字节的会自动在尾部加0x00，取出时，所有的字节都保留，返回定义长度的字节长度，在比较的时候，所有的字节都是有效的，并且0x00&lt;space (space对应的是0x20)</p>
+<li><p>binary(N)存储二进制字符串，插入进，少于N个字节的会自动在尾部加0x00，取出时，所有的字节都保留，返回定义长度的字节长度，在比较的时候，所有的字节都是有效的，并且0x00&lt;space (space对应的是0x20)</p>
 </li>
-<li>
-<p>varbinary在插入不会去填补0x00字节，查询的时候也不会丢弃任何字节，在比较的时候，所有的字节都是有效的，并且0x00&lt;space (space对应的是0x20)</p>
+<li><p>varbinary在插入不会去填补0x00字节，查询的时候也不会丢弃任何字节，在比较的时候，所有的字节都是有效的，并且0x00&lt;space (space对应的是0x20)</p>
 </li>
 </ul>
-<h4 id="大小比较时"><a class="header-anchor" href="#大小比较时">¶</a>大小比较时</h4>
-<p>char与varchar的字符比较中，是忽略大小写与最后的空格的，如：</p>
-<pre class=" language-language-bash"><code class="language-language-bash">mysql> select 'a'='a ' , 'a'='A' , 'a'='A ';
+<h4 id="大小比较时"><a href="#大小比较时" class="headerlink" title="大小比较时"></a>大小比较时</h4><p>char与varchar的字符比较中，是忽略大小写与最后的空格的，如：</p>
+<pre class=" language-bash"><code class="language-bash">mysql<span class="token operator">></span> <span class="token keyword">select</span> <span class="token string">'a'</span><span class="token operator">=</span><span class="token string">'a '</span> , <span class="token string">'a'</span><span class="token operator">=</span><span class="token string">'A'</span> , <span class="token string">'a'</span><span class="token operator">=</span><span class="token string">'A '</span><span class="token punctuation">;</span>
 
 +----------+---------+----------+
-| 'a'='a ' | 'a'='A' | 'a'='A ' |
+<span class="token operator">|</span> <span class="token string">'a'</span><span class="token operator">=</span><span class="token string">'a '</span> <span class="token operator">|</span> <span class="token string">'a'</span><span class="token operator">=</span><span class="token string">'A'</span> <span class="token operator">|</span> <span class="token string">'a'</span><span class="token operator">=</span><span class="token string">'A '</span> <span class="token operator">|</span>
 +----------+---------+----------+
-|        1 |       1 |        1 |
+<span class="token operator">|</span>        1 <span class="token operator">|</span>       1 <span class="token operator">|</span>        1 <span class="token operator">|</span>
 +----------+---------+----------+
-1 row in set (0.00 sec)
-</code></pre>
+1 row <span class="token keyword">in</span> <span class="token keyword">set</span> <span class="token punctuation">(</span>0.00 sec<span class="token punctuation">)</span></code></pre>
 <p>而binary及varbinary的字节比较中，所有的信息都不会被忽略，如：</p>
-<pre class=" language-language-bash"><code class="language-language-bash">mysql> create table t (c BINARY(3));
-Query OK, 0 rows affected (0.01 sec)
+<pre class=" language-bash"><code class="language-bash">mysql<span class="token operator">></span> create table t <span class="token punctuation">(</span>c BINARY<span class="token punctuation">(</span>3<span class="token punctuation">))</span><span class="token punctuation">;</span>
+Query OK, 0 rows affected <span class="token punctuation">(</span>0.01 sec<span class="token punctuation">)</span>
 
-mysql> insert into t set c = 'a';
-Query OK, 1 row affected (0.01 sec)
+mysql<span class="token operator">></span> insert into t <span class="token keyword">set</span> c <span class="token operator">=</span> <span class="token string">'a'</span><span class="token punctuation">;</span>
+Query OK, 1 row affected <span class="token punctuation">(</span>0.01 sec<span class="token punctuation">)</span>
 
-mysql> select hex(c), c = 'a', c = 'a\0\0' from t;
+mysql<span class="token operator">></span> <span class="token keyword">select</span> hex<span class="token punctuation">(</span>c<span class="token punctuation">)</span>, c <span class="token operator">=</span> <span class="token string">'a'</span>, c <span class="token operator">=</span> <span class="token string">'a\0\0'</span> from t<span class="token punctuation">;</span>
 +--------+---------+-------------+
-| HEX(c) | c = 'a' | c = 'a\0\0' |
+<span class="token operator">|</span> HEX<span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token operator">|</span> c <span class="token operator">=</span> <span class="token string">'a'</span> <span class="token operator">|</span> c <span class="token operator">=</span> <span class="token string">'a\0\0'</span> <span class="token operator">|</span>
 +--------+---------+-------------+
-| 610000 |       0 |           1 |
+<span class="token operator">|</span> 610000 <span class="token operator">|</span>       0 <span class="token operator">|</span>           1 <span class="token operator">|</span>
 +--------+---------+-------------+
-1 row in set (0.08 sec)
-</code></pre>
+1 row <span class="token keyword">in</span> <span class="token keyword">set</span> <span class="token punctuation">(</span>0.08 sec<span class="token punctuation">)</span></code></pre>
 
                 
             </div>
@@ -1080,7 +1073,7 @@ mysql> select hex(c), c = 'a', c = 'a\0\0' from t;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">104k</span>&nbsp;字
+                class="white-color">107.4k</span>&nbsp;字
             
             
             

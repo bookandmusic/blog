@@ -435,7 +435,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    697
+                    692
                 </div>
                 
 
@@ -464,125 +464,81 @@
             <div id="articleContent">
                 <p>简单对常见错误进行总结、归纳。</p>
 <a id="more"></a>
-<h2 id="Ubuntu系统"><a class="header-anchor" href="#Ubuntu系统">¶</a>Ubuntu系统</h2>
-<h3 id="1698-只能root用户登录Mysql"><a class="header-anchor" href="#1698-只能root用户登录Mysql">¶</a>1698 只能root用户登录Mysql</h3>
-<h4 id="一、问题描述"><a class="header-anchor" href="#一、问题描述">¶</a>一、问题描述</h4>
-<p>如果mysql安装时，没有提示输入密码，则会随机分配密码，直接mysql -u root -p则无法登录，报错：</p>
-<pre class=" language-language-shell"><code class="language-language-shell">ERROR 1698 (28000): Access denied for user 'root'@'localhost
-</code></pre>
-<h4 id="二、解决方案"><a class="header-anchor" href="#二、解决方案">¶</a>二、解决方案</h4>
-<ol>
-<li>
-<p>用管理员权限进入数据库</p>
-<pre class=" language-language-shell"><code class="language-language-shell"> sudo mysql -uroot -p
-</code></pre>
+
+<h2 id="Ubuntu系统"><a href="#Ubuntu系统" class="headerlink" title="Ubuntu系统"></a>Ubuntu系统</h2><h3 id="1698-只能root用户登录Mysql"><a href="#1698-只能root用户登录Mysql" class="headerlink" title="1698 只能root用户登录Mysql"></a>1698 只能root用户登录Mysql</h3><h4 id="一、问题描述"><a href="#一、问题描述" class="headerlink" title="一、问题描述"></a>一、问题描述</h4><p>如果mysql安装时，没有提示输入密码，则会随机分配密码，直接mysql -u root -p则无法登录，报错：</p>
+<pre class=" language-shell"><code class="language-shell">ERROR 1698 (28000): Access denied for user 'root'@'localhost</code></pre>
+<h4 id="二、解决方案"><a href="#二、解决方案" class="headerlink" title="二、解决方案"></a>二、解决方案</h4><ol>
+<li><p>用管理员权限进入数据库</p>
+<pre class=" language-shell"><code class="language-shell"> sudo mysql -uroot -p</code></pre>
 </li>
-<li>
-<p>修改加密方式和密码</p>
-<pre class=" language-language-sql"><code class="language-language-sql"> alter user 'username'@'host' identified with mysql_native_password BY 'password';
-</code></pre>
+<li><p>修改加密方式和密码</p>
+<pre class=" language-sql"><code class="language-sql"> <span class="token keyword">alter</span> <span class="token keyword">user</span> <span class="token string">'username'</span>@'host<span class="token string">' identified with mysql_native_password BY '</span>password'<span class="token punctuation">;</span></code></pre>
 </li>
-<li>
-<p>刷新</p>
-<pre class=" language-language-sql"><code class="language-language-sql"> flush privileges;
-</code></pre>
+<li><p>刷新</p>
+<pre class=" language-sql"><code class="language-sql"> flush <span class="token keyword">privileges</span><span class="token punctuation">;</span></code></pre>
 </li>
-<li>
-<p>最后重启终端，就可通过 <code>mysql -u root -p</code> 免sudo登录mysql啦！</p>
+<li><p>最后重启终端，就可通过 <code>mysql -u root -p</code> 免sudo登录mysql啦！</p>
 </li>
 </ol>
-<h2 id="Windows系统"><a class="header-anchor" href="#Windows系统">¶</a>Windows系统</h2>
-<h3 id="1042服务启动异常"><a class="header-anchor" href="#1042服务启动异常">¶</a>1042服务启动异常</h3>
-<h4 id="一、问题描述-v2"><a class="header-anchor" href="#一、问题描述-v2">¶</a>一、问题描述</h4>
-<p>mysql已经发展到了8.0阶段，但是很多人在下载了安装了mysql8.0后，在快接近完成的阶段下出现了异常：</p>
-<pre class=" language-language-bash"><code class="language-language-bash">error 1042：Unable to connect to any of the specified MySQL hosts
-</code></pre>
+<h2 id="Windows系统"><a href="#Windows系统" class="headerlink" title="Windows系统"></a>Windows系统</h2><h3 id="1042服务启动异常"><a href="#1042服务启动异常" class="headerlink" title="1042服务启动异常"></a>1042服务启动异常</h3><h4 id="一、问题描述-1"><a href="#一、问题描述-1" class="headerlink" title="一、问题描述"></a>一、问题描述</h4><p>mysql已经发展到了8.0阶段，但是很多人在下载了安装了mysql8.0后，在快接近完成的阶段下出现了异常：</p>
+<pre class=" language-bash"><code class="language-bash">error 1042：Unable to connect to any of the specified MySQL hosts</code></pre>
 <p>上述异常直接导致mysql无法正常Finish，如图所示：</p>
 <p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/08/Mysql-1042.png" alt="Mysql-1042"></p>
-<h4 id="二、解决方案-v2"><a class="header-anchor" href="#二、解决方案-v2">¶</a>二、解决方案</h4>
-<ol>
-<li>
-<p>windows端使用<code>Win+R</code> --&gt; 运行 <code>&quot;services.msc&quot;</code> --&gt; 打开service服务管理器，找到刚才安装mysql的服务名称</p>
+<h4 id="二、解决方案-1"><a href="#二、解决方案-1" class="headerlink" title="二、解决方案"></a>二、解决方案</h4><ol>
+<li><p>windows端使用<code>Win+R</code> –&gt; 运行 <code>&quot;services.msc&quot;</code> –&gt; 打开service服务管理器，找到刚才安装mysql的服务名称</p>
 </li>
-<li>
-<p>右键 --&gt; 属性 --&gt; 登录，更改成&quot;本地系统账户&quot; --&gt; 确定</p>
-<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/08/Mysql%E7%99%BB%E5%BD%95%E8%BA%AB%E4%BB%BD%E4%BF%AE%E6%94%B9.png" alt="Mysql登录身份修改"></p>
+<li><p>右键 –&gt; 属性 –&gt; 登录，更改成”本地系统账户” –&gt; 确定</p>
+<p> <img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/08/Mysql%E7%99%BB%E5%BD%95%E8%BA%AB%E4%BB%BD%E4%BF%AE%E6%94%B9.png" alt="Mysql登录身份修改"></p>
 </li>
-<li>
-<p>回到安装程序，在次点击Execute，会发现已经可以成功到Finish界面</p>
+<li><p>回到安装程序，在次点击Execute，会发现已经可以成功到Finish界面</p>
 </li>
 </ol>
-<h3 id="1045用户密码错误"><a class="header-anchor" href="#1045用户密码错误">¶</a>1045用户密码错误</h3>
-<h4 id="一、问题描述-v3"><a class="header-anchor" href="#一、问题描述-v3">¶</a>一、问题描述</h4>
-<p>在数据库安装之后，使用<code>mysql -uroot -p</code>链接数据库时，出现以下异常:</p>
-<pre class=" language-language-bash"><code class="language-language-bash">1045    Access denied for user 'root'@'localhost' (using password:YES)
-</code></pre>
+<h3 id="1045用户密码错误"><a href="#1045用户密码错误" class="headerlink" title="1045用户密码错误"></a>1045用户密码错误</h3><h4 id="一、问题描述-2"><a href="#一、问题描述-2" class="headerlink" title="一、问题描述"></a>一、问题描述</h4><p>在数据库安装之后，使用<code>mysql -uroot -p</code>链接数据库时，出现以下异常:</p>
+<pre class=" language-bash"><code class="language-bash">1045    Access denied <span class="token keyword">for</span> user <span class="token string">'root'</span>@<span class="token string">'localhost'</span> <span class="token punctuation">(</span>using password:YES<span class="token punctuation">)</span></code></pre>
 <p>这个意思是说：用户“root”@本地主机的访问被拒绝</p>
 <p>那为什么会出现这种错误呢？</p>
 <p>答案是这样：这种问题的本质是用户密码出现错误。</p>
-<h4 id="二、解决方案-v3"><a class="header-anchor" href="#二、解决方案-v3">¶</a>二、解决方案</h4>
-<ol>
-<li>
-<p>打开命令窗口cmd，停止MySQL服务，输入命令：</p>
-<pre class=" language-language-bash"><code class="language-language-bash"> net stop mysql
-</code></pre>
+<h4 id="二、解决方案-2"><a href="#二、解决方案-2" class="headerlink" title="二、解决方案"></a>二、解决方案</h4><ol>
+<li><p>打开命令窗口cmd，停止MySQL服务，输入命令：</p>
+<pre class=" language-bash"><code class="language-bash"> net stop mysql</code></pre>
 </li>
-<li>
-<p>开启跳过密码验证登录的MySQL服务,输入命令</p>
-<pre class=" language-language-bash"><code class="language-language-bash"> mysqld --console --skip-grant-tables --shared-memory
-</code></pre>
+<li><p>开启跳过密码验证登录的MySQL服务,输入命令</p>
+<pre class=" language-bash"><code class="language-bash"> mysqld --console --skip-grant-tables --shared-memory</code></pre>
 </li>
-<li>
-<p>再打开一个新的cmd，无密码登录MySQL，输入登录命令</p>
-<pre class=" language-language-bash"><code class="language-language-bash"> mysql -u root -p
-</code></pre>
+<li><p>再打开一个新的cmd，无密码登录MySQL，输入登录命令</p>
+<pre class=" language-bash"><code class="language-bash"> mysql -u root -p</code></pre>
 </li>
-<li>
-<p>重置用户名对应的密码，命令如下：</p>
-<pre class=" language-language-sql"><code class="language-language-sql"> use mysql;
+<li><p>重置用户名对应的密码，命令如下：</p>
+<pre class=" language-sql"><code class="language-sql"> <span class="token keyword">use</span> mysql<span class="token punctuation">;</span>
 
- update user set authentication_string='' where user='root'; --修改密码为空
+ <span class="token keyword">update</span> <span class="token keyword">user</span> <span class="token keyword">set</span> authentication_string<span class="token operator">=</span><span class="token string">''</span> <span class="token keyword">where</span> <span class="token keyword">user</span><span class="token operator">=</span><span class="token string">'root'</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">--修改密码为空</span>
 
- flush privileges; --刷新权限
-</code></pre>
+ flush <span class="token keyword">privileges</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">--刷新权限</span></code></pre>
 </li>
-<li>
-<p>退出mysql</p>
+<li><p>退出mysql</p>
 </li>
-<li>
-<p>关闭以<code>--console --skip-grant-tables --shared-memory</code> 启动的MySQL服务，</p>
+<li><p>关闭以<code>--console --skip-grant-tables --shared-memory</code> 启动的MySQL服务，</p>
 </li>
-<li>
-<p>打开命令框，启动MySQL服务。输入</p>
-<pre class=" language-language-bash"><code class="language-language-bash"> net start mysql
-</code></pre>
+<li><p>打开命令框，启动MySQL服务。输入</p>
+<pre class=" language-bash"><code class="language-bash"> net start mysql</code></pre>
 </li>
-<li>
-<p>再次登录无密码登录：</p>
-<pre class=" language-language-bash"><code class="language-language-bash"> mysql -u root -p
-</code></pre>
+<li><p>再次登录无密码登录：</p>
+<pre class=" language-bash"><code class="language-bash"> mysql -u root -p</code></pre>
 </li>
-<li>
-<p>正确修改root密码</p>
-<pre class=" language-language-sql"><code class="language-language-sql">alter user 'root'@'host' identified with mysql_native_password BY 'mysql';
+<li><p>正确修改root密码</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">alter</span> <span class="token keyword">user</span> <span class="token string">'root'</span>@'host<span class="token string">' identified with mysql_native_password BY '</span>mysql'<span class="token punctuation">;</span>
 
-flush privileges;
-</code></pre>
+flush <span class="token keyword">privileges</span><span class="token punctuation">;</span></code></pre>
 </li>
-<li>
-<p>退出，再次成功登录，到此，重置密码结束。</p>
+<li><p>退出，再次成功登录，到此，重置密码结束。</p>
 </li>
 </ol>
-<h3 id="Mysql数据库初始化"><a class="header-anchor" href="#Mysql数据库初始化">¶</a>Mysql数据库初始化</h3>
-<p>当Mysql数据库链接失败， 跳过用户名验证也失败， 需要先删除 安装目录下的<code>data</code>文件夹, 然后重新初始化,生成初始化密码</p>
+<h3 id="Mysql数据库初始化"><a href="#Mysql数据库初始化" class="headerlink" title="Mysql数据库初始化"></a>Mysql数据库初始化</h3><p>当Mysql数据库链接失败， 跳过用户名验证也失败， 需要先删除 安装目录下的<code>data</code>文件夹, 然后重新初始化,生成初始化密码</p>
 <ol>
-<li>
-<p>以管理员的身份打开cmd窗口跳转路径到<code>X:\xxx\mysql-8.0.11-winx64\bin</code></p>
-<pre class=" language-language-bash"><code class="language-language-bash"> mysqld --initialize --user=mysql --console
-</code></pre>
+<li><p>以管理员的身份打开cmd窗口跳转路径到<code>X:\xxx\mysql-8.0.11-winx64\bin</code></p>
+<pre class=" language-bash"><code class="language-bash"> mysqld --initialize --user<span class="token operator">=</span>mysql --console</code></pre>
 </li>
-<li>
-<p>按照上面的流程，就可以跳过用户名验证，重新设置mysql密码</p>
+<li><p>按照上面的流程，就可以跳过用户名验证，重新设置mysql密码</p>
 </li>
 </ol>
 
@@ -1143,7 +1099,7 @@ flush privileges;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">104k</span>&nbsp;字
+                class="white-color">107.4k</span>&nbsp;字
             
             
             

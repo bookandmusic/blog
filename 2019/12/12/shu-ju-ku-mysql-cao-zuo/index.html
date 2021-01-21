@@ -439,7 +439,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    454
+                    450
                 </div>
                 
 
@@ -468,71 +468,52 @@
             <div id="articleContent">
                 <p>介绍如何在 Ubuntu系统上 安装mysql软件、以及如何创建用户信息。</p>
 <a id="more"></a>
-<h3 id="Mysql软件操作"><a class="header-anchor" href="#Mysql软件操作">¶</a>Mysql软件操作</h3>
-<p>以下所有操作以Ubuntu为例</p>
-<h4 id="mysql安装"><a class="header-anchor" href="#mysql安装">¶</a>mysql安装</h4>
-<pre class=" language-language-bash"><code class="language-language-bash">sudo apt install mysql-server # 安装mysql
-</code></pre>
-<h4 id="mysql删除"><a class="header-anchor" href="#mysql删除">¶</a>mysql删除</h4>
-<pre class=" language-language-bash"><code class="language-language-bash">sudo apt remove --upgrade mysql-* -y # 卸载mysql
 
-dpkg -l|grep ^rc|awk '{print$2}'|sudo xargs dpkg -P #清除配置
-</code></pre>
-<h4 id="mysql服务"><a class="header-anchor" href="#mysql服务">¶</a>mysql服务</h4>
-<pre class=" language-language-bash"><code class="language-language-bash">service mysql start # 启动服务
-service mysql stop  # 停止服务
-service mysql restart  # 重启服务
-</code></pre>
-<h3 id="mysql用户操作"><a class="header-anchor" href="#mysql用户操作">¶</a>mysql用户操作</h3>
-<h4 id="一、创建用户"><a class="header-anchor" href="#一、创建用户">¶</a>一、创建用户</h4>
-<pre class=" language-language-sql"><code class="language-language-sql">create user 'username'@'host' identified with mysql_native_password BY 'password';
-</code></pre>
+<h3 id="Mysql软件操作"><a href="#Mysql软件操作" class="headerlink" title="Mysql软件操作"></a>Mysql软件操作</h3><p>以下所有操作以Ubuntu为例</p>
+<h4 id="mysql安装"><a href="#mysql安装" class="headerlink" title="mysql安装"></a>mysql安装</h4><pre class=" language-bash"><code class="language-bash"><span class="token function">sudo</span> apt <span class="token function">install</span> mysql-server <span class="token comment" spellcheck="true"># 安装mysql</span></code></pre>
+<h4 id="mysql删除"><a href="#mysql删除" class="headerlink" title="mysql删除"></a>mysql删除</h4><pre class=" language-bash"><code class="language-bash"><span class="token function">sudo</span> apt remove --upgrade mysql-* -y <span class="token comment" spellcheck="true"># 卸载mysql</span>
+
+dpkg -l<span class="token operator">|</span><span class="token function">grep</span> ^rc<span class="token operator">|</span><span class="token function">awk</span> <span class="token string">'{print<span class="token variable">$2</span>}'</span><span class="token operator">|</span><span class="token function">sudo</span> <span class="token function">xargs</span> dpkg -P <span class="token comment" spellcheck="true">#清除配置</span></code></pre>
+<h4 id="mysql服务"><a href="#mysql服务" class="headerlink" title="mysql服务"></a>mysql服务</h4><pre class=" language-bash"><code class="language-bash"><span class="token function">service</span> mysql start <span class="token comment" spellcheck="true"># 启动服务</span>
+<span class="token function">service</span> mysql stop  <span class="token comment" spellcheck="true"># 停止服务</span>
+<span class="token function">service</span> mysql restart  <span class="token comment" spellcheck="true"># 重启服务</span></code></pre>
+<h3 id="mysql用户操作"><a href="#mysql用户操作" class="headerlink" title="mysql用户操作"></a>mysql用户操作</h3><h4 id="一、创建用户"><a href="#一、创建用户" class="headerlink" title="一、创建用户"></a>一、创建用户</h4><pre class=" language-sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">user</span> <span class="token string">'username'</span>@'host<span class="token string">' identified with mysql_native_password BY '</span>password'<span class="token punctuation">;</span></code></pre>
 <ul>
 <li><code>username</code>：你将创建的用户名</li>
 <li><code>host</code>：指定该用户在哪个主机上可以登陆，如果是本地用户可用<code>localhost</code>，如果想让该用户可以从任意远程主机登陆，可以使用通配符<code>%</code></li>
 <li><code>password</code>：该用户的登陆密码，密码可以为空，如果为空则该用户可以不需要密码登陆服务器</li>
 <li><code>mysql_native_password</code>：用户加密方式，该方式为mysql8.0之前的加密方式，如果不写，则是mysql 8.0之后的加密方式<code>caching_sha2_password</code></li>
 </ul>
-<h4 id="二、-修改用户信息"><a class="header-anchor" href="#二、-修改用户信息">¶</a>二、 修改用户信息</h4>
-<pre class=" language-language-sql"><code class="language-language-sql">alter user 'username'@'host' identified with mysql_native_password BY 'password';
-</code></pre>
+<h4 id="二、-修改用户信息"><a href="#二、-修改用户信息" class="headerlink" title="二、 修改用户信息"></a>二、 修改用户信息</h4><pre class=" language-sql"><code class="language-sql"><span class="token keyword">alter</span> <span class="token keyword">user</span> <span class="token string">'username'</span>@'host<span class="token string">' identified with mysql_native_password BY '</span>password'<span class="token punctuation">;</span></code></pre>
 <ul>
 <li>参数同上</li>
 </ul>
-<h4 id="三、删除用户"><a class="header-anchor" href="#三、删除用户">¶</a>三、删除用户</h4>
-<pre class=" language-language-sql"><code class="language-language-sql">drop user 'username'@'host';
-</code></pre>
+<h4 id="三、删除用户"><a href="#三、删除用户" class="headerlink" title="三、删除用户"></a>三、删除用户</h4><pre class=" language-sql"><code class="language-sql"><span class="token keyword">drop</span> <span class="token keyword">user</span> <span class="token string">'username'</span><span class="token variable">@'host'</span><span class="token punctuation">;</span></code></pre>
 <ul>
 <li>参数同上</li>
 </ul>
-<h4 id="四、授权"><a class="header-anchor" href="#四、授权">¶</a>四、授权</h4>
-<pre class=" language-language-sql"><code class="language-language-sql">grant privileges on databasename.tablename to 'username'@'host';
-</code></pre>
+<h4 id="四、授权"><a href="#四、授权" class="headerlink" title="四、授权"></a>四、授权</h4><pre class=" language-sql"><code class="language-sql"><span class="token keyword">grant</span> <span class="token keyword">privileges</span> <span class="token keyword">on</span> databasename<span class="token punctuation">.</span>tablename <span class="token keyword">to</span> <span class="token string">'username'</span><span class="token variable">@'host'</span><span class="token punctuation">;</span></code></pre>
 <ul>
 <li>privileges：用户的操作权限，如SELECT，INSERT，UPDATE等，如果要授予所的权限则使用ALL</li>
 <li>databasename：数据库名</li>
 <li>tablename：表名，如果要授予该用户对所有数据库和表的相应操作权限则可用<em>表示，如</em>.*</li>
 <li>其余参数同上</li>
 </ul>
-<h4 id="五、删除权限"><a class="header-anchor" href="#五、删除权限">¶</a>五、删除权限</h4>
-<pre class=" language-language-sql"><code class="language-language-sql">revoke privileges on databasename.tablename to 'username'@'host';
-</code></pre>
+<h4 id="五、删除权限"><a href="#五、删除权限" class="headerlink" title="五、删除权限"></a>五、删除权限</h4><pre class=" language-sql"><code class="language-sql"><span class="token keyword">revoke</span> <span class="token keyword">privileges</span> <span class="token keyword">on</span> databasename<span class="token punctuation">.</span>tablename <span class="token keyword">to</span> <span class="token string">'username'</span><span class="token variable">@'host'</span><span class="token punctuation">;</span></code></pre>
 <ul>
 <li>参数同上</li>
 </ul>
-<h4 id="六、演示"><a class="header-anchor" href="#六、演示">¶</a>六、演示</h4>
-<pre class=" language-language-sql"><code class="language-language-sql"># 创建一个可以从任意远程主机登陆的用户test
-create user 'test'@'%' identified with mysql_native_password BY '123456';
+<h4 id="六、演示"><a href="#六、演示" class="headerlink" title="六、演示"></a>六、演示</h4><pre class=" language-sql"><code class="language-sql"><span class="token comment" spellcheck="true"># 创建一个可以从任意远程主机登陆的用户test</span>
+<span class="token keyword">create</span> <span class="token keyword">user</span> <span class="token string">'test'</span>@'<span class="token operator">%</span><span class="token string">' identified with mysql_native_password BY '</span><span class="token number">123456</span>'<span class="token punctuation">;</span>
 
-# 创建数据库mydata
-create database mydata charset=utf8;
+<span class="token comment" spellcheck="true"># 创建数据库mydata</span>
+<span class="token keyword">create</span> <span class="token keyword">database</span> mydata <span class="token keyword">charset</span><span class="token operator">=</span>utf8<span class="token punctuation">;</span>
 
-# 对用户test授权，只能操作数据库mydata
-grant all on mydata.* to 'test'@'%';
+<span class="token comment" spellcheck="true"># 对用户test授权，只能操作数据库mydata</span>
+<span class="token keyword">grant</span> <span class="token keyword">all</span> <span class="token keyword">on</span> mydata<span class="token punctuation">.</span><span class="token operator">*</span> <span class="token keyword">to</span> <span class="token string">'test'</span><span class="token variable">@'%'</span><span class="token punctuation">;</span>
 
-# 刷新配置，立即启用修改
-flush privileges;
-</code></pre>
+<span class="token comment" spellcheck="true"># 刷新配置，立即启用修改</span>
+flush <span class="token keyword">privileges</span><span class="token punctuation">;</span></code></pre>
 
                 
             </div>
@@ -788,9 +769,7 @@ flush privileges;
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            主键必然是唯一且不为空，但是唯一不一定是主键，而且主键只能有一个，但是唯一约束仅仅是为了保持某些列具有唯一性而已。所以可以有多列
-一张表里只能有一个主键约束，可以有多个唯一约束
-主键约束的字段不能为null，而唯一约束的字段可以为null值
+                            主键必然是唯一且不为空，但是唯一不一定是主键，而且主键只能有一个，但是唯一约束仅仅是为了保持某些列具有唯一性而已。所以可以有多列一张表里只能有一个主键约束，可以有多个唯一约束主键约束的字段不能为null，而唯一约束的字段可以为null值
                         
                     </div>
                     <div class="publish-info">
@@ -1097,7 +1076,7 @@ flush privileges;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">104k</span>&nbsp;字
+                class="white-color">107.4k</span>&nbsp;字
             
             
             

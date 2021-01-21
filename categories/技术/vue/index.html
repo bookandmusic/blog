@@ -346,19 +346,10 @@
                 </a>
                 
                 
-                <a href="/categories/%E6%8A%80%E6%9C%AF/python/Django/" title="Django: 3">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #E8F8F5;">Django
-                        <span class="tag-length">3</span>
-                    </span>
-                </a>
-                
-                
                 <a href="/categories/%E6%8A%80%E6%9C%AF/vue/" title="vue: 8">
                     <span class="chip center-align waves-effect waves-light
                              chip-active "
-                            style="background-color: #FEF9E7;">vue
+                            style="background-color: #E8F8F5;">vue
                         <span class="tag-length">8</span>
                     </span>
                 </a>
@@ -367,7 +358,7 @@
                 <a href="/categories/Ebook/" title="Ebook: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #F8F9F9;">Ebook
+                            style="background-color: #FEF9E7;">Ebook
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -376,7 +367,7 @@
                 <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E5%87%BD%E6%95%B0/" title="函数: 6">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #82E0AA;">函数
+                            style="background-color: #F8F9F9;">函数
                         <span class="tag-length">6</span>
                     </span>
                 </a>
@@ -385,7 +376,7 @@
                 <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E6%A8%A1%E5%9D%97/" title="模块: 2">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #D7BDE2;">模块
+                            style="background-color: #82E0AA;">模块
                         <span class="tag-length">2</span>
                     </span>
                 </a>
@@ -394,8 +385,17 @@
                 <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" title="面向对象: 2">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #A3E4D7;">面向对象
+                            style="background-color: #D7BDE2;">面向对象
                         <span class="tag-length">2</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/%E6%8A%80%E6%9C%AF/python/Django/" title="Django: 3">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #A3E4D7;">Django
+                        <span class="tag-length">3</span>
                     </span>
                 </a>
                 
@@ -623,9 +623,8 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                ¶前言
-组件是 vue.js 最强大的功能之一，而组件实例的作用域是相互独立的，这就意味着不同组件之间的数据无法相互引用。一般来说，组件可以有以下几种关系：
-
+                                前言组件是 vue.js 最强大的功能之一，而组件实例的作用域是相互独立的，这就意味着不同组件之间的数据无法相互引用。一般来说，组件可以有以下几种关系：
+  
 如上图所示，A 和 B、B 和 C、B 和 D 都是父子关系，C 和 D 是兄弟
                             
                         </div>
@@ -681,13 +680,9 @@
                         <div class="summary block-with-text">
                             
                                 简单介绍一下在Vue项目中引入本地资源的实现方式: 
-¶引入本地图片
-¶使用 @引入：
-这是在组件内直接引用和普通的 html 方法一样，代码如下
-
-
-¶使用 vue 的方法引入：
-这是典型的 vue 思想，使用数据来操纵 dom； 首先在
+引入本地图片使用 @引入：这是在组件内直接引用和普通的 html 方法一样，代码如下
+&lt;img src="@/assets/test.png" alt="test.png">
+使用
                             
                         </div>
                         <div class="publish-info">
@@ -741,11 +736,9 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                ¶事件
-要理解事件绑定，就得先了解事件。
+                                事件要理解事件绑定，就得先了解事件。
 浏览器是事件驱动型的，根据用户的行为触发不同的事件，根据事件执行相应的操作。我们较为熟悉的事件有三大类型：
-¶鼠标键盘事件
-
+鼠标键盘事件
 
 
 鼠标键盘事件
@@ -753,11 +746,11 @@
 
 
 
-
 onclick
 鼠标点击某个对象
 
 
+ondb
                             
                         </div>
                         <div class="publish-info">
@@ -824,12 +817,10 @@ onclick
                         <div class="summary block-with-text">
                             
                                 Vue.js官方提供了一套专用的路由工具库 Vue Router,其使用和配置都非常简单。
-¶安装路由
-可以使用npm包的方式来安装路由
+安装路由可以使用npm包的方式来安装路由
 cnpm install vue-router --save
 
-
-其实通过Vue-cli脚手架快速搭建
+其实通过Vue-cli脚手架快速搭建项目时
                             
                         </div>
                         <div class="publish-info">
@@ -947,10 +938,9 @@ cnpm install vue-router --save
                         <div class="summary block-with-text">
                             
                                 在 vue项目中使用axios分为局部使用和全局使用
-¶在vue中局部使用
-import axios from 'axios'
+在vue中局部使用import axios from 'axios'
 
-axios.get('/api/goods/add_info/?ID=12345&firstName=Fred
+axios.get('/api/goods/add_info/?ID=12345&amp;firstName=Fr
                             
                         </div>
                         <div class="publish-info">
@@ -1016,11 +1006,9 @@ axios.get('/api/goods/add_info/?ID=12345&firstName=Fred
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                ¶GET 请求传递参数
-¶1、直接在 URL 上添加参数
-import axios from 'axios'
+                                GET 请求传递参数1、直接在 URL 上添加参数import axios from 'axios'
 
-axios.get('/api/goods/add_info/?ID=12345&firstName=Fred&lastName
+axios.get('/api/goods/add_info/?ID=12345&amp;firstName=Fred&amp;last
                             
                         </div>
                         <div class="publish-info">
@@ -1082,19 +1070,15 @@ axios.get('/api/goods/add_info/?ID=12345&firstName=Fred&lastName
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                ¶Axios API
-
-
+                                Axios API
 可以通过向 axios 传递相关配置来创建请求
 
-
 axios配置全部参数
-axios(config)
-
-// 发送 POST 请求
-axios({
-    method: 'post',
-    url: '/u
+  axios(config)
+  // 发送 POST 请求
+  axios({
+      method: 'post',
+      url
                             
                         </div>
                         <div class="publish-info">
@@ -1214,7 +1198,7 @@ axios({
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">104k</span>&nbsp;字
+                class="white-color">107.4k</span>&nbsp;字
             
             
             

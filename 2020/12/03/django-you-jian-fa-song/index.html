@@ -443,7 +443,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    939
+                    954
                 </div>
                 
 
@@ -471,110 +471,99 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>我们常常会用到一些发送邮件的功能，比如：有人注册网站之后，需要向其邮箱中发送激活链接，只有点击激活链接，激活账户之后，才允许登录。</p>
-<h2 id="配置相关参数"><a class="header-anchor" href="#配置相关参数">¶</a>配置相关参数</h2>
-<p>在 <a href="http://settings.py" target="_blank" rel="noopener">settings.py</a> 的最后面加上类似这些</p>
-<pre class=" language-language-python"><code class="language-language-python">EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = False   # 是否使用TLS安全传输协议(用于在两个通信应用程序之间提供保密性和数据完整性。)
-EMAIL_USE_SSL = True    # 是否使用SSL加密，qq企业邮箱要求使用
-EMAIL_HOST = 'smtp.163.com'   # 发送邮件的邮箱 的 SMTP服务器，这里用了163邮箱
-EMAIL_PORT = 465     # 发件箱的SMTP服务器端口
-EMAIL_HOST_USER = 'xxxxx@xmdaren.com'    # 发送邮件的邮箱地址
-EMAIL_HOST_PASSWORD = '*********'         # 发送邮件的邮箱密码(这里使用的是授权码)
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # 默认的发送方
-</code></pre>
+<h2 id="配置相关参数"><a href="#配置相关参数" class="headerlink" title="配置相关参数"></a>配置相关参数</h2><p>在 settings.py 的最后面加上类似这些</p>
+<pre class=" language-python"><code class="language-python">EMAIL_BACKEND <span class="token operator">=</span> <span class="token string">'django.core.mail.backends.smtp.EmailBackend'</span>
+EMAIL_USE_TLS <span class="token operator">=</span> <span class="token boolean">False</span>   <span class="token comment" spellcheck="true"># 是否使用TLS安全传输协议(用于在两个通信应用程序之间提供保密性和数据完整性。)</span>
+EMAIL_USE_SSL <span class="token operator">=</span> <span class="token boolean">True</span>    <span class="token comment" spellcheck="true"># 是否使用SSL加密，qq企业邮箱要求使用</span>
+EMAIL_HOST <span class="token operator">=</span> <span class="token string">'smtp.163.com'</span>   <span class="token comment" spellcheck="true"># 发送邮件的邮箱 的 SMTP服务器，这里用了163邮箱</span>
+EMAIL_PORT <span class="token operator">=</span> <span class="token number">465</span>     <span class="token comment" spellcheck="true"># 发件箱的SMTP服务器端口</span>
+EMAIL_HOST_USER <span class="token operator">=</span> <span class="token string">'xxxxx@xmdaren.com'</span>    <span class="token comment" spellcheck="true"># 发送邮件的邮箱地址</span>
+EMAIL_HOST_PASSWORD <span class="token operator">=</span> <span class="token string">'*********'</span>         <span class="token comment" spellcheck="true"># 发送邮件的邮箱密码(这里使用的是授权码)</span>
+DEFAULT_FROM_EMAIL <span class="token operator">=</span> EMAIL_HOST_USER  <span class="token comment" spellcheck="true"># 默认的发送方</span></code></pre>
 <p>DEFAULT_FROM_EMAIL 还可以写成这样：</p>
-<pre class=" language-language-python"><code class="language-language-python">DEFAULT_FROM_EMAIL = 'mac <mac@163.com>'
-</code></pre>
+<pre class=" language-python"><code class="language-python">DEFAULT_FROM_EMAIL <span class="token operator">=</span> <span class="token string">'mac &lt;mac@163.com>'</span></code></pre>
 <p>这样别人收到的邮件中就会有你设定的名称。</p>
 <p>下面是一些常用的邮箱：</p>
-<p><a href="http://help.163.com/09/1223/14/5R7P3QI100753VB8.html" target="_blank" rel="noopener">163 邮箱</a>   <a href="http://www.126.com/help/client_04.htm" target="_blank" rel="noopener">126 邮箱</a>  <a href="https://service.mail.qq.com/cgi-bin/help?subtype=1&amp;&amp;no=166&amp;&amp;id=28" target="_blank" rel="noopener">QQ 邮箱</a></p>
-<p>其它邮箱参数可以登陆邮箱寻找帮助信息，也可以尝试在搜索引擎中搜索：“SMTP 邮箱名称”，比如：“163 SMTP” 进行查找。</p>
-<h2 id="发送邮件"><a class="header-anchor" href="#发送邮件">¶</a>发送邮件</h2>
-<p>发送普通邮件可以使用<code>django.core.mail</code>模块下的<code>send_mail</code>函数进行</p>
-<pre class=" language-language-python"><code class="language-language-python">send_mail(subject, message, from_email, recipient_list, fail_silently=False, html_message=None)
-# 将邮件发送至recipient_list中的每一个收件人
-'''
+<p><a href="http://help.163.com/09/1223/14/5R7P3QI100753VB8.html" target="_blank" rel="noopener">163 邮箱</a>   <a href="http://www.126.com/help/client_04.htm" target="_blank" rel="noopener">126 邮箱</a>  <a href="https://service.mail.qq.com/cgi-bin/help?subtype=1&&no=166&&id=28" target="_blank" rel="noopener">QQ 邮箱</a></p>
+<p>其它邮箱参数可以登陆邮箱寻找帮助信息，也可以尝试在搜索引擎中搜索：”SMTP 邮箱名称”，比如：”163 SMTP” 进行查找。</p>
+<h2 id="发送邮件"><a href="#发送邮件" class="headerlink" title="发送邮件"></a>发送邮件</h2><p> 发送普通邮件可以使用<code>django.core.mail</code>模块下的<code>send_mail</code>函数进行</p>
+<pre class=" language-python"><code class="language-python">send_mail<span class="token punctuation">(</span>subject<span class="token punctuation">,</span> message<span class="token punctuation">,</span> from_email<span class="token punctuation">,</span> recipient_list<span class="token punctuation">,</span> fail_silently<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> html_message<span class="token operator">=</span>None<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 将邮件发送至recipient_list中的每一个收件人</span>
+<span class="token triple-quoted-string string">'''
 subject: 发送邮件标题
 message: 发送邮件正文
 from_email: 发件人邮箱地址
 recipient_list: 一个字符串列表，每一个数据为接收者的邮箱地址
 html_message: 如果指定该值，则发送的内容类型为text/html为一个html邮件内容
-'''
+'''</span></code></pre>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> django<span class="token punctuation">.</span>conf <span class="token keyword">import</span> settings
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>core<span class="token punctuation">.</span>mail <span class="token keyword">import</span> send_mail
+
+
+<span class="token keyword">def</span> <span class="token function">send_regiser_active_email</span><span class="token punctuation">(</span>to_email<span class="token punctuation">,</span> username<span class="token punctuation">,</span> token<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''发送激活邮件'''</span>
+    active_url <span class="token operator">=</span> <span class="token string">"{}/user/active/{}"</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>settings<span class="token punctuation">.</span>HOST_URL<span class="token punctuation">,</span> token<span class="token punctuation">)</span>
+    subject <span class="token operator">=</span> <span class="token string">"xxx欢迎信息"</span>
+    message <span class="token operator">=</span> <span class="token string">'邮件正文'</span>
+    sender <span class="token operator">=</span> settings<span class="token punctuation">.</span>DEFAULT_FROM_EMAIL
+    receiver <span class="token operator">=</span> <span class="token punctuation">[</span>to_email<span class="token punctuation">]</span>
+    html_message <span class="token operator">=</span> <span class="token string">'&lt;h1>{}, 欢迎您成为xxx注册会员&lt;/h1>请点击下面链接激活您的账户&lt;br/>&lt;a href="{}">{}&lt;/a>'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>username<span class="token punctuation">,</span> active_url<span class="token punctuation">,</span>
+                                                                                            active_url<span class="token punctuation">)</span>
+    send_mail<span class="token punctuation">(</span>subject<span class="token punctuation">,</span> message<span class="token punctuation">,</span> sender<span class="token punctuation">,</span> receiver<span class="token punctuation">,</span> html_message<span class="token operator">=</span>html_message<span class="token punctuation">)</span>
 </code></pre>
-<pre class=" language-language-python"><code class="language-language-python">from django.conf import settings
-from django.core.mail import send_mail
+<h2 id="itsdangerous"><a href="#itsdangerous" class="headerlink" title="itsdangerous"></a>itsdangerous</h2><p>有时您只想将一些数据发送到不受信任的环境。但是如何安全地做到这一点？诀窍就是签名。只要知道一个密钥，您就可以对数据进行加密签名并将其移交给其他人。当您取回数据时，可以轻松确保没有人篡改数据。使用itsdangerous可以实现此种方案。</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> itsdangerous <span class="token keyword">import</span> TimedJSONWebSignatureSerializer <span class="token keyword">as</span> TJSS
 
+salt<span class="token operator">=</span><span class="token string">'abcdefg'</span> <span class="token comment" spellcheck="true"># 这里就是配置加密的规则</span>
 
-def send_regiser_active_email(to_email, username, token):
-    '''发送激活邮件'''
-    active_url = "{}/user/active/{}".format(settings.HOST_URL, token)
-    subject = "xxx欢迎信息"
-    message = '邮件正文'
-    sender = settings.DEFAULT_FROM_EMAIL
-    receiver = [to_email]
-    html_message = '<h1>{}, 欢迎您成为xxx注册会员</h1>请点击下面链接激活您的账户<br/><a href="{}">{}</a>'.format(username, active_url,
-                                                                                            active_url)
-    send_mail(subject, message, sender, receiver, html_message=html_message)
-    
-</code></pre>
-<h2 id="itsdangerous"><a class="header-anchor" href="#itsdangerous">¶</a>itsdangerous</h2>
-<p>有时您只想将一些数据发送到不受信任的环境。但是如何安全地做到这一点？诀窍就是签名。只要知道一个密钥，您就可以对数据进行加密签名并将其移交给其他人。当您取回数据时，可以轻松确保没有人篡改数据。使用itsdangerous可以实现此种方案。</p>
-<pre class=" language-language-python"><code class="language-language-python">from itsdangerous import TimedJSONWebSignatureSerializer as TJSS
+serializer<span class="token operator">=</span>TJSS<span class="token punctuation">(</span>salt<span class="token punctuation">,</span>expires_in<span class="token operator">=</span><span class="token number">3600</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 过期时间一小时</span>
+user_info <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">'user_id'</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true"># 加密阶段</span>
+res <span class="token operator">=</span> serializer<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span>user_info<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 得到加密后的数据，会返回一个字节类型的数据</span>
+token <span class="token operator">=</span> res<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 解码为str</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 得到的数据如下，就是包含数据和盐值的token了，只有在知道盐值的时候才能被解密出来</span>
+<span class="token comment" spellcheck="true">#eyJhbGciOiJIUzUxMiIsImlhdCI6MTU2MjY0Nzg4NCwiZXhwIjoxNTYyNjUxNDg0fQ.eyJjb25maXJtIjo1fQ.93DtXu9vHQDW0lr7saJhDBt-dcBxNNh_IMTR-JhWnrT-ujQ9SwevSUyW0p2txLS-gtyRHPlH1eD9INksIWilkA</span>
 
-salt='abcdefg' # 这里就是配置加密的规则
-
-serializer=TJSS(salt,expires_in=3600) # 过期时间一小时
-user_info = {'user_id':1}
-# 加密阶段
-res = serializer.dumps(user_info)  # 得到加密后的数据，会返回一个字节类型的数据
-token = res.decode() # 解码为str
-print(token)
-# 得到的数据如下，就是包含数据和盐值的token了，只有在知道盐值的时候才能被解密出来
-#eyJhbGciOiJIUzUxMiIsImlhdCI6MTU2MjY0Nzg4NCwiZXhwIjoxNTYyNjUxNDg0fQ.eyJjb25maXJtIjo1fQ.93DtXu9vHQDW0lr7saJhDBt-dcBxNNh_IMTR-JhWnrT-ujQ9SwevSUyW0p2txLS-gtyRHPlH1eD9INksIWilkA
-
-# 解密阶段
-res=serializer.loads(token)
-print(res)
-# 返回的数据如下：
-# {'user_id':1}
-</code></pre>
+<span class="token comment" spellcheck="true"># 解密阶段</span>
+res<span class="token operator">=</span>serializer<span class="token punctuation">.</span>loads<span class="token punctuation">(</span>token<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 返回的数据如下：</span>
+<span class="token comment" spellcheck="true"># {'user_id':1}</span></code></pre>
 <blockquote>
 <p>当token被修改时，解密时，会抛出 <code>itsdangerous.Badsignature</code></p>
 <p>当token过期时, 解密时，会抛出 <code>itsdangerous.SignatureExpired: Signature expired</code></p>
 </blockquote>
-<h2 id="邮件激活"><a class="header-anchor" href="#邮件激活">¶</a>邮件激活</h2>
-<p>注册成功，发送激活链接</p>
-<pre class=" language-language-python"><code class="language-language-python">from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-    
-    
-# 加密用户信息，生成token
-info = {'confirm': user.id}
-serializer = Serializer(settings.SECRET_KEY, 3600)
-token = serializer.dumps(info).decode()
+<h2 id="邮件激活"><a href="#邮件激活" class="headerlink" title="邮件激活"></a>邮件激活</h2><p>注册成功，发送激活链接</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> itsdangerous <span class="token keyword">import</span> TimedJSONWebSignatureSerializer <span class="token keyword">as</span> Serializer
 
-# 发送邮件
-send_regiser_active_email(email, username, token)
 
+<span class="token comment" spellcheck="true"># 加密用户信息，生成token</span>
+info <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">'confirm'</span><span class="token punctuation">:</span> user<span class="token punctuation">.</span>id<span class="token punctuation">}</span>
+serializer <span class="token operator">=</span> Serializer<span class="token punctuation">(</span>settings<span class="token punctuation">.</span>SECRET_KEY<span class="token punctuation">,</span> <span class="token number">3600</span><span class="token punctuation">)</span>
+token <span class="token operator">=</span> serializer<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span>info<span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 发送邮件</span>
+send_regiser_active_email<span class="token punctuation">(</span>email<span class="token punctuation">,</span> username<span class="token punctuation">,</span> token<span class="token punctuation">)</span>
 </code></pre>
 <p>用户点击激活链接，进行账户激活</p>
-<pre class=" language-language-python"><code class="language-language-python"># 进行解密， 获取要激活的用户信息
-serializer = Serializer(settings.SECRET_KEY, 3600)
-try:
-    # 获取用户id
-    info = serializer.loads(token)  # 在路由匹配中，获取token
-except (SignatureExpired, BadSignature) as error:
-    return redirect(reverse("user:activeemail"))  # 激活失败，重写跳转到邮箱激活页面
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 进行解密， 获取要激活的用户信息</span>
+serializer <span class="token operator">=</span> Serializer<span class="token punctuation">(</span>settings<span class="token punctuation">.</span>SECRET_KEY<span class="token punctuation">,</span> <span class="token number">3600</span><span class="token punctuation">)</span>
+<span class="token keyword">try</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 获取用户id</span>
+    info <span class="token operator">=</span> serializer<span class="token punctuation">.</span>loads<span class="token punctuation">(</span>token<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 在路由匹配中，获取token</span>
+<span class="token keyword">except</span> <span class="token punctuation">(</span>SignatureExpired<span class="token punctuation">,</span> BadSignature<span class="token punctuation">)</span> <span class="token keyword">as</span> error<span class="token punctuation">:</span>
+    <span class="token keyword">return</span> redirect<span class="token punctuation">(</span>reverse<span class="token punctuation">(</span><span class="token string">"user:activeemail"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 激活失败，重写跳转到邮箱激活页面</span>
 
-else:
-    user_id = info.get("confirm")
-    # 获取用户信息
-    user = User.objects.get(id=user_id)
-    user.is_active = 1
-    user.save()
+<span class="token keyword">else</span><span class="token punctuation">:</span>
+    user_id <span class="token operator">=</span> info<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"confirm"</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 获取用户信息</span>
+    user <span class="token operator">=</span> User<span class="token punctuation">.</span>objects<span class="token punctuation">.</span>get<span class="token punctuation">(</span>id<span class="token operator">=</span>user_id<span class="token punctuation">)</span>
+    user<span class="token punctuation">.</span>is_active <span class="token operator">=</span> <span class="token number">1</span>
+    user<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-    # 跳转到登录界面
-    return redirect(reverse('user:login'))  # 激活成功，跳转到登录页面      
-</code></pre>
+    <span class="token comment" spellcheck="true"># 跳转到登录界面</span>
+    <span class="token keyword">return</span> redirect<span class="token punctuation">(</span>reverse<span class="token punctuation">(</span><span class="token string">'user:login'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 激活成功，跳转到登录页面      </span></code></pre>
 
                 
             </div>
@@ -1105,7 +1094,7 @@ else:
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">104k</span>&nbsp;字
+                class="white-color">107.4k</span>&nbsp;字
             
             
             
