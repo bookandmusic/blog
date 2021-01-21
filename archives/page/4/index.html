@@ -435,9 +435,10 @@
                             <div class="summary block-with-text">
                                 
                                     在 vue项目中使用axios分为局部使用和全局使用
-在vue中局部使用import axios from 'axios'
+¶在vue中局部使用
+import axios from 'axios'
 
-axios.get('/api/goods/add_info/?ID=12345&amp;firstName=Fr
+axios.get('/api/goods/add_info/?ID=12345&firstName=Fred
                                 
                             </div>
                             <div class="publish-info">
@@ -508,9 +509,11 @@ axios.get('/api/goods/add_info/?ID=12345&amp;firstName=Fr
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    GET 请求传递参数1、直接在 URL 上添加参数import axios from 'axios'
+                                    ¶GET 请求传递参数
+¶1、直接在 URL 上添加参数
+import axios from 'axios'
 
-axios.get('/api/goods/add_info/?ID=12345&amp;firstName=Fred&amp;last
+axios.get('/api/goods/add_info/?ID=12345&firstName=Fred&lastName
                                 
                             </div>
                             <div class="publish-info">
@@ -579,15 +582,19 @@ axios.get('/api/goods/add_info/?ID=12345&amp;firstName=Fred&amp;last
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    Axios API
+                                    ¶Axios API
+
+
 可以通过向 axios 传递相关配置来创建请求
 
+
 axios配置全部参数
-  axios(config)
-  // 发送 POST 请求
-  axios({
-      method: 'post',
-      url
+axios(config)
+
+// 发送 POST 请求
+axios({
+    method: 'post',
+    url: '/u
                                 
                             </div>
                             <div class="publish-info">
@@ -659,9 +666,9 @@ axios配置全部参数
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    主键必然是唯一且不为空，但是唯一不一定是主键，而且主键只能有一个，但是唯一约束仅仅是为了保持某些列具有唯一性而已。所以可以有多列一张表里只能有一个主键约束，可以有多个唯一约束主键约束的字段不能为null，而唯一约束的字段可以为null值
-
-
+                                    主键必然是唯一且不为空，但是唯一不一定是主键，而且主键只能有一个，但是唯一约束仅仅是为了保持某些列具有唯一性而已。所以可以有多列
+一张表里只能有一个主键约束，可以有多个唯一约束
+主键约束的字段不能为null，而唯一约束的字段可以为null值
                                 
                             </div>
                             <div class="publish-info">
@@ -742,10 +749,12 @@ axios配置全部参数
                                 
                                     介绍如何在 Ubuntu系统上 安装mysql软件、以及如何创建用户信息。
 
+¶Mysql软件操作
+以下所有操作以Ubuntu为例
+¶mysql安装
+sudo apt install mysql-server # 安装mysql
 
-Mysql软件操作以下所有操作以Ubuntu为例
-mysql安装sudo apt install mysql-server # 安装mysql
-mysql删除s
+¶mys
                                 
                             </div>
                             <div class="publish-info">
@@ -819,7 +828,8 @@ mysql删除s
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    JSON介绍JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。易于人阅读和编写。同时也易于机器解析和生成。它基于JavaScript Programming Language, Standard 
+                                    ¶JSON介绍
+JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。易于人阅读和编写。同时也易于机器解析和生成。它基于JavaScript Programming Language, Standar
                                 
                             </div>
                             <div class="publish-info">
@@ -892,8 +902,9 @@ mysql删除s
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    类与实例面向对象最重要的概念就是类（Class）和实例（Instance），必须牢记类是抽象的模板，比如Student类，而实例是根据类创建出来的一个个具体的“对象”，每个对象都拥有相同的方法，但各自的数据可能不同。
-仍以Student类为
+                                    ¶类与实例
+面向对象最重要的概念就是类（Class）和实例（Instance），必须牢记类是抽象的模板，比如Student类，而实例是根据类创建出来的一个个具体的“对象”，每个对象都拥有相同的方法，但各自的数据可能不同。
+仍以Student
                                 
                             </div>
                             <div class="publish-info">
@@ -1117,9 +1128,9 @@ binary与varb
                                 
                                     学习数据库安装后，最重要的就是学习SQL语句。
 
-
-1. 数据语句操作类型SQL是操作数据库的核心，
-结构化查询语言(Structured Query Language)简称SQL，是一种特殊目的的编程语言，是一种数据库查询和程序设计语言，
+¶1. 数据语句操作类型
+SQL是操作数据库的核心，
+结构化查询语言(Structured Query Language)简称SQL，是一种特殊目的的编程语言，是一种数据库查询和程序设计语言
                                 
                             </div>
                             <div class="publish-info">
@@ -1189,7 +1200,10 @@ binary与varb
                                     
 Django2.0 新增了在 urls.py 中 app_name 来指定 namespace。我们之前通过 reverse 函数来反向获取 url
 
-reverse 语法reverse("&lt;namespace>:&lt;url-n
+¶reverse 语法
+reverse(":", kwargs={"": ""})
+
+
                                 
                             </div>
                             <div class="publish-info">
@@ -1265,8 +1279,8 @@ reverse 语法reverse("&lt;namespace>:&lt;url-n
                                     很多函数都有自己的很多方法，其中有些方法的功能类似，但是其复杂度有时却大不相同
 本节我们将引入一个新模块 timeit ，其功能是来测试一小段 Python 代码的执行速度。
 
-
-1、timeitclass timeit.Timer(stm
+¶1、timeit
+class timeit.Timer(st
                                 
                             </div>
                             <div class="publish-info">
@@ -1407,7 +1421,7 @@ reverse 语法reverse("&lt;namespace>:&lt;url-n
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

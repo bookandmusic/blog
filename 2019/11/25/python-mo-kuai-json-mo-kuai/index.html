@@ -447,7 +447,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    478
+                    479
                 </div>
                 
 
@@ -474,38 +474,53 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="JSON介绍"><a href="#JSON介绍" class="headerlink" title="JSON介绍"></a>JSON介绍</h3><p>JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。易于人阅读和编写。同时也易于机器解析和生成。它基于JavaScript Programming Language, Standard ECMA-262 3rd Edition - December 1999的一个子集。</p>
-<h4 id="JSON-语法规则"><a href="#JSON-语法规则" class="headerlink" title="JSON 语法规则"></a>JSON 语法规则</h4><p>JSON是一个标记符的序列。<br>JSON是一个序列化的对象或数组。</p>
-<h4 id="JSON-与-JS-对象的关系"><a href="#JSON-与-JS-对象的关系" class="headerlink" title="JSON 与 JS 对象的关系"></a>JSON 与 JS 对象的关系</h4><p>很多人搞不清楚 JSON 和 JS 对象的关系，甚至连谁是谁都不清楚。其实，可以这么理解：<br><strong>JSON 是 JS 对象的字符串表示法，它使用文本表示一个 JS 对象的信息，本质是一个字符串。</strong><br>如</p>
-<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>a<span class="token punctuation">:</span> <span class="token string">'Hello'</span><span class="token punctuation">,</span> b<span class="token punctuation">:</span> <span class="token string">'World'</span><span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//这是一个对象，注意键名也是可以使用引号包裹的</span>
+                <h3 id="JSON介绍"><a class="header-anchor" href="#JSON介绍">¶</a>JSON介绍</h3>
+<p>JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。易于人阅读和编写。同时也易于机器解析和生成。它基于JavaScript Programming Language, Standard ECMA-262 3rd Edition - December 1999的一个子集。</p>
+<h4 id="JSON-语法规则"><a class="header-anchor" href="#JSON-语法规则">¶</a>JSON 语法规则</h4>
+<p>JSON是一个标记符的序列。<br>
+JSON是一个序列化的对象或数组。</p>
+<h4 id="JSON-与-JS-对象的关系"><a class="header-anchor" href="#JSON-与-JS-对象的关系">¶</a>JSON 与 JS 对象的关系</h4>
+<p>很多人搞不清楚 JSON 和 JS 对象的关系，甚至连谁是谁都不清楚。其实，可以这么理解：<br>
+<strong>JSON 是 JS 对象的字符串表示法，它使用文本表示一个 JS 对象的信息，本质是一个字符串。</strong><br>
+如</p>
+<pre class=" language-language-javascript"><code class="language-language-javascript">var obj = {a: 'Hello', b: 'World'}; //这是一个对象，注意键名也是可以使用引号包裹的
 
-<span class="token keyword">var</span> json <span class="token operator">=</span> <span class="token string">'{"a": "Hello", "b": "World"}'</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//这是一个 JSON 字符串，本质是一个字符串</span></code></pre>
-<h4 id="JSON-和-JS-对象互转"><a href="#JSON-和-JS-对象互转" class="headerlink" title="JSON 和 JS 对象互转"></a>JSON 和 JS 对象互转</h4><p>要实现从JSON字符串转换为JS对象，使用 JSON.parse() 方法：</p>
-<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">var</span> obj <span class="token operator">=</span> JSON<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">'{"a": "Hello", "b": "World"}'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//结果是 {a: 'Hello', b: 'World'}</span></code></pre>
+var json = '{"a": "Hello", "b": "World"}'; //这是一个 JSON 字符串，本质是一个字符串
+</code></pre>
+<h4 id="JSON-和-JS-对象互转"><a class="header-anchor" href="#JSON-和-JS-对象互转">¶</a>JSON 和 JS 对象互转</h4>
+<p>要实现从JSON字符串转换为JS对象，使用 JSON.parse() 方法：</p>
+<pre class=" language-language-javascript"><code class="language-language-javascript">var obj = JSON.parse('{"a": "Hello", "b": "World"}'); //结果是 {a: 'Hello', b: 'World'}
+</code></pre>
 <p>要实现从JS对象转换为JSON字符串，使用 JSON.stringify() 方法：</p>
-<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">var</span> json <span class="token operator">=</span> JSON<span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span><span class="token punctuation">{</span>a<span class="token punctuation">:</span> <span class="token string">'Hello'</span><span class="token punctuation">,</span> b<span class="token punctuation">:</span> <span class="token string">'World'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//结果是 '{"a": "Hello", "b": "World"}'</span></code></pre>
-<h4 id="JSON-和-PYTHON-对象互转"><a href="#JSON-和-PYTHON-对象互转" class="headerlink" title="JSON 和 PYTHON 对象互转"></a>JSON 和 PYTHON 对象互转</h4><p>要实现从JSON字符串转换为Python对象，使用 json.loads() 方法：</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> json
+<pre class=" language-language-javascript"><code class="language-language-javascript">var json = JSON.stringify({a: 'Hello', b: 'World'}); //结果是 '{"a": "Hello", "b": "World"}'
+</code></pre>
+<h4 id="JSON-和-PYTHON-对象互转"><a class="header-anchor" href="#JSON-和-PYTHON-对象互转">¶</a>JSON 和 PYTHON 对象互转</h4>
+<p>要实现从JSON字符串转换为Python对象，使用 json.loads() 方法：</p>
+<pre class=" language-language-python"><code class="language-language-python">import json
 
-a_dict <span class="token operator">=</span> json<span class="token punctuation">.</span>loads<span class="token punctuation">(</span><span class="token string">'{"a": "Hello", "b": "World"}'</span><span class="token punctuation">)</span> <span class="token operator">//</span>结果是 <span class="token punctuation">{</span><span class="token string">'a'</span><span class="token punctuation">:</span> <span class="token string">'Hello'</span><span class="token punctuation">,</span> <span class="token string">'b'</span><span class="token punctuation">:</span> <span class="token string">'World'</span><span class="token punctuation">}</span>
-b_list <span class="token operator">=</span> json<span class="token punctuation">.</span>loads<span class="token punctuation">(</span><span class="token string">'[1, 2, 3, 4]'</span><span class="token punctuation">)</span> <span class="token operator">//</span>结果是 <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span></code></pre>
+a_dict = json.loads('{"a": "Hello", "b": "World"}') //结果是 {'a': 'Hello', 'b': 'World'}
+b_list = json.loads('[1, 2, 3, 4]') //结果是 [1, 2, 3, 4]
+</code></pre>
 <p>要实现从Python对象转换为JSON字符串，使用 json.dumps() 方法：</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> json
+<pre class=" language-language-python"><code class="language-language-python">import json
 
-a_obj <span class="token operator">=</span> json<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span><span class="token punctuation">{</span>a<span class="token punctuation">:</span> <span class="token string">'Hello'</span><span class="token punctuation">,</span> b<span class="token punctuation">:</span> <span class="token string">'World'</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">//</span>结果是 <span class="token string">'{"a": "Hello", "b": "World"}'</span>
-b_obj <span class="token operator">=</span> json<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token string">"a"</span><span class="token punctuation">:</span><span class="token number">7</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">//</span>结果是 <span class="token string">'[1, 2, 3, {"a": 7}]'</span></code></pre>
+a_obj = json.dumps({a: 'Hello', b: 'World'}) //结果是 '{"a": "Hello", "b": "World"}'
+b_obj = json.dumps([1, 2, 3, {"a":7}]) //结果是 '[1, 2, 3, {"a": 7}]'
+</code></pre>
 <p>要实现从Python对象转换为JSON字符串，并写入到json文件中，使用 json.dump() 方法：</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> json
+<pre class=" language-language-python"><code class="language-language-python">import json
 
-a_obj <span class="token operator">=</span> <span class="token string">'[12, 34, 56]'</span>
-<span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">"1.json"</span><span class="token punctuation">,</span> <span class="token string">"w"</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
-    json<span class="token punctuation">.</span>dump<span class="token punctuation">(</span>a_obj<span class="token punctuation">,</span>f<span class="token punctuation">)</span></code></pre>
+a_obj = '[12, 34, 56]'
+with open("1.json", "w") as f:
+	json.dump(a_obj,f)
+</code></pre>
 <p>要实现从json文件中读取JSON字符串，并转换为Python对象，使用 json.load() 方法：</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> json
+<pre class=" language-language-python"><code class="language-language-python">import json
 
-<span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">'1.json'</span><span class="token punctuation">,</span> <span class="token string">"r"</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
-    a_str <span class="token operator">=</span> json<span class="token punctuation">.</span>load<span class="token punctuation">(</span>f<span class="token punctuation">)</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>a_str<span class="token punctuation">)</span></code></pre>
+with open('1.json', "r") as f:
+	a_str = json.load(f)
+	print(a_str)
+</code></pre>
 
                 
             </div>
@@ -1068,7 +1083,7 @@ a_obj <span class="token operator">=</span> <span class="token string">'[12, 34,
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

@@ -447,7 +447,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    389
+                    390
                 </div>
                 
 
@@ -475,82 +475,102 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>在 vue项目中使用axios分为局部使用和全局使用</p>
-<h2 id="在vue中局部使用"><a href="#在vue中局部使用" class="headerlink" title="在vue中局部使用"></a>在vue中局部使用</h2><pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span>
+<h2 id="在vue中局部使用"><a class="header-anchor" href="#在vue中局部使用">¶</a>在vue中局部使用</h2>
+<pre class=" language-language-javascript"><code class="language-language-javascript">import axios from 'axios'
 
-axios<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'/api/goods/add_info/?ID=12345&amp;firstName=Fred&amp;lastName=Flintstone'</span><span class="token punctuation">)</span>
-<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>response<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
-<span class="token punctuation">.</span><span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<h2 id="在vue中全部使用"><a href="#在vue中全部使用" class="headerlink" title="在vue中全部使用"></a>在vue中全部使用</h2><p>axios 是一个基于 promise 的 HTTP 库，所以是不能使用vue.use()方法的。<br>那么难道我们要在每个文件都要来引用一次axios吗？多繁琐！！！<br>☞解决方法有很多种：</p>
-<h3 id="1-结合-vue-axios使用"><a href="#1-结合-vue-axios使用" class="headerlink" title="1.结合 vue-axios使用"></a>1.结合 vue-axios使用</h3><p>看了vue-axios的源码，它是按照vue插件的方式去写的。那么结合vue-axios，就可以去使用vue.use方法了</p>
+axios.get('/api/goods/add_info/?ID=12345&firstName=Fred&lastName=Flintstone')
+.then(function (response) {
+    console.log(response);
+})
+.catch(function (error) {
+    console.log(error);
+});
+</code></pre>
+<h2 id="在vue中全部使用"><a class="header-anchor" href="#在vue中全部使用">¶</a>在vue中全部使用</h2>
+<p>axios 是一个基于 promise 的 HTTP 库，所以是不能使用vue.use()方法的。<br>
+那么难道我们要在每个文件都要来引用一次axios吗？多繁琐！！！<br>
+☞解决方法有很多种：</p>
+<h3 id="1-结合-vue-axios使用"><a class="header-anchor" href="#1-结合-vue-axios使用">¶</a>1.结合 vue-axios使用</h3>
+<p>看了vue-axios的源码，它是按照vue插件的方式去写的。那么结合vue-axios，就可以去使用vue.use方法了</p>
 <ol>
-<li><p>首先在主入口文件main.js中引用：</p>
-<pre class=" language-javascript"><code class="language-javascript"> <span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span>
- <span class="token keyword">import</span> VueAxios <span class="token keyword">from</span> <span class="token string">'vue-axios'</span>
+<li>
+<p>首先在主入口文件main.js中引用：</p>
+<pre class=" language-language-javascript"><code class="language-language-javascript">import axios from 'axios'
+import VueAxios from 'vue-axios'
 
- Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>VueAxios<span class="token punctuation">,</span>axios<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+Vue.use(VueAxios,axios);
+</code></pre>
 </li>
-<li><p>之后就可以使用了，在组件文件中的methods里去使用了：</p>
-<pre class=" language-javascript"><code class="language-javascript"> <span class="token function">getNewsList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-     <span class="token keyword">this</span><span class="token punctuation">.</span>axios<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'api/getNewsList'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>
-         <span class="token keyword">this</span><span class="token punctuation">.</span>newsList<span class="token operator">=</span>response<span class="token punctuation">.</span>data<span class="token punctuation">.</span>data<span class="token punctuation">;</span>
-     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>
-         console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span>
-     <span class="token punctuation">}</span><span class="token punctuation">)</span>
- <span class="token punctuation">}</span></code></pre>
+<li>
+<p>之后就可以使用了，在组件文件中的methods里去使用了：</p>
+<pre class=" language-language-javascript"><code class="language-language-javascript">getNewsList(){
+    this.axios.get('api/getNewsList').then((response)=>{
+        this.newsList=response.data.data;
+    }).catch((response)=>{
+        console.log(response);
+    })
+}
+</code></pre>
 </li>
 </ol>
-<h3 id="2-axios-改写为-Vue-的原型属性（不推荐这样用）"><a href="#2-axios-改写为-Vue-的原型属性（不推荐这样用）" class="headerlink" title="2.axios 改写为 Vue 的原型属性（不推荐这样用）"></a>2.axios 改写为 Vue 的原型属性（不推荐这样用）</h3><ol>
-<li><p>首先在主入口文件main.js中引用，之后挂在vue的原型链上：</p>
-<pre class=" language-javascript"><code class="language-javascript"> <span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span>
- Vue<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>$axios<span class="token operator">=</span> axios</code></pre>
+<h3 id="2-axios-改写为-Vue-的原型属性（不推荐这样用）"><a class="header-anchor" href="#2-axios-改写为-Vue-的原型属性（不推荐这样用）">¶</a>2.axios 改写为 Vue 的原型属性（不推荐这样用）</h3>
+<ol>
+<li>
+<p>首先在主入口文件main.js中引用，之后挂在vue的原型链上：</p>
+<pre class=" language-language-javascript"><code class="language-language-javascript">import axios from 'axios'
+Vue.prototype.$axios= axios
+</code></pre>
 </li>
-<li><p>在组件中使用</p>
-<pre class=" language-javascript"><code class="language-javascript"> <span class="token keyword">this</span><span class="token punctuation">.</span>$ajax<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'api/getNewsList'</span><span class="token punctuation">)</span>
- <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>
-     <span class="token keyword">this</span><span class="token punctuation">.</span>newsList<span class="token operator">=</span>response<span class="token punctuation">.</span>data<span class="token punctuation">.</span>data<span class="token punctuation">;</span>
- <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>
-     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span>
- <span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre>
+<li>
+<p>在组件中使用</p>
+<pre class=" language-language-javascript"><code class="language-language-javascript">this.$ajax.get('api/getNewsList')
+.then((response)=>{
+    this.newsList=response.data.data;
+}).catch((response)=>{
+    console.log(response);
+})
+</code></pre>
 </li>
 </ol>
-<h3 id="3-结合Vuex的action"><a href="#3-结合Vuex的action" class="headerlink" title="3. 结合Vuex的action"></a>3. 结合Vuex的action</h3><ol>
-<li><p>在vuex的仓库文件store.js中引用，使用action添加方法</p>
-<pre class=" language-javascript"><code class="language-javascript"> <span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'Vue'</span>
- <span class="token keyword">import</span> Vuex <span class="token keyword">from</span> <span class="token string">'vuex'</span>
- <span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span>
+<h3 id="3-结合Vuex的action"><a class="header-anchor" href="#3-结合Vuex的action">¶</a>3. 结合Vuex的action</h3>
+<ol>
+<li>
+<p>在vuex的仓库文件store.js中引用，使用action添加方法</p>
+<pre class=" language-language-javascript"><code class="language-language-javascript">import Vue from 'Vue'
+import Vuex from 'vuex'
+import axios from 'axios'
 
- Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>Vuex<span class="token punctuation">)</span>
- <span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vuex<span class="token punctuation">.</span>Store</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
- <span class="token comment" spellcheck="true">// 定义状态</span>
- state<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-     user<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-     name<span class="token punctuation">:</span> <span class="token string">'xiaoming'</span>
-     <span class="token punctuation">}</span>
- <span class="token punctuation">}</span><span class="token punctuation">,</span>
- actions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-     <span class="token comment" spellcheck="true">// 封装一个 ajax 方法</span>
-     login <span class="token punctuation">(</span>context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-     <span class="token function">axios</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-         method<span class="token punctuation">:</span> <span class="token string">'post'</span><span class="token punctuation">,</span>
-         url<span class="token punctuation">:</span> <span class="token string">'/user'</span><span class="token punctuation">,</span>
-         data<span class="token punctuation">:</span> context<span class="token punctuation">.</span>state<span class="token punctuation">.</span>user
-     <span class="token punctuation">}</span><span class="token punctuation">)</span>
-     <span class="token punctuation">}</span>
- <span class="token punctuation">}</span>
- <span class="token punctuation">}</span><span class="token punctuation">)</span>
+Vue.use(Vuex)
+const store = new Vuex.Store({
+// 定义状态
+state: {
+    user: {
+    name: 'xiaoming'
+    }
+},
+actions: {
+    // 封装一个 ajax 方法
+    login (context) {
+    axios({
+        method: 'post',
+        url: '/user',
+        data: context.state.user
+    })
+    }
+}
+})
 
- <span class="token keyword">export</span> <span class="token keyword">default</span> store</code></pre>
+export default store
+</code></pre>
 </li>
-<li><p>在组件中发送请求的时候，需要使用 this.$store.dispatch</p>
-<pre class=" language-javascript"><code class="language-javascript"> methods<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-     submitForm <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-         <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">'login'</span><span class="token punctuation">)</span>
-     <span class="token punctuation">}</span>
- <span class="token punctuation">}</span></code></pre>
+<li>
+<p>在组件中发送请求的时候，需要使用 this.$store.dispatch</p>
+<pre class=" language-language-javascript"><code class="language-language-javascript">methods: {
+    submitForm () {
+        this.$store.dispatch('login')
+    }
+}
+</code></pre>
 </li>
 </ol>
 
@@ -1123,7 +1143,7 @@ axios<span class="token punctuation">.</span><span class="token keyword">get</sp
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

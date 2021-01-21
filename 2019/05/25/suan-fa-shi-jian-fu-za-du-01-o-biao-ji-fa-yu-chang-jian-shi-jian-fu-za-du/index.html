@@ -435,7 +435,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    583
+                    581
                 </div>
                 
 
@@ -466,34 +466,53 @@
 <p>算法 : 内功心法, 是解决问题的一种思想</p>
 </blockquote>
 <a id="more"></a>
-
-<h3 id="1、时间复杂度-T-n"><a href="#1、时间复杂度-T-n" class="headerlink" title="1、时间复杂度 $T(n)$"></a>1、时间复杂度 $T(n)$</h3><p>由于每台机器的性能有所差别，所有其执行相同代码的时间也长短不一，故而推出一种计量方式，统计代码执行基本运算（<code>函数调用需要看其源码的基本运算</code>）的数量（<code>n</code>) 来确定一个算法的优劣，其中基本运算的<strong>循环按乘法计算，顺序结构按加法计算，分支结构取最大值</strong>。</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">for</span> a <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">:</span> 
-    <span class="token keyword">for</span> b <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">for</span> c <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-            <span class="token keyword">if</span> a<span class="token operator">+</span>b<span class="token operator">+</span>c <span class="token operator">==</span> <span class="token number">1000</span> <span class="token operator">and</span> a<span class="token operator">**</span><span class="token number">2</span> <span class="token operator">+</span> b<span class="token operator">**</span><span class="token number">2</span> <span class="token operator">+</span> c<span class="token operator">**</span><span class="token number">2</span><span class="token punctuation">:</span>
-                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'a,b,c,: {}, {}, {}'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">,</span>c<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
-<p>上述代码的时间复杂度为<br>$T = 1000 * 1000 * 1000 * 2$<br>那么如果将上述代码中的 1000 改为 2000， 则<br>$T = 2000 * 2000 * 2000 * 2$<br>由于上述同样的代码由于不同的参数的 T 都不同，我们便将其统一成 <strong>N</strong>，这样上述代码的时间复杂度可以表示成：<br>$T = N * N * N * 2$<br>同样的我们抓住其主要 “<strong>矛盾</strong>” ，观其大，再将其简化成<br>$T= N^3$<br>这样同一段代码的时间复杂度便不会根据其参数而发生改变了。</p>
-<h3 id="2、大-O-标记法-O"><a href="#2、大-O-标记法-O" class="headerlink" title="2、大 $O$ 标记法 $O()$"></a>2、大 $O$ 标记法 $O()$</h3><p>其实和求极限的原理相似，抓住问题的主要矛盾，忽略那些细枝末节，也就像前面的 $T$的最后的样子。</p>
-<h3 id="3、时间复杂度的几条基本规则"><a href="#3、时间复杂度的几条基本规则" class="headerlink" title="3、时间复杂度的几条基本规则"></a>3、时间复杂度的几条基本规则</h3><ol>
-<li><p>基本步骤: 即只有常数项, 算作 $O(1)$</p>
+<h3 id="1、时间复杂度-T-n"><a class="header-anchor" href="#1、时间复杂度-T-n">¶</a>1、时间复杂度 $T(n)$</h3>
+<p>由于每台机器的性能有所差别，所有其执行相同代码的时间也长短不一，故而推出一种计量方式，统计代码执行基本运算（<code>函数调用需要看其源码的基本运算</code>）的数量（<code>n</code>) 来确定一个算法的优劣，其中基本运算的<strong>循环按乘法计算，顺序结构按加法计算，分支结构取最大值</strong>。</p>
+<pre class=" language-language-python"><code class="language-language-python">for a in range(0, 1000): 
+    for b in range(0, 1000):
+        for c in range(0, 1000):
+            if a+b+c == 1000 and a**2 + b**2 + c**2:
+                print('a,b,c,: {}, {}, {}'.format(a,b,c))
+</code></pre>
+<p>上述代码的时间复杂度为<br>
+$T = 1000 * 1000 * 1000 * 2$<br>
+那么如果将上述代码中的 1000 改为 2000， 则<br>
+$T = 2000 * 2000 * 2000 * 2$<br>
+由于上述同样的代码由于不同的参数的 T 都不同，我们便将其统一成 <strong>N</strong>，这样上述代码的时间复杂度可以表示成：<br>
+$T = N * N * N * 2$<br>
+同样的我们抓住其主要 “<strong>矛盾</strong>” ，观其大，再将其简化成<br>
+$T= N^3$<br>
+这样同一段代码的时间复杂度便不会根据其参数而发生改变了。</p>
+<h3 id="2、大-O-标记法-O"><a class="header-anchor" href="#2、大-O-标记法-O">¶</a>2、大 $O$ 标记法 $O()$</h3>
+<p>其实和求极限的原理相似，抓住问题的主要矛盾，忽略那些细枝末节，也就像前面的 $T$的最后的样子。</p>
+<h3 id="3、时间复杂度的几条基本规则"><a class="header-anchor" href="#3、时间复杂度的几条基本规则">¶</a>3、时间复杂度的几条基本规则</h3>
+<ol>
+<li>
+<p>基本步骤: 即只有常数项, 算作 $O(1)$</p>
 </li>
-<li><p>基本结构顺序, 条件, 循环</p>
+<li>
+<p>基本结构顺序, 条件, 循环</p>
 <ul>
-<li><p>顺序结构: 按加法运算</p>
+<li>
+<p>顺序结构: 按加法运算</p>
 </li>
-<li><p>循环结构: 乘法</p>
+<li>
+<p>循环结构: 乘法</p>
 </li>
-<li><p>分支结构: 取最大值</p>
+<li>
+<p>分支结构: 取最大值</p>
 </li>
 </ul>
 </li>
-<li><p>判断一个算法效率, 往往只需要关注操作数量的最高次项, 其他次要的忽略</p>
+<li>
+<p>判断一个算法效率, 往往只需要关注操作数量的最高次项, 其他次要的忽略</p>
 </li>
-<li><p>没特殊说明, 分析的时间复杂度都是<strong>最坏时间复杂度</strong></p>
+<li>
+<p>没特殊说明, 分析的时间复杂度都是<strong>最坏时间复杂度</strong></p>
 </li>
 </ol>
-<h3 id="4、常见的时间复杂度"><a href="#4、常见的时间复杂度" class="headerlink" title="4、常见的时间复杂度"></a>4、常见的时间复杂度</h3><table>
+<h3 id="4、常见的时间复杂度"><a class="header-anchor" href="#4、常见的时间复杂度">¶</a>4、常见的时间复杂度</h3>
+<table>
 <thead>
 <tr>
 <th>$T$</th>
@@ -501,7 +520,8 @@
 <th>名称</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>$12$</td>
 <td>$O(1)$</td>
 <td>常数阶</td>
@@ -527,7 +547,7 @@
 <td>$nlog(n)$ 阶</td>
 </tr>
 <tr>
-<td>$6n^3+2n^2+3n+4$</td>
+<td>$6n<sup>3+2n</sup>2+3n+4$</td>
 <td>$O(n^3)$</td>
 <td>立方阶</td>
 </tr>
@@ -536,9 +556,12 @@
 <td>$O(2^n)$</td>
 <td>指数阶</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526105531-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E6%9B%B2%E7%BA%BF%E5%9B%BE%20.png" alt="20190526105531-时间复杂度曲线图"></p>
-<p>$$<br>O(1) &lt; O(log(n)) &lt; O(n) &lt; O(nlog(n)) &lt; O(n^2)&lt; O(n ^ 2log(n)) &lt; O(n^3) &lt; O(2^n) &lt; O(n!) &lt; O(n^n)<br>$$</p>
+<p>$$<br>
+O(1) &lt; O(log(n)) &lt; O(n) &lt; O(nlog(n)) &lt; O(n^2)&lt; O(n ^ 2log(n)) &lt; O(n^3) &lt; O(2^n) &lt; O(n!) &lt; O(n^n)<br>
+$$</p>
 
                 
             </div>
@@ -1085,7 +1108,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

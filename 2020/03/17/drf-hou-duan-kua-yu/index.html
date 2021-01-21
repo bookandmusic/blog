@@ -469,28 +469,36 @@
                 <p>前后端分离开发时，经常会遇到一个问题，那就是<code>跨域问题</code>,因为这时候前端和后端的代码是在不同机器上运行的，两个地址不在一个域名下，这个时候前端脚本在进行ajax访问的时候浏览器就会报跨域相关的错误。</p>
 <p>原因：浏览器的同源策略不允许跨域访问，所谓同源策略是指协议、域名、端口相同。</p>
 <p>为了解决这个问题，在前端和后台配置均可，此时，以后台django配置为例</p>
-<h2 id="1-安装插件"><a href="#1-安装插件" class="headerlink" title="1. 安装插件"></a>1. 安装插件</h2><pre class=" language-bash"><code class="language-bash">pip <span class="token function">install</span> django-cors-headers</code></pre>
-<h2 id="2-注册应用"><a href="#2-注册应用" class="headerlink" title="2. 注册应用"></a>2. 注册应用</h2><pre class=" language-python"><code class="language-python">INSTALLED_APPS <span class="token operator">=</span> <span class="token punctuation">[</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    <span class="token string">'corsheaders'</span><span class="token punctuation">,</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">]</span></code></pre>
-<h2 id="3-中间件设置"><a href="#3-中间件设置" class="headerlink" title="3. 中间件设置"></a>3. 中间件设置</h2><pre class=" language-python"><code class="language-python">MIDDLEWARE <span class="token operator">=</span> <span class="token punctuation">[</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    <span class="token string">'django.contrib.sessions.middleware.SessionMiddleware'</span><span class="token punctuation">,</span>
-    <span class="token string">'corsheaders.middleware.CorsMiddleware'</span><span class="token punctuation">,</span>  <span class="token comment" spellcheck="true"># 注意，位置有限制</span>
-    <span class="token string">'django.middleware.common.CommonMiddleware'</span><span class="token punctuation">,</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">]</span></code></pre>
-<h2 id="4-配置跨域参数"><a href="#4-配置跨域参数" class="headerlink" title="4. 配置跨域参数"></a>4. 配置跨域参数</h2><pre class=" language-python"><code class="language-python">CORS_ORIGIN_ALLOW_ALL <span class="token operator">=</span> <span class="token boolean">True</span>  <span class="token comment" spellcheck="true"># 允许所有host访问</span>
-<span class="token comment" spellcheck="true"># 添加白名单</span>
-CORS_ORIGIN_WHITELIST <span class="token operator">=</span> <span class="token punctuation">(</span>
-    <span class="token string">'127.0.0.1:8080'</span><span class="token punctuation">,</span>
-    <span class="token string">'localhost:8080'</span><span class="token punctuation">,</span>
-<span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true"># 以上配置二选一即可</span>
+<h2 id="1-安装插件"><a class="header-anchor" href="#1-安装插件">¶</a>1. 安装插件</h2>
+<pre class=" language-language-bash"><code class="language-language-bash">pip install django-cors-headers
+</code></pre>
+<h2 id="2-注册应用"><a class="header-anchor" href="#2-注册应用">¶</a>2. 注册应用</h2>
+<pre class=" language-language-python"><code class="language-language-python">INSTALLED_APPS = [
+    ...
+    'corsheaders',
+    ...
+]
+</code></pre>
+<h2 id="3-中间件设置"><a class="header-anchor" href="#3-中间件设置">¶</a>3. 中间件设置</h2>
+<pre class=" language-language-python"><code class="language-language-python">MIDDLEWARE = [
+    ...
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # 注意，位置有限制
+    'django.middleware.common.CommonMiddleware',
+    ...
+]
+</code></pre>
+<h2 id="4-配置跨域参数"><a class="header-anchor" href="#4-配置跨域参数">¶</a>4. 配置跨域参数</h2>
+<pre class=" language-language-python"><code class="language-language-python">CORS_ORIGIN_ALLOW_ALL = True  # 允许所有host访问
+# 添加白名单
+CORS_ORIGIN_WHITELIST = (
+    '127.0.0.1:8080',
+    'localhost:8080',
+)
+# 以上配置二选一即可
 
-CORS_ALLOW_CREDENTIALS <span class="token operator">=</span> <span class="token boolean">True</span>  <span class="token comment" spellcheck="true"># 允许携带cookie,不需要可以不设置</span></code></pre>
+CORS_ALLOW_CREDENTIALS = True  # 允许携带cookie,不需要可以不设置
+</code></pre>
 
                 
             </div>
@@ -1059,7 +1067,7 @@ Python可应用于多平台包括 Linux 和 Mac OS X。
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

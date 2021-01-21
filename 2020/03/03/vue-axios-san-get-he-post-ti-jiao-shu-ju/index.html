@@ -443,7 +443,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    221
+                    222
                 </div>
                 
 
@@ -470,55 +470,68 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="GET-请求传递参数"><a href="#GET-请求传递参数" class="headerlink" title="GET 请求传递参数"></a>GET 请求传递参数</h2><h3 id="1、直接在-URL-上添加参数"><a href="#1、直接在-URL-上添加参数" class="headerlink" title="1、直接在 URL 上添加参数"></a>1、直接在 URL 上添加参数</h3><pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span>
+                <h2 id="GET-请求传递参数"><a class="header-anchor" href="#GET-请求传递参数">¶</a>GET 请求传递参数</h2>
+<h3 id="1、直接在-URL-上添加参数"><a class="header-anchor" href="#1、直接在-URL-上添加参数">¶</a>1、直接在 URL 上添加参数</h3>
+<pre class=" language-language-javascript"><code class="language-language-javascript">import axios from 'axios'
 
-axios<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'/api/goods/add_info/?ID=12345&amp;firstName=Fred&amp;lastName=Flintstone'</span><span class="token punctuation">)</span>
-<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>response<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
-<span class="token punctuation">.</span><span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<h3 id="2、可以通过-params-设置参数"><a href="#2、可以通过-params-设置参数" class="headerlink" title="2、可以通过 params 设置参数"></a>2、可以通过 params 设置参数</h3><pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span>
+axios.get('/api/goods/add_info/?ID=12345&firstName=Fred&lastName=Flintstone')
+.then(function (response) {
+    console.log(response);
+})
+.catch(function (error) {
+    console.log(error);
+});
+</code></pre>
+<h3 id="2、可以通过-params-设置参数"><a class="header-anchor" href="#2、可以通过-params-设置参数">¶</a>2、可以通过 params 设置参数</h3>
+<pre class=" language-language-javascript"><code class="language-language-javascript">import axios from 'axios'
 
-axios<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'/api/goods/add_info/'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
-    params<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-        ID<span class="token punctuation">:</span> <span class="token number">12345</span><span class="token punctuation">,</span>
-        firstName<span class="token punctuation">:</span> <span class="token string">'Fred'</span><span class="token punctuation">,</span>
-        lastName<span class="token punctuation">:</span> <span class="token string">'Flintstone'</span><span class="token punctuation">,</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
-<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>response<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
-<span class="token punctuation">.</span><span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<h2 id="POST-请求传递参数"><a href="#POST-请求传递参数" class="headerlink" title="POST 请求传递参数"></a>POST 请求传递参数</h2><h3 id="1、Content-Type-application-json"><a href="#1、Content-Type-application-json" class="headerlink" title="1、Content-Type: application/json"></a>1、Content-Type: application/json</h3><pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span>
+axios.get('/api/goods/add_info/', {
+    params: {
+        ID: 12345,
+        firstName: 'Fred',
+        lastName: 'Flintstone',
+    }
+})
+.then(function (response) {
+    console.log(response);
+})
+.catch(function (error) {
+    console.log(error);
+});
+</code></pre>
+<h2 id="POST-请求传递参数"><a class="header-anchor" href="#POST-请求传递参数">¶</a>POST 请求传递参数</h2>
+<h3 id="1、Content-Type-application-json"><a class="header-anchor" href="#1、Content-Type-application-json">¶</a>1、Content-Type: application/json</h3>
+<pre class=" language-language-javascript"><code class="language-language-javascript">import axios from 'axios'
 
-<span class="token keyword">let</span> data <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"code"</span><span class="token punctuation">:</span><span class="token string">"1234"</span><span class="token punctuation">,</span><span class="token string">"name"</span><span class="token punctuation">:</span><span class="token string">"yyyy"</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-axios<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>$url<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/test/testRequest`</span></span><span class="token punctuation">,</span>data<span class="token punctuation">)</span>
-<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res<span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'res=>'</span><span class="token punctuation">,</span>res<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre>
-<h3 id="2、Content-Type-multipart-form-data"><a href="#2、Content-Type-multipart-form-data" class="headerlink" title="2、Content-Type: multipart/form-data"></a>2、Content-Type: multipart/form-data</h3><pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span>
-<span class="token keyword">let</span> data <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FormData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-data<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">'code'</span><span class="token punctuation">,</span><span class="token string">'1234'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-data<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">'name'</span><span class="token punctuation">,</span><span class="token string">'yyyy'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-axios<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>$url<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/test/testRequest`</span></span><span class="token punctuation">,</span>data<span class="token punctuation">)</span>
-<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res<span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'res=>'</span><span class="token punctuation">,</span>res<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre>
-<h3 id="3、Content-Type-application-x-www-form-urlencoded"><a href="#3、Content-Type-application-x-www-form-urlencoded" class="headerlink" title="3、Content-Type: application/x-www-form-urlencoded"></a>3、Content-Type: application/x-www-form-urlencoded</h3><pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span>
-<span class="token keyword">import</span> qs <span class="token keyword">from</span> <span class="token string">'Qs'</span>
-<span class="token keyword">let</span> data <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"code"</span><span class="token punctuation">:</span><span class="token string">"1234"</span><span class="token punctuation">,</span><span class="token string">"name"</span><span class="token punctuation">:</span><span class="token string">"yyyy"</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-axios<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>$url<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/test/testRequest`</span></span><span class="token punctuation">,</span>qs<span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+let data = {"code":"1234","name":"yyyy"};
+axios.post(`${this.$url}/test/testRequest`,data)
+.then(res=>{
+    console.log('res=>',res);
+})
+</code></pre>
+<h3 id="2、Content-Type-multipart-form-data"><a class="header-anchor" href="#2、Content-Type-multipart-form-data">¶</a>2、Content-Type: multipart/form-data</h3>
+<pre class=" language-language-javascript"><code class="language-language-javascript">import axios from 'axios'
+let data = new FormData();
+data.append('code','1234');
+data.append('name','yyyy');
+axios.post(`${this.$url}/test/testRequest`,data)
+.then(res=>{
+    console.log('res=>',res);
+})
+</code></pre>
+<h3 id="3、Content-Type-application-x-www-form-urlencoded"><a class="header-anchor" href="#3、Content-Type-application-x-www-form-urlencoded">¶</a>3、Content-Type: application/x-www-form-urlencoded</h3>
+<pre class=" language-language-javascript"><code class="language-language-javascript">import axios from 'axios'
+import qs from 'Qs'
+let data = {"code":"1234","name":"yyyy"};
+axios.post(`${this.$url}/test/testRequest`,qs.stringify({
     data
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res<span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'res=>'</span><span class="token punctuation">,</span>res<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre>
-<p>总结：<br>1、上面三种方式会对应后台的请求方式，这个也要注意，比如django POST参数获取</p>
+}))
+.then(res=>{
+    console.log('res=>',res);
+})
+</code></pre>
+<p>总结：<br>
+1、上面三种方式会对应后台的请求方式，这个也要注意，比如django POST参数获取</p>
 
                 
             </div>
@@ -1089,7 +1102,7 @@ axios<span class="token punctuation">.</span><span class="token function">post</
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

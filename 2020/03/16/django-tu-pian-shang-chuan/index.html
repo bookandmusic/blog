@@ -435,14 +435,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    597
+                    506
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    2 分
                 </div>
                 
 
@@ -462,115 +462,142 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="图片上传"><a href="#图片上传" class="headerlink" title="图片上传"></a>图片上传</h2><p>static 和 media 都是存放文件的地方，但是又有区别，以下是两个文件夹的区别和用法</p>
-<h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>static 是静态文件，主要存的是 CSS, JavaScript, 网站 logo 等不变的文件。</p>
-<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>配置 <code>settings.py</code></p>
-<pre class=" language-python"><code class="language-python">STATIC_URL <span class="token operator">=</span> <span class="token string">'/static/'</span>  <span class="token comment" spellcheck="true"># 静态文件别名（相对路径） 和 绝对路径</span>
-STATICFILES_DIRS <span class="token operator">=</span> <span class="token punctuation">[</span>
-    os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>BASE_DIR<span class="token punctuation">,</span> <span class="token string">'app01/static'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-<span class="token punctuation">]</span>
-<span class="token comment" spellcheck="true"># STATIC_ROOT 配置部署的时候才用</span></code></pre>
-<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>在项目中将模板层用到的静态文件都放入该文件夹中</p>
-<h3 id="media"><a href="#media" class="headerlink" title="media"></a>media</h3><h4 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h4><p>media 主要用来保存用户上传的文件，例如图片等</p>
-<h4 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h4><p>配置 <code>settings.py</code></p>
-<pre class=" language-python"><code class="language-python">MEDIA_URL <span class="token operator">=</span> <span class="token string">"/media/"</span>   <span class="token comment" spellcheck="true"># 媒体文件别名(相对路径) 和 绝对路径</span>
-MEDIA_ROOT <span class="token operator">=</span> <span class="token punctuation">[</span>
-    os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>BASE_DIR<span class="token punctuation">,</span> <span class="token string">'app01/media'</span><span class="token punctuation">)</span>
-<span class="token punctuation">]</span></code></pre>
+                <h2 id="图片上传"><a class="header-anchor" href="#图片上传">¶</a>图片上传</h2>
+<p>static 和 media 都是存放文件的地方，但是又有区别，以下是两个文件夹的区别和用法</p>
+<h3 id="static"><a class="header-anchor" href="#static">¶</a>static</h3>
+<h4 id="定义"><a class="header-anchor" href="#定义">¶</a>定义</h4>
+<p>static 是静态文件，主要存的是 CSS, JavaScript, 网站 logo 等不变的文件。</p>
+<h4 id="配置"><a class="header-anchor" href="#配置">¶</a>配置</h4>
+<p>配置 <code>settings.py</code></p>
+<pre class=" language-language-python"><code class="language-language-python">STATIC_URL = '/static/'  # 静态文件别名（相对路径） 和 绝对路径
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'app01/static'),
+]
+# STATIC_ROOT 配置部署的时候才用
+</code></pre>
+<h4 id="使用"><a class="header-anchor" href="#使用">¶</a>使用</h4>
+<p>在项目中将模板层用到的静态文件都放入该文件夹中</p>
+<h3 id="media"><a class="header-anchor" href="#media">¶</a>media</h3>
+<h4 id="定义-v2"><a class="header-anchor" href="#定义-v2">¶</a>定义</h4>
+<p>media 主要用来保存用户上传的文件，例如图片等</p>
+<h4 id="配置-v2"><a class="header-anchor" href="#配置-v2">¶</a>配置</h4>
+<p>配置 <code>settings.py</code></p>
+<pre class=" language-language-python"><code class="language-language-python">MEDIA_URL = "/media/"   # 媒体文件别名(相对路径) 和 绝对路径
+MEDIA_ROOT = [
+    os.path.join(BASE_DIR, 'app01/media')
+]
+</code></pre>
 <p>配置路由</p>
 <ul>
-<li><p>在子应用正常配置路由</p>
-<pre class=" language-python"><code class="language-python">  <span class="token keyword">from</span> django<span class="token punctuation">.</span>urls <span class="token keyword">import</span> path
-  <span class="token keyword">from</span> app01<span class="token punctuation">.</span>views <span class="token keyword">import</span> <span class="token operator">*</span>
-  app_name <span class="token operator">=</span> <span class="token string">'goods'</span>
+<li>
+<p>在子应用正常配置路由</p>
+<pre class=" language-language-python"><code class="language-language-python">from django.urls import path
+from app01.views import *
+app_name = 'goods'
 
-  urlpatterns <span class="token operator">=</span> <span class="token punctuation">[</span>
-      path<span class="token punctuation">(</span><span class="token string">'goods/'</span><span class="token punctuation">,</span> GoodsCreateView<span class="token punctuation">.</span>as_view<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'create'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-      path<span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span> IndexView<span class="token punctuation">.</span>as_view<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'index'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-  <span class="token punctuation">]</span></code></pre>
+urlpatterns = [
+    path('goods/', GoodsCreateView.as_view(), name='create'),
+    path('', IndexView.as_view(), name='index'),
+]
+</code></pre>
 </li>
-<li><p>在项目的主路由中对图片上传的路径信息进行配置</p>
-<pre class=" language-python"><code class="language-python">  <span class="token keyword">from</span> django<span class="token punctuation">.</span>conf<span class="token punctuation">.</span>urls<span class="token punctuation">.</span>static <span class="token keyword">import</span> static
-  <span class="token keyword">from</span> django<span class="token punctuation">.</span>contrib <span class="token keyword">import</span> admin
-  <span class="token keyword">from</span> django<span class="token punctuation">.</span>urls <span class="token keyword">import</span> path<span class="token punctuation">,</span> include
-  <span class="token keyword">from</span> django01 <span class="token keyword">import</span> settings
+<li>
+<p>在项目的主路由中对图片上传的路径信息进行配置</p>
+<pre class=" language-language-python"><code class="language-language-python">from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import path, include
+from django01 import settings
 
-  urlpatterns <span class="token operator">=</span> <span class="token punctuation">[</span>
-      path<span class="token punctuation">(</span><span class="token string">'admin/'</span><span class="token punctuation">,</span> admin<span class="token punctuation">.</span>site<span class="token punctuation">.</span>urls<span class="token punctuation">)</span><span class="token punctuation">,</span>
-      path<span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span> include<span class="token punctuation">(</span><span class="token string">'app01.urls'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-  <span class="token punctuation">]</span> <span class="token operator">+</span> static<span class="token punctuation">(</span>settings<span class="token punctuation">.</span>MEDIA_URL<span class="token punctuation">,</span> document_root<span class="token operator">=</span>settings<span class="token punctuation">.</span>MEDIA_ROOT<span class="token punctuation">)</span>
-  <span class="token comment" spellcheck="true"># 对外展示图片的地址信息</span></code></pre>
-</li>
-</ul>
-<h3 id="模型类"><a href="#模型类" class="headerlink" title="模型类"></a>模型类</h3><ul>
-<li><p>定义包含图片字段的模型类</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Goods</span><span class="token punctuation">(</span>models<span class="token punctuation">.</span>Model<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    name <span class="token operator">=</span> models<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span>max_length<span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">,</span> verbose_name<span class="token operator">=</span><span class="token string">"名称"</span><span class="token punctuation">)</span>
-    price <span class="token operator">=</span> models<span class="token punctuation">.</span>DecimalField<span class="token punctuation">(</span>max_digits<span class="token operator">=</span><span class="token number">7</span><span class="token punctuation">,</span> decimal_places<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> verbose_name<span class="token operator">=</span><span class="token string">"单价"</span><span class="token punctuation">)</span>
-    nums <span class="token operator">=</span> models<span class="token punctuation">.</span>IntegerField<span class="token punctuation">(</span>verbose_name<span class="token operator">=</span><span class="token string">"数量"</span><span class="token punctuation">)</span>
-    img <span class="token operator">=</span> models<span class="token punctuation">.</span>ImageField<span class="token punctuation">(</span>upload_to<span class="token operator">=</span><span class="token string">'img'</span><span class="token punctuation">,</span> verbose_name<span class="token operator">=</span><span class="token string">"图片"</span><span class="token punctuation">)</span>
-
-    <span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span>
-        db_table <span class="token operator">=</span> <span class="token string">"tb_goods"</span>
-        verbose_name <span class="token operator">=</span> <span class="token string">"商品"</span>
-        verbose_name_plural <span class="token operator">=</span> verbose_name
-
-    <span class="token keyword">def</span> <span class="token function">__str__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> self<span class="token punctuation">.</span>name</code></pre>
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('app01.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# 对外展示图片的地址信息
+</code></pre>
 </li>
 </ul>
-<h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><h4 id="添加页面"><a href="#添加页面" class="headerlink" title="添加页面"></a>添加页面</h4><pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">action</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>goods:create<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span> <span class="token attr-name">method</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>post<span class="token punctuation">"</span></span> <span class="token attr-name">enctype</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>multipart/form-data<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<h3 id="模型类"><a class="header-anchor" href="#模型类">¶</a>模型类</h3>
+<ul>
+<li>
+<p>定义包含图片字段的模型类</p>
+<pre class=" language-language-python"><code class="language-language-python">class Goods(models.Model):
+    name = models.CharField(max_length=20, verbose_name="名称")
+    price = models.DecimalField(max_digits=7, decimal_places=2, verbose_name="单价")
+    nums = models.IntegerField(verbose_name="数量")
+    img = models.ImageField(upload_to='img', verbose_name="图片")
+
+    class Meta:
+        db_table = "tb_goods"
+        verbose_name = "商品"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name
+</code></pre>
+</li>
+</ul>
+<h3 id="模板"><a class="header-anchor" href="#模板">¶</a>模板</h3>
+<h4 id="添加页面"><a class="header-anchor" href="#添加页面">¶</a>添加页面</h4>
+<pre class=" language-language-html"><code class="language-language-html"><form action="{% url 'goods:create' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    名称:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>name<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>
-    价格:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>price<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>
-    数量:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>nums<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>
-    图片:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>file<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>img<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>
+    名称:<input type="text" name="name"> <br>
+    价格:<input type="text" name="price"> <br>
+    数量:<input type="text" name="nums"> <br>
+    图片:<input type="file" name="img"> <br>
 
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>提交<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span></code></pre>
-<h4 id="展示页面"><a href="#展示页面" class="headerlink" title="展示页面"></a>展示页面</h4><pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>table</span><span class="token punctuation">></span></span>
+    <input type="submit" value="提交">
+</form>
+</code></pre>
+<h4 id="展示页面"><a class="header-anchor" href="#展示页面">¶</a>展示页面</h4>
+<pre class=" language-language-html"><code class="language-language-html"><table>
     {% for good in goods %}
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span>{{ good.id }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span>{{ good.name }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span>{{ good.price }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span>{{ good.nums }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span>
-                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>/media/{{ good.img }}<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">="</span><span class="token attr-value"><span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">300</span>px<span class="token punctuation">;</span><span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">200</span>px</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+        <tr>
+            <td>{{ good.id }}</td>
+            <td>{{ good.name }}</td>
+            <td>{{ good.price }}</td>
+            <td>{{ good.nums }}</td>
+            <td>
+                <img src="/media/{{ good.img }}" alt="" style="width: 300px;height: 200px">
+            </td>
+        </tr>
     {% endfor %}
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>table</span><span class="token punctuation">></span></span></code></pre>
-<h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><h4 id="添加商品"><a href="#添加商品" class="headerlink" title="添加商品"></a>添加商品</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> django<span class="token punctuation">.</span>shortcuts <span class="token keyword">import</span> render<span class="token punctuation">,</span> redirect
-<span class="token keyword">from</span> django<span class="token punctuation">.</span>views <span class="token keyword">import</span> View
-<span class="token keyword">from</span> app01<span class="token punctuation">.</span>models <span class="token keyword">import</span> Goods
+</table>
+</code></pre>
+<h3 id="视图"><a class="header-anchor" href="#视图">¶</a>视图</h3>
+<h4 id="添加商品"><a class="header-anchor" href="#添加商品">¶</a>添加商品</h4>
+<pre class=" language-language-python"><code class="language-language-python">from django.shortcuts import render, redirect
+from django.views import View
+from app01.models import Goods
 
 
-<span class="token comment" spellcheck="true"># Create your views here.</span>
-<span class="token keyword">class</span> <span class="token class-name">GoodsCreateView</span><span class="token punctuation">(</span>View<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> render<span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token string">'goods.html'</span><span class="token punctuation">)</span>
+# Create your views here.
+class GoodsCreateView(View):
+    def get(self, request):
+        return render(request, 'goods.html')
 
-    <span class="token keyword">def</span> <span class="token function">post</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        name <span class="token operator">=</span> request<span class="token punctuation">.</span>POST<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'name'</span><span class="token punctuation">)</span>
-        price <span class="token operator">=</span> request<span class="token punctuation">.</span>POST<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'price'</span><span class="token punctuation">)</span>
-        nums <span class="token operator">=</span> request<span class="token punctuation">.</span>POST<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'nums'</span><span class="token punctuation">)</span>
-        img <span class="token operator">=</span> request<span class="token punctuation">.</span>FILES<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'img'</span><span class="token punctuation">)</span>
+    def post(self, request):
+        name = request.POST.get('name')
+        price = request.POST.get('price')
+        nums = request.POST.get('nums')
+        img = request.FILES.get('img')
 
-        <span class="token keyword">if</span> <span class="token operator">not</span> all<span class="token punctuation">(</span><span class="token punctuation">[</span>name<span class="token punctuation">,</span> price<span class="token punctuation">,</span> nums<span class="token punctuation">,</span> img<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-            <span class="token keyword">return</span> redirect<span class="token punctuation">(</span><span class="token string">'goods:create'</span><span class="token punctuation">)</span>
+        if not all([name, price, nums, img]):
+            return redirect('goods:create')
 
-        <span class="token keyword">try</span><span class="token punctuation">:</span>
-            Goods<span class="token punctuation">.</span>objects<span class="token punctuation">.</span>create<span class="token punctuation">(</span>name<span class="token operator">=</span>name<span class="token punctuation">,</span> price<span class="token operator">=</span>price<span class="token punctuation">,</span> nums<span class="token operator">=</span>nums<span class="token punctuation">,</span> img<span class="token operator">=</span>img<span class="token punctuation">)</span>
-        <span class="token keyword">except</span> Exception <span class="token keyword">as</span> e<span class="token punctuation">:</span>
-            <span class="token keyword">print</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span>
-            <span class="token keyword">return</span> redirect<span class="token punctuation">(</span><span class="token string">'goods:create'</span><span class="token punctuation">)</span>
-        <span class="token keyword">return</span> redirect<span class="token punctuation">(</span><span class="token string">'goods:index'</span><span class="token punctuation">)</span></code></pre>
-<h4 id="展示商品"><a href="#展示商品" class="headerlink" title="展示商品"></a>展示商品</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">IndexView</span><span class="token punctuation">(</span>View<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        goods <span class="token operator">=</span> Goods<span class="token punctuation">.</span>objects<span class="token punctuation">.</span>all<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        try:
+            Goods.objects.create(name=name, price=price, nums=nums, img=img)
+        except Exception as e:
+            print(e)
+            return redirect('goods:create')
+        return redirect('goods:index')
+</code></pre>
+<h4 id="展示商品"><a class="header-anchor" href="#展示商品">¶</a>展示商品</h4>
+<pre class=" language-language-python"><code class="language-language-python">class IndexView(View):
+    def get(self, request):
+        goods = Goods.objects.all()
 
-        <span class="token keyword">return</span> render<span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token string">'index.html'</span><span class="token punctuation">,</span> context<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">'goods'</span><span class="token punctuation">:</span> goods<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre>
+        return render(request, 'index.html', context={'goods': goods})
+</code></pre>
 
                 
             </div>
@@ -1133,7 +1160,7 @@ MEDIA_ROOT <span class="token operator">=</span> <span class="token punctuation"
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

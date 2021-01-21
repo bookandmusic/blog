@@ -505,11 +505,13 @@
                             <div class="summary block-with-text">
                                 
                                     REST framework提供了分页的支持。有以下两种方式实现:
-全局配置
+¶全局配置
+
+
 修改settings.py文件
 REST_FRAMEWORK = {
     ...
-    'DEFAULT_PAGINATION_CLASS':  'rest
+    'DEFAULT_PAGINATION_CLASS':  'r
                                 
                             </div>
                             <div class="publish-info">
@@ -578,9 +580,12 @@ REST_FRAMEWORK = {
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    图片上传static 和 media 都是存放文件的地方，但是又有区别，以下是两个文件夹的区别和用法
-static定义static 是静态文件，主要存的是 CSS, JavaScript, 网站 logo 等不变的文件。
-配置配置 sett
+                                    ¶图片上传
+static 和 media 都是存放文件的地方，但是又有区别，以下是两个文件夹的区别和用法
+¶static
+¶定义
+static 是静态文件，主要存的是 CSS, JavaScript, 网站 logo 等不变的文件。
+¶配置
                                 
                             </div>
                             <div class="publish-info">
@@ -647,11 +652,14 @@ static定义static 是静态文件，主要存的是 CSS, JavaScript, 网站 log
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    用户模型类相关模型类的定义在此，我们借用django自带的用户认证系统实现目的
+                                    ¶用户模型类相关
+¶模型类的定义
+在此，我们借用django自带的用户认证系统实现目的
+
 
 在models.py中定义用户类
-  from django.db import models
-  from django.contrib.auth.mode
+from django.db import models
+from django.contrib.auth.mod
                                 
                             </div>
                             <div class="publish-info">
@@ -726,15 +734,17 @@ static定义static 是静态文件，主要存的是 CSS, JavaScript, 网站 log
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    项目框架
+                                    ¶项目框架
+
+
 项目结构
- .
- ├── users
- │    ├── __init__.py
- │    ├── admin.py
- │    ├── apps.py
- │    ├── migrations
- │    │   └── __
+.
+├── users
+│    ├── __init__.py
+│    ├── admin.py
+│    ├── apps.py
+│    ├── migrations
+│    │   └── __init
                                 
                             </div>
                             <div class="publish-info">
@@ -874,9 +884,10 @@ static定义static 是静态文件，主要存的是 CSS, JavaScript, 网站 log
                             <div class="summary block-with-text">
                                 
                                     在 vue项目中使用axios分为局部使用和全局使用
-在vue中局部使用import axios from 'axios'
+¶在vue中局部使用
+import axios from 'axios'
 
-axios.get('/api/goods/add_info/?ID=12345&amp;firstName=Fr
+axios.get('/api/goods/add_info/?ID=12345&firstName=Fred
                                 
                             </div>
                             <div class="publish-info">
@@ -947,9 +958,11 @@ axios.get('/api/goods/add_info/?ID=12345&amp;firstName=Fr
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    GET 请求传递参数1、直接在 URL 上添加参数import axios from 'axios'
+                                    ¶GET 请求传递参数
+¶1、直接在 URL 上添加参数
+import axios from 'axios'
 
-axios.get('/api/goods/add_info/?ID=12345&amp;firstName=Fred&amp;last
+axios.get('/api/goods/add_info/?ID=12345&firstName=Fred&lastName
                                 
                             </div>
                             <div class="publish-info">
@@ -1018,15 +1031,19 @@ axios.get('/api/goods/add_info/?ID=12345&amp;firstName=Fred&amp;last
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    Axios API
+                                    ¶Axios API
+
+
 可以通过向 axios 传递相关配置来创建请求
 
+
 axios配置全部参数
-  axios(config)
-  // 发送 POST 请求
-  axios({
-      method: 'post',
-      url
+axios(config)
+
+// 发送 POST 请求
+axios({
+    method: 'post',
+    url: '/u
                                 
                             </div>
                             <div class="publish-info">
@@ -1142,7 +1159,7 @@ axios配置全部参数
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

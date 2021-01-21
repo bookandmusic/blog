@@ -443,14 +443,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.4k
+                    1.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    6 分
                 </div>
                 
 
@@ -470,320 +470,367 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="项目框架"><a href="#项目框架" class="headerlink" title="项目框架"></a>项目框架</h2><ol>
-<li><p>项目结构</p>
-<pre class=" language-bash"><code class="language-bash"> <span class="token keyword">.</span>
- ├── <span class="token function">users</span>
- │    ├── __init__.py
- │    ├── admin.py
- │    ├── apps.py
- │    ├── migrations
- │    │   └── __init__.py
- │    ├── models.py
- │    ├── tests.py
- │    ├── urls.py
- │    └── views.py
- ├── db.sqlite3
- ├── manage.py
- ├── django_demo
- │    ├── __init__.py
- │    ├── settings.py
- │    ├── urls.py
- │    └── wsgi.py
- └── templates
-     ├── base.html
-     ├── index.html
-     ├── login.html
-     ├── register.html
-     └── user.html
+                <h2 id="项目框架"><a class="header-anchor" href="#项目框架">¶</a>项目框架</h2>
+<ol>
+<li>
+<p>项目结构</p>
+<pre class=" language-language-bash"><code class="language-language-bash">.
+├── users
+│    ├── __init__.py
+│    ├── admin.py
+│    ├── apps.py
+│    ├── migrations
+│    │   └── __init__.py
+│    ├── models.py
+│    ├── tests.py
+│    ├── urls.py
+│    └── views.py
+├── db.sqlite3
+├── manage.py
+├── django_demo
+│    ├── __init__.py
+│    ├── settings.py
+│    ├── urls.py
+│    └── wsgi.py
+└── templates
+    ├── base.html
+    ├── index.html
+    ├── login.html
+    ├── register.html
+    └── user.html
+
 </code></pre>
 </li>
 </ol>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h3><p>通过终端命令,创建项目</p>
-<pre class=" language-bash"><code class="language-bash">django_admin startproject django_demo</code></pre>
-<h3 id="生成应用"><a href="#生成应用" class="headerlink" title="生成应用"></a>生成应用</h3><p>通过终端命令,生成users应用</p>
-<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># 此时在项目文件夹之下执行命令</span>
-python manage.py startapp <span class="token function">users</span></code></pre>
-<h3 id="修改配置信息"><a href="#修改配置信息" class="headerlink" title="修改配置信息"></a>修改配置信息</h3><p>在<code>settings.py</code>修改配置</p>
-<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 注册app</span>
-INSTALLED_APPS <span class="token operator">=</span> <span class="token punctuation">[</span>
-    <span class="token string">'django.contrib.admin'</span><span class="token punctuation">,</span>
-    <span class="token string">'django.contrib.auth'</span><span class="token punctuation">,</span>
-    <span class="token string">'django.contrib.contenttypes'</span><span class="token punctuation">,</span>
-    <span class="token string">'django.contrib.sessions'</span><span class="token punctuation">,</span>
-    <span class="token string">'django.contrib.messages'</span><span class="token punctuation">,</span>
-    <span class="token string">'django.contrib.staticfiles'</span><span class="token punctuation">,</span>
-    <span class="token string">'users.apps.UsersConfig'</span> <span class="token comment" spellcheck="true"># 注册users应用</span>
-<span class="token punctuation">]</span>
+<h2 id="准备工作"><a class="header-anchor" href="#准备工作">¶</a>准备工作</h2>
+<h3 id="创建项目"><a class="header-anchor" href="#创建项目">¶</a>创建项目</h3>
+<p>通过终端命令,创建项目</p>
+<pre class=" language-language-bash"><code class="language-language-bash">django_admin startproject django_demo
+</code></pre>
+<h3 id="生成应用"><a class="header-anchor" href="#生成应用">¶</a>生成应用</h3>
+<p>通过终端命令,生成users应用</p>
+<pre class=" language-language-bash"><code class="language-language-bash"># 此时在项目文件夹之下执行命令
+python manage.py startapp users
+</code></pre>
+<h3 id="修改配置信息"><a class="header-anchor" href="#修改配置信息">¶</a>修改配置信息</h3>
+<p>在<code>settings.py</code>修改配置</p>
+<pre class=" language-language-python"><code class="language-language-python"># 注册app
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'users.apps.UsersConfig' # 注册users应用
+]
 
-<span class="token comment" spellcheck="true"># 配置模板路径</span>
-TEMPLATES <span class="token operator">=</span> <span class="token punctuation">[</span>
-    <span class="token punctuation">{</span>
-        <span class="token string">'BACKEND'</span><span class="token punctuation">:</span> <span class="token string">'django.template.backends.django.DjangoTemplates'</span><span class="token punctuation">,</span>
-        <span class="token string">'DIRS'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>BASE_DIR<span class="token punctuation">,</span> <span class="token string">"templates"</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token string">'APP_DIRS'</span><span class="token punctuation">:</span> <span class="token boolean">True</span><span class="token punctuation">,</span>
-        <span class="token string">'OPTIONS'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
-            <span class="token string">'context_processors'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
-                <span class="token string">'django.template.context_processors.debug'</span><span class="token punctuation">,</span>
-                <span class="token string">'django.template.context_processors.request'</span><span class="token punctuation">,</span>
-                <span class="token string">'django.contrib.auth.context_processors.auth'</span><span class="token punctuation">,</span>
-                <span class="token string">'django.contrib.messages.context_processors.messages'</span><span class="token punctuation">,</span>
-            <span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">]</span></code></pre>
-<h3 id="创建模板"><a href="#创建模板" class="headerlink" title="创建模板"></a>创建模板</h3><p>在项目根路径下,创建<code>templates</code>,在目录下创建<code>base.html</code>文件,以便后面复用</p>
-<pre class=" language-html"><code class="language-html">{% block nav %}
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>users:index<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Index<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+# 配置模板路径
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+</code></pre>
+<h3 id="创建模板"><a class="header-anchor" href="#创建模板">¶</a>创建模板</h3>
+<p>在项目根路径下,创建<code>templates</code>,在目录下创建<code>base.html</code>文件,以便后面复用</p>
+<pre class=" language-language-html"><code class="language-language-html">{% block nav %}
+    <p>
+        <a href="{% url 'users:index' %}">Index</a>
 
         {% if user.is_authenticated %}
-            Hello, <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>users:user<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>{{ user.username }} <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span> .
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>users:logout<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>log out<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+            Hello, <a href="{% url 'users:user' %}">{{ user.username }} </a> .
+            <a href="{% url 'users:logout' %}">log out</a>
         {% else %}
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>users:register<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>register<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>users:login<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>log in<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+            <a href="{% url 'users:register' %}">register</a>
+            <a href="{% url 'users:login' %}">log in</a>
         {% endif %}
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    </p>
 {% endblock %}
 
 {% block err %}
     {% if account_msg %}
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>{{account_msg}}. Please try again.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+        <p>{{account_msg}}. Please try again.</p>
     {% endif %}
 
 {% endblock %}
 
 {% block body %}
 
-{% endblock %}</code></pre>
-<h3 id="指定用户模型类"><a href="#指定用户模型类" class="headerlink" title="指定用户模型类"></a>指定用户模型类</h3><ol>
-<li><p>在<code>users/models.py</code>中创建模型类</p>
-<pre class=" language-python"><code class="language-python"> <span class="token keyword">from</span> django<span class="token punctuation">.</span>db <span class="token keyword">import</span> models
- <span class="token keyword">from</span> django<span class="token punctuation">.</span>contrib<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>models <span class="token keyword">import</span> AbstractUser
+{% endblock %}
+</code></pre>
+<h3 id="指定用户模型类"><a class="header-anchor" href="#指定用户模型类">¶</a>指定用户模型类</h3>
+<ol>
+<li>
+<p>在<code>users/models.py</code>中创建模型类</p>
+<pre class=" language-language-python"><code class="language-language-python">from django.db import models
+from django.contrib.auth.models import AbstractUser
 
- <span class="token comment" spellcheck="true"># Create your models here.</span>
- <span class="token keyword">class</span> <span class="token class-name">UserProfile</span><span class="token punctuation">(</span>AbstractUser<span class="token punctuation">)</span><span class="token punctuation">:</span>
-     phone <span class="token operator">=</span> models<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span>max_length<span class="token operator">=</span><span class="token number">11</span><span class="token punctuation">,</span> unique<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> verbose_name<span class="token operator">=</span><span class="token string">"手机号"</span><span class="token punctuation">)</span>
+# Create your models here.
+class UserProfile(AbstractUser):
+    phone = models.CharField(max_length=11, unique=True, verbose_name="手机号")
 
-     <span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span>
-         db_table <span class="token operator">=</span> <span class="token string">'tb_users'</span>  <span class="token comment" spellcheck="true"># 指定表名</span>
-         verbose_name <span class="token operator">=</span> <span class="token string">'用户'</span>  <span class="token comment" spellcheck="true"># 后台显示表名</span>
-         verbose_name_plural <span class="token operator">=</span> verbose_name
+    class Meta:
+        db_table = 'tb_users'  # 指定表名
+        verbose_name = '用户'  # 后台显示表名
+        verbose_name_plural = verbose_name
 
-     <span class="token keyword">def</span> <span class="token function">__str__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-         <span class="token keyword">return</span> self<span class="token punctuation">.</span>username</code></pre>
+    def __str__(self):
+        return self.username
+</code></pre>
 </li>
-<li><p>在<code>settings.py</code>文件中,指定本项目用户模型类<br> Django用户模型类是通过全局配置项 AUTH_USER_MODEL 决定的</p>
-<pre class=" language-python"><code class="language-python"> <span class="token comment" spellcheck="true"># 配置规则：AUTH_USER_MODEL = '应用名.模型类名'</span>
- AUTH_USER_MODEL <span class="token operator">=</span> <span class="token string">'users.UserProfile'</span></code></pre>
+<li>
+<p>在<code>settings.py</code>文件中,指定本项目用户模型类<br>
+Django用户模型类是通过全局配置项 AUTH_USER_MODEL 决定的</p>
+<pre class=" language-language-python"><code class="language-language-python"># 配置规则：AUTH_USER_MODEL = '应用名.模型类名'
+AUTH_USER_MODEL = 'users.UserProfile'
+</code></pre>
 </li>
-<li><p>通过终端命令,生成迁移文件和迁移表</p>
-<pre class=" language-bash"><code class="language-bash"> python manage.py makemigrations
- python manage.py migrate</code></pre>
+<li>
+<p>通过终端命令,生成迁移文件和迁移表</p>
+<pre class=" language-language-bash"><code class="language-language-bash">python manage.py makemigrations
+python manage.py migrate
+</code></pre>
 </li>
 </ol>
-<h2 id="逻辑实现"><a href="#逻辑实现" class="headerlink" title="逻辑实现"></a>逻辑实现</h2><h3 id="实现注册逻辑"><a href="#实现注册逻辑" class="headerlink" title="实现注册逻辑"></a>实现注册逻辑</h3><h4 id="定义视图"><a href="#定义视图" class="headerlink" title="定义视图"></a>定义视图</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> django<span class="token punctuation">.</span>contrib<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>hashers <span class="token keyword">import</span> make_password
-<span class="token keyword">from</span> django<span class="token punctuation">.</span>contrib<span class="token punctuation">.</span>auth <span class="token keyword">import</span> login
+<h2 id="逻辑实现"><a class="header-anchor" href="#逻辑实现">¶</a>逻辑实现</h2>
+<h3 id="实现注册逻辑"><a class="header-anchor" href="#实现注册逻辑">¶</a>实现注册逻辑</h3>
+<h4 id="定义视图"><a class="header-anchor" href="#定义视图">¶</a>定义视图</h4>
+<pre class=" language-language-python"><code class="language-language-python">from django.contrib.auth.hashers import make_password
+from django.contrib.auth import login
 
-<span class="token keyword">from</span> django<span class="token punctuation">.</span>views <span class="token keyword">import</span> View
-<span class="token keyword">from</span> django<span class="token punctuation">.</span>shortcuts <span class="token keyword">import</span> render
-<span class="token keyword">from</span> django<span class="token punctuation">.</span>http <span class="token keyword">import</span> JsonResponse<span class="token punctuation">,</span> HttpResponseForbidden
-<span class="token keyword">from</span> <span class="token punctuation">.</span>models <span class="token keyword">import</span> UserProfile
+from django.views import View
+from django.shortcuts import render
+from django.http import JsonResponse, HttpResponseForbidden
+from .models import UserProfile
+  
+class RegisterView(View):
 
-<span class="token keyword">class</span> <span class="token class-name">RegisterView</span><span class="token punctuation">(</span>View<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  def get(self, request):
+      return render(request, 'register.html')
 
-  <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">)</span><span class="token punctuation">:</span>
-      <span class="token keyword">return</span> render<span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token string">'register.html'</span><span class="token punctuation">)</span>
+  def post(self, request):
+      username = request.POST.get("username")
+      password = request.POST.get("password")
+      password2 = request.POST.get("password2")
+      phone = request.POST.get("phone")
 
-  <span class="token keyword">def</span> <span class="token function">post</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">)</span><span class="token punctuation">:</span>
-      username <span class="token operator">=</span> request<span class="token punctuation">.</span>POST<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"username"</span><span class="token punctuation">)</span>
-      password <span class="token operator">=</span> request<span class="token punctuation">.</span>POST<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"password"</span><span class="token punctuation">)</span>
-      password2 <span class="token operator">=</span> request<span class="token punctuation">.</span>POST<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"password2"</span><span class="token punctuation">)</span>
-      phone <span class="token operator">=</span> request<span class="token punctuation">.</span>POST<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"phone"</span><span class="token punctuation">)</span>
+      if not all([username, password, password2, phone]):
+          return JsonResponse("缺少必要参数")
 
-      <span class="token keyword">if</span> <span class="token operator">not</span> all<span class="token punctuation">(</span><span class="token punctuation">[</span>username<span class="token punctuation">,</span> password<span class="token punctuation">,</span> password2<span class="token punctuation">,</span> phone<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-          <span class="token keyword">return</span> JsonResponse<span class="token punctuation">(</span><span class="token string">"缺少必要参数"</span><span class="token punctuation">)</span>
+      if password != password2:
+          return HttpResponseForbidden("密码不一致")
 
-      <span class="token keyword">if</span> password <span class="token operator">!=</span> password2<span class="token punctuation">:</span>
-          <span class="token keyword">return</span> HttpResponseForbidden<span class="token punctuation">(</span><span class="token string">"密码不一致"</span><span class="token punctuation">)</span>
+      # 此时 手动加密密码
+      # hash_password = make_password(password)
+      # try:
+      #   user = UserProfile(username=username, password=hash_password, phone=phone)
+      #   user.save()
+      # except Exception as e:
+      #     return HttpResponseForbidden("创建失败")
 
-      <span class="token comment" spellcheck="true"># 此时 手动加密密码</span>
-      <span class="token comment" spellcheck="true"># hash_password = make_password(password)</span>
-      <span class="token comment" spellcheck="true"># try:</span>
-      <span class="token comment" spellcheck="true">#   user = UserProfile(username=username, password=hash_password, phone=phone)</span>
-      <span class="token comment" spellcheck="true">#   user.save()</span>
-      <span class="token comment" spellcheck="true"># except Exception as e:</span>
-      <span class="token comment" spellcheck="true">#     return HttpResponseForbidden("创建失败")</span>
+      try:
+          # Django认证系统用户模型类提供的 create_user() 方法创建新的用户。
+          # create_user() 方法中封装了 set_password() 方法加密密码
+          user = UserProfile.objects.create_user(username=username, password=password, phone=phone)
+      except Exception as e:
+          return HttpResponseForbidden("创建失败")
 
-      <span class="token keyword">try</span><span class="token punctuation">:</span>
-          <span class="token comment" spellcheck="true"># Django认证系统用户模型类提供的 create_user() 方法创建新的用户。</span>
-          <span class="token comment" spellcheck="true"># create_user() 方法中封装了 set_password() 方法加密密码</span>
-          user <span class="token operator">=</span> UserProfile<span class="token punctuation">.</span>objects<span class="token punctuation">.</span>create_user<span class="token punctuation">(</span>username<span class="token operator">=</span>username<span class="token punctuation">,</span> password<span class="token operator">=</span>password<span class="token punctuation">,</span> phone<span class="token operator">=</span>phone<span class="token punctuation">)</span>
-      <span class="token keyword">except</span> Exception <span class="token keyword">as</span> e<span class="token punctuation">:</span>
-          <span class="token keyword">return</span> HttpResponseForbidden<span class="token punctuation">(</span><span class="token string">"创建失败"</span><span class="token punctuation">)</span>
+      # 状态保持
+      login(request, user)
 
-      <span class="token comment" spellcheck="true"># 状态保持</span>
-      login<span class="token punctuation">(</span>request<span class="token punctuation">,</span> user<span class="token punctuation">)</span>
-
-      <span class="token keyword">return</span> JsonResponse<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"msg"</span><span class="token punctuation">:</span> <span class="token string">"ok"</span><span class="token punctuation">,</span> <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token number">200</span><span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre>
-<h4 id="实现模板"><a href="#实现模板" class="headerlink" title="实现模板"></a>实现模板</h4><pre class=" language-html"><code class="language-html">{% extends "base.html" %}
-
-{% block body %}
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">action</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>users:register<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span> <span class="token attr-name">method</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>post<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-        用户名:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>username<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-        密码:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-        确认密码:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password2<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-        手机号: <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>phone<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>phone<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>提交<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span>
-{% endblock %}</code></pre>
-<h3 id="实现登录逻辑"><a href="#实现登录逻辑" class="headerlink" title="实现登录逻辑"></a>实现登录逻辑</h3><h4 id="定义视图-1"><a href="#定义视图-1" class="headerlink" title="定义视图"></a>定义视图</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">LoginView</span><span class="token punctuation">(</span>View<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">)</span><span class="token punctuation">:</span>
-
-        <span class="token comment" spellcheck="true"># 判断用户是否登录(属性) user.is_authenticated</span>
-        <span class="token keyword">if</span> request<span class="token punctuation">.</span>user<span class="token punctuation">.</span>is_authenticated<span class="token punctuation">:</span>
-            <span class="token keyword">return</span> redirect<span class="token punctuation">(</span>reverse<span class="token punctuation">(</span><span class="token string">'users:index'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-        <span class="token keyword">return</span> render<span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token string">"login.html"</span><span class="token punctuation">)</span>
-
-    <span class="token keyword">def</span> <span class="token function">post</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        username <span class="token operator">=</span> request<span class="token punctuation">.</span>POST<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"username"</span><span class="token punctuation">)</span>
-        password <span class="token operator">=</span> request<span class="token punctuation">.</span>POST<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"password"</span><span class="token punctuation">)</span>
-        remembered <span class="token operator">=</span> request<span class="token punctuation">.</span>POST<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"remembered"</span><span class="token punctuation">)</span>
-
-        <span class="token keyword">if</span> <span class="token operator">not</span> all<span class="token punctuation">(</span><span class="token punctuation">[</span>username<span class="token punctuation">,</span> password<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-            <span class="token comment" spellcheck="true"># return JsonResponse({"account_msg": "缺少必要参数", "code": 403})</span>
-            <span class="token keyword">return</span> render<span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token string">'login.html'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token string">'account_msg'</span><span class="token punctuation">:</span> <span class="token string">'缺少必要参数'</span><span class="token punctuation">,</span> <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token number">403</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
-
-        <span class="token comment" spellcheck="true"># 校验用户信息，成功返回user对象，否则为None</span>
-        user <span class="token operator">=</span> authenticate<span class="token punctuation">(</span>username<span class="token operator">=</span>username<span class="token punctuation">,</span> password<span class="token operator">=</span>password<span class="token punctuation">)</span>
-
-        <span class="token keyword">if</span> user <span class="token keyword">is</span> None<span class="token punctuation">:</span>
-            <span class="token keyword">return</span> render<span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token string">'login.html'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token string">'account_msg'</span><span class="token punctuation">:</span> <span class="token string">'用户名或密码错误'</span><span class="token punctuation">,</span> <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token number">403</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
-
-        <span class="token comment" spellcheck="true"># 实现状态保持</span>
-        login<span class="token punctuation">(</span>request<span class="token punctuation">,</span> user<span class="token punctuation">)</span>
-
-        <span class="token comment" spellcheck="true"># 设置状态保持的周期</span>
-        <span class="token keyword">if</span> remembered <span class="token operator">!=</span> <span class="token string">'on'</span><span class="token punctuation">:</span>
-            <span class="token comment" spellcheck="true"># 没有记住用户：浏览器会话结束就过期</span>
-            request<span class="token punctuation">.</span>session<span class="token punctuation">.</span>set_expiry<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
-        <span class="token keyword">else</span><span class="token punctuation">:</span>
-            <span class="token comment" spellcheck="true"># 记住用户：None表示两周后过期</span>
-            request<span class="token punctuation">.</span>session<span class="token punctuation">.</span>set_expiry<span class="token punctuation">(</span>None<span class="token punctuation">)</span>
-
-        <span class="token comment" spellcheck="true"># 响应登录结果</span>
-        <span class="token keyword">return</span> redirect<span class="token punctuation">(</span>reverse<span class="token punctuation">(</span><span class="token string">'users:index'</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
-<h4 id="实现模板-1"><a href="#实现模板-1" class="headerlink" title="实现模板"></a>实现模板</h4><pre class=" language-html"><code class="language-html">{% extends "base.html" %}
-
-{% block body %}
-
-
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">method</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>post<span class="token punctuation">"</span></span> <span class="token attr-name">action</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>users:login<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-        {% csrf_token %}
-        用户名:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>username<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-        密码:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>login<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hidden<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>next<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>users:index<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span>
-
-{% endblock %}</code></pre>
-<h3 id="注销"><a href="#注销" class="headerlink" title="注销"></a>注销</h3><h4 id="定义视图-2"><a href="#定义视图-2" class="headerlink" title="定义视图"></a>定义视图</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">LogoutView</span><span class="token punctuation">(</span>View<span class="token punctuation">)</span><span class="token punctuation">:</span>
-
-    <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">"""实现退出登录逻辑"""</span>
-        <span class="token comment" spellcheck="true"># 清理session</span>
-        logout<span class="token punctuation">(</span>request<span class="token punctuation">)</span>
-
-        <span class="token comment" spellcheck="true"># 退出登录，重定向到首页</span>
-        response <span class="token operator">=</span> redirect<span class="token punctuation">(</span>reverse<span class="token punctuation">(</span><span class="token string">'users:index'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-        <span class="token comment" spellcheck="true"># 退出登录时清除cookie中的username</span>
-        response<span class="token punctuation">.</span>delete_cookie<span class="token punctuation">(</span><span class="token string">'username'</span><span class="token punctuation">)</span>
-        <span class="token keyword">return</span> response</code></pre>
-<h3 id="用户信息"><a href="#用户信息" class="headerlink" title="用户信息"></a>用户信息</h3><h4 id="定义视图-3"><a href="#定义视图-3" class="headerlink" title="定义视图"></a>定义视图</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">UserView</span><span class="token punctuation">(</span>View<span class="token punctuation">)</span><span class="token punctuation">:</span>
-
-    <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> requset<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token comment" spellcheck="true"># 如果用户没有登陆就访问本应登陆才能访问的页面时会直接跳转到登陆页面</span>
-        <span class="token keyword">if</span> requset<span class="token punctuation">.</span>user<span class="token punctuation">.</span>is_authenticated<span class="token punctuation">:</span>
-            <span class="token keyword">return</span> render<span class="token punctuation">(</span>requset<span class="token punctuation">,</span> <span class="token string">'user.html'</span><span class="token punctuation">)</span>
-        <span class="token keyword">else</span><span class="token punctuation">:</span>
-            <span class="token keyword">return</span> redirect<span class="token punctuation">(</span>reverse<span class="token punctuation">(</span><span class="token string">'users:login'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-    <span class="token keyword">def</span> <span class="token function">post</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        old_password <span class="token operator">=</span> request<span class="token punctuation">.</span>POST<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"old_password"</span><span class="token punctuation">)</span>
-        new_password <span class="token operator">=</span> request<span class="token punctuation">.</span>POST<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"new_password"</span><span class="token punctuation">)</span>
-        conf_password <span class="token operator">=</span> request<span class="token punctuation">.</span>POST<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"conf_password"</span><span class="token punctuation">)</span>
-
-        <span class="token keyword">if</span> <span class="token operator">not</span> all<span class="token punctuation">(</span><span class="token punctuation">[</span>old_password<span class="token punctuation">,</span> new_password<span class="token punctuation">,</span> conf_password<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-            <span class="token keyword">return</span> render<span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token string">'user.html'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token string">'account_msg'</span><span class="token punctuation">:</span> <span class="token string">'缺少必要参数'</span><span class="token punctuation">,</span> <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token number">403</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
-
-        <span class="token keyword">if</span> new_password <span class="token operator">!=</span> conf_password<span class="token punctuation">:</span>
-            <span class="token keyword">return</span> render<span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token string">'user.html'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token string">'account_msg'</span><span class="token punctuation">:</span> <span class="token string">'密码不一致'</span><span class="token punctuation">,</span> <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token number">403</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
-
-        <span class="token comment" spellcheck="true"># 校验密码  check_password()</span>
-        <span class="token keyword">if</span> <span class="token operator">not</span> request<span class="token punctuation">.</span>user<span class="token punctuation">.</span>check_password<span class="token punctuation">(</span>old_password<span class="token punctuation">)</span><span class="token punctuation">:</span>
-            <span class="token keyword">return</span> render<span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token string">'user.html'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token string">'account_msg'</span><span class="token punctuation">:</span> <span class="token string">'密码不正确'</span><span class="token punctuation">,</span> <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token number">403</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
-
-        user <span class="token operator">=</span> request<span class="token punctuation">.</span>user
-
-        <span class="token comment" spellcheck="true"># 修改密码</span>
-        user<span class="token punctuation">.</span>set_password<span class="token punctuation">(</span>new_password<span class="token punctuation">)</span>
-        <span class="token comment" spellcheck="true"># user.password = make_password(new_password)</span>
-
-        <span class="token comment" spellcheck="true"># 保存修改</span>
-        user<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-        <span class="token comment" spellcheck="true"># 状态保持</span>
-        login<span class="token punctuation">(</span>request<span class="token punctuation">,</span> user<span class="token punctuation">)</span>
-
-        <span class="token keyword">return</span> redirect<span class="token punctuation">(</span>reverse<span class="token punctuation">(</span><span class="token string">'users:index'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+      return JsonResponse({"msg": "ok", "code": 200})
 </code></pre>
-<h4 id="实现模板-2"><a href="#实现模板-2" class="headerlink" title="实现模板"></a>实现模板</h4><pre class=" language-html"><code class="language-html">{% extends 'base.html' %}
+<h4 id="实现模板"><a class="header-anchor" href="#实现模板">¶</a>实现模板</h4>
+<pre class=" language-language-html"><code class="language-language-html">{% extends "base.html" %}
+
+{% block body %}
+    <form action="{% url 'users:register' %}" method="post">
+        用户名:<input type="text" name="username">
+        密码:<input type="password" name="password">
+        确认密码:<input type="password" name="password2">
+        手机号: <input type="phone" name="phone">
+        <input type="submit" value="提交">
+    </form>
+{% endblock %}
+</code></pre>
+<h3 id="实现登录逻辑"><a class="header-anchor" href="#实现登录逻辑">¶</a>实现登录逻辑</h3>
+<h4 id="定义视图-v2"><a class="header-anchor" href="#定义视图-v2">¶</a>定义视图</h4>
+<pre class=" language-language-python"><code class="language-language-python">class LoginView(View):
+    def get(self, request):
+
+        # 判断用户是否登录(属性) user.is_authenticated
+        if request.user.is_authenticated:
+            return redirect(reverse('users:index'))
+
+        return render(request, "login.html")
+
+    def post(self, request):
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        remembered = request.POST.get("remembered")
+
+        if not all([username, password]):
+            # return JsonResponse({"account_msg": "缺少必要参数", "code": 403})
+            return render(request, 'login.html', {'account_msg': '缺少必要参数', "code": 403})
+
+        # 校验用户信息，成功返回user对象，否则为None
+        user = authenticate(username=username, password=password)
+
+        if user is None:
+            return render(request, 'login.html', {'account_msg': '用户名或密码错误', "code": 403})
+
+        # 实现状态保持
+        login(request, user)
+
+        # 设置状态保持的周期
+        if remembered != 'on':
+            # 没有记住用户：浏览器会话结束就过期
+            request.session.set_expiry(0)
+        else:
+            # 记住用户：None表示两周后过期
+            request.session.set_expiry(None)
+
+        # 响应登录结果
+        return redirect(reverse('users:index'))
+</code></pre>
+<h4 id="实现模板-v2"><a class="header-anchor" href="#实现模板-v2">¶</a>实现模板</h4>
+<pre class=" language-language-html"><code class="language-language-html">{% extends "base.html" %}
 
 {% block body %}
 
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">action</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>users:user<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span> <span class="token attr-name">method</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>post<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-        旧密码: <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>old_password<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-        新密码: <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>new_password<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-        确认密码: <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>conf_password<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>确认修改<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hidden<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>next<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>users:index<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span>
 
-{% endblock %}</code></pre>
-<h3 id="首页"><a href="#首页" class="headerlink" title="首页"></a>首页</h3><h4 id="定义视图-4"><a href="#定义视图-4" class="headerlink" title="定义视图"></a>定义视图</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">IndexView</span><span class="token punctuation">(</span>View<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <form method="post" action="{% url 'users:login' %}">
+        {% csrf_token %}
+        用户名:<input type="text" name="username">
+        密码:<input type="password" name="password">
+        <button name="submit">login</button>
+        <input type="hidden" name="next" value="{% url 'users:index' %}"/>
+    </form>
 
-<span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">return</span> render<span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token string">'index.html'</span><span class="token punctuation">)</span></code></pre>
-<h4 id="实现模板-3"><a href="#实现模板-3" class="headerlink" title="实现模板"></a>实现模板</h4><pre class=" language-html"><code class="language-html">{% extends 'base.html' %}
+{% endblock %}
+</code></pre>
+<h3 id="注销"><a class="header-anchor" href="#注销">¶</a>注销</h3>
+<h4 id="定义视图-v3"><a class="header-anchor" href="#定义视图-v3">¶</a>定义视图</h4>
+<pre class=" language-language-python"><code class="language-language-python">class LogoutView(View):
+
+    def get(self, request):
+        """实现退出登录逻辑"""
+        # 清理session
+        logout(request)
+
+        # 退出登录，重定向到首页
+        response = redirect(reverse('users:index'))
+
+        # 退出登录时清除cookie中的username
+        response.delete_cookie('username')
+        return response
+</code></pre>
+<h3 id="用户信息"><a class="header-anchor" href="#用户信息">¶</a>用户信息</h3>
+<h4 id="定义视图-v4"><a class="header-anchor" href="#定义视图-v4">¶</a>定义视图</h4>
+<pre class=" language-language-python"><code class="language-language-python">class UserView(View):
+
+    def get(self, requset):
+        # 如果用户没有登陆就访问本应登陆才能访问的页面时会直接跳转到登陆页面
+        if requset.user.is_authenticated:
+            return render(requset, 'user.html')
+        else:
+            return redirect(reverse('users:login'))
+
+    def post(self, request):
+        old_password = request.POST.get("old_password")
+        new_password = request.POST.get("new_password")
+        conf_password = request.POST.get("conf_password")
+
+        if not all([old_password, new_password, conf_password]):
+            return render(request, 'user.html', {'account_msg': '缺少必要参数', "code": 403})
+
+        if new_password != conf_password:
+            return render(request, 'user.html', {'account_msg': '密码不一致', "code": 403})
+
+        # 校验密码  check_password()
+        if not request.user.check_password(old_password):
+            return render(request, 'user.html', {'account_msg': '密码不正确', "code": 403})
+
+        user = request.user
+
+        # 修改密码
+        user.set_password(new_password)
+        # user.password = make_password(new_password)
+
+        # 保存修改
+        user.save()
+
+        # 状态保持
+        login(request, user)
+
+        return redirect(reverse('users:index'))
+
+</code></pre>
+<h4 id="实现模板-v3"><a class="header-anchor" href="#实现模板-v3">¶</a>实现模板</h4>
+<pre class=" language-language-html"><code class="language-language-html">{% extends 'base.html' %}
 
 {% block body %}
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>欢迎来到首页<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
-{% endblock %}</code></pre>
-<h2 id="配置路由"><a href="#配置路由" class="headerlink" title="配置路由"></a>配置路由</h2><p><code>django_demo\urls.py</code>中配置总路由</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> django<span class="token punctuation">.</span>contrib <span class="token keyword">import</span> admin
-<span class="token keyword">from</span> django<span class="token punctuation">.</span>urls <span class="token keyword">import</span> path<span class="token punctuation">,</span>include
 
-urlpatterns <span class="token operator">=</span> <span class="token punctuation">[</span>
-    path<span class="token punctuation">(</span><span class="token string">'admin/'</span><span class="token punctuation">,</span> admin<span class="token punctuation">.</span>site<span class="token punctuation">.</span>urls<span class="token punctuation">)</span><span class="token punctuation">,</span>
-    path<span class="token punctuation">(</span><span class="token string">'users/'</span><span class="token punctuation">,</span> include<span class="token punctuation">(</span><span class="token string">"users.urls"</span><span class="token punctuation">,</span><span class="token string">"users"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">]</span></code></pre>
+    <form action="{% url 'users:user' %}" method="post">
+        旧密码: <input type="password" name="old_password">
+        新密码: <input type="password" name="new_password">
+        确认密码: <input type="password" name="conf_password">
+        <button name="submit">确认修改</button>
+        <input type="hidden" name="next" value="{% url 'users:index' %}"/>
+    </form>
+
+{% endblock %}
+</code></pre>
+<h3 id="首页"><a class="header-anchor" href="#首页">¶</a>首页</h3>
+<h4 id="定义视图-v5"><a class="header-anchor" href="#定义视图-v5">¶</a>定义视图</h4>
+<pre class=" language-language-python"><code class="language-language-python">class IndexView(View):
+
+def get(self, request):
+    return render(request, 'index.html')
+</code></pre>
+<h4 id="实现模板-v4"><a class="header-anchor" href="#实现模板-v4">¶</a>实现模板</h4>
+<pre class=" language-language-html"><code class="language-language-html">{% extends 'base.html' %}
+
+{% block body %}
+    <h1>欢迎来到首页</h1>
+{% endblock %}
+</code></pre>
+<h2 id="配置路由"><a class="header-anchor" href="#配置路由">¶</a>配置路由</h2>
+<p><code>django_demo\urls.py</code>中配置总路由</p>
+<pre class=" language-language-python"><code class="language-language-python">from django.contrib import admin
+from django.urls import path,include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('users/', include("users.urls","users"))
+]
+</code></pre>
 <p><code>users\urls.py</code>中配置子路由</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> django<span class="token punctuation">.</span>urls <span class="token keyword">import</span> path
-<span class="token keyword">from</span> <span class="token punctuation">.</span>views <span class="token keyword">import</span> RegisterView<span class="token punctuation">,</span> LoginView<span class="token punctuation">,</span> IndexView<span class="token punctuation">,</span> LogoutView<span class="token punctuation">,</span> UserView
+<pre class=" language-language-python"><code class="language-language-python">from django.urls import path
+from .views import RegisterView, LoginView, IndexView, LogoutView, UserView
 
-app_name <span class="token operator">=</span> <span class="token string">"users"</span>
+app_name = "users"
 
-urlpatterns <span class="token operator">=</span> <span class="token punctuation">[</span>
-    path<span class="token punctuation">(</span><span class="token string">'register/'</span><span class="token punctuation">,</span> RegisterView<span class="token punctuation">.</span>as_view<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">"register"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    path<span class="token punctuation">(</span><span class="token string">'login/'</span><span class="token punctuation">,</span> LoginView<span class="token punctuation">.</span>as_view<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">"login"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    path<span class="token punctuation">(</span><span class="token string">'logout/'</span><span class="token punctuation">,</span> LogoutView<span class="token punctuation">.</span>as_view<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">"logout"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    path<span class="token punctuation">(</span><span class="token string">"user/"</span><span class="token punctuation">,</span> UserView<span class="token punctuation">.</span>as_view<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'user'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    path<span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span> IndexView<span class="token punctuation">.</span>as_view<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">"index"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+urlpatterns = [
+    path('register/', RegisterView.as_view(), name="register"),
+    path('login/', LoginView.as_view(), name="login"),
+    path('logout/', LogoutView.as_view(), name="logout"),
+    path("user/", UserView.as_view(), name='user'),
+    path('', IndexView.as_view(), name="index"),
 
-<span class="token punctuation">]</span></code></pre>
+]
+</code></pre>
 
                 
             </div>
@@ -1354,7 +1401,7 @@ urlpatterns <span class="token operator">=</span> <span class="token punctuation
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

@@ -467,53 +467,58 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>在项目中，需要为 APP 撰写 API。刚开始接触的时候，并没有考虑太多，就想提供 URL，APP 端通过该 URL 进行查询、创建、更新等操作即可。但再对相关规范进行了解后，才发现，API 的设计并没有那么简单，远远不是 URL 的问题，而是一个通信协议的整体架构。</p>
-<h2 id="使用-SSL（https）来提供-URL"><a href="#使用-SSL（https）来提供-URL" class="headerlink" title="使用 SSL（https）来提供 URL"></a>使用 SSL（https）来提供 URL</h2><blockquote>
-<p>  首先，使用 https 可以在数据包被抓取时多一层加密。</p>
+<h2 id="使用-SSL（https）来提供-URL"><a class="header-anchor" href="#使用-SSL（https）来提供-URL">¶</a>使用 SSL（https）来提供 URL</h2>
+<blockquote>
+<p>首先，使用 https 可以在数据包被抓取时多一层加密。</p>
 </blockquote>
 <p>我们现在的 APP 使用环境大部分都是在路由器 WIFI 环境下，一旦路由器被入侵，那么黑客可以非常容易的抓取到用户通过路由器传输的数据，如果使用 http 未经加密，那么黑客可以很轻松的获取用户的信息，甚至是账户信息。</p>
 <blockquote>
-<p>  其次，即使使用 https，也要在 API 数据传输设计时，正确的采用加密。</p>
+<p>其次，即使使用 https，也要在 API 数据传输设计时，正确的采用加密。</p>
 </blockquote>
 <p>例如直接将 token 信息放在 URL 中的做法，即使你使用了 https，黑客仅能抓到域名字符部分，不能抓到请求的数据，但是 URL 可以在浏览器或特殊客户端工具中直接看到。因此，使用 https 进行请求时，要采用 POST、PUT 或者 HEAD 的方式传输必要的数据。</p>
-<h2 id="使用-GET、POST、PUT、DELETE-这几种请求模式"><a href="#使用-GET、POST、PUT、DELETE-这几种请求模式" class="headerlink" title="使用 GET、POST、PUT、DELETE 这几种请求模式"></a>使用 GET、POST、PUT、DELETE 这几种请求模式</h2><p>请求模式也可以说是动作、数据传输方式，通常我们在 web 中的 form 有 GET、POST 两种。</p>
+<h2 id="使用-GET、POST、PUT、DELETE-这几种请求模式"><a class="header-anchor" href="#使用-GET、POST、PUT、DELETE-这几种请求模式">¶</a>使用 GET、POST、PUT、DELETE 这几种请求模式</h2>
+<p>请求模式也可以说是动作、数据传输方式，通常我们在 web 中的 form 有 GET、POST 两种。</p>
 <p>而在 HTTP 中，存在以下这几种。</p>
 <table>
 <thead>
 <tr>
-<th align="left">请求方式</th>
-<th align="left">功能</th>
+<th style="text-align:left">请求方式</th>
+<th style="text-align:left">功能</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">GET（选择）</td>
-<td align="left">从服务器上获取一个具体的资源或者一个资源列表。</td>
+<tbody>
+<tr>
+<td style="text-align:left">GET（选择）</td>
+<td style="text-align:left">从服务器上获取一个具体的资源或者一个资源列表。</td>
 </tr>
 <tr>
-<td align="left">POST（创建）</td>
-<td align="left">在服务器上创建一个新的资源。</td>
+<td style="text-align:left">POST（创建）</td>
+<td style="text-align:left">在服务器上创建一个新的资源。</td>
 </tr>
 <tr>
-<td align="left">PUT（更新）</td>
-<td align="left">以整体的方式更新服务器上的一个资源。</td>
+<td style="text-align:left">PUT（更新）</td>
+<td style="text-align:left">以整体的方式更新服务器上的一个资源。</td>
 </tr>
 <tr>
-<td align="left">PATCH （更新）</td>
-<td align="left">只更新服务器上一个资源的一个属性。</td>
+<td style="text-align:left">PATCH （更新）</td>
+<td style="text-align:left">只更新服务器上一个资源的一个属性。</td>
 </tr>
 <tr>
-<td align="left">DELETE（删除）</td>
-<td align="left">删除服务器上的一个资源。</td>
+<td style="text-align:left">DELETE（删除）</td>
+<td style="text-align:left">删除服务器上的一个资源。</td>
 </tr>
 <tr>
-<td align="left">HEAD</td>
-<td align="left">获取一个资源的元数据，如数据的哈希值或最后的更新时间。</td>
+<td style="text-align:left">HEAD</td>
+<td style="text-align:left">获取一个资源的元数据，如数据的哈希值或最后的更新时间。</td>
 </tr>
 <tr>
-<td align="left">OPTIONS</td>
-<td align="left">获取客户端能对资源做什么操作的信息。</td>
+<td style="text-align:left">OPTIONS</td>
+<td style="text-align:left">获取客户端能对资源做什么操作的信息。</td>
 </tr>
-</tbody></table>
-<h2 id="在-URI-中体现资源，而非动作"><a href="#在-URI-中体现资源，而非动作" class="headerlink" title="在 URI 中体现资源，而非动作"></a>在 URI 中体现资源，而非动作</h2><p>阅读 RESTful 架构的参考文献之后，你会了解什么是资源的概念，以及 REST 的确切含义。再构建 API 的 URL 的时候，URI 中应该仅包含资源（对象），而不要加入动作。</p>
+</tbody>
+</table>
+<h2 id="在-URI-中体现资源，而非动作"><a class="header-anchor" href="#在-URI-中体现资源，而非动作">¶</a>在 URI 中体现资源，而非动作</h2>
+<p>阅读 RESTful 架构的参考文献之后，你会了解什么是资源的概念，以及 REST 的确切含义。再构建 API 的 URL 的时候，URI 中应该仅包含资源（对象），而不要加入动作。</p>
 <p>比如 <code>/user/1/update</code> ，其中 <code>update</code> 就是一个动作，虽然我们希望通过这个 URI 来实现用户 ID 为 1 的用户进行信息更新，但是按照 RESTful 的规范，<code>update</code>作为动作，应该用上面的 <code>PUT</code> 来表示，所以请求更新用户信息，应该使用 <code>PUT /user/1</code> 来表示更新用户 ID 为 1 的用户信息。</p>
 <p>如果去对应上面的请求模式：</p>
 <ul>
@@ -522,134 +527,139 @@
 <li>PUT 表示更新</li>
 <li>DELETE 表示删除</li>
 </ul>
-<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>API 的开发直接关系了 APP 是否可以正常使用，如果原本运行正常的 API，突然改动，那么之前使用这个 API 的 APP 可能无法正常运行。APP 是不可能强迫用户主动升级的，因此，通过 API 版本来解决这个问题。也就是说，API 的多个版本是同时运行的，而且都要保证可以正常使用。</p>
+<h2 id="版本"><a class="header-anchor" href="#版本">¶</a>版本</h2>
+<p>API 的开发直接关系了 APP 是否可以正常使用，如果原本运行正常的 API，突然改动，那么之前使用这个 API 的 APP 可能无法正常运行。APP 是不可能强迫用户主动升级的，因此，通过 API 版本来解决这个问题。也就是说，API 的多个版本是同时运行的，而且都要保证可以正常使用。</p>
 <p>按照 RESTful 的规范，不同的版本也应该用相同的 API URL，通过 header 信息来判断版本，再调用不同版本的程序进行处理。但是这明显会给开发带来巨大的成本。</p>
 <p>解决办法有两种：</p>
 <ol>
 <li>新版本兼容旧版本，所有旧版本的动作、字段、操作，都在新版本中可以被实现，但明显这样的维护成本很大；</li>
-<li>不同的版本，用不同的 URL 来提供服务，比如在 URL 中通过 v1、v2 来区分版本号，或者采用子域名的方式，比如 v2.api.xxx.com/user 的方式。</li>
+<li>不同的版本，用不同的 URL 来提供服务，比如在 URL 中通过 v1、v2 来区分版本号，或者采用子域名的方式，比如 <a href="http://v2.api.xxx.com/user" target="_blank" rel="noopener">v2.api.xxx.com/user</a> 的方式。</li>
 </ol>
-<h2 id="HTTP-响应码"><a href="#HTTP-响应码" class="headerlink" title="HTTP 响应码"></a>HTTP 响应码</h2><p>在用户发出请求，服务端对请求进行响应时，给予正确的 HTTP 响应状态码，有利于让客户端正确区分遇到的情况。</p>
+<h2 id="HTTP-响应码"><a class="header-anchor" href="#HTTP-响应码">¶</a>HTTP 响应码</h2>
+<p>在用户发出请求，服务端对请求进行响应时，给予正确的 HTTP 响应状态码，有利于让客户端正确区分遇到的情况。</p>
 <table>
 <thead>
 <tr>
-<th align="center">状态码</th>
-<th align="center">请求方式</th>
-<th align="left">描述</th>
+<th style="text-align:center">状态码</th>
+<th style="text-align:center">请求方式</th>
+<th style="text-align:left">描述</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center"><code>200</code></td>
-<td align="center"><code>[GET]</code></td>
-<td align="left">（<code>OK</code>成功）服务器成功返回用户请求的数据,该操作是幂等的（Idempotent）</td>
+<tbody>
+<tr>
+<td style="text-align:center"><code>200 </code></td>
+<td style="text-align:center"><code> [GET]</code></td>
+<td style="text-align:left">（<code>OK</code>成功）服务器成功返回用户请求的数据,该操作是幂等的（Idempotent）</td>
 </tr>
 <tr>
-<td align="center"><code>201</code></td>
-<td align="center"><code>[POST/PUT/PATCH]</code></td>
-<td align="left">（<code>CREATED</code>已建立）用户新建或修改数据成功</td>
+<td style="text-align:center"><code>201 </code></td>
+<td style="text-align:center"><code> [POST/PUT/PATCH]</code></td>
+<td style="text-align:left">（<code>CREATED</code>已建立）用户新建或修改数据成功</td>
 </tr>
 <tr>
-<td align="center"><code>202</code></td>
-<td align="center"><code>[*]</code></td>
-<td align="left">(<code>Accepted</code>接受请求)表示一个请求已经进入后台排队（异步任务）</td>
+<td style="text-align:center"><code>202</code></td>
+<td style="text-align:center"><code>[*]</code></td>
+<td style="text-align:left">(<code>Accepted</code>接受请求)表示一个请求已经进入后台排队（异步任务）</td>
 </tr>
 <tr>
-<td align="center"><code>204</code></td>
-<td align="center"><code>[DELETE]</code></td>
-<td align="left">(<code>NO CONTENT</code>无内容) 用户删除数据成功</td>
+<td style="text-align:center"><code>204</code></td>
+<td style="text-align:center"><code>[DELETE]</code></td>
+<td style="text-align:left">(<code>NO CONTENT</code>无内容) 用户删除数据成功</td>
 </tr>
 <tr>
-<td align="center"><code>300</code></td>
-<td align="center"></td>
-<td align="left">（<code>Multiple Choices</code>多种选择） 针对请求，服务器可执行多种操作。服务器可根据请求者 (user agent) 选择一项操作，或提供操作列表供请求者选择。</td>
+<td style="text-align:center"><code>300 </code></td>
+<td style="text-align:center"></td>
+<td style="text-align:left">（<code>Multiple Choices</code>多种选择） 针对请求，服务器可执行多种操作。服务器可根据请求者 (user agent) 选择一项操作，或提供操作列表供请求者选择。</td>
 </tr>
 <tr>
-<td align="center"><code>301</code></td>
-<td align="center"></td>
-<td align="left">（<code>Permanently Moved</code>永久移动） 请求的网页已永久移动到新位置。服务器返回此响应（对 GET 或 HEAD 请求的响应）时，会自动将请求者转到新位置。</td>
+<td style="text-align:center"><code>301 </code></td>
+<td style="text-align:center"></td>
+<td style="text-align:left">（<code>Permanently Moved</code>永久移动） 请求的网页已永久移动到新位置。服务器返回此响应（对 GET 或 HEAD 请求的响应）时，会自动将请求者转到新位置。</td>
 </tr>
 <tr>
-<td align="center"><code>302</code></td>
-<td align="center"></td>
-<td align="left">（<code>Temporarily Moved</code>临时移动） 服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来进行以后的请求。</td>
+<td style="text-align:center"><code>302 </code></td>
+<td style="text-align:center"></td>
+<td style="text-align:left">（<code>Temporarily Moved</code>临时移动） 服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来进行以后的请求。</td>
 </tr>
 <tr>
-<td align="center"><code>303</code></td>
-<td align="center"></td>
-<td align="left">（<code>See Other</code>查看其他位置） 请求者应当对不同的位置使用单独的 GET 请求来检索响应时，服务器返回此代码</td>
+<td style="text-align:center"><code>303 </code></td>
+<td style="text-align:center"></td>
+<td style="text-align:left">（<code>See Other</code>查看其他位置） 请求者应当对不同的位置使用单独的 GET 请求来检索响应时，服务器返回此代码</td>
 </tr>
 <tr>
-<td align="center"><code>304</code></td>
-<td align="center"></td>
-<td align="left">（<code>Not Modified</code>未修改） 自从上次请求后，请求的网页未修改过。服务器返回此响应时，不会返回网页内容。</td>
+<td style="text-align:center"><code>304 </code></td>
+<td style="text-align:center"></td>
+<td style="text-align:left">（<code>Not Modified</code>未修改） 自从上次请求后，请求的网页未修改过。服务器返回此响应时，不会返回网页内容。</td>
 </tr>
 <tr>
-<td align="center"><code>305</code></td>
-<td align="center"></td>
-<td align="left">（<code>Use Proxy</code>使用代理） 请求者只能使用代理访问请求的网页。如果服务器返回此响应，还表示请求者应使用代理。</td>
+<td style="text-align:center"><code>305 </code></td>
+<td style="text-align:center"></td>
+<td style="text-align:left">（<code>Use Proxy</code>使用代理） 请求者只能使用代理访问请求的网页。如果服务器返回此响应，还表示请求者应使用代理。</td>
 </tr>
 <tr>
-<td align="center"><code>307</code></td>
-<td align="center"></td>
-<td align="left"><code>Temporary Redirect</code>（临时重定向） 服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来进行以后的请求。</td>
+<td style="text-align:center"><code>307</code></td>
+<td style="text-align:center"></td>
+<td style="text-align:left"><code>Temporary Redirect</code>（临时重定向） 服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来进行以后的请求。</td>
 </tr>
 <tr>
-<td align="center"><code>400</code></td>
-<td align="center"><code>[POST/PUT/PATCH]</code></td>
-<td align="left"><code>INVALID REQUEST</code>(坏请求) 用户发出的请求有错误，服务器没有进行新建或修改数据的操作，该操作是幂等的。</td>
+<td style="text-align:center"><code>400</code></td>
+<td style="text-align:center"><code>[POST/PUT/PATCH]</code></td>
+<td style="text-align:left"><code> INVALID REQUEST</code>(坏请求) 用户发出的请求有错误，服务器没有进行新建或修改数据的操作，该操作是幂等的。</td>
 </tr>
 <tr>
-<td align="center"><code>401</code></td>
-<td align="center"><code>[*]</code></td>
-<td align="left"><code>Unauthorized</code> (未授权) 表示用户没有权限（令牌、用户名、密码错误）</td>
+<td style="text-align:center"><code>401</code></td>
+<td style="text-align:center"><code>[*]</code></td>
+<td style="text-align:left"><code>Unauthorized</code> (未授权) 表示用户没有权限（令牌、用户名、密码错误）</td>
 </tr>
 <tr>
-<td align="center"><code>403</code></td>
-<td align="center"><code>[*]</code></td>
-<td align="left"><code>Forbidden</code> （禁止）表示用户得到授权（与401错误相对），但是访问是被禁止的</td>
+<td style="text-align:center"><code>403</code></td>
+<td style="text-align:center"><code>[*]</code></td>
+<td style="text-align:left"><code>Forbidden</code> （禁止）表示用户得到授权（与401错误相对），但是访问是被禁止的</td>
 </tr>
 <tr>
-<td align="center"><code>404</code></td>
-<td align="center"><code>[*]</code></td>
-<td align="left"><code>NOT FOUND</code> （未找到）用户发出的请求针对的是不存在的记录，服务器没有进行操作，该操作是幂等的。</td>
+<td style="text-align:center"><code>404</code></td>
+<td style="text-align:center"><code>[*]</code></td>
+<td style="text-align:left"><code>NOT FOUND</code> （未找到）用户发出的请求针对的是不存在的记录，服务器没有进行操作，该操作是幂等的。</td>
 </tr>
 <tr>
-<td align="center"><code>405</code></td>
-<td align="center"></td>
-<td align="left"><code>Method not allowed</code>（方法不被允许）不支持该Request的方法</td>
+<td style="text-align:center"><code>405</code></td>
+<td style="text-align:center"></td>
+<td style="text-align:left"><code> Method not allowed</code>（方法不被允许）不支持该Request的方法</td>
 </tr>
 <tr>
-<td align="center"><code>406</code></td>
-<td align="center"></td>
-<td align="left"><code>Not Acceptable</code>（无法接受）无法使用请求的内容特性来响应请求的网页，也就是后台的返回结果前台无法解析（比如用户请求 JSON 格式，但是只有 XML 格式）</td>
+<td style="text-align:center"><code>406</code></td>
+<td style="text-align:center"></td>
+<td style="text-align:left"><code>Not Acceptable</code>（无法接受）无法使用请求的内容特性来响应请求的网页，也就是后台的返回结果前台无法解析（比如用户请求 JSON 格式，但是只有 XML 格式）</td>
 </tr>
 <tr>
-<td align="center"><code>407</code></td>
-<td align="center"></td>
-<td align="left"><code>Proxy Authentication Required</code>（要求进行代理认证）与状态码401类似， 用于需要进行认证的代理服务器.</td>
+<td style="text-align:center"><code>407</code></td>
+<td style="text-align:center"></td>
+<td style="text-align:left"><code>Proxy Authentication Required</code>（要求进行代理认证）与状态码401类似， 用于需要进行认证的代理服务器.</td>
 </tr>
 <tr>
-<td align="center"><code>408</code></td>
-<td align="center"></td>
-<td align="left"><code>Request Timeout</code>(请求超时) 如果客户端完成请求时花费的时间太长， 服务器可以回送这个状态码并关闭连接</td>
+<td style="text-align:center"><code>408</code></td>
+<td style="text-align:center"></td>
+<td style="text-align:left"><code> Request Timeout</code>(请求超时) 如果客户端完成请求时花费的时间太长， 服务器可以回送这个状态码并关闭连接</td>
 </tr>
 <tr>
-<td align="center"><code>410</code></td>
-<td align="center"><code>[GET]</code></td>
-<td align="left"><code>Gone</code> （过去的）用户请求的资源被永久删除，且不会再得到的</td>
+<td style="text-align:center"><code>410</code></td>
+<td style="text-align:center"><code>[GET]</code></td>
+<td style="text-align:left"><code>Gone</code> （过去的）用户请求的资源被永久删除，且不会再得到的</td>
 </tr>
 <tr>
-<td align="center"><code>422</code></td>
-<td align="center"><code>[POST/PUT/PATCH]</code></td>
-<td align="left"><code>Unprocesable entity</code> （不可处理）当创建一个对象时，发生一个验证错误</td>
+<td style="text-align:center"><code>422</code></td>
+<td style="text-align:center"><code> [POST/PUT/PATCH]</code></td>
+<td style="text-align:left"><code>Unprocesable entity</code> （不可处理）当创建一个对象时，发生一个验证错误</td>
 </tr>
 <tr>
-<td align="center"><code>500</code></td>
-<td align="center"><code>[*]</code></td>
-<td align="left"><code>INTERNAL SERVER ERROR</code>(服务器内部错误）服务器发生错误，用户将无法判断发出的请求是否成功</td>
+<td style="text-align:center"><code>500</code></td>
+<td style="text-align:center"><code> [*]</code></td>
+<td style="text-align:left"><code>INTERNAL SERVER ERROR</code>(服务器内部错误）服务器发生错误，用户将无法判断发出的请求是否成功</td>
 </tr>
-</tbody></table>
-<h2 id="返回值结构"><a href="#返回值结构" class="headerlink" title="返回值结构"></a>返回值结构</h2><p>在完成了上面的 URL 部署之后，接下来我们来看看返回结果应该怎么样来确定。</p>
+</tbody>
+</table>
+<h2 id="返回值结构"><a class="header-anchor" href="#返回值结构">¶</a>返回值结构</h2>
+<p>在完成了上面的 URL 部署之后，接下来我们来看看返回结果应该怎么样来确定。</p>
 <p>我看到大部分文献中指出，最好使用 JSON 进行返回，而非 xml。</p>
 <p>我认为原因可能有两点：</p>
 <ol>
@@ -658,27 +668,30 @@
 </ol>
 <p>那么，返回值应该怎么去部署呢？</p>
 <p>首先，字段的合理返回，数据的包裹。因为返回值中，我们常常要对数据进行区分分组，或者按照从属关系打包，所以，我们再返回时，最好有包裹的思想，把数据存放在不同的包裹中进行返回。</p>
-<pre class=" language-python"><code class="language-python"><span class="token punctuation">{</span>
-    <span class="token string">'error_code'</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
-    <span class="token string">'data'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
-        <span class="token string">'user_id'</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-        <span class="token string">'username'</span><span class="token punctuation">:</span> <span class="token string">'xiaomin'</span>
-    <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token string">'server_time'</span><span class="token punctuation">:</span> <span class="token number">14939939</span>
-<span class="token punctuation">}</span></code></pre>
+<pre class=" language-language-python"><code class="language-language-python">{
+    'error_code': 0,
+    'data': {
+        'user_id': 1,
+        'username': 'xiaomin'
+    },
+    'server_time': 14939939
+}
+</code></pre>
 <p>上面返回的 JSON 中，使用 data 来作为数据包，将所有数据统一以这个字段进行包裹。除了 data，也可以用 list 等其他形式的包裹，命名都是自己来根据自己的需要确定的。</p>
-<pre class=" language-python"><code class="language-python"><span class="token punctuation">{</span>
-    <span class="token string">'error_code'</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
-    <span class="token string">'list'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
-        <span class="token punctuation">{</span><span class="token string">'user_id'</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">'username'</span><span class="token punctuation">:</span> <span class="token string">'xiaoming'</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-        <span class="token punctuation">{</span><span class="token string">'user_id'</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">'username'</span><span class="token punctuation">:</span> <span class="token string">'goudan'</span><span class="token punctuation">}</span>
-    <span class="token punctuation">]</span>
-    <span class="token string">'server_time'</span><span class="token punctuation">:</span> <span class="token number">14939939</span>
-<span class="token punctuation">}</span></code></pre>
+<pre class=" language-language-python"><code class="language-language-python">{
+    'error_code': 0,
+    'list': [
+        {'user_id': 1, 'username': 'xiaoming'},
+        {'user_id': 2, 'username': 'goudan'}
+    ]
+    'server_time': 14939939
+}
+</code></pre>
 <p>总之，不要不分包，直接把所有数据和一些你想返回的全局数据混在一起进行返回。</p>
 <p>其次，错误码。错误码的作用是方便查找错误原因，通常情况下，可以用 error_code 来表示，当 error_code=0 时，表示没有发生错误，当 error_code&gt;0 时，发生了错误，并且提供较为详细的文档，告诉客户端对应的 error_code 值所产生的错误的原因和位置。</p>
 <p>最后，空白压缩和字符转换。也就是返回的 JSON 结果不要换行和空格，用一行返回结果，使整个结果文本容量最小。同时，中文等字符或结果中有引号，都进行字符转换，防止结果无法被正确识别。</p>
-<h2 id="鉴权"><a href="#鉴权" class="headerlink" title="鉴权"></a>鉴权</h2><p>其实也就是客户端的权限控制。一般而言，会给客户端分发一个 token 来确定该客户端的唯一身份。客户端在请求时，通过这个 token，判断发出请求的客户端所对应的用户，及其相关信息和权限。</p>
+<h2 id="鉴权"><a class="header-anchor" href="#鉴权">¶</a>鉴权</h2>
+<p>其实也就是客户端的权限控制。一般而言，会给客户端分发一个 token 来确定该客户端的唯一身份。客户端在请求时，通过这个 token，判断发出请求的客户端所对应的用户，及其相关信息和权限。</p>
 <p>前文已经提到了，token 信息不是用来进行处理的数据，虽然可以通过 POST、PUT 等进行数据提交或传输，但是从 RESTful 规范来讲，它不属于操作数据，在服务端进行处理时，仅是利用 token 进行鉴权处理，所以，我的建议是通过 header 来发送 token。</p>
 
                 
@@ -1000,8 +1013,9 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            内存管理机制
-Python中不但变量名无需事先声明，而且也无需类型声明。在Python语言中，对象的类型和内存占用都是运行时确定的。在赋值时解释器会根据语法和右侧的操作数来决定新对象的类型。在对象创建后，一个该对象的引用会被赋值给左侧的变量
+                            ¶内存管理机制
+
+Python中不但变量名无需事先声明，而且也无需类型声明。在Python语言中，对象的类型和内存占用都是运行时确定的。在赋值时解释器会根据语法和右侧的操作数来决定新对象的类型。在对象创建后，一个该对象的引用会被赋值给左侧的
                         
                     </div>
                     <div class="publish-info">
@@ -1239,7 +1253,7 @@ Python中不但变量名无需事先声明，而且也无需类型声明。在Py
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

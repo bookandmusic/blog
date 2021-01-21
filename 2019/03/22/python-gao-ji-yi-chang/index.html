@@ -463,22 +463,24 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190517210629-%E5%BC%82%E5%B8%B8%E7%B1%BB%E5%9E%8B%20.png" alt="20190517210629-异常类型"></p>
-<h3 id="自定义异常类型"><a href="#自定义异常类型" class="headerlink" title="自定义异常类型"></a>自定义异常类型</h3><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 自定义错误类型</span>
-<span class="token keyword">class</span> <span class="token class-name">ArgsException</span><span class="token punctuation">(</span>Exception<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> num<span class="token punctuation">,</span> num_type<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        self<span class="token punctuation">.</span>num <span class="token operator">=</span> num  <span class="token comment" spellcheck="true"># 用来描述参数个数</span>
-        self<span class="token punctuation">.</span>num_type <span class="token operator">=</span> num_type  <span class="token comment" spellcheck="true"># 用户描述参数类型</span>
+<h3 id="自定义异常类型"><a class="header-anchor" href="#自定义异常类型">¶</a>自定义异常类型</h3>
+<pre class=" language-language-python"><code class="language-language-python"># 自定义错误类型
+class ArgsException(Exception):
+    def __init__(self, num, num_type):
+        self.num = num  # 用来描述参数个数
+        self.num_type = num_type  # 用户描述参数类型
 
 
-num1 <span class="token operator">=</span> input<span class="token punctuation">(</span><span class="token string">"输入数字:"</span><span class="token punctuation">)</span>
-num2 <span class="token operator">=</span> input<span class="token punctuation">(</span><span class="token string">"输入数字:"</span><span class="token punctuation">)</span>
+num1 = input("输入数字:")
+num2 = input("输入数字:")
 
-<span class="token keyword">try</span><span class="token punctuation">:</span>
-    <span class="token keyword">if</span> num1<span class="token punctuation">.</span>isdigit<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">is</span> <span class="token boolean">False</span> <span class="token operator">or</span> num2<span class="token punctuation">.</span>isdigit<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">is</span> <span class="token boolean">False</span><span class="token punctuation">:</span>
-             <span class="token comment" spellcheck="true"># 错误类型的实例对象</span>
-        <span class="token keyword">raise</span> ArgsException<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">"int"</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># raise 异常类型  -> 主动抛出异常</span>
-<span class="token keyword">except</span> ArgsException <span class="token keyword">as</span> ret<span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"需要%d个%s参数"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>ret<span class="token punctuation">.</span>num<span class="token punctuation">,</span> ret<span class="token punctuation">.</span>num_type<span class="token punctuation">)</span><span class="token punctuation">)</span>
+try:
+    if num1.isdigit() is False or num2.isdigit() is False:
+             # 错误类型的实例对象
+        raise ArgsException(2, "int")  # raise 异常类型  -> 主动抛出异常
+except ArgsException as ret:
+    print("需要%d个%s参数" % (ret.num, ret.num_type))
+
 </code></pre>
 
                 
@@ -1030,7 +1032,7 @@ num2 <span class="token operator">=</span> input<span class="token punctuation">
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

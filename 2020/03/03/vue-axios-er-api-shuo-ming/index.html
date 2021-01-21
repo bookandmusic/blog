@@ -466,78 +466,97 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Axios-API"><a href="#Axios-API" class="headerlink" title="Axios API"></a>Axios API</h2><ol>
-<li><p>可以通过向 axios 传递相关配置来创建请求</p>
+                <h2 id="Axios-API"><a class="header-anchor" href="#Axios-API">¶</a>Axios API</h2>
+<ol>
+<li>
+<p>可以通过向 axios 传递相关配置来创建请求</p>
 <ul>
-<li><p>axios配置全部参数</p>
-<pre class=" language-javascript"><code class="language-javascript">  <span class="token function">axios</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span></code></pre>
-<pre class=" language-javascript"><code class="language-javascript">  <span class="token comment" spellcheck="true">// 发送 POST 请求</span>
-  <span class="token function">axios</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      method<span class="token punctuation">:</span> <span class="token string">'post'</span><span class="token punctuation">,</span>
-      url<span class="token punctuation">:</span> <span class="token string">'/user/12345'</span><span class="token punctuation">,</span>
-      data<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-      firstName<span class="token punctuation">:</span> <span class="token string">'Fred'</span><span class="token punctuation">,</span>
-      lastName<span class="token punctuation">:</span> <span class="token string">'Flintstone'</span>
-      <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<li>
+<p>axios配置全部参数</p>
+<pre class=" language-language-javascript"><code class="language-language-javascript">axios(config)
+</code></pre>
+<pre class=" language-language-javascript"><code class="language-language-javascript">// 发送 POST 请求
+axios({
+    method: 'post',
+    url: '/user/12345',
+    data: {
+    firstName: 'Fred',
+    lastName: 'Flintstone'
+    }
+});
+</code></pre>
 </li>
-<li><p>axios中指定url和参数配置</p>
-<pre class=" language-javascript"><code class="language-javascript">  <span class="token function">axios</span><span class="token punctuation">(</span>url<span class="token punctuation">[</span><span class="token punctuation">,</span> config<span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre>
-<pre class=" language-javascript"><code class="language-javascript">  <span class="token comment" spellcheck="true">// 发送 GET 请求（默认的方法）</span>
-  <span class="token function">axios</span><span class="token punctuation">(</span><span class="token string">'/user/12345'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<pre class=" language-javascript"><code class="language-javascript">  <span class="token comment" spellcheck="true">// 发送 POST 请求</span>
-  <span class="token function">axios</span><span class="token punctuation">(</span><span class="token string">'/user/12345'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
-      method<span class="token punctuation">:</span> <span class="token string">'post'</span><span class="token punctuation">,</span>
-      data<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-      firstName<span class="token punctuation">:</span> <span class="token string">'Fred'</span><span class="token punctuation">,</span>
-      lastName<span class="token punctuation">:</span> <span class="token string">'Flintstone'</span>
-      <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<li>
+<p>axios中指定url和参数配置</p>
+<pre class=" language-language-javascript"><code class="language-language-javascript">axios(url[, config])
+</code></pre>
+<pre class=" language-language-javascript"><code class="language-language-javascript">// 发送 GET 请求（默认的方法）
+axios('/user/12345');
+</code></pre>
+<pre class=" language-language-javascript"><code class="language-language-javascript">// 发送 POST 请求
+axios('/user/12345', {
+    method: 'post',
+    data: {
+    firstName: 'Fred',
+    lastName: 'Flintstone'
+    }
+});
+</code></pre>
 </li>
 </ul>
 </li>
-<li><p>请求方法的别名</p>
+<li>
+<p>请求方法的别名</p>
 <ul>
-<li><p>为方便起见，为所有支持的请求方法提供了别名</p>
-<pre class=" language-javascript"><code class="language-javascript">  axios<span class="token punctuation">.</span><span class="token function">request</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span>
-  axios<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>url<span class="token punctuation">[</span><span class="token punctuation">,</span> config<span class="token punctuation">]</span><span class="token punctuation">)</span>
-  axios<span class="token punctuation">.</span><span class="token keyword">delete</span><span class="token punctuation">(</span>url<span class="token punctuation">[</span><span class="token punctuation">,</span> config<span class="token punctuation">]</span><span class="token punctuation">)</span>
-  axios<span class="token punctuation">.</span><span class="token function">head</span><span class="token punctuation">(</span>url<span class="token punctuation">[</span><span class="token punctuation">,</span> config<span class="token punctuation">]</span><span class="token punctuation">)</span>
-  axios<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span>url<span class="token punctuation">[</span><span class="token punctuation">,</span> data<span class="token punctuation">[</span><span class="token punctuation">,</span> config<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-  axios<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>url<span class="token punctuation">[</span><span class="token punctuation">,</span> data<span class="token punctuation">[</span><span class="token punctuation">,</span> config<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-  axios<span class="token punctuation">.</span><span class="token function">patch</span><span class="token punctuation">(</span>url<span class="token punctuation">[</span><span class="token punctuation">,</span> data<span class="token punctuation">[</span><span class="token punctuation">,</span> config<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre>
+<li>
+<p>为方便起见，为所有支持的请求方法提供了别名</p>
+<pre class=" language-language-javascript"><code class="language-language-javascript">axios.request(config)
+axios.get(url[, config])
+axios.delete(url[, config])
+axios.head(url[, config])
+axios.post(url[, data[, config]])
+axios.put(url[, data[, config]])
+axios.patch(url[, data[, config]])
+</code></pre>
 <blockquote>
 <p>NOTE:在使用别名方法时， url、method、data 这些属性都不必在配置中指定。</p>
 </blockquote>
 </li>
-<li><p>axios请求方法</p>
-<pre class=" language-javascript"><code class="language-javascript">  <span class="token comment" spellcheck="true">// 发送 POST 请求</span>
-  axios<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">'/user/12345'</span><span class="token punctuation">,</span><span class="token punctuation">{</span>
-      firstName<span class="token punctuation">:</span> <span class="token string">'Fred'</span><span class="token punctuation">,</span>
-      lastName<span class="token punctuation">:</span> <span class="token string">'Flintstone'</span>
-  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<li>
+<p>axios请求方法</p>
+<pre class=" language-language-javascript"><code class="language-language-javascript">// 发送 POST 请求
+axios.post('/user/12345',{
+    firstName: 'Fred',
+    lastName: 'Flintstone'
+});
+</code></pre>
 </li>
 </ul>
 </li>
-<li><p>并发</p>
+<li>
+<p>并发</p>
 <ul>
-<li><p>处理并发请求的助手函数</p>
-<pre class=" language-javascript"><code class="language-javascript">  axios<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span>iterable<span class="token punctuation">)</span>
-  axios<span class="token punctuation">.</span><span class="token function">spread</span><span class="token punctuation">(</span>callback<span class="token punctuation">)</span></code></pre>
+<li>
+<p>处理并发请求的助手函数</p>
+<pre class=" language-language-javascript"><code class="language-language-javascript">axios.all(iterable)
+axios.spread(callback)
+</code></pre>
 </li>
-<li><p>执行多个并发请求</p>
-<pre class=" language-javascript"><code class="language-javascript">  <span class="token keyword">function</span> <span class="token function">getUserAccount</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token keyword">return</span> axios<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'/user/12345'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
+<li>
+<p>执行多个并发请求</p>
+<pre class=" language-language-javascript"><code class="language-language-javascript">function getUserAccount() {
+    return axios.get('/user/12345');
+}
 
-  <span class="token keyword">function</span> <span class="token function">getUserPermissions</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token keyword">return</span> axios<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'/user/12345/permissions'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
+function getUserPermissions() {
+    return axios.get('/user/12345/permissions');
+}
 
-  axios<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token function">getUserAccount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">getUserPermissions</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-  <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>axios<span class="token punctuation">.</span><span class="token function">spread</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>acct<span class="token punctuation">,</span> perms<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token comment" spellcheck="true">// 两个请求现在都执行完成</span>
-  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+axios.all([getUserAccount(), getUserPermissions()])
+.then(axios.spread(function (acct, perms) {
+    // 两个请求现在都执行完成
+}));
+</code></pre>
 </li>
 </ul>
 </li>
@@ -866,7 +885,9 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            主键必然是唯一且不为空，但是唯一不一定是主键，而且主键只能有一个，但是唯一约束仅仅是为了保持某些列具有唯一性而已。所以可以有多列一张表里只能有一个主键约束，可以有多个唯一约束主键约束的字段不能为null，而唯一约束的字段可以为null值
+                            主键必然是唯一且不为空，但是唯一不一定是主键，而且主键只能有一个，但是唯一约束仅仅是为了保持某些列具有唯一性而已。所以可以有多列
+一张表里只能有一个主键约束，可以有多个唯一约束
+主键约束的字段不能为null，而唯一约束的字段可以为null值
                         
                     </div>
                     <div class="publish-info">
@@ -1104,7 +1125,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             

@@ -482,24 +482,27 @@
 <p>Python可应用于多平台包括 Linux 和 Mac OS X。</p>
 <p>你可以通过终端窗口输入 “python” 命令来查看本地是否已经安装Python以及Python的安装版本。</p>
 <a id="more"></a>
+<h2 id="Python环境配置"><a class="header-anchor" href="#Python环境配置">¶</a>Python环境配置</h2>
+<pre class=" language-language-bash"><code class="language-language-bash"># ubuntu
+sudo apt-get install python3-pip
+sudo apt-get install python-pip
 
-<h2 id="Python环境配置"><a href="#Python环境配置" class="headerlink" title="Python环境配置"></a>Python环境配置</h2><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># ubuntu</span>
-<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> python3-pip
-<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> python-pip
+# windows
+python3 -m pip install --upgrade pip --force-reinstall
+python2 -m pip install --upgrade pip --force-reinstall
 
-<span class="token comment" spellcheck="true"># windows</span>
-python3 -m pip <span class="token function">install</span> --upgrade pip --force-reinstall
-python2 -m pip <span class="token function">install</span> --upgrade pip --force-reinstall
+# mac
+brew install python  # 这一步安装了python3和pip3
+brew install python@2 # 这一步安装了python2和pip2
 
-<span class="token comment" spellcheck="true"># mac</span>
-brew <span class="token function">install</span> python  <span class="token comment" spellcheck="true"># 这一步安装了python3和pip3</span>
-brew <span class="token function">install</span> python@2 <span class="token comment" spellcheck="true"># 这一步安装了python2和pip2</span>
-
-<span class="token comment" spellcheck="true"># ipython2</span>
-pip <span class="token function">install</span> ipython 
-<span class="token comment" spellcheck="true"># ipython3</span>
-pip3 <span class="token function">install</span> ipython </code></pre>
-<h2 id="pip镜像源"><a href="#pip镜像源" class="headerlink" title="pip镜像源"></a>pip镜像源</h2><h3 id="镜像源"><a href="#镜像源" class="headerlink" title="镜像源"></a>镜像源</h3><ul>
+# ipython2
+pip install ipython 
+# ipython3
+pip3 install ipython 
+</code></pre>
+<h2 id="pip镜像源"><a class="header-anchor" href="#pip镜像源">¶</a>pip镜像源</h2>
+<h3 id="镜像源"><a class="header-anchor" href="#镜像源">¶</a>镜像源</h3>
+<ul>
 <li>清华：<code>https://pypi.tuna.tsinghua.edu.cn/simple</code></li>
 <li>阿里云：<code>http://mirrors.aliyun.com/pypi/simple/</code></li>
 <li>中国科技大学 <code>https://pypi.mirrors.ustc.edu.cn/simple/</code></li>
@@ -507,169 +510,252 @@ pip3 <span class="token function">install</span> ipython </code></pre>
 <li>山东理工大学：<code>http://pypi.sdutlinux.org/</code></li>
 <li>豆瓣：<code>http://pypi.douban.com/simple/</code></li>
 </ul>
-<h3 id="文件修改"><a href="#文件修改" class="headerlink" title="文件修改"></a>文件修改</h3><h4 id="Linux-Mac"><a href="#Linux-Mac" class="headerlink" title="Linux/Mac"></a>Linux/Mac</h4><p>修改 <code>~/.pip/pip.conf</code> (没有就创建一个文件夹及文件。文件夹要加<code>.</code>，表示是隐藏文件夹)</p>
+<h3 id="文件修改"><a class="header-anchor" href="#文件修改">¶</a>文件修改</h3>
+<h4 id="Linux-Mac"><a class="header-anchor" href="#Linux-Mac">¶</a>Linux/Mac</h4>
+<p>修改 <code>~/.pip/pip.conf</code> (没有就创建一个文件夹及文件。文件夹要加<code>.</code>，表示是隐藏文件夹)</p>
 <blockquote>
 <p>内容如下</p>
 </blockquote>
-<pre class=" language-bash"><code class="language-bash"><span class="token punctuation">[</span>global<span class="token punctuation">]</span>
-index-url <span class="token operator">=</span> https://pypi.tuna.tsinghua.edu.cn/simple
-<span class="token punctuation">[</span>install<span class="token punctuation">]</span>
-trusted-host<span class="token operator">=</span>mirrors.aliyun.com</code></pre>
-<h4 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h4><p>直接在 user 目录中创建一个 pip 目录，如：<code>C:\Users\xx\pip</code>，新建文件<code>pip.ini</code>。内容同上。</p>
-<h3 id="终端修改"><a href="#终端修改" class="headerlink" title="终端修改"></a>终端修改</h3><pre class=" language-bash"><code class="language-bash">pip config <span class="token keyword">set</span> global.index-url http://mirrors.aliyun.com/pypi/simple/ <span class="token comment" spellcheck="true"># 终端使用命令设置pip镜像</span>
-pip <span class="token function">install</span> pip -U  <span class="token comment" spellcheck="true"># 升级pip包管理工具</span></code></pre>
-<h2 id="虚拟环境之pipenv"><a href="#虚拟环境之pipenv" class="headerlink" title="虚拟环境之pipenv"></a>虚拟环境之pipenv</h2><ol>
-<li><p>安装<code>pipenv</code></p>
-<pre class=" language-bash"><code class="language-bash"> pip <span class="token function">install</span> pipenv</code></pre>
+<pre class=" language-language-bash"><code class="language-language-bash">[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+[install]
+trusted-host=mirrors.aliyun.com
+</code></pre>
+<h4 id="windows"><a class="header-anchor" href="#windows">¶</a>windows</h4>
+<p>直接在 user 目录中创建一个 pip 目录，如：<code>C:\Users\xx\pip</code>，新建文件<code>pip.ini</code>。内容同上。</p>
+<h3 id="终端修改"><a class="header-anchor" href="#终端修改">¶</a>终端修改</h3>
+<pre class=" language-language-bash"><code class="language-language-bash">pip config set global.index-url http://mirrors.aliyun.com/pypi/simple/ # 终端使用命令设置pip镜像
+pip install pip -U  # 升级pip包管理工具
+</code></pre>
+<h2 id="虚拟环境之pipenv"><a class="header-anchor" href="#虚拟环境之pipenv">¶</a>虚拟环境之pipenv</h2>
+<ol>
+<li>
+<p>安装<code>pipenv</code></p>
+<pre class=" language-language-bash"><code class="language-language-bash"> pip install pipenv
+</code></pre>
 </li>
-<li><p>使用<code>pipenv</code>创建虚拟环境</p>
-<pre class=" language-bash"><code class="language-bash"> <span class="token comment" spellcheck="true"># 尽量在一个项目目录下创建虚拟环境</span>
- pip <span class="token function">install</span></code></pre>
+<li>
+<p>使用<code>pipenv</code>创建虚拟环境</p>
+<pre class=" language-language-bash"><code class="language-language-bash"> # 尽量在一个项目目录下创建虚拟环境
+ pip install
+</code></pre>
 </li>
-<li><p>激活虚拟环境</p>
-<pre class=" language-bash"><code class="language-bash"> <span class="token comment" spellcheck="true"># 在创建虚拟环境的位置运行命令</span>
- pipenv shell</code></pre>
+<li>
+<p>激活虚拟环境</p>
+<pre class=" language-language-bash"><code class="language-language-bash"> # 在创建虚拟环境的位置运行命令
+ pipenv shell
+</code></pre>
 </li>
-<li><p>修改虚拟环境的镜像源</p>
-<p> 打开虚拟环境下的配置文件: <code>Pipfile</code></p>
-<pre class=" language-bash"><code class="language-bash">     <span class="token punctuation">[</span><span class="token punctuation">[</span>source<span class="token punctuation">]</span><span class="token punctuation">]</span>
-     name <span class="token operator">=</span> <span class="token string">"pypi"</span>
-     url <span class="token operator">=</span> <span class="token string">"https://pypi.org/simple"</span>
-     verify_ssl <span class="token operator">=</span> <span class="token boolean">true</span>
+<li>
+<p>修改虚拟环境的镜像源</p>
+<p>打开虚拟环境下的配置文件: <code>Pipfile</code></p>
+<pre class=" language-language-bash"><code class="language-language-bash">    [[source]]
+    name = "pypi"
+    url = "https://pypi.org/simple"
+    verify_ssl = true
 
-     <span class="token punctuation">[</span>dev-packages<span class="token punctuation">]</span>
+    [dev-packages]
 
-     <span class="token punctuation">[</span>packages<span class="token punctuation">]</span>
+    [packages]
 
-     <span class="token punctuation">[</span>requires<span class="token punctuation">]</span>
-     python_version <span class="token operator">=</span> <span class="token string">"3.7"</span></code></pre>
-<p> 修改url为国内镜像源:</p>
+    [requires]
+    python_version = "3.7"
+</code></pre>
+<p>修改url为国内镜像源:</p>
 <ul>
-<li><p>清华: <code>https://pypi.tuna.tsinghua.edu.cn/simple</code></p>
+<li>
+<p>清华: <code>https://pypi.tuna.tsinghua.edu.cn/simple</code></p>
 </li>
-<li><p>阿里云: <code>http://mirrors.aliyun.com/pypi/simple/</code></p>
+<li>
+<p>阿里云: <code>http://mirrors.aliyun.com/pypi/simple/</code></p>
 </li>
-<li><p>中国科技大学: <code>https://pypi.mirrors.ustc.edu.cn/simple/</code></p>
+<li>
+<p>中国科技大学: <code>https://pypi.mirrors.ustc.edu.cn/simple/</code></p>
 </li>
-<li><p>华中理工大学: <code>http://pypi.hustunique.com/</code></p>
+<li>
+<p>华中理工大学: <code>http://pypi.hustunique.com/</code></p>
 </li>
-<li><p>山东理工大学: <code>http://pypi.sdutlinux.org/</code></p>
+<li>
+<p>山东理工大学: <code>http://pypi.sdutlinux.org/</code></p>
 </li>
-<li><p>豆瓣: <code>http://pypi.douban.com/simple/</code></p>
+<li>
+<p>豆瓣: <code>http://pypi.douban.com/simple/</code></p>
 </li>
 </ul>
 </li>
-<li><p>在虚拟环境安装第三方包</p>
-<pre class=" language-bash"><code class="language-bash"> pipenv <span class="token function">install</span> django</code></pre>
+<li>
+<p>在虚拟环境安装第三方包</p>
+<pre class=" language-language-bash"><code class="language-language-bash"> pipenv install django
+</code></pre>
 </li>
-<li><p>使用pipenv卸载第三方模块</p>
-<pre class=" language-bash"><code class="language-bash"> pipev uninstall django</code></pre>
+<li>
+<p>使用pipenv卸载第三方模块</p>
+<pre class=" language-language-bash"><code class="language-language-bash"> pipev uninstall django
+</code></pre>
 </li>
-<li><p>查看依赖</p>
-<pre class=" language-bash"><code class="language-bash"> pipenv graph</code></pre>
+<li>
+<p>查看依赖</p>
+<pre class=" language-language-bash"><code class="language-language-bash"> pipenv graph
+</code></pre>
 </li>
-<li><p>将安装的模块打包到一个文件内</p>
-<pre class=" language-bash"><code class="language-bash"> pip freeze <span class="token operator">></span> requirements.txt</code></pre>
+<li>
+<p>将安装的模块打包到一个文件内</p>
+<pre class=" language-language-bash"><code class="language-language-bash"> pip freeze > requirements.txt
+</code></pre>
 </li>
-<li><p>将一个文件内的第三方扩展安装到虚拟环境中</p>
-<pre class=" language-bash"><code class="language-bash"> pip <span class="token function">install</span> -r requirements.txt</code></pre>
+<li>
+<p>将一个文件内的第三方扩展安装到虚拟环境中</p>
+<pre class=" language-language-bash"><code class="language-language-bash"> pip install -r requirements.txt
+</code></pre>
 </li>
-<li><p>退出虚拟环境</p>
-<pre class=" language-bash"><code class="language-bash"><span class="token keyword">exit</span></code></pre>
+<li>
+<p>退出虚拟环境</p>
+<pre class=" language-language-bash"><code class="language-language-bash">exit
+</code></pre>
 </li>
-<li><p>删除虚拟环境</p>
-<pre class=" language-bash"><code class="language-bash">pipenv --rm</code></pre>
+<li>
+<p>删除虚拟环境</p>
+<pre class=" language-language-bash"><code class="language-language-bash">pipenv --rm
+</code></pre>
 </li>
-<li><p>不激活虚拟环境，直接运行命令</p>
-<pre class=" language-bash"><code class="language-bash">pipenv run django-amdin start project djangodemo</code></pre>
+<li>
+<p>不激活虚拟环境，直接运行命令</p>
+<pre class=" language-language-bash"><code class="language-language-bash">pipenv run django-amdin start project djangodemo
+</code></pre>
 </li>
 </ol>
-<h2 id="虚拟环境之virtualenv"><a href="#虚拟环境之virtualenv" class="headerlink" title="虚拟环境之virtualenv"></a>虚拟环境之virtualenv</h2><ol>
-<li><p>安装<code>virtualenv</code></p>
-<pre class=" language-bash"><code class="language-bash"> pip <span class="token function">install</span> virtualenv <span class="token comment" spellcheck="true"># 虚拟环境</span>
- pip <span class="token function">install</span> virtualenvwrappern <span class="token comment" spellcheck="true"># mac/linux系统</span>
- pip <span class="token function">install</span> virtualenvwrapper-win <span class="token comment" spellcheck="true"># windows系统</span></code></pre>
+<h2 id="虚拟环境之virtualenv"><a class="header-anchor" href="#虚拟环境之virtualenv">¶</a>虚拟环境之virtualenv</h2>
+<ol>
+<li>
+<p>安装<code>virtualenv</code></p>
+<pre class=" language-language-bash"><code class="language-language-bash"> pip install virtualenv # 虚拟环境
+ pip install virtualenvwrappern # mac/linux系统
+ pip install virtualenvwrapper-win # windows系统
+</code></pre>
 </li>
-<li><p>创建虚拟环境</p>
-<pre class=" language-bash"><code class="language-bash"> mkvirtualenv django</code></pre>
+<li>
+<p>创建虚拟环境</p>
+<pre class=" language-language-bash"><code class="language-language-bash"> mkvirtualenv django
+</code></pre>
 </li>
-<li><p>激活虚拟环境</p>
-<pre class=" language-bash"><code class="language-bash"> <span class="token comment" spellcheck="true"># 在创建虚拟环境后会默认激活</span>
- workon django  <span class="token comment" spellcheck="true"># 激活django虚拟环境</span>
- workon  <span class="token comment" spellcheck="true"># 查看所有虚拟环境</span></code></pre>
+<li>
+<p>激活虚拟环境</p>
+<pre class=" language-language-bash"><code class="language-language-bash"> # 在创建虚拟环境后会默认激活
+ workon django  # 激活django虚拟环境
+ workon  # 查看所有虚拟环境
+</code></pre>
 </li>
-<li><p>修改虚拟环境的镜像源</p>
-<pre class=" language-bash"><code class="language-bash">pip config <span class="token keyword">set</span> global.index-url http://mirrors.aliyun.com/pypi/simple/ <span class="token comment" spellcheck="true"># 终端使用命令设置pip镜像</span>
-pip <span class="token function">install</span> pip -U  <span class="token comment" spellcheck="true"># 升级pip包管理工具</span></code></pre>
+<li>
+<p>修改虚拟环境的镜像源</p>
+<pre class=" language-language-bash"><code class="language-language-bash">pip config set global.index-url http://mirrors.aliyun.com/pypi/simple/ # 终端使用命令设置pip镜像
+pip install pip -U  # 升级pip包管理工具
+</code></pre>
 </li>
-<li><p>在虚拟环境安装第三方包</p>
-<pre class=" language-bash"><code class="language-bash"> pip <span class="token function">install</span> django  <span class="token comment" spellcheck="true"># 先激活虚拟环境</span></code></pre>
+<li>
+<p>在虚拟环境安装第三方包</p>
+<pre class=" language-language-bash"><code class="language-language-bash"> pip install django  # 先激活虚拟环境
+</code></pre>
 </li>
-<li><p>卸载第三方模块</p>
-<pre class=" language-bash"><code class="language-bash"> pip uninstall django <span class="token comment" spellcheck="true"># 先激活虚拟环境</span></code></pre>
+<li>
+<p>卸载第三方模块</p>
+<pre class=" language-language-bash"><code class="language-language-bash"> pip uninstall django # 先激活虚拟环境
+</code></pre>
 </li>
-<li><p>将安装的模块打包到一个文件内</p>
-<pre class=" language-bash"><code class="language-bash"> pip freeze <span class="token operator">></span> requirements.txt</code></pre>
+<li>
+<p>将安装的模块打包到一个文件内</p>
+<pre class=" language-language-bash"><code class="language-language-bash"> pip freeze > requirements.txt
+</code></pre>
 </li>
-<li><p>将一个文件内的第三方扩展安装到虚拟环境中</p>
-<pre class=" language-bash"><code class="language-bash"> pip <span class="token function">install</span> -r requirements.txt</code></pre>
+<li>
+<p>将一个文件内的第三方扩展安装到虚拟环境中</p>
+<pre class=" language-language-bash"><code class="language-language-bash"> pip install -r requirements.txt
+</code></pre>
 </li>
-<li><p>退出虚拟环境</p>
-<pre class=" language-bash"><code class="language-bash"> <span class="token keyword">exit</span></code></pre>
+<li>
+<p>退出虚拟环境</p>
+<pre class=" language-language-bash"><code class="language-language-bash">exit
+</code></pre>
 </li>
-<li><p>删除虚拟环境</p>
-<pre class=" language-bash"><code class="language-bash">rmvirtualenv django</code></pre>
+<li>
+<p>删除虚拟环境</p>
+<pre class=" language-language-bash"><code class="language-language-bash">rmvirtualenv django
+</code></pre>
 </li>
 </ol>
-<h2 id="虚拟环境之conda"><a href="#虚拟环境之conda" class="headerlink" title="虚拟环境之conda"></a>虚拟环境之conda</h2><h3 id="1-Anaconda简介"><a href="#1-Anaconda简介" class="headerlink" title="1. Anaconda简介"></a>1. Anaconda简介</h3><ul>
-<li><p>Anaconda是一个方便的python包管理和环境管理软件，一般用来配置不同的项目环境。</p>
-</li>
-<li><p>Anaconda通过管理工具包、开发环境、Python版本，大大简化了你的工作流程。不仅可以方便地安装、更新、卸载工具包，而且安装时能自动安装相应的依赖包，同时还能使用不同的虚拟环境隔离不同要求的项目。</p>
-</li>
-<li><p>Anaconda 镜像使用帮助</p>
+<h2 id="虚拟环境之conda"><a class="header-anchor" href="#虚拟环境之conda">¶</a>虚拟环境之conda</h2>
+<h3 id="1-Anaconda简介"><a class="header-anchor" href="#1-Anaconda简介">¶</a>1. Anaconda简介</h3>
 <ul>
-<li><p>Anaconda 是一个用于科学计算的 Python 发行版，支持 Linux, Mac, Windows, 包含了众多流行的科学计算、数据分析的 Python 包。</p>
+<li>
+<p>Anaconda是一个方便的python包管理和环境管理软件，一般用来配置不同的项目环境。</p>
 </li>
-<li><p>Anaconda 安装包可以到 <a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/</a> 下载。</p>
+<li>
+<p>Anaconda通过管理工具包、开发环境、Python版本，大大简化了你的工作流程。不仅可以方便地安装、更新、卸载工具包，而且安装时能自动安装相应的依赖包，同时还能使用不同的虚拟环境隔离不同要求的项目。</p>
+</li>
+<li>
+<p>Anaconda 镜像使用帮助</p>
+<ul>
+<li>
+<p>Anaconda 是一个用于科学计算的 Python 发行版，支持 Linux, Mac, Windows, 包含了众多流行的科学计算、数据分析的 Python 包。</p>
+</li>
+<li>
+<p>Anaconda 安装包可以到 <a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/</a> 下载。</p>
 </li>
 </ul>
 </li>
-<li><p>Miniconda 镜像使用帮助</p>
+<li>
+<p>Miniconda 镜像使用帮助</p>
 <ul>
-<li><p>Miniconda 是一个 Anaconda 的轻量级替代，默认只包含了 python 和 conda，但是可以通过 pip 和 conda 来安装所需要的包。</p>
+<li>
+<p>Miniconda 是一个 Anaconda 的轻量级替代，默认只包含了 python 和 conda，但是可以通过 pip 和 conda 来安装所需要的包。</p>
 </li>
-<li><p>Miniconda 安装包可以到 <a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/</a> 下载。</p>
+<li>
+<p>Miniconda 安装包可以到 <a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/</a> 下载。</p>
 </li>
 </ul>
 </li>
 </ul>
-<h3 id="2-Anaconda安装"><a href="#2-Anaconda安装" class="headerlink" title="2. Anaconda安装"></a>2. Anaconda安装</h3><ul>
-<li><p>Windows安装</p>
+<h3 id="2-Anaconda安装"><a class="header-anchor" href="#2-Anaconda安装">¶</a>2. Anaconda安装</h3>
 <ul>
-<li><p>点击安装文件<code>Anaconda3-2019.07-Windows-x86_64.exe</code>,选择安装路径,如<code>D:\python\Anaconda</code>,然后一直next即可。</p>
+<li>
+<p>Windows安装</p>
+<ul>
+<li>
+<p>点击安装文件<code>Anaconda3-2019.07-Windows-x86_64.exe</code>,选择安装路径,如<code>D:\python\Anaconda</code>,然后一直next即可。</p>
 </li>
-<li><p><strong>配置环境变量:</strong> 将安装的根路径,如<code>D:\python\Anaconda</code>和<code>scripts</code>文件夹路径<code>D:\python\Anaconda\scripts</code>添加到电脑环境变量之中</p>
+<li>
+<p><strong>配置环境变量:</strong> 将安装的根路径,如<code>D:\python\Anaconda</code>和<code>scripts</code>文件夹路径<code>D:\python\Anaconda\scripts</code>添加到电脑环境变量之中</p>
 </li>
 </ul>
 </li>
-<li><p>Linux/Mac安装</p>
+<li>
+<p>Linux/Mac安装</p>
 <ul>
-<li><p>将安装文件<code>Anaconda3-2019.07-Linux-x86_64.sh</code>移动到用户家目录</p>
+<li>
+<p>将安装文件<code>Anaconda3-2019.07-Linux-x86_64.sh</code>移动到用户家目录</p>
 </li>
-<li><p>在用户家目录,打开终端,执行<code>./Anaconda3-2019.07-Linux-x86_64.sh</code>,然后输入yes,一路回车即可。</p>
+<li>
+<p>在用户家目录,打开终端,执行<code>./Anaconda3-2019.07-Linux-x86_64.sh</code>,然后输入yes,一路回车即可。</p>
 </li>
-<li><p><strong>配置环境变量:</strong></p>
+<li>
+<p><strong>配置环境变量:</strong></p>
 <ul>
-<li><p>打开.bashrc 文件,在终端执行如下命令:</p>
-<pre class=" language-bash"><code class="language-bash"><span class="token function">vi</span> ~/.bashrc</code></pre>
+<li>
+<p>打开.bashrc 文件,在终端执行如下命令:</p>
+<pre class=" language-language-bash"><code class="language-language-bash">vi ~/.bashrc
+</code></pre>
 </li>
-<li><p>输入G，跳转到文件末尾,在文件最后一行新增环境变量</p>
-<pre class=" language-bash"><code class="language-bash"><span class="token function">export</span> PATH<span class="token operator">=</span>~/anaconda3/bin:<span class="token variable">$PATH</span></code></pre>
+<li>
+<p>输入G，跳转到文件末尾,在文件最后一行新增环境变量</p>
+<pre class=" language-language-bash"><code class="language-language-bash">export PATH=~/anaconda3/bin:$PATH
+</code></pre>
 </li>
-<li><p>修改完成,先按esc键进入命令行模式，然后按<code>shift+：</code>进入末行模式，输入<code>wq</code>,保存退出</p>
+<li>
+<p>修改完成,先按esc键进入命令行模式，然后按<code>shift+：</code>进入末行模式，输入<code>wq</code>,保存退出</p>
 </li>
-<li><p>在终端执行如下命令,使其立即生效</p>
-<pre class=" language-bash"><code class="language-bash"><span class="token function">source</span> ~/.bashrc</code></pre>
+<li>
+<p>在终端执行如下命令,使其立即生效</p>
+<pre class=" language-language-bash"><code class="language-language-bash">source ~/.bashrc
+</code></pre>
 </li>
 </ul>
 <blockquote>
@@ -679,13 +765,16 @@ pip <span class="token function">install</span> pip -U  <span class="token comme
 </ul>
 </li>
 </ul>
-<h3 id="3-修改Anaconda镜像源"><a href="#3-修改Anaconda镜像源" class="headerlink" title="3. 修改Anaconda镜像源"></a>3. 修改Anaconda镜像源</h3><ul>
-<li><p>Anaconda默认访问国外服务器，网速较慢，故需要修改默认镜像</p>
+<h3 id="3-修改Anaconda镜像源"><a class="header-anchor" href="#3-修改Anaconda镜像源">¶</a>3. 修改Anaconda镜像源</h3>
+<ul>
+<li>
+<p>Anaconda默认访问国外服务器，网速较慢，故需要修改默认镜像</p>
 </li>
-<li><p>TUNA 还提供了 Anaconda 仓库与第三方源（conda-forge、msys2、pytorch等，查看完整列表）的镜像，各系统都可以通过修改用户目录下的 .condarc 文件:</p>
-<pre class=" language-bash"><code class="language-bash">channels:
+<li>
+<p>TUNA 还提供了 Anaconda 仓库与第三方源（conda-forge、msys2、pytorch等，查看完整列表）的镜像，各系统都可以通过修改用户目录下的 .condarc 文件:</p>
+<pre class=" language-language-bash"><code class="language-language-bash">channels:
   - defaults
-show_channel_urls: <span class="token boolean">true</span>
+show_channel_urls: true
 channel_alias: https://mirrors.tuna.tsinghua.edu.cn/anaconda
 default_channels:
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
@@ -699,140 +788,185 @@ custom_channels:
   bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
   menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
   pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</code></pre>
+  simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+</code></pre>
 <p>即可添加 Anaconda Python 免费仓库。Windows 用户无法直接创建名为 <code>.condarc</code> 的文件，可先执行 <code>conda config --set show_channel_urls yes</code> 生成该文件之后再修改。</p>
 </li>
 </ul>
-<h3 id="4-Anconda基本使用"><a href="#4-Anconda基本使用" class="headerlink" title="4. Anconda基本使用"></a>4. Anconda基本使用</h3><h4 id="管理环境"><a href="#管理环境" class="headerlink" title="管理环境"></a>管理环境</h4><ul>
-<li><p>检查conda版本</p>
-<pre class=" language-bash"><code class="language-bash">conda --version</code></pre>
+<h3 id="4-Anconda基本使用"><a class="header-anchor" href="#4-Anconda基本使用">¶</a>4. Anconda基本使用</h3>
+<h4 id="管理环境"><a class="header-anchor" href="#管理环境">¶</a>管理环境</h4>
+<ul>
+<li>
+<p>检查conda版本</p>
+<pre class=" language-language-bash"><code class="language-language-bash">conda --version
+</code></pre>
 </li>
-<li><p>升级当前版本conda</p>
-<pre class=" language-bash"><code class="language-bash">conda update conda</code></pre>
+<li>
+<p>升级当前版本conda</p>
+<pre class=" language-language-bash"><code class="language-language-bash">conda update conda
+</code></pre>
 </li>
-<li><p>管理（虚拟）环境</p>
-<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># 创建一个名为python37的环境，指定Python版本是3.7（不用管是3.7.x，conda会为我们自动寻找3.7.x中的最新版本）</span>
-conda create --name python37 python<span class="token operator">=</span>3.7
+<li>
+<p>管理（虚拟）环境</p>
+<pre class=" language-language-bash"><code class="language-language-bash"># 创建一个名为python37的环境，指定Python版本是3.7（不用管是3.7.x，conda会为我们自动寻找3.7.x中的最新版本）
+conda create --name python37 python=3.7
 
-<span class="token comment" spellcheck="true"># 安装好后，使用activate激活某个环境</span>
-activate python37 <span class="token comment" spellcheck="true"># for Windows</span>
-<span class="token function">source</span> activate python37 <span class="token comment" spellcheck="true"># for Linux &amp; Mac</span>
-<span class="token comment" spellcheck="true"># 激活后，会发现terminal输入的地方多了python37的字样</span>
+# 安装好后，使用activate激活某个环境
+activate python37 # for Windows
+source activate python37 # for Linux & Mac
+# 激活后，会发现terminal输入的地方多了python37的字样
 
-<span class="token comment" spellcheck="true"># 如果想返回默认的python环境，运行</span>
-deactivate python37 <span class="token comment" spellcheck="true"># for Windows</span>
-<span class="token function">source</span> deactivate python37 <span class="token comment" spellcheck="true"># for Linux &amp; Mac</span>
+# 如果想返回默认的python环境，运行
+deactivate python37 # for Windows
+source deactivate python37 # for Linux & Mac
 
-<span class="token comment" spellcheck="true"># 删除一个已有的环境</span>
+# 删除一个已有的环境
 conda remove --name python37 --all
 
-<span class="token comment" spellcheck="true"># 另外，我们可以使用conda命令替换source命令用来激活和关闭环境</span>
+# 另外，我们可以使用conda命令替换source命令用来激活和关闭环境
 conda activate python37
 conda deactivate
 
-<span class="token comment" spellcheck="true"># 取消每次打开终端，默认激活bash环境</span>
-conda config --set auto_activate_base <span class="token boolean">false</span>
+# 取消每次打开终端，默认激活bash环境
+conda config --set auto_activate_base false
 
-<span class="token comment" spellcheck="true"># 重新激活每次打开终端，默认进入base环境</span>
-conda config --set auto_activate_base <span class="token boolean">true</span>
+# 重新激活每次打开终端，默认进入base环境
+conda config --set auto_activate_base true
+
 </code></pre>
 <p>新的开发环境会被默认安装在你conda目录下的envs文件目录下。</p>
 <p>如果我们没有指定安装python的版本，conda会安装我们最初安装conda时所装的那个版本的python。</p>
 </li>
-<li><p>列出所有环境</p>
-<pre class=" language-bash"><code class="language-bash">conda info -e
-conda info –-envs</code></pre>
+<li>
+<p>列出所有环境</p>
+<pre class=" language-language-bash"><code class="language-language-bash">conda info -e
+conda info –-envs
+</code></pre>
 <blockquote>
 <p>注意:conda会对当前活动的环境追加星号标记。</p>
 </blockquote>
-<pre class=" language-bash"><code class="language-bash">macdeMacBook-Pro:~ mac$ conda info -e
-<span class="token comment" spellcheck="true"># conda environments:</span>
-<span class="token comment" spellcheck="true">#</span>
+<pre class=" language-language-bash"><code class="language-language-bash">macdeMacBook-Pro:~ mac$ conda info -e
+# conda environments:
+#
 base                  *  /Users/mac/anaconda3
 myenv                    /Users/mac/anaconda3/envs/myenv
-py3                      /Users/mac/anaconda3/envs/py3</code></pre>
+py3                      /Users/mac/anaconda3/envs/py3
+</code></pre>
 </li>
-<li><p>复制一个环境<br>通过克隆来复制一个环境。这儿将通过克隆py3来创建一个称为py32的副本。</p>
-<pre class=" language-bash"><code class="language-bash">conda create -n py32 --clone py3</code></pre>
+<li>
+<p>复制一个环境<br>
+通过克隆来复制一个环境。这儿将通过克隆py3来创建一个称为py32的副本。</p>
+<pre class=" language-language-bash"><code class="language-language-bash">conda create -n py32 --clone py3
+</code></pre>
 <p>通过</p>
-<pre class=" language-bash"><code class="language-bash">conda info –-envs</code></pre>
+<pre class=" language-language-bash"><code class="language-language-bash">conda info –-envs
+</code></pre>
 <p>来检查环境。</p>
 </li>
-<li><p>重命名env</p>
+<li>
+<p>重命名env</p>
 <p>conda是没有重命名环境的功能的, 要实现这个基本需求, 只能通过愚蠢的克隆-删除的过程。</p>
 <p>切记不要直接mv移动环境的文件夹来重命名, 会导致一系列无法想象的错误的发生!</p>
-<pre class=" language-bash"><code class="language-bash">conda create --name newname --clone oldname      <span class="token comment" spellcheck="true"># 克隆环境</span>
-conda remove --name oldname --all      <span class="token comment" spellcheck="true"># 彻底删除旧环境</span></code></pre>
+<pre class=" language-language-bash"><code class="language-language-bash">conda create --name newname --clone oldname      # 克隆环境
+conda remove --name oldname --all      # 彻底删除旧环境
+</code></pre>
 </li>
-<li><p>分享环境</p>
+<li>
+<p>分享环境</p>
 <p>如果你想把你当前的环境配置与别人分享，这样ta可以快速建立一个与你一模一样的环境（同一个版本的python及各种包）来共同开发/进行新的实验。</p>
 <p><strong>一个分享环境的快速方法就是给ta一个你的环境的.yml文件。</strong></p>
 <p>首先通过activate target_env要分享的环境target_env，然后输入下面的命令会在当前工作目录下生成一个environment.yml文件</p>
-<pre class=" language-bash"><code class="language-bash">conda <span class="token function">env</span> <span class="token function">export</span> <span class="token operator">></span> environment.yml</code></pre>
+<pre class=" language-language-bash"><code class="language-language-bash">conda env export > environment.yml
+</code></pre>
 <p>小伙伴拿到environment.yml文件后，将该文件放在工作目录下，可以通过以下命令从该文件创建环境</p>
-<pre class=" language-bash"><code class="language-bash">conda <span class="token function">env</span> create -f environment.yml</code></pre>
+<pre class=" language-language-bash"><code class="language-language-bash">conda env create -f environment.yml
+</code></pre>
 </li>
 </ul>
-<h4 id="管理包"><a href="#管理包" class="headerlink" title="管理包"></a>管理包</h4><ul>
-<li><p>conda安装和管理python包非常方便，可以在指定的python环境中安装包，且自动安装所需要的依赖包，避免了很多拓展包冲突兼容问题。</p>
+<h4 id="管理包"><a class="header-anchor" href="#管理包">¶</a>管理包</h4>
+<ul>
+<li>
+<p>conda安装和管理python包非常方便，可以在指定的python环境中安装包，且自动安装所需要的依赖包，避免了很多拓展包冲突兼容问题。</p>
 </li>
-<li><p><strong>不建议使用easy_install安装包</strong>。大部分包都可以使用conda安装，无法使用conda和anaconda.org安装的包可以通过pip命令安装</p>
+<li>
+<p><strong>不建议使用easy_install安装包</strong>。大部分包都可以使用conda安装，无法使用conda和anaconda.org安装的包可以通过pip命令安装</p>
 </li>
-<li><p>使用合适的源可以提升安装的速度</p>
+<li>
+<p>使用合适的源可以提升安装的速度</p>
 </li>
-<li><p>查看已安装包</p>
-<pre class=" language-bash"><code class="language-bash">conda list</code></pre>
+<li>
+<p>查看已安装包</p>
+<pre class=" language-language-bash"><code class="language-language-bash">conda list
+</code></pre>
 <p>使用这条命令来查看哪个版本的python或其他程序安装在了该环境中，或者确保某些包已经被安装了或被删除了。</p>
 </li>
-<li><p>向指定环境安装包<br>我们在指定环境中安装requests包，有两种方式:</p>
+<li>
+<p>向指定环境安装包<br>
+我们在指定环境中安装requests包，有两种方式:</p>
 <ul>
-<li><p>直接通过-n选项指定安装环境的名字</p>
-<pre class=" language-bash"><code class="language-bash">conda <span class="token function">install</span> --name py3 requests</code></pre>
+<li>
+<p>直接通过-n选项指定安装环境的名字</p>
+<pre class=" language-language-bash"><code class="language-language-bash">conda install --name py3 requests
+</code></pre>
 <blockquote>
 <p>提示：你必须告诉conda你要安装环境的名字（-n py3）否则它将会被安装到当前环境中。</p>
 </blockquote>
 </li>
-<li><p>激活py3环境，再使用conda install命令。</p>
-<pre class=" language-bash"><code class="language-bash">conda activate py3
-conda <span class="token function">install</span> requests</code></pre>
+<li>
+<p>激活py3环境，再使用conda install命令。</p>
+<pre class=" language-language-bash"><code class="language-language-bash">conda activate py3
+conda install requests
+</code></pre>
 </li>
 </ul>
 </li>
-<li><p>通过pip命令</p>
+<li>
+<p>通过pip命令</p>
 <p>对于那些无法通过conda安装或者从Anaconda.org获得的包，我们通常可以用pip命令来安装包。</p>
 <p>可以上pypi网站查询要安装的包，查好以后输入pip install命令就可以安装这个包了。</p>
 <p>我们激活想要放置程序的python环境，然后通过pip安装一个叫“PyMysql”的包。</p>
-<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Linux, OS X</span>
-<span class="token function">source</span> activate bunnies
+<pre class=" language-language-bash"><code class="language-language-bash"># Linux, OS X
+source activate bunnies
 
-<span class="token comment" spellcheck="true"># Windows</span>
+# Windows
 activate py3
-<span class="token comment" spellcheck="true"># 安装</span>
-pip <span class="token function">install</span> pymysql</code></pre>
+# 安装
+pip install pymysql
+</code></pre>
 <p>pip只是一个包管理器，所以它不能为你管理环境。pip甚至不能升级python，因为它不像conda一样把python当做包来处理。但是它可以安装一些conda安装不了的包。</p>
 <blockquote>
 <p>小技巧：在任何时候你可以通过在命令后边跟上-help来获得该命令的完整文档。很多跟在–后边常用的命令选项，可以被略写为一个短线加命令首字母。所以–name选项和-n的作用是一样的。通过conda -h或conda –-help来看大量的缩写。</p>
 </blockquote>
 </li>
 </ul>
-<h4 id="移除包、环境、或者conda"><a href="#移除包、环境、或者conda" class="headerlink" title="移除包、环境、或者conda"></a>移除包、环境、或者conda</h4><ul>
-<li><p>移除包</p>
-<p>假设你决定不再使用包pymysql。你可以在py3环境中移除它。</p>
-<pre class=" language-bash"><code class="language-bash">conda remove -n py3 pymysql</code></pre>
-</li>
-<li><p>移除环境</p>
-<p>我们不再需要snakes环境了，可以输入以下命令：</p>
-<pre class=" language-bash"><code class="language-bash">conda remove -n myenv --all</code></pre>
-</li>
-<li><p>删除conda</p>
+<h4 id="移除包、环境、或者conda"><a class="header-anchor" href="#移除包、环境、或者conda">¶</a>移除包、环境、或者conda</h4>
 <ul>
-<li><p>Linux/OS X：</p>
-<p>移除Anaconda 或 Miniconda 安装文件夹</p>
-<pre class=" language-bash"><code class="language-bash"><span class="token function">rm</span> -rf ~/miniconda
-<span class="token comment" spellcheck="true"># OR</span>
-<span class="token function">rm</span> -rf ~/anaconda</code></pre>
+<li>
+<p>移除包</p>
+<p>假设你决定不再使用包pymysql。你可以在py3环境中移除它。</p>
+<pre class=" language-language-bash"><code class="language-language-bash">conda remove -n py3 pymysql
+</code></pre>
 </li>
-<li><p>Windows：<br>去控制面板，点击“添加或删除程序”，选择“Python2.7/3.6（Anaconda）”或“Python2.7/3.6（Miniconda）”并点击删除程序。</p>
+<li>
+<p>移除环境</p>
+<p>我们不再需要snakes环境了，可以输入以下命令：</p>
+<pre class=" language-language-bash"><code class="language-language-bash">conda remove -n myenv --all
+</code></pre>
+</li>
+<li>
+<p>删除conda</p>
+<ul>
+<li>
+<p>Linux/OS X：</p>
+<p>移除Anaconda 或 Miniconda 安装文件夹</p>
+<pre class=" language-language-bash"><code class="language-language-bash">rm -rf ~/miniconda
+# OR
+rm -rf ~/anaconda
+</code></pre>
+</li>
+<li>
+<p>Windows：<br>
+去控制面板，点击“添加或删除程序”，选择“Python2.7/3.6（Anaconda）”或“Python2.7/3.6（Miniconda）”并点击删除程序。</p>
 </li>
 </ul>
 </li>
@@ -1419,7 +1553,7 @@ pip <span class="token function">install</span> pymysql</code></pre>
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
+                class="white-color">104k</span>&nbsp;字
             
             
             
