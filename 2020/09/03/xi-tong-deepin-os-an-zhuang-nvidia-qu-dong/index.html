@@ -477,9 +477,9 @@
 <p>在终端执行命令: <code>sudo apt autoremove  nvidia</code>(没有可以跳过)</p>
 </li>
 <li><p>在终端执行命令:</p>
-<pre class=" language-shell"><code class="language-shell">sudo dedit /etc/modprobe.d/blacklist.conf</code></pre>
+<pre class=" language-zsh"><code class="language-zsh">sudo dedit /etc/modprobe.d/blacklist.conf</code></pre>
 <p>然后在将以下内容复制到文件中</p>
-<pre class=" language-shell"><code class="language-shell">blacklist nouveau
+<pre class=" language-zsh"><code class="language-zsh">blacklist nouveau
 
 blacklist lbm-nouveau
 
@@ -491,36 +491,37 @@ alias lbm-nouveau off</code></pre>
 <p>  保存退出</p>
 </li>
 <li><p>接下来在终端执行命令:</p>
-<pre><code> sudo update-initramfs -u</code></pre></li>
+<pre class=" language-zsh"><code class="language-zsh"> sudo update-initramfs -u</code></pre>
+</li>
 <li><p>重启系统，再次进入系统，可能会发现分  辨率异常。(分辨率异常就说明成功禁用 nouveau 驱动重启系统，重启后查看是否生效，</p>
-<pre class=" language-shell"><code class="language-shell">lsmod |grep -i nouveau</code></pre>
+<pre class=" language-zsh"><code class="language-zsh">lsmod |grep -i nouveau</code></pre>
 </li>
 </ol>
 <h3 id="三、NVIDIA-安装过程"><a href="#三、NVIDIA-安装过程" class="headerlink" title="三、NVIDIA 安装过程"></a>三、NVIDIA 安装过程</h3><ol>
 <li><p>使用快捷键 <code>CTRL+ALT+F2</code> 进入终端，登录自己的账号 (就是用户名和密码)。</p>
 </li>
 <li><p>暂时关闭图形界面：</p>
-<pre class=" language-bash"><code class="language-bash"> <span class="token function">sudo</span> <span class="token function">service</span> lightdm stop</code></pre>
+<pre class=" language-zsh"><code class="language-zsh"> sudo service lightdm stop</code></pre>
 </li>
 <li><p>给下载好的 nvidia 驱动文件设置执行权限 (文件默认在 <code>/home/用户名/Downloads/</code> 目录下，用户名为你自己的用户名，如果你改文件名了，就填你改后的文件名，千万别填 <code>NVIDIA-Linux-x86_64-430.26.run</code>)。</p>
-<pre class=" language-bash"><code class="language-bash"> <span class="token function">sudo</span> <span class="token function">chmod</span> a+x  /home/用户名/Downloads/NVIDIA-Linux-x86_64-430.26.run</code></pre>
+<pre class=" language-zsh"><code class="language-zsh"> sudo chmod a+x  /home/用户名/Downloads/NVIDIA-Linux-x86_64-430.26.run</code></pre>
 </li>
 <li><p>驱动安装：</p>
-<pre class=" language-bash"><code class="language-bash"> <span class="token function">sudo</span>  sh  /home / 用户名 / Downloads/NVIDIA-Linux-x86_64-430.26.run</code></pre>
+<pre class=" language-zsh"><code class="language-zsh"> sudo  sh  /home / 用户名 / Downloads/NVIDIA-Linux-x86_64-430.26.run</code></pre>
 <p> (一系列 yes，还有一个界面选择 <code>install and cover</code>，意为安装和覆盖。)</p>
 </li>
 <li><p>重启系统：</p>
-<pre class=" language-bash"><code class="language-bash"> <span class="token function">sudo</span> <span class="token function">reboot</span></code></pre>
+<pre class=" language-zsh"><code class="language-zsh"> sudo reboot</code></pre>
 <p> 安装完成后重启，执行 <code>nvidia-smi</code></p>
 <p> <img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/08/20190922111147368.png" alt="20190922111147368"></p>
 <p> 发现这时候其实 NVIDIA 的显卡并没有工作，<strong>显存一点都没占用</strong>。主要是由于我的电脑是双显卡，这时候其实依然是 intel 集成显卡在工作，所以还要做下面的工作。</p>
 </li>
 </ol>
-<h3 id="四、设置默认-nvidia-显卡工作"><a href="#四、设置默认-nvidia-显卡工作" class="headerlink" title="四、设置默认 nvidia 显卡工作"></a>四、设置默认 nvidia 显卡工作</h3><pre class=" language-shell"><code class="language-shell">lspci | egrep 'VGA|3D'</code></pre>
+<h3 id="四、设置默认-nvidia-显卡工作"><a href="#四、设置默认-nvidia-显卡工作" class="headerlink" title="四、设置默认 nvidia 显卡工作"></a>四、设置默认 nvidia 显卡工作</h3><pre class=" language-zsh"><code class="language-zsh">lspci | egrep 'VGA|3D'</code></pre>
 <p>执行上述命令获取 <code>nvidia</code> 显卡设备 <code>BusID</code>，例如: <code>01:00.0</code> 填写 <code>PCI:1:0:0</code>，</p>
 <p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/08/20190922111306609.png" alt="20190922111306609"></p>
 <p> 然后编辑 <code>/etc/X11/xorg.conf</code>，注意其中 PCI 部分填写 <code>PCI:1:0:0</code>，</p>
-<pre class=" language-shell"><code class="language-shell">Section "Module"
+<pre class=" language-zsh"><code class="language-zsh">Section "Module"
     Load "modesetting"
 EndSection
 
@@ -531,17 +532,18 @@ Section "Device"
     Option "AllowEmptyInitialConfiguration"
 EndSection</code></pre>
 <p>编辑<code>~/.xinitrc</code>，</p>
-<pre class=" language-shell"><code class="language-shell">xrandr --setprovideroutputsource modesetting NVIDIA-0
+<pre class=" language-zsh"><code class="language-zsh">xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --auto
 xrandr --dpi 96</code></pre>
 <p>编辑<code>/etc/lightdm/display_setup.sh</code>，</p>
-<pre><code>#!/bin/sh
+<pre class=" language-zsh"><code class="language-zsh">#!/bin/sh
 xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --auto
-xrandr --dpi 96</code></pre><p>然后执行</p>
-<pre class=" language-shell"><code class="language-shell">sudo chmod +x  /etc/lightdm/display_setup.sh</code></pre>
+xrandr --dpi 96</code></pre>
+<p>然后执行</p>
+<pre class=" language-zsh"><code class="language-zsh">sudo chmod +x  /etc/lightdm/display_setup.sh</code></pre>
 <p>编辑 <code>/etc/lightdm/lightdm.conf</code> 在 <code>[Seat:*]</code> 行下添加，</p>
-<pre class=" language-shell"><code class="language-shell">display-setup-script=/etc/lightdm/display_setup.sh</code></pre>
+<pre class=" language-zsh"><code class="language-zsh">display-setup-script=/etc/lightdm/display_setup.sh</code></pre>
 <p>重启动后，查看是否生效，<code>nvidia-smi</code></p>
 <p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/08/20190922111512515.png" alt="20190922111512515"></p>
 <p>发现已经生效。</p>
