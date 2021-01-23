@@ -251,9 +251,9 @@
       <category term="web" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/web/"/>
     
     
-      <category term="DRF" scheme="https://bookandmusic.github.io/tags/DRF/"/>
-    
       <category term="JWT" scheme="https://bookandmusic.github.io/tags/JWT/"/>
+    
+      <category term="DRF" scheme="https://bookandmusic.github.io/tags/DRF/"/>
     
   </entry>
   
@@ -423,9 +423,9 @@
       <category term="web" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/web/"/>
     
     
-      <category term="API" scheme="https://bookandmusic.github.io/tags/API/"/>
-    
       <category term="RESTful" scheme="https://bookandmusic.github.io/tags/RESTful/"/>
+    
+      <category term="API" scheme="https://bookandmusic.github.io/tags/API/"/>
     
   </entry>
   

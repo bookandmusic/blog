@@ -1,956 +1,1715 @@
-<!DOCTYPE HTML>
-<html lang="zh-CN">
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
 
 
 <head>
-    <meta charset="utf-8">
-    <meta name="keywords" content="分类, Bookandmusic">
-    <meta name="description" content="">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="renderer" content="webkit|ie-stand|ie-comp">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" type="image/png" href="/img/favicon.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="bookandmusic">
+  <meta name="keywords" content="">
+  <title>分类 - Bookandmusic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
-    <title>分类 | Bookandmusic</title>
-    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/favicon.ico">
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/libs/awesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/libs/aos/aos.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/libs/animate/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/css/matery.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/css/my.css">
+<!-- 主题依赖的图标库，不要自行修改 -->
 
-    <script src="https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/libs/jquery/jquery.min.js"></script>
-
-<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Bookandmusic" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"bookandmusic.github.io","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"4e4c5cdb7a970cf955efdc949fbe43f5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Bookandmusic" type="application/atom+xml">
+</head>
 
 
 <body>
-    <header class="navbar-fixed">
-    <nav id="headNav" class="bg-color nav-transparent">
-        <div id="navContainer" class="nav-wrapper container">
-            <div class="brand-logo">
-                <a href="/" class="waves-effect waves-light">
-                    
-                    <img src="https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/medias/favicon.ico" class="logo-img" alt="LOGO">
-                    
-                    <span class="logo-span">Bookandmusic</span>
-                </a>
-            </div>
-            
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Bookandmusic</strong>&nbsp;</a>
 
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
-<ul class="right nav-menu">
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/" class="waves-effect waves-light">
-      
-      <i class="fas fa-home" style="zoom: 0.6;"></i>
-      
-      <span>首页</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/tags" class="waves-effect waves-light">
-      
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
-      
-      <span>标签</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/archives" class="waves-effect waves-light">
-      
-      <i class="fas fa-archive" style="zoom: 0.6;"></i>
-      
-      <span>归档</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/about" class="waves-effect waves-light">
-      
-      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
-      
-      <span>关于</span>
-    </a>
-    
-  </li>
-  
-  <li>
-    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
-    </a>
-  </li>
-</ul>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
 
-
-<div id="mobile-nav" class="side-nav sidenav">
-
-    <div class="mobile-head bg-color">
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
         
-        <img src="https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/medias/favicon.ico" class="logo-img circle responsive-img">
-        
-        <div class="logo-name">Bookandmusic</div>
-        <div class="logo-desc">
-            
-            Never really desperate, only the lost of the soul.
-            
-        </div>
-    </div>
-
-    
-
-    <ul class="menu-list mobile-menu-list">
-        
-        <li class="m-nav-item">
-	  
-		<a href="/" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-home"></i>
-			
-			首页
-		</a>
           
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/tags" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-tags"></i>
-			
-			标签
-		</a>
           
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
-		</a>
           
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/archives" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-archive"></i>
-			
-			归档
-		</a>
           
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/about" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-user-circle"></i>
-			
-			关于
-		</a>
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
           
-        </li>
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
         
-        <li><div class="divider"></div></li>
-        <li>
-            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
-                <i class="fab fa-github-square fa-fw"></i>Fork Me
-            </a>
-        </li>
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
         
-    </ul>
-</div>
-
-
-        </div>
-
         
-            <style>
-    .nav-transparent .github-corner {
-        display: none !important;
-    }
-
-    .github-corner {
-        position: absolute;
-        z-index: 10;
-        top: 0;
-        right: 0;
-        border: 0;
-        transform: scale(1.1);
-    }
-
-    .github-corner svg {
-        color: #0f9d58;
-        fill: #fff;
-        height: 64px;
-        width: 64px;
-    }
-
-    .github-corner:hover .octo-arm {
-        animation: a 0.56s ease-in-out;
-    }
-
-    .github-corner .octo-arm {
-        animation: none;
-    }
-
-    @keyframes a {
-        0%,
-        to {
-            transform: rotate(0);
-        }
-        20%,
-        60% {
-            transform: rotate(-25deg);
-        }
-        40%,
-        80% {
-            transform: rotate(10deg);
-        }
-    }
-</style>
-
-<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
-   data-tooltip="Fork Me" data-position="left" data-delay="50">
-    <svg viewBox="0 0 250 250" aria-hidden="true">
-        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
-              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
-        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
-              fill="currentColor" class="octo-body"></path>
-    </svg>
-</a>
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
         
-    </nav>
-
-</header>
-
-    <div class="bg-cover pd-header about-cover">
-    <div class="container">
-    <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                踮起脚尖，另一种高度
-                
-            </div>
-
-            <div class="description center-align">
-                
-                <span id="subtitle"></span>
-                <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
-                <script>
-                    var typed = new Typed("#subtitle", {
-                        strings: ['从来没有真正的绝境, 只有心灵的迷途','Never really desperate, only the lost of the soul'],
-                        startDelay: 300,
-                        typeSpeed: 100,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                </script>
-                
-            </div>
-        </div>
+      </ul>
     </div>
-</div>
+  </div>
+</nav>
 
-
-<script>
-    // 每天切换 banner 图.  Switch banner image every day.
-    var bannerUrl = "https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/medias/banner/" + new Date().getDay() + '.jpg';
-    $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
-</script>
-
-
-    </div>
-</div>
-
-<main class="content">
-
-    
-
-<div id="category-cloud" class="container chip-container">
-    <div class="card">
-        <div class="card-content">
-            <div class="tag-title center-align">
-                <i class="fas fa-bookmark"></i>&nbsp;&nbsp;文章分类
-            </div>
-            <div class="tag-chips">
-                
-                
-                
-                <a href="/categories/%E6%8A%80%E6%9C%AF/" title="技术: 57">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F9EBEA;">技术
-                        <span class="tag-length">57</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%8A%80%E6%9C%AF/python/" title="python: 32">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F5EEF8;">python
-                        <span class="tag-length">32</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%8A%80%E6%9C%AF/python/web/" title="web: 15">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #D5F5E3;">web
-                        <span class="tag-length">15</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%8A%80%E6%9C%AF/vue/" title="vue: 8">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #E8F8F5;">vue
-                        <span class="tag-length">8</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/Ebook/" title="Ebook: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #FEF9E7;">Ebook
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E5%87%BD%E6%95%B0/" title="函数: 6">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F8F9F9;">函数
-                        <span class="tag-length">6</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E6%A8%A1%E5%9D%97/" title="模块: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #82E0AA;">模块
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" title="面向对象: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #D7BDE2;">面向对象
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%8A%80%E6%9C%AF/python/Django/" title="Django: 3">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #A3E4D7;">Django
-                        <span class="tag-length">3</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E9%AB%98%E7%BA%A7/" title="高级: 4">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #85C1E9;">高级
-                        <span class="tag-length">4</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E5%B7%A5%E5%85%B7/" title="工具: 4">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F8C471;">工具
-                        <span class="tag-length">4</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%95%99%E7%A8%8B/" title="教程: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F9E79F;">教程
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%8A%80%E6%9C%AF/%E6%95%B0%E6%8D%AE%E5%BA%93/" title="数据库: 7">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F9E79F;">数据库
-                        <span class="tag-length">7</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E7%94%9F%E6%B4%BB/" title="生活: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #FFF;">生活
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%AE%97%E6%B3%95/" title="算法: 3">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F9EBEA;">算法
-                        <span class="tag-length">3</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E7%B3%BB%E7%BB%9F/" title="系统: 4">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #D5F5E3;">系统
-                        <span class="tag-length">4</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/" title="网络通信: 6">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #D7BDE2;">网络通信
-                        <span class="tag-length">6</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E5%B7%A5%E5%85%B7/Git/" title="Git: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F9E79F;">Git
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E5%B7%A5%E5%85%B7/NodeJs/" title="NodeJs: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F5EEF8;">NodeJs
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E5%B7%A5%E5%85%B7/python/" title="python: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F8C471;">python
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%8A%80%E6%9C%AF/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/" title="mysql: 6">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F8C471;">mysql
-                        <span class="tag-length">6</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%8A%80%E6%9C%AF/%E6%95%B0%E6%8D%AE%E5%BA%93/redis/" title="redis: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #82E0AA;">redis
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E7%94%9F%E6%B4%BB/%E7%AC%91%E8%AF%9D/" title="笑话: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #D7BDE2;">笑话
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%AE%97%E6%B3%95/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" title="时间复杂度: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F8C471;">时间复杂度
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E7%B3%BB%E7%BB%9F/Mac/" title="Mac: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F9EBEA;">Mac
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E7%B3%BB%E7%BB%9F/linux/" title="linux: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #85C1E9;">linux
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/" title="TCP: 6">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #82E0AA;">TCP
-                        <span class="tag-length">6</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E7%B3%BB%E7%BB%9F/Windows/" title="Windows: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F8F9F9;">Windows
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%8A%80%E6%9C%AF/JS/" title="JS: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F9E79F;">JS
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E7%94%9F%E6%B4%BB/%E6%84%9F%E6%82%9F/" title="感悟: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F8F9F9;">感悟
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/" title="排序: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #FFF;">排序
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-
-    
-    <style type="text/css">
-    #category-radar {
-        width: 100%;
-        height: 360px;
-    }
-</style>
-
-<div class="container" data-aos="fade-up">
-    <div class="card">
-        <div id="category-radar" class="card-content"></div>
-    </div>
-</div>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/libs/echarts/echarts.min.js"></script>
-<script type="text/javascript">
-    let radarChart = echarts.init(document.getElementById('category-radar'));
-
-    
-
-    let option = {
-        title: {
-            left: 'center',
-            text: '文章分类雷达图',
-            textStyle: {
-                fontWeight: 500,
-                fontSize: 22
-            }
-        },
-        tooltip: {},
-        radar: {
-            name: {
-                textStyle: {
-                    color: '#3C4858'
-                }
-            },
-            indicator: [{"name":"技术","max":58},{"name":"python","max":58},{"name":"web","max":58},{"name":"vue","max":58},{"name":"Ebook","max":58},{"name":"函数","max":58},{"name":"模块","max":58},{"name":"面向对象","max":58},{"name":"Django","max":58},{"name":"高级","max":58},{"name":"工具","max":58},{"name":"教程","max":58},{"name":"数据库","max":58},{"name":"生活","max":58},{"name":"算法","max":58},{"name":"系统","max":58},{"name":"网络通信","max":58},{"name":"Git","max":58},{"name":"NodeJs","max":58},{"name":"python","max":58},{"name":"mysql","max":58},{"name":"redis","max":58},{"name":"笑话","max":58},{"name":"时间复杂度","max":58},{"name":"Mac","max":58},{"name":"linux","max":58},{"name":"TCP","max":58},{"name":"Windows","max":58},{"name":"JS","max":58},{"name":"感悟","max":58},{"name":"排序","max":58}],
-            nameGap: 5,
-            center: ['50%','55%'],
-            radius: '66%'
-        },
-        series: [{
-            type: 'radar',
-            color: ['#3ecf8e'],
-            itemStyle: {normal: {areaStyle: {type: 'default'}}},
-            data : [
-                {
-                    value : [57,32,15,8,1,6,2,2,3,4,4,2,7,2,3,4,6,1,1,2,6,1,1,2,2,1,6,1,1,1,1],
-                    name : '文章分类数量'
-                }
-            ]
-        }]
-    };
-
-    radarChart.setOption(option);
-</script>
-
-    
-
-</main>
-
-
-    <footer class="page-footer bg-color">
-    
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="4943692268"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.3'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/libs/aplayer/APlayer.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
-
-    
-    <div class="container row center-align" style="margin-bottom: 0px !important;">
-        <div class="col s12 m8 l8 copy-right">
-            Copyright&nbsp;&copy;
-            
-                <span id="year">2019-2021</span>
-            
-            <span id="year">2019</span>
-            <a href="/about" target="_blank">bookandmusic</a>
-            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
-            <br>
-            
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">107.4k</span>&nbsp;字
-            
-            
-            
-            
-            
-            
-            <span id="busuanzi_container_site_pv">
-                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
-                    class="white-color"></span>&nbsp;次
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="分类">
+              
             </span>
+
             
-            
-            <span id="busuanzi_container_site_uv">
-                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
-                    class="white-color"></span>&nbsp;人
-            </span>
-            
-            <br>
-            
-            <br>
-            
+          </div>
+
+          
         </div>
-        <div class="col s12 m4 l4 social-link social-statis">
-
-
-    <a href="mailto:1943288286@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1943288286" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1943288286" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
-
-</div>
+      </div>
     </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+
+
+
+
+
+<div class="category-list">
+  
+  
+  
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffzaf0004jbjddedx57et" role="tab" data-toggle="collapse" href="#collapse-ckk9ffzaf0004jbjddedx57et"
+        aria-expanded="false"
+      >
+        技术
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E6%8A%80%E6%9C%AF/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>57</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffzaf0004jbjddedx57et" class="collapse in " role="tabpanel"
+       aria-labelledby="heading-ckk9ffzaf0004jbjddedx57et">
+    
+  
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffzaq000ijbjdhwed8qds" role="tab" data-toggle="collapse" href="#collapse-ckk9ffzaq000ijbjdhwed8qds"
+        aria-expanded="false"
+      >
+        python
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E6%8A%80%E6%9C%AF/python/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>32</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffzaq000ijbjdhwed8qds" class="collapse in " role="tabpanel"
+       aria-labelledby="heading-ckk9ffzaq000ijbjdhwed8qds">
+    
+  
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffzbh001njbjdfdp50djo" role="tab" data-toggle="collapse" href="#collapse-ckk9ffzbh001njbjdfdp50djo"
+        aria-expanded="false"
+      >
+        web
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E6%8A%80%E6%9C%AF/python/web/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>15</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffzbh001njbjdfdp50djo" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9ffzbh001njbjdfdp50djo">
+    
+    
+    
+      
+      
+        <a href="/2020/12/01/django-huan-cun/" class="list-group-item list-group-item-action">
+          <span class="category-post">Django-缓存</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/11/30/django-shu-ju-fen-ye/" class="list-group-item list-group-item-action">
+          <span class="category-post">Django-数据分页</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/10/24/drf-jwt-qian-xi/" class="list-group-item list-group-item-action">
+          <span class="category-post">JWT浅析</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/08/14/restful-gui-fan-de-api-jie-kou-she-ji/" class="list-group-item list-group-item-action">
+          <span class="category-post">RESTful规范的API接口设计</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/07/08/drf-xu-lie-hua-yu-fan-xu-lie-hua/" class="list-group-item list-group-item-action">
+          <span class="category-post">DRF-序列化与反序列化</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/24/django-orm/" class="list-group-item list-group-item-action">
+          <span class="category-post">Django-ORM</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/24/xss-gong-ji-he-csrf-gong-ji/" class="list-group-item list-group-item-action">
+          <span class="category-post">XSS攻击和CSRF攻击</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/24/http-xie-yi-zhi-http-zhuang-tai-ma-xiang-jie/" class="list-group-item list-group-item-action">
+          <span class="category-post">HTTP状态码</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/03/17/drf-hou-duan-kua-yu/" class="list-group-item list-group-item-action">
+          <span class="category-post">DRF-后端跨域</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/03/16/drf-shu-ju-fen-ye/" class="list-group-item list-group-item-action">
+          <span class="category-post">DRF-数据分页</span>
+        </a>
+      
+    
+      
+      
+        <a href="/categories/%E6%8A%80%E6%9C%AF/python/web/" class="list-group-item list-group-item-action">
+          <span class="category-post">More...</span>
+        </a>
+        
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffzd10050jbjd2z8revdh" role="tab" data-toggle="collapse" href="#collapse-ckk9ffzd10050jbjd2z8revdh"
+        aria-expanded="false"
+      >
+        函数
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E5%87%BD%E6%95%B0/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>6</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffzd10050jbjd2z8revdh" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9ffzd10050jbjd2z8revdh">
+    
+    
+    
+      
+      
+        <a href="/2020/06/06/python-han-shu-di-gui-han-shu/" class="list-group-item list-group-item-action">
+          <span class="category-post">递归函数</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/06/06/python-han-shu-ni-ming-han-shu/" class="list-group-item list-group-item-action">
+          <span class="category-post">匿名函数</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/06/06/python-han-shu-gao-jie-han-shu/" class="list-group-item list-group-item-action">
+          <span class="category-post">高阶函数</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/06/06/python-han-shu-bian-liang-jie-xi/" class="list-group-item list-group-item-action">
+          <span class="category-post">变量进阶</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2019/05/25/python-han-shu-nei-zhi-han-shu/" class="list-group-item list-group-item-action">
+          <span class="category-post">内置函数</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2019/05/02/python-han-shu-zhuang-shi-qi/" class="list-group-item list-group-item-action">
+          <span class="category-post">装饰器</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffzdf006hjbjd1ara5xu2" role="tab" data-toggle="collapse" href="#collapse-ckk9ffzdf006hjbjd1ara5xu2"
+        aria-expanded="false"
+      >
+        高级
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E9%AB%98%E7%BA%A7/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>4</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffzdf006hjbjd1ara5xu2" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9ffzdf006hjbjd1ara5xu2">
+    
+    
+    
+      
+      
+        <a href="/2020/07/30/python-gao-ji-nei-cun-guan-li/" class="list-group-item list-group-item-action">
+          <span class="category-post">python高级-内存管理</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2019/05/23/python-gao-ji-zheng-ze-pi-pei/" class="list-group-item list-group-item-action">
+          <span class="category-post">正则匹配</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2019/05/17/python-gao-ji-jin-cheng-xian-cheng-xie-cheng/" class="list-group-item list-group-item-action">
+          <span class="category-post">python进程、线程、协程</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2019/03/22/python-gao-ji-yi-chang/" class="list-group-item list-group-item-action">
+          <span class="category-post">异常</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffzbt0023jbjdf9zz3w96" role="tab" data-toggle="collapse" href="#collapse-ckk9ffzbt0023jbjdf9zz3w96"
+        aria-expanded="false"
+      >
+        Django
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E6%8A%80%E6%9C%AF/python/Django/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>3</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffzbt0023jbjdf9zz3w96" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9ffzbt0023jbjdf9zz3w96">
+    
+    
+    
+      
+      
+        <a href="/2020/12/10/django-zhong-jian-jian/" class="list-group-item list-group-item-action">
+          <span class="category-post">Django-中间件</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/12/03/django-you-jian-fa-song/" class="list-group-item list-group-item-action">
+          <span class="category-post">Django-邮件发送</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2019/03/22/django-xiang-mu-liu-cheng/" class="list-group-item list-group-item-action">
+          <span class="category-post">Django基础-项目流程</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffzdd0065jbjd0yqmgew7" role="tab" data-toggle="collapse" href="#collapse-ckk9ffzdd0065jbjd0yqmgew7"
+        aria-expanded="false"
+      >
+        模块
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E6%A8%A1%E5%9D%97/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>2</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffzdd0065jbjd0yqmgew7" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9ffzdd0065jbjd0yqmgew7">
+    
+    
+    
+      
+      
+        <a href="/2019/11/25/python-mo-kuai-json-mo-kuai/" class="list-group-item list-group-item-action">
+          <span class="category-post">Json模块</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2019/05/03/python-mo-kuai-time-timeit-mo-kuai/" class="list-group-item list-group-item-action">
+          <span class="category-post">time与timeit 模块</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffzde006djbjd6v5bh2ej" role="tab" data-toggle="collapse" href="#collapse-ckk9ffzde006djbjd6v5bh2ej"
+        aria-expanded="false"
+      >
+        面向对象
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>2</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffzde006djbjd6v5bh2ej" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9ffzde006djbjd6v5bh2ej">
+    
+    
+    
+      
+      
+        <a href="/2019/11/04/python-mian-xiang-dui-xiang-ji-chu/" class="list-group-item list-group-item-action">
+          <span class="category-post">面向对象编程</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2019/03/22/python-mian-xiang-dui-xiang-mo-fa-fang-fa/" class="list-group-item list-group-item-action">
+          <span class="category-post">魔法方法</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffzcl003ujbjddohr2oiy" role="tab" data-toggle="collapse" href="#collapse-ckk9ffzcl003ujbjddohr2oiy"
+        aria-expanded="false"
+      >
+        vue
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E6%8A%80%E6%9C%AF/vue/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>8</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffzcl003ujbjddohr2oiy" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9ffzcl003ujbjddohr2oiy">
+    
+    
+    
+      
+      
+        <a href="/2020/12/27/vue-zu-jian-jian-tong-xin-liu-chong-fang-shi-wan-zheng-ban/" class="list-group-item list-group-item-action">
+          <span class="category-post">Vue组件间通信方式</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/10/23/vue-yin-ru-ben-di-zi-yuan/" class="list-group-item list-group-item-action">
+          <span class="category-post">Vue引入本地资源</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/16/vue-shi-jian-bang-ding-yi-ji-shi-jian-xiu-shi-fu/" class="list-group-item list-group-item-action">
+          <span class="category-post">Vue事件绑定以及事件修饰符</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/14/vue-vue-router/" class="list-group-item list-group-item-action">
+          <span class="category-post">vue-router</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/03/03/vue-axios-si-kua-yu-qing-qiu/" class="list-group-item list-group-item-action">
+          <span class="category-post">Axios(四):跨域请求</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/03/03/vue-axios-yi-axios-zai-vue-zhong-de-shi-yong-jiao-cheng/" class="list-group-item list-group-item-action">
+          <span class="category-post">Axios(一):axios在vue中的使用教程</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/03/03/vue-axios-san-get-he-post-ti-jiao-shu-ju/" class="list-group-item list-group-item-action">
+          <span class="category-post">Axios(三):GET和POST提交数据</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/03/03/vue-axios-er-api-shuo-ming/" class="list-group-item list-group-item-action">
+          <span class="category-post">Axios(二):API说明</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffzdt008hjbjdgy4oab6o" role="tab" data-toggle="collapse" href="#collapse-ckk9ffzdt008hjbjdgy4oab6o"
+        aria-expanded="false"
+      >
+        数据库
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E6%8A%80%E6%9C%AF/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>7</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffzdt008hjbjdgy4oab6o" class="collapse in " role="tabpanel"
+       aria-labelledby="heading-ckk9ffzdt008hjbjdgy4oab6o">
+    
+  
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffze900b1jbjd7f9he5lc" role="tab" data-toggle="collapse" href="#collapse-ckk9ffze900b1jbjd7f9he5lc"
+        aria-expanded="false"
+      >
+        mysql
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E6%8A%80%E6%9C%AF/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>6</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffze900b1jbjd7f9he5lc" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9ffze900b1jbjd7f9he5lc">
+    
+    
+    
+      
+      
+        <a href="/2020/04/21/shu-ju-ku-mysql-chang-jian-cuo-wu/" class="list-group-item list-group-item-action">
+          <span class="category-post">Mysql常见错误</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/02/26/shu-ju-ku-mysql-zhu-jian-yue-shu-he-wei-yi-xing-yue-shu-de-qu-bie/" class="list-group-item list-group-item-action">
+          <span class="category-post">主键约束和唯一性约束的区别</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2019/12/12/shu-ju-ku-mysql-cao-zuo/" class="list-group-item list-group-item-action">
+          <span class="category-post">Mysql操作</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2019/06/01/shu-ju-ku-mysql-zhong-varbinary-binary-char-varchar-yi-tong/" class="list-group-item list-group-item-action">
+          <span class="category-post">Mysql中varbinary、binary、char、varchar异同</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2019/06/01/shu-ju-ku-mysql-zhong-de-decimal-lei-xing-shuo-ming/" class="list-group-item list-group-item-action">
+          <span class="category-post">Mysql中的Decimal类型说明</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2019/05/27/shu-ju-ku-mysql-bi-ji/" class="list-group-item list-group-item-action">
+          <span class="category-post">数据库笔记</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffzee00brjbjdfw3n7d8z" role="tab" data-toggle="collapse" href="#collapse-ckk9ffzee00brjbjdfw3n7d8z"
+        aria-expanded="false"
+      >
+        redis
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E6%8A%80%E6%9C%AF/%E6%95%B0%E6%8D%AE%E5%BA%93/redis/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffzee00brjbjdfw3n7d8z" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9ffzee00brjbjdfw3n7d8z">
+    
+    
+    
+      
+      
+        <a href="/2020/05/23/shu-ju-ku-redis-ming-ling/" class="list-group-item list-group-item-action">
+          <span class="category-post">Redis命令</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffze200a4jbjd2h0t0gv4" role="tab" data-toggle="collapse" href="#collapse-ckk9ffze200a4jbjd2h0t0gv4"
+        aria-expanded="false"
+      >
+        网络通信
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>6</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffze200a4jbjd2h0t0gv4" class="collapse in " role="tabpanel"
+       aria-labelledby="heading-ckk9ffze200a4jbjd2h0t0gv4">
+    
+  
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffzel00d0jbjd0rozfrtb" role="tab" data-toggle="collapse" href="#collapse-ckk9ffzel00d0jbjd0rozfrtb"
+        aria-expanded="false"
+      >
+        TCP
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>6</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffzel00d0jbjd0rozfrtb" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9ffzel00d0jbjd0rozfrtb">
+    
+    
+    
+      
+      
+        <a href="/2020/08/16/wang-luo-tong-xin-duo-chong-fang-shi-shi-xian-bing-fa-web-server/" class="list-group-item list-group-item-action">
+          <span class="category-post">网络通信-多种方式实现并发 Web Server</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/08/16/wang-luo-tong-xin-simple-web-server/" class="list-group-item list-group-item-action">
+          <span class="category-post">网络通信-简单WEB服务器</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/08/16/wang-luo-tong-xin-chang-lian-jie-yu-duan-lian-jie/" class="list-group-item list-group-item-action">
+          <span class="category-post">网络通信-长连接与短连接</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2019/05/09/wang-luo-tong-xin-03-http-bao-wen-nei-de-http-xin-xi/" class="list-group-item list-group-item-action">
+          <span class="category-post">03-HTTP 报文内的 HTTP 信息</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2019/05/09/wang-luo-tong-xin-02-jian-dan-jie-shao-http-xie-yi-jie-gou/" class="list-group-item list-group-item-action">
+          <span class="category-post">02-简单介绍 HTTP 协议结构</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2019/05/09/wang-luo-tong-xin-01-liao-jie-web-ji-wang-luo-ji-chu/" class="list-group-item list-group-item-action">
+          <span class="category-post">01—了解web及网络基础</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffzdy009ljbjdaoz83pz3" role="tab" data-toggle="collapse" href="#collapse-ckk9ffzdy009ljbjdaoz83pz3"
+        aria-expanded="false"
+      >
+        算法
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%AE%97%E6%B3%95/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>3</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffzdy009ljbjdaoz83pz3" class="collapse in " role="tabpanel"
+       aria-labelledby="heading-ckk9ffzdy009ljbjdaoz83pz3">
+    
+  
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffzeh00ccjbjdgs3j6kf0" role="tab" data-toggle="collapse" href="#collapse-ckk9ffzeh00ccjbjdgs3j6kf0"
+        aria-expanded="false"
+      >
+        时间复杂度
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%AE%97%E6%B3%95/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>2</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffzeh00ccjbjdgs3j6kf0" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9ffzeh00ccjbjdgs3j6kf0">
+    
+    
+    
+      
+      
+        <a href="/2019/05/25/suan-fa-shi-jian-fu-za-du-01-o-biao-ji-fa-yu-chang-jian-shi-jian-fu-za-du/" class="list-group-item list-group-item-action">
+          <span class="category-post">O标记法与常见时间复杂度</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2019/05/25/suan-fa-shi-jian-fu-za-du-02-chang-jian-han-shu-de-shi-jian-fu-za-du/" class="list-group-item list-group-item-action">
+          <span class="category-post">常见函数的时间复杂度</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffzeg00c8jbjd0w39aa6e" role="tab" data-toggle="collapse" href="#collapse-ckk9ffzeg00c8jbjd0w39aa6e"
+        aria-expanded="false"
+      >
+        排序
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffzeg00c8jbjd0w39aa6e" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9ffzeg00c8jbjd0w39aa6e">
+    
+    
+    
+      
+      
+        <a href="/2019/05/09/suan-fa-pai-xu/" class="list-group-item list-group-item-action">
+          <span class="category-post">经典排序算法总结与实现</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffzcb0038jbjdg4qt9di5" role="tab" data-toggle="collapse" href="#collapse-ckk9ffzcb0038jbjdg4qt9di5"
+        aria-expanded="false"
+      >
+        JS
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E6%8A%80%E6%9C%AF/JS/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffzcb0038jbjdg4qt9di5" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9ffzcb0038jbjdg4qt9di5">
+    
+    
+    
+      
+      
+        <a href="/2020/04/12/js-es6-yu-fa/" class="list-group-item list-group-item-action">
+          <span class="category-post">ES6语法</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffzdn007hjbjdh6rbhwbm" role="tab" data-toggle="collapse" href="#collapse-ckk9ffzdn007hjbjdh6rbhwbm"
+        aria-expanded="false"
+      >
+        工具
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E5%B7%A5%E5%85%B7/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>4</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffzdn007hjbjdh6rbhwbm" class="collapse in " role="tabpanel"
+       aria-labelledby="heading-ckk9ffzdn007hjbjdh6rbhwbm">
+    
+  
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffze700anjbjd760z0guv" role="tab" data-toggle="collapse" href="#collapse-ckk9ffze700anjbjd760z0guv"
+        aria-expanded="false"
+      >
+        python
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E5%B7%A5%E5%85%B7/python/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>2</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffze700anjbjd760z0guv" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9ffze700anjbjd760z0guv">
+    
+    
+    
+      
+      
+        <a href="/2020/04/11/gong-ju-python-huan-jing-pei-zhi/" class="list-group-item list-group-item-action">
+          <span class="category-post">python环境配置</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2019/05/25/gong-ju-win10-pyhton2-he-3-gong-cun/" class="list-group-item list-group-item-action">
+          <span class="category-post">win10 python2和python3共存问题</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffze500aejbjd032m7bov" role="tab" data-toggle="collapse" href="#collapse-ckk9ffze500aejbjd032m7bov"
+        aria-expanded="false"
+      >
+        Git
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E5%B7%A5%E5%85%B7/Git/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffze500aejbjd032m7bov" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9ffze500aejbjd032m7bov">
+    
+    
+    
+      
+      
+        <a href="/2019/03/31/gong-ju-git-cao-zuo/" class="list-group-item list-group-item-action">
+          <span class="category-post">Git操作</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffze600ahjbjd3ngv7ppp" role="tab" data-toggle="collapse" href="#collapse-ckk9ffze600ahjbjd3ngv7ppp"
+        aria-expanded="false"
+      >
+        NodeJs
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E5%B7%A5%E5%85%B7/NodeJs/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffze600ahjbjd3ngv7ppp" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9ffze600ahjbjd3ngv7ppp">
+    
+    
+    
+      
+      
+        <a href="/2019/03/31/gong-ju-nodejs-huan-jing-pei-zhi/" class="list-group-item list-group-item-action">
+          <span class="category-post">Node.js环境配置</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffzdq0080jbjd913t31br" role="tab" data-toggle="collapse" href="#collapse-ckk9ffzdq0080jbjd913t31br"
+        aria-expanded="false"
+      >
+        系统
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E7%B3%BB%E7%BB%9F/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>4</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffzdq0080jbjd913t31br" class="collapse in " role="tabpanel"
+       aria-labelledby="heading-ckk9ffzdq0080jbjd913t31br">
+    
+  
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffze800avjbjdf9xg4qse" role="tab" data-toggle="collapse" href="#collapse-ckk9ffze800avjbjdf9xg4qse"
+        aria-expanded="false"
+      >
+        Mac
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E7%B3%BB%E7%BB%9F/Mac/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>2</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffze800avjbjdf9xg4qse" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9ffze800avjbjdf9xg4qse">
+    
+    
+    
+      
+      
+        <a href="/2020/12/27/gong-ju-hao-yong-de-cli-gong-ju/" class="list-group-item list-group-item-action">
+          <span class="category-post">好用的CLI工具</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/23/xi-tong-mac-qing-chu-office-zui-jin-wen-jian/" class="list-group-item list-group-item-action">
+          <span class="category-post">清除office最近文件</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffzej00cpjbjdficpdbgt" role="tab" data-toggle="collapse" href="#collapse-ckk9ffzej00cpjbjdficpdbgt"
+        aria-expanded="false"
+      >
+        linux
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E7%B3%BB%E7%BB%9F/linux/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffzej00cpjbjdficpdbgt" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9ffzej00cpjbjdficpdbgt">
+    
+    
+    
+      
+      
+        <a href="/2020/09/03/xi-tong-deepin-os-an-zhuang-nvidia-qu-dong/" class="list-group-item list-group-item-action">
+          <span class="category-post">Deepin OS 安装 NVIDIA驱动</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffzek00cujbjd8lcsfl9n" role="tab" data-toggle="collapse" href="#collapse-ckk9ffzek00cujbjd8lcsfl9n"
+        aria-expanded="false"
+      >
+        Windows
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E7%B3%BB%E7%BB%9F/Windows/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffzek00cujbjd8lcsfl9n" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9ffzek00cujbjd8lcsfl9n">
+    
+    
+    
+      
+      
+        <a href="/2019/05/25/xi-tong-win10-she-zhi-kai-ji-zi-qi/" class="list-group-item list-group-item-action">
+          <span class="category-post">win10设置开机自启</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffzdr0085jbjddg4raiqq" role="tab" data-toggle="collapse" href="#collapse-ckk9ffzdr0085jbjddg4raiqq"
+        aria-expanded="false"
+      >
+        教程
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>2</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffzdr0085jbjddg4raiqq" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9ffzdr0085jbjddg4raiqq">
+    
+    
+    
+      
+      
+        <a href="/2019/03/31/jiao-cheng-gitbook-jiao-cheng/" class="list-group-item list-group-item-action">
+          <span class="category-post">GitBook教程</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2019/03/23/jiao-cheng-hexo-bo-ke-pei-zhi-jiao-cheng/" class="list-group-item list-group-item-action">
+          <span class="category-post">Hexo博客配置教程</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffzdx009ajbjd653ue6qk" role="tab" data-toggle="collapse" href="#collapse-ckk9ffzdx009ajbjd653ue6qk"
+        aria-expanded="false"
+      >
+        生活
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E7%94%9F%E6%B4%BB/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>2</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffzdx009ajbjd653ue6qk" class="collapse in " role="tabpanel"
+       aria-labelledby="heading-ckk9ffzdx009ajbjd653ue6qk">
+    
+  
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffzee00bxjbjd1a7la0x6" role="tab" data-toggle="collapse" href="#collapse-ckk9ffzee00bxjbjd1a7la0x6"
+        aria-expanded="false"
+      >
+        感悟
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E7%94%9F%E6%B4%BB/%E6%84%9F%E6%82%9F/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffzee00bxjbjd1a7la0x6" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9ffzee00bxjbjd1a7la0x6">
+    
+    
+    
+      
+      
+        <a href="/2019/03/23/sheng-huo-xiao-gu-shi/" class="list-group-item list-group-item-action">
+          <span class="category-post">小故事</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffzef00c3jbjd586we11u" role="tab" data-toggle="collapse" href="#collapse-ckk9ffzef00c3jbjd586we11u"
+        aria-expanded="false"
+      >
+        笑话
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E7%94%9F%E6%B4%BB/%E7%AC%91%E8%AF%9D/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffzef00c3jbjd586we11u" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9ffzef00c3jbjd586we11u">
+    
+    
+    
+      
+      
+        <a href="/2019/03/23/sheng-huo-xiao-hua-yi/" class="list-group-item list-group-item-action">
+          <span class="category-post">来来来，你能猜出来吗</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9ffzcy004sjbjd3xhqfsgr" role="tab" data-toggle="collapse" href="#collapse-ckk9ffzcy004sjbjd3xhqfsgr"
+        aria-expanded="false"
+      >
+        Ebook
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/Ebook/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9ffzcy004sjbjd3xhqfsgr" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9ffzcy004sjbjd3xhqfsgr">
+    
+    
+    
+      
+      
+        <a href="/2019/05/12/books/" class="list-group-item list-group-item-action">
+          <span class="category-post">books</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love">BookabdMusic</i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
 </footer>
 
-<div class="progress-bar"></div>
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
 
 
-    <!-- 搜索遮罩框 -->
-<div id="searchModal" class="modal">
-    <div class="modal-content">
-        <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
-            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
-                   class="search-input">
-        </div>
-        <div id="searchResult"></div>
-    </div>
-</div>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
-<script type="text/javascript">
-$(function () {
-    var searchFunc = function (path, search_id, content_id) {
-        'use strict';
-        $.ajax({
-            url: path,
-            dataType: "xml",
-            success: function (xmlResponse) {
-                // get the contents from search data
-                var datas = $("entry", xmlResponse).map(function () {
-                    return {
-                        title: $("title", this).text(),
-                        content: $("content", this).text(),
-                        url: $("url", this).text()
-                    };
-                }).get();
-                var $input = document.getElementById(search_id);
-                var $resultContent = document.getElementById(content_id);
-                $input.addEventListener('input', function () {
-                    var str = '<ul class=\"search-result-list\">';
-                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                    $resultContent.innerHTML = "";
-                    if (this.value.trim().length <= 0) {
-                        return;
-                    }
-                    // perform local searching
-                    datas.forEach(function (data) {
-                        var isMatch = true;
-                        var data_title = data.title.trim().toLowerCase();
-                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
-                        var data_url = data.url;
-                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
-                        var index_title = -1;
-                        var index_content = -1;
-                        var first_occur = -1;
-                        // only match artiles with not empty titles and contents
-                        if (data_title !== '' && data_content !== '') {
-                            keywords.forEach(function (keyword, i) {
-                                index_title = data_title.indexOf(keyword);
-                                index_content = data_content.indexOf(keyword);
-                                if (index_title < 0 && index_content < 0) {
-                                    isMatch = false;
-                                } else {
-                                    if (index_content < 0) {
-                                        index_content = 0;
-                                    }
-                                    if (i === 0) {
-                                        first_occur = index_content;
-                                    }
-                                }
-                            });
-                        }
-                        // show search results
-                        if (isMatch) {
-                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
-                            var content = data.content.trim().replace(/<[^>]+>/g, "");
-                            if (first_occur >= 0) {
-                                // cut out 100 characters
-                                var start = first_occur - 20;
-                                var end = first_occur + 80;
-                                if (start < 0) {
-                                    start = 0;
-                                }
-                                if (start === 0) {
-                                    end = 100;
-                                }
-                                if (end > content.length) {
-                                    end = content.length;
-                                }
-                                var match_content = content.substr(start, end);
-                                // highlight all keywords
-                                keywords.forEach(function (keyword) {
-                                    var regS = new RegExp(keyword, "gi");
-                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
-                                });
-
-                                str += "<p class=\"search-result\">" + match_content + "...</p>"
-                            }
-                            str += "</li>";
-                        }
-                    });
-                    str += "</ul>";
-                    $resultContent.innerHTML = str;
-                });
-            }
-        });
-    };
-
-    searchFunc('/search.xml', 'searchInput', 'searchResult');
-});
-</script>
-
-    <!-- 回到顶部按钮 -->
-<div id="backTop" class="top-scroll">
-    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fas fa-arrow-up"></i>
-    </a>
-</div>
+<!-- Plugins -->
 
 
-    <script src="https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/libs/materialize/materialize.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/libs/aos/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/js/matery.js"></script>
+  
+    <script  src="/js/lazyload.js" ></script>
+  
 
-    <!-- Baidu Analytics -->
 
-    <!-- Baidu Push -->
 
-<script>
+  
+
+
+
+
+
+
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
     (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
 
-    
-    <script src="https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/libs/others/clicklove.js" async="async"></script>
-    
-    
-    <script async src="https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/libs/others/busuanzi.pure.mini.js"></script>
-    
 
-    
 
-    
 
-	
-    
 
-    
 
-    
 
-    
-    <script src="https://cdn.jsdelivr.net/gh/bookandmusic/bookandmusic.github.io/libs/instantpage/instantpage.js" type="module"></script>
-    
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
 
 </body>
-
 </html>
