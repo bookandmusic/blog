@@ -13,8 +13,6 @@ tags:
 
 下面我们使用 `Python` 来实现并发的 `Web Server`，其中采用了多进程、多线程、协程、单进程单线程非阻塞、`select`、`epoll`的方式。
 
-<!--more-->
-
 一、使用子进程来实现并发 Web Server
 ---------------------------
 
@@ -390,7 +388,7 @@ if __name__ == '__main__':
 
 我们在最后使用单进程+单线程+非阻塞+长连接实现了一个可并发处理客户端连接的服务器。他的原理可以用以下的图来描述：
 
-![P4p4aJ](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/08/P4p4aJ.png)
+![P4p4aJ](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/08/P4p4aJ.png)
 
 **解释：**
 
@@ -408,7 +406,7 @@ if __name__ == '__main__':
 
 **我们再来看epoll的图：**
 
-![5TcU6B](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/08/5TcU6B.png)
+![5TcU6B](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/08/5TcU6B.png)
 
 **解释：**
 

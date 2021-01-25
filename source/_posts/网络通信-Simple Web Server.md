@@ -12,8 +12,6 @@ tags:
 
 本篇文章介绍如何实现一个简单 的Web Server 以及对应的问题解决方案。
 
-<!--more-->
-
 ## 一、如何使用Python实现一个返回固定页面的Web Server
 
 1. 使用socket创建一个TCP Server
@@ -99,11 +97,11 @@ def main():
 
 ## 三、TCP协议3次握手、4次挥手
 
-![fHQGzW](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/08/fHQGzW.jpg)
+![fHQGzW](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/08/fHQGzW.jpg)
 
 ### 三次握手：
 
-![三次握手](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/08/三次握手.png)
+![三次握手](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/08/三次握手.png)
 
  
 
@@ -121,7 +119,7 @@ def main():
 
 ### 四次挥手：
 
-![四次挥手](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/08/四次挥手.png)
+![四次挥手](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/08/四次挥手.png)
 
 
 

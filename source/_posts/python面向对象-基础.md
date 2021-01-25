@@ -1,12 +1,11 @@
 ---
-title: 面向对象编程
+title: python面向对象
 date: 2019-11-04 22:36:03
 categories:
   - 技术
   - python
-  - 面向对象
+  - 基础
 tags:
-  - python
   - 面向对象
 ---
 

@@ -1,14 +1,12 @@
 ---
-title: 内置函数
+title: python内置函数
+date: 2019-05-25 10:45:27
 categories:
   - 技术
   - python
-  - 函数
-tags:
-  - python
-  - 函数
   - 基础
-date: 2019-05-25 10:45:27
+tags:
+  - 内置函数
 ---
 ### python内置函数
 

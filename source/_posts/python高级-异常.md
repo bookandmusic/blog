@@ -1,14 +1,14 @@
 ---
-title: 异常
+title: python异常
 categories:
   - 技术
   - python
-  - 高级
+  - 基础
 tags:
   - 异常
 date: 2019-03-22 22:38:25
 ---
-![20190517210629-异常类型](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190517210629-异常类型%20.png)
+![20190517210629-异常类型](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190517210629-异常类型%20.png)
 
 ### 自定义异常类型
 ```python

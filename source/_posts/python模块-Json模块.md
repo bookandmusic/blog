@@ -1,16 +1,12 @@
 ---
 title: Json模块
 date: 2019-11-25 14:30:27
-
 categories: 
-- 技术
-- python
-- 模块
+  - 技术
+  - python
+  - 模块
 tags:
   - Json
-  - Python
-  - 字典
-  - 列表
 ---
 
 ### JSON介绍

@@ -17,13 +17,13 @@ date: 2019-05-09 19:55:09
 
 请求报文是由请求方法、请求 `URI`、协议版本、可选的请求首部字段和内容实体构成的。
 
-![20190526111207-请求报文](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526111207-请求报文%20.png)
+![20190526111207-请求报文](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526111207-请求报文%20.png)
 
 ## 2、响应报文
 
 服务器以响应的形式返回处理结果。
 
-![20190526111215-响应报文](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526111215-响应报文%20.png)
+![20190526111215-响应报文](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526111215-响应报文%20.png)
 
 `200 OK` 是状态码（`status` `code`）和 原因短语。
 下一行是创建相应的日期，是首部字段 (`header` `field`) 的一个属性。
@@ -31,7 +31,7 @@ date: 2019-05-09 19:55:09
 下一行是返回内容的类型。
 空行后的是资源实体的主体内容。
 
-![20190526111221-响应报文02](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526111221-响应报文02%20.png)
+![20190526111221-响应报文02](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526111221-响应报文02%20.png)
 
 ## 3、HTTP 是无状态（stateless）协议。
 
@@ -47,19 +47,19 @@ date: 2019-05-09 19:55:09
 
   获取资源。请求已被 `URI` 识别的资源，就是经过服务器解析后返回的响应内容，文本就保持原样返回，如果是可执行程序，就返回结果。
 
-![20190526111129-GET方式](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526111129-GET方式%20.png)
+![20190526111129-GET方式](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526111129-GET方式%20.png)
 
 ### `POST`
 
   传输实体主体。
 
-![20190526111137-POST方式](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526111137-POST方式%20.png)
+![20190526111137-POST方式](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526111137-POST方式%20.png)
 
 ### `HEAD`
 
   获得报文首部。和 `GET` 一样，但是不返回主体部分，只用于确认 `URI` 的有效性和资源更新的日期等。
 
-![20190526111155-报文头](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526111155-报文头%20.png)
+![20190526111155-报文头](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526111155-报文头%20.png)
 
 > **注意：**方法名区分大小写，注意要用**大写字母**。
 
@@ -68,19 +68,19 @@ date: 2019-05-09 19:55:09
   当请求的资源有很多时，会发生多次的 `TCP` 连接和断开过程，增加了通信量的开销。于是产生了持久链接（`HTTP` `Persistent` `connections`）。
   **特点：** 只要任意一端没有明确提出断开连接，则保持 `TCP` 连接状态。
 
-![20190526111143-TCP链接](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526111143-TCP链接%20.png)
+![20190526111143-TCP链接](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526111143-TCP链接%20.png)
 
 ## 6、管线化
 
   持久化连接需要等待上一个发送请求得到响应之后才能发送下一个请求，但是管线化技术可以直接发送，这样就能同时并发发送多个请求。
 
-![20190526111200-管线化](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526111200-管线化%20.png)
+![20190526111200-管线化](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526111200-管线化%20.png)
 
 ## 7、Cookie
 
   状态管理。为了解决 `HTTP` 的无状态，`Cookie` 技术通过在请求和响应报文中写入 `Cookie` 信息来控制客户端的状态。具体实现是 `Cookie` 根据响应报文内 `Set-Cookie` 的首部字段信息，通知客户端保存 `Cookie`，当下一次再像**该**服务器发送请求，客户端会自动在请求报文中添加 `Cookie` 值后发送。服务端发现客户端发送的 `Cookie` 后，回去检查对比记录，得到状态信息。
 
-![20190526111108-Cookie](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526111108-Cookie%20.png)
+![20190526111108-Cookie](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526111108-Cookie%20.png)
 
 ## 自我回顾
 

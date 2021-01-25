@@ -3,11 +3,10 @@ title: Django-用户认证
 categories:
   - 技术
   - python
-  - web
+  - Django
 tags:
-  - django
   - auth
-  - user
+  - 模板
 date: 2020-03-10 21:34:46
 ---
 ## 项目框架
@@ -425,7 +424,6 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name="login"),
     path('logout/', LogoutView.as_view(), name="logout"),
     path("user/", UserView.as_view(), name='user'),
-    path('', IndexView.as_view(), name="index"),
-
+    path('', IndexView.as_view(), name="index")
 ]
 ```

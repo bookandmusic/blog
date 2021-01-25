@@ -4,9 +4,10 @@ date: 2020-03-16 20:23:16
 categories:
   - 技术
   - python
-  - web
+  - Django
 tags:
   - 图片上传
+  - 模板
 ---
 
 ## 图片上传

@@ -1,14 +1,12 @@
 ---
 title: time与timeit 模块
+date:  2019-05-03 20:14:29
 categories:
   - 技术
   - python
   - 模块
 tags:
-  - python
-  - 基础
-
-date: 2019-05-03 20:14:29
+  - 时间模块
 ---
 # 一、time 模块
 ### 1. 时间表现形式
@@ -16,7 +14,7 @@ date: 2019-05-03 20:14:29
 - struct_time： 时间元组，共有九个元素组
 - format time： 格式化时间，已格式化的结构使时间更具可读性。包括自定义格式和固定格式
 ### 2. 时间格式转换图
-![20190503200750-时间格式转换图](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190503200750-时间格式转换图%20.jpg)
+![20190503200750-时间格式转换图](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190503200750-时间格式转换图%20.jpg)
 
 ### 3. 常用方法
 1. 获取当前时间戳

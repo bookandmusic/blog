@@ -12,8 +12,6 @@ tags:
 
 Git是目前世界上最先进的分布式版本控制系统，可以有效、高速的处理从很小到非常大的项目版本管理。也就是用来管理你的hexo博客文章，上传到GitHub的工具。Git非常强大，开发人员必备技能。
 
-<!--more-->
-
 ## 1. 安装Git
 
 - windows：到git官网上下载, [Download](https://gitforwindows.org/) git,下载后会有一个Git Bash的命令行工具，以后就用这个工具来使用git。
@@ -28,7 +26,7 @@ Git是目前世界上最先进的分布式版本控制系统，可以有效、�
 
 ## 2. 基本操作
 
-![Git操作](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2005/Git操作%20.jpg)
+![Git操作](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/Git操作%20.jpg)
 
 
 ## 3. 远程仓库密钥配置
@@ -119,7 +117,7 @@ Hi humingx! You've successfully authenticated, but GitHub does not provide shell
 
     ```bash
     cd existing_git_repo
-    git remote add origin https://gitee.com/liushaofeng2018/test.git
+    git remote add origin https://gitee.com/bookandmusic/test.git
     ```
     添加后，远程库的名字就是origin，这是Git默认的叫法，也可以改成别的，但是origin这个名字一看就知道是远程库。
     ```bash
@@ -138,7 +136,7 @@ Hi humingx! You've successfully authenticated, but GitHub does not provide shell
     touch README.md
     git add README.md
     git commit -m "first commit"
-    git remote add origin https://gitee.com/liushaofeng2018/test.git
+    git remote add origin https://gitee.com/bookandmusic/test.git
     git push -u origin master
     ```
 

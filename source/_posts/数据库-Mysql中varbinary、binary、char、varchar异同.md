@@ -1,5 +1,6 @@
 ---
 title: Mysql中varbinary、binary、char、varchar异同
+date: 2019-06-01 09:12:16
 categories:
   - 技术
   - 数据库
@@ -9,14 +10,11 @@ tags:
   - binary
   - char
   - varchar
-date: 2019-06-01 09:12:16
 ---
 
 binary 与 varbinary 类型和char与varchar类型是相似的，只是他们存储的是二进制数据，也就是说他们是包含字节流而不是字符流，他们有二进制字符的集合和顺序，他们的对比，排序是基于字节的数值进行的
 
 binary与varbinary的最大长度和char与varchar是一样的，只不过他们是定义**字节长度**，而char和varchar对应的是**字符长度**。
-
-<!--more-->
 
 #### 存储和取出时对尾部空格的处理
 

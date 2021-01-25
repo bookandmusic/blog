@@ -1,22 +1,21 @@
 ---
-title: python高级-内存管理
+title: python内存管理
 date: 2020-07-30 21:53:24
 categories:
   - 技术
   - python
-  - 高级
+  - 系统
 tags:
   - 引用计数
-  - 可变类型与不可变类型
+  - 分代回收
+  - 标记清除
 ---
 
 ## 内存管理机制
 
 > Python中不但变量名无需事先声明，而且也无需类型声明。在Python语言中，对象的类型和内存占用都是运行时确定的。在赋值时解释器会根据语法和右侧的操作数来决定新对象的类型。在对象创建后，一个该对象的引用会被赋值给左侧的变量。
 
-<!--more-->
-
-![python针对变量的内存管理机制](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/python针对变量的内存管理机制%20.png)
+![python针对变量的内存管理机制](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/python针对变量的内存管理机制%20.png)
 
 ### id()函数
 
@@ -50,11 +49,11 @@ tags:
 
 #### 增加引用计数
 
-![增加引用计数](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/增加引用计数%20.png)
+![增加引用计数](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/增加引用计数%20.png)
 
 #### 减少引用计数
 
-![减少引用计数](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/减少引用计数%20.png)
+![减少引用计数](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/减少引用计数%20.png)
 
 ### is和==
 
@@ -223,4 +222,6 @@ print(a is b)  # True
 print(a is c4)  # False
 
 ```
+
+### [引用计数+标记清理+分代回收](https://www.cnblogs.com/shengulong/p/10143856.html)
 

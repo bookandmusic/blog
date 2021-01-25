@@ -17,7 +17,7 @@ HTTP 通信过程包括从客户端发往服务器端的请求以及从服务端
 就是一大串通信过程里经过 `HTTP` 处理后添加的报文。
 其大致分为报文首部和报文主体两块。两者由最初出现的空行（`CR+LF`）来划分，通常并不一定要有报文主体。
 
-![20190526112612-HTTP报文结构](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526112612-HTTP报文结构%20.png)
+![20190526112612-HTTP报文结构](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526112612-HTTP报文结构%20.png)
 
 ## 2、编码提升传输速率
 
@@ -29,8 +29,8 @@ HTTP 通信过程包括从客户端发往服务器端的请求以及从服务端
 HTTP 报文主体用于传输请求或响应的实体主体。
 一般情况，报文主体等于实体主体，但是传输中进行编码操作的时候，实体主体内容发生变化。
 
-![20190526112620-HTTP报文结构02](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526112620-HTTP报文结构02%20.png)
-![20190526112630-HTTP报文实例](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526112630-HTTP报文实例%20.png)
+![20190526112620-HTTP报文结构02](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526112620-HTTP报文结构02%20.png)
+![20190526112630-HTTP报文实例](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526112630-HTTP报文实例%20.png)
 
 ### 压缩传输的内容编码
 
@@ -49,11 +49,11 @@ HTTP 报文主体用于传输请求或响应的实体主体。
 
 * `multipart`/`form-data` 在 `Web` 表单文件上传使用
 
-  ![20190526112655-多部分对象集合](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526112655-多部分对象集合%20.png)
+  ![20190526112655-多部分对象集合](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526112655-多部分对象集合%20.png)
 
 * `multipart`/`byteranges` 状态码 206（`Partial` `Content`，部分内容）响应报文包含了多个范围的内容时使用。
 
-![20190526112701-多部分对象集合02](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526112701-多部分对象集合02%20.png)
+![20190526112701-多部分对象集合02](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526112701-多部分对象集合02%20.png)
 
 `HTTP` 报文使用这个多部分对象集合的时候，需要在首部添加 `Content-type` 字段。
 使用 `boundary` 字符串来划分多部分
@@ -75,7 +75,7 @@ HTTP 报文主体用于传输请求或响应的实体主体。
 `Range` : `bytes` = -3000, 5000 - 7000
 从头到 3000， 5000 到 7000 的
 
-![20190526112648-HTTP范围请求](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526112648-HTTP范围请求%20.png)
+![20190526112648-HTTP范围请求](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526112648-HTTP范围请求%20.png)
 
 针对范围请求，响应会返回状态码为 `206 Partial Content` 的响应报文，另外，对于多重范围的范围请求，响应会在首部字段 `Content-Type` 标明 `multipart`/`byteranges` 后返回响应报文，如果服务器无法响应请求，返回状态码 `200 OK `和完整的实体内容。
 

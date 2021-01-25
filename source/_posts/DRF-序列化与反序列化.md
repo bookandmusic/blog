@@ -4,16 +4,13 @@ date: 2020-07-08 10:26:57
 categories:
   - 技术
   - python
-  - web
+  - DRF
 tags:
   - 序列化
   - 反序列化
-  - DRF
 ---
 
 DRF内置的序列化类，可以对整个模型类进行序列化与反序列化，简化了繁杂的工作。
-
-<!--more-->
 
 ## 内置字段序列化
 
@@ -54,12 +51,13 @@ class Books(models.Model):
 
 ### 序列化类
 
-#### 1. 全部字段序列化
+#### 字段默认方式序列化
+
+>   全部字段都采用 `ModelSerializer`的默认方式实现**序列化**与**反序列化**，外键对应的序列化值是外键id
 
 ```python
 from rest_framework.serializers import ModelSerializer
 from .models import Books, Authors
-from rest_framework import serializers
 
 
 class AuthorsSerializer(ModelSerializer):
@@ -77,9 +75,11 @@ class BooksSerializer(ModelSerializer):
         
 ```
 
-#### 2. 指定字段序列化
+#### 字段指定方式序列化
 
-##### <1> 外键字段内置方式序列化
+>   对模型类的外键关联字段通过 其他方式，实现**序列化**，其他字段仍然使用 默认方式实现序列化
+
+##### 外键字段内置方式序列化
 
 **图书类序列化**
 
@@ -100,7 +100,7 @@ class BooksSerializer(ModelSerializer):
     
     # author = serializers.CharField(source='author.name', read_only=True)  # 指定关联对象的字段
     
-    # author = AuthorsSerializer()  # 将关联对象所有字段全部序列化
+    author = AuthorsSerializer()  # 将关联对象所有字段全部序列化
     class Meta:
         model = Books
         fields = '__all__'
@@ -116,9 +116,9 @@ from rest_framework import serializers
 
 class AuthorsSerializer(ModelSerializer):
     # books_set = serializers.PrimaryKeyRelatedField(read_only=True, many=True)
-    # books_set = serializers.StringRelatedField(many=True)
+    # books_set = serializers.StringRelatedField(read_only=True, many=True)
     # books_set = serializers.HyperlinkedRelatedField(view_name='books-detail', read_only=True, many=True)
-    # books_set = BookSerializer(many=True)
+    # books_set = BookSerializer(read_only=True, many=True)
     # books_set = BookRelateField(read_only=True, many=True)  # 自定义关联字段
 
     class Meta:
@@ -127,7 +127,7 @@ class AuthorsSerializer(ModelSerializer):
 
 ```
 
-##### <2> 外键字段自定义方式序列化
+#####  外键字段自定义方式序列化
 
 ```python
 from rest_framework.serializers import ModelSerializer
@@ -165,9 +165,9 @@ class BooksSerializer(ModelSerializer):
 
 ## 自定义字段序列化
 
-> 最大好处, 在于将序列化字段与反序列化字段分离，互不影响
+> 通过上面的例子可以看出：将外键字段通过其他方式序列化，可以得到不通类型的数据；但是大多数情况，不能实现反序列化。因此，可以在序列化时，不修改外键字段，而是自己构建新字段。最大好处, 在于将序列化字段与反序列化字段分离，互不影响。
 
-### <1> 修改模型类
+### 修改模型类
 
 需要在模型类中用`@property`来实现，可插拔
 
@@ -211,7 +211,7 @@ class BooksSerializer(ModelSerializer):
 
 ```
 
-### <2>修改序列化类
+### 修改序列化类
 
 > 模型类不变，只在序列化器中添加序列化字段
 

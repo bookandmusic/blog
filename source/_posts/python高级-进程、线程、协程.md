@@ -1,15 +1,15 @@
 ---
-title: python进程、线程、协程
+title: python多任务机制
+date: 2019-05-17 20:53:32
 categories:
   - 技术
   - python
-  - 高级
+  - 系统
 tags:
   - 线程
   - 进程
   - 协程
   - 多任务
-date: 2019-05-17 20:53:32
 ---
 
 ### python 线程与进程简介

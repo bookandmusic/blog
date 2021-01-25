@@ -1,17 +1,16 @@
 ---
 title: 装饰器
 date: 2019-05-02 14:30:27
-
 categories: 
 - 技术
 - python
-- 函数
+- 基础
 tags:
   - 闭包
   - 装饰器
 ---
 
-### 返回函数
+## 返回函数
 
 > `python`的常识，函数和其他任何东西一样，都是对象。这意味着可以将`函数`当做`实参`传递给函数，或者在函数中将`函数`作为`返回值`返回。
 
@@ -27,19 +26,20 @@ f = lazy_sum(1, 3, 5, 7, 9)
 f()
 ```
 
-### 闭包
+## 闭包
 
-- 闭包是“返回函数”的一个典型应用
+闭包是“返回函数”的一个典型应用
 
-- 闭包的定义：
+闭包的定义：
 
-  > 在一个外函数(`outer`)中定义了一个内函数(`inner`)
-  >
-  > 内函数里运用了外函数的临时变量
-  >
-  > 并且外函数的返回值是内函数的引用
-- 闭包的使用，可以隐藏内部函数的工作细节，只给外部使用者提供一个可以执行的内部函数的引用。
-  
+> -   在一个外函数(`outer`)中定义了一个内函数(`inner`)
+>
+> -    内函数里运用了外函数的临时变量
+>
+> -   并且外函数的返回值是内函数的引用
+
+闭包的使用，可以隐藏内部函数的工作细节，只给外部使用者提供一个可以执行的内部函数的引用。
+
 ```python
 #闭包函数的实例
   # outer是外部函数 a和b都是外函数的临时变量
@@ -79,46 +79,51 @@ f()
      print('测试失败!')
   ```
 
-### 装饰器
+## 装饰器
 
-
-#### 装饰器介绍
+### 装饰器介绍
 
 要了解python中`@`装饰器的作用，首先要记住这么几点：
 
-1. 装饰器符号`@`属于语法糖
-   - 什么意思呢？
-   - 就是说，我不按照`@`装饰器的语法要求来写，而是按照一般`python`的语法要求来写完全可以。
-   - 那么用`@`装饰器的格式来写的目的就是为了书写简单方便
+>   装饰器符号`@`属于语法糖
 
-   > 注意：装饰器是用于拓展已有函数功能的一种函数，这个函数的特殊之处在于它的返回值也是一个函数，实际上就是利用闭包语法实现的。
-   
-2. 装饰器的作用是什么呢？ 简单的理解就是：装饰原有的函数。什么意思呢？
+什么意思呢？
 
-   - 比如有一个函数`func(a, b)`，它的功能是求`a`,`b`的差值
+- 就是说，我不按照`@`装饰器的语法要求来写，而是按照一般`python`的语法要求来写完全可以。
+- 那么用`@`装饰器的格式来写的目的就是为了书写简单方便
 
-   - 现在有一个新需求，就是想对函数功能再装饰下，求完差值后再取绝对值，但是不能能修改原有函数，这时候就需要装饰器装饰函数     
+**注意：装饰器是用于拓展已有函数功能的一种函数，这个函数的特殊之处在于它的返回值也是一个函数，实际上就是利用闭包语法实现的。**
 
-        ```python
-        """
-        函数闭包实现求差值之后，再求绝对值
-        """
-        def func(a, b):
-            return a- b
+### 装饰器语法
 
-        def abs_num(func):
-            def inner(a, b):
-                ret = func(a, b)
-                return abs(ret)
-            return inner
+装饰器的作用是什么呢？ 简单的理解就是：装饰原有的函数。什么意思呢？
 
-        @abs_num
-        func(2, 3)
-        ```
-        
-    - 当`abs_num`装饰函数`func`时，类似于将函数`func`作为参数传给`abs_num`,并将返回值即内层函数(`inner`)名重新赋值给变量`func`
+比如有一个函数`func(a, b)`，它的功能是求`a`,`b`的差值
 
-    - 当调用函数`func`时，实质是调用内层函数`inner`，在内层函数中执行`func`函数，即最原始的函数`func`
+现在有一个新需求，就是想对函数功能再装饰下，求完差值后再取绝对值，但是不能能修改原有函数，这时候就需要装饰器装饰函数     
+
+```python
+"""
+函数闭包实现求差值之后，再求绝对值
+"""
+def func(a, b):
+    return a- b
+
+def abs_num(func):
+    def inner(a, b):
+        ret = func(a, b)
+        return abs(ret)
+    return inner
+
+@abs_num
+func(2, 3)
+```
+
+ - 当`abs_num`装饰函数`func`时，类似于将函数`func`作为参数传给`abs_num`,并将返回值即内层函数(`inner`)名重新赋值给变量`func`
+
+ - 当调用函数`func`时，实质是调用内层函数`inner`，在内层函数中执行`func`函数，即最原始的函数`func`
+
+### 装饰器分类
 
 #### 被装饰函数有参数
 
@@ -296,100 +301,104 @@ s()
 - 判断对象是否为可调用对象可以用函数 callable
 - 如果在类中实现了 __call__ 方法，那么实例对象也将成为一个可调用对象
 
-#### 练习题
+### 示例
 
-1. 函数input_str中，会获取用户输入字符串，并返回其结果，利用装饰器将其字符串先加上`<b></b>`标签，再添加`<i></i>`标签，如：`<i><b>hello</b></>`。注意：**利用双层装饰器实现**。
-  
-    ```python
-    def set_func_b(func):
+#### 装饰器处理响应值
+
+函数input_str中，会获取用户输入字符串，并返回其结果，利用装饰器将其字符串先加上`<b></b>`标签，再添加`<i></i>`标签，如：`<i><b>hello</b></>`。注意：**利用双层装饰器实现**。
+
+```python
+def set_func_b(func):
+    def call_func():
+        return "<b>" + func() + "</b>"
+
+    return call_func
+
+def set_func_i(func):
+    def call_func():
+        return "<i>" + func() + "</i>"
+
+    return call_func
+
+@set_func_i
+@set_func_b
+def input_str():
+    str = input("输入：")
+    return str
+
+print(input_str())
+```
+
+#### 装饰器限频
+
+请实现一个装饰器,限制该函数被调用的频率,如10秒一次
+
+```python
+import time
+
+def set_time(t):
+    def set_num(func):
+        dic = {"last_time": 0, "time_interval": t}
+
         def call_func():
-            return "<b>" + func() + "</b>"
+            now_time = time.time()
+
+            finall_time = dic["last_time"] + dic["time_interval"]
+            if finall_time <= now_time:
+                dic["last_time"] = now_time
+                ret = func()
+
+                return ret
+            else:
+                print("还有%.2fs才能调用该函数" % (finall_time - now_time))
 
         return call_func
-    
-    def set_func_i(func):
+    return set_num
+
+@set_time(5)
+def s():
+    print("hello...")
+```
+
+请实现一个装饰器,限制该函数每个间隔被调用的频率,如1分钟5次
+
+```python
+import time
+
+def set_time(t, n):
+    def set_num(func):
+        dic = {"last_time": 0, "time_interval": t, "num": 0}
+
         def call_func():
-            return "<i>" + func() + "</i>"
-    
-        return call_func
+            now_time = time.time()
 
-    @set_func_i
-    @set_func_b
-    def input_str():
-        str = input("输入：")
-        return str
+            finall_time = dic["last_time"] + dic["time_interval"] # 代表可以重新调用的时间
+            finall_num = dic["num"] # 代表调用的次数
 
-    print(input_str())
-    ```
-
-2. 请实现一个装饰器,限制该函数被调用的频率,如10秒一次
-
-    ```python
-    import time
-    
-    def set_time(t):
-        def set_num(func):
-            dic = {"last_time": 0, "time_interval": t}
-    
-            def call_func():
-                now_time = time.time()
-    
-                finall_time = dic["last_time"] + dic["time_interval"]
-                if finall_time <= now_time:
+            if finall_num < n: # 当次数不满足时，可以继续调用
+                if finall_num == 0:
                     dic["last_time"] = now_time
-                    ret = func()
-    
-                    return ret
-                else:
-                    print("还有%.2fs才能调用该函数" % (finall_time - now_time))
-    
-            return call_func
-        return set_num
+                dic["num"] += 1
 
-    @set_time(5)
-    def s():
-        print("hello...")
-    ```
+                return func()
 
-3. 请实现一个装饰器,限制该函数每个间隔被调用的频率,如1分钟5次
-  
-    ```python
-    import time
-    
-    def set_time(t, n):
-        def set_num(func):
-            dic = {"last_time": 0, "time_interval": t, "num": 0}
-    
-            def call_func():
-                now_time = time.time()
-    
-                finall_time = dic["last_time"] + dic["time_interval"] # 代表可以重新调用的时间
-                finall_num = dic["num"] # 代表调用的次数
-    
-                if finall_num < n: # 当次数不满足时，可以继续调用
-                    if finall_num == 0:
-                        dic["last_time"] = now_time
-                    dic["num"] += 1
-    
-                    return func()
-    
-                elif now_time >= finall_time: # 已经超出时间，可以重新调用
-                    dic["num"] = 0
-                    dic["last_time"] = 0
-    
-                    return func()
-                else:
-                    print("还有%.2fs才能调用该函数" % (finall_time - now_time))
-            return call_func
-        return set_num
+            elif now_time >= finall_time: # 已经超出时间，可以重新调用
+                dic["num"] = 0
+                dic["last_time"] = 0
 
-    @set_time(60, 5)
-    def s():
-        print("hello...")
+                return func()
+            else:
+                print("还有%.2fs才能调用该函数" % (finall_time - now_time))
+        return call_func
+    return set_num
 
-    s()
-    s()
-    s()
-    time.sleep(2)
-    s()
-    ```
+@set_time(60, 5)
+def s():
+    print("hello...")
+
+s()
+s()
+s()
+time.sleep(2)
+s()
+```

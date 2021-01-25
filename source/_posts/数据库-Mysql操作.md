@@ -11,8 +11,6 @@ tags:
 ---
 介绍如何在 Ubuntu系统上 安装mysql软件、以及如何创建用户信息。
 
-<!--more-->
-
 ### Mysql软件操作
 
 以下所有操作以Ubuntu为例

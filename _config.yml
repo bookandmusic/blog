@@ -12,8 +12,8 @@ timezone: Asia/Shanghai      #网站时区
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-# url: https://bookandmusic.github.io
-url: http://bookandmusic.gitee.io/  #你的站点Url
+url: https://bookandmusic.github.io
+# url: http://bookandmusic.gitee.io/  #你的站点Url
 root: /                     #站点的根目录
 permalink: :year/:month/:day/:title/      #文章的 永久链接 格式 
 permalink_defaults:                       #永久链接中各部分的默认值
@@ -32,7 +32,7 @@ skip_render:                    #跳过指定文件的渲染，您可使用 glob
 new_post_name: :title.md # 新文章的文件名称
 default_layout: post      #预设布局
 titlecase: false # 把标题转换为 titlecase
-external_link: true # 在新标签中打开链接
+external_link.enable: true # 在新标签中打开链接
 filename_case: 0   #把文件名称转换为 (1) 小写或 (2) 大写
 render_drafts: false   #是否显示草稿
 post_asset_folder: false   #是否启动 Asset 文件夹,也就是创建新文章时，是否创建对应的资源文件夹
@@ -69,7 +69,6 @@ plugin:
 - hexo-generator-feed # 生成RSS
 - hexo-deployer-git # hexo d 部署到服务器
 - hexo-permalink-pinyin # 中文链接转拼音
-- hexo-prism-plugin # 代码高亮插件
 - hexo-wordcount # 文章字数统计插件
 - hexo-renderer-markdown-it # Markdown 解析和渲染的插件， hexo-renderer-marked 默认
 
@@ -120,17 +119,11 @@ feed:
   order_by: -date
   
 ## 主题配置
-theme: matery
+theme: fluid
 
-# 代码高亮
-highlight:
-  enable: false
-
-prism_plugin:
-  mode: 'preprocess'    # realtime/preprocess
-  theme: 'tomorrow'
-  line_number: false    # default false
-  custom_css:
+# # 代码高亮
+highlight: 
+  enable: true
 
 
 
@@ -138,6 +131,6 @@ prism_plugin:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git   #类型，常用的git
-  # repository: git@github.com:bookandmusic/bookandmusic.github.io.git
-  repository: https://gitee.com/bookandmusic/bookandmusic.git
+  repository: git@github.com:bookandmusic/bookandmusic.github.io.git
+  # repository: https://gitee.com/bookandmusic/bookandmusic.git
   branch: master

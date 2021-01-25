@@ -13,8 +13,6 @@ date: 2019-03-31 11:58:35
 
 安装 GitBook 需要 Node 环境，具体怎么安装 Node 这里就不多说了。
 
-<!--more-->
-
 ## 安装 GitBook
 
 ```bash

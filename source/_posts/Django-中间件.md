@@ -49,7 +49,7 @@ MIDDLEWARE = [
 
 ```
 
-![中间件示意图](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/中间件示意图.png)
+![中间件示意图](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/中间件示意图.png)
 
 # 3 自定义中间件
 

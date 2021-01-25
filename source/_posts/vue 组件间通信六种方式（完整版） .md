@@ -14,7 +14,7 @@ tags:
 
 组件是 vue.js 最强大的功能之一，而组件实例的作用域是相互独立的，这就意味着不同组件之间的数据无法相互引用。一般来说，组件可以有以下几种关系：
 
-![1460000019208629](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/1460000019208629.png)  
+![1460000019208629](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/1460000019208629.png)  
 
 
 如上图所示，A 和 B、B 和 C、B 和 D 都是父子关系，C 和 D 是兄弟关系，A 和 C 是隔代关系（可能隔多代）。
@@ -82,7 +82,7 @@ export default {
 
 接下来我们通过一个例子，说明子组件如何向父组件传递值：当我们点击 “*Vue.js Demo*” 后，子组件向父组件传递值，文字由原来的 “传递的是一个值” 变成“子向父组件传值”，实现子组件向父组件值的传递。
 
-![1460000019208630](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/1460000019208630.png)
+![1460000019208630](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/1460000019208630.png)
 
 #### 2.1 *Header.vue* 子组件
 
@@ -238,13 +238,13 @@ var vm = new Vue({
 </script>
 ```
 
-![1460000019208631](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/1460000019208631.gif)  
+![1460000019208631](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/1460000019208631.gif)  
 `$on` 监听了自定义事件 data-a 和 data-b，因为有时不确定何时会触发事件，一般会在 mounted 或 created 钩子中来监听。
 
 方法三、vuex
 --------
 
-![1460000019208632](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/1460000019208632.png)
+![1460000019208632](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/1460000019208632.png)
 
 ### 1. 简要介绍 Vuex 原理
 
@@ -406,7 +406,7 @@ export default {
 </script>
 ```
 
-![](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/1460000019208633.png)  
+![](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/1460000019208633.png)  
 如上图所示`$attrs`表示没有继承数据的对象，格式为 {属性名：属性值}。Vue2.4 提供了`$attrs` , `$listeners` 来传递数据与事件，跨级组件之间的通讯变得更简单。
 
 简单来说：`$attrs`与`$listeners` 是两个对象，`$attrs` 里存放的是父组件中绑定的非 Props 属性，`$listeners`里存放的是父组件中绑定的非原生事件。
@@ -456,7 +456,7 @@ export default {
 
 我们来看个例子：孙组件 D、E 和 F 获取 A 组件传递过来的 color 值，并能实现数据响应式变化，即 A 组件的 color 变化后，组件 D、E、F 会跟着变（核心代码如下：）
 
-![](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/1460000019208634.png)
+![](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/1460000019208634.png)
 
 ```js
 // A 组件 

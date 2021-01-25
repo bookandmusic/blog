@@ -1,10 +1,10 @@
 ---
-title: 高阶函数
+title: python高阶函数
 date: 2020-06-06 11:13:12
 categories:
 - 技术
 - python
-- 函数
+- 基础
 tags:
 - 高阶函数
 - sorted
@@ -13,23 +13,23 @@ tags:
 - filter
 ---
 
-1. 定义
+## 高阶函数介绍
 
-   当一个函数 接收 另一个函数作为参数， 它就是 `高阶函数`
+### 定义
 
-<!--more-->
+当一个函数 接收 另一个函数作为参数， 它就是 `高阶函数`
 
-2. 示例
+### 示例
 
-    ```python
-    def func(a, x, y):
-        a(x, y)  # a就是传递的 函数参数f，  执行 a 相当于 执行  f
+```python
+def func(a, x, y):
+    a(x, y)  # a就是传递的 函数参数f，  执行 a 相当于 执行  f
 
-    def f(x, y):
-        print(x + y)
+def f(x, y):
+    print(x + y)
 
-    func(f, 1, 2)  # 3， 在函数f执行过程中，输出 3
-    ```
+func(f, 1, 2)  # 3， 在函数f执行过程中，输出 3
+```
 
 ## 四大高阶函数
 

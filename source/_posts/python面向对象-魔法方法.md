@@ -1,13 +1,12 @@
 ---
-title: 魔法方法
+title: python魔法方法
+date: 2019-03-22 22:22:33
 categories:
   - 技术
   - python
-  - 面向对象
+  - 基础
 tags:
-  - python
-  - 面向对象
-date: 2019-03-22 22:22:33
+  - 魔法方法
 ---
 据说，Python 的对象天生拥有一些神奇的方法，它们总被双下划线所包围，他们是面向对象的 Python 的一切。
 
@@ -15,4 +14,4 @@ date: 2019-03-22 22:22:33
 
 Python 的魔术方法非常强大，然而随之而来的则是责任。了解正确的方法去使用非常重要！
 
-![魔法方法](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2005/魔法方法%20.png)
+![魔法方法](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/魔法方法%20.png)

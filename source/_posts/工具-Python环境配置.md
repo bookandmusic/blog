@@ -5,7 +5,6 @@ categories:
   - 工具
   - python
 tags:
-  - python
   - virtualenv
   - pipenv
   - conda
@@ -18,8 +17,6 @@ tags:
 Python可应用于多平台包括 Linux 和 Mac OS X。
 
 你可以通过终端窗口输入 "python" 命令来查看本地是否已经安装Python以及Python的安装版本。
-
-<!--more-->
 
 ## Python环境配置
 

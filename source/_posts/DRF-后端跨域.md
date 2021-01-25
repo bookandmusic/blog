@@ -4,9 +4,8 @@ date: 2020-03-17 18:19:28
 categories:
   - 技术
   - python
-  - web
-tags:
   - DRF
+tags:
   - 跨域
 ---
 

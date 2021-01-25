@@ -3,10 +3,9 @@ title: Flask易错点
 categories:
   - 技术
   - python
-  - web
+  - Flask
 tags:
-  - web
-  - flask
+  - 易错点
 date: 2019-03-22 22:58:58
 ---
 #### 1 with上下文管理器

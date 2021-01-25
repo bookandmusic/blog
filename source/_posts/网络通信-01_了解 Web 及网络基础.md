@@ -12,8 +12,6 @@ date: 2019-05-09 19:54:09
 
 HTTP 的出现主要是为了解决文本传输的难题
 
-<!--more-->
-
 ## TCP/IP 协议族：
 
 是互联网相关的各类协议族的总称
@@ -35,11 +33,11 @@ HTTP 的出现主要是为了解决文本传输的难题
 
 ### 通信传输流
 
-![20190526110342-HTTP-传输过程](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526110342-HTTP-传输过程%20.png)
+![20190526110342-HTTP-传输过程](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526110342-HTTP-传输过程%20.png)
 
   应用发请求通过 `TCP` 处理报文进行分隔发送给网络层网络层增加 `MAC` 地址给链路, 之后反向操作, 请求数据的时候每一层处理完成后会给这个数据加上这个层的首部信息, 相反, 处理请求的时候, 每处理一层就删除一个首部, 这叫做数据信息的封装 (`encapsulate`)。
 
-![20190526110348-HTTP-传输过程02](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526110348-HTTP-传输过程02%20.png)
+![20190526110348-HTTP-传输过程02](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526110348-HTTP-传输过程02%20.png)
 
 ## IP、TCP 和 DNS
 
@@ -58,7 +56,7 @@ HTTP 的出现主要是为了解决文本传输的难题
     不同局域网之间的通信需要经过多次中转，在中转时会利用下一站中转设备的 `MAC` 地址来搜索下一个中转目标，这时会采用 `ARP` 协议（`Addres s Resolution Protocol`)，这是用于解析地址的协议，可以根据对方 `IP` 地址就能反查处对应的 `MAC` 地址。
       信息传输的时候，并不是从一开始就设计好精确的路线，而是边走边瞧，到下一个中转点会自动判断下一个中转点，这叫做路由选择（`routing`）
 
-![20190526110449-IP处理](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526110449-IP处理%20.png)
+![20190526110449-IP处理](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526110449-IP处理%20.png)
 
 ### TCP 协议
 
@@ -68,7 +66,7 @@ HTTP 的出现主要是为了解决文本传输的难题
 
 ####   三次握手（`three—way handshaking`）策略
 
-![20190526110500-三次握手](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526110500-三次握手%20.png)
+![20190526110500-三次握手](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526110500-三次握手%20.png)
 
 - 发送端先发送一个带有 `SYN`（`synchronize` 同步）标识的数据包给对方
 - 对方接收到后回传一个带有  `SYN`/`ACK`（`acknowledgement`)标识的数据包已传达确认信息
@@ -80,13 +78,13 @@ HTTP 的出现主要是为了解决文本传输的难题
   `DNS` 服务是和 `HTTP` 一样位于应用层, 提供`域名`到 `IP` 地址之间的解析服务。
  计算机可以有 `IP` 地址, 又可以有主机名和域名。比如可以使用 [www.baidu.com](http://www.baidu.com) 访问百度，也可以使用 `119.75.217.109` 访问百度。`DNS` 协议就是可以查询其对应关系的协议。
 
-![20190526110337-DNS解析](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526110337-DNS解析%20.png)
+![20190526110337-DNS解析](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526110337-DNS解析%20.png)
 
 ### 各种协议与 HTTP 协议的关系
 
   客户端发出对某 `www.` 网站的请求, 通过 `DNS` 协议获取对应的 `IP` 地址, 在通过 `HTTP` 协议生成请求报文, 通过 `TCP` 进行分隔划分成数据包, 通过三次握手把每个报文段可靠的传给对方, 再通过 `IP` 协议分配 `IP` 地址和 `MAC` 地址, 一遍中转一遍传送, 对方通过 `IP` 协议接收一段段报文, 通过 `TCP` 协议再一段段重组, 在通过 `HTTP` 协议对这些内容进行处理请求信息, 把请求结果再像上边的过程走回客户端。一次完整的传输就结束了。
 
-![20190526110506-协议关系](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526110506-协议关系%20.png)
+![20190526110506-协议关系](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526110506-协议关系%20.png)
 
 ## URI 和 URL
 
@@ -103,7 +101,7 @@ HTTP 的出现主要是为了解决文本传输的难题
 
 绝对 `URI` 格式：
 
-![20190526110455-URI格式](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020%2006/20190526110455-URI格式%20.png)
+![20190526110455-URI格式](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526110455-URI格式%20.png)
 
 可选项：登录信息、服务器端口号、查询字符串、片段标识符
 

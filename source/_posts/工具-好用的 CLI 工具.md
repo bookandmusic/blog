@@ -28,7 +28,7 @@ eval "$(starship init bash)"
 *   如果上一个命令执行失败，会展示相应的错误提示符。
   
 
-![](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640.jpeg)  
+![](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640.jpeg)  
 
 还有不计其数的其他信息可以展示。但是，它能以更加友好的形式智能地给你呈现!
 
@@ -82,7 +82,7 @@ time_range = "-" # 显示时间的范围，必须是24小时制
 
 fzf— fuzzy finder，即模糊查找器。它是一种通用工具，可让你使用模糊搜索来查找文件、历史命令、进程、git 提交等。你键入一些字母，它会尝试匹配结果列表中任何位置的字母。输入的字母越多，结果也就越准确。你可能在其他的代码编辑器中有过这种类型的搜索使用体验——当你想打开某个文件时，只键入文件名的一部分而不用输入完整路径就能进行查找——这就是模糊搜索。
 
-![](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220059861.jpeg)  
+![](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220059861.jpeg)  
 
 我通过 fish fzf 插件插件使用它，因此我可以搜索命令历史记录或快速打开文件。这是可以每天为我节省不少时间的一个非常棒的工具。
 
@@ -181,7 +181,7 @@ tests/testenv/mod.rs
 
 ## 4 ripgrep
 
-![](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220618373.gif)
+![](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220618373.gif)
 
 上图为 grep（左）与 rg（右）命令执行时的对比。
 
@@ -213,13 +213,13 @@ rg  ^def.*$ 01_two-sum.py
 
 在 Linux 或 Mac 上显示进程运行状态信息最常用工具是我们熟悉的`top`，它是每位系统管理员的好帮手。而且，即使是像我一样主要从事网络开发，查看计算机的运行状况也很有用。你知道，只是看一下当前到底是 Docker 进程还是 Chrome 进程吃掉了你所有的 RAM，应该如何做吗？
 
-![](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220647892.jpeg)  
+![](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220647892.jpeg)  
 
 `htop`工具是`top`工具的绝佳替代品。
 
 `top`工具是非常基础的监控工具，提供的功能有限，因此很多人转去使用 htop。`htop`比起`top`，优势很明显——除了功能更加完善以外，它的色彩搭配也很丰富，整体上使用起来更加友好。
 
-![](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220657583.jpeg)  
+![](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220657583.jpeg)  
 
 借助 glances，还可以让你一目了然地快速了解系统当前状态。
 
@@ -244,7 +244,7 @@ glances 下载地址：https://nicolargo.github.io/glances/
 
 Virtualenv 是用于在 Python 中创建虚拟环境的工具（比起内置的`venv`模块，我更喜欢 Virtualenv）。
 
-![](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220804528.jpeg)  
+![](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220804528.jpeg)  
 
 virtualenvwrapper 是 virtualenv 的虚拟环境管理器。它提供了许多命令来执行快速创建、列出或删除虚拟环境等操作。
 
@@ -256,7 +256,7 @@ https://pypi.org/project/virtualenv/
 
 ## 7 Homebrew
 
-![](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220810324.jpeg)
+![](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220810324.jpeg)
 
 如果你使用的是 Mac，那我就无需再介绍 Homebrew 了。它是 macOS 上被业界普遍认可的软件包管理器。
 
@@ -295,7 +295,7 @@ $ tree .
 
 ## 9 bat
 
-![](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220820634.jpeg)
+![](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220820634.jpeg)
 
 类似于在终端中常用的用于显示文件内容的`cat`命令，但是`bat`效果更佳。
 
@@ -305,7 +305,7 @@ bat 下载地址：https://github.com/sharkdp/bat
 
 ## 10 httpie
 
-![](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220827622.gif)
+![](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220827622.gif)
 
 如果你需要发送一些 HTTP 请求，但发现使用`curl`不够直观，那么请尝试一下`httpie`。这是一款非常好用的`curl`替代工具。合理的默认配置以及简洁的语法使它更易于使用，命令返回也是彩色输出，甚至支持为不同类型的身份验证安装相应的插件。
 
@@ -319,7 +319,7 @@ httpie 下载地址：https://httpie.org/
 
 比如，如果你要创建一些文件的 gzip 压缩存档，`man tar`可以为你提供可能的参数选择。而`tldr tar`会列出一些我们常见的示例——如图所示，第二个示例正是你要执行的操作：
 
-![](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220836708.jpeg)  
+![](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220836708.jpeg)  
 
 “man pages” 展示的信息太全面了，但是很多时候使用`tldr`可以更快地帮你找到特定信息，这才是用户真正想要的。
 
@@ -327,7 +327,7 @@ tldr 下载地址：https://tldr.sh/
 
 ## 12 exa
 
-![](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220843370.jpeg)
+![](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220843370.jpeg)
 
 `exa`是`ls`命令的一个可替代方案。
 
@@ -337,7 +337,7 @@ exa 下载地址：https://the.exa.website/
 
 ## 13 litecli 和 mycli
 
-![](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220850333.gif)
+![](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220850333.gif)
 
 这是我首选的 SQLite 和 mysql的解决方案。借助自动提示和语法突出显示，它们比默认的`sqlite3`和`mysql`工具要好用很多。
 
@@ -347,7 +347,7 @@ mycli 下载地址：https://www.mycli.net/
 
 ## 14 ncdu
 
-![](https://gitee.com/liushaofeng2018/imgs/raw/master/uPic/2020/12/640-20201227220855650.jpeg)
+![](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220855650.jpeg)
 
 这是在终端进行磁盘分析时使用的工具，它使用起来简单快捷。当我需要释放一些硬盘空间时，会默认使用这款工具。
 
