@@ -262,7 +262,7 @@
 <h2 id="配置路由"><a href="#配置路由" class="headerlink" title="配置路由"></a>配置路由</h2><p><code>django_demo\urls.py</code>中配置总路由</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> django.contrib <span class="hljs-keyword">import</span> admin<br><span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> path,include<br><br>urlpatterns = [<br>    path(<span class="hljs-string">&#x27;admin/&#x27;</span>, admin.site.urls),<br>    path(<span class="hljs-string">&#x27;users/&#x27;</span>, include(<span class="hljs-string">&quot;users.urls&quot;</span>,<span class="hljs-string">&quot;users&quot;</span>))<br>]<br></code></pre></div></td></tr></table></figure>
 <p><code>users\urls.py</code>中配置子路由</p>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> path<br><span class="hljs-keyword">from</span> .views <span class="hljs-keyword">import</span> RegisterView, LoginView, IndexView, LogoutView, UserView<br><br>app_name = <span class="hljs-string">&quot;users&quot;</span><br><br>urlpatterns = [<br>    path(<span class="hljs-string">&#x27;register/&#x27;</span>, RegisterView.as_view(), name=<span class="hljs-string">&quot;register&quot;</span>),<br>    path(<span class="hljs-string">&#x27;login/&#x27;</span>, LoginView.as_view(), name=<span class="hljs-string">&quot;login&quot;</span>),<br>    path(<span class="hljs-string">&#x27;logout/&#x27;</span>, LogoutView.as_view(), name=<span class="hljs-string">&quot;logout&quot;</span>),<br>    path(<span class="hljs-string">&quot;user/&quot;</span>, UserView.as_view(), name=<span class="hljs-string">&#x27;user&#x27;</span>),<br>    path(<span class="hljs-string">&#x27;&#x27;</span>, IndexView.as_view(), name=<span class="hljs-string">&quot;index&quot;</span>),<br><br>]<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> path<br><span class="hljs-keyword">from</span> .views <span class="hljs-keyword">import</span> RegisterView, LoginView, IndexView, LogoutView, UserView<br><br>app_name = <span class="hljs-string">&quot;users&quot;</span><br><br>urlpatterns = [<br>    path(<span class="hljs-string">&#x27;register/&#x27;</span>, RegisterView.as_view(), name=<span class="hljs-string">&quot;register&quot;</span>),<br>    path(<span class="hljs-string">&#x27;login/&#x27;</span>, LoginView.as_view(), name=<span class="hljs-string">&quot;login&quot;</span>),<br>    path(<span class="hljs-string">&#x27;logout/&#x27;</span>, LogoutView.as_view(), name=<span class="hljs-string">&quot;logout&quot;</span>),<br>    path(<span class="hljs-string">&quot;user/&quot;</span>, UserView.as_view(), name=<span class="hljs-string">&#x27;user&#x27;</span>),<br>    path(<span class="hljs-string">&#x27;&#x27;</span>, IndexView.as_view(), name=<span class="hljs-string">&quot;index&quot;</span>)<br>]<br></code></pre></div></td></tr></table></figure>
             </div>
             <hr>
             <div>
@@ -275,7 +275,7 @@
                     
                       <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
                     
-                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/python/web/">web</a>
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/python/Django/">Django</a>
                     
                   </div>
                 
@@ -283,11 +283,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/django/">django</a>
+                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%9D%BF/">模板</a>
                     
                       <a class="hover-with-bg" href="/tags/auth/">auth</a>
-                    
-                      <a class="hover-with-bg" href="/tags/user/">user</a>
                     
                   </div>
                 

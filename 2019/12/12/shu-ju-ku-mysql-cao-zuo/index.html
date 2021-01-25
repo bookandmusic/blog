@@ -229,8 +229,6 @@
             
             <div class="markdown-body">
               <p>介绍如何在 Ubuntu系统上 安装mysql软件、以及如何创建用户信息。</p>
-<a id="more"></a>
-
 <h3 id="Mysql软件操作"><a href="#Mysql软件操作" class="headerlink" title="Mysql软件操作"></a>Mysql软件操作</h3><p>以下所有操作以Ubuntu为例</p>
 <h4 id="mysql安装"><a href="#mysql安装" class="headerlink" title="mysql安装"></a>mysql安装</h4><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo apt install mysql-server <span class="hljs-comment"># 安装mysql</span><br></code></pre></div></td></tr></table></figure>
 <h4 id="mysql删除"><a href="#mysql删除" class="headerlink" title="mysql删除"></a>mysql删除</h4><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo apt remove --upgrade mysql-* -y <span class="hljs-comment"># 卸载mysql</span><br><br>dpkg -l|grep ^rc|awk <span class="hljs-string">&#x27;&#123;print$2&#125;&#x27;</span>|sudo xargs dpkg -P <span class="hljs-comment">#清除配置</span><br></code></pre></div></td></tr></table></figure>

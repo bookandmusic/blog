@@ -1,0 +1,677 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" type="image/png" href="/img/favicon.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="bookandmusic">
+  <meta name="keywords" content="">
+  <title>RESTful规范的API接口设计 - Bookandmusic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"bookandmusic.github.io","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"4e4c5cdb7a970cf955efdc949fbe43f5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Bookandmusic" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Bookandmusic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="RESTful规范的API接口设计">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-08-14 20:38" pubdate>
+        2020年8月14日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      28
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">RESTful规范的API接口设计</h1>
+            
+            <div class="markdown-body">
+              <p>在项目中，需要为 APP 撰写 API。刚开始接触的时候，并没有考虑太多，就想提供 URL，APP 端通过该 URL 进行查询、创建、更新等操作即可。但再对相关规范进行了解后，才发现，API 的设计并没有那么简单，远远不是 URL 的问题，而是一个通信协议的整体架构。</p>
+<h2 id="使用-SSL（https）来提供-URL"><a href="#使用-SSL（https）来提供-URL" class="headerlink" title="使用 SSL（https）来提供 URL"></a>使用 SSL（https）来提供 URL</h2><blockquote>
+<p>  首先，使用 https 可以在数据包被抓取时多一层加密。</p>
+</blockquote>
+<p>我们现在的 APP 使用环境大部分都是在路由器 WIFI 环境下，一旦路由器被入侵，那么黑客可以非常容易的抓取到用户通过路由器传输的数据，如果使用 http 未经加密，那么黑客可以很轻松的获取用户的信息，甚至是账户信息。</p>
+<blockquote>
+<p>  其次，即使使用 https，也要在 API 数据传输设计时，正确的采用加密。</p>
+</blockquote>
+<p>例如直接将 token 信息放在 URL 中的做法，即使你使用了 https，黑客仅能抓到域名字符部分，不能抓到请求的数据，但是 URL 可以在浏览器或特殊客户端工具中直接看到。因此，使用 https 进行请求时，要采用 POST、PUT 或者 HEAD 的方式传输必要的数据。</p>
+<h2 id="使用-GET、POST、PUT、DELETE-这几种请求模式"><a href="#使用-GET、POST、PUT、DELETE-这几种请求模式" class="headerlink" title="使用 GET、POST、PUT、DELETE 这几种请求模式"></a>使用 GET、POST、PUT、DELETE 这几种请求模式</h2><p>请求模式也可以说是动作、数据传输方式，通常我们在 web 中的 form 有 GET、POST 两种。</p>
+<p>而在 HTTP 中，存在以下这几种。</p>
+<table>
+<thead>
+<tr>
+<th align="left">请求方式</th>
+<th align="left">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">GET（选择）</td>
+<td align="left">从服务器上获取一个具体的资源或者一个资源列表。</td>
+</tr>
+<tr>
+<td align="left">POST（创建）</td>
+<td align="left">在服务器上创建一个新的资源。</td>
+</tr>
+<tr>
+<td align="left">PUT（更新）</td>
+<td align="left">以整体的方式更新服务器上的一个资源。</td>
+</tr>
+<tr>
+<td align="left">PATCH （更新）</td>
+<td align="left">只更新服务器上一个资源的一个属性。</td>
+</tr>
+<tr>
+<td align="left">DELETE（删除）</td>
+<td align="left">删除服务器上的一个资源。</td>
+</tr>
+<tr>
+<td align="left">HEAD</td>
+<td align="left">获取一个资源的元数据，如数据的哈希值或最后的更新时间。</td>
+</tr>
+<tr>
+<td align="left">OPTIONS</td>
+<td align="left">获取客户端能对资源做什么操作的信息。</td>
+</tr>
+</tbody></table>
+<h2 id="在-URI-中体现资源，而非动作"><a href="#在-URI-中体现资源，而非动作" class="headerlink" title="在 URI 中体现资源，而非动作"></a>在 URI 中体现资源，而非动作</h2><p>阅读 RESTful 架构的参考文献之后，你会了解什么是资源的概念，以及 REST 的确切含义。再构建 API 的 URL 的时候，URI 中应该仅包含资源（对象），而不要加入动作。</p>
+<p>比如 <code>/user/1/update</code> ，其中 <code>update</code> 就是一个动作，虽然我们希望通过这个 URI 来实现用户 ID 为 1 的用户进行信息更新，但是按照 RESTful 的规范，<code>update</code>作为动作，应该用上面的 <code>PUT</code> 来表示，所以请求更新用户信息，应该使用 <code>PUT /user/1</code> 来表示更新用户 ID 为 1 的用户信息。</p>
+<p>如果去对应上面的请求模式：</p>
+<ul>
+<li>GET 表示显示、列出、展示</li>
+<li>POST 表示提交、创建</li>
+<li>PUT 表示更新</li>
+<li>DELETE 表示删除</li>
+</ul>
+<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>API 的开发直接关系了 APP 是否可以正常使用，如果原本运行正常的 API，突然改动，那么之前使用这个 API 的 APP 可能无法正常运行。APP 是不可能强迫用户主动升级的，因此，通过 API 版本来解决这个问题。也就是说，API 的多个版本是同时运行的，而且都要保证可以正常使用。</p>
+<p>按照 RESTful 的规范，不同的版本也应该用相同的 API URL，通过 header 信息来判断版本，再调用不同版本的程序进行处理。但是这明显会给开发带来巨大的成本。</p>
+<p>解决办法有两种：</p>
+<ol>
+<li>新版本兼容旧版本，所有旧版本的动作、字段、操作，都在新版本中可以被实现，但明显这样的维护成本很大；</li>
+<li>不同的版本，用不同的 URL 来提供服务，比如在 URL 中通过 v1、v2 来区分版本号，或者采用子域名的方式，比如 v2.api.xxx.com/user 的方式。</li>
+</ol>
+<h2 id="HTTP-响应码"><a href="#HTTP-响应码" class="headerlink" title="HTTP 响应码"></a>HTTP 响应码</h2><p>在用户发出请求，服务端对请求进行响应时，给予正确的 HTTP 响应状态码，有利于让客户端正确区分遇到的情况。</p>
+<table>
+<thead>
+<tr>
+<th align="center">状态码</th>
+<th align="center">请求方式</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>200</code></td>
+<td align="center"><code>[GET]</code></td>
+<td align="left">（<code>OK</code>成功）服务器成功返回用户请求的数据,该操作是幂等的（Idempotent）</td>
+</tr>
+<tr>
+<td align="center"><code>201</code></td>
+<td align="center"><code>[POST/PUT/PATCH]</code></td>
+<td align="left">（<code>CREATED</code>已建立）用户新建或修改数据成功</td>
+</tr>
+<tr>
+<td align="center"><code>202</code></td>
+<td align="center"><code>[*]</code></td>
+<td align="left">(<code>Accepted</code>接受请求)表示一个请求已经进入后台排队（异步任务）</td>
+</tr>
+<tr>
+<td align="center"><code>204</code></td>
+<td align="center"><code>[DELETE]</code></td>
+<td align="left">(<code>NO CONTENT</code>无内容) 用户删除数据成功</td>
+</tr>
+<tr>
+<td align="center"><code>300</code></td>
+<td align="center"></td>
+<td align="left">（<code>Multiple Choices</code>多种选择） 针对请求，服务器可执行多种操作。服务器可根据请求者 (user agent) 选择一项操作，或提供操作列表供请求者选择。</td>
+</tr>
+<tr>
+<td align="center"><code>301</code></td>
+<td align="center"></td>
+<td align="left">（<code>Permanently Moved</code>永久移动） 请求的网页已永久移动到新位置。服务器返回此响应（对 GET 或 HEAD 请求的响应）时，会自动将请求者转到新位置。</td>
+</tr>
+<tr>
+<td align="center"><code>302</code></td>
+<td align="center"></td>
+<td align="left">（<code>Temporarily Moved</code>临时移动） 服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来进行以后的请求。</td>
+</tr>
+<tr>
+<td align="center"><code>303</code></td>
+<td align="center"></td>
+<td align="left">（<code>See Other</code>查看其他位置） 请求者应当对不同的位置使用单独的 GET 请求来检索响应时，服务器返回此代码</td>
+</tr>
+<tr>
+<td align="center"><code>304</code></td>
+<td align="center"></td>
+<td align="left">（<code>Not Modified</code>未修改） 自从上次请求后，请求的网页未修改过。服务器返回此响应时，不会返回网页内容。</td>
+</tr>
+<tr>
+<td align="center"><code>305</code></td>
+<td align="center"></td>
+<td align="left">（<code>Use Proxy</code>使用代理） 请求者只能使用代理访问请求的网页。如果服务器返回此响应，还表示请求者应使用代理。</td>
+</tr>
+<tr>
+<td align="center"><code>307</code></td>
+<td align="center"></td>
+<td align="left"><code>Temporary Redirect</code>（临时重定向） 服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来进行以后的请求。</td>
+</tr>
+<tr>
+<td align="center"><code>400</code></td>
+<td align="center"><code>[POST/PUT/PATCH]</code></td>
+<td align="left"><code>INVALID REQUEST</code>(坏请求) 用户发出的请求有错误，服务器没有进行新建或修改数据的操作，该操作是幂等的。</td>
+</tr>
+<tr>
+<td align="center"><code>401</code></td>
+<td align="center"><code>[*]</code></td>
+<td align="left"><code>Unauthorized</code> (未授权) 表示用户没有权限（令牌、用户名、密码错误）</td>
+</tr>
+<tr>
+<td align="center"><code>403</code></td>
+<td align="center"><code>[*]</code></td>
+<td align="left"><code>Forbidden</code> （禁止）表示用户得到授权（与401错误相对），但是访问是被禁止的</td>
+</tr>
+<tr>
+<td align="center"><code>404</code></td>
+<td align="center"><code>[*]</code></td>
+<td align="left"><code>NOT FOUND</code> （未找到）用户发出的请求针对的是不存在的记录，服务器没有进行操作，该操作是幂等的。</td>
+</tr>
+<tr>
+<td align="center"><code>405</code></td>
+<td align="center"></td>
+<td align="left"><code>Method not allowed</code>（方法不被允许）不支持该Request的方法</td>
+</tr>
+<tr>
+<td align="center"><code>406</code></td>
+<td align="center"></td>
+<td align="left"><code>Not Acceptable</code>（无法接受）无法使用请求的内容特性来响应请求的网页，也就是后台的返回结果前台无法解析（比如用户请求 JSON 格式，但是只有 XML 格式）</td>
+</tr>
+<tr>
+<td align="center"><code>407</code></td>
+<td align="center"></td>
+<td align="left"><code>Proxy Authentication Required</code>（要求进行代理认证）与状态码401类似， 用于需要进行认证的代理服务器.</td>
+</tr>
+<tr>
+<td align="center"><code>408</code></td>
+<td align="center"></td>
+<td align="left"><code>Request Timeout</code>(请求超时) 如果客户端完成请求时花费的时间太长， 服务器可以回送这个状态码并关闭连接</td>
+</tr>
+<tr>
+<td align="center"><code>410</code></td>
+<td align="center"><code>[GET]</code></td>
+<td align="left"><code>Gone</code> （过去的）用户请求的资源被永久删除，且不会再得到的</td>
+</tr>
+<tr>
+<td align="center"><code>422</code></td>
+<td align="center"><code>[POST/PUT/PATCH]</code></td>
+<td align="left"><code>Unprocesable entity</code> （不可处理）当创建一个对象时，发生一个验证错误</td>
+</tr>
+<tr>
+<td align="center"><code>500</code></td>
+<td align="center"><code>[*]</code></td>
+<td align="left"><code>INTERNAL SERVER ERROR</code>(服务器内部错误）服务器发生错误，用户将无法判断发出的请求是否成功</td>
+</tr>
+</tbody></table>
+<h2 id="返回值结构"><a href="#返回值结构" class="headerlink" title="返回值结构"></a>返回值结构</h2><p>在完成了上面的 URL 部署之后，接下来我们来看看返回结果应该怎么样来确定。</p>
+<p>我看到大部分文献中指出，最好使用 JSON 进行返回，而非 xml。</p>
+<p>我认为原因可能有两点：</p>
+<ol>
+<li>JSON 可以很好的被很多程序支持，javascript 的 ajax 可以直接将 JSON 转换为对象。</li>
+<li>JSON 的格式在容量上比 xml 小很多，可以减低宽带占用，提高传输效率。</li>
+</ol>
+<p>那么，返回值应该怎么去部署呢？</p>
+<p>首先，字段的合理返回，数据的包裹。因为返回值中，我们常常要对数据进行区分分组，或者按照从属关系打包，所以，我们再返回时，最好有包裹的思想，把数据存放在不同的包裹中进行返回。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">&#123;<br>    <span class="hljs-string">&#x27;error_code&#x27;</span>: <span class="hljs-number">0</span>,<br>    <span class="hljs-string">&#x27;data&#x27;</span>: &#123;<br>        <span class="hljs-string">&#x27;user_id&#x27;</span>: <span class="hljs-number">1</span>,<br>        <span class="hljs-string">&#x27;username&#x27;</span>: <span class="hljs-string">&#x27;xiaomin&#x27;</span><br>    &#125;,<br>    <span class="hljs-string">&#x27;server_time&#x27;</span>: <span class="hljs-number">14939939</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>上面返回的 JSON 中，使用 data 来作为数据包，将所有数据统一以这个字段进行包裹。除了 data，也可以用 list 等其他形式的包裹，命名都是自己来根据自己的需要确定的。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">&#123;<br>    <span class="hljs-string">&#x27;error_code&#x27;</span>: <span class="hljs-number">0</span>,<br>    <span class="hljs-string">&#x27;list&#x27;</span>: [<br>        &#123;<span class="hljs-string">&#x27;user_id&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;username&#x27;</span>: <span class="hljs-string">&#x27;xiaoming&#x27;</span>&#125;,<br>        &#123;<span class="hljs-string">&#x27;user_id&#x27;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&#x27;username&#x27;</span>: <span class="hljs-string">&#x27;goudan&#x27;</span>&#125;<br>    ]<br>    <span class="hljs-string">&#x27;server_time&#x27;</span>: <span class="hljs-number">14939939</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>总之，不要不分包，直接把所有数据和一些你想返回的全局数据混在一起进行返回。</p>
+<p>其次，错误码。错误码的作用是方便查找错误原因，通常情况下，可以用 error_code 来表示，当 error_code=0 时，表示没有发生错误，当 error_code&gt;0 时，发生了错误，并且提供较为详细的文档，告诉客户端对应的 error_code 值所产生的错误的原因和位置。</p>
+<p>最后，空白压缩和字符转换。也就是返回的 JSON 结果不要换行和空格，用一行返回结果，使整个结果文本容量最小。同时，中文等字符或结果中有引号，都进行字符转换，防止结果无法被正确识别。</p>
+<h2 id="鉴权"><a href="#鉴权" class="headerlink" title="鉴权"></a>鉴权</h2><p>其实也就是客户端的权限控制。一般而言，会给客户端分发一个 token 来确定该客户端的唯一身份。客户端在请求时，通过这个 token，判断发出请求的客户端所对应的用户，及其相关信息和权限。</p>
+<p>前文已经提到了，token 信息不是用来进行处理的数据，虽然可以通过 POST、PUT 等进行数据提交或传输，但是从 RESTful 规范来讲，它不属于操作数据，在服务端进行处理时，仅是利用 token 进行鉴权处理，所以，我的建议是通过 header 来发送 token。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/python/web/">web</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/API/">API</a>
+                    
+                      <a class="hover-with-bg" href="/tags/RESTful/">RESTful</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/08/16/wang-luo-tong-xin-chang-lian-jie-yu-duan-lian-jie/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">网络通信-长连接与短连接</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/30/python-gao-ji-nei-cun-guan-li/">
+                        <span class="hidden-mobile">python内存管理</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love">BookabdMusic</i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

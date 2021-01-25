@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="bookandmusic">
   <meta name="keywords" content="">
-  <title>高阶函数 - Bookandmusic</title>
+  <title>python高阶函数 - Bookandmusic</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="高阶函数">
+            <span class="h2" id="subtitle" title="python高阶函数">
               
             </span>
 
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      885 字
+      891 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      11
+      12
        分钟
     </span>
   
@@ -225,22 +225,12 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">高阶函数</h1>
+            <h1 style="display: none">python高阶函数</h1>
             
             <div class="markdown-body">
-              <ol>
-<li><p>定义</p>
-<p>当一个函数 接收 另一个函数作为参数， 它就是 <code>高阶函数</code></p>
-</li>
-</ol>
-<a id="more"></a>
-
-<ol start="2">
-<li><p>示例</p>
- <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span>(<span class="hljs-params">a, x, y</span>):</span><br>    a(x, y)  <span class="hljs-comment"># a就是传递的 函数参数f，  执行 a 相当于 执行  f</span><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span>(<span class="hljs-params">x, y</span>):</span><br>    print(x + y)<br><br>func(f, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>)  <span class="hljs-comment"># 3， 在函数f执行过程中，输出 3</span><br></code></pre></div></td></tr></table></figure>
-<h2 id="四大高阶函数"><a href="#四大高阶函数" class="headerlink" title="四大高阶函数"></a>四大高阶函数</h2></li>
-</ol>
-<h3 id="map-func-iterable"><a href="#map-func-iterable" class="headerlink" title="map(func, iterable)"></a><code>map(func, iterable)</code></h3><blockquote>
+              <h2 id="高阶函数介绍"><a href="#高阶函数介绍" class="headerlink" title="高阶函数介绍"></a>高阶函数介绍</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>当一个函数 接收 另一个函数作为参数， 它就是 <code>高阶函数</code></p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span>(<span class="hljs-params">a, x, y</span>):</span><br>    a(x, y)  <span class="hljs-comment"># a就是传递的 函数参数f，  执行 a 相当于 执行  f</span><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span>(<span class="hljs-params">x, y</span>):</span><br>    print(x + y)<br><br>func(f, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>)  <span class="hljs-comment"># 3， 在函数f执行过程中，输出 3</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="四大高阶函数"><a href="#四大高阶函数" class="headerlink" title="四大高阶函数"></a>四大高阶函数</h2><h3 id="map-func-iterable"><a href="#map-func-iterable" class="headerlink" title="map(func, iterable)"></a><code>map(func, iterable)</code></h3><blockquote>
 <p>将 <strong>可迭代对象</strong> 中的每个值 按照 第一个参数( <strong>函数</strong>)的 规则 依次 处理， 得到一个 新的 <strong>迭代器</strong> 对象</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span>(<span class="hljs-params">alist</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    :param alist: 接收列表作为参数</span><br><span class="hljs-string">    :return: 将列表中每个数字，求平方之后，返回一个新列表</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sqr</span>(<span class="hljs-params">x</span>):</span><br>        <span class="hljs-keyword">return</span> x * x<br><br>    r = <span class="hljs-built_in">map</span>(sqr, alist) <span class="hljs-comment"># r是迭代器对象</span><br><br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">list</span>(r)  <span class="hljs-comment"># 将迭代器对象转换为列表</span><br><br><br>r = func([<span class="hljs-number">11</span>, <span class="hljs-number">22</span>, <span class="hljs-number">33</span>, <span class="hljs-number">44</span>, <span class="hljs-number">55</span>])<br>print(r)<br></code></pre></div></td></tr></table></figure>
@@ -277,7 +267,7 @@
                     
                       <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
                     
-                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/python/%E5%87%BD%E6%95%B0/">函数</a>
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/python/%E5%9F%BA%E7%A1%80/">基础</a>
                     
                   </div>
                 
@@ -308,7 +298,7 @@
                     
                       <a href="/2020/06/06/python-han-shu-ni-ming-han-shu/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">匿名函数</span>
+                        <span class="hidden-mobile">python匿名函数</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -317,7 +307,7 @@
                     
                     
                       <a href="/2020/06/06/python-han-shu-bian-liang-jie-xi/">
-                        <span class="hidden-mobile">变量进阶</span>
+                        <span class="hidden-mobile">python变量作用域</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

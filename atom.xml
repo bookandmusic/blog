@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://bookandmusic.github.io/"/>
-  <updated>2021-01-21T07:06:06.521Z</updated>
+  <updated>2021-01-23T14:46:46.942Z</updated>
   <id>https://bookandmusic.github.io/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Django基础(六)-ORM操作</title>
+    <link href="https://bookandmusic.github.io/2021/01/23/django-6-orm-cao-zuo/"/>
+    <id>https://bookandmusic.github.io/2021/01/23/django-6-orm-cao-zuo/</id>
+    <published>2021-01-23T14:37:39.000Z</published>
+    <updated>2021-01-23T14:46:46.942Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="技术" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="python" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
+    
+      <category term="Django" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/Django/"/>
+    
+    
+      <category term="ORM操作" scheme="https://bookandmusic.github.io/tags/ORM%E6%93%8D%E4%BD%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Django基础(二)-视图</title>
+    <link href="https://bookandmusic.github.io/2021/01/23/django-2-shi-tu/"/>
+    <id>https://bookandmusic.github.io/2021/01/23/django-2-shi-tu/</id>
+    <published>2021-01-23T14:31:00.000Z</published>
+    <updated>2021-01-23T14:46:18.431Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="技术" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="python" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
+    
+      <category term="Django" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/Django/"/>
+    
+    
+      <category term="视图" scheme="https://bookandmusic.github.io/tags/%E8%A7%86%E5%9B%BE/"/>
+    
+  </entry>
   
   <entry>
     <title>好用的CLI工具</title>
@@ -110,17 +156,25 @@
   </entry>
   
   <entry>
-    <title>Django-模板</title>
-    <link href="https://bookandmusic.github.io/2020/12/09/django-mo-ban/"/>
-    <id>https://bookandmusic.github.io/2020/12/09/django-mo-ban/</id>
+    <title>Django基础(三)-模板</title>
+    <link href="https://bookandmusic.github.io/2020/12/09/django-3-mo-ban/"/>
+    <id>https://bookandmusic.github.io/2020/12/09/django-3-mo-ban/</id>
     <published>2020-12-09T09:27:02.000Z</published>
-    <updated>2020-12-09T09:27:02.809Z</updated>
+    <updated>2021-01-23T14:46:23.039Z</updated>
     
     <summary type="html">
     
     </summary>
     
     
+      <category term="技术" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="python" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
+    
+      <category term="Django" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/Django/"/>
+    
+    
+      <category term="模板" scheme="https://bookandmusic.github.io/tags/%E6%A8%A1%E6%9D%BF/"/>
     
   </entry>
   
@@ -165,7 +219,7 @@
     <link href="https://bookandmusic.github.io/2020/12/01/django-huan-cun/"/>
     <id>https://bookandmusic.github.io/2020/12/01/django-huan-cun/</id>
     <published>2020-12-01T13:49:38.000Z</published>
-    <updated>2020-12-01T15:25:25.326Z</updated>
+    <updated>2021-01-23T15:21:14.050Z</updated>
     
     <summary type="html">
     
@@ -184,7 +238,7 @@
     
       <category term="python" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
     
-      <category term="web" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/web/"/>
+      <category term="Django" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/Django/"/>
     
     
       <category term="缓存" scheme="https://bookandmusic.github.io/tags/%E7%BC%93%E5%AD%98/"/>
@@ -196,7 +250,7 @@
     <link href="https://bookandmusic.github.io/2020/11/30/django-shu-ju-fen-ye/"/>
     <id>https://bookandmusic.github.io/2020/11/30/django-shu-ju-fen-ye/</id>
     <published>2020-11-30T13:45:42.000Z</published>
-    <updated>2020-12-03T14:06:19.286Z</updated>
+    <updated>2021-01-23T14:45:15.906Z</updated>
     
     <summary type="html">
     
@@ -216,10 +270,12 @@
     
       <category term="python" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
     
-      <category term="web" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/web/"/>
+      <category term="Django" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/Django/"/>
     
     
       <category term="分页" scheme="https://bookandmusic.github.io/tags/%E5%88%86%E9%A1%B5/"/>
+    
+      <category term="模板" scheme="https://bookandmusic.github.io/tags/%E6%A8%A1%E6%9D%BF/"/>
     
   </entry>
   
@@ -228,7 +284,7 @@
     <link href="https://bookandmusic.github.io/2020/10/24/drf-jwt-qian-xi/"/>
     <id>https://bookandmusic.github.io/2020/10/24/drf-jwt-qian-xi/</id>
     <published>2020-10-24T12:38:26.000Z</published>
-    <updated>2021-01-21T07:12:53.816Z</updated>
+    <updated>2021-01-25T03:30:14.367Z</updated>
     
     <summary type="html">
     
@@ -248,12 +304,10 @@
     
       <category term="python" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
     
-      <category term="web" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/web/"/>
+      <category term="DRF" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/DRF/"/>
     
     
       <category term="JWT" scheme="https://bookandmusic.github.io/tags/JWT/"/>
-    
-      <category term="DRF" scheme="https://bookandmusic.github.io/tags/DRF/"/>
     
   </entry>
   
@@ -287,15 +341,20 @@
     <link href="https://bookandmusic.github.io/2020/09/03/xi-tong-deepin-os-an-zhuang-nvidia-qu-dong/"/>
     <id>https://bookandmusic.github.io/2020/09/03/xi-tong-deepin-os-an-zhuang-nvidia-qu-dong/</id>
     <published>2020-09-03T10:20:35.000Z</published>
-    <updated>2021-01-21T10:29:36.300Z</updated>
+    <updated>2021-01-25T02:59:36.558Z</updated>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;工具-原料&quot;&gt;&lt;a href=&quot;#工具-原料&quot; class=&quot;headerlink&quot; title=&quot;工具 / 原料&quot;&gt;&lt;/a&gt;工具 / 原料&lt;/h2&gt;&lt;ul&gt;
+      
+      
+        
+        
+          &lt;h2 id=&quot;工具-原料&quot;&gt;&lt;a href=&quot;#工具-原料&quot; class=&quot;headerlink&quot; title=&quot;工具 / 原料&quot;&gt;&lt;/a&gt;工具 / 原料&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;一台电脑&lt;/li&gt;
 &lt;li&gt;Deepin15.10.2 系统&lt;/li&gt;
-&lt;li&gt;N 卡官网驱动&lt;/li&gt;
-&lt;/ul&gt;
+&lt;li&gt;N
+        
+      
     
     </summary>
     
@@ -316,11 +375,18 @@
     <link href="https://bookandmusic.github.io/2020/08/16/wang-luo-tong-xin-duo-chong-fang-shi-shi-xian-bing-fa-web-server/"/>
     <id>https://bookandmusic.github.io/2020/08/16/wang-luo-tong-xin-duo-chong-fang-shi-shi-xian-bing-fa-web-server/</id>
     <published>2020-08-16T13:40:36.000Z</published>
-    <updated>2021-01-21T07:07:12.614Z</updated>
+    <updated>2021-01-25T02:59:13.221Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;下面我们使用 &lt;code&gt;Python&lt;/code&gt; 来实现并发的 &lt;code&gt;Web Server&lt;/code&gt;，其中采用了多进程、多线程、协程、单进程单线程非阻塞、&lt;code&gt;select&lt;/code&gt;、&lt;code&gt;epoll&lt;/code&gt;的方式。&lt;/p&gt;
+      
+      
+        
+        
+          &lt;p&gt;下面我们使用 &lt;code&gt;Python&lt;/code&gt; 来实现并发的 &lt;code&gt;Web Server&lt;/code&gt;，其中采用了多进程、多线程、协程、单进程单线程非阻塞、&lt;code&gt;select&lt;/code&gt;、&lt;code&gt;epoll&lt;/code&gt;的方式。&lt;/p&gt;
+&lt;h2
+        
+      
     
     </summary>
     
@@ -345,11 +411,19 @@
     <link href="https://bookandmusic.github.io/2020/08/16/wang-luo-tong-xin-simple-web-server/"/>
     <id>https://bookandmusic.github.io/2020/08/16/wang-luo-tong-xin-simple-web-server/</id>
     <published>2020-08-16T13:23:36.000Z</published>
-    <updated>2021-01-21T07:07:09.088Z</updated>
+    <updated>2021-01-25T02:59:22.853Z</updated>
     
     <summary type="html">
     
       &lt;p&gt;本篇文章介绍如何实现一个简单 的Web Server 以及对应的问题解决方案。&lt;/p&gt;
+&lt;h2 id=&quot;一、如何使用Python实现一个返回固定页面的Web-Server&quot;&gt;&lt;a href=&quot;#一、如何使用Python实现一个返回固定页面的Web-Server&quot; class=&quot;headerlink&quot; title=&quot;一、如何使用Python实现一个返回固定页面的Web Server&quot;&gt;&lt;/a&gt;一、如何使用Python实现一个返回固定页面的Web Server&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;使用socket创建一个TCP Server&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;接受来自浏览器的TCP链接，并接收HTTP请求&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;返回固定响应数据给浏览器&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
     
     </summary>
     
@@ -372,11 +446,18 @@
     <link href="https://bookandmusic.github.io/2020/08/16/wang-luo-tong-xin-chang-lian-jie-yu-duan-lian-jie/"/>
     <id>https://bookandmusic.github.io/2020/08/16/wang-luo-tong-xin-chang-lian-jie-yu-duan-lian-jie/</id>
     <published>2020-08-16T10:27:27.000Z</published>
-    <updated>2021-01-21T07:07:19.841Z</updated>
+    <updated>2021-01-25T02:59:18.061Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;简单介绍长连接与短连接的优缺点。&lt;/p&gt;
+      
+      
+        
+        
+          &lt;p&gt;简单介绍长连接与短连接的优缺点。&lt;/p&gt;
+&lt;h2 id=&quot;1-短连接：&quot;&gt;&lt;a href=&quot;#1-短连接：&quot; class=&quot;headerlink&quot; title=&quot;1. 短连接：&quot;&gt;&lt;/a&gt;1. 短连接：&lt;/h2&gt;&lt;p&gt;&lt;img
+        
+      
     
     </summary>
     
@@ -398,10 +479,10 @@
   
   <entry>
     <title>RESTful规范的API接口设计</title>
-    <link href="https://bookandmusic.github.io/2020/08/14/restful-gui-fan-de-api-jie-kou-she-ji/"/>
-    <id>https://bookandmusic.github.io/2020/08/14/restful-gui-fan-de-api-jie-kou-she-ji/</id>
+    <link href="https://bookandmusic.github.io/2020/08/14/web-restful-gui-fan-de-api-jie-kou-she-ji/"/>
+    <id>https://bookandmusic.github.io/2020/08/14/web-restful-gui-fan-de-api-jie-kou-she-ji/</id>
     <published>2020-08-14T12:38:26.000Z</published>
-    <updated>2020-12-06T03:05:13.647Z</updated>
+    <updated>2021-01-23T15:09:50.792Z</updated>
     
     <summary type="html">
     
@@ -423,24 +504,28 @@
       <category term="web" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/web/"/>
     
     
-      <category term="RESTful" scheme="https://bookandmusic.github.io/tags/RESTful/"/>
-    
       <category term="API" scheme="https://bookandmusic.github.io/tags/API/"/>
+    
+      <category term="RESTful" scheme="https://bookandmusic.github.io/tags/RESTful/"/>
     
   </entry>
   
   <entry>
-    <title>python高级-内存管理</title>
+    <title>python内存管理</title>
     <link href="https://bookandmusic.github.io/2020/07/30/python-gao-ji-nei-cun-guan-li/"/>
     <id>https://bookandmusic.github.io/2020/07/30/python-gao-ji-nei-cun-guan-li/</id>
     <published>2020-07-30T13:53:24.000Z</published>
-    <updated>2021-01-21T07:05:12.328Z</updated>
+    <updated>2021-01-23T14:53:26.346Z</updated>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;内存管理机制&quot;&gt;&lt;a href=&quot;#内存管理机制&quot; class=&quot;headerlink&quot; title=&quot;内存管理机制&quot;&gt;&lt;/a&gt;内存管理机制&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;Python中不但变量名无需事先声明，而且也无需类型声明。在Python语言中，对象的类型和内存占用都是运行时确定的。在赋值时解释器会根据语法和右侧的操作数来决定新对象的类型。在对象创建后，一个该对象的引用会被赋值给左侧的变量。&lt;/p&gt;
-&lt;/blockquote&gt;
+      
+      
+        
+        
+          &lt;h2 id=&quot;内存管理机制&quot;&gt;&lt;a href=&quot;#内存管理机制&quot; class=&quot;headerlink&quot;
+        
+      
     
     </summary>
     
@@ -449,12 +534,14 @@
     
       <category term="python" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
     
-      <category term="高级" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/%E9%AB%98%E7%BA%A7/"/>
+      <category term="系统" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/%E7%B3%BB%E7%BB%9F/"/>
     
     
       <category term="引用计数" scheme="https://bookandmusic.github.io/tags/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/"/>
     
-      <category term="可变类型与不可变类型" scheme="https://bookandmusic.github.io/tags/%E5%8F%AF%E5%8F%98%E7%B1%BB%E5%9E%8B%E4%B8%8E%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%B1%BB%E5%9E%8B/"/>
+      <category term="分代回收" scheme="https://bookandmusic.github.io/tags/%E5%88%86%E4%BB%A3%E5%9B%9E%E6%94%B6/"/>
+    
+      <category term="标记清除" scheme="https://bookandmusic.github.io/tags/%E6%A0%87%E8%AE%B0%E6%B8%85%E9%99%A4/"/>
     
   </entry>
   
@@ -463,11 +550,18 @@
     <link href="https://bookandmusic.github.io/2020/07/08/drf-xu-lie-hua-yu-fan-xu-lie-hua/"/>
     <id>https://bookandmusic.github.io/2020/07/08/drf-xu-lie-hua-yu-fan-xu-lie-hua/</id>
     <published>2020-07-08T02:26:57.000Z</published>
-    <updated>2020-12-01T14:23:48.395Z</updated>
+    <updated>2021-01-25T14:15:59.996Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;DRF内置的序列化类，可以对整个模型类进行序列化与反序列化，简化了繁杂的工作。&lt;/p&gt;
+      
+      
+        
+        
+          &lt;p&gt;DRF内置的序列化类，可以对整个模型类进行序列化与反序列化，简化了繁杂的工作。&lt;/p&gt;
+&lt;h2 id=&quot;内置字段序列化&quot;&gt;&lt;a href=&quot;#内置字段序列化&quot; class=&quot;headerlink&quot; title=&quot;内置字段序列化&quot;&gt;&lt;/a&gt;内置字段序列化&lt;/h2&gt;&lt;h3
+        
+      
     
     </summary>
     
@@ -476,10 +570,8 @@
     
       <category term="python" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
     
-      <category term="web" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/web/"/>
+      <category term="DRF" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/DRF/"/>
     
-    
-      <category term="DRF" scheme="https://bookandmusic.github.io/tags/DRF/"/>
     
       <category term="序列化" scheme="https://bookandmusic.github.io/tags/%E5%BA%8F%E5%88%97%E5%8C%96/"/>
     
@@ -488,15 +580,21 @@
   </entry>
   
   <entry>
-    <title>递归函数</title>
+    <title>python递归函数</title>
     <link href="https://bookandmusic.github.io/2020/06/06/python-han-shu-di-gui-han-shu/"/>
     <id>https://bookandmusic.github.io/2020/06/06/python-han-shu-di-gui-han-shu/</id>
     <published>2020-06-06T03:16:01.000Z</published>
-    <updated>2020-12-01T14:23:48.399Z</updated>
+    <updated>2021-01-23T14:59:58.063Z</updated>
     
     <summary type="html">
     
-      &lt;h3 id=&quot;1-定义&quot;&gt;&lt;a href=&quot;#1-定义&quot; class=&quot;headerlink&quot; title=&quot;1. 定义&quot;&gt;&lt;/a&gt;1. 定义&lt;/h3&gt;&lt;p&gt;函数调用函数自身，这种方式称为递归，这种函数称为递归函数&lt;/p&gt;
+      
+      
+        
+        
+          &lt;h2 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;headerlink&quot;
+        
+      
     
     </summary>
     
@@ -505,7 +603,7 @@
     
       <category term="python" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
     
-      <category term="函数" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/%E5%87%BD%E6%95%B0/"/>
+      <category term="基础" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/%E5%9F%BA%E7%A1%80/"/>
     
     
       <category term="递归函数" scheme="https://bookandmusic.github.io/tags/%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0/"/>
@@ -513,17 +611,23 @@
   </entry>
   
   <entry>
-    <title>匿名函数</title>
+    <title>python匿名函数</title>
     <link href="https://bookandmusic.github.io/2020/06/06/python-han-shu-ni-ming-han-shu/"/>
     <id>https://bookandmusic.github.io/2020/06/06/python-han-shu-ni-ming-han-shu/</id>
     <published>2020-06-06T03:14:42.000Z</published>
-    <updated>2020-12-01T14:23:48.399Z</updated>
+    <updated>2021-01-23T15:01:10.937Z</updated>
     
     <summary type="html">
     
-      &lt;ul&gt;
-&lt;li&gt;匿名函数的另一个别称是&lt;code&gt;lambda表达式&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
+      
+      
+        
+        
+          &lt;h2 id=&quot;语法&quot;&gt;&lt;a href=&quot;#语法&quot; class=&quot;headerlink&quot; title=&quot;语法&quot;&gt;&lt;/a&gt;语法&lt;/h2&gt;&lt;p&gt;匿名函数的另一个别称是&lt;code&gt;lambda表达式&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;lambda表达式的语法：&lt;/p&gt;
+&lt;figure
+        
+      
     
     </summary>
     
@@ -532,82 +636,12 @@
     
       <category term="python" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
     
-      <category term="函数" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/%E5%87%BD%E6%95%B0/"/>
+      <category term="基础" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/%E5%9F%BA%E7%A1%80/"/>
     
     
       <category term="lambda" scheme="https://bookandmusic.github.io/tags/lambda/"/>
     
       <category term="匿名函数" scheme="https://bookandmusic.github.io/tags/%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>高阶函数</title>
-    <link href="https://bookandmusic.github.io/2020/06/06/python-han-shu-gao-jie-han-shu/"/>
-    <id>https://bookandmusic.github.io/2020/06/06/python-han-shu-gao-jie-han-shu/</id>
-    <published>2020-06-06T03:13:12.000Z</published>
-    <updated>2020-12-01T14:23:48.399Z</updated>
-    
-    <summary type="html">
-    
-      &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;定义&lt;/p&gt;
-&lt;p&gt;当一个函数 接收 另一个函数作为参数， 它就是 &lt;code&gt;高阶函数&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-    
-    </summary>
-    
-    
-      <category term="技术" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-      <category term="python" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
-    
-      <category term="函数" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/%E5%87%BD%E6%95%B0/"/>
-    
-    
-      <category term="高阶函数" scheme="https://bookandmusic.github.io/tags/%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/"/>
-    
-      <category term="sorted" scheme="https://bookandmusic.github.io/tags/sorted/"/>
-    
-      <category term="map" scheme="https://bookandmusic.github.io/tags/map/"/>
-    
-      <category term="reduce" scheme="https://bookandmusic.github.io/tags/reduce/"/>
-    
-      <category term="filter" scheme="https://bookandmusic.github.io/tags/filter/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>变量进阶</title>
-    <link href="https://bookandmusic.github.io/2020/06/06/python-han-shu-bian-liang-jie-xi/"/>
-    <id>https://bookandmusic.github.io/2020/06/06/python-han-shu-bian-liang-jie-xi/</id>
-    <published>2020-06-06T03:10:17.000Z</published>
-    <updated>2020-12-01T14:23:48.399Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;变量的作用域&quot;&gt;&lt;a href=&quot;#变量的作用域&quot; class=&quot;headerlink&quot; title=&quot;变量的作用域&quot;&gt;&lt;/a&gt;变量的作用域&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;在Python程序中创建、改变、查找变量名时，都是在一个保存变量名的空间中进行，我们称之为命名空间，也被称之为作用域。&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-    
-      <category term="技术" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-      <category term="python" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
-    
-      <category term="函数" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/%E5%87%BD%E6%95%B0/"/>
-    
-    
-      <category term="LEGB" scheme="https://bookandmusic.github.io/tags/LEGB/"/>
-    
-      <category term="引用计数" scheme="https://bookandmusic.github.io/tags/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/"/>
-    
-      <category term="global" scheme="https://bookandmusic.github.io/tags/global/"/>
-    
-      <category term="nonlocal" scheme="https://bookandmusic.github.io/tags/nonlocal/"/>
     
   </entry>
   

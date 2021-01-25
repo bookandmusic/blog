@@ -182,18 +182,81 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2019/05/25/suan-fa-shi-jian-fu-za-du-01-o-biao-ji-fa-yu-chang-jian-shi-jian-fu-za-du/">O标记法与常见时间复杂度</a>
+        <a href="/2019/05/25/django-4-lu-you/">Django基础(四)-路由</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2019/05/25/suan-fa-shi-jian-fu-za-du-01-o-biao-ji-fa-yu-chang-jian-shi-jian-fu-za-du/">
+        <a href="/2019/05/25/django-4-lu-you/">
           
           
             
           
           
-算法 : 内功心法, 是解决问题的一种思想
+Django2.0 新增了在 urls.py 中 app_name 来指定 namespace。我们之前通过 reverse 函数来反向获取 url
 
+reverse 语法1reverse(&quot;&lt;namespace&gt;:&lt;url-name&gt;&quot;, kwargs=&#123;&quot;&lt;kwarg&gt;&quot;: &quot;&lt;val&gt
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-05-25 22:45" pubdate>
+              2019-05-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/python/Django/">Django</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/namespace/">namespace</a>
+            
+              <a href="/tags/app-name/">app_name</a>
+            
+              <a href="/tags/reverse/">reverse</a>
+            
+              <a href="/tags/%E8%B7%AF%E7%94%B1/">路由</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/05/25/suan-fa-shi-jian-fu-za-du-02-chang-jian-han-shu-de-shi-jian-fu-za-du/">常见函数的时间复杂度</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2019/05/25/suan-fa-shi-jian-fu-za-du-02-chang-jian-han-shu-de-shi-jian-fu-za-du/">
+          
+          
+            
+          
+          很多函数都有自己的很多方法，其中有些方法的功能类似，但是其复杂度有时却大不相同
+本节我们将引入一个新模块 timeit ，其功能是来测试一小段 Python 代码的执行速度。
+1、timeit1class timeit.Timer(stmt=&#x27;pass&#x27;, setup=&#x27;pass&#x27;,timer=&lt;timer function&gt;)
+
+Timer 是
         </a>
       </p>
 
@@ -236,7 +299,63 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2019/05/25/python-han-shu-nei-zhi-han-shu/">内置函数</a>
+        <a href="/2019/05/25/suan-fa-shi-jian-fu-za-du-01-o-biao-ji-fa-yu-chang-jian-shi-jian-fu-za-du/">O标记法与常见时间复杂度</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2019/05/25/suan-fa-shi-jian-fu-za-du-01-o-biao-ji-fa-yu-chang-jian-shi-jian-fu-za-du/">
+          
+          
+            
+          
+          
+算法 : 内功心法, 是解决问题的一种思想
+
+1、时间复杂度 $T(n)$由于每台机器的性能有所差别，所有其执行相同代码的时间也长短不一，故而推出一种计量方式，统计代码执行基本运算（函数调用需要看其源码的基本运算）的数量（n) 来确定一个算法的优劣，其中基本运算的循环按乘法计算，顺序结构按加法计算，分支结构取最大值。
+12345for a in range(0, 1000):     for b
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-05-25 19:54" pubdate>
+              2019-05-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%AE%97%E6%B3%95/">算法</a>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%AE%97%E6%B3%95/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">时间复杂度</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">时间复杂度</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/05/25/python-han-shu-nei-zhi-han-shu/">python内置函数</a>
       </h1>
 
       <p class="index-excerpt">
@@ -275,7 +394,7 @@ Python 内置函数就是 python 标准库里（语言自身携带的）函数�
             
               <a href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
             
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E5%87%BD%E6%95%B0/">函数</a>
+              <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E5%9F%BA%E7%A1%80/">基础</a>
             
           </div>
         
@@ -283,69 +402,7 @@ Python 内置函数就是 python 标准库里（语言自身携带的）函数�
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/python/">python</a>
-            
-              <a href="/tags/%E5%87%BD%E6%95%B0/">函数</a>
-            
-              <a href="/tags/%E5%9F%BA%E7%A1%80/">基础</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2019/05/25/gong-ju-win10-pyhton2-he-3-gong-cun/">win10 python2和python3共存问题</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2019/05/25/gong-ju-win10-pyhton2-he-3-gong-cun/">
-          
-          
-            
-          
-          
-特别说明，本文是在 Windows64 位系统下进行的，32 位系统请下载相应版本的安装包，安装方法类似。
-
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2019-05-25 10:45" pubdate>
-              2019-05-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
-            
-              <a href="/categories/%E5%B7%A5%E5%85%B7/python/">python</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/pip/">pip</a>
-            
-              <a href="/tags/Windows/">Windows</a>
-            
-              <a href="/tags/python2/">python2</a>
-            
-              <a href="/tags/python3/">python3</a>
+              <a href="/tags/%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0/">内置函数</a>
             
           </div>
         
@@ -416,7 +473,64 @@ win10 系统电脑一台
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2019/05/23/python-gao-ji-zheng-ze-pi-pei/">正则匹配</a>
+        <a href="/2019/05/25/gong-ju-win10-pyhton2-he-3-gong-cun/">win10 python2和python3共存问题</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2019/05/25/gong-ju-win10-pyhton2-he-3-gong-cun/">
+          
+          
+            
+          
+          
+特别说明，本文是在 Windows64 位系统下进行的，32 位系统请下载相应版本的安装包，安装方法类似。
+
+下载python安装包进入 python 官网，链接 https://www.python.org/
+选择 Downloads—&gt;Windows，点击进入就可以看到寻找想要的 python 版本
+
+本文选择的是：
+Python3.5.2, 点击后面链接可直接下载，https://w
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-05-25 10:45" pubdate>
+              2019-05-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+            
+              <a href="/categories/%E5%B7%A5%E5%85%B7/python/">python</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Windows/">Windows</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/05/23/python-gao-ji-zheng-ze-pi-pei/">python正则匹配</a>
       </h1>
 
       <p class="index-excerpt">
@@ -462,7 +576,7 @@ win10 系统电脑一台
             
               <a href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
             
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E9%AB%98%E7%BA%A7/">高级</a>
+              <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E5%9F%BA%E7%A1%80/">基础</a>
             
           </div>
         
@@ -470,7 +584,7 @@ win10 系统电脑一台
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E6%AD%A3%E5%88%99/">正则</a>
+              <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a>
             
           </div>
         
@@ -484,7 +598,7 @@ win10 系统电脑一台
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2019/05/17/python-gao-ji-jin-cheng-xian-cheng-xie-cheng/">python进程、线程、协程</a>
+        <a href="/2019/05/17/python-gao-ji-jin-cheng-xian-cheng-xie-cheng/">python多任务机制</a>
       </h1>
 
       <p class="index-excerpt">
@@ -520,7 +634,7 @@ win10 系统电脑一台
             
               <a href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
             
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E9%AB%98%E7%BA%A7/">高级</a>
+              <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E7%B3%BB%E7%BB%9F/">系统</a>
             
           </div>
         
@@ -752,60 +866,6 @@ vue组件
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2019/05/09/wang-luo-tong-xin-01-liao-jie-web-ji-wang-luo-ji-chu/">01—了解web及网络基础</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2019/05/09/wang-luo-tong-xin-01-liao-jie-web-ji-wang-luo-ji-chu/">
-          
-          
-            
-          
-          HTTP 的出现主要是为了解决文本传输的难题
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2019-05-09 19:54" pubdate>
-              2019-05-09
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/">网络通信</a>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/">TCP</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/HTTP/">HTTP</a>
-            
-              <a href="/tags/TCP/">TCP</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
         <a href="/2019/05/09/suan-fa-pai-xu/">经典排序算法总结与实现</a>
       </h1>
 
@@ -816,6 +876,8 @@ vue组件
             
           
           经典排序算法在面试中占有很大的比重，也是基础，为了未雨绸缪，整理并用Python实现了七大经典排序算法，包括冒泡排序，插入排序，选择排序，希尔排序，归并排序，快速排序，堆排序。之所以用Python实现，主要是因为它更接近伪代码，能用更少的代码实现算法，更利于理解。
+本篇博客所有排序实现均默认从小到大。
+一、冒泡排序 BubbleSort介绍冒泡排序的原理非常简单，它重复地走访过要排序的数列，一次比
         </a>
       </p>
 
@@ -852,72 +914,11 @@ vue组件
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2019/05/03/python-mo-kuai-time-timeit-mo-kuai/">time与timeit 模块</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2019/05/03/python-mo-kuai-time-timeit-mo-kuai/">
-          
-          
-            
-          
-          一、time 模块1. 时间表现形式
-timestamp：时间戳，时间戳表示的是从1970年1月1日00:00:00开始按秒计算的偏移量
-struct_time： 时间元组，共有九个元素组
-format time： 格式化时间，已格式化的结构使时间更具可读性。包括自定义格式和固定格式2. 时间格式转换图
-
-3. 常用方法
-获取当前时间戳
- 12345In [26]: time.time()Out[
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2019-05-03 20:14" pubdate>
-              2019-05-03
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E6%A8%A1%E5%9D%97/">模块</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/python/">python</a>
-            
-              <a href="/tags/%E5%9F%BA%E7%A1%80/">基础</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/4/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/4/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
   

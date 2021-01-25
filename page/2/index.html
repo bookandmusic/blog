@@ -182,6 +182,125 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2020/08/16/wang-luo-tong-xin-duo-chong-fang-shi-shi-xian-bing-fa-web-server/">网络通信-多种方式实现并发 Web Server</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/08/16/wang-luo-tong-xin-duo-chong-fang-shi-shi-xian-bing-fa-web-server/">
+          
+          
+            
+          
+          下面我们使用 Python 来实现并发的 Web Server，其中采用了多进程、多线程、协程、单进程单线程非阻塞、select、epoll的方式。
+一、使用子进程来实现并发 Web Server123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-08-16 21:40" pubdate>
+              2020-08-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/">网络通信</a>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/">TCP</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/TCP/">TCP</a>
+            
+              <a href="/tags/WEB-Server/">WEB Server</a>
+            
+              <a href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/">高并发</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/08/16/wang-luo-tong-xin-simple-web-server/">网络通信-简单WEB服务器</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/08/16/wang-luo-tong-xin-simple-web-server/">
+          
+          
+            
+          
+          本篇文章介绍如何实现一个简单 的Web Server 以及对应的问题解决方案。
+一、如何使用Python实现一个返回固定页面的Web Server
+使用socket创建一个TCP Server
+
+接受来自浏览器的TCP链接，并接收HTTP请求
+
+返回固定响应数据给浏览器
+
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-08-16 21:23" pubdate>
+              2020-08-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/">网络通信</a>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/">TCP</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/TCP/">TCP</a>
+            
+              <a href="/tags/WEB-Server/">WEB Server</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2020/08/16/wang-luo-tong-xin-chang-lian-jie-yu-duan-lian-jie/">网络通信-长连接与短连接</a>
       </h1>
 
@@ -192,6 +311,18 @@
             
           
           简单介绍长连接与短连接的优缺点。
+1. 短连接：  
+
+client 向 server 发起连接请求  
+server 接到请求，双方建立连接  
+client 向 server 发送消息  
+server 回应 client  
+一次读写完成，此时双方任何一个都可以发起 close 操作
+
+2. 长连接：  
+
+client 向 server 发起连接  
+server 接到请求，双方建立连接 
         </a>
       </p>
 
@@ -238,11 +369,11 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/08/14/restful-gui-fan-de-api-jie-kou-she-ji/">RESTful规范的API接口设计</a>
+        <a href="/2020/08/14/web-restful-gui-fan-de-api-jie-kou-she-ji/">RESTful规范的API接口设计</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/08/14/restful-gui-fan-de-api-jie-kou-she-ji/">
+        <a href="/2020/08/14/web-restful-gui-fan-de-api-jie-kou-she-ji/">
           
           
             
@@ -280,9 +411,9 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/RESTful/">RESTful</a>
-            
               <a href="/tags/API/">API</a>
+            
+              <a href="/tags/RESTful/">RESTful</a>
             
           </div>
         
@@ -296,7 +427,7 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/07/30/python-gao-ji-nei-cun-guan-li/">python高级-内存管理</a>
+        <a href="/2020/07/30/python-gao-ji-nei-cun-guan-li/">python内存管理</a>
       </h1>
 
       <p class="index-excerpt">
@@ -308,6 +439,11 @@
           内存管理机制
 Python中不但变量名无需事先声明，而且也无需类型声明。在Python语言中，对象的类型和内存占用都是运行时确定的。在赋值时解释器会根据语法和右侧的操作数来决定新对象的类型。在对象创建后，一个该对象的引用会被赋值给左侧的变量。
 
+
+id()函数
+python的内置函数 id()可以用来查看对象的内存地址
+
+1234567891011121314&gt;&gt;&gt; a = 1&
         </a>
       </p>
 
@@ -328,7 +464,7 @@ Python中不但变量名无需事先声明，而且也无需类型声明。在Py
             
               <a href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
             
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E9%AB%98%E7%BA%A7/">高级</a>
+              <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E7%B3%BB%E7%BB%9F/">系统</a>
             
           </div>
         
@@ -338,7 +474,9 @@ Python中不但变量名无需事先声明，而且也无需类型声明。在Py
             
               <a href="/tags/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/">引用计数</a>
             
-              <a href="/tags/%E5%8F%AF%E5%8F%98%E7%B1%BB%E5%9E%8B%E4%B8%8E%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%B1%BB%E5%9E%8B/">可变类型与不可变类型</a>
+              <a href="/tags/%E5%88%86%E4%BB%A3%E5%9B%9E%E6%94%B6/">分代回收</a>
+            
+              <a href="/tags/%E6%A0%87%E8%AE%B0%E6%B8%85%E9%99%A4/">标记清除</a>
             
           </div>
         
@@ -362,6 +500,7 @@ Python中不但变量名无需事先声明，而且也无需类型声明。在Py
             
           
           DRF内置的序列化类，可以对整个模型类进行序列化与反序列化，简化了繁杂的工作。
+内置字段序列化模型类123456789101112131415161718192021222324252627282930from django.db import models# Create your models here.class Authors(models.Model):    name = models
         </a>
       </p>
 
@@ -382,15 +521,13 @@ Python中不但变量名无需事先声明，而且也无需类型声明。在Py
             
               <a href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
             
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/web/">web</a>
+              <a href="/categories/%E6%8A%80%E6%9C%AF/python/DRF/">DRF</a>
             
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/DRF/">DRF</a>
             
               <a href="/tags/%E5%BA%8F%E5%88%97%E5%8C%96/">序列化</a>
             
@@ -408,7 +545,7 @@ Python中不但变量名无需事先声明，而且也无需类型声明。在Py
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/06/06/python-han-shu-di-gui-han-shu/">递归函数</a>
+        <a href="/2020/06/06/python-han-shu-di-gui-han-shu/">python递归函数</a>
       </h1>
 
       <p class="index-excerpt">
@@ -417,7 +554,15 @@ Python中不但变量名无需事先声明，而且也无需类型声明。在Py
           
             
           
-          1. 定义函数调用函数自身，这种方式称为递归，这种函数称为递归函数
+          定义函数调用函数自身，这种方式称为递归，这种函数称为递归函数
+
+递归函数使用过程中，需要找到不变的规律和停止递归的边界条件， 
+因为函数自身调用自身，函数本身的结构不变，只是每次传的参数改变啦
+递归实现过程(扩展)：利用栈的思想，先找边界条件，同时将后面的任务存起来，一直到最前面的边界条件，然后回去，每次从栈中取任务，进行计算，一直到最后一个任务取完，结果也计算完毕
+
+递归过程:
+递归前进段
+递归
         </a>
       </p>
 
@@ -438,7 +583,7 @@ Python中不但变量名无需事先声明，而且也无需类型声明。在Py
             
               <a href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
             
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E5%87%BD%E6%95%B0/">函数</a>
+              <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E5%9F%BA%E7%A1%80/">基础</a>
             
           </div>
         
@@ -460,7 +605,7 @@ Python中不但变量名无需事先声明，而且也无需类型声明。在Py
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/06/06/python-han-shu-ni-ming-han-shu/">匿名函数</a>
+        <a href="/2020/06/06/python-han-shu-ni-ming-han-shu/">python匿名函数</a>
       </h1>
 
       <p class="index-excerpt">
@@ -469,9 +614,14 @@ Python中不但变量名无需事先声明，而且也无需类型声明。在Py
           
             
           
-          
-匿名函数的另一个别称是lambda表达式
+          语法匿名函数的另一个别称是lambda表达式
+lambda表达式的语法：
+1lambda argument_list: expression
 
+argument_list是参数列表。它的结构与Python中函数(function)的参数列表是一样的。
+expression是一个关于参数的表达式。表达式中出现的参数需要在argument_list中有定义，并且表达式只能是单行的。
+
+示例123456
         </a>
       </p>
 
@@ -492,7 +642,7 @@ Python中不但变量名无需事先声明，而且也无需类型声明。在Py
             
               <a href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
             
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E5%87%BD%E6%95%B0/">函数</a>
+              <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E5%9F%BA%E7%A1%80/">基础</a>
             
           </div>
         
@@ -516,7 +666,7 @@ Python中不但变量名无需事先声明，而且也无需类型声明。在Py
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/06/06/python-han-shu-gao-jie-han-shu/">高阶函数</a>
+        <a href="/2020/06/06/python-han-shu-gao-jie-han-shu/">python高阶函数</a>
       </h1>
 
       <p class="index-excerpt">
@@ -525,11 +675,10 @@ Python中不但变量名无需事先声明，而且也无需类型声明。在Py
           
             
           
-          
-定义
-当一个函数 接收 另一个函数作为参数， 它就是 高阶函数
-
-
+          高阶函数介绍定义当一个函数 接收 另一个函数作为参数， 它就是 高阶函数
+示例1234567def func(a, x, y):    a(x, y)  # a就是传递的 函数参数f，  执行 a 相当于 执行  fdef f(x, y):    print(x + y)func(f, 1, 2)  # 3， 在函数f执行过程中，输出 3
+四大高阶函数map(func, iterable)
+将 可
         </a>
       </p>
 
@@ -550,7 +699,7 @@ Python中不但变量名无需事先声明，而且也无需类型声明。在Py
             
               <a href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
             
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E5%87%BD%E6%95%B0/">函数</a>
+              <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E5%9F%BA%E7%A1%80/">基础</a>
             
           </div>
         
@@ -580,7 +729,7 @@ Python中不但变量名无需事先声明，而且也无需类型声明。在Py
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/06/06/python-han-shu-bian-liang-jie-xi/">变量进阶</a>
+        <a href="/2020/06/06/python-han-shu-bian-liang-jie-xi/">python变量作用域</a>
       </h1>
 
       <p class="index-excerpt">
@@ -591,6 +740,12 @@ Python中不但变量名无需事先声明，而且也无需类型声明。在Py
           
           变量的作用域
 在Python程序中创建、改变、查找变量名时，都是在一个保存变量名的空间中进行，我们称之为命名空间，也被称之为作用域。
+
+Python的作用域是静态的，在源代码中变量名被赋值的位置决定了该变量能被访问的范围。即Python变量的作用域由变量所在源代码中的位置决定。
+
+
+作用域的产生
+只有当变量在Module(模块)、Class(类)、def(函数)中定义的时候，才会有作用域的概念。
 
         </a>
       </p>
@@ -612,7 +767,7 @@ Python中不但变量名无需事先声明，而且也无需类型声明。在Py
             
               <a href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
             
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E5%87%BD%E6%95%B0/">函数</a>
+              <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E5%9F%BA%E7%A1%80/">基础</a>
             
           </div>
         
@@ -622,7 +777,7 @@ Python中不但变量名无需事先声明，而且也无需类型声明。在Py
             
               <a href="/tags/LEGB/">LEGB</a>
             
-              <a href="/tags/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/">引用计数</a>
+              <a href="/tags/%E4%BD%9C%E7%94%A8%E5%9F%9F/">作用域</a>
             
               <a href="/tags/global/">global</a>
             
@@ -640,72 +795,11 @@ Python中不但变量名无需事先声明，而且也无需类型声明。在Py
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/05/24/django-orm/">Django-ORM</a>
+        <a href="/2020/05/24/web-xss-gong-ji-he-csrf-gong-ji/">XSS攻击和CSRF攻击</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/05/24/django-orm/">
-          
-          
-            
-          
-          一、ORM介绍1. 什么是 ORM
-ORM 全拼Object-Relation Mapping
-
-中文意为 对象-关系映射
-
-在MVC/MVT设计模式中的Model模块中都包括ORM
-
-
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-05-24 20:38" pubdate>
-              2020-05-24
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/web/">web</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/django/">django</a>
-            
-              <a href="/tags/ORM/">ORM</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/05/24/xss-gong-ji-he-csrf-gong-ji/">XSS攻击和CSRF攻击</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/05/24/xss-gong-ji-he-csrf-gong-ji/">
+        <a href="/2020/05/24/web-xss-gong-ji-he-csrf-gong-ji/">
           
           
             
@@ -757,18 +851,29 @@ ORM 全拼Object-Relation Mapping
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/05/24/http-xie-yi-zhi-http-zhuang-tai-ma-xiang-jie/">HTTP状态码</a>
+        <a href="/2020/05/24/django-5-orm-mo-xing-lei/">Django基础(五)-ORM模型类</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/05/24/http-xie-yi-zhi-http-zhuang-tai-ma-xiang-jie/">
+        <a href="/2020/05/24/django-5-orm-mo-xing-lei/">
           
           
             
           
-          HTTP 协议之 http 状态码详解HTTP状态码（HTTP Status Code）是用以表示网页服务器HTTP响应状态的3位数字代码。
-它由 RFC 2616 规范定义的，并得到RFC 2518、RFC 2817、RFC 2295、RFC 2774、RFC 4918等规范扩展。
-HTTP 状态码被分为五大类， 目前我们使用的 HTTP 协议版本是 1.1， 支持以下的状态码。随着协议的发展，
+          一、ORM介绍1. 什么是 ORM
+ORM 全拼Object-Relation Mapping
+
+中文意为 对象-关系映射
+
+在MVC/MVT设计模式中的Model模块中都包括ORM
+
+
+2.ORM 优势（1）只需要面向对象编程, 不需要面向数据库编写代码.
+
+对数据库的操作都转化成对类属性和方法的操作.
+不用编写各种数据库的 sql 语句.
+
+（2）实现了数据模型与数据库的解耦, 屏蔽了不同数据
         </a>
       </p>
 
@@ -789,7 +894,7 @@ HTTP 状态码被分为五大类， 目前我们使用的 HTTP 协议版本是 1
             
               <a href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
             
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/web/">web</a>
+              <a href="/categories/%E6%8A%80%E6%9C%AF/python/Django/">Django</a>
             
           </div>
         
@@ -797,61 +902,9 @@ HTTP 状态码被分为五大类， 目前我们使用的 HTTP 协议版本是 1
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E7%8A%B6%E6%80%81%E7%A0%81/">状态码</a>
+              <a href="/tags/django/">django</a>
             
-              <a href="/tags/HTTP/">HTTP</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/05/23/shu-ju-ku-redis-ming-ling/">Redis命令</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/05/23/shu-ju-ku-redis-ming-ling/">
-          
-          
-            
-          
-          简单对redis 命令进行总结、归纳。
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-05-23 20:54" pubdate>
-              2020-05-23
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/%E6%95%B0%E6%8D%AE%E5%BA%93/redis/">redis</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/redis%E5%91%BD%E4%BB%A4/">redis命令</a>
+              <a href="/tags/ORM%E6%A8%A1%E5%9E%8B%E7%B1%BB/">ORM模型类</a>
             
           </div>
         
@@ -863,7 +916,7 @@ HTTP 状态码被分为五大类， 目前我们使用的 HTTP 协议版本是 1
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
   

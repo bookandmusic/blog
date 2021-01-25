@@ -229,8 +229,6 @@
             
             <div class="markdown-body">
               <p>简单对常见错误进行总结、归纳。</p>
-<a id="more"></a>
-
 <h2 id="Ubuntu系统"><a href="#Ubuntu系统" class="headerlink" title="Ubuntu系统"></a>Ubuntu系统</h2><h3 id="1698-只能root用户登录Mysql"><a href="#1698-只能root用户登录Mysql" class="headerlink" title="1698 只能root用户登录Mysql"></a>1698 只能root用户登录Mysql</h3><h4 id="一、问题描述"><a href="#一、问题描述" class="headerlink" title="一、问题描述"></a>一、问题描述</h4><p>如果mysql安装时，没有提示输入密码，则会随机分配密码，直接mysql -u root -p则无法登录，报错：</p>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">ERROR 1698 (28000): Access denied for user &#x27;root&#x27;@&#x27;localhost<br></code></pre></div></td></tr></table></figure>
 <h4 id="二、解决方案"><a href="#二、解决方案" class="headerlink" title="二、解决方案"></a>二、解决方案</h4><ol>

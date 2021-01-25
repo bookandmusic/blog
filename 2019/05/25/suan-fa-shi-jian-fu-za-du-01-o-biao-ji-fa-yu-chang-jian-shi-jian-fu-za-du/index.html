@@ -231,8 +231,6 @@
               <blockquote>
 <p>算法 : 内功心法, 是解决问题的一种思想</p>
 </blockquote>
-<a id="more"></a>
-
 <h3 id="1、时间复杂度-T-n"><a href="#1、时间复杂度-T-n" class="headerlink" title="1、时间复杂度 $T(n)$"></a>1、时间复杂度 $T(n)$</h3><p>由于每台机器的性能有所差别，所有其执行相同代码的时间也长短不一，故而推出一种计量方式，统计代码执行基本运算（<code>函数调用需要看其源码的基本运算</code>）的数量（<code>n</code>) 来确定一个算法的优劣，其中基本运算的<strong>循环按乘法计算，顺序结构按加法计算，分支结构取最大值</strong>。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1000</span>): <br>    <span class="hljs-keyword">for</span> b <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1000</span>):<br>        <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1000</span>):<br>            <span class="hljs-keyword">if</span> a+b+c == <span class="hljs-number">1000</span> <span class="hljs-keyword">and</span> a**<span class="hljs-number">2</span> + b**<span class="hljs-number">2</span> + c**<span class="hljs-number">2</span>:<br>                print(<span class="hljs-string">&#x27;a,b,c,: &#123;&#125;, &#123;&#125;, &#123;&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(a,b,c))<br></code></pre></div></td></tr></table></figure>
 <p>上述代码的时间复杂度为<br>$T = 1000 * 1000 * 1000 * 2$<br>那么如果将上述代码中的 1000 改为 2000， 则<br>$T = 2000 * 2000 * 2000 * 2$<br>由于上述同样的代码由于不同的参数的 T 都不同，我们便将其统一成 <strong>N</strong>，这样上述代码的时间复杂度可以表示成：<br>$T = N * N * N * 2$<br>同样的我们抓住其主要 “<strong>矛盾</strong>” ，观其大，再将其简化成<br>$T= N^3$<br>这样同一段代码的时间复杂度便不会根据其参数而发生改变了。</p>
@@ -346,7 +344,7 @@
                     
                     
                       <a href="/2019/05/25/python-han-shu-nei-zhi-han-shu/">
-                        <span class="hidden-mobile">内置函数</span>
+                        <span class="hidden-mobile">python内置函数</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
