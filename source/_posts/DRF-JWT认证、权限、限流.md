@@ -11,31 +11,7 @@ tags:
   - 认证
   - 限流
 ---
-DRF框架的一系列功能：认证、权限、限流，都是依赖于JWT。
-
-整个流程就是这样的:
-
--   客户端发送用户名和密码到服务端，
--   验证通过，生成JWT
--   返回JWT给客户端
-
--   下次，客户端发送请求时，携带JWT，一般是在请求头里加入`Authorization`，并加上`JWT`标注：
-
-```js
-{
-  headers: {
-    'Authorization': 'JWT ' + token
-}
-```
-
--   服务端会验证 token，如果验证通过就会返回相应的资源
--   在此基础上，可以实现权限和限流
-
-流程图如下：
-
-![jwt-diagram](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/10/1821058-2e28fe6c997a60c9.png) 
-
-
+主要以 Django+DRF + Vue的开发模式，简单介绍以 jwt作为凭证，实现 用户注册、登录 一系列流程
 
 ## 以 Django 作为服务端
 
@@ -273,11 +249,11 @@ urlpatterns = [
 ]
 ```
 
-### 认证
+### 个人中心
 
-当客户端请求时，会携带上一步生成的`token`，因此，需要在 服务端验证`token`，从而判断是否允许进行下一步操作
+当客户端请求个人信息时，需要携带上一步生成的`token`，因此，需要在 服务端验证`token`，从而判断是否允许进行下一步操作
 
-#### 全局配置
+#### 全局认证
 
 ```python
 REST_FRAMEWORK = {
@@ -290,14 +266,17 @@ REST_FRAMEWORK = {
 }
 ```
 
-#### 局部配置
+#### 局部认证
 
 可以在具体的视图中通过`authentication_classes`属性来设置
 
 ```python
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+
+
 # 个人信息    
 class UserInfoAPIView(APIView):
-    authentication_classes = [TokenAuthentication]  # 指明认证类
+    authentication_classes = [JSONWebTokenAuthentication]  # 指明认证类
 
     def get(self, request):
         user = request.user  # 只要认证成功，请求对象中就会存在 user对象
@@ -305,7 +284,7 @@ class UserInfoAPIView(APIView):
         return Response(ser.data)
 ```
 
-### 权限
+### 访问权限
 
 上面的视图，仍然存在一个问题：客户端发送jwt，服务器可以正常解析出登录用户；但是，如果没有发送jwt，再通过`request.user`获取用户对象，就会出错。因此，需要对该功能进行权限验证，只有登录用户才可以访问，否则，就拒绝访问
 
@@ -370,11 +349,9 @@ class UserView(GenericAPIView, ListModelMixin):
         return self.list(request, *args, **kwrags)
 ```
 
-
-
 ### 限流Throttling
 
-可以对接口访问的频次进行限制，以减轻服务器压力。特别是限制爬虫的抓取。
+上面的视图可以正常访问用户的个人信息，但是需要对接口访问的频次进行限制，以减轻服务器压力。特别是限制爬虫的抓取。
 
 #### 针对用户进行限制
 
@@ -410,8 +387,11 @@ from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 from .serializer import UserSerializer, User
 
 class UserView(GenericAPIView, ListModelMixin):
-    queryset = User.objects.all()
+    """查询所有注册用户"""
+    queryset = UserModel.objects.all()
     serializer_class = UserSerializer
+    authentication_classes = [JSONWebTokenAuthentication]
+    permission_classes = [IsAdminUser]
     throttle_classes = (UserRateThrottle, AnonRateThrottle)
 
     def get(self, request, *args, **kwargs):
@@ -600,7 +580,7 @@ export default {
 </script>
 ```
 
-#### 用户展示页面
+#### 用户个人中心
 
 ```html
 <template>

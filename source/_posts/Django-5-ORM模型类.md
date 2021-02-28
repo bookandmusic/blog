@@ -10,9 +10,9 @@ tags:
   - ORM模型类
 ---
 
-## 一、ORM介绍
+## ORM介绍
 
-### 1. 什么是 ORM
+### 什么是 ORM
 
 - **`ORM`** 全拼`Object-Relation Mapping`
 
@@ -20,7 +20,7 @@ tags:
 
 - 在`MVC`/`MVT`设计模式中的`Model`模块中都包括`ORM`
 
-### 2.ORM 优势
+### ORM 优势
 
 （1）只需要面向对象编程, 不需要面向数据库编写代码.
 
@@ -32,12 +32,12 @@ tags:
 - 不在关注用的是`mysql`、`oracle`... 等.
 - 通过简单的配置就可以轻松更换数据库, 而不需要修改代码.
 
-### 3.ORM 劣势
+### ORM 劣势
 
 - 相比较直接使用 SQL 语句操作数据库, 有性能损失.
 - 根据对象的操作转换成 SQL 语句, 根据查询的结果转化成对象, 在映射过程中有性能损失.
 
-### 4.ORM 和数据库关系：
+### ORM 和数据库关系：
 
 在 Django 中 model 是你数据的单一、明确的信息来源。它包含了你存储的数据的重要字段和行为。通常，一个模型（model）映射到一个数据库表.
 
@@ -51,7 +51,7 @@ tags:
 
 ![ORM示意图](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/ORM示意图%20.png)
 
-## 二、Django配置使用mysql数据库
+## Django配置使用mysql数据库
 
 ### `settings.py`配置`DATABASES`
 
@@ -104,9 +104,9 @@ DATABASES = {
 
 3. 在django最新版本中，提示"Django需要mysqlclient 1.3.13或更高版本"。要么在报错时，将抛出版本异常的代码注释掉,仍然使用`pymysql`；要么直接使用`mysqlclient`,不建议直接`pip`命令安装，可以使用`conda`创建虚拟环境，使用`conda`安装`mysqlclient`。
 
-## 三、字段属性和选项
+## 字段属性和选项
 
-### 1.模型类属性命名限制
+### 模型类属性命名限制
 
 - 不能是python的保留关键字。
 
@@ -118,7 +118,7 @@ DATABASES = {
     属性名=models.字段类型(选项)
   ```
 
-### 2.字段类型
+### 字段类型
 
 #### 整数
 
@@ -426,7 +426,7 @@ FilePathField(path="/home/images", match="foo.*", recursive=True)
 
 时间，在Python中用`datetime.time`实例表示。接受与`DateField`相同的额外参数。
 
-### 3.字段选项
+### 字段选项
 
 > 以下参数对所有字段类型均有效，且是可选的。
 
@@ -700,7 +700,7 @@ class MyForm(forms.Form):
 
  [`django.core.validators`](https://docs.djangoproject.com/zh-hans/2.2/ref/validators/#built-in-validators)模块包含一组可调用的验证器，用于模型和表单字段，可以在内部使用它们。
 
-### 4. `Meta` 选项
+###  `Meta` 选项
 
 使用内部 `Meta类` 来给模型赋予元数据，就像：
 
@@ -849,11 +849,11 @@ verbose_name_plural = "stories"
 
 如果没有给出，Django将使用 `verbose_name`+ `"s"`
 
-### 5.关联关系
+### 关联关系
 
 显然，关系型数据库的强大之处在于各表之间的关联关系。 Django 提供了定义三种最常见的数据库关联关系的方法：多对一，多对多，一对一。																
 
-#### 1、多对一关联
+#### ForeignKey(多对一)
 
 定义一个多对一的关联关系，使用 `django.db.models.ForeignKey` 类。就和其它 `Field`字段类型一样，只需要在你模型中添加一个值为该类的属性。
 
@@ -897,7 +897,7 @@ publish = models.ForeignKey(to='Publish')  # to用来指代跟哪张表有关系
       1. 与之关联的值设置为指定值，设置：`models.SET(值)`
       2. 与之关联的值设置为可执行对象的返回值，设置：`models.SET(可执行对象)`
 
-#### 2、OneToOneField(一对一)
+#### OneToOneField(一对一)
 
 > 外键字段创建在任意一张表都可以，建议外键添加在查询频率较高的一方
 
@@ -914,7 +914,7 @@ author_detail = models.OneToOneField(to='Author_detail')  # 外键本质fk + uni
 
 3. `on_delete`:同ForeignKey字段。
 
-#### 3、ManyToManyField(多对多)
+#### ManyToManyField(多对多)
 
 > 用于表示多对多的关联关系。在数据库中通过第三张表来建立关联关系。
 
