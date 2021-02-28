@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://bookandmusic.github.io/"/>
-  <updated>2021-02-27T15:41:39.396Z</updated>
+  <updated>2021-02-28T13:42:54.519Z</updated>
   <id>https://bookandmusic.github.io/</id>
   
   <author>
@@ -15,6 +15,43 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Celery异步任务</title>
+    <link href="https://bookandmusic.github.io/2021/02/28/django-celery-yi-bu-ren-wu/"/>
+    <id>https://bookandmusic.github.io/2021/02/28/django-celery-yi-bu-ren-wu/</id>
+    <published>2021-02-28T13:39:31.000Z</published>
+    <updated>2021-02-28T13:42:54.519Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;**情景：**用户发起request，并等待response返回。在本些views中，可能需要执行一段耗时的程序，那么用户就会等待很长时间，造成不好的用户体验，比如发送邮件、手机验证码等。&lt;/p&gt;
+&lt;p&gt;使用celery后，情况就不一样了。&lt;/p&gt;
+&lt;p&gt;**解决：**将耗
+        
+      
+    
+    </summary>
+    
+    
+      <category term="技术" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="python" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
+    
+      <category term="Django" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/Django/"/>
+    
+    
+      <category term="Celery" scheme="https://bookandmusic.github.io/tags/Celery/"/>
+    
+      <category term="单文件导入settings" scheme="https://bookandmusic.github.io/tags/%E5%8D%95%E6%96%87%E4%BB%B6%E5%AF%BC%E5%85%A5settings/"/>
+    
+      <category term="异步操作" scheme="https://bookandmusic.github.io/tags/%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C/"/>
+    
+  </entry>
   
   <entry>
     <title>JWT生成、认证</title>
@@ -223,7 +260,7 @@
     <link href="https://bookandmusic.github.io/2020/12/03/django-you-jian-fa-song/"/>
     <id>https://bookandmusic.github.io/2020/12/03/django-you-jian-fa-song/</id>
     <published>2020-12-03T14:07:31.000Z</published>
-    <updated>2020-12-04T01:03:58.000Z</updated>
+    <updated>2021-02-28T07:29:41.714Z</updated>
     
     <summary type="html">
     
@@ -616,37 +653,6 @@
       <category term="序列化" scheme="https://bookandmusic.github.io/tags/%E5%BA%8F%E5%88%97%E5%8C%96/"/>
     
       <category term="反序列化" scheme="https://bookandmusic.github.io/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python递归函数</title>
-    <link href="https://bookandmusic.github.io/2020/06/06/python-han-shu-di-gui-han-shu/"/>
-    <id>https://bookandmusic.github.io/2020/06/06/python-han-shu-di-gui-han-shu/</id>
-    <published>2020-06-06T03:16:01.000Z</published>
-    <updated>2021-01-23T14:59:58.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="技术" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-      <category term="python" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
-    
-      <category term="基础" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="递归函数" scheme="https://bookandmusic.github.io/tags/%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0/"/>
     
   </entry>
   
