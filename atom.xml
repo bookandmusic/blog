@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://bookandmusic.github.io/"/>
-  <updated>2021-02-28T13:42:54.519Z</updated>
+  <updated>2021-02-28T13:45:03.796Z</updated>
   <id>https://bookandmusic.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://bookandmusic.github.io/2021/02/28/django-celery-yi-bu-ren-wu/"/>
     <id>https://bookandmusic.github.io/2021/02/28/django-celery-yi-bu-ren-wu/</id>
     <published>2021-02-28T13:39:31.000Z</published>
-    <updated>2021-02-28T13:42:54.519Z</updated>
+    <updated>2021-02-28T13:45:03.796Z</updated>
     
     <summary type="html">
     
@@ -29,9 +29,7 @@
       
         
         
-          &lt;p&gt;**情景：**用户发起request，并等待response返回。在本些views中，可能需要执行一段耗时的程序，那么用户就会等待很长时间，造成不好的用户体验，比如发送邮件、手机验证码等。&lt;/p&gt;
-&lt;p&gt;使用celery后，情况就不一样了。&lt;/p&gt;
-&lt;p&gt;**解决：**将耗
+          &lt;p&gt;&lt;strong&gt;情景：&lt;/strong&gt;
         
       
     
