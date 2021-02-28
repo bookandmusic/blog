@@ -228,7 +228,7 @@
             <h1 style="display: none">Django基础(五)-ORM模型类</h1>
             
             <div class="markdown-body">
-              <h2 id="一、ORM介绍"><a href="#一、ORM介绍" class="headerlink" title="一、ORM介绍"></a>一、ORM介绍</h2><h3 id="1-什么是-ORM"><a href="#1-什么是-ORM" class="headerlink" title="1. 什么是 ORM"></a>1. 什么是 ORM</h3><ul>
+              <h2 id="ORM介绍"><a href="#ORM介绍" class="headerlink" title="ORM介绍"></a>ORM介绍</h2><h3 id="什么是-ORM"><a href="#什么是-ORM" class="headerlink" title="什么是 ORM"></a>什么是 ORM</h3><ul>
 <li><p><strong><code>ORM</code></strong> 全拼<code>Object-Relation Mapping</code></p>
 </li>
 <li><p>中文意为 <strong><code>对象-关系映射</code></strong></p>
@@ -236,7 +236,7 @@
 <li><p>在<code>MVC</code>/<code>MVT</code>设计模式中的<code>Model</code>模块中都包括<code>ORM</code></p>
 </li>
 </ul>
-<h3 id="2-ORM-优势"><a href="#2-ORM-优势" class="headerlink" title="2.ORM 优势"></a>2.ORM 优势</h3><p>（1）只需要面向对象编程, 不需要面向数据库编写代码.</p>
+<h3 id="ORM-优势"><a href="#ORM-优势" class="headerlink" title="ORM 优势"></a>ORM 优势</h3><p>（1）只需要面向对象编程, 不需要面向数据库编写代码.</p>
 <ul>
 <li>对数据库的操作都转化成对类属性和方法的操作.</li>
 <li>不用编写各种数据库的 sql 语句.</li>
@@ -246,17 +246,17 @@
 <li>不在关注用的是<code>mysql</code>、<code>oracle</code>… 等.</li>
 <li>通过简单的配置就可以轻松更换数据库, 而不需要修改代码.</li>
 </ul>
-<h3 id="3-ORM-劣势"><a href="#3-ORM-劣势" class="headerlink" title="3.ORM 劣势"></a>3.ORM 劣势</h3><ul>
+<h3 id="ORM-劣势"><a href="#ORM-劣势" class="headerlink" title="ORM 劣势"></a>ORM 劣势</h3><ul>
 <li>相比较直接使用 SQL 语句操作数据库, 有性能损失.</li>
 <li>根据对象的操作转换成 SQL 语句, 根据查询的结果转化成对象, 在映射过程中有性能损失.</li>
 </ul>
-<h3 id="4-ORM-和数据库关系："><a href="#4-ORM-和数据库关系：" class="headerlink" title="4.ORM 和数据库关系："></a>4.ORM 和数据库关系：</h3><p>在 Django 中 model 是你数据的单一、明确的信息来源。它包含了你存储的数据的重要字段和行为。通常，一个模型（model）映射到一个数据库表.</p>
+<h3 id="ORM-和数据库关系："><a href="#ORM-和数据库关系：" class="headerlink" title="ORM 和数据库关系："></a>ORM 和数据库关系：</h3><p>在 Django 中 model 是你数据的单一、明确的信息来源。它包含了你存储的数据的重要字段和行为。通常，一个模型（model）映射到一个数据库表.</p>
 <p>基本情况：</p>
 <p>每个模型都是一个 Python 类，它是 django.db.models.Model 的子类。</p>
 <p>模型的每个属性都代表一个数据库字段。</p>
 <p>综上所述，Django 为您提供了一个自动生成的数据库访问 API。</p>
 <p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/ORM%E7%A4%BA%E6%84%8F%E5%9B%BE%20.png" srcset="/img/loading.gif" alt="ORM示意图"></p>
-<h2 id="二、Django配置使用mysql数据库"><a href="#二、Django配置使用mysql数据库" class="headerlink" title="二、Django配置使用mysql数据库"></a>二、Django配置使用mysql数据库</h2><h3 id="settings-py配置DATABASES"><a href="#settings-py配置DATABASES" class="headerlink" title="settings.py配置DATABASES"></a><code>settings.py</code>配置<code>DATABASES</code></h3><p>默认:<code>&#123;&#125;</code>(空字典)</p>
+<h2 id="Django配置使用mysql数据库"><a href="#Django配置使用mysql数据库" class="headerlink" title="Django配置使用mysql数据库"></a>Django配置使用mysql数据库</h2><h3 id="settings-py配置DATABASES"><a href="#settings-py配置DATABASES" class="headerlink" title="settings.py配置DATABASES"></a><code>settings.py</code>配置<code>DATABASES</code></h3><p>默认:<code>&#123;&#125;</code>(空字典)</p>
 <p>一个字典，包含Django使用的所有数据库的设置。它是一个嵌套的字典，其内容将数据库别名映射到包含单个数据库选项的字典。</p>
 <p>数据库设置必须配置一个默认数据库;还可以指定任意数量的其他数据库。</p>
 <p>最简单的设置文件是针对使用SQLite的单数据库设置的。这可以配置使用以下:</p>
@@ -271,14 +271,14 @@
 <li><p>在django最新版本中，提示”Django需要mysqlclient 1.3.13或更高版本”。要么在报错时，将抛出版本异常的代码注释掉,仍然使用<code>pymysql</code>；要么直接使用<code>mysqlclient</code>,不建议直接<code>pip</code>命令安装，可以使用<code>conda</code>创建虚拟环境，使用<code>conda</code>安装<code>mysqlclient</code>。</p>
 </li>
 </ol>
-<h2 id="三、字段属性和选项"><a href="#三、字段属性和选项" class="headerlink" title="三、字段属性和选项"></a>三、字段属性和选项</h2><h3 id="1-模型类属性命名限制"><a href="#1-模型类属性命名限制" class="headerlink" title="1.模型类属性命名限制"></a>1.模型类属性命名限制</h3><ul>
+<h2 id="字段属性和选项"><a href="#字段属性和选项" class="headerlink" title="字段属性和选项"></a>字段属性和选项</h2><h3 id="模型类属性命名限制"><a href="#模型类属性命名限制" class="headerlink" title="模型类属性命名限制"></a>模型类属性命名限制</h3><ul>
 <li><p>不能是python的保留关键字。</p>
 </li>
 <li><p><strong>不允许使用连续的下划线，这是由django的查询方式决定的。</strong></p>
 </li>
 <li><p>定义属性时需要指定字段类型，通过字段类型的参数指定选项，语法如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">属性名=models.字段类型(选项)<br></code></pre></div></td></tr></table></figure>
-<h3 id="2-字段类型"><a href="#2-字段类型" class="headerlink" title="2.字段类型"></a>2.字段类型</h3></li>
+<h3 id="字段类型"><a href="#字段类型" class="headerlink" title="字段类型"></a>字段类型</h3></li>
 </ul>
 <h4 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h4><h5 id="AutoField"><a href="#AutoField" class="headerlink" title="AutoField"></a><code>AutoField</code></h5><p>根据可用id自动递增的一个32位(<code>4 byte</code>)的整数(<code>Integer</code>)字段,它的适用范围为:<code>1</code>到<code>2147483647</code>之间。</p>
 <p>你通常不需要直接使用它;如果不进行其他指定，主键字段将自动添加到模型中。</p>
@@ -410,7 +410,7 @@
 <p><code>auto_now_add</code>、<code>auto_now</code>和<code>default</code>选项是互斥的。这些选项的任何组合都将导致错误。</p>
 <h5 id="DateTimeField"><a href="#DateTimeField" class="headerlink" title="DateTimeField"></a><code>DateTimeField</code></h5><p>日期和时间，在Python中用<code>datetime.datetime</code>实例表示。接受与<code>DateField</code>相同的额外参数。</p>
 <h5 id="TimeField"><a href="#TimeField" class="headerlink" title="TimeField"></a><code>TimeField</code></h5><p>时间，在Python中用<code>datetime.time</code>实例表示。接受与<code>DateField</code>相同的额外参数。</p>
-<h3 id="3-字段选项"><a href="#3-字段选项" class="headerlink" title="3.字段选项"></a>3.字段选项</h3><blockquote>
+<h3 id="字段选项"><a href="#字段选项" class="headerlink" title="字段选项"></a>字段选项</h3><blockquote>
 <p>以下参数对所有字段类型均有效，且是可选的。</p>
 </blockquote>
 <h4 id="null"><a href="#null" class="headerlink" title="null"></a><code>null</code></h4><p>如果设置为 <code>True</code>， 当该字段为空时，Django 会将数据库中该字段设置为 <code>NULL</code>，默认为 <code>False</code>。</p>
@@ -495,7 +495,7 @@
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> django <span class="hljs-keyword">import</span> forms<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyForm</span>(<span class="hljs-params">forms.Form</span>):</span><br>    even_field = forms.IntegerField(validators=[validate_even])<br></code></pre></div></td></tr></table></figure>
 <p>对于更复杂或可配置的验证器，您还可以使用带有<code>__call__()</code>方法的类。例如， <code>RegexValidator</code>这类验证器。如果在<code>validators</code> <code>model</code>字段选项中使用基于类的验证器,应该添加<code>deconstruct()</code>装饰器和 <code>__eq__()</code> 方法让它可以被迁移框架序列化。</p>
 <p> <a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/2.2/ref/validators/#built-in-validators"><code>django.core.validators</code></a>模块包含一组可调用的验证器，用于模型和表单字段，可以在内部使用它们。</p>
-<h3 id="4-Meta-选项"><a href="#4-Meta-选项" class="headerlink" title="4. Meta 选项"></a>4. <code>Meta</code> 选项</h3><p>使用内部 <code>Meta类</code> 来给模型赋予元数据，就像：</p>
+<h3 id="Meta-选项"><a href="#Meta-选项" class="headerlink" title="Meta 选项"></a><code>Meta</code> 选项</h3><p>使用内部 <code>Meta类</code> 来给模型赋予元数据，就像：</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> django.db <span class="hljs-keyword">import</span> models<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Ox</span>(<span class="hljs-params">models.Model</span>):</span><br>    horn_length = models.IntegerField()<br><br>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Meta</span>:</span><br>        ordering = [<span class="hljs-string">&quot;horn_length&quot;</span>]<br>        verbose_name_plural = <span class="hljs-string">&quot;oxen&quot;</span><br></code></pre></div></td></tr></table></figure>
 <h4 id="abstract"><a href="#abstract" class="headerlink" title="abstract"></a><code>abstract</code></h4><p>抽象基类在你要将公共信息放入很多模型时会很有用。编写你的基类，并在 <strong>Meta</strong> 类中填入 <code>abstract=True</code>。该模型将不会创建任何数据表。当其用作其它模型类的基类时，它的字段会自动添加至子类。</p>
 <p>一个例子:</p>
@@ -535,8 +535,8 @@
 <h4 id="verbose-name-plural"><a href="#verbose-name-plural" class="headerlink" title="verbose_name_plural"></a><code>verbose_name_plural</code></h4><p>对象的复数名称:</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">verbose_name_plural = <span class="hljs-string">&quot;stories&quot;</span><br></code></pre></div></td></tr></table></figure>
 <p>如果没有给出，Django将使用 <code>verbose_name</code>+ <code>&quot;s&quot;</code></p>
-<h3 id="5-关联关系"><a href="#5-关联关系" class="headerlink" title="5.关联关系"></a>5.关联关系</h3><p>显然，关系型数据库的强大之处在于各表之间的关联关系。 Django 提供了定义三种最常见的数据库关联关系的方法：多对一，多对多，一对一。                                                                </p>
-<h4 id="1、多对一关联"><a href="#1、多对一关联" class="headerlink" title="1、多对一关联"></a>1、多对一关联</h4><p>定义一个多对一的关联关系，使用 <code>django.db.models.ForeignKey</code> 类。就和其它 <code>Field</code>字段类型一样，只需要在你模型中添加一个值为该类的属性。</p>
+<h3 id="关联关系"><a href="#关联关系" class="headerlink" title="关联关系"></a>关联关系</h3><p>显然，关系型数据库的强大之处在于各表之间的关联关系。 Django 提供了定义三种最常见的数据库关联关系的方法：多对一，多对多，一对一。                                                                </p>
+<h4 id="ForeignKey-多对一"><a href="#ForeignKey-多对一" class="headerlink" title="ForeignKey(多对一)"></a>ForeignKey(多对一)</h4><p>定义一个多对一的关联关系，使用 <code>django.db.models.ForeignKey</code> 类。就和其它 <code>Field</code>字段类型一样，只需要在你模型中添加一个值为该类的属性。</p>
 <p><code>ForeignKey</code> 类需要添加一个位置参数，即你想要关联的模型类名。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 关键字ForeignKey</span><br>publish = models.ForeignKey(to=<span class="hljs-string">&#x27;Publish&#x27;</span>)  <span class="hljs-comment"># to用来指代跟哪张表有关系 默认关联的就是表的主键字段</span><br><span class="hljs-comment"># 外键字段名在创建时会自动加上_id后缀</span><br></code></pre></div></td></tr></table></figure>
 <h5 id="字段参数"><a href="#字段参数" class="headerlink" title="字段参数"></a>字段参数</h5><ol>
@@ -573,7 +573,7 @@
 </ol>
 </li>
 </ol>
-<h4 id="2、OneToOneField-一对一"><a href="#2、OneToOneField-一对一" class="headerlink" title="2、OneToOneField(一对一)"></a>2、OneToOneField(一对一)</h4><blockquote>
+<h4 id="OneToOneField-一对一"><a href="#OneToOneField-一对一" class="headerlink" title="OneToOneField(一对一)"></a>OneToOneField(一对一)</h4><blockquote>
 <p>外键字段创建在任意一张表都可以，建议外键添加在查询频率较高的一方</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 关键字OneToOneField</span><br>author_detail = models.OneToOneField(to=<span class="hljs-string">&#x27;Author_detail&#x27;</span>)  <span class="hljs-comment"># 外键本质fk + unique</span><br></code></pre></div></td></tr></table></figure>
@@ -585,7 +585,7 @@
 <li><p><code>on_delete</code>:同ForeignKey字段。</p>
 </li>
 </ol>
-<h4 id="3、ManyToManyField-多对多"><a href="#3、ManyToManyField-多对多" class="headerlink" title="3、ManyToManyField(多对多)"></a>3、ManyToManyField(多对多)</h4><blockquote>
+<h4 id="ManyToManyField-多对多"><a href="#ManyToManyField-多对多" class="headerlink" title="ManyToManyField(多对多)"></a>ManyToManyField(多对多)</h4><blockquote>
 <p>用于表示多对多的关联关系。在数据库中通过第三张表来建立关联关系。</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 关键字ManyToManyField</span><br>author = models.ManyToManyField(to=<span class="hljs-string">&#x27;Author&#x27;</span>)  <br><span class="hljs-comment"># django orm会自动帮你创建第三张关系表，表名为两个关联的表名用_连接</span><br></code></pre></div></td></tr></table></figure>
@@ -680,9 +680,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/05/24/web-xss-gong-ji-he-csrf-gong-ji/">
+                      <a href="/2020/06/06/python-han-shu-bian-liang-jie-xi/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">XSS攻击和CSRF攻击</span>
+                        <span class="hidden-mobile">python变量作用域</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -690,8 +690,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/05/24/web-http-xie-yi-zhi-http-zhuang-tai-ma-xiang-jie/">
-                        <span class="hidden-mobile">HTTP状态码</span>
+                      <a href="/2020/05/24/web-xss-gong-ji-he-csrf-gong-ji/">
+                        <span class="hidden-mobile">XSS攻击和CSRF攻击</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

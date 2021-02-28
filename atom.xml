@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://bookandmusic.github.io/"/>
-  <updated>2021-01-23T14:46:46.942Z</updated>
+  <updated>2021-02-27T15:41:39.396Z</updated>
   <id>https://bookandmusic.github.io/</id>
   
   <author>
@@ -17,11 +17,51 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>JWT生成、认证</title>
+    <link href="https://bookandmusic.github.io/2021/02/27/drf-jwt-sheng-cheng-ren-zheng/"/>
+    <id>https://bookandmusic.github.io/2021/02/27/drf-jwt-sheng-cheng-ren-zheng/</id>
+    <published>2021-02-27T15:22:33.000Z</published>
+    <updated>2021-02-27T15:41:39.396Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;DRF框架的一系列功能：认证、权限、限流，都是依赖于JWT。&lt;/p&gt;
+&lt;p&gt;整个流程就是这样的:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;客户端发送用户名和密码到服务端，&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;验证通过，生成JWT&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;返回JWT给客户端&lt;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="技术" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="python" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
+    
+      <category term="DRF" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/DRF/"/>
+    
+    
+      <category term="JWT生成" scheme="https://bookandmusic.github.io/tags/JWT%E7%94%9F%E6%88%90/"/>
+    
+      <category term="认证" scheme="https://bookandmusic.github.io/tags/%E8%AE%A4%E8%AF%81/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Django基础(六)-ORM操作</title>
     <link href="https://bookandmusic.github.io/2021/01/23/django-6-orm-cao-zuo/"/>
     <id>https://bookandmusic.github.io/2021/01/23/django-6-orm-cao-zuo/</id>
     <published>2021-01-23T14:37:39.000Z</published>
-    <updated>2021-01-23T14:46:46.942Z</updated>
+    <updated>2021-01-23T14:46:46.000Z</updated>
     
     <summary type="html">
     
@@ -44,7 +84,7 @@
     <link href="https://bookandmusic.github.io/2021/01/23/django-2-shi-tu/"/>
     <id>https://bookandmusic.github.io/2021/01/23/django-2-shi-tu/</id>
     <published>2021-01-23T14:31:00.000Z</published>
-    <updated>2021-01-23T14:46:18.431Z</updated>
+    <updated>2021-01-23T14:46:18.000Z</updated>
     
     <summary type="html">
     
@@ -67,7 +107,7 @@
     <link href="https://bookandmusic.github.io/2020/12/27/gong-ju-hao-yong-de-cli-gong-ju/"/>
     <id>https://bookandmusic.github.io/2020/12/27/gong-ju-hao-yong-de-cli-gong-ju/</id>
     <published>2020-12-27T14:10:35.000Z</published>
-    <updated>2021-01-21T07:06:06.521Z</updated>
+    <updated>2021-01-21T07:06:06.000Z</updated>
     
     <summary type="html">
     
@@ -98,7 +138,7 @@
     <link href="https://bookandmusic.github.io/2020/12/27/vue-zu-jian-jian-tong-xin-liu-chong-fang-shi-wan-zheng-ban/"/>
     <id>https://bookandmusic.github.io/2020/12/27/vue-zu-jian-jian-tong-xin-liu-chong-fang-shi-wan-zheng-ban/</id>
     <published>2020-12-27T13:56:48.000Z</published>
-    <updated>2021-01-21T07:05:29.359Z</updated>
+    <updated>2021-01-21T07:05:29.000Z</updated>
     
     <summary type="html">
     
@@ -129,7 +169,7 @@
     <link href="https://bookandmusic.github.io/2020/12/10/django-zhong-jian-jian/"/>
     <id>https://bookandmusic.github.io/2020/12/10/django-zhong-jian-jian/</id>
     <published>2020-12-09T23:50:31.000Z</published>
-    <updated>2021-01-21T07:03:03.632Z</updated>
+    <updated>2021-01-21T07:03:03.000Z</updated>
     
     <summary type="html">
     
@@ -160,7 +200,7 @@
     <link href="https://bookandmusic.github.io/2020/12/09/django-3-mo-ban/"/>
     <id>https://bookandmusic.github.io/2020/12/09/django-3-mo-ban/</id>
     <published>2020-12-09T09:27:02.000Z</published>
-    <updated>2021-01-23T14:46:23.039Z</updated>
+    <updated>2021-01-23T14:46:23.000Z</updated>
     
     <summary type="html">
     
@@ -183,7 +223,7 @@
     <link href="https://bookandmusic.github.io/2020/12/03/django-you-jian-fa-song/"/>
     <id>https://bookandmusic.github.io/2020/12/03/django-you-jian-fa-song/</id>
     <published>2020-12-03T14:07:31.000Z</published>
-    <updated>2020-12-04T01:03:58.633Z</updated>
+    <updated>2020-12-04T01:03:58.000Z</updated>
     
     <summary type="html">
     
@@ -219,7 +259,7 @@
     <link href="https://bookandmusic.github.io/2020/12/01/django-huan-cun/"/>
     <id>https://bookandmusic.github.io/2020/12/01/django-huan-cun/</id>
     <published>2020-12-01T13:49:38.000Z</published>
-    <updated>2021-01-23T15:21:14.050Z</updated>
+    <updated>2021-01-23T15:21:14.000Z</updated>
     
     <summary type="html">
     
@@ -250,7 +290,7 @@
     <link href="https://bookandmusic.github.io/2020/11/30/django-shu-ju-fen-ye/"/>
     <id>https://bookandmusic.github.io/2020/11/30/django-shu-ju-fen-ye/</id>
     <published>2020-11-30T13:45:42.000Z</published>
-    <updated>2021-01-23T14:45:15.906Z</updated>
+    <updated>2021-01-23T14:45:15.000Z</updated>
     
     <summary type="html">
     
@@ -281,10 +321,10 @@
   
   <entry>
     <title>JWT浅析</title>
-    <link href="https://bookandmusic.github.io/2020/10/24/drf-jwt-qian-xi/"/>
-    <id>https://bookandmusic.github.io/2020/10/24/drf-jwt-qian-xi/</id>
+    <link href="https://bookandmusic.github.io/2020/10/24/web-jwt-qian-xi/"/>
+    <id>https://bookandmusic.github.io/2020/10/24/web-jwt-qian-xi/</id>
     <published>2020-10-24T12:38:26.000Z</published>
-    <updated>2021-01-25T03:30:14.367Z</updated>
+    <updated>2021-01-25T14:26:24.000Z</updated>
     
     <summary type="html">
     
@@ -304,7 +344,7 @@
     
       <category term="python" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
     
-      <category term="DRF" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/DRF/"/>
+      <category term="web" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/web/"/>
     
     
       <category term="JWT" scheme="https://bookandmusic.github.io/tags/JWT/"/>
@@ -316,7 +356,7 @@
     <link href="https://bookandmusic.github.io/2020/10/23/vue-yin-ru-ben-di-zi-yuan/"/>
     <id>https://bookandmusic.github.io/2020/10/23/vue-yin-ru-ben-di-zi-yuan/</id>
     <published>2020-10-23T14:28:48.000Z</published>
-    <updated>2020-12-27T13:53:54.685Z</updated>
+    <updated>2020-12-27T13:53:54.000Z</updated>
     
     <summary type="html">
     
@@ -341,7 +381,7 @@
     <link href="https://bookandmusic.github.io/2020/09/03/xi-tong-deepin-os-an-zhuang-nvidia-qu-dong/"/>
     <id>https://bookandmusic.github.io/2020/09/03/xi-tong-deepin-os-an-zhuang-nvidia-qu-dong/</id>
     <published>2020-09-03T10:20:35.000Z</published>
-    <updated>2021-01-25T02:59:36.558Z</updated>
+    <updated>2021-01-25T02:59:36.000Z</updated>
     
     <summary type="html">
     
@@ -375,7 +415,7 @@
     <link href="https://bookandmusic.github.io/2020/08/16/wang-luo-tong-xin-duo-chong-fang-shi-shi-xian-bing-fa-web-server/"/>
     <id>https://bookandmusic.github.io/2020/08/16/wang-luo-tong-xin-duo-chong-fang-shi-shi-xian-bing-fa-web-server/</id>
     <published>2020-08-16T13:40:36.000Z</published>
-    <updated>2021-01-25T02:59:13.221Z</updated>
+    <updated>2021-01-25T02:59:13.000Z</updated>
     
     <summary type="html">
     
@@ -411,7 +451,7 @@
     <link href="https://bookandmusic.github.io/2020/08/16/wang-luo-tong-xin-simple-web-server/"/>
     <id>https://bookandmusic.github.io/2020/08/16/wang-luo-tong-xin-simple-web-server/</id>
     <published>2020-08-16T13:23:36.000Z</published>
-    <updated>2021-01-25T02:59:22.853Z</updated>
+    <updated>2021-01-25T02:59:22.000Z</updated>
     
     <summary type="html">
     
@@ -446,7 +486,7 @@
     <link href="https://bookandmusic.github.io/2020/08/16/wang-luo-tong-xin-chang-lian-jie-yu-duan-lian-jie/"/>
     <id>https://bookandmusic.github.io/2020/08/16/wang-luo-tong-xin-chang-lian-jie-yu-duan-lian-jie/</id>
     <published>2020-08-16T10:27:27.000Z</published>
-    <updated>2021-01-25T02:59:18.061Z</updated>
+    <updated>2021-01-25T02:59:18.000Z</updated>
     
     <summary type="html">
     
@@ -482,7 +522,7 @@
     <link href="https://bookandmusic.github.io/2020/08/14/web-restful-gui-fan-de-api-jie-kou-she-ji/"/>
     <id>https://bookandmusic.github.io/2020/08/14/web-restful-gui-fan-de-api-jie-kou-she-ji/</id>
     <published>2020-08-14T12:38:26.000Z</published>
-    <updated>2021-01-23T15:09:50.792Z</updated>
+    <updated>2021-01-23T15:09:50.000Z</updated>
     
     <summary type="html">
     
@@ -515,7 +555,7 @@
     <link href="https://bookandmusic.github.io/2020/07/30/python-gao-ji-nei-cun-guan-li/"/>
     <id>https://bookandmusic.github.io/2020/07/30/python-gao-ji-nei-cun-guan-li/</id>
     <published>2020-07-30T13:53:24.000Z</published>
-    <updated>2021-01-23T14:53:26.346Z</updated>
+    <updated>2021-01-23T14:53:26.000Z</updated>
     
     <summary type="html">
     
@@ -550,7 +590,7 @@
     <link href="https://bookandmusic.github.io/2020/07/08/drf-xu-lie-hua-yu-fan-xu-lie-hua/"/>
     <id>https://bookandmusic.github.io/2020/07/08/drf-xu-lie-hua-yu-fan-xu-lie-hua/</id>
     <published>2020-07-08T02:26:57.000Z</published>
-    <updated>2021-01-25T14:15:59.996Z</updated>
+    <updated>2021-01-25T14:15:59.000Z</updated>
     
     <summary type="html">
     
@@ -584,7 +624,7 @@
     <link href="https://bookandmusic.github.io/2020/06/06/python-han-shu-di-gui-han-shu/"/>
     <id>https://bookandmusic.github.io/2020/06/06/python-han-shu-di-gui-han-shu/</id>
     <published>2020-06-06T03:16:01.000Z</published>
-    <updated>2021-01-23T14:59:58.063Z</updated>
+    <updated>2021-01-23T14:59:58.000Z</updated>
     
     <summary type="html">
     
@@ -607,41 +647,6 @@
     
     
       <category term="递归函数" scheme="https://bookandmusic.github.io/tags/%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python匿名函数</title>
-    <link href="https://bookandmusic.github.io/2020/06/06/python-han-shu-ni-ming-han-shu/"/>
-    <id>https://bookandmusic.github.io/2020/06/06/python-han-shu-ni-ming-han-shu/</id>
-    <published>2020-06-06T03:14:42.000Z</published>
-    <updated>2021-01-23T15:01:10.937Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;语法&quot;&gt;&lt;a href=&quot;#语法&quot; class=&quot;headerlink&quot; title=&quot;语法&quot;&gt;&lt;/a&gt;语法&lt;/h2&gt;&lt;p&gt;匿名函数的另一个别称是&lt;code&gt;lambda表达式&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;lambda表达式的语法：&lt;/p&gt;
-&lt;figure
-        
-      
-    
-    </summary>
-    
-    
-      <category term="技术" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-      <category term="python" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
-    
-      <category term="基础" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="lambda" scheme="https://bookandmusic.github.io/tags/lambda/"/>
-    
-      <category term="匿名函数" scheme="https://bookandmusic.github.io/tags/%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/"/>
     
   </entry>
   
