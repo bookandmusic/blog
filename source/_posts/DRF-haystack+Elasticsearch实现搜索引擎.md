@@ -93,7 +93,7 @@ pip install drf-haystack
 pip install "elasticsearch>=5,<6"
 ```
 
-drf-haystack是为了在REST framework中使用haystack而进行的封装（如果在Django中使用haystack，则安装django-haystack即可）。
+[drf-haystack](https://drf-haystack.readthedocs.io/en/latest/index.html)是为了在REST framework中使用haystack而进行的封装（如果在Django中使用haystack，则安装[django-haystack](https://django-haystack.readthedocs.io/en/master/toc.html)即可）。
 
 ### 注册应用
 
