@@ -39,32 +39,32 @@ Elasticsearch 不支持对中文进行分词建立索引，需要配合扩展**e
 
 >   注意： haystack 支持 Elasticsearch 1.x、2.x、5.x，所以不能安装Elasticsearch7.x
 
-创建文件夹  `elasticsearch`
+### 创建文件夹  `elasticsearch`
 
 下载中文分词插件 [elasticsearch-analysis-ik-5.6.16.zip](https://github.91chifun.workers.dev//https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v5.6.16/elasticsearch-analysis-ik-5.6.16.zip)， 注意：插件需要和elasticsearch版本对应
 
 解压到当前文件夹，并将文件夹重命名为`elasticsearch-analysis-ik`
 
-创建 `DockerFile`
+### 创建 `DockerFile`
 
 ```dockerfile
 FROM elasticsearch:5.6.16
 ADD elasticsearch-analysis-ik /usr/share/elasticsearch/plugins/elasticsearch-analysis-ik
 ```
 
-创建镜像
+### 创建镜像
 
 ```zsh
 docker build -f Dockerfile -t bookandmusic/elasticsearch-ik:5.6.16 .
 ```
 
-查看镜像
+### 查看镜像
 
 ```zsh
 docker images
 ```
 
-创建容器
+### 创建容器
 
 ```zsh
 docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" --name elasticsearch -e ES_JAVA_OPTS="-Xms64m -Xmx512m" -d bookandmusic/elasticsearch-ik:5.6.16
@@ -78,6 +78,93 @@ docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" --name elas
 ```
 
 >   注意： 创建容器时，一定要指定内存，否则，则直接闪退
+
+### 使用postman测试IK分词
+
+IK分词效果有两种,一种是ik_max_word（最大分词）和ik_smart（最小分词）
+
+![image-20210307155255273](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/03/image-20210307155255273.png)
+
+```json
+{
+    "tokens": [
+        {
+            "token": "今天是",
+            "start_offset": 0,
+            "end_offset": 3,
+            "type": "CN_WORD",
+            "position": 0
+        },
+        {
+            "token": "今天",
+            "start_offset": 0,
+            "end_offset": 2,
+            "type": "CN_WORD",
+            "position": 1
+        },
+        {
+            "token": "是",
+            "start_offset": 2,
+            "end_offset": 3,
+            "type": "CN_CHAR",
+            "position": 2
+        },
+        {
+            "token": "个",
+            "start_offset": 3,
+            "end_offset": 4,
+            "type": "CN_CHAR",
+            "position": 3
+        },
+        {
+            "token": "好日子",
+            "start_offset": 4,
+            "end_offset": 7,
+            "type": "CN_WORD",
+            "position": 4
+        },
+        {
+            "token": "日子",
+            "start_offset": 5,
+            "end_offset": 7,
+            "type": "CN_WORD",
+            "position": 5
+        }
+    ]
+}
+```
+
+![image-20210307155506003](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/03/image-20210307155506003.png)
+
+```json
+{
+    "tokens": [
+        {
+            "token": "今天是",
+            "start_offset": 0,
+            "end_offset": 3,
+            "type": "CN_WORD",
+            "position": 0
+        },
+        {
+            "token": "个",
+            "start_offset": 3,
+            "end_offset": 4,
+            "type": "CN_CHAR",
+            "position": 1
+        },
+        {
+            "token": "好日子",
+            "start_offset": 4,
+            "end_offset": 7,
+            "type": "CN_WORD",
+            "position": 2
+        }
+    ]
+}
+```
+
+
 
 ## 使用haystack对接Elasticsearch
 
