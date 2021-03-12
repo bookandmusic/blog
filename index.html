@@ -182,6 +182,103 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/03/06/ssh-an-zhuang-yu-pei-zhi/">SSH安装与配置</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/06/ssh-an-zhuang-yu-pei-zhi/">
+          
+          
+            
+          
+          ssh服务器安装ssh-server1$ sudo apt-get install openssh-server vim -y
+设置密码由于SSH使用的就是账号的登录密码，所以不存在单独的SSH密码。如果你需要修改SSH远程登录密码，需要修改这台服务器的账号的登录密码。
+1$ passwd
+修改配置文件配置ssh客户端1$ vi /etc/ssh/ssh_config
+去掉PasswordAuth
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-06 09:56" pubdate>
+              2021-03-06
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/02/drf-haystack-elasticsearch-shi-xian-sou-suo-yin-qing/">haystack+Elasticsearch实现搜索引擎</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/02/drf-haystack-elasticsearch-shi-xian-sou-suo-yin-qing/">
+          
+          
+            
+          
+          搜索引擎原理通过搜索引擎进行数据查询时，搜索引擎并不是直接在数据库中进行查询，而是搜索引擎会对数据库中的数据进行一遍预处理，单独建立起一份索引结构数据。
+我们可以将索引结构数据想象成是字典书籍的索引检索页，里面包含了关键词与词条的对应关系，并记录词条的位置。
+我们在通过搜索引擎搜索时，搜索引擎将关键字在索引数据中进行快速对比查找，进而找到数据的真实存储位置。
+Elasticsearch开源的 El
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-02 20:24" pubdate>
+              2021-03-02
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/python/DRF/">DRF</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/haystack/">haystack</a>
+            
+              <a href="/tags/Elasticsearch/">Elasticsearch</a>
+            
+              <a href="/tags/DRF/">DRF</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/02/28/django-celery-yi-bu-ren-wu/">Celery异步任务</a>
       </h1>
 
@@ -733,115 +830,6 @@ Celery 是一个包含一系列的消息任务队列。您可以不用了解内�
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/%E7%BC%93%E5%AD%98/">缓存</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/11/30/django-shu-ju-fen-ye/">Django-数据分页</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/11/30/django-shu-ju-fen-ye/">
-          
-          
-            
-          
-          当页面因需要展示的数据条目过多，导致无法在一个页面全部显示。这时，页面经常会采用分页形式进行展示，然后每页显示 20 或者 50 等条数据。分页经常在网站上随处可见，
-分页的实现不仅提高了用户体验，还是减轻数据库读取数据的压力。Django 自带名为 Paginator 的分页工具， 方便我们实现分页功能。本文就讲解如何使用 Paginator 实现分页功能。
-PaginatorPaginator
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-30 21:45" pubdate>
-              2020-11-30
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/Django/">Django</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%88%86%E9%A1%B5/">分页</a>
-            
-              <a href="/tags/%E6%A8%A1%E6%9D%BF/">模板</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/10/24/web-jwt-qian-xi/">JWT浅析</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/10/24/web-jwt-qian-xi/">
-          
-          
-            
-          
-           JWT起源
-Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于 JSON 的开放标准（(RFC 7519). 该 token 被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT 的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该 tok
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-24 20:38" pubdate>
-              2020-10-24
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/web/">web</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/JWT/">JWT</a>
             
           </div>
         

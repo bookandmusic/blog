@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://bookandmusic.github.io/"/>
-  <updated>2021-02-28T13:45:03.796Z</updated>
+  <updated>2021-03-06T07:20:52.025Z</updated>
   <id>https://bookandmusic.github.io/</id>
   
   <author>
@@ -17,11 +17,69 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>SSH安装与配置</title>
+    <link href="https://bookandmusic.github.io/2021/03/06/ssh-an-zhuang-yu-pei-zhi/"/>
+    <id>https://bookandmusic.github.io/2021/03/06/ssh-an-zhuang-yu-pei-zhi/</id>
+    <published>2021-03-06T01:56:09.000Z</published>
+    <updated>2021-03-06T07:20:52.025Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;ssh服务器&quot;&gt;&lt;a href=&quot;#ssh服务器&quot; class=&quot;headerlink&quot; title=&quot;ssh服务器&quot;&gt;&lt;/a&gt;ssh服务器&lt;/h2&gt;&lt;h3 id=&quot;安装ssh-server&quot;&gt;&lt;a href=&quot;#安装ssh-server&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>haystack+Elasticsearch实现搜索引擎</title>
+    <link href="https://bookandmusic.github.io/2021/03/02/drf-haystack-elasticsearch-shi-xian-sou-suo-yin-qing/"/>
+    <id>https://bookandmusic.github.io/2021/03/02/drf-haystack-elasticsearch-shi-xian-sou-suo-yin-qing/</id>
+    <published>2021-03-02T12:24:18.000Z</published>
+    <updated>2021-03-07T07:56:16.988Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;搜索引擎原理&quot;&gt;&lt;a href=&quot;#搜索引擎原理&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="技术" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="python" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
+    
+      <category term="DRF" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/DRF/"/>
+    
+    
+      <category term="haystack" scheme="https://bookandmusic.github.io/tags/haystack/"/>
+    
+      <category term="Elasticsearch" scheme="https://bookandmusic.github.io/tags/Elasticsearch/"/>
+    
+      <category term="DRF" scheme="https://bookandmusic.github.io/tags/DRF/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Celery异步任务</title>
     <link href="https://bookandmusic.github.io/2021/02/28/django-celery-yi-bu-ren-wu/"/>
     <id>https://bookandmusic.github.io/2021/02/28/django-celery-yi-bu-ren-wu/</id>
     <published>2021-02-28T13:39:31.000Z</published>
-    <updated>2021-02-28T13:45:03.796Z</updated>
+    <updated>2021-03-12T08:24:31.218Z</updated>
     
     <summary type="html">
     
@@ -582,75 +640,6 @@
       <category term="API" scheme="https://bookandmusic.github.io/tags/API/"/>
     
       <category term="RESTful" scheme="https://bookandmusic.github.io/tags/RESTful/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python内存管理</title>
-    <link href="https://bookandmusic.github.io/2020/07/30/python-gao-ji-nei-cun-guan-li/"/>
-    <id>https://bookandmusic.github.io/2020/07/30/python-gao-ji-nei-cun-guan-li/</id>
-    <published>2020-07-30T13:53:24.000Z</published>
-    <updated>2021-01-23T14:53:26.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;内存管理机制&quot;&gt;&lt;a href=&quot;#内存管理机制&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="技术" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-      <category term="python" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
-    
-      <category term="系统" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/%E7%B3%BB%E7%BB%9F/"/>
-    
-    
-      <category term="引用计数" scheme="https://bookandmusic.github.io/tags/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0/"/>
-    
-      <category term="分代回收" scheme="https://bookandmusic.github.io/tags/%E5%88%86%E4%BB%A3%E5%9B%9E%E6%94%B6/"/>
-    
-      <category term="标记清除" scheme="https://bookandmusic.github.io/tags/%E6%A0%87%E8%AE%B0%E6%B8%85%E9%99%A4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>DRF-序列化与反序列化</title>
-    <link href="https://bookandmusic.github.io/2020/07/08/drf-xu-lie-hua-yu-fan-xu-lie-hua/"/>
-    <id>https://bookandmusic.github.io/2020/07/08/drf-xu-lie-hua-yu-fan-xu-lie-hua/</id>
-    <published>2020-07-08T02:26:57.000Z</published>
-    <updated>2021-01-25T14:15:59.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;DRF内置的序列化类，可以对整个模型类进行序列化与反序列化，简化了繁杂的工作。&lt;/p&gt;
-&lt;h2 id=&quot;内置字段序列化&quot;&gt;&lt;a href=&quot;#内置字段序列化&quot; class=&quot;headerlink&quot; title=&quot;内置字段序列化&quot;&gt;&lt;/a&gt;内置字段序列化&lt;/h2&gt;&lt;h3
-        
-      
-    
-    </summary>
-    
-    
-      <category term="技术" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-      <category term="python" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/"/>
-    
-      <category term="DRF" scheme="https://bookandmusic.github.io/categories/%E6%8A%80%E6%9C%AF/python/DRF/"/>
-    
-    
-      <category term="序列化" scheme="https://bookandmusic.github.io/tags/%E5%BA%8F%E5%88%97%E5%8C%96/"/>
-    
-      <category term="反序列化" scheme="https://bookandmusic.github.io/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"/>
     
   </entry>
   

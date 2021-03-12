@@ -182,6 +182,122 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2019/11/04/python-mian-xiang-dui-xiang-ji-chu/">python面向对象</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2019/11/04/python-mian-xiang-dui-xiang-ji-chu/">
+          
+          
+            
+          
+          类与实例面向对象最重要的概念就是类（Class）和实例（Instance），必须牢记类是抽象的模板，比如Student类，而实例是根据类创建出来的一个个具体的“对象”，每个对象都拥有相同的方法，但各自的数据可能不同。
+仍以Student类为例，在Python中，定义类是通过class关键字：
+12class Student(object):    pass
+class后面紧接着是类名，即Stude
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-11-04 22:36" pubdate>
+              2019-11-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E5%9F%BA%E7%A1%80/">基础</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">面向对象</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/06/01/shu-ju-ku-mysql-zhong-varbinary-binary-char-varchar-yi-tong/">Mysql中varbinary、binary、char、varchar异同</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2019/06/01/shu-ju-ku-mysql-zhong-varbinary-binary-char-varchar-yi-tong/">
+          
+          
+            
+          
+          binary 与 varbinary 类型和char与varchar类型是相似的，只是他们存储的是二进制数据，也就是说他们是包含字节流而不是字符流，他们有二进制字符的集合和顺序，他们的对比，排序是基于字节的数值进行的
+binary与varbinary的最大长度和char与varchar是一样的，只不过他们是定义字节长度，而char和varchar对应的是字符长度。
+存储和取出时对尾部空格的处理
+c
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-06-01 09:12" pubdate>
+              2019-06-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/">mysql</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/varbinary/">varbinary</a>
+            
+              <a href="/tags/binary/">binary</a>
+            
+              <a href="/tags/char/">char</a>
+            
+              <a href="/tags/varchar/">varchar</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2019/06/01/shu-ju-ku-mysql-zhong-de-decimal-lei-xing-shuo-ming/">Mysql中的Decimal类型说明</a>
       </h1>
 
@@ -352,20 +468,20 @@ reverse 语法1reverse(&quot;&lt;namespace&gt;:&lt;url-name&gt;&quot;, kwargs=&#
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2019/05/25/suan-fa-shi-jian-fu-za-du-02-chang-jian-han-shu-de-shi-jian-fu-za-du/">常见函数的时间复杂度</a>
+        <a href="/2019/05/25/suan-fa-shi-jian-fu-za-du-01-o-biao-ji-fa-yu-chang-jian-shi-jian-fu-za-du/">O标记法与常见时间复杂度</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2019/05/25/suan-fa-shi-jian-fu-za-du-02-chang-jian-han-shu-de-shi-jian-fu-za-du/">
+        <a href="/2019/05/25/suan-fa-shi-jian-fu-za-du-01-o-biao-ji-fa-yu-chang-jian-shi-jian-fu-za-du/">
           
           
             
           
-          很多函数都有自己的很多方法，其中有些方法的功能类似，但是其复杂度有时却大不相同
-本节我们将引入一个新模块 timeit ，其功能是来测试一小段 Python 代码的执行速度。
-1、timeit1class timeit.Timer(stmt=&#x27;pass&#x27;, setup=&#x27;pass&#x27;,timer=&lt;timer function&gt;)
+          
+算法 : 内功心法, 是解决问题的一种思想
 
-Timer 是
+1、时间复杂度 $T(n)$由于每台机器的性能有所差别，所有其执行相同代码的时间也长短不一，故而推出一种计量方式，统计代码执行基本运算（函数调用需要看其源码的基本运算）的数量（n) 来确定一个算法的优劣，其中基本运算的循环按乘法计算，顺序结构按加法计算，分支结构取最大值。
+12345for a in range(0, 1000):     for b
         </a>
       </p>
 
@@ -408,20 +524,20 @@ Timer 是
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2019/05/25/suan-fa-shi-jian-fu-za-du-01-o-biao-ji-fa-yu-chang-jian-shi-jian-fu-za-du/">O标记法与常见时间复杂度</a>
+        <a href="/2019/05/25/suan-fa-shi-jian-fu-za-du-02-chang-jian-han-shu-de-shi-jian-fu-za-du/">常见函数的时间复杂度</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2019/05/25/suan-fa-shi-jian-fu-za-du-01-o-biao-ji-fa-yu-chang-jian-shi-jian-fu-za-du/">
+        <a href="/2019/05/25/suan-fa-shi-jian-fu-za-du-02-chang-jian-han-shu-de-shi-jian-fu-za-du/">
           
           
             
           
-          
-算法 : 内功心法, 是解决问题的一种思想
+          很多函数都有自己的很多方法，其中有些方法的功能类似，但是其复杂度有时却大不相同
+本节我们将引入一个新模块 timeit ，其功能是来测试一小段 Python 代码的执行速度。
+1、timeit1class timeit.Timer(stmt=&#x27;pass&#x27;, setup=&#x27;pass&#x27;,timer=&lt;timer function&gt;)
 
-1、时间复杂度 $T(n)$由于每台机器的性能有所差别，所有其执行相同代码的时间也长短不一，故而推出一种计量方式，统计代码执行基本运算（函数调用需要看其源码的基本运算）的数量（n) 来确定一个算法的优劣，其中基本运算的循环按乘法计算，顺序结构按加法计算，分支结构取最大值。
-12345for a in range(0, 1000):     for b
+Timer 是
         </a>
       </p>
 
@@ -758,151 +874,6 @@ Python3.5.2, 点击后面链接可直接下载，https://w
               <a href="/tags/%E5%8D%8F%E7%A8%8B/">协程</a>
             
               <a href="/tags/%E5%A4%9A%E4%BB%BB%E5%8A%A1/">多任务</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2019/05/12/books/">books</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2019/05/12/books/">
-          
-          
-            
-          
-          基础基础教程
-python基础
-
-python高级
-
-
-工具
-redis
-
-git
-
-
-webdjango
-django
-
-django-rest-framework
-
-Django项目:美多商城-前端
-
-Django项目:美多商城-后台
-
-
-flask
-flask
-
-flask项目：头条
-
-
-前端
-vue
-
-vue组件
-
-
-数据结构与算法
-用python解决数据结构与算法问题
-
-人工智能
-推荐系
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2019-05-12 20:59" pubdate>
-              2019-05-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Ebook/">Ebook</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Ebook/">Ebook</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2019/05/09/wang-luo-tong-xin-03-http-bao-wen-nei-de-http-xin-xi/">03-HTTP 报文内的 HTTP 信息</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2019/05/09/wang-luo-tong-xin-03-http-bao-wen-nei-de-http-xin-xi/">
-          
-          
-            
-          
-          HTTP 通信过程包括从客户端发往服务器端的请求以及从服务端返回客户端的响应。
-1、HTTP 报文就是一大串通信过程里经过 HTTP 处理后添加的报文。其大致分为报文首部和报文主体两块。两者由最初出现的空行（CR+LF）来划分，通常并不一定要有报文主体。
-
-2、编码提升传输速率报文主体和实体主体的差异
-报文：HTTP 通信的基本单位，8 位组字节流组成，通过 HTTP 通信传输。
-实体：请求或响应
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2019-05-09 19:56" pubdate>
-              2019-05-09
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/">网络通信</a>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/">TCP</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/HTTP/">HTTP</a>
-            
-              <a href="/tags/TCP/">TCP</a>
             
           </div>
         
