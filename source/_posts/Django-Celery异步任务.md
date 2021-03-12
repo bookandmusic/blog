@@ -79,7 +79,7 @@ django.setup()  # Django初始化
 app = Celery('tasks', broker='amqp://guest@localhost//')
 
 
-@app.task()
+@app.task
 def task_send_email(user_id, username, email):
     # 加密用户信息，生成token
     info = {'confirm': user_id}
@@ -118,11 +118,13 @@ def task_send_email(user_id, username, email):
 
 现在可以使用 `worker` 参数进行执行我们刚刚创建职程（Worker）：
 
-注意： **此时运行celery，是在Django项目下的`utils`目录中**，`-A celery实例名`，即为当前文件的名
+注意： **此时运行celery，是在Django项目下根目录中**,***此时启动文件路径必须和 调用 异步任务的导包路径一致，否则，不识别***，`-A celery实例名`，即为当前文件的名
 
 ```zsh
-$ celery -A task worker --loglevel=info
+$ celery -A utils.task worker --loglevel=info
 ```
+
+
 
 ## Celery集成django使用
 
