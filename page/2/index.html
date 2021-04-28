@@ -39,7 +39,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"bookandmusic.github.io","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"4e4c5cdb7a970cf955efdc949fbe43f5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"www.boookandmusic.cn","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"4e4c5cdb7a970cf955efdc949fbe43f5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -175,6 +175,60 @@
               <div class="col-12 col-md-10 m-auto">
                 
 
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/12/01/django-huan-cun/">Django-缓存</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/12/01/django-huan-cun/">
+          
+          
+            
+          
+          缓存简介在动态网站中,用户所有的请求,服务器都会去数据库中进行相应的增,删,查,改,渲染模板,执行业务逻辑,最后生成用户看到的页面.
+当一个网站的用户访问量很大的时候,每一次的的后台操作,都会消耗很多的服务端资源,所以必须使用缓存来减轻后端服务器的压力.
+缓存是将一些常用的数据保存到内存或者memcache中,在一定的时间内有人来访问这些数据时,则不再去执行数据库及渲染等操作,而是直接从内存或me
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-12-01 21:49" pubdate>
+              2020-12-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/python/Django/">Django</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%BC%93%E5%AD%98/">缓存</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
 
   <div class="row mx-auto index-card">
     
@@ -812,67 +866,6 @@ python的内置函数 id()可以用来查看对象的内存地址
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0/">递归函数</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/06/06/python-han-shu-ni-ming-han-shu/">python匿名函数</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/06/06/python-han-shu-ni-ming-han-shu/">
-          
-          
-            
-          
-          语法匿名函数的另一个别称是lambda表达式
-lambda表达式的语法：
-1lambda argument_list: expression
-
-argument_list是参数列表。它的结构与Python中函数(function)的参数列表是一样的。
-expression是一个关于参数的表达式。表达式中出现的参数需要在argument_list中有定义，并且表达式只能是单行的。
-
-示例123456
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-06-06 11:14" pubdate>
-              2020-06-06
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E5%9F%BA%E7%A1%80/">基础</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/lambda/">lambda</a>
-            
-              <a href="/tags/%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/">匿名函数</a>
             
           </div>
         

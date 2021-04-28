@@ -39,7 +39,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"bookandmusic.github.io","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"4e4c5cdb7a970cf955efdc949fbe43f5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"www.boookandmusic.cn","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"4e4c5cdb7a970cf955efdc949fbe43f5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -175,6 +175,57 @@
               <div class="col-12 col-md-10 m-auto">
                 
 
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/28/git-ming-ling/">Git命令</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/28/git-ming-ling/">
+          
+          
+            
+          
+          创建仓库git initgit init 命令创建一个新的 Git 仓库。它用来将已存在但还没有版本控制的项目转换成一个 Git 仓库，或者创建一个空的新仓库。大多数Git命令在未初始化的仓库中都是无法使用的，所以这就是你运行新项目的第一个命令了。
+运行 git init 命令会在你项目的根目录下创建一个新的 .git 目录，其中包含了你项目必需的所有元数据。除了 .git 目录之外，已经存在的项
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-28 09:15" pubdate>
+              2021-03-28
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+            
+              <a href="/categories/%E5%B7%A5%E5%85%B7/Git/">Git</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Git/">Git</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
 
   <div class="row mx-auto index-card">
     
@@ -390,9 +441,9 @@ Celery 是一个包含一系列的消息任务队列。您可以不用了解内�
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/JWT%E7%94%9F%E6%88%90/">JWT生成</a>
-            
               <a href="/tags/%E8%AE%A4%E8%AF%81/">认证</a>
+            
+              <a href="/tags/JWT%E7%94%9F%E6%88%90/">JWT生成</a>
             
           </div>
         
@@ -776,60 +827,6 @@ Celery 是一个包含一系列的消息任务队列。您可以不用了解内�
               <a href="/tags/itsdangerous/">itsdangerous</a>
             
               <a href="/tags/%E4%B8%B4%E6%97%B6%E8%BA%AB%E4%BB%BD%E4%BB%A4%E7%89%8C/">临时身份令牌</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/12/01/django-huan-cun/">Django-缓存</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/12/01/django-huan-cun/">
-          
-          
-            
-          
-          缓存简介在动态网站中,用户所有的请求,服务器都会去数据库中进行相应的增,删,查,改,渲染模板,执行业务逻辑,最后生成用户看到的页面.
-当一个网站的用户访问量很大的时候,每一次的的后台操作,都会消耗很多的服务端资源,所以必须使用缓存来减轻后端服务器的压力.
-缓存是将一些常用的数据保存到内存或者memcache中,在一定的时间内有人来访问这些数据时,则不再去执行数据库及渲染等操作,而是直接从内存或me
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-12-01 21:49" pubdate>
-              2020-12-01
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/Django/">Django</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E7%BC%93%E5%AD%98/">缓存</a>
             
           </div>
         

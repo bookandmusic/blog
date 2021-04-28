@@ -39,7 +39,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"bookandmusic.github.io","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"4e4c5cdb7a970cf955efdc949fbe43f5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"www.boookandmusic.cn","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"4e4c5cdb7a970cf955efdc949fbe43f5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -175,6 +175,67 @@
               <div class="col-12 col-md-10 m-auto">
                 
 
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/04/11/gong-ju-python-huan-jing-pei-zhi/">python环境配置</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/04/11/gong-ju-python-huan-jing-pei-zhi/">
+          
+          
+            
+          
+          本篇文章将介绍如何在本地搭建Python开发环境。
+Python可应用于多平台包括 Linux 和 Mac OS X。
+你可以通过终端窗口输入 “python” 命令来查看本地是否已经安装Python以及Python的安装版本。
+Python环境配置12345678910111213141516# ubuntusudo apt-get install python3-pipsudo apt-get
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-04-11 00:00" pubdate>
+              2020-04-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+            
+              <a href="/categories/%E5%B7%A5%E5%85%B7/python/">python</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/virtualenv/">virtualenv</a>
+            
+              <a href="/tags/pipenv/">pipenv</a>
+            
+              <a href="/tags/conda/">conda</a>
+            
+              <a href="/tags/%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/">虚拟环境</a>
+            
+              <a href="/tags/pip/">pip</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
 
   <div class="row mx-auto index-card">
     
@@ -393,11 +454,11 @@ djangodemo/settings.py
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E8%AE%A4%E8%AF%81/">认证</a>
-            
               <a href="/tags/JWT/">JWT</a>
             
               <a href="/tags/%E6%9D%83%E9%99%90/">权限</a>
+            
+              <a href="/tags/%E8%AE%A4%E8%AF%81/">认证</a>
             
               <a href="/tags/%E9%99%90%E6%B5%81/">限流</a>
             
@@ -422,11 +483,9 @@ djangodemo/settings.py
           
             
           
-          ¶项目框架
-
-
+          项目框架
 项目结构
- 12345678910111213141516171819202122232425.├── users│    ├── __init__.py│    ├── admin.py│    ├── apps.py│    ├── migrations│    │   └── __init__.py│    ├── models.py│    ├── tests.py│   
+ 12345678910111213141516171819202122232425.├── users│    ├── __init__.py│    ├── admin.py│    ├── apps.py│    ├── migrations│    │   └── __init__.py│    ├── models.py│    ├── tests.py│    ├─
         </a>
       </p>
 
@@ -802,59 +861,6 @@ mysql删除123sudo apt remove --upgrade mysql-* -y # 卸载mysqldpkg -l|grep ^rc
               <a href="/tags/%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">用户管理</a>
             
               <a href="/tags/mysql%E8%BD%AF%E4%BB%B6%E6%93%8D%E4%BD%9C/">mysql软件操作</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2019/11/25/python-mo-kuai-json-mo-kuai/">Json模块</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2019/11/25/python-mo-kuai-json-mo-kuai/">
-          
-          
-            
-          
-          JSON介绍JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。易于人阅读和编写。同时也易于机器解析和生成。它基于JavaScript Programming Language, Standard ECMA-262 3rd Edition - December 1999的一个子集。
-JSON 语法规则JSON是一个标记符的序列。JSON是一个序列化的对象或
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2019-11-25 14:30" pubdate>
-              2019-11-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E6%A8%A1%E5%9D%97/">模块</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Json/">Json</a>
             
           </div>
         
