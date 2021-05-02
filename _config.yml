@@ -10,9 +10,13 @@ author: bookandmusic    #作者
 language: zh-CN       #语言
 timezone: Asia/Shanghai      #网站时区
 
+# 自动生成sitemap
+baidusitemap:
+path: baidusitemap.xml
+
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://bookandmusic.github.io
+url: https://www.bookandmusic.cn/
 # url: http://bookandmusic.gitee.io/  #你的站点Url
 root: /                     #站点的根目录
 permalink: :year/:month/:day/:title/      #文章的 永久链接 格式 
