@@ -130,9 +130,9 @@
       
         <tags>
             
-            <tag> 认证 </tag>
-            
             <tag> JWT生成 </tag>
+            
+            <tag> 认证 </tag>
             
         </tags>
       
@@ -819,35 +819,6 @@
     
     
     <entry>
-      <title>XSS攻击和CSRF攻击</title>
-      <link href="2020/05/24/web-xss-gong-ji-he-csrf-gong-ji/"/>
-      <url>2020/05/24/web-xss-gong-ji-he-csrf-gong-ji/</url>
-      
-        <content type="html"><![CDATA[<h2 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h2><h3 id="1-CSRF-的基本概念、缩写、全称"><a href="#1-CSRF-的基本概念、缩写、全称" class="headerlink" title="1. CSRF 的基本概念、缩写、全称"></a>1. CSRF 的基本概念、缩写、全称</h3><p>CSRF（Cross-site request forgery）：跨站请求伪造。</p><h3 id="2-CSRF-的攻击原理"><a href="#2-CSRF-的攻击原理" class="headerlink" title="2. CSRF 的攻击原理"></a>2. CSRF 的攻击原理</h3><p><img src="https://img2018.cnblogs.com/blog/941968/201904/941968-20190422203527996-279231194.jpg" alt=""></p><p>用户是网站 A 的注册用户，且登录进去，于是网站 A 就给用户下发 cookie。</p><p>从上图可以看出，要完成一次 CSRF 攻击，受害者必须满足两个必要的条件：</p><p>（1）登录受信任网站 A，并在本地生成 Cookie。（如果用户没有登录网站 A，那么网站 B 在诱导的时候，请求网站 A 的 api 接口时，会提示你登录）</p><p>（2）在不登出 A 的情况下，访问危险网站 B（其实是利用了网站 A 的漏洞）。</p><p>我们在讲 CSRF 时，一定要把上面的两点说清楚。</p><p>温馨提示一下，cookie 保证了用户可以处于登录状态，但网站 B 其实拿不到 cookie。</p><h3 id="3-CSRF的防范措施"><a href="#3-CSRF的防范措施" class="headerlink" title="3. CSRF的防范措施"></a>3. CSRF的防范措施</h3><h4 id="1、判断请求头中的-Referer"><a href="#1、判断请求头中的-Referer" class="headerlink" title="1、判断请求头中的 Referer"></a>1、判断请求头中的 Referer</h4><p>这个字段记录的是请求的来源。比如前端<em>Vue</em>页面 <code>http://localhost:8080/#/showbooks</code>上调用了服务端<em>Django</em>的接口 <code>http://127.0.0.1:8000/books/?page=2&amp;page_size=10</code>， 那么在服务端，就可以通过 <code>Referer</code> 判断这个请求是来自哪里。</p><p>在实际应用中，这些跟业务逻辑无关的操作往往会放在拦截器中（或者说过滤器，不同技术使用的名词可能不同）。意思是说，在进入到业务逻辑之前，就应该要根据 Referer 的值来决定这个请求能不能处理。</p><p>用Flask 的话可以使用装饰器；在Django 中是叫中间件。每种技术它走的流程其实都一样。</p><p>而在 Django 可以通过以下代码获取对应信息</p><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">request.META[<span class="hljs-string">&#x27;HTTP_REFERER&#x27;</span>]  <span class="hljs-comment"># 来路</span><br><br>request.META.get(<span class="hljs-string">&quot;HTTP_USER_AGENT&quot;</span>)  <span class="hljs-comment"># 请求头</span><br></code></pre></div></td></tr></table></figure><p>在Flask中，则获取方式不同。</p><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">request.referrer  <span class="hljs-comment"># 来路</span><br><br>request.headers.get(<span class="hljs-string">&#x27;User-Agent&#x27;</span>)  <span class="hljs-comment"># 请求头</span><br></code></pre></div></td></tr></table></figure><p>但要注意的是，Referer 是浏览器设置的，在浏览器兼容性大不相同的时代中，如果存在某种浏览器允许用户修改这个值，那么 CSRF 漏洞依然存在。</p><h4 id="2、在请求参数中加入-csrf-token"><a href="#2、在请求参数中加入-csrf-token" class="headerlink" title="2、在请求参数中加入 csrf token"></a>2、在请求参数中加入 csrf token</h4><p>讨论 GET 和 POST 两种请求，对于 GET，其实也没什么需要防范的。为什么？</p><p>因为 GET 在 “约定” 当中，被认为是查询操作，查询的意思就是，你查一次，查两次，无数次，结果都不会改变（用户得到的数据可能会变），这不会对数据库造成任何影响，所以不需要加其他额外的参数。</p><blockquote><p>所以这里要提醒各位的是，尽量遵从这些约定，不要在 GET 请求中出现 /delete, /update, /edit 这种单词。把 “写” 操作放到 POST 中。</p></blockquote><p>对于 POST，服务端在创建表单的时候可以加一个隐藏字段，也是通过某种加密算法得到的。在处理请求时，验证这个字段是否合法，如果合法就继续处理，否则就认为是恶意操作。</p><figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">method</span>=<span class="hljs-string">&quot;post&quot;</span> <span class="hljs-attr">action</span>=<span class="hljs-string">&quot;/delete&quot;</span>&gt;</span><br>  <span class="hljs-comment">&lt;!-- 其他字段 --&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;hidden&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span><br></code></pre></div></td></tr></table></figure><p>这个 html 片段由服务端生成。</p><p>这的确是一个很好的防范措施，再增加一些处理的话，还能防止表单重复提交。</p><p>可是对于一些新兴网站，很多都采用了 “前后端分离开发” 的设计，或者退一步，无论是不是前后端分离，它的 HTML 可能是由 JavaScript 拼接而成，并且表单也都是异步提交。所以这个办法有它的应用场景，也有局限性。</p><h4 id="3、新增-HTTP-Header"><a href="#3、新增-HTTP-Header" class="headerlink" title="3、新增 HTTP Header"></a>3、新增 HTTP Header</h4><p>方法二和方法一有点像，本质上没有太大区别，只是使用方式上有区别。</p><p>把 token 隐藏在 http 的 head 头中。</p><p>服务端可以像获取 Referer 一样获取这个请求头，不同的是，这个 token 是由服务端生成的，所以攻击者他没办法猜。</p><p>另一篇文章讲解的——<strong><code>JWT</code></strong>——就是基于这个方式。抛开 JWT 不谈，它的工作原理是这样的:</p><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/10/image-20201010164929032.png" alt="image-20201010164929032"></p><p>解释一下这四个请求，类型都是 POST 。</p><ol><li><p>通过 <code>/login</code> 接口，用户登录，服务端传回一个 <code>access_token</code>，前端把它保存起来，可以是内存当中，如果你希望用来模拟 <code>session</code> 的话。也可以保存到 <code>localStorage</code> 中，这样可以实现自动登录。</p></li><li><p>调用 <code>/delete</code> 接口，参数是某样商品的 id。仔细看，在这个请求中，多了一个名为 <code>Authoriaztion</code> 的 <code>header</code>，它的值是之前从服务端传回来的 <code>access_token</code>，在前面加了一个 “<code>Bearer</code>”（这是和服务端的约定，约定就是说，说好了加就一起加，不加就都不加……）</p></li><li><p>调用 <code>/logout</code> 接口，同样把 <code>access_token</code> 加在 <code>header</code> 中传过去。成功之后，服务端和前端都会把这个 <code>token</code> 置为失效，或直接删除。</p></li><li><p>再调用 <code>/delete</code> 接口，由于此时已经没有 <code>access_token</code> 了，所以服务端判断该请求没权限，返回 401 。</p></li></ol><p>从头至尾，整个过程没有涉及 cookie，所以 CSRF 是不可能发生的！</p><h2 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h2><h3 id="1-XSS-的基本概念"><a href="#1-XSS-的基本概念" class="headerlink" title="1. XSS 的基本概念"></a>1. XSS 的基本概念</h3><p>XSS（Cross Site Scripting）：跨域脚本攻击。</p><h3 id="2-XSS-的攻击原理"><a href="#2-XSS-的攻击原理" class="headerlink" title="2. XSS 的攻击原理"></a>2. XSS 的攻击原理</h3><p>XSS 攻击的核心原理是：不需要你做任何的登录认证，它会通过合法的操作（比如在 url 中输入、在评论框中输入），向你的页面注入脚本（可能是 js、hmtl 代码块等）。</p><p>最后导致的结果可能是：</p><p>盗用 Cookie 破坏页面的正常结构，插入广告等恶意内容 D-doss 攻击</p><h3 id="3-XSS-的攻击方式"><a href="#3-XSS-的攻击方式" class="headerlink" title="3. XSS 的攻击方式"></a>3. XSS 的攻击方式</h3><h4 id="1、反射型"><a href="#1、反射型" class="headerlink" title="1、反射型"></a>1、反射型</h4><p>发出请求时，XSS 代码出现在 url 中，作为输入提交到服务器端，服务器端解析后响应，XSS 代码随响应内容一起传回给浏览器，最后浏览器解析执行 XSS 代码。这个过程像一次反射，所以叫反射型 XSS。</p><h4 id="2、存储型存"><a href="#2、存储型存" class="headerlink" title="2、存储型存"></a>2、存储型存</h4><p>储型 XSS 和反射型 XSS 的差别在于，提交的代码会存储在服务器端（数据库、内存、文件系统等），下次请求时目标页面时不用再提交 XSS 代码。</p><h3 id="4-XSS-的防范措施"><a href="#4-XSS-的防范措施" class="headerlink" title="4. XSS 的防范措施"></a>4. XSS 的防范措施</h3><p>XSS 的防范措施主要有三个：</p><h4 id="1、编码"><a href="#1、编码" class="headerlink" title="1、编码"></a>1、编码</h4><p>对用户输入的数据进行<code>HTML Entity</code> 编码。</p><p>比如说这段代码：</p><figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js">&lt;script&gt;alert(<span class="hljs-number">1</span>)&lt;/script&gt;<br></code></pre></div></td></tr></table></figure><p>若不进行任何处理，则浏览器会执行 <code>alert</code> 的 js 操作，实现 <code>XSS</code> 注入。</p><p>进行编码处理之后，在浏览器中的显示结果就是 <code>&lt;script&gt;alert(1)&lt;/script&gt;</code>，实现了将 <code>$var</code> 作为纯文本进行输出，且不引起 <code>JavaScript</code> 的执行。</p><h4 id="2、过滤"><a href="#2、过滤" class="headerlink" title="2、过滤"></a>2、过滤</h4><p>移除用户输入的和事件相关的属性。如 <code>onerror</code> 可以自动触发攻击，还有 <code>onclick</code> 等。（总而言是，过滤掉一些不安全的内容）移除用户输入的 <code>Style</code> 节点、<code>Script</code> 节点、<code>Iframe</code> 节点。（尤其是 <code>Script</code> 节点，它可是支持跨域的，一定要移除）。</p><h4 id="3、校正"><a href="#3、校正" class="headerlink" title="3、校正"></a>3、校正</h4><p>避免直接对 <code>HTML Entity</code> 进行解码。使用 <code>DOM Parse</code> 转换，校正不配对的 <code>DOM</code> 标签。备注：我们应该去了解一下<code>DOM Parse</code>这个概念，它的作用是把文本解析成 <code>DOM</code> 结构。</p><p>比较常用的做法是，通过第一步的编码转成文本，然后第三步转成 DOM 对象，然后经过第二步的过滤。</p><h2 id="CSRF-和-XSS-的区别"><a href="#CSRF-和-XSS-的区别" class="headerlink" title="CSRF 和 XSS 的区别"></a>CSRF 和 XSS 的区别</h2><h3 id="区别一："><a href="#区别一：" class="headerlink" title="区别一："></a>区别一：</h3><ul><li>CSRF：需要用户先登录网站 A，获取 cookie。</li><li>XSS：不需要登录。</li></ul><h3 id="区别二：（原理的区别）"><a href="#区别二：（原理的区别）" class="headerlink" title="区别二：（原理的区别）"></a>区别二：（原理的区别）</h3><ul><li><p>CSRF：是利用网站 A 本身的漏洞，去请求网站 A 的 api。</p></li><li><p>XSS：是向网站 A 注入 JS 代码，然后执行 JS 里的代码，篡改网站 A 的内容。</p></li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 技术 </category>
-          
-          <category> python </category>
-          
-          <category> web </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> CSRF </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>HTTP状态码</title>
       <link href="2020/05/24/web-http-xie-yi-zhi-http-zhuang-tai-ma-xiang-jie/"/>
       <url>2020/05/24/web-http-xie-yi-zhi-http-zhuang-tai-ma-xiang-jie/</url>
@@ -871,6 +842,35 @@
             <tag> 状态码 </tag>
             
             <tag> HTTP </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>XSS攻击和CSRF攻击</title>
+      <link href="2020/05/24/web-xss-gong-ji-he-csrf-gong-ji/"/>
+      <url>2020/05/24/web-xss-gong-ji-he-csrf-gong-ji/</url>
+      
+        <content type="html"><![CDATA[<h2 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h2><h3 id="1-CSRF-的基本概念、缩写、全称"><a href="#1-CSRF-的基本概念、缩写、全称" class="headerlink" title="1. CSRF 的基本概念、缩写、全称"></a>1. CSRF 的基本概念、缩写、全称</h3><p>CSRF（Cross-site request forgery）：跨站请求伪造。</p><h3 id="2-CSRF-的攻击原理"><a href="#2-CSRF-的攻击原理" class="headerlink" title="2. CSRF 的攻击原理"></a>2. CSRF 的攻击原理</h3><p><img src="https://img2018.cnblogs.com/blog/941968/201904/941968-20190422203527996-279231194.jpg" alt=""></p><p>用户是网站 A 的注册用户，且登录进去，于是网站 A 就给用户下发 cookie。</p><p>从上图可以看出，要完成一次 CSRF 攻击，受害者必须满足两个必要的条件：</p><p>（1）登录受信任网站 A，并在本地生成 Cookie。（如果用户没有登录网站 A，那么网站 B 在诱导的时候，请求网站 A 的 api 接口时，会提示你登录）</p><p>（2）在不登出 A 的情况下，访问危险网站 B（其实是利用了网站 A 的漏洞）。</p><p>我们在讲 CSRF 时，一定要把上面的两点说清楚。</p><p>温馨提示一下，cookie 保证了用户可以处于登录状态，但网站 B 其实拿不到 cookie。</p><h3 id="3-CSRF的防范措施"><a href="#3-CSRF的防范措施" class="headerlink" title="3. CSRF的防范措施"></a>3. CSRF的防范措施</h3><h4 id="1、判断请求头中的-Referer"><a href="#1、判断请求头中的-Referer" class="headerlink" title="1、判断请求头中的 Referer"></a>1、判断请求头中的 Referer</h4><p>这个字段记录的是请求的来源。比如前端<em>Vue</em>页面 <code>http://localhost:8080/#/showbooks</code>上调用了服务端<em>Django</em>的接口 <code>http://127.0.0.1:8000/books/?page=2&amp;page_size=10</code>， 那么在服务端，就可以通过 <code>Referer</code> 判断这个请求是来自哪里。</p><p>在实际应用中，这些跟业务逻辑无关的操作往往会放在拦截器中（或者说过滤器，不同技术使用的名词可能不同）。意思是说，在进入到业务逻辑之前，就应该要根据 Referer 的值来决定这个请求能不能处理。</p><p>用Flask 的话可以使用装饰器；在Django 中是叫中间件。每种技术它走的流程其实都一样。</p><p>而在 Django 可以通过以下代码获取对应信息</p><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">request.META[<span class="hljs-string">&#x27;HTTP_REFERER&#x27;</span>]  <span class="hljs-comment"># 来路</span><br><br>request.META.get(<span class="hljs-string">&quot;HTTP_USER_AGENT&quot;</span>)  <span class="hljs-comment"># 请求头</span><br></code></pre></div></td></tr></table></figure><p>在Flask中，则获取方式不同。</p><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">request.referrer  <span class="hljs-comment"># 来路</span><br><br>request.headers.get(<span class="hljs-string">&#x27;User-Agent&#x27;</span>)  <span class="hljs-comment"># 请求头</span><br></code></pre></div></td></tr></table></figure><p>但要注意的是，Referer 是浏览器设置的，在浏览器兼容性大不相同的时代中，如果存在某种浏览器允许用户修改这个值，那么 CSRF 漏洞依然存在。</p><h4 id="2、在请求参数中加入-csrf-token"><a href="#2、在请求参数中加入-csrf-token" class="headerlink" title="2、在请求参数中加入 csrf token"></a>2、在请求参数中加入 csrf token</h4><p>讨论 GET 和 POST 两种请求，对于 GET，其实也没什么需要防范的。为什么？</p><p>因为 GET 在 “约定” 当中，被认为是查询操作，查询的意思就是，你查一次，查两次，无数次，结果都不会改变（用户得到的数据可能会变），这不会对数据库造成任何影响，所以不需要加其他额外的参数。</p><blockquote><p>所以这里要提醒各位的是，尽量遵从这些约定，不要在 GET 请求中出现 /delete, /update, /edit 这种单词。把 “写” 操作放到 POST 中。</p></blockquote><p>对于 POST，服务端在创建表单的时候可以加一个隐藏字段，也是通过某种加密算法得到的。在处理请求时，验证这个字段是否合法，如果合法就继续处理，否则就认为是恶意操作。</p><figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">method</span>=<span class="hljs-string">&quot;post&quot;</span> <span class="hljs-attr">action</span>=<span class="hljs-string">&quot;/delete&quot;</span>&gt;</span><br>  <span class="hljs-comment">&lt;!-- 其他字段 --&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;hidden&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span><br></code></pre></div></td></tr></table></figure><p>这个 html 片段由服务端生成。</p><p>这的确是一个很好的防范措施，再增加一些处理的话，还能防止表单重复提交。</p><p>可是对于一些新兴网站，很多都采用了 “前后端分离开发” 的设计，或者退一步，无论是不是前后端分离，它的 HTML 可能是由 JavaScript 拼接而成，并且表单也都是异步提交。所以这个办法有它的应用场景，也有局限性。</p><h4 id="3、新增-HTTP-Header"><a href="#3、新增-HTTP-Header" class="headerlink" title="3、新增 HTTP Header"></a>3、新增 HTTP Header</h4><p>方法二和方法一有点像，本质上没有太大区别，只是使用方式上有区别。</p><p>把 token 隐藏在 http 的 head 头中。</p><p>服务端可以像获取 Referer 一样获取这个请求头，不同的是，这个 token 是由服务端生成的，所以攻击者他没办法猜。</p><p>另一篇文章讲解的——<strong><code>JWT</code></strong>——就是基于这个方式。抛开 JWT 不谈，它的工作原理是这样的:</p><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/10/image-20201010164929032.png" alt="image-20201010164929032"></p><p>解释一下这四个请求，类型都是 POST 。</p><ol><li><p>通过 <code>/login</code> 接口，用户登录，服务端传回一个 <code>access_token</code>，前端把它保存起来，可以是内存当中，如果你希望用来模拟 <code>session</code> 的话。也可以保存到 <code>localStorage</code> 中，这样可以实现自动登录。</p></li><li><p>调用 <code>/delete</code> 接口，参数是某样商品的 id。仔细看，在这个请求中，多了一个名为 <code>Authoriaztion</code> 的 <code>header</code>，它的值是之前从服务端传回来的 <code>access_token</code>，在前面加了一个 “<code>Bearer</code>”（这是和服务端的约定，约定就是说，说好了加就一起加，不加就都不加……）</p></li><li><p>调用 <code>/logout</code> 接口，同样把 <code>access_token</code> 加在 <code>header</code> 中传过去。成功之后，服务端和前端都会把这个 <code>token</code> 置为失效，或直接删除。</p></li><li><p>再调用 <code>/delete</code> 接口，由于此时已经没有 <code>access_token</code> 了，所以服务端判断该请求没权限，返回 401 。</p></li></ol><p>从头至尾，整个过程没有涉及 cookie，所以 CSRF 是不可能发生的！</p><h2 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h2><h3 id="1-XSS-的基本概念"><a href="#1-XSS-的基本概念" class="headerlink" title="1. XSS 的基本概念"></a>1. XSS 的基本概念</h3><p>XSS（Cross Site Scripting）：跨域脚本攻击。</p><h3 id="2-XSS-的攻击原理"><a href="#2-XSS-的攻击原理" class="headerlink" title="2. XSS 的攻击原理"></a>2. XSS 的攻击原理</h3><p>XSS 攻击的核心原理是：不需要你做任何的登录认证，它会通过合法的操作（比如在 url 中输入、在评论框中输入），向你的页面注入脚本（可能是 js、hmtl 代码块等）。</p><p>最后导致的结果可能是：</p><p>盗用 Cookie 破坏页面的正常结构，插入广告等恶意内容 D-doss 攻击</p><h3 id="3-XSS-的攻击方式"><a href="#3-XSS-的攻击方式" class="headerlink" title="3. XSS 的攻击方式"></a>3. XSS 的攻击方式</h3><h4 id="1、反射型"><a href="#1、反射型" class="headerlink" title="1、反射型"></a>1、反射型</h4><p>发出请求时，XSS 代码出现在 url 中，作为输入提交到服务器端，服务器端解析后响应，XSS 代码随响应内容一起传回给浏览器，最后浏览器解析执行 XSS 代码。这个过程像一次反射，所以叫反射型 XSS。</p><h4 id="2、存储型存"><a href="#2、存储型存" class="headerlink" title="2、存储型存"></a>2、存储型存</h4><p>储型 XSS 和反射型 XSS 的差别在于，提交的代码会存储在服务器端（数据库、内存、文件系统等），下次请求时目标页面时不用再提交 XSS 代码。</p><h3 id="4-XSS-的防范措施"><a href="#4-XSS-的防范措施" class="headerlink" title="4. XSS 的防范措施"></a>4. XSS 的防范措施</h3><p>XSS 的防范措施主要有三个：</p><h4 id="1、编码"><a href="#1、编码" class="headerlink" title="1、编码"></a>1、编码</h4><p>对用户输入的数据进行<code>HTML Entity</code> 编码。</p><p>比如说这段代码：</p><figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js">&lt;script&gt;alert(<span class="hljs-number">1</span>)&lt;/script&gt;<br></code></pre></div></td></tr></table></figure><p>若不进行任何处理，则浏览器会执行 <code>alert</code> 的 js 操作，实现 <code>XSS</code> 注入。</p><p>进行编码处理之后，在浏览器中的显示结果就是 <code>&lt;script&gt;alert(1)&lt;/script&gt;</code>，实现了将 <code>$var</code> 作为纯文本进行输出，且不引起 <code>JavaScript</code> 的执行。</p><h4 id="2、过滤"><a href="#2、过滤" class="headerlink" title="2、过滤"></a>2、过滤</h4><p>移除用户输入的和事件相关的属性。如 <code>onerror</code> 可以自动触发攻击，还有 <code>onclick</code> 等。（总而言是，过滤掉一些不安全的内容）移除用户输入的 <code>Style</code> 节点、<code>Script</code> 节点、<code>Iframe</code> 节点。（尤其是 <code>Script</code> 节点，它可是支持跨域的，一定要移除）。</p><h4 id="3、校正"><a href="#3、校正" class="headerlink" title="3、校正"></a>3、校正</h4><p>避免直接对 <code>HTML Entity</code> 进行解码。使用 <code>DOM Parse</code> 转换，校正不配对的 <code>DOM</code> 标签。备注：我们应该去了解一下<code>DOM Parse</code>这个概念，它的作用是把文本解析成 <code>DOM</code> 结构。</p><p>比较常用的做法是，通过第一步的编码转成文本，然后第三步转成 DOM 对象，然后经过第二步的过滤。</p><h2 id="CSRF-和-XSS-的区别"><a href="#CSRF-和-XSS-的区别" class="headerlink" title="CSRF 和 XSS 的区别"></a>CSRF 和 XSS 的区别</h2><h3 id="区别一："><a href="#区别一：" class="headerlink" title="区别一："></a>区别一：</h3><ul><li>CSRF：需要用户先登录网站 A，获取 cookie。</li><li>XSS：不需要登录。</li></ul><h3 id="区别二：（原理的区别）"><a href="#区别二：（原理的区别）" class="headerlink" title="区别二：（原理的区别）"></a>区别二：（原理的区别）</h3><ul><li><p>CSRF：是利用网站 A 本身的漏洞，去请求网站 A 的 api。</p></li><li><p>XSS：是向网站 A 注入 JS 代码，然后执行 JS 里的代码，篡改网站 A 的内容。</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+          <category> python </category>
+          
+          <category> web </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CSRF </tag>
             
         </tags>
       
@@ -1242,11 +1242,11 @@
       
         <tags>
             
+            <tag> 认证 </tag>
+            
             <tag> JWT </tag>
             
             <tag> 权限 </tag>
-            
-            <tag> 认证 </tag>
             
             <tag> 限流 </tag>
             
