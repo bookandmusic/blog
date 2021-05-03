@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.bookandmusic.cn/"/>
-  <updated>2021-03-28T14:48:53.865Z</updated>
+  <updated>2021-05-03T13:30:50.021Z</updated>
   <id>https://www.bookandmusic.cn/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>DRF-图片上传到七牛云</title>
+    <link href="https://www.bookandmusic.cn/2021/05/03/drf-tu-pian-shang-chuan-dao-qi-niu-yun/"/>
+    <id>https://www.bookandmusic.cn/2021/05/03/drf-tu-pian-shang-chuan-dao-qi-niu-yun/</id>
+    <published>2021-05-03T12:18:19.000Z</published>
+    <updated>2021-05-03T13:30:50.021Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;流程分析&quot;&gt;&lt;a href=&quot;#流程分析&quot; class=&quot;headerlink&quot; title=&quot;流程分析&quot;&gt;&lt;/a&gt;流程分析&lt;/h2&gt;&lt;p&gt;在前后端分离开发中，当上传图片时，一般不会直接把图片等文件资源，直接传到django服务器,
+        
+      
+    
+    </summary>
+    
+    
+      <category term="技术" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="python" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/python/"/>
+    
+      <category term="DRF" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/python/DRF/"/>
+    
+    
+      <category term="element-ui" scheme="https://www.bookandmusic.cn/tags/element-ui/"/>
+    
+      <category term="axios" scheme="https://www.bookandmusic.cn/tags/axios/"/>
+    
+  </entry>
   
   <entry>
     <title>Git命令</title>
@@ -600,42 +633,6 @@
       <category term="TCP" scheme="https://www.bookandmusic.cn/tags/TCP/"/>
     
       <category term="WEB Server" scheme="https://www.bookandmusic.cn/tags/WEB-Server/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>网络通信-长连接与短连接</title>
-    <link href="https://www.bookandmusic.cn/2020/08/16/wang-luo-tong-xin-chang-lian-jie-yu-duan-lian-jie/"/>
-    <id>https://www.bookandmusic.cn/2020/08/16/wang-luo-tong-xin-chang-lian-jie-yu-duan-lian-jie/</id>
-    <published>2020-08-16T10:27:27.000Z</published>
-    <updated>2021-01-25T02:59:18.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;简单介绍长连接与短连接的优缺点。&lt;/p&gt;
-&lt;h2 id=&quot;1-短连接：&quot;&gt;&lt;a href=&quot;#1-短连接：&quot; class=&quot;headerlink&quot; title=&quot;1. 短连接：&quot;&gt;&lt;/a&gt;1. 短连接：&lt;/h2&gt;&lt;p&gt;&lt;img
-        
-      
-    
-    </summary>
-    
-    
-      <category term="技术" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-      <category term="网络通信" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/"/>
-    
-      <category term="TCP" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/"/>
-    
-    
-      <category term="TCP" scheme="https://www.bookandmusic.cn/tags/TCP/"/>
-    
-      <category term="短连接" scheme="https://www.bookandmusic.cn/tags/%E7%9F%AD%E8%BF%9E%E6%8E%A5/"/>
-    
-      <category term="长连接" scheme="https://www.bookandmusic.cn/tags/%E9%95%BF%E8%BF%9E%E6%8E%A5/"/>
     
   </entry>
   
