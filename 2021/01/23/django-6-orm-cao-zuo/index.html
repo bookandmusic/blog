@@ -238,7 +238,7 @@
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">aggregate(别名 = 聚合函数名(<span class="hljs-string">&quot;属性名称&quot;</span>))<br></code></pre></div></td></tr></table></figure>
 <ol>
 <li><p>查询所有订单的总价</p>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">Order.objects..aggregate(<span class="hljs-built_in">sum</span>=Sum(<span class="hljs-string">&quot;total_amount&quot;</span>))<br></code></pre></div></td></tr></table></figure></li>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">Order.objects.aggregate(<span class="hljs-built_in">sum</span>=Sum(<span class="hljs-string">&quot;total_amount&quot;</span>))<br></code></pre></div></td></tr></table></figure></li>
 <li><p>查询所有商品的平均价格</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">Goods.objects.aggregate(avg=Avg(<span class="hljs-string">&quot;price&quot;</span>))<br></code></pre></div></td></tr></table></figure>
 <h3 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h3></li>

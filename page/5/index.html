@@ -182,6 +182,60 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2020/02/26/shu-ju-ku-mysql-zhu-jian-yue-shu-he-wei-yi-xing-yue-shu-de-qu-bie/">主键约束和唯一性约束的区别</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/02/26/shu-ju-ku-mysql-zhu-jian-yue-shu-he-wei-yi-xing-yue-shu-de-qu-bie/">
+          
+          
+            
+          
+          主键必然是唯一且不为空，但是唯一不一定是主键，而且主键只能有一个，但是唯一约束仅仅是为了保持某些列具有唯一性而已。所以可以有多列一张表里只能有一个主键约束，可以有多个唯一约束主键约束的字段不能为null，而唯一约束的字段可以为null值
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-02-26 08:33" pubdate>
+              2020-02-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/">mysql</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E4%B8%BB%E9%94%AE%E7%BA%A6%E6%9D%9F/">主键约束</a>
+            
+              <a href="/tags/%E5%94%AF%E4%B8%80%E7%BA%A6%E6%9D%9F/">唯一约束</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2019/12/12/shu-ju-ku-mysql-cao-zuo/">Mysql操作</a>
       </h1>
 
@@ -690,23 +744,25 @@ Timer 是
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2019/05/25/gong-ju-win10-pyhton2-he-3-gong-cun/">win10 python2和python3共存问题</a>
+        <a href="/2019/05/25/python-han-shu-nei-zhi-han-shu/">python内置函数</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2019/05/25/gong-ju-win10-pyhton2-he-3-gong-cun/">
+        <a href="/2019/05/25/python-han-shu-nei-zhi-han-shu/">
           
           
             
           
-          
-特别说明，本文是在 Windows64 位系统下进行的，32 位系统请下载相应版本的安装包，安装方法类似。
+          python内置函数
+Python 内置函数就是 python 标准库里（语言自身携带的）函数（公共函数）。
 
-下载python安装包进入 python 官网，链接 https://www.python.org/
-选择 Downloads—&gt;Windows，点击进入就可以看到寻找想要的 python 版本
+那么，接下来就来谈一谈 python 里的内置函数
+1、abs()
+此函数返回数字的绝对值。
 
-本文选择的是：
-Python3.5.2, 点击后面链接可直接下载，https://w
+1234a = 5b = -10print(abs(a))  #输出3print(abs(b))  #输出5
+2、all()
+此函数用于判断给定的可迭代参数 iterable 中的所有元素是否
         </a>
       </p>
 
@@ -723,9 +779,11 @@ Python3.5.2, 点击后面链接可直接下载，https://w
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+              <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
             
-              <a href="/categories/%E5%B7%A5%E5%85%B7/python/">python</a>
+              <a href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E5%9F%BA%E7%A1%80/">基础</a>
             
           </div>
         
@@ -733,7 +791,7 @@ Python3.5.2, 点击后面链接可直接下载，https://w
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Windows/">Windows</a>
+              <a href="/tags/%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0/">内置函数</a>
             
           </div>
         
@@ -791,67 +849,6 @@ win10 系统电脑一台
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/">开机自启</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2019/05/25/python-han-shu-nei-zhi-han-shu/">python内置函数</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2019/05/25/python-han-shu-nei-zhi-han-shu/">
-          
-          
-            
-          
-          python内置函数
-Python 内置函数就是 python 标准库里（语言自身携带的）函数（公共函数）。
-
-那么，接下来就来谈一谈 python 里的内置函数
-1、abs()
-此函数返回数字的绝对值。
-
-1234a = 5b = -10print(abs(a))  #输出3print(abs(b))  #输出5
-2、all()
-此函数用于判断给定的可迭代参数 iterable 中的所有元素是否
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2019-05-25 10:45" pubdate>
-              2019-05-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
-            
-              <a href="/categories/%E6%8A%80%E6%9C%AF/python/%E5%9F%BA%E7%A1%80/">基础</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0/">内置函数</a>
             
           </div>
         

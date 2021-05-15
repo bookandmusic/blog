@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.bookandmusic.cn/"/>
-  <updated>2021-05-03T13:30:50.021Z</updated>
+  <updated>2021-05-15T12:42:33.356Z</updated>
   <id>https://www.bookandmusic.cn/</id>
   
   <author>
@@ -15,6 +15,42 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python自动化测试</title>
+    <link href="https://www.bookandmusic.cn/2021/05/15/python-zi-dong-hua-ce-shi/"/>
+    <id>https://www.bookandmusic.cn/2021/05/15/python-zi-dong-hua-ce-shi/</id>
+    <published>2021-05-15T10:48:25.000Z</published>
+    <updated>2021-05-15T12:42:33.356Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;  写好了一个项目之后，要确定各个模块是不是稳定运行，有没有bug，比如一个项目有100个路由，可以手动一个一个URL的输入，查看响应有没有毛病，但这样不符合程序员的逼格。&lt;br&gt; 
+        
+      
+    
+    </summary>
+    
+    
+      <category term="技术" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="python" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/python/"/>
+    
+      <category term="模块" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/python/%E6%A8%A1%E5%9D%97/"/>
+    
+    
+      <category term="unittest" scheme="https://www.bookandmusic.cn/tags/unittest/"/>
+    
+      <category term="django test" scheme="https://www.bookandmusic.cn/tags/django-test/"/>
+    
+      <category term="mock" scheme="https://www.bookandmusic.cn/tags/mock/"/>
+    
+  </entry>
   
   <entry>
     <title>DRF-图片上传到七牛云</title>
@@ -216,7 +252,7 @@
     <link href="https://www.bookandmusic.cn/2021/01/23/django-6-orm-cao-zuo/"/>
     <id>https://www.bookandmusic.cn/2021/01/23/django-6-orm-cao-zuo/</id>
     <published>2021-01-23T14:37:39.000Z</published>
-    <updated>2021-05-12T11:42:40.299Z</updated>
+    <updated>2021-05-13T06:05:24.688Z</updated>
     
     <summary type="html">
     
@@ -606,41 +642,6 @@
       <category term="WEB Server" scheme="https://www.bookandmusic.cn/tags/WEB-Server/"/>
     
       <category term="高并发" scheme="https://www.bookandmusic.cn/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>网络通信-简单WEB服务器</title>
-    <link href="https://www.bookandmusic.cn/2020/08/16/wang-luo-tong-xin-simple-web-server/"/>
-    <id>https://www.bookandmusic.cn/2020/08/16/wang-luo-tong-xin-simple-web-server/</id>
-    <published>2020-08-16T13:23:36.000Z</published>
-    <updated>2021-01-25T02:59:22.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本篇文章介绍如何实现一个简单 的Web Server 以及对应的问题解决方案。&lt;/p&gt;
-&lt;h2 id=&quot;一、如何使用Python实现一个返回固定页面的Web-Server&quot;&gt;&lt;a href=&quot;#一、如何使用Python实现一个返回固定页面的Web-Server&quot; class=&quot;headerlink&quot; title=&quot;一、如何使用Python实现一个返回固定页面的Web Server&quot;&gt;&lt;/a&gt;一、如何使用Python实现一个返回固定页面的Web Server&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;使用socket创建一个TCP Server&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;接受来自浏览器的TCP链接，并接收HTTP请求&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;返回固定响应数据给浏览器&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-    
-    </summary>
-    
-    
-      <category term="技术" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-      <category term="网络通信" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/"/>
-    
-      <category term="TCP" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/"/>
-    
-    
-      <category term="TCP" scheme="https://www.bookandmusic.cn/tags/TCP/"/>
-    
-      <category term="WEB Server" scheme="https://www.bookandmusic.cn/tags/WEB-Server/"/>
     
   </entry>
   
