@@ -97,7 +97,7 @@ aggregate(别名 = 聚合函数名("属性名称"))
 1.  查询所有订单的总价
 
     ```python
-    Order.objects..aggregate(sum=Sum("total_amount"))
+    Order.objects.aggregate(sum=Sum("total_amount"))
     ```
 
 2.  查询所有商品的平均价格
