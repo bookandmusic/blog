@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.bookandmusic.cn/"/>
-  <updated>2021-05-15T12:42:33.356Z</updated>
+  <updated>2021-06-08T16:33:00.777Z</updated>
   <id>https://www.bookandmusic.cn/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Flask图片上传与展示</title>
+    <link href="https://www.bookandmusic.cn/2021/06/09/flask-tu-pian-shang-chuan-yu-zhan-shi/"/>
+    <id>https://www.bookandmusic.cn/2021/06/09/flask-tu-pian-shang-chuan-yu-zhan-shi/</id>
+    <published>2021-06-08T16:00:28.000Z</published>
+    <updated>2021-06-08T16:33:00.777Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;项目配置&quot;&gt;&lt;a href=&quot;#项目配置&quot; class=&quot;headerlink&quot; title=&quot;项目配置&quot;&gt;&lt;/a&gt;项目配置&lt;/h2&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter
+        
+      
+    
+    </summary>
+    
+    
+      <category term="技术" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="python" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/python/"/>
+    
+      <category term="Flask" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/python/Flask/"/>
+    
+    
+      <category term="图片上传和展示" scheme="https://www.bookandmusic.cn/tags/%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E5%92%8C%E5%B1%95%E7%A4%BA/"/>
+    
+  </entry>
   
   <entry>
     <title>python自动化测试</title>
@@ -606,42 +637,6 @@
       <category term="deepin" scheme="https://www.bookandmusic.cn/tags/deepin/"/>
     
       <category term="nvidia" scheme="https://www.bookandmusic.cn/tags/nvidia/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>网络通信-多种方式实现并发 Web Server</title>
-    <link href="https://www.bookandmusic.cn/2020/08/16/wang-luo-tong-xin-duo-chong-fang-shi-shi-xian-bing-fa-web-server/"/>
-    <id>https://www.bookandmusic.cn/2020/08/16/wang-luo-tong-xin-duo-chong-fang-shi-shi-xian-bing-fa-web-server/</id>
-    <published>2020-08-16T13:40:36.000Z</published>
-    <updated>2021-01-25T02:59:13.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;下面我们使用 &lt;code&gt;Python&lt;/code&gt; 来实现并发的 &lt;code&gt;Web Server&lt;/code&gt;，其中采用了多进程、多线程、协程、单进程单线程非阻塞、&lt;code&gt;select&lt;/code&gt;、&lt;code&gt;epoll&lt;/code&gt;的方式。&lt;/p&gt;
-&lt;h2
-        
-      
-    
-    </summary>
-    
-    
-      <category term="技术" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-      <category term="网络通信" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/"/>
-    
-      <category term="TCP" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/"/>
-    
-    
-      <category term="TCP" scheme="https://www.bookandmusic.cn/tags/TCP/"/>
-    
-      <category term="WEB Server" scheme="https://www.bookandmusic.cn/tags/WEB-Server/"/>
-    
-      <category term="高并发" scheme="https://www.bookandmusic.cn/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/"/>
     
   </entry>
   
