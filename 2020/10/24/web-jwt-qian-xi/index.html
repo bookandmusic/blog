@@ -252,16 +252,16 @@
 </ul>
 <p>这个 token 必须要在每次请求时传递给服务端，它应该保存在请求头里， 另外，服务端要支持<code>CORS(跨来源资源共享)</code>策略，一般我们在服务端这么做就可以了<code>Access-Control-Allow-Origin: *</code>。</p>
 <p>那么我们现在回到 JWT 的主题上。</p>
-<h2 id="JWT类别"><a href="#JWT类别" class="headerlink" title="JWT类别"></a>JWT类别</h2><p>网上大多数介绍JWT的文章实际介绍的都是<code>JWS(JSON Web Signature)</code>,也往往导致了人们对于JWT的误解，但是JWT并不等于JWS，JWS只是JWT的一种实现，除了JWS外，<code>JWE(JSON Web Encryption)</code>也是JWT的一种实现。</p>
+<h2 id="JWT解析"><a href="#JWT解析" class="headerlink" title="JWT解析"></a>JWT解析</h2><p>网上大多数介绍JWT的文章实际介绍的都是<code>JWS(JSON Web Signature)</code>,也往往导致了人们对于JWT的误解，但是JWT并不等于JWS，JWS只是JWT的一种实现，除了JWS外，<code>JWE(JSON Web Encryption)</code>也是JWT的一种实现。</p>
 <p>下面就来详细介绍一下JWT与JWE的两种实现方式：</p>
-<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/06/7P3VBB.tif" srcset="/img/loading.gif" alt="7P3VBB"></p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/06/7P3VBB.png" srcset="/img/loading.gif" alt="7P3VBB"></p>
 <h3 id="JSON-Web-Signature-JWS"><a href="#JSON-Web-Signature-JWS" class="headerlink" title="JSON Web Signature(JWS)"></a>JSON Web Signature(JWS)</h3><p>JSON Web Signature是一个有着简单的统一表达形式的字符串：由三段信息构成的，将这三段信息文本用<code>.</code>链接一起就构成了 Jwt 字符串。</p>
 <ul>
 <li>第一部分我们称它为头部（header)</li>
 <li>第二部分我们称其为载荷（payload, 类似于飞机上承载的物品)</li>
 <li>第三部分是签证（signature)</li>
 </ul>
-<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/06/O1Klg9.tif" srcset="/img/loading.gif" alt="O1Klg9"></p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/06/O1Klg9.png" srcset="/img/loading.gif" alt="O1Klg9"></p>
 <p>然后将每一部分进行<code>base64</code>编码之后，就像这样:</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ<br></code></pre></div></td></tr></table></figure>
 <h4 id="header（头信息）"><a href="#header（头信息）" class="headerlink" title="header（头信息）"></a>header（头信息）</h4><p>jwt 的头部承载两部分信息：</p>
@@ -315,7 +315,7 @@
 <p><strong>注意：secret 是保存在服务器端的，jwt 的签发生成也是在服务器端的，secret 就是用来进行 jwt 的签发和 jwt 的验证，所以，它就是你服务端的私钥，在任何场景都不应该流露出去。一旦客户端得知这个 secret, 那就意味着客户端是可以自我签发 jwt 了。</strong></p>
 </blockquote>
 <h3 id="JSON-Web-Encryption-JWE"><a href="#JSON-Web-Encryption-JWE" class="headerlink" title="JSON Web Encryption(JWE)"></a>JSON Web Encryption(JWE)</h3><p>相对于JWS，JWE则同时保证了安全性与数据完整性。<br>JWE由五部分组成：</p>
-<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/06/LAPjcz.tif" srcset="/img/loading.gif" alt="LAPjcz"></p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/06/LAPjcz.png" srcset="/img/loading.gif" alt="LAPjcz"></p>
 <p>我们来看看一个标准的JWE过程是怎样的：</p>
 <ul>
 <li><p>JOSE含义与JWS头部相同。</p>
