@@ -7,12 +7,16 @@ categories:
   - web
 tags:
   - JWT
+  - JWE
+  - JWS
 ---
 
  JWT起源
 -------
 
-> Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于 JSON 的开放标准（[(RFC 7519](https://link.jianshu.com?t=https://tools.ietf.org/html/rfc7519)). 该 token 被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT 的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该 token 也可直接被用于认证，也可被加密。
+> -   Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于 JSON 的开放标准（[(RFC 7519](https://link.jianshu.com?t=https://tools.ietf.org/html/rfc7519)). 
+> -   token 被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。
+> -   JWT 的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该 token 也可直接被用于认证，也可被加密。
 
 说起 JWT，我们应该来谈一谈基于 token 的认证和传统的 session 认证的区别。
 
@@ -46,18 +50,31 @@ tags:
 
 那么我们现在回到 JWT 的主题上。
 
-JWT 构成
----------
+## JWT解析
 
-JWT 是由三段信息构成的，将这三段信息文本用`.`链接一起就构成了 Jwt 字符串。就像这样:
+网上大多数介绍JWT的文章实际介绍的都是`JWS(JSON Web Signature)`,也往往导致了人们对于JWT的误解，但是JWT并不等于JWS，JWS只是JWT的一种实现，除了JWS外，`JWE(JSON Web Encryption)`也是JWT的一种实现。
+
+下面就来详细介绍一下JWT与JWE的两种实现方式：
+
+<img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/06/iShot2021-06-10%2023.54.56.png" alt="JWT" style="zoom: 33%;" />
+
+### JSON Web Signature(JWS)
+
+JSON Web Signature是一个有着简单的统一表达形式的字符串：由三段信息构成的，将这三段信息文本用`.`链接一起就构成了 Jwt 字符串。
+
+-   第一部分我们称它为头部（header)
+-   第二部分我们称其为载荷（payload, 类似于飞机上承载的物品)
+-   第三部分是签证（signature)
+
+<img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/06/iShot2021-06-10%2023.56.21.png" alt="JWS构成" style="zoom:50%;" />
+
+然后将每一部分进行`base64`编码之后，就像这样:
 
 ```python
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ
 ```
 
-第一部分我们称它为头部（header), 第二部分我们称其为载荷（payload, 类似于飞机上承载的物品)，第三部分是签证（signature).
-
-### header（头信息）
+#### header（头信息）
 
 jwt 的头部承载两部分信息：
 
@@ -79,7 +96,7 @@ jwt 的头部承载两部分信息：
 eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
 ```
 
-### Payload（有效载荷）
+#### Payload（有效载荷）
 
 载荷就是存放有效信息的地方，其中包含claims。claims是关于实体（常用的是用户信息）和其他数据的声明，claims有三种类型：
 
@@ -87,7 +104,7 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
 - **Public claims（公共的声明）:** 自定义claims，注意不要和JWT注册表中属性冲突，[这里可以查看JWT标准注册表](https://www.iana.org/assignments/jwt/jwt.xhtml)
 - **Private claims（私有的声明）:** 这些是自定义的claims，用于在同意使用这些claims的各方之间共享信息，它们既不是Registered claims，也不是Public claims。
 
-#### 标准中注册的声明
+##### 标准中注册的声明
 
 > **建议但不强制使用**
 
@@ -100,13 +117,13 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
 *   **jti**: jwt 的唯一身份标识，主要用来作为一次性 token, 从而回避重放攻击。
 *   **name**：用户全名
 
-#### 公共的声明
+##### 公共的声明
 
 公共的声明可以添加任何的信息，一般添加用户的相关信息或其他业务需要的必要信息. 但不建议添加敏感信息，因为该部分在客户端可解密。
 
-#### 私有的声明 
+##### 私有的声明 
 
-私有声明是提供者和消费者所共同定义的声明，一般不建议存放敏感信息，因为 base64 是对称解密的，意味着该部分信息可以归类为明文信息。
+私有声明是提供者和消费者所共同定义的声明，**一般不建议存放敏感信息**，因为 base64 是对称解密的，意味着该部分信息可以归类为明文信息。
 
 > 在官网有详细的属性说明，尽量使用里面提到的 *Registered Claim Names*，这样可以提高阅读性
 
@@ -126,7 +143,7 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
 eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9
 ```
 
-### signature
+#### signature
 
 jwt 的第三部分是一个签证信息，这个签证信息由三部分组成：
 
@@ -148,18 +165,33 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4
 
 > **注意：secret 是保存在服务器端的，jwt 的签发生成也是在服务器端的，secret 就是用来进行 jwt 的签发和 jwt 的验证，所以，它就是你服务端的私钥，在任何场景都不应该流露出去。一旦客户端得知这个 secret, 那就意味着客户端是可以自我签发 jwt 了。**
 
+### JSON Web Encryption(JWE)
+
+相对于JWS，JWE则同时保证了安全性与数据完整性。
+JWE由五部分组成：
+
+<img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/06/iShot2021-06-10%2023.57.03.png" alt="JWE构成" style="zoom:50%;" />
+
+我们来看看一个标准的JWE过程是怎样的：
+
+-   JOSE含义与JWS头部相同。
+
+-   生成一个随机的Content Encryption Key （CEK）。
+
+-   使用RSAES-OAEP 加密算法，用公钥加密CEK，生成JWE Encrypted Key。
+
+-   生成JWE初始化向量。
+
+-   使用AES GCM加密算法对明文部分进行加密生成密文Ciphertext,算法会随之生成一个128位的认证标记Authentication Tag。
+
+-   对五个部分分别进行base64编码。
+
+可见，JWE的计算过程相对繁琐，不够轻量级，因此适合与数据传输而非token认证，但该协议也足够安全可靠，用简短字符串描述了传输内容，兼顾数据的安全性与完整性。
+
 总结
 --
 
 ### 优点
 
 *   因为 json 的通用性，所以 JWT 是可以进行跨语言支持的，像 JAVA,JavaScript,NodeJS,Python 等很多语言都可以使用。
-*   因为有了 payload 部分，所以 JWT 可以在自身存储一些其他业务逻辑所必要的非敏感信息。
-*   便于传输，jwt 的构成非常简单，字节占用很小，所以它是非常便于传输的。
 *   它不需要在服务端保存会话信息, 所以它易于应用的扩展。
-
-### 安全相关
-
-*   不应该在 jwt 的 payload 部分存放敏感信息，因为该部分是客户端可解密的部分。
-*   保护好 secret 私钥，该私钥非常重要。
-*   如果可以，请使用 https 协议
