@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="bookandmusic">
   <meta name="keywords" content="">
-  <title>02-简单介绍 HTTP 协议结构 - Bookandmusic</title>
+  <title>JWS的python实现方案 - Bookandmusic</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="02-简单介绍 HTTP 协议结构">
+            <span class="h2" id="subtitle" title="JWS的python实现方案">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2019-05-09 19:55" pubdate>
-        2019年5月9日 晚上
+      <time datetime="2021-06-10 23:00" pubdate>
+        2021年6月10日 晚上
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      801 字
+      748 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      10
        分钟
     </span>
   
@@ -225,34 +225,41 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">02-简单介绍 HTTP 协议结构</h1>
+            <h1 style="display: none">JWS的python实现方案</h1>
             
             <div class="markdown-body">
-              <p>首先，应用 <code>HTTP</code> 协议时，必定有客户端和服务器端。<br>其中，发起请求的是客户端，响应请求并返回的是服务端。</p>
-<h2 id="1、请求报文"><a href="#1、请求报文" class="headerlink" title="1、请求报文"></a>1、请求报文</h2><p>请求报文是由请求方法、请求 <code>URI</code>、协议版本、可选的请求首部字段和内容实体构成的。</p>
-<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526111207-%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%20.png" srcset="/img/loading.gif" alt="20190526111207-请求报文"></p>
-<h2 id="2、响应报文"><a href="#2、响应报文" class="headerlink" title="2、响应报文"></a>2、响应报文</h2><p>服务器以响应的形式返回处理结果。</p>
-<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526111215-%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87%20.png" srcset="/img/loading.gif" alt="20190526111215-响应报文"></p>
-<p><code>200 OK</code> 是状态码（<code>status</code> <code>code</code>）和 原因短语。<br>下一行是创建相应的日期，是首部字段 (<code>header</code> <code>field</code>) 的一个属性。<br>下一行是返回内容的总长度。<br>下一行是返回内容的类型。<br>空行后的是资源实体的主体内容。</p>
-<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526111221-%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%8702%20.png" srcset="/img/loading.gif" alt="20190526111221-响应报文02"></p>
-<h2 id="3、HTTP-是无状态（stateless）协议。"><a href="#3、HTTP-是无状态（stateless）协议。" class="headerlink" title="3、HTTP 是无状态（stateless）协议。"></a>3、HTTP 是无状态（stateless）协议。</h2><p>  HTTP 自身不对请求和相应之间的通信状态进行保存，即不对发送过的请求或响应进行持久化处理。<br>  这是为了更快地处理大量事务，确保协议的可伸缩性。<br>  这一技术的<strong>问题</strong>就是当访问一家网站的多个页面时，无法保存其登陆状态，所以根据这一问题，引入了 <code>Cookie</code> 技术来管理状态。</p>
-<h2 id="4、HTTP-方法"><a href="#4、HTTP-方法" class="headerlink" title="4、HTTP 方法"></a>4、HTTP 方法</h2><p>  下面就简单介绍一下常用的几种方法，<code>GET</code>、<code>POST</code> 和 <code>HEAD</code> 除此之外的还有 <code>PUT</code>、<code>DELETE</code>、<code>OPTIONS</code>、<code>TRACE</code> 和 <code>CONNECT</code>，这些不太常用，所以不在这里赘述了。</p>
-<h3 id="GET"><a href="#GET" class="headerlink" title="GET"></a><code>GET</code></h3><p>  获取资源。请求已被 <code>URI</code> 识别的资源，就是经过服务器解析后返回的响应内容，文本就保持原样返回，如果是可执行程序，就返回结果。</p>
-<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526111129-GET%E6%96%B9%E5%BC%8F%20.png" srcset="/img/loading.gif" alt="20190526111129-GET方式"></p>
-<h3 id="POST"><a href="#POST" class="headerlink" title="POST"></a><code>POST</code></h3><p>  传输实体主体。</p>
-<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526111137-POST%E6%96%B9%E5%BC%8F%20.png" srcset="/img/loading.gif" alt="20190526111137-POST方式"></p>
-<h3 id="HEAD"><a href="#HEAD" class="headerlink" title="HEAD"></a><code>HEAD</code></h3><p>  获得报文首部。和 <code>GET</code> 一样，但是不返回主体部分，只用于确认 <code>URI</code> 的有效性和资源更新的日期等。</p>
-<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526111155-%E6%8A%A5%E6%96%87%E5%A4%B4%20.png" srcset="/img/loading.gif" alt="20190526111155-报文头"></p>
-<blockquote>
-<p><strong>注意：</strong>方法名区分大小写，注意要用<strong>大写字母</strong>。</p>
+              <h2 id="JWS"><a href="#JWS" class="headerlink" title="JWS"></a>JWS</h2><p>在python中的 jws实现方案有以下两种：</p>
+<h3 id="pyjwt"><a href="#pyjwt" class="headerlink" title="pyjwt"></a><code>pyjwt</code></h3><blockquote>
+<p>  很多框架的 token认证方案，都是对<code>pyjwt</code>的进一步封装， 如：DRF的 <code>restframework-jwt</code>、Flask的 <code>flask-jwt-extend</code></p>
 </blockquote>
-<h2 id="5、持久化连接"><a href="#5、持久化连接" class="headerlink" title="5、持久化连接"></a>5、持久化连接</h2><p>  当请求的资源有很多时，会发生多次的 <code>TCP</code> 连接和断开过程，增加了通信量的开销。于是产生了持久链接（<code>HTTP</code> <code>Persistent</code> <code>connections</code>）。<br>  <strong>特点：</strong> 只要任意一端没有明确提出断开连接，则保持 <code>TCP</code> 连接状态。</p>
-<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526111143-TCP%E9%93%BE%E6%8E%A5%20.png" srcset="/img/loading.gif" alt="20190526111143-TCP链接"></p>
-<h2 id="6、管线化"><a href="#6、管线化" class="headerlink" title="6、管线化"></a>6、管线化</h2><p>  持久化连接需要等待上一个发送请求得到响应之后才能发送下一个请求，但是管线化技术可以直接发送，这样就能同时并发发送多个请求。</p>
-<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526111200-%E7%AE%A1%E7%BA%BF%E5%8C%96%20.png" srcset="/img/loading.gif" alt="20190526111200-管线化"></p>
-<h2 id="7、Cookie"><a href="#7、Cookie" class="headerlink" title="7、Cookie"></a>7、Cookie</h2><p>  状态管理。为了解决 <code>HTTP</code> 的无状态，<code>Cookie</code> 技术通过在请求和响应报文中写入 <code>Cookie</code> 信息来控制客户端的状态。具体实现是 <code>Cookie</code> 根据响应报文内 <code>Set-Cookie</code> 的首部字段信息，通知客户端保存 <code>Cookie</code>，当下一次再像<strong>该</strong>服务器发送请求，客户端会自动在请求报文中添加 <code>Cookie</code> 值后发送。服务端发现客户端发送的 <code>Cookie</code> 后，回去检查对比记录，得到状态信息。</p>
-<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526111108-Cookie%20.png" srcset="/img/loading.gif" alt="20190526111108-Cookie"></p>
-<h2 id="自我回顾"><a href="#自我回顾" class="headerlink" title="自我回顾"></a>自我回顾</h2><p>1、请求报文、响应报文的基本组成？<br>2、什么是无状态协议，怎么解决的？<br>3、<code>HTTP</code> 的基本方法？分别有什么功能？<br>4、为了加快资源访问速度出现了什么方法？</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> jwt<br><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime, timedelta<br><br>expiry = datetime.utcnow() + timedelta(seconds=<span class="hljs-number">60</span>*<span class="hljs-number">60</span>)<br>secret = <span class="hljs-string">&#x27;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9&#x27;</span><br><br>payload = &#123;<br>    <span class="hljs-string">&#x27;exp&#x27;</span>: datetime.utcnow() + timedelta(seconds=<span class="hljs-number">30</span>),   <span class="hljs-comment"># 过期时间</span><br>    <span class="hljs-string">&#x27;uid&#x27;</span>: <span class="hljs-number">1</span>,<br>    <span class="hljs-string">&#x27;username&#x27;</span>: <span class="hljs-string">&#x27;admin&#x27;</span><br>&#125;<br><br><span class="hljs-comment"># 加密, 得到 token字符串</span><br>token = jwt.encode(payload, secret, algorithm=<span class="hljs-string">&#x27;HS256&#x27;</span>)<br>print(token)<br><span class="hljs-comment"># head部分.payload载荷部分.签名部分</span><br><br><span class="hljs-comment"># 解密，校验签名</span><br>payload = jwt.decode(encoded_jwt, secret,  algorithms=[<span class="hljs-string">&#x27;HS256&#x27;</span>])<br>print(payload)<br><span class="hljs-comment"># 如果 token 被修改过后，则会抛出 DecodeError: Signature verification failed</span><br><span class="hljs-comment"># 如果 token 过期后，则会抛出 ExpiredSignatureError: Signature has expired</span><br></code></pre></div></td></tr></table></figure>
+<p>生成的token：</p>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">b&#x27;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjMzMzk0MjQsInVpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiJ9.c__sgvA9VOv54T1R5Nm8Z4scFBMEgHo46xVF3PxtaRw&#x27;<br></code></pre></div></td></tr></table></figure>
+<p>进行base64解码：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">In [<span class="hljs-number">1</span>]: <span class="hljs-keyword">import</span> base64<br>    <br>In [<span class="hljs-number">2</span>]: base64.decodebytes(<span class="hljs-string">b&#x27;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9&#x27;</span>)<br>Out[<span class="hljs-number">2</span>]: <span class="hljs-string">b&#x27;&#123;&quot;typ&quot;:&quot;JWT&quot;,&quot;alg&quot;:&quot;HS256&quot;&#125;&#x27;</span><br>    <br>In [<span class="hljs-number">3</span>]: base64.decodebytes(<span class="hljs-string">b&#x27;eyJleHAiOjE2MjMzMzk0MjQsInVpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiJ9&#x27;</span>)<br>Out[<span class="hljs-number">3</span>]: <span class="hljs-string">b&#x27;&#123;&quot;exp&quot;:1623337821,&quot;uid&quot;:1,&quot;username&quot;:&quot;admin&quot;&#125;&#x27;</span> <br></code></pre></div></td></tr></table></figure>
+<h3 id="itsdangerous"><a href="#itsdangerous" class="headerlink" title="itsdangerous"></a><code>itsdangerous</code></h3><blockquote>
+<p>  <code>ItsDangerous</code>默认使用<code>HMAC</code>和<code>SHA-512</code>进行签名, 生成<strong>临时身份令牌</strong></p>
+</blockquote>
+<p>有时您只想将一些数据发送到不受信任的环境。但是如何安全地做到这一点？诀窍就是签名。只要知道一个密钥，您就可以对数据进行加密签名并将其移交给其他人。当您取回数据时，可以轻松确保没有人篡改数据。使用<code>itsdangerous</code>可以实现此种方案。</p>
+<p>例如： 想通过邮件让用户注册激活的时候地址当中带有用户的信息。但是信息一般都是敏感信息，而且还想让它具有时效性，所以就可以选择<code>itsdangerous</code>模块</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> itsdangerous <span class="hljs-keyword">import</span> TimedJSONWebSignatureSerializer<br><span class="hljs-keyword">from</span> itsdangerous <span class="hljs-keyword">import</span> SignatureExpired, BadSignature, BadData<br><br>expiry = <span class="hljs-number">60</span><br>secret = <span class="hljs-string">&#x27;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9&#x27;</span><br>payload = &#123;<br>    <span class="hljs-string">&#x27;uid&#x27;</span>: <span class="hljs-number">1</span>,<br>    <span class="hljs-string">&#x27;username&#x27;</span>: <span class="hljs-string">&#x27;admin&#x27;</span><br>&#125;<br><br><span class="hljs-comment"># 创建序列化器对象</span><br>serializer = TimedJSONWebSignatureSerializer(secret, expires_in=expiry)<br><br><span class="hljs-comment"># 加密</span><br>token = serializer.dumps(payload)<br>print(token)<br><span class="hljs-comment"># head部分.payload载荷部分.签名部分</span><br><br><span class="hljs-comment"># 解密，校验签名</span><br>payload = serializer.loads(token)<br>print(payload )<br><span class="hljs-comment"># 如果 token 被修改过后，则会抛出 BadSignature: Signature b&#x27;xxx&#x27; does not match</span><br><span class="hljs-comment"># 如果 token 过期后，则会抛出 SignatureExpired: Signature expired</span><br></code></pre></div></td></tr></table></figure>
+<p>生成的token：</p>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">b&#x27;eyJhbGciOiJIUzUxMiIsImlhdCI6MTYyMzMzODcwNiwiZXhwIjoxNjIzMzM4NzY2fQ.eyJ1aWQiOjEsInVzZXJuYW1lIjoiYWRtaW4ifQ._cpzkgKX-u7w8r57BGbwMHEg-EkHdJKjC74x_gPvrSGkPq5mrjmAXWFMSit0l_RGV-DzUJA09kEL6uX-ReCL0g&#x27;<br></code></pre></div></td></tr></table></figure>
+<p>进行base64解码：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">In [<span class="hljs-number">1</span>]: <span class="hljs-keyword">import</span> base64<br>    <br>In [<span class="hljs-number">2</span>]: base64.decodebytes(<span class="hljs-string">b&#x27;eyJhbGciOiJIUzUxMiIsImlhdCI6MTYyMzMzODcwNiwiZXhwIjoxNjIzMzM4NzY2fQ==&#x27;</span>)<br>Out[<span class="hljs-number">2</span>]: <span class="hljs-string">b&#x27;&#123;&quot;alg&quot;:&quot;HS512&quot;,&quot;iat&quot;:1623338706,&quot;exp&quot;:1623338766&#125;&#x27;</span><br>    <br>In [<span class="hljs-number">3</span>]: base64.decodebytes(<span class="hljs-string">b&#x27;eyJ1aWQiOjEsInVzZXJuYW1lIjoiYWRtaW4ifQ==&#x27;</span>)<br>Out[<span class="hljs-number">3</span>]: <span class="hljs-string">b&#x27;&#123;&quot;uid&quot;:1,&quot;username&quot;:&quot;admin&quot;&#125;&#x27;</span> <br></code></pre></div></td></tr></table></figure>
+<h2 id="Base64"><a href="#Base64" class="headerlink" title="Base64"></a>Base64</h2><blockquote>
+<p>  对字符串进行base64 解码时，有时候会出现 <code>Incorrect padding</code>:</p>
+</blockquote>
+<p>因为输入的base64编码字符串必须符合base64的padding规则：</p>
+<ul>
+<li><p>当原数据长度不是3的整数倍时, 如果最后剩下两个输入数据，在编码结果后加1个“=”；</p>
+</li>
+<li><p>如果最后剩下一个输入数据，编码结果后加2个“=”；</p>
+</li>
+<li><p>如果没有剩下任何数据，就什么都不要加，这样才可以保证资料还原的正确性。</p>
+</li>
+</ul>
+<p>因此，在对上面的 <code>itsdangerous</code> 生成的token进行base64 解码时，需要补上对应的 <code>=</code></p>
 
             </div>
             <hr>
@@ -264,9 +271,9 @@
                     
                       <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
                     
-                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/">网络通信</a>
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/python/">python</a>
                     
-                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/">TCP</a>
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/python/web/">web</a>
                     
                   </div>
                 
@@ -274,9 +281,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/HTTP/">HTTP</a>
+                      <a class="hover-with-bg" href="/tags/JWT/">JWT</a>
                     
-                      <a class="hover-with-bg" href="/tags/TCP/">TCP</a>
+                      <a class="hover-with-bg" href="/tags/JWS/">JWS</a>
                     
                   </div>
                 
@@ -289,18 +296,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2019/05/09/wang-luo-tong-xin-03-http-bao-wen-nei-de-http-xin-xi/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">03-HTTP 报文内的 HTTP 信息</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2019/05/09/suan-fa-pai-xu/">
-                        <span class="hidden-mobile">经典排序算法总结与实现</span>
+                      <a href="/2021/06/09/flask-tu-pian-shang-chuan-yu-zhan-shi/">
+                        <span class="hidden-mobile">Flask图片上传与展示</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

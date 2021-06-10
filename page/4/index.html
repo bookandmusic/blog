@@ -600,12 +600,19 @@ static定义static 是静态文件，主要存的是 CSS, JavaScript, 网站 log
           
             
           
-          主要以 Django+DRF + Vue的开发模式，简单介绍以 jwt作为凭证，实现 用户注册、登录 一系列流程
-以 Django 作为服务端环境搭建1pip install django  django-cors-headers djangorestframework djangorestframework-jwt
-项目配置信息
-djangodemo/settings.py
+          DRF框架的一系列功能：认证、权限、限流，都是依赖于JWT。
+整个流程就是这样的:
 
-123456789
+客户端发送用户名和密码到服务端，
+
+验证通过，生成JWT
+
+返回JWT给客户端
+
+下次，客户端发送请求时，携带JWT，一般是在请求头里加入Authorization，并加上JWT标注：
+
+
+1234&#123;  headers: &#123;    &#x27;Authorization&#x27;: &#x2
         </a>
       </p>
 

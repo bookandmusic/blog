@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.bookandmusic.cn/"/>
-  <updated>2021-06-08T16:33:00.777Z</updated>
+  <updated>2021-06-10T15:44:15.145Z</updated>
   <id>https://www.bookandmusic.cn/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JWS的python实现方案</title>
+    <link href="https://www.bookandmusic.cn/2021/06/10/web-jws-de-python-shi-xian-fang-an/"/>
+    <id>https://www.bookandmusic.cn/2021/06/10/web-jws-de-python-shi-xian-fang-an/</id>
+    <published>2021-06-10T15:00:11.000Z</published>
+    <updated>2021-06-10T15:44:15.145Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;JWS&quot;&gt;&lt;a href=&quot;#JWS&quot; class=&quot;headerlink&quot; title=&quot;JWS&quot;&gt;&lt;/a&gt;JWS&lt;/h2&gt;&lt;p&gt;在python中的 jws实现方案有以下两种：&lt;/p&gt;
+&lt;h3 id=&quot;pyjwt&quot;&gt;&lt;a href=&quot;#pyjwt&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="技术" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="python" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/python/"/>
+    
+      <category term="web" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/python/web/"/>
+    
+    
+      <category term="JWT" scheme="https://www.bookandmusic.cn/tags/JWT/"/>
+    
+      <category term="JWS" scheme="https://www.bookandmusic.cn/tags/JWS/"/>
+    
+  </entry>
   
   <entry>
     <title>Flask图片上传与展示</title>
@@ -235,46 +269,6 @@
       <category term="单文件导入settings" scheme="https://www.bookandmusic.cn/tags/%E5%8D%95%E6%96%87%E4%BB%B6%E5%AF%BC%E5%85%A5settings/"/>
     
       <category term="异步操作" scheme="https://www.bookandmusic.cn/tags/%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JWT生成、认证</title>
-    <link href="https://www.bookandmusic.cn/2021/02/27/drf-jwt-sheng-cheng-ren-zheng/"/>
-    <id>https://www.bookandmusic.cn/2021/02/27/drf-jwt-sheng-cheng-ren-zheng/</id>
-    <published>2021-02-27T15:22:33.000Z</published>
-    <updated>2021-02-27T15:41:39.396Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;DRF框架的一系列功能：认证、权限、限流，都是依赖于JWT。&lt;/p&gt;
-&lt;p&gt;整个流程就是这样的:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;客户端发送用户名和密码到服务端，&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;验证通过，生成JWT&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;返回JWT给客户端&lt;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="技术" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-      <category term="python" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/python/"/>
-    
-      <category term="DRF" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/python/DRF/"/>
-    
-    
-      <category term="JWT生成" scheme="https://www.bookandmusic.cn/tags/JWT%E7%94%9F%E6%88%90/"/>
-    
-      <category term="认证" scheme="https://www.bookandmusic.cn/tags/%E8%AE%A4%E8%AF%81/"/>
     
   </entry>
   
@@ -554,7 +548,7 @@
     <link href="https://www.bookandmusic.cn/2020/10/24/web-jwt-qian-xi/"/>
     <id>https://www.bookandmusic.cn/2020/10/24/web-jwt-qian-xi/</id>
     <published>2020-10-24T12:38:26.000Z</published>
-    <updated>2021-01-25T14:26:24.000Z</updated>
+    <updated>2021-06-10T14:59:31.540Z</updated>
     
     <summary type="html">
     
@@ -563,7 +557,8 @@
         
         
           &lt;h2 id=&quot;JWT起源&quot;&gt;&lt;a href=&quot;#JWT起源&quot; class=&quot;headerlink&quot; title=&quot; JWT起源&quot;&gt;&lt;/a&gt; JWT起源&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;Json web token (JWT),
+&lt;ul&gt;
+&lt;li&gt;Json web token (JWT),
         
       
     
@@ -578,6 +573,10 @@
     
     
       <category term="JWT" scheme="https://www.bookandmusic.cn/tags/JWT/"/>
+    
+      <category term="JWE" scheme="https://www.bookandmusic.cn/tags/JWE/"/>
+    
+      <category term="JWS" scheme="https://www.bookandmusic.cn/tags/JWS/"/>
     
   </entry>
   

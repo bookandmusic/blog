@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.1k 字
+      2.3k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      22
+      24
        分钟
     </span>
   
@@ -229,7 +229,11 @@
             
             <div class="markdown-body">
               <h2 id="JWT起源"><a href="#JWT起源" class="headerlink" title=" JWT起源"></a> JWT起源</h2><blockquote>
-<p>Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于 JSON 的开放标准（<a target="_blank" rel="noopener" href="https://link.jianshu.com?t=https://tools.ietf.org/html/rfc7519">(RFC 7519</a>). 该 token 被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT 的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该 token 也可直接被用于认证，也可被加密。</p>
+<ul>
+<li>Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于 JSON 的开放标准（<a target="_blank" rel="noopener" href="https://link.jianshu.com?t=https://tools.ietf.org/html/rfc7519">(RFC 7519</a>). </li>
+<li>token 被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。</li>
+<li>JWT 的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该 token 也可直接被用于认证，也可被加密。</li>
+</ul>
 </blockquote>
 <p>说起 JWT，我们应该来谈一谈基于 token 的认证和传统的 session 认证的区别。</p>
 <h3 id="传统的-session-认证"><a href="#传统的-session-认证" class="headerlink" title="传统的 session 认证"></a>传统的 session 认证</h3><p>我们知道，http 协议本身是一种无状态的协议，而这就意味着如果用户向我们的应用提供了用户名和密码来进行用户认证，那么下一次请求时，用户还要再一次进行用户认证才行，因为根据 http 协议，我们并不能知道是哪个用户发出的请求，所以为了让我们的应用能识别是哪个用户发出的请求，我们只能在服务器存储一份用户登录的信息，这份登录信息会在响应时传递给浏览器，告诉其保存为 cookie, 以便下次请求时发送给我们的应用，这样我们的应用就能识别请求来自哪个用户了, 这就是传统的基于 session 认证。</p>
@@ -248,10 +252,19 @@
 </ul>
 <p>这个 token 必须要在每次请求时传递给服务端，它应该保存在请求头里， 另外，服务端要支持<code>CORS(跨来源资源共享)</code>策略，一般我们在服务端这么做就可以了<code>Access-Control-Allow-Origin: *</code>。</p>
 <p>那么我们现在回到 JWT 的主题上。</p>
-<h2 id="JWT-构成"><a href="#JWT-构成" class="headerlink" title="JWT 构成"></a>JWT 构成</h2><p>JWT 是由三段信息构成的，将这三段信息文本用<code>.</code>链接一起就构成了 Jwt 字符串。就像这样:</p>
+<h2 id="JWT类别"><a href="#JWT类别" class="headerlink" title="JWT类别"></a>JWT类别</h2><p>网上大多数介绍JWT的文章实际介绍的都是<code>JWS(JSON Web Signature)</code>,也往往导致了人们对于JWT的误解，但是JWT并不等于JWS，JWS只是JWT的一种实现，除了JWS外，<code>JWE(JSON Web Encryption)</code>也是JWT的一种实现。</p>
+<p>下面就来详细介绍一下JWT与JWE的两种实现方式：</p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/06/7P3VBB.tif" srcset="/img/loading.gif" alt="7P3VBB"></p>
+<h3 id="JSON-Web-Signature-JWS"><a href="#JSON-Web-Signature-JWS" class="headerlink" title="JSON Web Signature(JWS)"></a>JSON Web Signature(JWS)</h3><p>JSON Web Signature是一个有着简单的统一表达形式的字符串：由三段信息构成的，将这三段信息文本用<code>.</code>链接一起就构成了 Jwt 字符串。</p>
+<ul>
+<li>第一部分我们称它为头部（header)</li>
+<li>第二部分我们称其为载荷（payload, 类似于飞机上承载的物品)</li>
+<li>第三部分是签证（signature)</li>
+</ul>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/06/O1Klg9.tif" srcset="/img/loading.gif" alt="O1Klg9"></p>
+<p>然后将每一部分进行<code>base64</code>编码之后，就像这样:</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ<br></code></pre></div></td></tr></table></figure>
-<p>第一部分我们称它为头部（header), 第二部分我们称其为载荷（payload, 类似于飞机上承载的物品)，第三部分是签证（signature).</p>
-<h3 id="header（头信息）"><a href="#header（头信息）" class="headerlink" title="header（头信息）"></a>header（头信息）</h3><p>jwt 的头部承载两部分信息：</p>
+<h4 id="header（头信息）"><a href="#header（头信息）" class="headerlink" title="header（头信息）"></a>header（头信息）</h4><p>jwt 的头部承载两部分信息：</p>
 <ul>
 <li>令牌类型（即：JWT）</li>
 <li>散列算法（HMAC、RSASSA、RSASSA-PSS等）</li>
@@ -260,13 +273,13 @@
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">&#123;<br>  <span class="hljs-string">&#x27;typ&#x27;</span>: <span class="hljs-string">&#x27;JWT&#x27;</span>,<br>  <span class="hljs-string">&#x27;alg&#x27;</span>: <span class="hljs-string">&#x27;HS256&#x27;</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
 <p>然后将头部进行 base64 加密（该加密是可以对称解密的), 构成了第一部分.</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9<br></code></pre></div></td></tr></table></figure>
-<h3 id="Payload（有效载荷）"><a href="#Payload（有效载荷）" class="headerlink" title="Payload（有效载荷）"></a>Payload（有效载荷）</h3><p>载荷就是存放有效信息的地方，其中包含claims。claims是关于实体（常用的是用户信息）和其他数据的声明，claims有三种类型：</p>
+<h4 id="Payload（有效载荷）"><a href="#Payload（有效载荷）" class="headerlink" title="Payload（有效载荷）"></a>Payload（有效载荷）</h4><p>载荷就是存放有效信息的地方，其中包含claims。claims是关于实体（常用的是用户信息）和其他数据的声明，claims有三种类型：</p>
 <ul>
 <li><strong>Registered claims（注册的声明）：</strong> 这些是一组预定义的claims，非强制性的，但是推荐使用， iss（发行人）， exp（到期时间）， sub（主题）， aud（观众）等；</li>
 <li><strong>Public claims（公共的声明）:</strong> 自定义claims，注意不要和JWT注册表中属性冲突，<a target="_blank" rel="noopener" href="https://www.iana.org/assignments/jwt/jwt.xhtml">这里可以查看JWT标准注册表</a></li>
 <li><strong>Private claims（私有的声明）:</strong> 这些是自定义的claims，用于在同意使用这些claims的各方之间共享信息，它们既不是Registered claims，也不是Public claims。</li>
 </ul>
-<h4 id="标准中注册的声明"><a href="#标准中注册的声明" class="headerlink" title="标准中注册的声明"></a>标准中注册的声明</h4><blockquote>
+<h5 id="标准中注册的声明"><a href="#标准中注册的声明" class="headerlink" title="标准中注册的声明"></a>标准中注册的声明</h5><blockquote>
 <p><strong>建议但不强制使用</strong></p>
 </blockquote>
 <ul>
@@ -279,8 +292,8 @@
 <li><strong>jti</strong>: jwt 的唯一身份标识，主要用来作为一次性 token, 从而回避重放攻击。</li>
 <li><strong>name</strong>：用户全名</li>
 </ul>
-<h4 id="公共的声明"><a href="#公共的声明" class="headerlink" title="公共的声明"></a>公共的声明</h4><p>公共的声明可以添加任何的信息，一般添加用户的相关信息或其他业务需要的必要信息. 但不建议添加敏感信息，因为该部分在客户端可解密。</p>
-<h4 id="私有的声明"><a href="#私有的声明" class="headerlink" title="私有的声明"></a>私有的声明</h4><p>私有声明是提供者和消费者所共同定义的声明，一般不建议存放敏感信息，因为 base64 是对称解密的，意味着该部分信息可以归类为明文信息。</p>
+<h5 id="公共的声明"><a href="#公共的声明" class="headerlink" title="公共的声明"></a>公共的声明</h5><p>公共的声明可以添加任何的信息，一般添加用户的相关信息或其他业务需要的必要信息. 但不建议添加敏感信息，因为该部分在客户端可解密。</p>
+<h5 id="私有的声明"><a href="#私有的声明" class="headerlink" title="私有的声明"></a>私有的声明</h5><p>私有声明是提供者和消费者所共同定义的声明，<strong>一般不建议存放敏感信息</strong>，因为 base64 是对称解密的，意味着该部分信息可以归类为明文信息。</p>
 <blockquote>
 <p>在官网有详细的属性说明，尽量使用里面提到的 <em>Registered Claim Names</em>，这样可以提高阅读性</p>
 </blockquote>
@@ -288,7 +301,7 @@
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">&#123;<br>  <span class="hljs-string">&quot;sub&quot;</span>: <span class="hljs-string">&quot;1234567890&quot;</span>,<br>  <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;John Doe&quot;</span>,<br>  <span class="hljs-string">&quot;admin&quot;</span>: true<br>&#125;<br></code></pre></div></td></tr></table></figure>
 <p>然后将其进行 base64 加密，得到 Jwt 的第二部分。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9<br></code></pre></div></td></tr></table></figure>
-<h3 id="signature"><a href="#signature" class="headerlink" title="signature"></a>signature</h3><p>jwt 的第三部分是一个签证信息，这个签证信息由三部分组成：</p>
+<h4 id="signature"><a href="#signature" class="headerlink" title="signature"></a>signature</h4><p>jwt 的第三部分是一个签证信息，这个签证信息由三部分组成：</p>
 <ul>
 <li>header (base64 后的)</li>
 <li>payload (base64 后的)</li>
@@ -301,16 +314,27 @@
 <blockquote>
 <p><strong>注意：secret 是保存在服务器端的，jwt 的签发生成也是在服务器端的，secret 就是用来进行 jwt 的签发和 jwt 的验证，所以，它就是你服务端的私钥，在任何场景都不应该流露出去。一旦客户端得知这个 secret, 那就意味着客户端是可以自我签发 jwt 了。</strong></p>
 </blockquote>
+<h3 id="JSON-Web-Encryption-JWE"><a href="#JSON-Web-Encryption-JWE" class="headerlink" title="JSON Web Encryption(JWE)"></a>JSON Web Encryption(JWE)</h3><p>相对于JWS，JWE则同时保证了安全性与数据完整性。<br>JWE由五部分组成：</p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/06/LAPjcz.tif" srcset="/img/loading.gif" alt="LAPjcz"></p>
+<p>我们来看看一个标准的JWE过程是怎样的：</p>
+<ul>
+<li><p>JOSE含义与JWS头部相同。</p>
+</li>
+<li><p>生成一个随机的Content Encryption Key （CEK）。</p>
+</li>
+<li><p>使用RSAES-OAEP 加密算法，用公钥加密CEK，生成JWE Encrypted Key。</p>
+</li>
+<li><p>生成JWE初始化向量。</p>
+</li>
+<li><p>使用AES GCM加密算法对明文部分进行加密生成密文Ciphertext,算法会随之生成一个128位的认证标记Authentication Tag。</p>
+</li>
+<li><p>对五个部分分别进行base64编码。</p>
+</li>
+</ul>
+<p>可见，JWE的计算过程相对繁琐，不够轻量级，因此适合与数据传输而非token认证，但该协议也足够安全可靠，用简短字符串描述了传输内容，兼顾数据的安全性与完整性。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
 <li>因为 json 的通用性，所以 JWT 是可以进行跨语言支持的，像 JAVA,JavaScript,NodeJS,Python 等很多语言都可以使用。</li>
-<li>因为有了 payload 部分，所以 JWT 可以在自身存储一些其他业务逻辑所必要的非敏感信息。</li>
-<li>便于传输，jwt 的构成非常简单，字节占用很小，所以它是非常便于传输的。</li>
 <li>它不需要在服务端保存会话信息, 所以它易于应用的扩展。</li>
-</ul>
-<h3 id="安全相关"><a href="#安全相关" class="headerlink" title="安全相关"></a>安全相关</h3><ul>
-<li>不应该在 jwt 的 payload 部分存放敏感信息，因为该部分是客户端可解密的部分。</li>
-<li>保护好 secret 私钥，该私钥非常重要。</li>
-<li>如果可以，请使用 https 协议</li>
 </ul>
 
             </div>
@@ -334,6 +358,10 @@
                     <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/JWT/">JWT</a>
+                    
+                      <a class="hover-with-bg" href="/tags/JWE/">JWE</a>
+                    
+                      <a class="hover-with-bg" href="/tags/JWS/">JWS</a>
                     
                   </div>
                 

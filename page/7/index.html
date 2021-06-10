@@ -396,10 +396,10 @@ Hexo简介Hexo是一款基于Node.js的静态博客框架，依赖少易于安�
           
             
           
-          1 with上下文管理器常用：
-12with open(&quot;file_name&quot;,&quot;wb&quot;) as f:	f.write(&quot;hello flask&quot;)
-自定义：
-123456789101112131415class Foo(gbiect):	def __enter__(self):		&quot;&quot;&quot;进入with语句的时
+          装饰器123@app.route(&quot;/&quot;)def index():   	return &quot;index page&quot;
+123def index():   	return &quot;index page&quot;app.route(&quot;/&quot;)(index)
+装饰器不仅仅是定义时可以用，还可以在定义完再使用
+自定义正则转换器及蓝图1234567
         </a>
       </p>
 
