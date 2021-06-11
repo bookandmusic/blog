@@ -265,16 +265,16 @@
 <img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/06/iShot2021-06-10%2023.56.21.png" srcset="/img/loading.gif" alt="JWS构成" style="zoom:50%;" />
 
 <p>然后将每一部分进行<code>base64</code>编码之后，就像这样:</p>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter hljs hljs hljs hljs hljs hljs hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ<br></code></pre></div></td></tr></table></figure>
 <h4 id="header（头信息）"><a href="#header（头信息）" class="headerlink" title="header（头信息）"></a>header（头信息）</h4><p>jwt 的头部承载两部分信息：</p>
 <ul>
 <li>令牌类型（即：JWT）</li>
 <li>散列算法（HMAC、RSASSA、RSASSA-PSS等）</li>
 </ul>
 <p>完整的头部就像下面这样的 JSON：</p>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">&#123;<br>  <span class="hljs-string">&#x27;typ&#x27;</span>: <span class="hljs-string">&#x27;JWT&#x27;</span>,<br>  <span class="hljs-string">&#x27;alg&#x27;</span>: <span class="hljs-string">&#x27;HS256&#x27;</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter hljs hljs hljs hljs hljs hljs hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">&#123;<br>  <span class="hljs-string">&#x27;typ&#x27;</span>: <span class="hljs-string">&#x27;JWT&#x27;</span>,<br>  <span class="hljs-string">&#x27;alg&#x27;</span>: <span class="hljs-string">&#x27;HS256&#x27;</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
 <p>然后将头部进行 base64 加密（该加密是可以对称解密的), 构成了第一部分.</p>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter hljs hljs hljs hljs hljs hljs hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9<br></code></pre></div></td></tr></table></figure>
 <h4 id="Payload（有效载荷）"><a href="#Payload（有效载荷）" class="headerlink" title="Payload（有效载荷）"></a>Payload（有效载荷）</h4><p>载荷就是存放有效信息的地方，其中包含claims。claims是关于实体（常用的是用户信息）和其他数据的声明，claims有三种类型：</p>
 <ul>
 <li><strong>Registered claims（注册的声明）：</strong> 这些是一组预定义的claims，非强制性的，但是推荐使用， iss（发行人）， exp（到期时间）， sub（主题）， aud（观众）等；</li>
@@ -300,9 +300,9 @@
 <p>在官网有详细的属性说明，尽量使用里面提到的 <em>Registered Claim Names</em>，这样可以提高阅读性</p>
 </blockquote>
 <p>自定义一个 payload:</p>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">&#123;<br>  <span class="hljs-string">&quot;sub&quot;</span>: <span class="hljs-string">&quot;1234567890&quot;</span>,<br>  <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;John Doe&quot;</span>,<br>  <span class="hljs-string">&quot;admin&quot;</span>: true<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter hljs hljs hljs hljs hljs hljs hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">&#123;<br>  <span class="hljs-string">&quot;sub&quot;</span>: <span class="hljs-string">&quot;1234567890&quot;</span>,<br>  <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;John Doe&quot;</span>,<br>  <span class="hljs-string">&quot;admin&quot;</span>: true<br>&#125;<br></code></pre></div></td></tr></table></figure>
 <p>然后将其进行 base64 加密，得到 Jwt 的第二部分。</p>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter hljs hljs hljs hljs hljs hljs hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9<br></code></pre></div></td></tr></table></figure>
 <h4 id="signature"><a href="#signature" class="headerlink" title="signature"></a>signature</h4><p>jwt 的第三部分是一个签证信息，这个签证信息由三部分组成：</p>
 <ul>
 <li>header (base64 后的)</li>
@@ -310,9 +310,9 @@
 <li>secret</li>
 </ul>
 <p>这个签名的计算跟第一部分中的 alg 属性有关，假如是 HS256，那么服务端需要保存一个私钥，比如 secret 。然后，把第一部分和第二部分生成的两个字符串用 <code>.</code> 连接之后，用 HS256 进行加盐<code>secret</code>加密，然后就构成了 jwt 的第三部分。</p>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter hljs hljs hljs hljs hljs hljs hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ<br></code></pre></div></td></tr></table></figure>
 <p>将这三部分用<code>.</code>连接成一个完整的字符串, 构成了最终的 jwt:</p>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter hljs hljs hljs hljs hljs hljs hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ<br></code></pre></div></td></tr></table></figure>
 <blockquote>
 <p><strong>注意：secret 是保存在服务器端的，jwt 的签发生成也是在服务器端的，secret 就是用来进行 jwt 的签发和 jwt 的验证，所以，它就是你服务端的私钥，在任何场景都不应该流露出去。一旦客户端得知这个 secret, 那就意味着客户端是可以自我签发 jwt 了。</strong></p>
 </blockquote>
@@ -362,9 +362,9 @@
                     
                       <a class="hover-with-bg" href="/tags/JWT/">JWT</a>
                     
-                      <a class="hover-with-bg" href="/tags/JWE/">JWE</a>
-                    
                       <a class="hover-with-bg" href="/tags/JWS/">JWS</a>
+                    
+                      <a class="hover-with-bg" href="/tags/JWE/">JWE</a>
                     
                   </div>
                 

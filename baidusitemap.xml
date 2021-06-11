@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.bookandmusic.cn/2020/10/24/web-jwt-qian-xi/</loc>
-    <lastmod>2021-06-10</lastmod>
+    <loc>https://www.bookandmusic.cn/2020/12/03/django-you-jian-fa-song/</loc>
+    <lastmod>2021-06-11</lastmod>
   </url>
   <url>
     <loc>https://www.bookandmusic.cn/2021/06/10/web-jws-de-python-shi-xian-fang-an/</loc>
+    <lastmod>2021-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.bookandmusic.cn/2020/03/03/vue-axios-yi-axios-zai-vue-zhong-de-shi-yong-jiao-cheng/</loc>
+    <lastmod>2021-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.bookandmusic.cn/2020/10/24/web-jwt-qian-xi/</loc>
     <lastmod>2021-06-10</lastmod>
   </url>
   <url>
@@ -47,10 +55,6 @@
   <url>
     <loc>https://www.bookandmusic.cn/2021/03/06/ssh-an-zhuang-yu-pei-zhi/</loc>
     <lastmod>2021-03-06</lastmod>
-  </url>
-  <url>
-    <loc>https://www.bookandmusic.cn/2020/12/03/django-you-jian-fa-song/</loc>
-    <lastmod>2021-02-28</lastmod>
   </url>
   <url>
     <loc>https://www.bookandmusic.cn/2020/03/10/django-yong-hu-ren-zheng-xi-tong/</loc>
@@ -293,7 +297,7 @@
     <lastmod>2020-12-06</lastmod>
   </url>
   <url>
-    <loc>https://www.bookandmusic.cn/2020/03/03/vue-axios-si-kua-yu-qing-qiu/</loc>
+    <loc>https://www.bookandmusic.cn/2020/05/16/vue-shi-jian-bang-ding-yi-ji-shi-jian-xiu-shi-fu/</loc>
     <lastmod>2020-12-01</lastmod>
   </url>
   <url>
@@ -301,11 +305,11 @@
     <lastmod>2020-12-01</lastmod>
   </url>
   <url>
-    <loc>https://www.bookandmusic.cn/2020/03/03/vue-axios-er-api-shuo-ming/</loc>
+    <loc>https://www.bookandmusic.cn/2020/03/03/vue-axios-si-kua-yu-qing-qiu/</loc>
     <lastmod>2020-12-01</lastmod>
   </url>
   <url>
-    <loc>https://www.bookandmusic.cn/2020/05/16/vue-shi-jian-bang-ding-yi-ji-shi-jian-xiu-shi-fu/</loc>
+    <loc>https://www.bookandmusic.cn/2020/03/03/vue-axios-er-api-shuo-ming/</loc>
     <lastmod>2020-12-01</lastmod>
   </url>
   <url>
@@ -314,10 +318,6 @@
   </url>
   <url>
     <loc>https://www.bookandmusic.cn/2020/02/26/shu-ju-ku-mysql-zhu-jian-yue-shu-he-wei-yi-xing-yue-shu-de-qu-bie/</loc>
-    <lastmod>2020-12-01</lastmod>
-  </url>
-  <url>
-    <loc>https://www.bookandmusic.cn/2020/03/03/vue-axios-yi-axios-zai-vue-zhong-de-shi-yong-jiao-cheng/</loc>
     <lastmod>2020-12-01</lastmod>
   </url>
 </urlset> 
