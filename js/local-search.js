@@ -27,7 +27,7 @@ var searchFunc = function(path, search_id, content_id) {
   $resultContent.innerHTML = '<div class="m-auto text-center"><div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div><br/>Loading...</div>';
   $.ajax({
     // 0x01. load xml file
-    url : path,
+    url : "https://cdn.jsdelivr.net/gh/bookandmusic/blog@210602/search.xml",
     dataType: 'xml',
     success : function(xmlResponse) {
       // 0x02. parse xml file
