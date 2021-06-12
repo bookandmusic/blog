@@ -130,3 +130,8 @@ var searchFunc = function(path, search_id, content_id) {
     $('#local-search-result').html('');
   });
 };
+
+var getSearchFile = function(){
+  var path = "https://cdn.jsdelivr.net/gh/bookandmusic/blog@210602/search.xml";
+  searchFunc(path, 'local-search-input', 'local-search-result');
+};
