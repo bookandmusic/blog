@@ -2169,31 +2169,6 @@
     
     
     <entry>
-      <title>GitBook教程</title>
-      <link href="2019/03/31/jiao-cheng-gitbook-jiao-cheng/"/>
-      <url>2019/03/31/jiao-cheng-gitbook-jiao-cheng/</url>
-      
-        <content type="html"><![CDATA[<blockquote><p>GitBook 是一个基于<code>Node.js</code>的命令行工具，可以使用<code>Markdown</code>来制作电子书，并利用<code>Git/Github</code>发布。</p></blockquote><p>支持输出<code>静态站点</code>、<code>PDF</code>、<code>eBook</code>、<code>HTML网页</code>等格式。</p><p>安装 GitBook 需要 Node 环境，具体怎么安装 Node 这里就不多说了。</p><h2 id="安装-GitBook"><a href="#安装-GitBook" class="headerlink" title="安装 GitBook"></a>安装 GitBook</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm install -g gitbook-cli<br><span class="hljs-comment"># OR</span><br>yarn global add gitbook-cli<br></code></pre></div></td></tr></table></figure><p>检查是否安装成功</p><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">gitbook -V<br></code></pre></div></td></tr></table></figure><h2 id="导出电子书"><a href="#导出电子书" class="headerlink" title="导出电子书"></a>导出电子书</h2><p>打开到 gitbook 的目录下</p><h3 id="1、输出静态网页"><a href="#1、输出静态网页" class="headerlink" title="1、输出静态网页"></a>1、输出静态网页</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ gitbook serve .<br>Press CTRL+C to quit ...<br><br>Starting build ...<br>Successfuly built !<br><br>Starting server ...<br>Serving book on http://localhost:4000   <br></code></pre></div></td></tr></table></figure><p>这时候就可以打开 <a href="http://localhost:4000/">http://localhost:4000</a>：进行预览</p><p>同时在项目的目录中多了一个 <code>_book</code> 的文件夹，其中的文件就是生成的静态网页的内容。</p><h3 id="2、导出-PDF"><a href="#2、导出-PDF" class="headerlink" title="2、导出 PDF"></a>2、导出 PDF</h3><p>在项目的目录中执行</p><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">gitbook pdf .<br></code></pre></div></td></tr></table></figure><p>项目目录下就会生成 <code>book.pdf</code></p><h3 id="3、导出-epub"><a href="#3、导出-epub" class="headerlink" title="3、导出 epub"></a>3、导出 epub</h3><p>在项目目录中执行</p><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">gitbook epub .  <br></code></pre></div></td></tr></table></figure><p>项目目录下就会生成 <code>book.epub</code></p><h2 id="解决静态网页不能跳转问题"><a href="#解决静态网页不能跳转问题" class="headerlink" title="解决静态网页不能跳转问题"></a>解决静态网页不能跳转问题</h2><ul><li><p>在导出的文件夹目录下找到gitbook-&gt;theme.js文件</p></li><li><p>找到下面的代码搜索<code>if(m)for(n.handler&amp;&amp;</code></p></li><li><p>将if(m)改成if(false)</p><figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-keyword">if</span>(<span class="hljs-literal">false</span>)<span class="hljs-keyword">for</span>(n.handler&amp;&amp;(i=n,n=i.handler,o=i.selector),o&amp;&amp;de.find.matchesSelector(Ye,o),n.guid||(n.guid=de.guid++),(u=m.events)||(u=m.events=&#123;&#125;),(a=m.handle)||(a=m.handle=<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">t</span>)</span>&#123;<span class="hljs-keyword">return</span><span class="hljs-string">&quot;undefined&quot;</span>!=<span class="hljs-keyword">typeof</span> de&amp;&amp;de.event.triggered!==t.type?de.event.dispatch.apply(e,<span class="hljs-built_in">arguments</span>):<span class="hljs-keyword">void</span> <span class="hljs-number">0</span>&#125;),t=(t||<span class="hljs-string">&quot;&quot;</span>).match(qe)||[<span class="hljs-string">&quot;&quot;</span>],l=t.length;l--;)s=Ze.exec(t[l])||[],h=g=s[<span class="hljs-number">1</span>],d=(s[<span class="hljs-number">2</span>]||<span class="hljs-string">&quot;&quot;</span>).split(<span class="hljs-string">&quot;.&quot;</span>).sort(),h&amp;&amp;(f=de.event.special[h]||&#123;&#125;,h=(o?f.delegateType:f.bindType)||h,f=de.event.special[h]||&#123;&#125;,c=de.extend(&#123;<span class="hljs-attr">type</span>:h,<span class="hljs-attr">origType</span>:g,<span class="hljs-attr">data</span>:r,<span class="hljs-attr">handler</span>:n,<span class="hljs-attr">guid</span>:n.guid,<span class="hljs-attr">selector</span>:o,<span class="hljs-attr">needsContext</span>:o&amp;&amp;de.expr.match.needsContext.test(o),<span class="hljs-attr">namespace</span>:d.join(<span class="hljs-string">&quot;.&quot;</span>)&#125;,i),(p=u[h])||(p=u[h]=[],p.delegateCount=<span class="hljs-number">0</span>,f.setup&amp;&amp;f.setup.call(e,r,d,a)!==!<span class="hljs-number">1</span>||e.addEventListener&amp;&amp;e.addEventListener(h,a)),f.add&amp;&amp;(f.add.call(e,c),c.handler.guid||(c.handler.guid=n.guid)),o?p.splice(p.delegateCount++,<span class="hljs-number">0</span>,c):p.push(c),de.event.global[h]=!<span class="hljs-number">0</span>)&#125;<br></code></pre></div></td></tr></table></figure></li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 教程 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> GitBook </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Node.js环境配置</title>
       <link href="2019/03/31/gong-ju-nodejs-huan-jing-pei-zhi/"/>
       <url>2019/03/31/gong-ju-nodejs-huan-jing-pei-zhi/</url>
@@ -2219,6 +2194,31 @@
             <tag> nvm </tag>
             
             <tag> yarn </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>GitBook教程</title>
+      <link href="2019/03/31/jiao-cheng-gitbook-jiao-cheng/"/>
+      <url>2019/03/31/jiao-cheng-gitbook-jiao-cheng/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>GitBook 是一个基于<code>Node.js</code>的命令行工具，可以使用<code>Markdown</code>来制作电子书，并利用<code>Git/Github</code>发布。</p></blockquote><p>支持输出<code>静态站点</code>、<code>PDF</code>、<code>eBook</code>、<code>HTML网页</code>等格式。</p><p>安装 GitBook 需要 Node 环境，具体怎么安装 Node 这里就不多说了。</p><h2 id="安装-GitBook"><a href="#安装-GitBook" class="headerlink" title="安装 GitBook"></a>安装 GitBook</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm install -g gitbook-cli<br><span class="hljs-comment"># OR</span><br>yarn global add gitbook-cli<br></code></pre></div></td></tr></table></figure><p>检查是否安装成功</p><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">gitbook -V<br></code></pre></div></td></tr></table></figure><h2 id="导出电子书"><a href="#导出电子书" class="headerlink" title="导出电子书"></a>导出电子书</h2><p>打开到 gitbook 的目录下</p><h3 id="1、输出静态网页"><a href="#1、输出静态网页" class="headerlink" title="1、输出静态网页"></a>1、输出静态网页</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ gitbook serve .<br>Press CTRL+C to quit ...<br><br>Starting build ...<br>Successfuly built !<br><br>Starting server ...<br>Serving book on http://localhost:4000   <br></code></pre></div></td></tr></table></figure><p>这时候就可以打开 <a href="http://localhost:4000/">http://localhost:4000</a>：进行预览</p><p>同时在项目的目录中多了一个 <code>_book</code> 的文件夹，其中的文件就是生成的静态网页的内容。</p><h3 id="2、导出-PDF"><a href="#2、导出-PDF" class="headerlink" title="2、导出 PDF"></a>2、导出 PDF</h3><p>在项目的目录中执行</p><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">gitbook pdf .<br></code></pre></div></td></tr></table></figure><p>项目目录下就会生成 <code>book.pdf</code></p><h3 id="3、导出-epub"><a href="#3、导出-epub" class="headerlink" title="3、导出 epub"></a>3、导出 epub</h3><p>在项目目录中执行</p><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">gitbook epub .  <br></code></pre></div></td></tr></table></figure><p>项目目录下就会生成 <code>book.epub</code></p><h2 id="解决静态网页不能跳转问题"><a href="#解决静态网页不能跳转问题" class="headerlink" title="解决静态网页不能跳转问题"></a>解决静态网页不能跳转问题</h2><ul><li><p>在导出的文件夹目录下找到gitbook-&gt;theme.js文件</p></li><li><p>找到下面的代码搜索<code>if(m)for(n.handler&amp;&amp;</code></p></li><li><p>将if(m)改成if(false)</p><figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-keyword">if</span>(<span class="hljs-literal">false</span>)<span class="hljs-keyword">for</span>(n.handler&amp;&amp;(i=n,n=i.handler,o=i.selector),o&amp;&amp;de.find.matchesSelector(Ye,o),n.guid||(n.guid=de.guid++),(u=m.events)||(u=m.events=&#123;&#125;),(a=m.handle)||(a=m.handle=<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">t</span>)</span>&#123;<span class="hljs-keyword">return</span><span class="hljs-string">&quot;undefined&quot;</span>!=<span class="hljs-keyword">typeof</span> de&amp;&amp;de.event.triggered!==t.type?de.event.dispatch.apply(e,<span class="hljs-built_in">arguments</span>):<span class="hljs-keyword">void</span> <span class="hljs-number">0</span>&#125;),t=(t||<span class="hljs-string">&quot;&quot;</span>).match(qe)||[<span class="hljs-string">&quot;&quot;</span>],l=t.length;l--;)s=Ze.exec(t[l])||[],h=g=s[<span class="hljs-number">1</span>],d=(s[<span class="hljs-number">2</span>]||<span class="hljs-string">&quot;&quot;</span>).split(<span class="hljs-string">&quot;.&quot;</span>).sort(),h&amp;&amp;(f=de.event.special[h]||&#123;&#125;,h=(o?f.delegateType:f.bindType)||h,f=de.event.special[h]||&#123;&#125;,c=de.extend(&#123;<span class="hljs-attr">type</span>:h,<span class="hljs-attr">origType</span>:g,<span class="hljs-attr">data</span>:r,<span class="hljs-attr">handler</span>:n,<span class="hljs-attr">guid</span>:n.guid,<span class="hljs-attr">selector</span>:o,<span class="hljs-attr">needsContext</span>:o&amp;&amp;de.expr.match.needsContext.test(o),<span class="hljs-attr">namespace</span>:d.join(<span class="hljs-string">&quot;.&quot;</span>)&#125;,i),(p=u[h])||(p=u[h]=[],p.delegateCount=<span class="hljs-number">0</span>,f.setup&amp;&amp;f.setup.call(e,r,d,a)!==!<span class="hljs-number">1</span>||e.addEventListener&amp;&amp;e.addEventListener(h,a)),f.add&amp;&amp;(f.add.call(e,c),c.handler.guid||(c.handler.guid=n.guid)),o?p.splice(p.delegateCount++,<span class="hljs-number">0</span>,c):p.push(c),de.event.global[h]=!<span class="hljs-number">0</span>)&#125;<br></code></pre></div></td></tr></table></figure></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 教程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> GitBook </tag>
             
         </tags>
       
