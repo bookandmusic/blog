@@ -44,11 +44,11 @@
       <category term="web" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/python/web/"/>
     
     
-      <category term="itsdangerous" scheme="https://www.bookandmusic.cn/tags/itsdangerous/"/>
-    
       <category term="JWT" scheme="https://www.bookandmusic.cn/tags/JWT/"/>
     
       <category term="JWS" scheme="https://www.bookandmusic.cn/tags/JWS/"/>
+    
+      <category term="itsdangerous" scheme="https://www.bookandmusic.cn/tags/itsdangerous/"/>
     
       <category term="pyjwt" scheme="https://www.bookandmusic.cn/tags/pyjwt/"/>
     
@@ -59,7 +59,7 @@
     <link href="https://www.bookandmusic.cn/2021/06/09/flask-tu-pian-shang-chuan-yu-zhan-shi/"/>
     <id>https://www.bookandmusic.cn/2021/06/09/flask-tu-pian-shang-chuan-yu-zhan-shi/</id>
     <published>2021-06-08T16:00:28.000Z</published>
-    <updated>2021-06-08T16:33:00.777Z</updated>
+    <updated>2021-06-12T06:35:11.477Z</updated>
     
     <summary type="html">
     
@@ -81,7 +81,7 @@
       <category term="Flask" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/python/Flask/"/>
     
     
-      <category term="图片上传和展示" scheme="https://www.bookandmusic.cn/tags/%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E5%92%8C%E5%B1%95%E7%A4%BA/"/>
+      <category term="图片上传" scheme="https://www.bookandmusic.cn/tags/%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0/"/>
     
   </entry>
   
@@ -90,7 +90,7 @@
     <link href="https://www.bookandmusic.cn/2021/05/15/python-zi-dong-hua-ce-shi/"/>
     <id>https://www.bookandmusic.cn/2021/05/15/python-zi-dong-hua-ce-shi/</id>
     <published>2021-05-15T10:48:25.000Z</published>
-    <updated>2021-05-15T12:42:33.356Z</updated>
+    <updated>2021-06-12T06:39:55.059Z</updated>
     
     <summary type="html">
     
@@ -246,7 +246,7 @@
     <link href="https://www.bookandmusic.cn/2021/02/28/django-celery-yi-bu-ren-wu/"/>
     <id>https://www.bookandmusic.cn/2021/02/28/django-celery-yi-bu-ren-wu/</id>
     <published>2021-02-28T13:39:31.000Z</published>
-    <updated>2021-03-12T08:24:31.218Z</updated>
+    <updated>2021-06-12T06:33:25.930Z</updated>
     
     <summary type="html">
     
@@ -270,7 +270,7 @@
     
       <category term="Celery" scheme="https://www.bookandmusic.cn/tags/Celery/"/>
     
-      <category term="单文件导入settings" scheme="https://www.bookandmusic.cn/tags/%E5%8D%95%E6%96%87%E4%BB%B6%E5%AF%BC%E5%85%A5settings/"/>
+      <category term="单文件导入配置项" scheme="https://www.bookandmusic.cn/tags/%E5%8D%95%E6%96%87%E4%BB%B6%E5%AF%BC%E5%85%A5%E9%85%8D%E7%BD%AE%E9%A1%B9/"/>
     
       <category term="异步操作" scheme="https://www.bookandmusic.cn/tags/%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C/"/>
     
@@ -312,7 +312,7 @@
     <link href="https://www.bookandmusic.cn/2021/01/23/django-2-shi-tu/"/>
     <id>https://www.bookandmusic.cn/2021/01/23/django-2-shi-tu/</id>
     <published>2021-01-23T14:31:00.000Z</published>
-    <updated>2021-01-23T14:46:18.000Z</updated>
+    <updated>2021-06-12T06:31:06.390Z</updated>
     
     <summary type="html">
     
@@ -326,7 +326,7 @@
       <category term="Django" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/python/Django/"/>
     
     
-      <category term="视图" scheme="https://www.bookandmusic.cn/tags/%E8%A7%86%E5%9B%BE/"/>
+      <category term="django基础" scheme="https://www.bookandmusic.cn/tags/django%E5%9F%BA%E7%A1%80/"/>
     
   </entry>
   
@@ -366,7 +366,7 @@
     <link href="https://www.bookandmusic.cn/2020/12/27/vue-zu-jian-jian-tong-xin-liu-chong-fang-shi-wan-zheng-ban/"/>
     <id>https://www.bookandmusic.cn/2020/12/27/vue-zu-jian-jian-tong-xin-liu-chong-fang-shi-wan-zheng-ban/</id>
     <published>2020-12-27T13:56:48.000Z</published>
-    <updated>2021-01-21T07:05:29.000Z</updated>
+    <updated>2021-06-12T06:38:56.764Z</updated>
     
     <summary type="html">
     
@@ -388,7 +388,7 @@
     
       <category term="Vue" scheme="https://www.bookandmusic.cn/tags/Vue/"/>
     
-      <category term="组件" scheme="https://www.bookandmusic.cn/tags/%E7%BB%84%E4%BB%B6/"/>
+      <category term="组件通信" scheme="https://www.bookandmusic.cn/tags/%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/"/>
     
   </entry>
   
@@ -428,7 +428,7 @@
     <link href="https://www.bookandmusic.cn/2020/12/09/django-3-mo-ban/"/>
     <id>https://www.bookandmusic.cn/2020/12/09/django-3-mo-ban/</id>
     <published>2020-12-09T09:27:02.000Z</published>
-    <updated>2021-01-23T14:46:23.000Z</updated>
+    <updated>2021-06-12T06:31:11.767Z</updated>
     
     <summary type="html">
     
@@ -442,7 +442,7 @@
       <category term="Django" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/python/Django/"/>
     
     
-      <category term="模板" scheme="https://www.bookandmusic.cn/tags/%E6%A8%A1%E6%9D%BF/"/>
+      <category term="django基础" scheme="https://www.bookandmusic.cn/tags/django%E5%9F%BA%E7%A1%80/"/>
     
   </entry>
   
@@ -451,7 +451,7 @@
     <link href="https://www.bookandmusic.cn/2020/12/03/django-you-jian-fa-song/"/>
     <id>https://www.bookandmusic.cn/2020/12/03/django-you-jian-fa-song/</id>
     <published>2020-12-03T14:07:31.000Z</published>
-    <updated>2021-06-11T15:07:07.626Z</updated>
+    <updated>2021-06-12T06:32:46.688Z</updated>
     
     <summary type="html">
     
@@ -475,8 +475,6 @@
     
     
       <category term="邮件" scheme="https://www.bookandmusic.cn/tags/%E9%82%AE%E4%BB%B6/"/>
-    
-      <category term="临时身份令牌" scheme="https://www.bookandmusic.cn/tags/%E4%B8%B4%E6%97%B6%E8%BA%AB%E4%BB%BD%E4%BB%A4%E7%89%8C/"/>
     
   </entry>
   
@@ -516,7 +514,7 @@
     <link href="https://www.bookandmusic.cn/2020/11/30/django-shu-ju-fen-ye/"/>
     <id>https://www.bookandmusic.cn/2020/11/30/django-shu-ju-fen-ye/</id>
     <published>2020-11-30T13:45:42.000Z</published>
-    <updated>2021-01-23T14:45:15.000Z</updated>
+    <updated>2021-06-12T06:32:15.395Z</updated>
     
     <summary type="html">
     
@@ -540,8 +538,6 @@
     
     
       <category term="分页" scheme="https://www.bookandmusic.cn/tags/%E5%88%86%E9%A1%B5/"/>
-    
-      <category term="模板" scheme="https://www.bookandmusic.cn/tags/%E6%A8%A1%E6%9D%BF/"/>
     
   </entry>
   
@@ -587,7 +583,7 @@
     <link href="https://www.bookandmusic.cn/2020/10/23/vue-yin-ru-ben-di-zi-yuan/"/>
     <id>https://www.bookandmusic.cn/2020/10/23/vue-yin-ru-ben-di-zi-yuan/</id>
     <published>2020-10-23T14:28:48.000Z</published>
-    <updated>2020-12-27T13:53:54.000Z</updated>
+    <updated>2021-06-12T06:38:06.540Z</updated>
     
     <summary type="html">
     
@@ -600,6 +596,8 @@
     
       <category term="vue" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/vue/"/>
     
+    
+      <category term="Vue" scheme="https://www.bookandmusic.cn/tags/Vue/"/>
     
       <category term="图片" scheme="https://www.bookandmusic.cn/tags/%E5%9B%BE%E7%89%87/"/>
     

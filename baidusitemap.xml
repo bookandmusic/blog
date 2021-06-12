@@ -1,8 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://www.bookandmusic.cn/2021/05/15/python-zi-dong-hua-ce-shi/</loc>
+    <lastmod>2021-06-12</lastmod>
+  </url>
+  <url>
+    <loc>https://www.bookandmusic.cn/2020/12/27/vue-zu-jian-jian-tong-xin-liu-chong-fang-shi-wan-zheng-ban/</loc>
+    <lastmod>2021-06-12</lastmod>
+  </url>
+  <url>
+    <loc>https://www.bookandmusic.cn/2020/03/03/vue-axios-san-get-he-post-ti-jiao-shu-ju/</loc>
+    <lastmod>2021-06-12</lastmod>
+  </url>
+  <url>
+    <loc>https://www.bookandmusic.cn/2020/04/14/vue-router/</loc>
+    <lastmod>2021-06-12</lastmod>
+  </url>
+  <url>
+    <loc>https://www.bookandmusic.cn/2020/10/23/vue-yin-ru-ben-di-zi-yuan/</loc>
+    <lastmod>2021-06-12</lastmod>
+  </url>
+  <url>
+    <loc>https://www.bookandmusic.cn/2020/04/12/js-es6-yu-fa/</loc>
+    <lastmod>2021-06-12</lastmod>
+  </url>
+  <url>
+    <loc>https://www.bookandmusic.cn/2019/03/22/flask-yi-cuo-dian/</loc>
+    <lastmod>2021-06-12</lastmod>
+  </url>
+  <url>
+    <loc>https://www.bookandmusic.cn/2021/06/09/flask-tu-pian-shang-chuan-yu-zhan-shi/</loc>
+    <lastmod>2021-06-12</lastmod>
+  </url>
+  <url>
+    <loc>https://www.bookandmusic.cn/2021/02/28/django-celery-yi-bu-ren-wu/</loc>
+    <lastmod>2021-06-12</lastmod>
+  </url>
+  <url>
     <loc>https://www.bookandmusic.cn/2020/12/03/django-you-jian-fa-song/</loc>
-    <lastmod>2021-06-11</lastmod>
+    <lastmod>2021-06-12</lastmod>
+  </url>
+  <url>
+    <loc>https://www.bookandmusic.cn/2020/03/10/django-yong-hu-ren-zheng-xi-tong/</loc>
+    <lastmod>2021-06-12</lastmod>
+  </url>
+  <url>
+    <loc>https://www.bookandmusic.cn/2020/03/16/django-tu-pian-shang-chuan/</loc>
+    <lastmod>2021-06-12</lastmod>
+  </url>
+  <url>
+    <loc>https://www.bookandmusic.cn/2020/11/30/django-shu-ju-fen-ye/</loc>
+    <lastmod>2021-06-12</lastmod>
+  </url>
+  <url>
+    <loc>https://www.bookandmusic.cn/2020/05/24/django-5-orm-mo-xing-lei/</loc>
+    <lastmod>2021-06-12</lastmod>
+  </url>
+  <url>
+    <loc>https://www.bookandmusic.cn/2019/05/25/django-4-lu-you/</loc>
+    <lastmod>2021-06-12</lastmod>
+  </url>
+  <url>
+    <loc>https://www.bookandmusic.cn/2020/12/09/django-3-mo-ban/</loc>
+    <lastmod>2021-06-12</lastmod>
+  </url>
+  <url>
+    <loc>https://www.bookandmusic.cn/2021/01/23/django-2-shi-tu/</loc>
+    <lastmod>2021-06-12</lastmod>
+  </url>
+  <url>
+    <loc>https://www.bookandmusic.cn/2019/03/22/django-1-xiang-mu-liu-cheng/</loc>
+    <lastmod>2021-06-12</lastmod>
   </url>
   <url>
     <loc>https://www.bookandmusic.cn/2021/06/10/web-jws-de-python-shi-xian-fang-an/</loc>
@@ -21,18 +89,6 @@
     <lastmod>2021-06-10</lastmod>
   </url>
   <url>
-    <loc>https://www.bookandmusic.cn/2019/03/22/flask-yi-cuo-dian/</loc>
-    <lastmod>2021-06-10</lastmod>
-  </url>
-  <url>
-    <loc>https://www.bookandmusic.cn/2021/06/09/flask-tu-pian-shang-chuan-yu-zhan-shi/</loc>
-    <lastmod>2021-06-08</lastmod>
-  </url>
-  <url>
-    <loc>https://www.bookandmusic.cn/2021/05/15/python-zi-dong-hua-ce-shi/</loc>
-    <lastmod>2021-05-15</lastmod>
-  </url>
-  <url>
     <loc>https://www.bookandmusic.cn/2021/01/23/django-6-orm-cao-zuo/</loc>
     <lastmod>2021-05-13</lastmod>
   </url>
@@ -45,24 +101,12 @@
     <lastmod>2021-03-28</lastmod>
   </url>
   <url>
-    <loc>https://www.bookandmusic.cn/2021/02/28/django-celery-yi-bu-ren-wu/</loc>
-    <lastmod>2021-03-12</lastmod>
-  </url>
-  <url>
     <loc>https://www.bookandmusic.cn/2021/03/02/drf-haystack-elasticsearch-shi-xian-sou-suo-yin-qing/</loc>
     <lastmod>2021-03-07</lastmod>
   </url>
   <url>
     <loc>https://www.bookandmusic.cn/2021/03/06/ssh-an-zhuang-yu-pei-zhi/</loc>
     <lastmod>2021-03-06</lastmod>
-  </url>
-  <url>
-    <loc>https://www.bookandmusic.cn/2020/03/10/django-yong-hu-ren-zheng-xi-tong/</loc>
-    <lastmod>2021-02-28</lastmod>
-  </url>
-  <url>
-    <loc>https://www.bookandmusic.cn/2020/05/24/django-5-orm-mo-xing-lei/</loc>
-    <lastmod>2021-01-25</lastmod>
   </url>
   <url>
     <loc>https://www.bookandmusic.cn/2020/07/08/drf-xu-lie-hua-yu-fan-xu-lie-hua/</loc>
@@ -233,30 +277,6 @@
     <lastmod>2021-01-23</lastmod>
   </url>
   <url>
-    <loc>https://www.bookandmusic.cn/2019/05/25/django-4-lu-you/</loc>
-    <lastmod>2021-01-23</lastmod>
-  </url>
-  <url>
-    <loc>https://www.bookandmusic.cn/2020/12/09/django-3-mo-ban/</loc>
-    <lastmod>2021-01-23</lastmod>
-  </url>
-  <url>
-    <loc>https://www.bookandmusic.cn/2021/01/23/django-2-shi-tu/</loc>
-    <lastmod>2021-01-23</lastmod>
-  </url>
-  <url>
-    <loc>https://www.bookandmusic.cn/2019/03/22/django-1-xiang-mu-liu-cheng/</loc>
-    <lastmod>2021-01-23</lastmod>
-  </url>
-  <url>
-    <loc>https://www.bookandmusic.cn/2020/03/16/django-tu-pian-shang-chuan/</loc>
-    <lastmod>2021-01-23</lastmod>
-  </url>
-  <url>
-    <loc>https://www.bookandmusic.cn/2020/11/30/django-shu-ju-fen-ye/</loc>
-    <lastmod>2021-01-23</lastmod>
-  </url>
-  <url>
     <loc>https://www.bookandmusic.cn/2019/05/09/wang-luo-tong-xin-03-http-bao-wen-nei-de-http-xin-xi/</loc>
     <lastmod>2021-01-21</lastmod>
   </url>
@@ -281,31 +301,15 @@
     <lastmod>2021-01-21</lastmod>
   </url>
   <url>
-    <loc>https://www.bookandmusic.cn/2020/12/27/vue-zu-jian-jian-tong-xin-liu-chong-fang-shi-wan-zheng-ban/</loc>
-    <lastmod>2021-01-21</lastmod>
-  </url>
-  <url>
     <loc>https://www.bookandmusic.cn/2020/12/10/django-zhong-jian-jian/</loc>
     <lastmod>2021-01-21</lastmod>
   </url>
   <url>
-    <loc>https://www.bookandmusic.cn/2020/10/23/vue-yin-ru-ben-di-zi-yuan/</loc>
-    <lastmod>2020-12-27</lastmod>
-  </url>
-  <url>
-    <loc>https://www.bookandmusic.cn/2020/04/14/vue-vue-router/</loc>
-    <lastmod>2020-12-06</lastmod>
+    <loc>https://www.bookandmusic.cn/2020/02/26/shu-ju-ku-mysql-zhu-jian-yue-shu-he-wei-yi-xing-yue-shu-de-qu-bie/</loc>
+    <lastmod>2020-12-01</lastmod>
   </url>
   <url>
     <loc>https://www.bookandmusic.cn/2020/05/16/vue-shi-jian-bang-ding-yi-ji-shi-jian-xiu-shi-fu/</loc>
-    <lastmod>2020-12-01</lastmod>
-  </url>
-  <url>
-    <loc>https://www.bookandmusic.cn/2020/04/12/js-es6-yu-fa/</loc>
-    <lastmod>2020-12-01</lastmod>
-  </url>
-  <url>
-    <loc>https://www.bookandmusic.cn/2020/03/03/vue-axios-si-kua-yu-qing-qiu/</loc>
     <lastmod>2020-12-01</lastmod>
   </url>
   <url>
@@ -313,11 +317,7 @@
     <lastmod>2020-12-01</lastmod>
   </url>
   <url>
-    <loc>https://www.bookandmusic.cn/2020/03/03/vue-axios-san-get-he-post-ti-jiao-shu-ju/</loc>
-    <lastmod>2020-12-01</lastmod>
-  </url>
-  <url>
-    <loc>https://www.bookandmusic.cn/2020/02/26/shu-ju-ku-mysql-zhu-jian-yue-shu-he-wei-yi-xing-yue-shu-de-qu-bie/</loc>
+    <loc>https://www.bookandmusic.cn/2020/03/03/vue-axios-si-kua-yu-qing-qiu/</loc>
     <lastmod>2020-12-01</lastmod>
   </url>
 </urlset> 
