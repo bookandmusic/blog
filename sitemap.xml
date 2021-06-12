@@ -548,13 +548,6 @@
   </url>
   
   <url>
-    <loc>https://www.bookandmusic.cn/tags/index.html</loc>
-    
-    <lastmod>2020-12-01</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.bookandmusic.cn/2020/05/16/vue-shi-jian-bang-ding-yi-ji-shi-jian-xiu-shi-fu/</loc>
     
     <lastmod>2020-12-01</lastmod>
@@ -562,7 +555,14 @@
   </url>
   
   <url>
-    <loc>https://www.bookandmusic.cn/2020/03/03/vue-axios-er-api-shuo-ming/</loc>
+    <loc>https://www.bookandmusic.cn/tags/index.html</loc>
+    
+    <lastmod>2020-12-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.bookandmusic.cn/2020/03/03/vue-axios-si-kua-yu-qing-qiu/</loc>
     
     <lastmod>2020-12-01</lastmod>
     
@@ -576,7 +576,7 @@
   </url>
   
   <url>
-    <loc>https://www.bookandmusic.cn/2020/03/03/vue-axios-si-kua-yu-qing-qiu/</loc>
+    <loc>https://www.bookandmusic.cn/2020/03/03/vue-axios-er-api-shuo-ming/</loc>
     
     <lastmod>2020-12-01</lastmod>
     
@@ -683,6 +683,13 @@
   </url>
   
   <url>
+    <loc>https://www.bookandmusic.cn/tags/ORM%E6%93%8D%E4%BD%9C/</loc>
+    <lastmod>2021-06-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.bookandmusic.cn/tags/Celery/</loc>
     <lastmod>2021-06-12</lastmod>
     <changefreq>daily</changefreq>
@@ -704,13 +711,6 @@
   </url>
   
   <url>
-    <loc>https://www.bookandmusic.cn/tags/ORM%E6%93%8D%E4%BD%9C/</loc>
-    <lastmod>2021-06-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.bookandmusic.cn/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/</loc>
     <lastmod>2021-06-12</lastmod>
     <changefreq>daily</changefreq>
@@ -725,14 +725,14 @@
   </url>
   
   <url>
-    <loc>https://www.bookandmusic.cn/tags/%E9%82%AE%E4%BB%B6/</loc>
+    <loc>https://www.bookandmusic.cn/tags/%E7%BC%93%E5%AD%98/</loc>
     <lastmod>2021-06-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.bookandmusic.cn/tags/%E7%BC%93%E5%AD%98/</loc>
+    <loc>https://www.bookandmusic.cn/tags/%E9%82%AE%E4%BB%B6/</loc>
     <lastmod>2021-06-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -802,20 +802,6 @@
   </url>
   
   <url>
-    <loc>https://www.bookandmusic.cn/tags/%E5%9B%BE%E7%89%87/</loc>
-    <lastmod>2021-06-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.bookandmusic.cn/tags/%E6%A0%B7%E5%BC%8F/</loc>
-    <lastmod>2021-06-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.bookandmusic.cn/tags/vue/</loc>
     <lastmod>2021-06-12</lastmod>
     <changefreq>daily</changefreq>
@@ -845,6 +831,20 @@
   
   <url>
     <loc>https://www.bookandmusic.cn/tags/%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A/</loc>
+    <lastmod>2021-06-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.bookandmusic.cn/tags/%E5%9B%BE%E7%89%87/</loc>
+    <lastmod>2021-06-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.bookandmusic.cn/tags/%E6%A0%B7%E5%BC%8F/</loc>
     <lastmod>2021-06-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -907,13 +907,6 @@
   </url>
   
   <url>
-    <loc>https://www.bookandmusic.cn/tags/%E9%97%AD%E5%8C%85/</loc>
-    <lastmod>2021-06-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.bookandmusic.cn/tags/LEGB/</loc>
     <lastmod>2021-06-12</lastmod>
     <changefreq>daily</changefreq>
@@ -942,14 +935,14 @@
   </url>
   
   <url>
-    <loc>https://www.bookandmusic.cn/tags/%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0/</loc>
+    <loc>https://www.bookandmusic.cn/tags/%E9%97%AD%E5%8C%85/</loc>
     <lastmod>2021-06-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.bookandmusic.cn/tags/Json/</loc>
+    <loc>https://www.bookandmusic.cn/tags/%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0/</loc>
     <lastmod>2021-06-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -991,7 +984,7 @@
   </url>
   
   <url>
-    <loc>https://www.bookandmusic.cn/tags/%E6%97%B6%E9%97%B4%E6%A8%A1%E5%9D%97/</loc>
+    <loc>https://www.bookandmusic.cn/tags/Json/</loc>
     <lastmod>2021-06-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1013,6 +1006,13 @@
   
   <url>
     <loc>https://www.bookandmusic.cn/tags/mock/</loc>
+    <lastmod>2021-06-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.bookandmusic.cn/tags/%E6%97%B6%E9%97%B4%E6%A8%A1%E5%9D%97/</loc>
     <lastmod>2021-06-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1187,13 +1187,6 @@
   </url>
   
   <url>
-    <loc>https://www.bookandmusic.cn/tags/Windows/</loc>
-    <lastmod>2021-06-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.bookandmusic.cn/tags/CLI/</loc>
     <lastmod>2021-06-12</lastmod>
     <changefreq>daily</changefreq>
@@ -1202,6 +1195,13 @@
   
   <url>
     <loc>https://www.bookandmusic.cn/tags/%E7%BB%88%E7%AB%AF%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2021-06-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.bookandmusic.cn/tags/Windows/</loc>
     <lastmod>2021-06-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1334,13 +1334,6 @@
   </url>
   
   <url>
-    <loc>https://www.bookandmusic.cn/tags/office/</loc>
-    <lastmod>2021-06-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.bookandmusic.cn/tags/deepin/</loc>
     <lastmod>2021-06-12</lastmod>
     <changefreq>daily</changefreq>
@@ -1349,6 +1342,13 @@
   
   <url>
     <loc>https://www.bookandmusic.cn/tags/nvidia/</loc>
+    <lastmod>2021-06-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.bookandmusic.cn/tags/office/</loc>
     <lastmod>2021-06-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

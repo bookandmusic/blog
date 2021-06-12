@@ -27,7 +27,7 @@ var searchFunc = function(path, search_id, content_id) {
   $resultContent.innerHTML = '<div class="m-auto text-center"><div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div><br/>Loading...</div>';
   $.ajax({
     // 0x01. load xml file
-    url : "https://cdn.jsdelivr.net/gh/bookandmusic/blog@210602/search.xml",
+    url : path,
     dataType: 'xml',
     success : function(xmlResponse) {
       // 0x02. parse xml file
@@ -129,4 +129,9 @@ var searchFunc = function(path, search_id, content_id) {
     $('#local-search-input').val('').removeClass('invalid').removeClass('valid');
     $('#local-search-result').html('');
   });
+};
+
+var getSearchFile = function(){
+  var path = "https://cdn.jsdelivr.net/gh/bookandmusic/blog@210602/search.xml";
+  searchFunc(path, 'local-search-input', 'local-search-result');
 };
