@@ -135,6 +135,6 @@ highlight:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git   #类型，常用的git
-  repository: git@github.com:bookandmusic/bookandmusic.github.io.git
+  repository: git@github.com:bookandmusic/blog.git
   # repository: https://gitee.com/bookandmusic/bookandmusic.git
   branch: master
