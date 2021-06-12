@@ -7,7 +7,7 @@ categories:
   - Django
 tags:
   - Celery
-  - 单文件导入settings
+  - 单文件导入配置项
   - 异步操作
 ---
 

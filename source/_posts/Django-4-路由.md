@@ -8,7 +8,7 @@ tags:
   - namespace
   - app_name
   - reverse
-  - 路由
+  - django基础
 date: 2019-05-25 22:45:46
 ---
 > Django2.0 新增了在 urls.py 中 `app_name` 来指定 namespace。我们之前通过 `reverse` 函数来反向获取 url

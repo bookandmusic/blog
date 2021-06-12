@@ -6,7 +6,7 @@ categories:
   - python
   - Django
 tags:
-  - django
+  - django基础
   - ORM模型类
 ---
 

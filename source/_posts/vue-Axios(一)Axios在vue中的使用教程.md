@@ -7,9 +7,6 @@ categories:
 tags:
     - vue
     - axios
-    - vue-axios
-    - 局部axios
-    - 全局axios
 ---
 
 在 vue项目中使用axios分为局部使用和全局使用

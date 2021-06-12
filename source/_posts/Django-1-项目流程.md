@@ -5,7 +5,7 @@ categories:
   - python
   - Django
 tags:
-  - 入门教程
+  - django基础
 date: 2019-03-22 22:45:46
 ---
 

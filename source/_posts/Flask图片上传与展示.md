@@ -6,7 +6,7 @@ categories:
  - python
  - Flask
 tags:
- - 图片上传和展示
+ - 图片上传
 ---
 
 ## 项目配置

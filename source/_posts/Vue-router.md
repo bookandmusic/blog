@@ -5,9 +5,8 @@ categories:
     - 技术
     - vue
 tags:
-    - vue
-    - vue-router
-    - 路由
+    - Vue
+    - router
 ---
 
 Vue.js官方提供了一套专用的路由工具库 Vue Router,其使用和配置都非常简单。

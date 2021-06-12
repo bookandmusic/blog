@@ -7,8 +7,6 @@ categories:
   - Django
 tags:
   - 邮件
-  - itsdangerous
-  - 临时身份令牌
 ---
 
 我们常常会用到一些发送邮件的功能，比如：有人注册网站之后，需要向其邮箱中发送激活链接，只有点击激活链接，激活账户之后，才允许登录。
@@ -78,38 +76,9 @@ def send_regiser_active_email(to_email, username, token):
     
 ```
 
-## itsdangerous
-
-有时您只想将一些数据发送到不受信任的环境。但是如何安全地做到这一点？诀窍就是签名。只要知道一个密钥，您就可以对数据进行加密签名并将其移交给其他人。当您取回数据时，可以轻松确保没有人篡改数据。使用itsdangerous可以实现此种方案。
-
-```python
-from itsdangerous import TimedJSONWebSignatureSerializer as TJSS
-
-salt='abcdefg' # 这里就是配置加密的规则
-
-serializer=TJSS(salt,expires_in=3600) # 过期时间一小时
-user_info = {'user_id':1}
-# 加密阶段
-res = serializer.dumps(user_info)  # 得到加密后的数据，会返回一个字节类型的数据
-token = res.decode() # 解码为str
-print(token)
-# 得到的数据如下，就是包含数据和盐值的token了，只有在知道盐值的时候才能被解密出来
-#eyJhbGciOiJIUzUxMiIsImlhdCI6MTU2MjY0Nzg4NCwiZXhwIjoxNTYyNjUxNDg0fQ.eyJjb25maXJtIjo1fQ.93DtXu9vHQDW0lr7saJhDBt-dcBxNNh_IMTR-JhWnrT-ujQ9SwevSUyW0p2txLS-gtyRHPlH1eD9INksIWilkA
-
-# 解密阶段
-res=serializer.loads(token)
-print(res)
-# 返回的数据如下：
-# {'user_id':1}
-```
-
-> 当token被修改时，解密时，会抛出 `itsdangerous.Badsignature`
->
-> 当token过期时, 解密时，会抛出 `itsdangerous.SignatureExpired: Signature expired`
-
 ## 邮件激活
 
-注册成功，发送激活链接
+注册成功，发送激活链接, **注意：**为了安全考虑，可以使用`itsdangerous`，根据用户信息加密生成 token
 
 ```python
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer

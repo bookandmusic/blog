@@ -5,7 +5,6 @@ categories:
 - 技术
 - JS
 tags:
-- JS
 - ES6
 - var
 - let
@@ -74,12 +73,12 @@ tags:
     ```javascript
     const a = 5
     // a = 10 // 报错 Assignment to constant variable
-
+    
     const obj = {}
     obj.a = 20 // 可执行
     console.log(obj) // 可执行 {a: 20}
     // obj = {} // 报错
-
+    
     const arry = []
     arry.push(1) // 可执行
     arry.length = 0 // 可执行
@@ -270,7 +269,7 @@ x => ({ foo: x })
     var Person = (name) => { // Uncaught TypeError: Person is not a constructor
         this.name = name;
     }
-
+    
     var person = new Person('Jack');
     ```
 

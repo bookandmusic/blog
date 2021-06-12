@@ -7,12 +7,11 @@ categories:
 tags:
     - vue
     - axios
-    - GET
-    - POST
+    - 参数发送
 ---
 
 ## GET 请求传递参数
-  
+
 ### 1、直接在 URL 上添加参数
 
 ```javascript
@@ -28,7 +27,7 @@ axios.get('/api/goods/add_info/?ID=12345&firstName=Fred&lastName=Flintstone')
 ```
 
 ### 2、可以通过 params 设置参数
-  
+
 ```javascript
 import axios from 'axios'
 

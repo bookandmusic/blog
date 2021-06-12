@@ -7,7 +7,6 @@ categories:
   - Django
 tags:
   - 图片上传
-  - 模板
 ---
 
 ## 图片上传

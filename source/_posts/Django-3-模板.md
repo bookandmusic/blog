@@ -6,5 +6,5 @@ categories:
   - python
   - Django
 tags:
-  - 模板
+  - django基础
 ---

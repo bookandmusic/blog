@@ -5,6 +5,7 @@ categories:
     - 技术
     - vue
 tags:
+    - Vue
     - 图片
     - 样式
 ---

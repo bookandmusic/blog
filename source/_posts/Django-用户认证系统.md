@@ -6,7 +6,7 @@ categories:
   - Django
 tags:
   - auth
-  - 模板
+  - user
 date: 2020-03-10 21:34:46
 ---
 ## 项目框架
@@ -38,7 +38,7 @@ date: 2020-03-10 21:34:46
         ├── login.html
         ├── register.html
         └── user.html
-
+    
     ```
 
 ## 准备工作

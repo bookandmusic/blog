@@ -6,7 +6,7 @@ categories:
     - vue
 tags:
     - Vue
-    - 组件
+    - 组件通信
 ---
 
 前言

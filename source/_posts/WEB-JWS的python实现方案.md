@@ -8,6 +8,8 @@ categories:
 tags:
   - JWT
   - JWS
+  - itsdangerous
+  - pyjwt
 ---
 
 ## JWS

@@ -6,5 +6,5 @@ categories:
   - python
   - Django
 tags:
-  - 视图
+  - django基础
 ---
