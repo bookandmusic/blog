@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="bookandmusic">
   <meta name="keywords" content="">
-  <title>Git命令 - Bookandmusic</title>
+  <title>版本控制工具Git - Bookandmusic</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Git命令">
+            <span class="h2" id="subtitle" title="版本控制工具Git">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-28 09:15" pubdate>
-        2021年3月28日 上午
+      <time datetime="2021-06-12 22:29" pubdate>
+        2021年6月12日 晚上
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.2k 字
+      4.3k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      46
+      48
        分钟
     </span>
   
@@ -225,10 +225,20 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Git命令</h1>
+            <h1 style="display: none">版本控制工具Git</h1>
             
             <div class="markdown-body">
-              <h2 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h2><h3 id="git-init"><a href="#git-init" class="headerlink" title="git init"></a>git init</h3><p><code>git init</code> 命令创建一个新的 Git 仓库。它用来将已存在但还没有版本控制的项目转换成一个 Git 仓库，或者创建一个空的新仓库。大多数Git命令在未初始化的仓库中都是无法使用的，所以这就是你运行新项目的第一个命令了。</p>
+              <p>Git是目前世界上最先进的分布式版本控制系统，可以有效、高速的处理从很小到非常大的项目版本管理。也就是用来管理你的hexo博客文章，上传到GitHub的工具。Git非常强大，开发人员必备技能。</p>
+<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><ul>
+<li><p>windows：到git官网上下载, <a target="_blank" rel="noopener" href="https://gitforwindows.org/">Download</a> git,下载后会有一个Git Bash的命令行工具，以后就用这个工具来使用git。</p>
+</li>
+<li><p>linux：对linux来说实在是太简单了，因为最早的git就是在linux上编写的，只需要一行代码</p>
+  <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">sudo apt-get install git<br></code></pre></div></td></tr></table></figure>
+<p>  安装好后，用<code>git --version</code> 来查看一下版本</p>
+</li>
+</ul>
+<h2 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/Git%E6%93%8D%E4%BD%9C%20.jpg" srcset="/img/loading.gif" alt="Git操作"></p>
+<h2 id="命令详解"><a href="#命令详解" class="headerlink" title="命令详解"></a>命令详解</h2><h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><h4 id="git-init"><a href="#git-init" class="headerlink" title="git init"></a>git init</h4><p><code>git init</code> 命令创建一个新的 Git 仓库。它用来将已存在但还没有版本控制的项目转换成一个 Git 仓库，或者创建一个空的新仓库。大多数Git命令在未初始化的仓库中都是无法使用的，所以这就是你运行新项目的第一个命令了。</p>
 <p>运行 <code>git init</code> 命令会在你项目的根目录下创建一个新的 <code>.git</code> 目录，其中包含了你项目必需的所有元数据。除了 <code>.git</code> 目录之外，已经存在的项目不会被改变（Git 不强制每个子目录中都有一个 <code>.git</code> 目录）。</p>
 <figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">git init<br></code></pre></div></td></tr></table></figure>
 <p>将当前的目录转换成一个 Git 仓库。它在当前的目录下增加了一个 <code>.git</code> 目录，于是就可以开始记录项目版本了。</p>
@@ -239,29 +249,29 @@
 <p>一般来说，用 <code>—-bare</code> 标记初始化的仓库以 <code>.git</code> 结尾。比如，一个叫<code>repo</code>的仓库，它的空版本应该保存在 <code>repo.git</code> 目录下（这也是为什么我们从 GitHub clone 仓库的时候，地址都是 xxx.git 这样的形式的原因）。</p>
 <p>并且这个仓库是可以被正常 <code>clone</code> 和 <code>push</code> 更新的， <strong>裸仓库</strong>不包含工作区，所以并不会存在在裸仓库上直接提交变更的情况。</p>
 <p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/03/center_stroe.svg" srcset="/img/loading.gif" alt="center_stroe"></p>
-<h3 id="git-clone"><a href="#git-clone" class="headerlink" title="git clone"></a>git clone</h3><p><code>git clone</code> 命令拷贝整个 Git 仓库。这个命令在本地创建一个完备的Git仓库——它包含自己的历史，管理自己的文件，以及环境和原仓库完全隔离。</p>
+<h4 id="git-clone"><a href="#git-clone" class="headerlink" title="git clone"></a>git clone</h4><p><code>git clone</code> 命令拷贝整个 Git 仓库。这个命令在本地创建一个完备的Git仓库——它包含自己的历史，管理自己的文件，以及环境和原仓库完全隔离。</p>
 <p>为了方便起见，<code>clone</code> 自动创建了一个名为 <code>origin</code> 的远程连接，指向原有仓库。这让和中央仓库之间的交互更加简单。</p>
 <figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">git <span class="hljs-built_in">clone</span> &lt;repo&gt;<br></code></pre></div></td></tr></table></figure>
 <p>将位于 <code>&lt;repo&gt;</code> 的仓库克隆到本地机器。原仓库可以在本地文件系统中，或是通过 HTTP 或 SSH 连接的远程机器。</p>
 <figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">git <span class="hljs-built_in">clone</span> &lt;repo&gt; &lt;directory&gt;<br></code></pre></div></td></tr></table></figure>
 <p>将位于 <code>&lt;repo&gt;</code> 的仓库克隆到本地机器上的 <code>&lt;directory&gt;</code> 目录。</p>
-<h2 id="保存更改"><a href="#保存更改" class="headerlink" title="保存更改"></a>保存更改</h2><h3 id="git-add"><a href="#git-add" class="headerlink" title="git add"></a>git add</h3><p><code>git add</code> 命令将工作目录中的变化添加到暂存区。它告诉 Git 你想要在下一次提交时包含这个文件的更新。但是，<code>git add</code> 不会实质上地影响你的仓库——在你运行 <code>git commit</code> 前更改都还没有真正被记录。</p>
+<h3 id="保存更改"><a href="#保存更改" class="headerlink" title="保存更改"></a>保存更改</h3><h4 id="git-add"><a href="#git-add" class="headerlink" title="git add"></a>git add</h4><p><code>git add</code> 命令将工作目录中的变化添加到暂存区。它告诉 Git 你想要在下一次提交时包含这个文件的更新。但是，<code>git add</code> 不会实质上地影响你的仓库——在你运行 <code>git commit</code> 前更改都还没有真正被记录。</p>
 <figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">git add &lt;file&gt;<br></code></pre></div></td></tr></table></figure>
 <p>将 <code>&lt;file&gt;</code> 中的更改加入下次提交的缓存。</p>
 <figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">git add &lt;directory&gt;<br></code></pre></div></td></tr></table></figure>
 <p>将 <code>&lt;directory&gt;</code> 下的更改加入下次提交的缓存。</p>
-<h3 id="git-commit"><a href="#git-commit" class="headerlink" title="git commit"></a>git commit</h3><p><code>git commit</code>命令将缓存的快照提交到项目历史。提交的快照可以认为是项目安全的版本，Git 永远不会改变它们，除非你这么要求。和 <code>git add</code> 一样，这是最重要的 Git 命令之一。</p>
+<h4 id="git-commit"><a href="#git-commit" class="headerlink" title="git commit"></a>git commit</h4><p><code>git commit</code>命令将缓存的快照提交到项目历史。提交的快照可以认为是项目安全的版本，Git 永远不会改变它们，除非你这么要求。和 <code>git add</code> 一样，这是最重要的 Git 命令之一。</p>
 <figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">git commit<br></code></pre></div></td></tr></table></figure>
 <p>提交已经缓存的快照。它会运行文本编辑器，等待你输入提交信息。当你输入信息之后，保存文件，关闭编辑器，创建实际的提交。</p>
 <figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">git commit -m <span class="hljs-string">&quot;&lt;message&gt;&quot;</span><br></code></pre></div></td></tr></table></figure>
 <p>提交已经缓存的快照。但将 <code>&lt;message&gt;</code> 作为提交信息，而不是运行文本编辑器。</p>
-<h2 id="查看查看状态"><a href="#查看查看状态" class="headerlink" title="查看查看状态"></a>查看查看状态</h2><h3 id="git-status"><a href="#git-status" class="headerlink" title="git status"></a>git status</h3><p><code>git status</code> 命令显示工作目录和缓存区的状态。你可以看到哪些更改被缓存了，哪些还没有，以及哪些还未被 Git 追踪。status 的输出 <em>不会</em> 告诉你任何已提交到项目历史的信息。如果你想看的话，应该使用 <code>git log</code> 命令。</p>
+<h3 id="查看查看状态"><a href="#查看查看状态" class="headerlink" title="查看查看状态"></a>查看查看状态</h3><h4 id="git-status"><a href="#git-status" class="headerlink" title="git status"></a>git status</h4><p><code>git status</code> 命令显示工作目录和缓存区的状态。你可以看到哪些更改被缓存了，哪些还没有，以及哪些还未被 Git 追踪。status 的输出 <em>不会</em> 告诉你任何已提交到项目历史的信息。如果你想看的话，应该使用 <code>git log</code> 命令。</p>
 <figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">git status<br></code></pre></div></td></tr></table></figure>
 <p><code>git status</code> 是一个相对简单的命令。 它告诉你 <code>git add</code> 和 <code>git commit</code> 的进展。status 信息还包括了添加缓存和移除缓存的相关指令。</p>
 <h4 id="忽略文件"><a href="#忽略文件" class="headerlink" title="忽略文件"></a>忽略文件</h4><p>未追踪的文件通常有两类。它们要么是项目新增但还未提交的文件，要么是像 <code>.pyc</code>、<code>.obj</code>、<code>.exe</code> 等编译后的二进制文件。显然前者应该出现在 <code>git status</code> 的输出中，而后者会让我们困惑究竟发生了什么。</p>
 <p>因此，Git 允许完全忽略这些文件，只需要将路径放在一个特定的 <code>.gitignore</code> 文件中。所有想要忽略的文件应该分别写在单独一行，<code>*</code> 字符用作通配符。比如，将下面这行加入项目根目录的<code>.gitignore</code>文件可以避免编译后的Python模块出现在<code>git status</code>中：</p>
 <figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs .gitignore">*.pyc<br></code></pre></div></td></tr></table></figure>
-<h3 id="git-log"><a href="#git-log" class="headerlink" title="git log"></a>git log</h3><p><code>git log</code> 命令显示已提交的快照。你可以列出项目历史，筛选，以及搜索特定更改。<code>git status</code> 允许你查看工作目录和缓存区，而 <code>git log</code> 只作用于提交的项目历史。</p>
+<h4 id="git-log"><a href="#git-log" class="headerlink" title="git log"></a>git log</h4><p><code>git log</code> 命令显示已提交的快照。你可以列出项目历史，筛选，以及搜索特定更改。<code>git status</code> 允许你查看工作目录和缓存区，而 <code>git log</code> 只作用于提交的项目历史。</p>
 <p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/03/2021_3_28.svg" srcset="/img/loading.gif" alt="2021_3_28"></p>
 <p>log 输出可以有很多种自定义的方式，从简单地筛选提交，到用完全自定义的格式显示。其中一些最常用的 <code>git log</code> 配置如下所示。</p>
 <figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">git <span class="hljs-built_in">log</span><br></code></pre></div></td></tr></table></figure>
@@ -274,10 +284,10 @@
 <p>除了 <code>git log</code> 信息之外，包含哪些文件被更改了，以及每个文件相对的增删行数。</p>
 <figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">git <span class="hljs-built_in">log</span> -p<br></code></pre></div></td></tr></table></figure>
 <p>显示代表每个提交的一堆信息。显示每个提交全部的差异（diff），这也是项目历史中最详细的视图。</p>
-<h2 id="回滚错误提交"><a href="#回滚错误提交" class="headerlink" title="回滚错误提交"></a>回滚错误提交</h2><h3 id="git-revert"><a href="#git-revert" class="headerlink" title="git revert"></a>git revert</h3><p><code>git revert</code> 命令用来撤销一个已经提交的快照。但是，它是通过搞清楚如何撤销这个提交引入的更改，然后在最后加上一个撤销了更改的 <em>新</em> 提交，而不是从项目历史中移除这个提交。这避免了Git丢失项目历史，这一点对于你的版本历史和协作的可靠性来说是很重要的。</p>
+<h3 id="回滚错误提交"><a href="#回滚错误提交" class="headerlink" title="回滚错误提交"></a>回滚错误提交</h3><h4 id="git-revert"><a href="#git-revert" class="headerlink" title="git revert"></a>git revert</h4><p><code>git revert</code> 命令用来撤销一个已经提交的快照。但是，它是通过搞清楚如何撤销这个提交引入的更改，然后在最后加上一个撤销了更改的 <em>新</em> 提交，而不是从项目历史中移除这个提交。这避免了Git丢失项目历史，这一点对于你的版本历史和协作的可靠性来说是很重要的。</p>
 <figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">git revert &lt;commit&gt;<br></code></pre></div></td></tr></table></figure>
 <p>生成一个撤消了 <code>&lt;commit&gt;</code> 引入的修改的新提交，然后应用到当前分支。</p>
-<h3 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a>git reset</h3><p>如果说 <code>git revert</code> 是一个撤销更改安全的方式，你可以将 <code>git reset</code> 看做一个 <em>危险</em> 的方式。当你用 <code>git reset</code> 来重设更改时(提交不再被任何引用或引用日志所引用)，我们无法获得原来的样子——这个撤销是永远的。使用这个工具的时候务必要小心，因为这是少数几个可能会造成工作丢失的命令之一。</p>
+<h4 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a>git reset</h4><p>如果说 <code>git revert</code> 是一个撤销更改安全的方式，你可以将 <code>git reset</code> 看做一个 <em>危险</em> 的方式。当你用 <code>git reset</code> 来重设更改时(提交不再被任何引用或引用日志所引用)，我们无法获得原来的样子——这个撤销是永远的。使用这个工具的时候务必要小心，因为这是少数几个可能会造成工作丢失的命令之一。</p>
 <p>和 <code>git checkout</code> 一样，<code>git reset</code> 有很多种用法。它可以被用来移除提交快照，尽管它通常被用来撤销缓存区和工作目录的修改。不管是哪种情况，它应该只被用于 <em>本地</em> 修改——你永远不应该重设和其他开发者共享的快照。</p>
 <figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">git reset &lt;file&gt;<br></code></pre></div></td></tr></table></figure>
 <p>从缓存区移除特定文件，但不改变工作目录。它会取消这个文件的缓存，而不覆盖任何更改。</p>
@@ -292,7 +302,7 @@
 <h4 id="revert-VS-reset"><a href="#revert-VS-reset" class="headerlink" title="revert VS reset"></a>revert VS reset</h4><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/03/reset.svg" srcset="/img/loading.gif" alt="reset"></p>
 <p>撤销和重设相比有两个重要的优点。首先，它不会改变项目历史，对那些已经发布到共享仓库的提交来说这是一个安全的操作。</p>
 <p>其次，<code>git revert</code> 可以针对历史中任何一个提交，而 <code>git reset</code>只能从当前提交向前回溯。比如，你想用 <code>git reset</code> 重设一个旧的提交，你不得不移除那个提交后的所有提交，再移除那个提交，然后重新提交后面的所有提交。不用说，这并不是一个优雅的回滚方案。</p>
-<h3 id="git-clean"><a href="#git-clean" class="headerlink" title="git clean"></a>git clean</h3><p><code>git clean</code> 命令将未跟踪的文件从你的工作目录中移除。它只是提供了一条捷径，因为用 <code>git status</code> 查看哪些文件还未跟踪然后手动移除它们也很方便。和一般的 <code>rm</code> 命令一样，<code>git clean</code> 是无法撤消的，所以在删除未跟踪的文件之前想清楚，你是否真的要这么做。</p>
+<h4 id="git-clean"><a href="#git-clean" class="headerlink" title="git clean"></a>git clean</h4><p><code>git clean</code> 命令将未跟踪的文件从你的工作目录中移除。它只是提供了一条捷径，因为用 <code>git status</code> 查看哪些文件还未跟踪然后手动移除它们也很方便。和一般的 <code>rm</code> 命令一样，<code>git clean</code> 是无法撤消的，所以在删除未跟踪的文件之前想清楚，你是否真的要这么做。</p>
 <p><code>git clean</code> 命令经常和 <code>git reset --hard</code> 一起使用。记住，reset 只影响被跟踪的文件，所以还需要一个单独的命令来清理未被跟踪的文件。这个两个命令相结合，你就可以将工作目录回到之前特定提交时的状态。</p>
 <figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">git clean -n<br></code></pre></div></td></tr></table></figure>
 <p>执行一次git clean的『演习』。它会告诉你那些文件在命令执行后会被移除，而不是真的删除它。</p>
@@ -304,9 +314,9 @@
 <p>移除未跟踪的文件，以及目录。</p>
 <figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">git clean -xf<br></code></pre></div></td></tr></table></figure>
 <p>移除当前目录下未跟踪的文件，以及 Git 一般忽略的文件。</p>
-<h2 id="代码同步"><a href="#代码同步" class="headerlink" title="代码同步"></a>代码同步</h2><p>Git 给予每个开发者一份自己的仓库拷贝，拥有自己完整的本地历史和分支结构。用户通常共享一系列的提交而不是单个变更集合。Git 允许你在仓库间共享整个分支，而不是从工作副本提交一个差异集合到中央仓库。</p>
+<h3 id="代码同步"><a href="#代码同步" class="headerlink" title="代码同步"></a>代码同步</h3><p>Git 给予每个开发者一份自己的仓库拷贝，拥有自己完整的本地历史和分支结构。用户通常共享一系列的提交而不是单个变更集合。Git 允许你在仓库间共享整个分支，而不是从工作副本提交一个差异集合到中央仓库。</p>
 <p>下面的命令让你管理仓库之间的连接，将分支「推送」到其他仓库来发布本地历史，或是将分支「拉取」到本地仓库来查看其它开发者的贡献。</p>
-<h3 id="git-remote"><a href="#git-remote" class="headerlink" title="git remote"></a>git remote</h3><p><code>git remote</code> 命令允许你创建、查看和删除和其它仓库之间的连接。远程连接更像是书签，而不是直接跳转到其他仓库的链接。它用方便记住的别名引用不那么方便记住的 URL，而不是提供其他仓库的实时连接。</p>
+<h4 id="git-remote"><a href="#git-remote" class="headerlink" title="git remote"></a>git remote</h4><p><code>git remote</code> 命令允许你创建、查看和删除和其它仓库之间的连接。远程连接更像是书签，而不是直接跳转到其他仓库的链接。它用方便记住的别名引用不那么方便记住的 URL，而不是提供其他仓库的实时连接。</p>
 <p>例如，下图显示了你的仓库和中央仓库以及另一个开发者仓库之间的远程连接。你可以向 Git 命令传递 origin 和 john 的别名来引用这些仓库，替代完整的 URL。</p>
 <p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/03/repo.svg" srcset="/img/loading.gif" alt="repo"></p>
 <figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">git remote<br></code></pre></div></td></tr></table></figure>
@@ -325,13 +335,13 @@
 <p>但是，直接将提交推送到一个 HTTP 地址一般是不可行的（你不太可能希望匿名用户也能随意推送）。如果希望对仓库进行读写，你需要使用 SSH 协议：</p>
 <figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">ssh:<span class="hljs-regexp">//u</span>ser@host<span class="hljs-regexp">/path/</span>to/repo.git<br></code></pre></div></td></tr></table></figure>
 <p>你需要在托管的服务器上有一个有效的 SSH 账户，但不用麻烦了，Git 支持开箱即用的 SSH 认证连接。</p>
-<h3 id="git-fetch"><a href="#git-fetch" class="headerlink" title="git fetch"></a>git fetch</h3><p><code>git fetch</code> 命令将提交从远程仓库导入到你的本地仓库。拉取下来的提交储存为远程分支，而不是我们一直使用的普通的本地分支。你因此可以在整合进你的项目副本之前查看更改。</p>
+<h4 id="git-fetch"><a href="#git-fetch" class="headerlink" title="git fetch"></a>git fetch</h4><p><code>git fetch</code> 命令将提交从远程仓库导入到你的本地仓库。拉取下来的提交储存为远程分支，而不是我们一直使用的普通的本地分支。你因此可以在整合进你的项目副本之前查看更改。</p>
 <figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">git fetch &lt;remote&gt;<br></code></pre></div></td></tr></table></figure>
 <p>拉取仓库中所有的分支。同时会从另一个仓库中下载所有需要的提交和文件。</p>
 <figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">git fetch &lt;remote&gt; &lt;branch&gt;<br></code></pre></div></td></tr></table></figure>
 <p>和上一个命令相同，但只拉取指定的分支。</p>
 <p>当你希望查看其他人的工作进展时，你需要 fetch。fetch 下来的内容表示为一个远程分支，因此不会影响你的本地开发。这是一个安全的方式，在整合进你的本地仓库之前，检查那些提交。你可以看到中央仓库的历史进展如何，但它不会强制你将这些进展合并入你的仓库。</p>
-<h3 id="git-pull"><a href="#git-pull" class="headerlink" title="git pull"></a>git pull</h3><p>在基于 Git 的协作工作流中，将上游更改合并到你的本地仓库是一个常见的工作。我们已经知道应该使用 <code>git fetch</code>，然后是 <code>git merge</code>，但是 <code>git pull</code> 将这两个命令合二为一。</p>
+<h4 id="git-pull"><a href="#git-pull" class="headerlink" title="git pull"></a>git pull</h4><p>在基于 Git 的协作工作流中，将上游更改合并到你的本地仓库是一个常见的工作。我们已经知道应该使用 <code>git fetch</code>，然后是 <code>git merge</code>，但是 <code>git pull</code> 将这两个命令合二为一。</p>
 <figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">git pull &lt;remote&gt;<br></code></pre></div></td></tr></table></figure>
 <p>拉取当前分支对应的远程副本中的更改，并立即并入本地副本。效果和 <code>git fetch</code> 后接 <code>git merge origin/.</code> 一致。</p>
 <figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">git pull --rebase &lt;remote&gt;<br></code></pre></div></td></tr></table></figure>
@@ -339,7 +349,7 @@
 <p>下图揭示了 pull 过程中的每一步。</p>
 <p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/03/gitpull.svg" srcset="/img/loading.gif" alt="gitpull"></p>
 <p>你认为你的仓库已经同步了，但 <code>git fetch</code> 发现 origin 中 <code>master</code> 的版本在上次检查后已经有了新进展。 接着 <code>git merge</code> 立即将 <code>remote master</code> 并入本地的分支。</p>
-<h3 id="git-push"><a href="#git-push" class="headerlink" title="git push"></a>git push</h3><p>Push 是你将本地仓库中的提交转移到远程仓库中时要做的事。它和 <code>git fetch</code> 正好相反，fetch 将提交导入到本地分支，而 push 将提交导出到远程分支。它可以覆盖已有的更改，所以你需要小心使用。这些情况请见下面的讨论。</p>
+<h4 id="git-push"><a href="#git-push" class="headerlink" title="git push"></a>git push</h4><p>Push 是你将本地仓库中的提交转移到远程仓库中时要做的事。它和 <code>git fetch</code> 正好相反，fetch 将提交导入到本地分支，而 push 将提交导出到远程分支。它可以覆盖已有的更改，所以你需要小心使用。这些情况请见下面的讨论。</p>
 <figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">git push &lt;remote&gt; &lt;branch&gt;<br></code></pre></div></td></tr></table></figure>
 <p>将指定的分支推送到 <code>&lt;remote&gt;</code> 上，包括所有需要的提交和提交对象。它会在目标仓库中创建一个本地分支。为了防止你覆盖已有的提交，如果会导致目标仓库非快速向前合并时，Git 不允许你 push。</p>
 <figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">git push &lt;remote&gt; --force<br></code></pre></div></td></tr></table></figure>
@@ -371,6 +381,8 @@
                     
                       <a class="hover-with-bg" href="/tags/Git/">Git</a>
                     
+                      <a class="hover-with-bg" href="/tags/%E4%BB%A3%E7%A0%81%E7%AE%A1%E7%90%86/">代码管理</a>
+                    
                   </div>
                 
               </div>
@@ -382,9 +394,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/05/03/drf-tu-pian-shang-chuan-dao-qi-niu-yun/">
+                      <a href="/2021/06/13/linux-wang-luo-chuan-shu-ming-ling/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">DRF-图片上传到七牛云</span>
+                        <span class="hidden-mobile">Linux网络传输命令</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -392,8 +404,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/03/06/ssh-an-zhuang-yu-pei-zhi/">
-                        <span class="hidden-mobile">SSH安装与配置</span>
+                      <a href="/2021/06/10/web-jws-de-python-shi-xian-fang-an/">
+                        <span class="hidden-mobile">JWS的python实现方案</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

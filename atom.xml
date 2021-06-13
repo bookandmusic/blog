@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.bookandmusic.cn/"/>
-  <updated>2021-06-11T15:04:58.574Z</updated>
+  <updated>2021-06-13T09:44:29.100Z</updated>
   <id>https://www.bookandmusic.cn/</id>
   
   <author>
@@ -15,6 +15,75 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux网络传输命令</title>
+    <link href="https://www.bookandmusic.cn/2021/06/13/linux-wang-luo-chuan-shu-ming-ling/"/>
+    <id>https://www.bookandmusic.cn/2021/06/13/linux-wang-luo-chuan-shu-ming-ling/</id>
+    <published>2021-06-13T02:11:52.000Z</published>
+    <updated>2021-06-13T09:44:29.100Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;名词解释&quot;&gt;&lt;a href=&quot;#名词解释&quot; class=&quot;headerlink&quot; title=&quot;名词解释&quot;&gt;&lt;/a&gt;名词解释&lt;/h2&gt;&lt;h3 id=&quot;FTP&quot;&gt;&lt;a href=&quot;#FTP&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="工具" scheme="https://www.bookandmusic.cn/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="Linux" scheme="https://www.bookandmusic.cn/categories/%E5%B7%A5%E5%85%B7/Linux/"/>
+    
+    
+      <category term="ftp" scheme="https://www.bookandmusic.cn/tags/ftp/"/>
+    
+      <category term="scp" scheme="https://www.bookandmusic.cn/tags/scp/"/>
+    
+      <category term="sftp" scheme="https://www.bookandmusic.cn/tags/sftp/"/>
+    
+      <category term="ssh" scheme="https://www.bookandmusic.cn/tags/ssh/"/>
+    
+      <category term="openssh" scheme="https://www.bookandmusic.cn/tags/openssh/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>版本控制工具Git</title>
+    <link href="https://www.bookandmusic.cn/2021/06/12/gong-ju-ban-ben-kong-zhi-gong-ju-git/"/>
+    <id>https://www.bookandmusic.cn/2021/06/12/gong-ju-ban-ben-kong-zhi-gong-ju-git/</id>
+    <published>2021-06-12T14:29:36.000Z</published>
+    <updated>2021-06-12T14:47:27.336Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Git是目前世界上最先进的分布式版本控制系统，可以有效、高速的处理从很小到非常大的项目版本管理。也就是用来管理你的hexo博客文章，上传到GitHub的工具。Git非常强大，开发人员必备技能。&lt;/p&gt;
+&lt;h2 id=&quot;环境配置&quot;&gt;&lt;a href=&quot;#环境配置&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="工具" scheme="https://www.bookandmusic.cn/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="Git" scheme="https://www.bookandmusic.cn/categories/%E5%B7%A5%E5%85%B7/Git/"/>
+    
+    
+      <category term="Git" scheme="https://www.bookandmusic.cn/tags/Git/"/>
+    
+      <category term="代码管理" scheme="https://www.bookandmusic.cn/tags/%E4%BB%A3%E7%A0%81%E7%AE%A1%E7%90%86/"/>
+    
+  </entry>
   
   <entry>
     <title>JWS的python实现方案</title>
@@ -90,7 +159,7 @@
     <link href="https://www.bookandmusic.cn/2021/05/15/python-zi-dong-hua-ce-shi/"/>
     <id>https://www.bookandmusic.cn/2021/05/15/python-zi-dong-hua-ce-shi/</id>
     <published>2021-05-15T10:48:25.000Z</published>
-    <updated>2021-06-12T06:39:55.059Z</updated>
+    <updated>2021-06-12T14:09:59.801Z</updated>
     
     <summary type="html">
     
@@ -110,7 +179,7 @@
     
       <category term="python" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/python/"/>
     
-      <category term="模块" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/python/%E6%A8%A1%E5%9D%97/"/>
+      <category term="web" scheme="https://www.bookandmusic.cn/categories/%E6%8A%80%E6%9C%AF/python/web/"/>
     
     
       <category term="unittest" scheme="https://www.bookandmusic.cn/tags/unittest/"/>
@@ -151,35 +220,6 @@
       <category term="element-ui" scheme="https://www.bookandmusic.cn/tags/element-ui/"/>
     
       <category term="axios" scheme="https://www.bookandmusic.cn/tags/axios/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Git命令</title>
-    <link href="https://www.bookandmusic.cn/2021/03/28/git-ming-ling/"/>
-    <id>https://www.bookandmusic.cn/2021/03/28/git-ming-ling/</id>
-    <published>2021-03-28T01:15:27.000Z</published>
-    <updated>2021-03-28T14:48:53.865Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;创建仓库&quot;&gt;&lt;a href=&quot;#创建仓库&quot; class=&quot;headerlink&quot; title=&quot;创建仓库&quot;&gt;&lt;/a&gt;创建仓库&lt;/h2&gt;&lt;h3 id=&quot;git-init&quot;&gt;&lt;a href=&quot;#git-init&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="工具" scheme="https://www.bookandmusic.cn/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-      <category term="Git" scheme="https://www.bookandmusic.cn/categories/%E5%B7%A5%E5%85%B7/Git/"/>
-    
-    
-      <category term="Git" scheme="https://www.bookandmusic.cn/tags/Git/"/>
     
   </entry>
   
@@ -602,40 +642,6 @@
       <category term="图片" scheme="https://www.bookandmusic.cn/tags/%E5%9B%BE%E7%89%87/"/>
     
       <category term="样式" scheme="https://www.bookandmusic.cn/tags/%E6%A0%B7%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Deepin OS 安装 NVIDIA驱动</title>
-    <link href="https://www.bookandmusic.cn/2020/09/03/xi-tong-deepin-os-an-zhuang-nvidia-qu-dong/"/>
-    <id>https://www.bookandmusic.cn/2020/09/03/xi-tong-deepin-os-an-zhuang-nvidia-qu-dong/</id>
-    <published>2020-09-03T10:20:35.000Z</published>
-    <updated>2021-01-25T02:59:36.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;工具-原料&quot;&gt;&lt;a href=&quot;#工具-原料&quot; class=&quot;headerlink&quot; title=&quot;工具 / 原料&quot;&gt;&lt;/a&gt;工具 / 原料&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;一台电脑&lt;/li&gt;
-&lt;li&gt;Deepin15.10.2 系统&lt;/li&gt;
-&lt;li&gt;N
-        
-      
-    
-    </summary>
-    
-    
-      <category term="系统" scheme="https://www.bookandmusic.cn/categories/%E7%B3%BB%E7%BB%9F/"/>
-    
-      <category term="linux" scheme="https://www.bookandmusic.cn/categories/%E7%B3%BB%E7%BB%9F/linux/"/>
-    
-    
-      <category term="deepin" scheme="https://www.bookandmusic.cn/tags/deepin/"/>
-    
-      <category term="nvidia" scheme="https://www.bookandmusic.cn/tags/nvidia/"/>
     
   </entry>
   
