@@ -4,7 +4,7 @@ date: 2021-05-15 18:48:25
 categories:
   - 技术
   - python
-  - 模块
+  - web
 tags:
   - unittest
   - django test

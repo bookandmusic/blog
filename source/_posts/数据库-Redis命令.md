@@ -11,8 +11,6 @@ tags:
 
 简单对redis 命令进行总结、归纳。
 
-<!--more-->
-
 ### 键
 
 ![键](https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/键%20.png)
