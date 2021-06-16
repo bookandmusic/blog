@@ -229,12 +229,12 @@
             
             <div class="markdown-body">
               <h2 id="远程仓库密钥配置"><a href="#远程仓库密钥配置" class="headerlink" title="远程仓库密钥配置"></a>远程仓库密钥配置</h2><h3 id="GitHub密钥配置"><a href="#GitHub密钥配置" class="headerlink" title="GitHub密钥配置"></a>GitHub密钥配置</h3><h4 id="设置身份信息"><a href="#设置身份信息" class="headerlink" title="设置身份信息"></a>设置身份信息</h4><p>git设置身份信息</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs hljs hljs hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git config --global user.name &quot;yourname&quot;<br><br>git config --global user.email &quot;your@email.com&quot;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git config --global user.name &quot;yourname&quot;<br><br>git config --global user.email &quot;your@email.com&quot;<br></code></pre></div></td></tr></table></figure>
 <h4 id="删除-ssh文件夹"><a href="#删除-ssh文件夹" class="headerlink" title="删除.ssh文件夹"></a>删除.ssh文件夹</h4><p>（直接搜索该文件夹）下的<code>known_hosts</code>(手动删除即可，不需要git）</p>
 <h4 id="创建密钥"><a href="#创建密钥" class="headerlink" title="创建密钥"></a>创建密钥</h4><p>终端输入命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs hljs hljs hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">ssh-keygen -t rsa -C &quot;your@email.com&quot;（请填你设置的邮箱地址）<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">ssh-keygen -t rsa -C &quot;your@email.com&quot;（请填你设置的邮箱地址）<br></code></pre></div></td></tr></table></figure>
 <p>接着出现：</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs hljs hljs hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">Generating public/private rsa key pair.<br><br>Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">Generating public/private rsa key pair.<br><br>Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):<br></code></pre></div></td></tr></table></figure>
 <p>请直接按下回车</p>
 <p>然后系统会自动在<code>.ssh</code>文件夹下生成两个文件，<code>id_rsa</code>和<code>id_rsa.pub</code>，用记事本打开<code>id_rsa.pub</code></p>
 <p>将全部的内容复制</p>
@@ -244,11 +244,11 @@
 <p>在key中将刚刚复制的粘贴进去</p>
 <p>最后点击<code>Add SSH key</code></p>
 <h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>在终端输入</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs hljs hljs hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">ssh -T git@github.com<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">ssh -T git@github.com<br></code></pre></div></td></tr></table></figure>
 <p>你将会看到：</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs hljs hljs hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">The authenticity of host &#x27;github.com (207.97.227.239)&#x27; can&#x27;t be established.<br>RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.<br>Are you sure you want to continue connecting (yes/no)?<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">The authenticity of host &#x27;github.com (207.97.227.239)&#x27; can&#x27;t be established.<br>RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.<br>Are you sure you want to continue connecting (yes/no)?<br></code></pre></div></td></tr></table></figure>
 <p>输入 yes</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs hljs hljs hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">Hi humingx! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">Hi humingx! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.<br></code></pre></div></td></tr></table></figure>
 <p>如果看到Hi后面是你的用户名，就说明成功了。</p>
 <h3 id="Gitee仓库密钥配置"><a href="#Gitee仓库密钥配置" class="headerlink" title="Gitee仓库密钥配置"></a>Gitee仓库密钥配置</h3><blockquote>
 <p>  Gitee仓库密钥配置和GitHub密钥配置步骤相似</p>
@@ -257,7 +257,7 @@
 <li>错误原因：</li>
 </ul>
 <p>当使用git方式下载时，如果没有配置过<code>ssh key</code>，则会有如下错误提示：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs hljs hljs hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git@github.com:Permissiondenied(publickey) <br>fatal: Could not <span class="hljs-built_in">read</span> from remote repository<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git@github.com:Permissiondenied(publickey) <br>fatal: Could not <span class="hljs-built_in">read</span> from remote repository<br></code></pre></div></td></tr></table></figure>
 <ul>
 <li>解决方案：</li>
 </ul>
@@ -282,7 +282,7 @@
 <p>首先来明确一下需要每次输入用户名和密码的场景：</p>
 <p>首先，必须是使用<code>https</code>方式下载的代码在操作时才可能需要输入用户名密码。</p>
 <p>第二，在满足第一点的基础上，未配置<code>credential.helper</code>。可以用如下命令检查<code>credential.helper</code>的当前配置：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs hljs hljs hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git config -l | grep credential.helper<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git config -l | grep credential.helper<br></code></pre></div></td></tr></table></figure>
 
 <p>如果未配置的话结果应该为空。</p>
 <ul>
@@ -290,7 +290,7 @@
 </ul>
 <p>方案一, 既然是因为本地仓库和远程仓库关联时使用 <code>ssh</code>方式，才会没有使用密钥验证身份，而是重复输入密码验证。因此，可以删除<code>https</code>方式的本地仓库的远程连接，然后添加<code>ssh</code>方式的远程链接</p>
 <p>方案二, 既然是因为未配置<code>credential.helper</code>。简单粗暴的办法就是直接配置<code>credential.helper</code>的值为<code>manager</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs hljs hljs hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git config  --global credential.helper manager<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git config  --global credential.helper manager<br></code></pre></div></td></tr></table></figure>
 <p>再次尝试<code>pull</code>代码的时候会弹出窗口要求输入用户名密码（只需要输入这一次就ok了）。</p>
 
             </div>
@@ -338,8 +338,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2019/03/31/gong-ju-nodejs-huan-jing-pei-zhi/">
-                        <span class="hidden-mobile">Node.js环境配置</span>
+                      <a href="/2019/03/31/jiao-cheng-gitbook-jiao-cheng/">
+                        <span class="hidden-mobile">GitBook教程</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

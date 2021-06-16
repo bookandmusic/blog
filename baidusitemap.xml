@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://www.bookandmusic.cn/2021/06/09/flask-tu-pian-shang-chuan-yu-zhan-shi/</loc>
+    <lastmod>2021-06-15</lastmod>
+  </url>
+  <url>
     <loc>https://www.bookandmusic.cn/2021/06/13/linux-wang-luo-chuan-shu-ming-ling/</loc>
     <lastmod>2021-06-13</lastmod>
   </url>
@@ -50,10 +54,6 @@
   </url>
   <url>
     <loc>https://www.bookandmusic.cn/2019/03/22/flask-yi-cuo-dian/</loc>
-    <lastmod>2021-06-12</lastmod>
-  </url>
-  <url>
-    <loc>https://www.bookandmusic.cn/2021/06/09/flask-tu-pian-shang-chuan-yu-zhan-shi/</loc>
     <lastmod>2021-06-12</lastmod>
   </url>
   <url>
@@ -309,11 +309,11 @@
     <lastmod>2021-01-21</lastmod>
   </url>
   <url>
-    <loc>https://www.bookandmusic.cn/2020/03/03/vue-axios-er-api-shuo-ming/</loc>
+    <loc>https://www.bookandmusic.cn/2020/05/16/vue-shi-jian-bang-ding-yi-ji-shi-jian-xiu-shi-fu/</loc>
     <lastmod>2020-12-01</lastmod>
   </url>
   <url>
-    <loc>https://www.bookandmusic.cn/2020/02/26/shu-ju-ku-mysql-zhu-jian-yue-shu-he-wei-yi-xing-yue-shu-de-qu-bie/</loc>
+    <loc>https://www.bookandmusic.cn/2020/03/03/vue-axios-er-api-shuo-ming/</loc>
     <lastmod>2020-12-01</lastmod>
   </url>
   <url>
@@ -321,7 +321,7 @@
     <lastmod>2020-12-01</lastmod>
   </url>
   <url>
-    <loc>https://www.bookandmusic.cn/2020/05/16/vue-shi-jian-bang-ding-yi-ji-shi-jian-xiu-shi-fu/</loc>
+    <loc>https://www.bookandmusic.cn/2020/02/26/shu-ju-ku-mysql-zhu-jian-yue-shu-he-wei-yi-xing-yue-shu-de-qu-bie/</loc>
     <lastmod>2020-12-01</lastmod>
   </url>
 </urlset> 
