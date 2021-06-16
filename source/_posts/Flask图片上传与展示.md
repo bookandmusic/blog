@@ -173,10 +173,8 @@ from app.config import Config
 
 class ImgView(Resource):
     def get(self, filename):
-        # 1. 拼接除图片的完成路径
-        img_path = os.path.join(Config.MEDIA_ROOT, filename)
 		# 2. 使用flask 内置的函数提供响应
-        return send_from_directory(MEDIA, filename)
+        return send_from_directory(Config.MEDIA_ROOT, filename)
 
 ```
 
