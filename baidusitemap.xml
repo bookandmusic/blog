@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://www.bookandmusic.cn/2021/06/16/shu-ju-ku-mongodb-ji-chu-jiao-cheng/</loc>
+    <lastmod>2021-06-22</lastmod>
+  </url>
+  <url>
+    <loc>https://www.bookandmusic.cn/2019/05/27/shu-ju-ku-mysql-bi-ji/</loc>
+    <lastmod>2021-06-16</lastmod>
+  </url>
+  <url>
     <loc>https://www.bookandmusic.cn/2021/06/09/flask-tu-pian-shang-chuan-yu-zhan-shi/</loc>
     <lastmod>2021-06-15</lastmod>
   </url>
@@ -202,10 +210,6 @@
   </url>
   <url>
     <loc>https://www.bookandmusic.cn/2020/04/21/shu-ju-ku-mysql-chang-jian-cuo-wu/</loc>
-    <lastmod>2021-01-23</lastmod>
-  </url>
-  <url>
-    <loc>https://www.bookandmusic.cn/2019/05/27/shu-ju-ku-mysql-bi-ji/</loc>
     <lastmod>2021-01-23</lastmod>
   </url>
   <url>
