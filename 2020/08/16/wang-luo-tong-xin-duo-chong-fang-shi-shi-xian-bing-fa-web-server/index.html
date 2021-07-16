@@ -1,259 +1,181 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>网络通信-多种方式实现并发 Web Server | Bookandmusic</title><meta name="keywords" content="TCP,WEB Server,高并发"><meta name="author" content="bookandmusic"><meta name="copyright" content="bookandmusic"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="下面我们使用 Python 来实现并发的 Web Server，其中采用了多进程、多线程、协程、单进程单线程非阻塞、select、epoll的方式。 一、使用子进程来实现并发 Web Server123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络通信-多种方式实现并发 Web Server">
+<meta property="og:url" content="https://www.bookandmusic.cn/2020/08/16/wang-luo-tong-xin-duo-chong-fang-shi-shi-xian-bing-fa-web-server/index.html">
+<meta property="og:site_name" content="Bookandmusic">
+<meta property="og:description" content="下面我们使用 Python 来实现并发的 Web Server，其中采用了多进程、多线程、协程、单进程单线程非阻塞、select、epoll的方式。 一、使用子进程来实现并发 Web Server123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2020-08-16T13:40:36.000Z">
+<meta property="article:modified_time" content="2021-01-25T02:59:13.000Z">
+<meta property="article:author" content="bookandmusic">
+<meta property="article:tag" content="TCP">
+<meta property="article:tag" content="WEB Server">
+<meta property="article:tag" content="高并发">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://www.bookandmusic.cn/2020/08/16/wang-luo-tong-xin-duo-chong-fang-shi-shi-xian-bing-fa-web-server/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.5/dist/instantsearch.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.5/dist/instantsearch.min.js" defer></script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"ZMZD8LN6JF","apiKey":"c75e305c22fd4cf56b8f03aa6efec207","indexName":"Blog","hits":{"per_page":6},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '网络通信-多种方式实现并发 Web Server',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-01-25 10:59:13'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-<!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
 
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
 
-
-<head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
-  <link rel="icon" type="image/png" href="/img/favicon.ico">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
   
-  <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
-  <meta name="author" content="bookandmusic">
-  <meta name="keywords" content="">
-  <title>网络通信-多种方式实现并发 Web Server - Bookandmusic</title>
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
   
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
     
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-<!-- 自定义样式保持在最底部 -->
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"www.bookandmusic.cn","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"4e4c5cdb7a970cf955efdc949fbe43f5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Bookandmusic" type="application/atom+xml">
-</head>
-
-
-<body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>Bookandmusic</strong>&nbsp;</a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                分类
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                关于
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
-          </li>
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="网络通信-多种方式实现并发 Web Server">
-              
-            </span>
-
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-08-16 21:40" pubdate>
-        2020年8月16日 晚上
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      3.9k 字
-    </span>
-  
-
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      48
-       分钟
-    </span>
-  
-
-  
-  
-</div>
-
-            
-          </div>
-
-          
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    
-      
-
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">网络通信-多种方式实现并发 Web Server</h1>
-            
-            <div class="markdown-body">
-              <p>下面我们使用 <code>Python</code> 来实现并发的 <code>Web Server</code>，其中采用了多进程、多线程、协程、单进程单线程非阻塞、<code>select</code>、<code>epoll</code>的方式。</p>
-<h2 id="一、使用子进程来实现并发-Web-Server"><a href="#一、使用子进程来实现并发-Web-Server" class="headerlink" title="一、使用子进程来实现并发 Web Server"></a>一、使用子进程来实现并发 Web Server</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> socket<br><span class="hljs-keyword">import</span> re<br><span class="hljs-keyword">import</span> multiprocessing<br><br><span class="hljs-comment">#  注意： 不同的实现方式，但是对请求的处理方式相同，只是主函数中对客户端请求的接收方式不同 </span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">handle_request</span>(<span class="hljs-params">new_socket</span>):</span><br>    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>        <span class="hljs-comment"># 接收请求</span><br>        recv_msg = new_socket.recv(<span class="hljs-number">1024</span>).decode(<span class="hljs-string">&quot;utf-8&quot;</span>)<br>        <span class="hljs-keyword">if</span> recv_msg == <span class="hljs-string">&quot;&quot;</span>:<br>            print(<span class="hljs-string">&quot;recv null&quot;</span>)<br>            new_socket.close()<br>            <span class="hljs-keyword">return</span><br><br>        <span class="hljs-comment"># 从请求中解析出URI</span><br>        recv_lines = recv_msg.splitlines()<br>        print(recv_lines)<br>        <span class="hljs-comment"># 使用正则表达式提取出URI</span><br>        ret = re.match(<span class="hljs-string">r&quot;[^/]+(/[^ ]*)&quot;</span>, recv_lines[<span class="hljs-number">0</span>])<br>        <span class="hljs-keyword">if</span> ret:<br>            <span class="hljs-comment"># 获取URI字符串</span><br>            file_name = ret.group(<span class="hljs-number">1</span>)<br>            <span class="hljs-comment"># 如果URI是/，则默认返回index.html的内容</span><br>            <span class="hljs-keyword">if</span> file_name == <span class="hljs-string">&quot;/&quot;</span>:<br>                file_name = <span class="hljs-string">&quot;/index.html&quot;</span><br><br>        <span class="hljs-keyword">try</span>:<br>            <span class="hljs-comment"># 根据请求的URI，读取相应的文件</span><br>            fp = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;.&quot;</span> + file_name, <span class="hljs-string">&quot;rb&quot;</span>)<br>        <span class="hljs-keyword">except</span>:<br>            <span class="hljs-comment"># 找不到文件，响应404</span><br>            response_msg = <span class="hljs-string">&quot;HTTP/1.1 404 NOT FOUND\r\n&quot;</span><br>            response_msg += <span class="hljs-string">&quot;\r\n&quot;</span><br>            response_msg += <span class="hljs-string">&quot;&lt;h1&gt;----file not found----&lt;/h1&gt;&quot;</span><br>            new_socket.send(response_msg.encode(<span class="hljs-string">&quot;utf-8&quot;</span>))<br>        <span class="hljs-keyword">else</span>:<br>            html_content = fp.read()<br>            fp.close()<br>            response_body = html_content<br><br>            <span class="hljs-comment"># 响应正确 200 OK</span><br>            response_header = <span class="hljs-string">&quot;HTTP/1.1 200 OK\r\n&quot;</span><br>            response_header += <span class="hljs-string">&quot;Content-Length:%d\r\n&quot;</span> % <span class="hljs-built_in">len</span>(response_body)<br>            response_header += <span class="hljs-string">&quot;\r\n&quot;</span><br><br>            response = response_header.encode(<span class="hljs-string">&quot;utf-8&quot;</span>) + response_body<br><br>            <span class="hljs-comment"># 返回响应数据</span><br>            new_socket.send(response)<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span>():</span><br>    <span class="hljs-comment"># 创建TCP SOCKET实例</span><br>    tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)<br>    <span class="hljs-comment"># # 设置重用地址</span><br>    <span class="hljs-comment"># tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)</span><br>    <span class="hljs-comment"># 绑定地址（默认本机IP）和端口</span><br>    tcp_server_socket.bind((<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-number">7890</span>))<br>    <span class="hljs-comment"># 监听</span><br>    tcp_server_socket.listen(<span class="hljs-number">128</span>)<br>    <span class="hljs-comment"># 循环接收客户端连接</span><br>    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>        new_socket, client_addr = tcp_server_socket.accept()<br>        <span class="hljs-comment"># 启动一个子进程来处理客户端的请求</span><br>        sub_p = multiprocessing.Process(target=handle_request, args=(new_socket,))<br>        sub_p.start()<br>        <span class="hljs-comment"># 这里要关闭父进程中的new_socket，因为创建子进程会复制一份new_socket给子进程</span><br>        new_socket.close()<br><br>    <span class="hljs-comment"># 关闭整个SOCKET</span><br>    tcp_server_socket.close()<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    main()<br></code></pre></div></td></tr></table></figure>
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Bookandmusic" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">83</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">136</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">31</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Bookandmusic</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">网络通信-多种方式实现并发 Web Server</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-08-16T13:40:36.000Z" title="发表于 2020-08-16 21:40:36">2020-08-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-01-25T02:59:13.000Z" title="更新于 2021-01-25 10:59:13">2021-01-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/">网络通信</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/">TCP</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="网络通信-多种方式实现并发 Web Server"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>下面我们使用 <code>Python</code> 来实现并发的 <code>Web Server</code>，其中采用了多进程、多线程、协程、单进程单线程非阻塞、<code>select</code>、<code>epoll</code>的方式。</p>
+<h2 id="一、使用子进程来实现并发-Web-Server"><a href="#一、使用子进程来实现并发-Web-Server" class="headerlink" title="一、使用子进程来实现并发 Web Server"></a>一、使用子进程来实现并发 Web Server</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> multiprocessing</span><br><span class="line"></span><br><span class="line"><span class="comment">#  注意： 不同的实现方式，但是对请求的处理方式相同，只是主函数中对客户端请求的接收方式不同 </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">handle_request</span>(<span class="params">new_socket</span>):</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="comment"># 接收请求</span></span><br><span class="line">        recv_msg = new_socket.recv(<span class="number">1024</span>).decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> recv_msg == <span class="string">&quot;&quot;</span>:</span><br><span class="line">            print(<span class="string">&quot;recv null&quot;</span>)</span><br><span class="line">            new_socket.close()</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 从请求中解析出URI</span></span><br><span class="line">        recv_lines = recv_msg.splitlines()</span><br><span class="line">        print(recv_lines)</span><br><span class="line">        <span class="comment"># 使用正则表达式提取出URI</span></span><br><span class="line">        ret = re.match(<span class="string">r&quot;[^/]+(/[^ ]*)&quot;</span>, recv_lines[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">if</span> ret:</span><br><span class="line">            <span class="comment"># 获取URI字符串</span></span><br><span class="line">            file_name = ret.group(<span class="number">1</span>)</span><br><span class="line">            <span class="comment"># 如果URI是/，则默认返回index.html的内容</span></span><br><span class="line">            <span class="keyword">if</span> file_name == <span class="string">&quot;/&quot;</span>:</span><br><span class="line">                file_name = <span class="string">&quot;/index.html&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="comment"># 根据请求的URI，读取相应的文件</span></span><br><span class="line">            fp = <span class="built_in">open</span>(<span class="string">&quot;.&quot;</span> + file_name, <span class="string">&quot;rb&quot;</span>)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="comment"># 找不到文件，响应404</span></span><br><span class="line">            response_msg = <span class="string">&quot;HTTP/1.1 404 NOT FOUND\r\n&quot;</span></span><br><span class="line">            response_msg += <span class="string">&quot;\r\n&quot;</span></span><br><span class="line">            response_msg += <span class="string">&quot;&lt;h1&gt;----file not found----&lt;/h1&gt;&quot;</span></span><br><span class="line">            new_socket.send(response_msg.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            html_content = fp.read()</span><br><span class="line">            fp.close()</span><br><span class="line">            response_body = html_content</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 响应正确 200 OK</span></span><br><span class="line">            response_header = <span class="string">&quot;HTTP/1.1 200 OK\r\n&quot;</span></span><br><span class="line">            response_header += <span class="string">&quot;Content-Length:%d\r\n&quot;</span> % <span class="built_in">len</span>(response_body)</span><br><span class="line">            response_header += <span class="string">&quot;\r\n&quot;</span></span><br><span class="line"></span><br><span class="line">            response = response_header.encode(<span class="string">&quot;utf-8&quot;</span>) + response_body</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 返回响应数据</span></span><br><span class="line">            new_socket.send(response)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    <span class="comment"># 创建TCP SOCKET实例</span></span><br><span class="line">    tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">    <span class="comment"># # 设置重用地址</span></span><br><span class="line">    <span class="comment"># tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)</span></span><br><span class="line">    <span class="comment"># 绑定地址（默认本机IP）和端口</span></span><br><span class="line">    tcp_server_socket.bind((<span class="string">&quot;&quot;</span>, <span class="number">7890</span>))</span><br><span class="line">    <span class="comment"># 监听</span></span><br><span class="line">    tcp_server_socket.listen(<span class="number">128</span>)</span><br><span class="line">    <span class="comment"># 循环接收客户端连接</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        new_socket, client_addr = tcp_server_socket.accept()</span><br><span class="line">        <span class="comment"># 启动一个子进程来处理客户端的请求</span></span><br><span class="line">        sub_p = multiprocessing.Process(target=handle_request, args=(new_socket,))</span><br><span class="line">        sub_p.start()</span><br><span class="line">        <span class="comment"># 这里要关闭父进程中的new_socket，因为创建子进程会复制一份new_socket给子进程</span></span><br><span class="line">        new_socket.close()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 关闭整个SOCKET</span></span><br><span class="line">    tcp_server_socket.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
 <p>我们使用进程来实现并发的 Web Server，也就是将 <code>accept</code> 到 <code>new_socket</code> 传递给子进程去处理，处理函数还是 <code>handle_request</code>。</p>
 <p>但是这里注意，子进程会从父进程中将所有的变量<strong>进行拷贝</strong>，也就是说父进程和子进程中<strong>各有一份 new_socket</strong>，而在 <code>Linux</code> 下，<code>socket</code> 对应的也是一个文件描述符，而这两个 <code>new_socket</code> 实际上是指向同一个 <code>fd</code> 的。所以我们将 <code>new_socket</code> 交给子进程后，父进程就可以马上关闭自己的 <code>new_socket</code> 了，当子进程服务完毕后，关闭子进程中的 <code>new_socket</code>，这样<strong>对应的 <code>FD</code> 才会正真关闭，此时才会触发四次挥手。所以父进程代码中的 <code>new_socket.close()</code> 非常重要。</strong></p>
 <h2 id="二、使用线程来实现并发-Web-Server"><a href="#二、使用线程来实现并发-Web-Server" class="headerlink" title="二、使用线程来实现并发 Web Server"></a>二、使用线程来实现并发 Web Server</h2><p>在第一节中，我们使用进程来实现并发，但是进程对资源消耗很大，一般不推荐使用。所以这里我们使用线程来实现并发，很简单，我们将 <code>multiprocessing.Process</code> 替换为 <code>threaing.Thread</code> 就可以了：</p>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> socket<br><span class="hljs-keyword">import</span> re<br><span class="hljs-keyword">import</span> threading<br><span class="hljs-keyword">from</span> web_server <span class="hljs-keyword">import</span> handle_request<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span>():</span><br>    <span class="hljs-comment"># 创建TCP SOCKET实例</span><br>    tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)<br>    <span class="hljs-comment"># 设置重用地址</span><br>    tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, <span class="hljs-number">1</span>)<br>    <span class="hljs-comment"># 绑定地址（默认本机IP）和端口</span><br>    tcp_server_socket.bind((<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-number">7890</span>))<br>    <span class="hljs-comment"># 监听</span><br>    tcp_server_socket.listen(<span class="hljs-number">128</span>)<br>    <span class="hljs-comment"># 循环接收客户端连接</span><br>    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>        new_socket, client_addr = tcp_server_socket.accept()<br>        <span class="hljs-comment"># 启动一个线程来处理客户端的请求</span><br>        t = threading.Thread(target=handle_request, args=(new_socket,))<br>        t.start()<br><br>    <span class="hljs-comment"># 关闭整个SOCKET</span><br>    tcp_server_socket.close()<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    main()<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">from</span> web_server <span class="keyword">import</span> handle_request</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    <span class="comment"># 创建TCP SOCKET实例</span></span><br><span class="line">    tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">    <span class="comment"># 设置重用地址</span></span><br><span class="line">    tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, <span class="number">1</span>)</span><br><span class="line">    <span class="comment"># 绑定地址（默认本机IP）和端口</span></span><br><span class="line">    tcp_server_socket.bind((<span class="string">&quot;&quot;</span>, <span class="number">7890</span>))</span><br><span class="line">    <span class="comment"># 监听</span></span><br><span class="line">    tcp_server_socket.listen(<span class="number">128</span>)</span><br><span class="line">    <span class="comment"># 循环接收客户端连接</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        new_socket, client_addr = tcp_server_socket.accept()</span><br><span class="line">        <span class="comment"># 启动一个线程来处理客户端的请求</span></span><br><span class="line">        t = threading.Thread(target=handle_request, args=(new_socket,))</span><br><span class="line">        t.start()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 关闭整个SOCKET</span></span><br><span class="line">    tcp_server_socket.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
 <p>我们发现，除了将子进程的创建过程替换成了线程的创建过程，后面的 <code>new_socket.close(</code>) 也被删除了，这是因为线程是公用进程资源的，<code>new_socket</code> 不会被复制，所以 <code>socket</code> 对应的 FD，只有一个 new_socket 指向他。</p>
 <p>如果此时我们仍然在这里关闭 <code>new_socket</code>，那么在线程再使用 <code>new_socket</code> 就会报错。如下信息：</p>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">Exception <span class="hljs-keyword">in</span> thread Thread-<span class="hljs-number">1</span>:<br>Traceback (most recent call last):<br>  File <span class="hljs-string">&quot;/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py&quot;</span>, line <span class="hljs-number">926</span>, <span class="hljs-keyword">in</span> _bootstrap_inner<br>    self.run()<br>  File <span class="hljs-string">&quot;/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py&quot;</span>, line <span class="hljs-number">870</span>, <span class="hljs-keyword">in</span> run<br>    self._target(*self._args, **self._kwargs)<br>  File <span class="hljs-string">&quot;/Users/mac/PycharmProjects/Month2/web_server.py&quot;</span>, line <span class="hljs-number">9</span>, <span class="hljs-keyword">in</span> handle_request<br>    recv_msg = new_socket.recv(<span class="hljs-number">1024</span>).decode(<span class="hljs-string">&quot;utf-8&quot;</span>)<br>OSError: [Errno <span class="hljs-number">9</span>] Bad file descriptor<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Exception <span class="keyword">in</span> thread Thread-<span class="number">1</span>:</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py&quot;</span>, line <span class="number">926</span>, <span class="keyword">in</span> _bootstrap_inner</span><br><span class="line">    self.run()</span><br><span class="line">  File <span class="string">&quot;/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py&quot;</span>, line <span class="number">870</span>, <span class="keyword">in</span> run</span><br><span class="line">    self._target(*self._args, **self._kwargs)</span><br><span class="line">  File <span class="string">&quot;/Users/mac/PycharmProjects/Month2/web_server.py&quot;</span>, line <span class="number">9</span>, <span class="keyword">in</span> handle_request</span><br><span class="line">    recv_msg = new_socket.recv(<span class="number">1024</span>).decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line">OSError: [Errno <span class="number">9</span>] Bad file descriptor</span><br></pre></td></tr></table></figure>
 <h2 id="三、使用协程来实现并发-Web-Server"><a href="#三、使用协程来实现并发-Web-Server" class="headerlink" title="三、使用协程来实现并发 Web Server"></a>三、使用协程来实现并发 Web Server</h2><p>使用进程和线程来实现的并发 Web Server，当并发访问量很大时，资源消耗都很高。所以这里使用协程来实现并发服务器。</p>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> socket<br><span class="hljs-keyword">import</span> re<br><span class="hljs-keyword">import</span> gevent<br><span class="hljs-keyword">from</span> gevent <span class="hljs-keyword">import</span> monkey<br>monkey.patch_all()<br><span class="hljs-keyword">from</span> web_server <span class="hljs-keyword">import</span> handle_request<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span>():</span><br>    <span class="hljs-comment"># 创建TCP SOCKET实例</span><br>    tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)<br>    <span class="hljs-comment"># # 设置重用地址</span><br>    <span class="hljs-comment"># tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)</span><br>    <span class="hljs-comment"># 绑定地址（默认本机IP）和端口</span><br>    tcp_server_socket.bind((<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-number">7890</span>))<br>    <span class="hljs-comment"># 监听</span><br>    tcp_server_socket.listen(<span class="hljs-number">128</span>)<br>    <span class="hljs-comment"># 循环接收客户端连接</span><br>    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>        new_socket, client_addr = tcp_server_socket.accept()<br>        <span class="hljs-comment"># 启动一个协程来处理客户端的请求</span><br>        gevent.spawn(handle_request, new_socket)<br><br>    <span class="hljs-comment"># 关闭整个SOCKET</span><br>    tcp_server_socket.close()<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    main()<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> gevent</span><br><span class="line"><span class="keyword">from</span> gevent <span class="keyword">import</span> monkey</span><br><span class="line">monkey.patch_all()</span><br><span class="line"><span class="keyword">from</span> web_server <span class="keyword">import</span> handle_request</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    <span class="comment"># 创建TCP SOCKET实例</span></span><br><span class="line">    tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">    <span class="comment"># # 设置重用地址</span></span><br><span class="line">    <span class="comment"># tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)</span></span><br><span class="line">    <span class="comment"># 绑定地址（默认本机IP）和端口</span></span><br><span class="line">    tcp_server_socket.bind((<span class="string">&quot;&quot;</span>, <span class="number">7890</span>))</span><br><span class="line">    <span class="comment"># 监听</span></span><br><span class="line">    tcp_server_socket.listen(<span class="number">128</span>)</span><br><span class="line">    <span class="comment"># 循环接收客户端连接</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        new_socket, client_addr = tcp_server_socket.accept()</span><br><span class="line">        <span class="comment"># 启动一个协程来处理客户端的请求</span></span><br><span class="line">        gevent.spawn(handle_request, new_socket)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 关闭整个SOCKET</span></span><br><span class="line">    tcp_server_socket.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
 <p>使用 gevent 来实现协程，并发处理请求。</p>
 <h2 id="四、使用单进程单线程非阻塞模拟实现高并发HTTP服务器"><a href="#四、使用单进程单线程非阻塞模拟实现高并发HTTP服务器" class="headerlink" title="四、使用单进程单线程非阻塞模拟实现高并发HTTP服务器"></a>四、使用单进程单线程非阻塞模拟实现高并发HTTP服务器</h2><p>前面我们使用的多进程和多线程来处理并发，是因为 <code>socket.recv()</code> 是阻塞的，每次 <code>accept</code> 一个连接，就需要交给一个新的进程或线程去处理，从而不影响下一个 <code>socket</code> 连接。</p>
 <p>但是我们可以通过单进程单线程和非阻塞的方式来完成并发 <code>socket</code> 的处理：</p>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> socket<br><span class="hljs-keyword">import</span> time<br><span class="hljs-keyword">import</span> re<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">handle_request</span>(<span class="hljs-params">new_socket, recv_msg</span>):</span><br>    <span class="hljs-comment"># 从请求中解析出URI</span><br>    recv_lines = recv_msg.splitlines()<br><br>    <span class="hljs-comment"># 使用正则表达式提取出URI</span><br>    ret = re.match(<span class="hljs-string">r&quot;[^/]+(/[^ ]*)&quot;</span>, recv_lines[<span class="hljs-number">0</span>])<br><br>    <span class="hljs-keyword">if</span> ret:<br>        <span class="hljs-comment"># 获取URI字符串</span><br>        file_name = ret.group(<span class="hljs-number">1</span>)<br>        <span class="hljs-comment"># 如果URI是/，则默认返回index.html的内容</span><br>        <span class="hljs-keyword">if</span> file_name == <span class="hljs-string">&quot;/&quot;</span>:<br>            file_name = <span class="hljs-string">&quot;/index.html&quot;</span><br><br>    <span class="hljs-keyword">try</span>:<br>        <span class="hljs-comment"># 根据请求的URI，读取相应的文件</span><br>        fp = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;.&quot;</span> + file_name, <span class="hljs-string">&quot;rb&quot;</span>)<br>    <span class="hljs-keyword">except</span>:<br>        <span class="hljs-comment"># 找不到文件，响应404</span><br>        response_msg = <span class="hljs-string">&quot;HTTP/1.1 404 NOT FOUND\r\n&quot;</span><br>        response_msg += <span class="hljs-string">&quot;\r\n&quot;</span><br>        response_msg += <span class="hljs-string">&quot;&lt;h1&gt;----file not found----&lt;/h1&gt;&quot;</span><br>        new_socket.send(response_msg.encode(<span class="hljs-string">&quot;utf-8&quot;</span>))<br>    <span class="hljs-keyword">else</span>:<br>        html_content = fp.read()<br>        fp.close()<br><br>        response_body = html_content<br><br>        <span class="hljs-comment"># 响应正确 200 OK</span><br>        response_header = <span class="hljs-string">&quot;HTTP/1.1 200 OK\r\n&quot;</span><br>        response_header += <span class="hljs-string">&quot;Content-Length:%d\r\n&quot;</span> % <span class="hljs-built_in">len</span>(response_body)<br>        response_header += <span class="hljs-string">&quot;\r\n&quot;</span><br><br>        response = response_header.encode(<span class="hljs-string">&quot;utf-8&quot;</span>) + response_body<br><br>        <span class="hljs-comment"># 返回响应数据</span><br>        new_socket.send(response)<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span>():</span><br>    <span class="hljs-comment"># 创建TCP SOCKET实例</span><br>    tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)<br>    <span class="hljs-comment"># 设置重用地址</span><br>    tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, <span class="hljs-number">1</span>)<br>    <span class="hljs-comment"># 绑定地址（默认本机IP）和端口</span><br>    tcp_server_socket.bind((<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-number">7890</span>))<br>    <span class="hljs-comment"># 监听</span><br>    tcp_server_socket.listen(<span class="hljs-number">128</span>)<br><br>    <span class="hljs-comment"># 将accept设置为非阻塞,这里设置一次，后面不管调多少次accept都是非阻塞的</span><br>    tcp_server_socket.setblocking(<span class="hljs-literal">False</span>)<br>    <span class="hljs-comment"># 定义一个列表，将每次连接的socket加入该列表</span><br>    client_socket_list = <span class="hljs-built_in">list</span>()<br>    fd_to_addr = &#123;&#125;<br><br>    <span class="hljs-comment"># 循环接收客户端连接</span><br>    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>        time.sleep(<span class="hljs-number">0.5</span>)<br><br>        <span class="hljs-keyword">try</span>:<br>            new_socket, client_addr = tcp_server_socket.accept()<br>        <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> ret:<br>            <span class="hljs-comment"># 当没有客户端链接的时候，抛出异常</span><br>            <span class="hljs-keyword">pass</span><br>        <span class="hljs-keyword">else</span>:<br>            print(<span class="hljs-string">&quot;客户端&#123;&#125; OnLine。。。。&quot;</span>.<span class="hljs-built_in">format</span>(client_addr))<br>            <span class="hljs-comment"># 当有客户端链接的时候</span><br>            <span class="hljs-comment"># 将new_socket.recv()设置为非阻塞的</span><br>            new_socket.setblocking(<span class="hljs-literal">False</span>)<br>            <span class="hljs-comment"># 将new_socket加入列表</span><br>            client_socket_list.append(new_socket)<br><br>            <span class="hljs-comment"># 将 conn 和 addr 信息分别保存起来</span><br>            fd_to_addr[new_socket.fileno()] = client_addr<br><br>        <span class="hljs-comment"># 遍历socket列表，检查每一个socket是否有数据到达，或者客户端是否断开</span><br>        <span class="hljs-keyword">for</span> client_socket <span class="hljs-keyword">in</span> client_socket_list:<br>            <span class="hljs-keyword">try</span>:<br>                recv_content = client_socket.recv(<span class="hljs-number">1024</span>).decode(<span class="hljs-string">&quot;utf-8&quot;</span>)<br>            <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> ret:<br>                <span class="hljs-comment"># 异常，表示该客户端没有发数据过来</span><br>                <span class="hljs-keyword">pass</span><br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-comment"># 正常，表示客户端发了数据，或者客户端断开连接（断开连接会导致recv正常返回）</span><br>                <span class="hljs-keyword">if</span> recv_content:<br>                    <span class="hljs-comment"># 有数据，调用请求处理代码</span><br>                    handle_request(client_socket, recv_content)<br>                <span class="hljs-keyword">else</span>:<br>                    print(<span class="hljs-string">&quot;客户端&#123;&#125;OffLine。。。。&quot;</span>.<span class="hljs-built_in">format</span>(fd_to_addr[client_socket.fileno()]))<br>                    <span class="hljs-comment"># recv正常返回，且数据为空，表示客户端断开了链接</span><br>                    <span class="hljs-comment"># 将该socket踢出列表</span><br>                    client_socket_list.remove(client_socket)<br>                    <span class="hljs-comment"># 服务器也关闭连接</span><br>                    client_socket.close()<br><br>    <span class="hljs-comment"># 关闭整个SOCKET</span><br>    tcp_server_socket.close()<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    main()<br><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">handle_request</span>(<span class="params">new_socket, recv_msg</span>):</span></span><br><span class="line">    <span class="comment"># 从请求中解析出URI</span></span><br><span class="line">    recv_lines = recv_msg.splitlines()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 使用正则表达式提取出URI</span></span><br><span class="line">    ret = re.match(<span class="string">r&quot;[^/]+(/[^ ]*)&quot;</span>, recv_lines[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ret:</span><br><span class="line">        <span class="comment"># 获取URI字符串</span></span><br><span class="line">        file_name = ret.group(<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># 如果URI是/，则默认返回index.html的内容</span></span><br><span class="line">        <span class="keyword">if</span> file_name == <span class="string">&quot;/&quot;</span>:</span><br><span class="line">            file_name = <span class="string">&quot;/index.html&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># 根据请求的URI，读取相应的文件</span></span><br><span class="line">        fp = <span class="built_in">open</span>(<span class="string">&quot;.&quot;</span> + file_name, <span class="string">&quot;rb&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="comment"># 找不到文件，响应404</span></span><br><span class="line">        response_msg = <span class="string">&quot;HTTP/1.1 404 NOT FOUND\r\n&quot;</span></span><br><span class="line">        response_msg += <span class="string">&quot;\r\n&quot;</span></span><br><span class="line">        response_msg += <span class="string">&quot;&lt;h1&gt;----file not found----&lt;/h1&gt;&quot;</span></span><br><span class="line">        new_socket.send(response_msg.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        html_content = fp.read()</span><br><span class="line">        fp.close()</span><br><span class="line"></span><br><span class="line">        response_body = html_content</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 响应正确 200 OK</span></span><br><span class="line">        response_header = <span class="string">&quot;HTTP/1.1 200 OK\r\n&quot;</span></span><br><span class="line">        response_header += <span class="string">&quot;Content-Length:%d\r\n&quot;</span> % <span class="built_in">len</span>(response_body)</span><br><span class="line">        response_header += <span class="string">&quot;\r\n&quot;</span></span><br><span class="line"></span><br><span class="line">        response = response_header.encode(<span class="string">&quot;utf-8&quot;</span>) + response_body</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 返回响应数据</span></span><br><span class="line">        new_socket.send(response)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    <span class="comment"># 创建TCP SOCKET实例</span></span><br><span class="line">    tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">    <span class="comment"># 设置重用地址</span></span><br><span class="line">    tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, <span class="number">1</span>)</span><br><span class="line">    <span class="comment"># 绑定地址（默认本机IP）和端口</span></span><br><span class="line">    tcp_server_socket.bind((<span class="string">&quot;&quot;</span>, <span class="number">7890</span>))</span><br><span class="line">    <span class="comment"># 监听</span></span><br><span class="line">    tcp_server_socket.listen(<span class="number">128</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将accept设置为非阻塞,这里设置一次，后面不管调多少次accept都是非阻塞的</span></span><br><span class="line">    tcp_server_socket.setblocking(<span class="literal">False</span>)</span><br><span class="line">    <span class="comment"># 定义一个列表，将每次连接的socket加入该列表</span></span><br><span class="line">    client_socket_list = <span class="built_in">list</span>()</span><br><span class="line">    fd_to_addr = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 循环接收客户端连接</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        time.sleep(<span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            new_socket, client_addr = tcp_server_socket.accept()</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> ret:</span><br><span class="line">            <span class="comment"># 当没有客户端链接的时候，抛出异常</span></span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">&quot;客户端&#123;&#125; OnLine。。。。&quot;</span>.<span class="built_in">format</span>(client_addr))</span><br><span class="line">            <span class="comment"># 当有客户端链接的时候</span></span><br><span class="line">            <span class="comment"># 将new_socket.recv()设置为非阻塞的</span></span><br><span class="line">            new_socket.setblocking(<span class="literal">False</span>)</span><br><span class="line">            <span class="comment"># 将new_socket加入列表</span></span><br><span class="line">            client_socket_list.append(new_socket)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 将 conn 和 addr 信息分别保存起来</span></span><br><span class="line">            fd_to_addr[new_socket.fileno()] = client_addr</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 遍历socket列表，检查每一个socket是否有数据到达，或者客户端是否断开</span></span><br><span class="line">        <span class="keyword">for</span> client_socket <span class="keyword">in</span> client_socket_list:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                recv_content = client_socket.recv(<span class="number">1024</span>).decode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> ret:</span><br><span class="line">                <span class="comment"># 异常，表示该客户端没有发数据过来</span></span><br><span class="line">                <span class="keyword">pass</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment"># 正常，表示客户端发了数据，或者客户端断开连接（断开连接会导致recv正常返回）</span></span><br><span class="line">                <span class="keyword">if</span> recv_content:</span><br><span class="line">                    <span class="comment"># 有数据，调用请求处理代码</span></span><br><span class="line">                    handle_request(client_socket, recv_content)</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    print(<span class="string">&quot;客户端&#123;&#125;OffLine。。。。&quot;</span>.<span class="built_in">format</span>(fd_to_addr[client_socket.fileno()]))</span><br><span class="line">                    <span class="comment"># recv正常返回，且数据为空，表示客户端断开了链接</span></span><br><span class="line">                    <span class="comment"># 将该socket踢出列表</span></span><br><span class="line">                    client_socket_list.remove(client_socket)</span><br><span class="line">                    <span class="comment"># 服务器也关闭连接</span></span><br><span class="line">                    client_socket.close()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 关闭整个SOCKET</span></span><br><span class="line">    tcp_server_socket.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>上面代码主要是说明在单进程单线程情况下，如何将 <code>accept</code> 和 <code>recv</code> 分开，并且都用非阻塞的方式来处理，这样每次查看是否有客户端链接进来的时候，都会去检查所有已链接的 <code>socket</code> 是否有数据发送过来。</p>
 <p>在这种方式中，我们使用单进程单线程模拟了并发处理 <code>socket</code> 连接的功能，但这些 <code>socket</code> 连接的处理不是并行的。当一个 <code>socket</code> 处理数据时间比较长时，也会<strong>造成整个程序的等待。</strong></p>
 <p>特别注意的是，在请求处理函数 <code>handle_request</code> 中，我们将请求内容作为参数一并传递进去。然后在返回 <code>200 OK</code> 的时候，在响应头中添加了 <code>Content-Length</code> 字段，这个字段用于告诉客户端，此次发送的响应体有多大。当客户端收完指定大小的数据，就认为这次服务器发送的数据已经发送完毕。他就可以继续发送下一个新的请求。</p>
 <p>在 <code>handle_request</code> 中可以看到，<code>new_socket.close()</code> 已经被删除，也就是说服务器不会自动关闭连接，而直到客户端断开连接之前，服务器都保持<code>长连接</code>。断开连接由客户端来发起。</p>
 <h2 id="五、使用select实现高并发HTTP服务器"><a href="#五、使用select实现高并发HTTP服务器" class="headerlink" title="五、使用select实现高并发HTTP服务器"></a>五、使用select实现高并发HTTP服务器</h2><p>在编写了单进程非阻塞式服务器之后，还有另外种写服务器的方法，便是利用<code>select</code>。<br><code>select</code>是对底层操作系统的一个访问操作，因而效率较高，比单进程非阻塞中的<code>for</code>循环遍历效率要高，可以利用<code>select</code>进行选择，选择出来可以读取信息的套接字、可以发送信息的套接字、以及产生的异常（分别是三个返回值）。</p>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">readable, writable, exceptionable = select([], [], [])<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">readable, writable, exceptionable = select([], [], [])</span><br></pre></td></tr></table></figure>
 <p>以上即为<code>select</code>的使用方法，程序执行到该语句后进行阻塞等待，接收到新的套接字之后便解阻塞。<br>程序思路便是利用<code>select</code>检测、选择出能读取的套接字（包括服务器套接字、客户端套接字），将接收到消息的客户端套接字存入列表（列表中本来只有服务器套接字），之后进行<code>for</code>循环遍历，读取套接字中的信息或者进行与客户端的连接。</p>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> socket <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">from</span> select <span class="hljs-keyword">import</span> select<br><span class="hljs-keyword">from</span> web_server <span class="hljs-keyword">import</span> handle_request<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span>():</span><br>    <span class="hljs-comment"># 创建套接字</span><br>    server_socket = socket(AF_INET, SOCK_STREAM)<br><br>    <span class="hljs-comment"># 设置可以重复使用绑定的信息</span><br>    server_socket.setsockopt(SOL_SOCKET, SO_REUSEADDR, <span class="hljs-number">1</span>)<br><br>    <span class="hljs-comment"># 绑定本机信息</span><br>    server_socket.bind((<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-number">8080</span>))<br><br>    <span class="hljs-comment"># 主动监听</span><br>    server_socket.listen(<span class="hljs-number">128</span>)<br>    <br>    <span class="hljs-comment"># 将accept设置为非阻塞</span><br>    server_socket.setblocking(<span class="hljs-literal">False</span>)<br><br>    inputs = [server_socket]<br>    fd_to_addr = &#123;&#125;<br><br>    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>        readable, writable, exceptionable = select(inputs, [], [])<br>        <span class="hljs-keyword">for</span> sock <span class="hljs-keyword">in</span> readable:<br><br>            <span class="hljs-keyword">if</span> sock == server_socket:<br>                clientSocket, clientAddr = server_socket.accept()<br>                <span class="hljs-comment"># 当有客户端链接的时候</span><br>                <span class="hljs-comment"># 将new_socket.recv()设置为非阻塞的</span><br>                clientSocket.setblocking(<span class="hljs-literal">False</span>)<br><br>                inputs.append(clientSocket)<br>                <span class="hljs-comment"># 将 addr 信息保存起来</span><br>                fd_to_addr[clientSocket.fileno()] = clientAddr<br>                print(<span class="hljs-string">&quot;客户端&#123;&#125; OnLine。。。。&quot;</span>.<span class="hljs-built_in">format</span>(clientAddr))<br><br>            <span class="hljs-keyword">else</span>:<br>                message = sock.recv(<span class="hljs-number">1024</span>)<br>                <span class="hljs-keyword">if</span> message:<br>                    <span class="hljs-comment"># print(&#x27;message from [%s] is %s&#x27; % (str(sock), message.decode(&#x27;utf-8&#x27;)))</span><br>                    handle_request(sock, message.decode(<span class="hljs-string">&quot;utf8&quot;</span>))<br>                <span class="hljs-keyword">else</span>:<br>                    print(<span class="hljs-string">&#x27;[%s] OffLine。。。。&#x27;</span> % (fd_to_addr[sock.fileno()]))<br>                    inputs.remove(sock)<br>                    sock.close()<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    main()<br><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> socket <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> select <span class="keyword">import</span> select</span><br><span class="line"><span class="keyword">from</span> web_server <span class="keyword">import</span> handle_request</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    <span class="comment"># 创建套接字</span></span><br><span class="line">    server_socket = socket(AF_INET, SOCK_STREAM)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 设置可以重复使用绑定的信息</span></span><br><span class="line">    server_socket.setsockopt(SOL_SOCKET, SO_REUSEADDR, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 绑定本机信息</span></span><br><span class="line">    server_socket.bind((<span class="string">&quot;&quot;</span>, <span class="number">8080</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 主动监听</span></span><br><span class="line">    server_socket.listen(<span class="number">128</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 将accept设置为非阻塞</span></span><br><span class="line">    server_socket.setblocking(<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    inputs = [server_socket]</span><br><span class="line">    fd_to_addr = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        readable, writable, exceptionable = select(inputs, [], [])</span><br><span class="line">        <span class="keyword">for</span> sock <span class="keyword">in</span> readable:</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> sock == server_socket:</span><br><span class="line">                clientSocket, clientAddr = server_socket.accept()</span><br><span class="line">                <span class="comment"># 当有客户端链接的时候</span></span><br><span class="line">                <span class="comment"># 将new_socket.recv()设置为非阻塞的</span></span><br><span class="line">                clientSocket.setblocking(<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">                inputs.append(clientSocket)</span><br><span class="line">                <span class="comment"># 将 addr 信息保存起来</span></span><br><span class="line">                fd_to_addr[clientSocket.fileno()] = clientAddr</span><br><span class="line">                print(<span class="string">&quot;客户端&#123;&#125; OnLine。。。。&quot;</span>.<span class="built_in">format</span>(clientAddr))</span><br><span class="line"></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                message = sock.recv(<span class="number">1024</span>)</span><br><span class="line">                <span class="keyword">if</span> message:</span><br><span class="line">                    <span class="comment"># print(&#x27;message from [%s] is %s&#x27; % (str(sock), message.decode(&#x27;utf-8&#x27;)))</span></span><br><span class="line">                    handle_request(sock, message.decode(<span class="string">&quot;utf8&quot;</span>))</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    print(<span class="string">&#x27;[%s] OffLine。。。。&#x27;</span> % (fd_to_addr[sock.fileno()]))</span><br><span class="line">                    inputs.remove(sock)</span><br><span class="line">                    sock.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p><code>select</code>版服务器有一定的缺点，便是只能处理1024个并发客户端，因而其效率还是有一定的局限性。</p>
 <h2 id="六、使用epoll实现高并发HTTP服务器"><a href="#六、使用epoll实现高并发HTTP服务器" class="headerlink" title="六、使用epoll实现高并发HTTP服务器"></a>六、使用epoll实现高并发HTTP服务器</h2><p>我们在最后使用单进程+单线程+非阻塞+长连接实现了一个可并发处理客户端连接的服务器。他的原理可以用以下的图来描述：</p>
-<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/08/P4p4aJ.png" srcset="/img/loading.gif" alt="P4p4aJ"></p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/08/P4p4aJ.png" alt="P4p4aJ"></p>
 <p><strong>解释：</strong></p>
 <ol>
 <li><p>HTTP服务器是我们使用 单进程+单线程+非阻塞+长连接实现 的<code>web</code>服务器。</p>
@@ -270,257 +192,9 @@
 </li>
 </ol>
 <p><strong>我们再来看epoll的图：</strong></p>
-<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/08/5TcU6B.png" srcset="/img/loading.gif" alt="5TcU6B"></p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/08/5TcU6B.png" alt="5TcU6B"></p>
 <p><strong>解释：</strong></p>
 <p>1.我们可以看到，在结构上，最大的区别在于，存放<code>socket</code>的列表不处于应用程序内部。在<code>epoll</code>中，这个存放<code>socket</code>的列表处于一个<strong>特殊的内存空间，这个内存空间是应用程序与内核共享的空间</strong>。也就是说，当应用程序委托操作系统检查是否有数据到达时，无需将复制数据给内核空间，操作系统可以直接进行检查。</p>
 <p>2.操作系统检查到某个<code>socket</code>有数据到达，使用<strong>事件通知</strong>的形式，直接告诉应用程序，而不是以轮询的方式。打个比方，一个厨师挨个问50个人饿了没，如果饿了就给他东西吃，这是轮询。而50个人中，谁饿了谁举手，厨师就给吃的，这叫事件通知。很明显，事件通知的效率会特别高。</p>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> socket <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">import</span> select<br><span class="hljs-keyword">from</span> web_server <span class="hljs-keyword">import</span> handle_request<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span>():</span><br>    <span class="hljs-comment"># 创建套接字</span><br>    server_socket = socket(AF_INET, SOCK_STREAM)<br><br>    <span class="hljs-comment"># 设置可以重复使用绑定的信息</span><br>    server_socket.setsockopt(SOL_SOCKET, SO_REUSEADDR, <span class="hljs-number">1</span>)<br><br>    <span class="hljs-comment"># 绑定本机信息</span><br>    server_socket.bind((<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-number">8080</span>))<br><br>    <span class="hljs-comment"># 主动监听</span><br>    server_socket.listen(<span class="hljs-number">128</span>)<br>    <span class="hljs-comment"># 将accept设置为非阻塞</span><br>    server_socket.setblocking(<span class="hljs-literal">False</span>)<br>    <span class="hljs-comment"># 创建epoll对象</span><br>    epoll = select.epoll()<br><br>    <span class="hljs-comment"># 注册事件到epoll中</span><br>    <span class="hljs-comment"># epoll.register(fd[, eventmask])</span><br>    <span class="hljs-comment"># 注意，如果fd已经注册过，则会发生异常</span><br>    <span class="hljs-comment"># 将创建的套接字添加到epoll的事件监听中</span><br><br>    <span class="hljs-comment"># 注册tcp套接字</span><br>    epoll.register(server_socket.fileno(), select.EPOLLIN)<br><br>    <span class="hljs-string">&#x27;&#x27;&#x27;因为epoll返回的触发事件对应的是套接字文件描述符，所以需要在字典中加入对应关系&#x27;&#x27;&#x27;</span><br><br>    <span class="hljs-comment"># 定义一个字典，用于存放fd和套接字的对应关系，因为操作系统在事件通知的时候，使用的是fd，而不是套接字，我们需要使用fd来找到对应</span><br>    <span class="hljs-comment"># 的套接字，从而可以调用accept和recv</span><br>    fd_to_socket = &#123;&#125;<br>    fd_to_addr = &#123;&#125;<br><br>    <span class="hljs-comment"># 循环接收客户端连接</span><br>    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>        <span class="hljs-comment"># 使用一个列表来接受操作系统的事件通知，poll()是阻塞的，当有数据到达时，poll才会解开阻塞</span><br>        epoll_list = epoll.poll()<br><br>        <span class="hljs-keyword">for</span> fd, event <span class="hljs-keyword">in</span> epoll_list:<br>            <span class="hljs-comment"># 首先判断事件通知中的fd是否对应监听套接字（监听套接字调用accept）</span><br>            <span class="hljs-keyword">if</span> fd == server_socket.fileno():<br><br>                conn, addr = server_socket.accept()<br>                <span class="hljs-comment"># 监听到一个新的客户端连接，将conn也注册到epoll中</span><br>                epoll.register(conn.fileno(), select.EPOLLIN)<br><br>                print(<span class="hljs-string">&#x27;有新的客户端到来%s&#x27;</span> % <span class="hljs-built_in">str</span>(addr))<br><br>                <span class="hljs-comment"># 将 conn 和 addr 信息分别保存起来</span><br>                fd_to_socket[conn.fileno()] = conn<br>                fd_to_addr[conn.fileno()] = addr<br><br>            <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 如果不是监听套接字，那么都是客户端对应的套接字</span><br>                <span class="hljs-comment"># 接收数据</span><br>                recvData = fd_to_socket[fd].recv(<span class="hljs-number">1024</span>).decode(<span class="hljs-string">&#x27;utf8&#x27;</span>)<br><br>                <span class="hljs-keyword">if</span> recvData:<br>                    handle_request(fd_to_socket[fd], recvData)<br><br>                <span class="hljs-comment"># 如果没有数据，则表示客户端断开连接</span><br>                <span class="hljs-keyword">else</span>:<br>                    <span class="hljs-comment"># 从 epoll 中移除该 连接 fd</span><br>                    epoll.unregister(fd)<br><br>                    <span class="hljs-comment">#  关闭fd对应的socket</span><br>                    fd_to_socket[fd].close()<br><br>                    print(<span class="hljs-string">&quot;%s---offline---&quot;</span> % <span class="hljs-built_in">str</span>(fd_to_addr[fd]))<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    main()<br><br></code></pre></div></td></tr></table></figure>
-
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-                    
-                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/">网络通信</a>
-                    
-                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCP/">TCP</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/TCP/">TCP</a>
-                    
-                      <a class="hover-with-bg" href="/tags/WEB-Server/">WEB Server</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/">高并发</a>
-                    
-                  </div>
-                
-              </div>
-              
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
-              
-              
-                <div class="post-prevnext">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2020/09/03/xi-tong-deepin-os-an-zhuang-nvidia-qu-dong/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Deepin OS 安装 NVIDIA驱动</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2020/08/16/wang-luo-tong-xin-simple-web-server/">
-                        <span class="hidden-mobile">网络通信-简单WEB服务器</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
-    </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-      </div>
-    
-  </div>
-</div>
-
-<!-- Custom -->
-
-
-    
-
-    
-      <a id="scroll-top-button" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-    
-
-    
-  </main>
-
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love">BookabdMusic</i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-  </div>
-  
-  <div class="statistics">
-    
-    
-
-    
-      
-        <!-- 不蒜子统计PV -->
-        <span id="busuanzi_container_site_pv" style="display: none">
-            总访问量 
-            <span id="busuanzi_value_site_pv"></span>
-             次
-          </span>
-      
-      
-        <!-- 不蒜子统计UV -->
-        <span id="busuanzi_container_site_uv" style="display: none">
-            总访客数 
-            <span id="busuanzi_value_site_uv"></span>
-             人
-          </span>
-      
-    
-  </div>
-
-
-  
-
-  
-</footer>
-
-<!-- SCRIPTS -->
-
-  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
-<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-<!-- Plugins -->
-
-
-  
-    <script  src="/js/lazyload.js" ></script>
-  
-
-
-
-  
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
-
-
-
-  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
-
-
-
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
-
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-      typing(title)
-      
-    })(window, document);
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
-    })()
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 主题的启动项 保持在最底部 -->
-<script  src="/js/boot.js" ></script>
-
-
-
-</body>
-</html>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> socket <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> select</span><br><span class="line"><span class="keyword">from</span> web_server <span class="keyword">import</span> handle_request</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    <span class="comment"># 创建套接字</span></span><br><span class="line">    server_socket = socket(AF_INET, SOCK_STREAM)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 设置可以重复使用绑定的信息</span></span><br><span class="line">    server_socket.setsockopt(SOL_SOCKET, SO_REUSEADDR, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 绑定本机信息</span></span><br><span class="line">    server_socket.bind((<span class="string">&quot;&quot;</span>, <span class="number">8080</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 主动监听</span></span><br><span class="line">    server_socket.listen(<span class="number">128</span>)</span><br><span class="line">    <span class="comment"># 将accept设置为非阻塞</span></span><br><span class="line">    server_socket.setblocking(<span class="literal">False</span>)</span><br><span class="line">    <span class="comment"># 创建epoll对象</span></span><br><span class="line">    epoll = select.epoll()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 注册事件到epoll中</span></span><br><span class="line">    <span class="comment"># epoll.register(fd[, eventmask])</span></span><br><span class="line">    <span class="comment"># 注意，如果fd已经注册过，则会发生异常</span></span><br><span class="line">    <span class="comment"># 将创建的套接字添加到epoll的事件监听中</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 注册tcp套接字</span></span><br><span class="line">    epoll.register(server_socket.fileno(), select.EPOLLIN)</span><br><span class="line"></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;因为epoll返回的触发事件对应的是套接字文件描述符，所以需要在字典中加入对应关系&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 定义一个字典，用于存放fd和套接字的对应关系，因为操作系统在事件通知的时候，使用的是fd，而不是套接字，我们需要使用fd来找到对应</span></span><br><span class="line">    <span class="comment"># 的套接字，从而可以调用accept和recv</span></span><br><span class="line">    fd_to_socket = &#123;&#125;</span><br><span class="line">    fd_to_addr = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 循环接收客户端连接</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="comment"># 使用一个列表来接受操作系统的事件通知，poll()是阻塞的，当有数据到达时，poll才会解开阻塞</span></span><br><span class="line">        epoll_list = epoll.poll()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> fd, event <span class="keyword">in</span> epoll_list:</span><br><span class="line">            <span class="comment"># 首先判断事件通知中的fd是否对应监听套接字（监听套接字调用accept）</span></span><br><span class="line">            <span class="keyword">if</span> fd == server_socket.fileno():</span><br><span class="line"></span><br><span class="line">                conn, addr = server_socket.accept()</span><br><span class="line">                <span class="comment"># 监听到一个新的客户端连接，将conn也注册到epoll中</span></span><br><span class="line">                epoll.register(conn.fileno(), select.EPOLLIN)</span><br><span class="line"></span><br><span class="line">                print(<span class="string">&#x27;有新的客户端到来%s&#x27;</span> % <span class="built_in">str</span>(addr))</span><br><span class="line"></span><br><span class="line">                <span class="comment"># 将 conn 和 addr 信息分别保存起来</span></span><br><span class="line">                fd_to_socket[conn.fileno()] = conn</span><br><span class="line">                fd_to_addr[conn.fileno()] = addr</span><br><span class="line"></span><br><span class="line">            <span class="keyword">else</span>:  <span class="comment"># 如果不是监听套接字，那么都是客户端对应的套接字</span></span><br><span class="line">                <span class="comment"># 接收数据</span></span><br><span class="line">                recvData = fd_to_socket[fd].recv(<span class="number">1024</span>).decode(<span class="string">&#x27;utf8&#x27;</span>)</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> recvData:</span><br><span class="line">                    handle_request(fd_to_socket[fd], recvData)</span><br><span class="line"></span><br><span class="line">                <span class="comment"># 如果没有数据，则表示客户端断开连接</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="comment"># 从 epoll 中移除该 连接 fd</span></span><br><span class="line">                    epoll.unregister(fd)</span><br><span class="line"></span><br><span class="line">                    <span class="comment">#  关闭fd对应的socket</span></span><br><span class="line">                    fd_to_socket[fd].close()</span><br><span class="line"></span><br><span class="line">                    print(<span class="string">&quot;%s---offline---&quot;</span> % <span class="built_in">str</span>(fd_to_addr[fd]))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">bookandmusic</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.bookandmusic.cn/2020/08/16/wang-luo-tong-xin-duo-chong-fang-shi-shi-xian-bing-fa-web-server/">https://www.bookandmusic.cn/2020/08/16/wang-luo-tong-xin-duo-chong-fang-shi-shi-xian-bing-fa-web-server/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.bookandmusic.cn" target="_blank">Bookandmusic</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/TCP/">TCP</a><a class="post-meta__tags" href="/tags/WEB-Server/">WEB Server</a><a class="post-meta__tags" href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/">高并发</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/09/03/xi-tong-deepin-os-an-zhuang-nvidia-qu-dong/"><img class="prev-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Deepin OS 安装 NVIDIA驱动</div></div></a></div><div class="next-post pull-right"><a href="/2020/08/16/wang-luo-tong-xin-simple-web-server/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">网络通信-简单WEB服务器</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/08/16/wang-luo-tong-xin-simple-web-server/" title="网络通信-简单WEB服务器"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-16</div><div class="title">网络通信-简单WEB服务器</div></div></a></div><div><a href="/2019/05/09/wang-luo-tong-xin-01-liao-jie-web-ji-wang-luo-ji-chu/" title="01—了解web及网络基础"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-05-09</div><div class="title">01—了解web及网络基础</div></div></a></div><div><a href="/2019/05/09/wang-luo-tong-xin-02-jian-dan-jie-shao-http-xie-yi-jie-gou/" title="02-简单介绍 HTTP 协议结构"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-05-09</div><div class="title">02-简单介绍 HTTP 协议结构</div></div></a></div><div><a href="/2019/05/09/wang-luo-tong-xin-03-http-bao-wen-nei-de-http-xin-xi/" title="03-HTTP 报文内的 HTTP 信息"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-05-09</div><div class="title">03-HTTP 报文内的 HTTP 信息</div></div></a></div><div><a href="/2020/08/16/wang-luo-tong-xin-chang-lian-jie-yu-duan-lian-jie/" title="网络通信-长连接与短连接"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-16</div><div class="title">网络通信-长连接与短连接</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">bookandmusic</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">83</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">136</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">31</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BD%BF%E7%94%A8%E5%AD%90%E8%BF%9B%E7%A8%8B%E6%9D%A5%E5%AE%9E%E7%8E%B0%E5%B9%B6%E5%8F%91-Web-Server"><span class="toc-number">1.</span> <span class="toc-text">一、使用子进程来实现并发 Web Server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BD%BF%E7%94%A8%E7%BA%BF%E7%A8%8B%E6%9D%A5%E5%AE%9E%E7%8E%B0%E5%B9%B6%E5%8F%91-Web-Server"><span class="toc-number">2.</span> <span class="toc-text">二、使用线程来实现并发 Web Server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%BD%BF%E7%94%A8%E5%8D%8F%E7%A8%8B%E6%9D%A5%E5%AE%9E%E7%8E%B0%E5%B9%B6%E5%8F%91-Web-Server"><span class="toc-number">3.</span> <span class="toc-text">三、使用协程来实现并发 Web Server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E4%BD%BF%E7%94%A8%E5%8D%95%E8%BF%9B%E7%A8%8B%E5%8D%95%E7%BA%BF%E7%A8%8B%E9%9D%9E%E9%98%BB%E5%A1%9E%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%B9%B6%E5%8F%91HTTP%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">4.</span> <span class="toc-text">四、使用单进程单线程非阻塞模拟实现高并发HTTP服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E4%BD%BF%E7%94%A8select%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%B9%B6%E5%8F%91HTTP%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">5.</span> <span class="toc-text">五、使用select实现高并发HTTP服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E4%BD%BF%E7%94%A8epoll%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%B9%B6%E5%8F%91HTTP%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">6.</span> <span class="toc-text">六、使用epoll实现高并发HTTP服务器</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/07/15/web-fu-wu-bu-shu-liu-cheng/" title="web服务+gunicorn+supervisor+nginx"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="web服务+gunicorn+supervisor+nginx"/></a><div class="content"><a class="title" href="/2021/07/15/web-fu-wu-bu-shu-liu-cheng/" title="web服务+gunicorn+supervisor+nginx">web服务+gunicorn+supervisor+nginx</a><time datetime="2021-07-15T14:45:15.000Z" title="发表于 2021-07-15 22:45:15">2021-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/16/shu-ju-ku-mongodb-ji-chu-jiao-cheng/" title="MongoDB基础教程"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MongoDB基础教程"/></a><div class="content"><a class="title" href="/2021/06/16/shu-ju-ku-mongodb-ji-chu-jiao-cheng/" title="MongoDB基础教程">MongoDB基础教程</a><time datetime="2021-06-16T10:49:51.000Z" title="发表于 2021-06-16 18:49:51">2021-06-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/13/linux-wang-luo-chuan-shu-ming-ling/" title="Linux网络传输命令"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux网络传输命令"/></a><div class="content"><a class="title" href="/2021/06/13/linux-wang-luo-chuan-shu-ming-ling/" title="Linux网络传输命令">Linux网络传输命令</a><time datetime="2021-06-13T02:11:52.000Z" title="发表于 2021-06-13 10:11:52">2021-06-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/12/gong-ju-ban-ben-kong-zhi-gong-ju-git/" title="版本控制工具Git"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="版本控制工具Git"/></a><div class="content"><a class="title" href="/2021/06/12/gong-ju-ban-ben-kong-zhi-gong-ju-git/" title="版本控制工具Git">版本控制工具Git</a><time datetime="2021-06-12T14:29:36.000Z" title="发表于 2021-06-12 22:29:36">2021-06-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/10/web-jws-de-python-shi-xian-fang-an/" title="JWS的python实现方案"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JWS的python实现方案"/></a><div class="content"><a class="title" href="/2021/06/10/web-jws-de-python-shi-xian-fang-an/" title="JWS的python实现方案">JWS的python实现方案</a><time datetime="2021-06-10T15:00:11.000Z" title="发表于 2021-06-10 23:00:11">2021-06-10</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By bookandmusic</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><div class="search-dialog__title" id="algolia-search-title">Algolia</div><div id="algolia-input-panel"><div id="algolia-search-input"></div></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-stats"></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/algolia.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

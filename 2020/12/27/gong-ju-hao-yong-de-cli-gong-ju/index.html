@@ -1,235 +1,156 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>好用的CLI工具 | Bookandmusic</title><meta name="keywords" content="CLI,终端工具"><meta name="author" content="bookandmusic"><meta name="copyright" content="bookandmusic"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1 Starship如果必须要从本篇文章中选择一个我最喜欢的终端工具——那非 Starship 莫属。Starship 可以适用于任何 Shell。你只需要安装它，然后在相应的配置文件.bashrc&#x2F;.zshrc添加一行配置，剩下的工作交给它来完成就好了。   1eval &quot;$(starship init bash)&quot; 它可以做到：  根据你是否在代码仓库中添加了新文件、是否修">
+<meta property="og:type" content="article">
+<meta property="og:title" content="好用的CLI工具">
+<meta property="og:url" content="https://www.bookandmusic.cn/2020/12/27/gong-ju-hao-yong-de-cli-gong-ju/index.html">
+<meta property="og:site_name" content="Bookandmusic">
+<meta property="og:description" content="1 Starship如果必须要从本篇文章中选择一个我最喜欢的终端工具——那非 Starship 莫属。Starship 可以适用于任何 Shell。你只需要安装它，然后在相应的配置文件.bashrc&#x2F;.zshrc添加一行配置，剩下的工作交给它来完成就好了。   1eval &quot;$(starship init bash)&quot; 它可以做到：  根据你是否在代码仓库中添加了新文件、是否修">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2020-12-27T14:10:35.000Z">
+<meta property="article:modified_time" content="2021-01-21T07:06:06.000Z">
+<meta property="article:author" content="bookandmusic">
+<meta property="article:tag" content="CLI">
+<meta property="article:tag" content="终端工具">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://www.bookandmusic.cn/2020/12/27/gong-ju-hao-yong-de-cli-gong-ju/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.5/dist/instantsearch.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.5/dist/instantsearch.min.js" defer></script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"ZMZD8LN6JF","apiKey":"c75e305c22fd4cf56b8f03aa6efec207","indexName":"Blog","hits":{"per_page":6},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '好用的CLI工具',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-01-21 15:06:06'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-<!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
 
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
 
-
-<head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
-  <link rel="icon" type="image/png" href="/img/favicon.ico">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
   
-  <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
-  <meta name="author" content="bookandmusic">
-  <meta name="keywords" content="">
-  <title>好用的CLI工具 - Bookandmusic</title>
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
   
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
     
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-<!-- 自定义样式保持在最底部 -->
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"www.bookandmusic.cn","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"4e4c5cdb7a970cf955efdc949fbe43f5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Bookandmusic" type="application/atom+xml">
-</head>
-
-
-<body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>Bookandmusic</strong>&nbsp;</a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                分类
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                关于
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
-          </li>
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="好用的CLI工具">
-              
-            </span>
-
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-12-27 22:10" pubdate>
-        2020年12月27日 晚上
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      3.1k 字
-    </span>
-  
-
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      36
-       分钟
-    </span>
-  
-
-  
-  
-</div>
-
-            
-          </div>
-
-          
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    
-      
-
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">好用的CLI工具</h1>
-            
-            <div class="markdown-body">
-              <h2 id="1-Starship"><a href="#1-Starship" class="headerlink" title="1 Starship"></a>1 Starship</h2><p>如果必须要从本篇文章中选择一个我最喜欢的终端工具——那非 <code>Starship</code> 莫属。<code>Starship</code> 可以适用于任何 Shell。你只需要安装它，然后在相应的配置文件<code>.bashrc</code>/<code>.zshrc</code>添加一行配置，剩下的工作交给它来完成就好了。  </p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">eval</span> <span class="hljs-string">&quot;<span class="hljs-subst">$(starship init bash)</span>&quot;</span><br></code></pre></div></td></tr></table></figure>
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Bookandmusic" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">83</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">136</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">31</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Bookandmusic</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">好用的CLI工具</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-12-27T14:10:35.000Z" title="发表于 2020-12-27 22:10:35">2020-12-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-01-21T07:06:06.000Z" title="更新于 2021-01-21 15:06:06">2021-01-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%B3%BB%E7%BB%9F/Mac/">Mac</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="好用的CLI工具"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="1-Starship"><a href="#1-Starship" class="headerlink" title="1 Starship"></a>1 Starship</h2><p>如果必须要从本篇文章中选择一个我最喜欢的终端工具——那非 <code>Starship</code> 莫属。<code>Starship</code> 可以适用于任何 Shell。你只需要安装它，然后在相应的配置文件<code>.bashrc</code>/<code>.zshrc</code>添加一行配置，剩下的工作交给它来完成就好了。  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(starship init bash)</span>&quot;</span></span><br></pre></td></tr></table></figure>
 <p>它可以做到：</p>
 <ul>
 <li><p>根据你是否在代码仓库中添加了新文件、是否修改了文件、是否暂存了文件等情况，用相应的符号表示 <code>git</code> 仓库的状态。</p>
@@ -241,12 +162,12 @@
 <li><p>如果上一个命令执行失败，会展示相应的错误提示符。</p>
 </li>
 </ul>
-<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640.jpeg" srcset="/img/loading.gif" alt="">  </p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640.jpeg" alt="">  </p>
 <p>还有不计其数的其他信息可以展示。但是，它能以更加友好的形式智能地给你呈现!</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># startship 个性化配置</span><br>[character]      <span class="hljs-comment"># 正在配置的组件名称是“character”</span><br>symbol = <span class="hljs-string">&quot;&gt;&quot;</span>  <span class="hljs-comment"># 提示符中在输入文本之前显示的符号</span><br>error_symbol = <span class="hljs-string">&quot;✗&quot;</span> <span class="hljs-comment"># 如果上一条命令失败，提示符中在输入文本之前显示的符号</span><br>use_symbol_for_status = <span class="hljs-literal">true</span> <span class="hljs-comment"># 指示是否改变显示符号来指出错误状态</span><br>style_success = <span class="hljs-string">&quot;bold green&quot;</span>	<span class="hljs-comment"># 上次命令成功时使用的样式</span><br>style_failure = <span class="hljs-string">&quot;bold red&quot;</span>	<span class="hljs-comment"># 上次命令失败时使用的样式</span><br><br><span class="hljs-comment"># 当 starship 扫描当前目录下的文件和文件夹时，最多使用 10 毫秒</span><br>scan_timeout = 10<br><br>[battery]<br>full_symbol = <span class="hljs-string">&quot;🔋&quot;</span> <span class="hljs-comment"># 电量满标志</span><br>charging_symbol = <span class="hljs-string">&quot;⚡️&quot;</span> <span class="hljs-comment"># 充电标志</span><br>discharging_symbol = <span class="hljs-string">&quot;💀&quot;</span> <span class="hljs-comment"># 放电标志</span><br><br>[[battery.display]]  <span class="hljs-comment"># 当电量在 0% 到 30% 时以 &quot;bold red&quot; 样式显示</span><br>threshold = 30<br>style = <span class="hljs-string">&quot;bold red&quot;</span><br><br>[[battery.display]]  <span class="hljs-comment"># 当电量在 30% 到 100% 时以 &quot;bold yellow&quot; 样式显示</span><br>threshold = 100<br>style = <span class="hljs-string">&quot;bold yellow&quot;</span><br><br><br>[cmd_duration]<br>min_time = 100 <span class="hljs-comment"># 显示此组件所需的最短执行时长</span><br>prefix = <span class="hljs-string">&quot;underwent &quot;</span> <span class="hljs-comment"># 直接在执行时长前显示的前缀</span><br>style = <span class="hljs-string">&quot;bold yellow&quot;</span> <span class="hljs-comment"># 此组件的样式</span><br><br>[directory] <span class="hljs-comment"># 显示当前目录的路径</span><br>truncation_length = 8 <span class="hljs-comment"># 当前目录路径被截断后最多保留的父目录数量。</span><br>truncate_to_repo = <span class="hljs-literal">true</span> <span class="hljs-comment"># 是否只截断到您当前处于的 git 仓库根目录下。</span><br>prefix = <span class="hljs-string">&quot;in&quot;</span> <span class="hljs-comment"># 直接在显示路径前显示的前缀。</span><br>style = <span class="hljs-string">&quot;bold cyan&quot;</span> <span class="hljs-comment"># 此组件的样式。</span><br><br>[time]<br>disabled = <span class="hljs-literal">false</span> <span class="hljs-comment"># 启用时间组件</span><br>use_12hr = <span class="hljs-literal">false</span> <span class="hljs-comment"># 禁用12小时制</span><br>format = <span class="hljs-string">&quot;🕙[ %T ]&quot;</span> <span class="hljs-comment"># 时间格式</span><br>time_range = <span class="hljs-string">&quot;-&quot;</span> <span class="hljs-comment"># 显示时间的范围，必须是24小时制</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># startship 个性化配置</span></span><br><span class="line">[character]      <span class="comment"># 正在配置的组件名称是“character”</span></span><br><span class="line">symbol = <span class="string">&quot;&gt;&quot;</span>  <span class="comment"># 提示符中在输入文本之前显示的符号</span></span><br><span class="line">error_symbol = <span class="string">&quot;✗&quot;</span> <span class="comment"># 如果上一条命令失败，提示符中在输入文本之前显示的符号</span></span><br><span class="line">use_symbol_for_status = <span class="literal">true</span> <span class="comment"># 指示是否改变显示符号来指出错误状态</span></span><br><span class="line">style_success = <span class="string">&quot;bold green&quot;</span>	<span class="comment"># 上次命令成功时使用的样式</span></span><br><span class="line">style_failure = <span class="string">&quot;bold red&quot;</span>	<span class="comment"># 上次命令失败时使用的样式</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 当 starship 扫描当前目录下的文件和文件夹时，最多使用 10 毫秒</span></span><br><span class="line">scan_timeout = 10</span><br><span class="line"></span><br><span class="line">[battery]</span><br><span class="line">full_symbol = <span class="string">&quot;🔋&quot;</span> <span class="comment"># 电量满标志</span></span><br><span class="line">charging_symbol = <span class="string">&quot;⚡️&quot;</span> <span class="comment"># 充电标志</span></span><br><span class="line">discharging_symbol = <span class="string">&quot;💀&quot;</span> <span class="comment"># 放电标志</span></span><br><span class="line"></span><br><span class="line">[[battery.display]]  <span class="comment"># 当电量在 0% 到 30% 时以 &quot;bold red&quot; 样式显示</span></span><br><span class="line">threshold = 30</span><br><span class="line">style = <span class="string">&quot;bold red&quot;</span></span><br><span class="line"></span><br><span class="line">[[battery.display]]  <span class="comment"># 当电量在 30% 到 100% 时以 &quot;bold yellow&quot; 样式显示</span></span><br><span class="line">threshold = 100</span><br><span class="line">style = <span class="string">&quot;bold yellow&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[cmd_duration]</span><br><span class="line">min_time = 100 <span class="comment"># 显示此组件所需的最短执行时长</span></span><br><span class="line">prefix = <span class="string">&quot;underwent &quot;</span> <span class="comment"># 直接在执行时长前显示的前缀</span></span><br><span class="line">style = <span class="string">&quot;bold yellow&quot;</span> <span class="comment"># 此组件的样式</span></span><br><span class="line"></span><br><span class="line">[directory] <span class="comment"># 显示当前目录的路径</span></span><br><span class="line">truncation_length = 8 <span class="comment"># 当前目录路径被截断后最多保留的父目录数量。</span></span><br><span class="line">truncate_to_repo = <span class="literal">true</span> <span class="comment"># 是否只截断到您当前处于的 git 仓库根目录下。</span></span><br><span class="line">prefix = <span class="string">&quot;in&quot;</span> <span class="comment"># 直接在显示路径前显示的前缀。</span></span><br><span class="line">style = <span class="string">&quot;bold cyan&quot;</span> <span class="comment"># 此组件的样式。</span></span><br><span class="line"></span><br><span class="line">[time]</span><br><span class="line">disabled = <span class="literal">false</span> <span class="comment"># 启用时间组件</span></span><br><span class="line">use_12hr = <span class="literal">false</span> <span class="comment"># 禁用12小时制</span></span><br><span class="line">format = <span class="string">&quot;🕙[ %T ]&quot;</span> <span class="comment"># 时间格式</span></span><br><span class="line">time_range = <span class="string">&quot;-&quot;</span> <span class="comment"># 显示时间的范围，必须是24小时制</span></span><br></pre></td></tr></table></figure>
 <p>官网地址：<a target="_blank" rel="noopener" href="https://starship.rs/">https://starship.rs/</a></p>
 <h2 id="2-fzf"><a href="#2-fzf" class="headerlink" title="2 fzf"></a>2 fzf</h2><p>fzf— fuzzy finder，即模糊查找器。它是一种通用工具，可让你使用模糊搜索来查找文件、历史命令、进程、git 提交等。你键入一些字母，它会尝试匹配结果列表中任何位置的字母。输入的字母越多，结果也就越准确。你可能在其他的代码编辑器中有过这种类型的搜索使用体验——当你想打开某个文件时，只键入文件名的一部分而不用输入完整路径就能进行查找——这就是模糊搜索。</p>
-<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220059861.jpeg" srcset="/img/loading.gif" alt="">  </p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220059861.jpeg" alt="">  </p>
 <p>我通过 fish fzf 插件插件使用它，因此我可以搜索命令历史记录或快速打开文件。这是可以每天为我节省不少时间的一个非常棒的工具。</p>
 <p>fzf默认会以“extened-search”模式启动， 这种模式下你可以输入多个以空格分隔的搜索关键词， 如<code>^music .mp3$</code>, <code>sbtrkt !fire</code>.</p>
 <table>
@@ -289,37 +210,37 @@
 </tr>
 </tbody></table>
 <p>如果你不想用fuzzy match， 可以用<code>fzf -e</code>做精确匹配<br>符号”|”可以做or匹配， 比如</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">^core go$|rb$|py$<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^core go$|rb$|py$</span><br></pre></td></tr></table></figure>
 <p>表示以core开头，以go或rb或py结尾的</p>
 <p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/junegunn/fzf">https://github.com/junegunn/fzf</a></p>
 <h2 id="3-fd"><a href="#3-fd" class="headerlink" title="3 fd"></a>3 fd</h2><p>类似于系统自带的 <code>find</code> 命令，但使用起来更简单，查找速度更快，并且具有良好的默认设置。</p>
 <h3 id="简单搜索"><a href="#简单搜索" class="headerlink" title="简单搜索"></a>简单搜索</h3><p><em>fd<em>设计用于查找文件系统中的条目. 你可以执行的最基本的搜索就是运行一个参数:搜索模式的</em>fd</em>. 例如,假设您想查找您的旧脚本 (包括<code>netflix</code>) :</p>
-<figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">&gt; fd netfl<br>Software/python/imdb-ratings/netflix-details.py<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; fd netfl</span><br><span class="line">Software/python/imdb-ratings/netflix-details.py</span><br></pre></td></tr></table></figure>
 <p>如果只调用一个这样的参数,<em>fd</em>递归检索当前目录中, <em>包含</em>模式<code>netfl</code>的任何条目.</p>
 <h3 id="正则表达式搜索"><a href="#正则表达式搜索" class="headerlink" title="正则表达式搜索"></a>正则表达式搜索</h3><p>搜索模式被视为正则表达式. 这里,我们搜索开始<code>x</code>并以<code>rc</code>结束的条目. :</p>
-<figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">&gt; <span class="hljs-built_in">cd</span> /etc<br>&gt; fd <span class="hljs-string">&#x27;^x.*rc$&#x27;</span><br>X11/xinit/xinitrc<br>X11/xinit/xserverrc<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">cd</span> /etc</span><br><span class="line">&gt; fd <span class="string">&#x27;^x.*rc$&#x27;</span></span><br><span class="line">X11/xinit/xinitrc</span><br><span class="line">X11/xinit/xserverrc</span><br></pre></td></tr></table></figure>
 <h3 id="指定根目录"><a href="#指定根目录" class="headerlink" title="指定根目录"></a>指定根目录</h3><p>如果我们想搜索一个特定的目录,它可以作为第二个参数<em>fd</em>:</p>
-<figure class="highlight gradle"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gradle">&gt; fd passwd /etc<br><span class="hljs-regexp">/etc/</span><span class="hljs-keyword">default</span>/passwd<br><span class="hljs-regexp">/etc/</span>pam.d/passwd<br><span class="hljs-regexp">/etc/</span>passwd<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; fd passwd &#x2F;etc</span><br><span class="line">&#x2F;etc&#x2F;default&#x2F;passwd</span><br><span class="line">&#x2F;etc&#x2F;pam.d&#x2F;passwd</span><br><span class="line">&#x2F;etc&#x2F;passwd</span><br></pre></td></tr></table></figure>
 <h3 id="仅运行fd"><a href="#仅运行fd" class="headerlink" title="仅运行fd"></a>仅运行<em>fd</em></h3><p><em>fd</em>可以不带参数调用. 这是非常有用的,以便快速地查看当前目录中的所有条目,递归地 (类似于<code>ls -R</code>) :</p>
-<figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">&gt; <span class="hljs-built_in">cd</span> fd/tests<br>&gt; fd<br>testenv<br>testenv/mod.rs<br>tests.rs<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">cd</span> fd/tests</span><br><span class="line">&gt; fd</span><br><span class="line">testenv</span><br><span class="line">testenv/mod.rs</span><br><span class="line">tests.rs</span><br></pre></td></tr></table></figure>
 <h3 id="搜索特定的文件扩展名"><a href="#搜索特定的文件扩展名" class="headerlink" title="搜索特定的文件扩展名"></a>搜索特定的文件扩展名</h3><p>通常,我们对特定类型的所有文件感兴趣. 这可以用<code>-e</code> (或) <code>--extension</code>选择权. 在这里,我们搜索FD仓库中的所有md文件:</p>
-<figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">&gt; <span class="hljs-built_in">cd</span> fd<br>&gt; fd -e md<br>CONTRIBUTING.md<br>README.md<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">cd</span> fd</span><br><span class="line">&gt; fd -e md</span><br><span class="line">CONTRIBUTING.md</span><br><span class="line">README.md</span><br></pre></td></tr></table></figure>
 <p>这个<code>-e</code>选项可以与搜索模式结合使用:</p>
-<figure class="highlight zsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs zsh">&gt; fd -e rs mod<br>src/fshelper/mod.rs<br>src/lscolors/mod.rs<br>tests/testenv/mod.rs<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; fd -e rs mod</span><br><span class="line">src/fshelper/mod.rs</span><br><span class="line">src/lscolors/mod.rs</span><br><span class="line">tests/testenv/mod.rs</span><br></pre></td></tr></table></figure>
 <p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/sharkdp/fd">https://github.com/sharkdp/fd</a></p>
-<h2 id="4-ripgrep"><a href="#4-ripgrep" class="headerlink" title="4 ripgrep"></a>4 ripgrep</h2><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220618373.gif" srcset="/img/loading.gif" alt=""></p>
+<h2 id="4-ripgrep"><a href="#4-ripgrep" class="headerlink" title="4 ripgrep"></a>4 ripgrep</h2><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220618373.gif" alt=""></p>
 <p>上图为 grep（左）与 rg（右）命令执行时的对比。</p>
 <p>与上述<code>fd</code>指令类似，<code>ripgrep</code>是<code>grep</code>命令的替代方法， 不过<code>ripgrep</code>的执行速度更快，而且具有健全的默认配置以及丰富的彩色输出。</p>
 <p>它同样会跳过被<code>.gitignore</code>忽略以及隐藏的文件，因此如果有特殊需要，我们可以设置指令别名：<code>rga =&#39;rg -uuu&#39;</code>。它会禁用所有智能筛选，并使<code>ripgrep</code>的表现与标准的 grep 指令一致。</p>
-<h3 id="简单搜索-1"><a href="#简单搜索-1" class="headerlink" title="简单搜索"></a>简单搜索</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">ls | rg App<br></code></pre></div></td></tr></table></figure>
-<h3 id="正则表达式搜索-1"><a href="#正则表达式搜索-1" class="headerlink" title="正则表达式搜索"></a>正则表达式搜索</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">ls | rg ^App.*$<br></code></pre></div></td></tr></table></figure>
-<h3 id="指定文件搜索"><a href="#指定文件搜索" class="headerlink" title="指定文件搜索"></a>指定文件搜索</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">rg  ^def.*$ 01_two-sum.py<br></code></pre></div></td></tr></table></figure>
+<h3 id="简单搜索-1"><a href="#简单搜索-1" class="headerlink" title="简单搜索"></a>简单搜索</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls | rg App</span><br></pre></td></tr></table></figure>
+<h3 id="正则表达式搜索-1"><a href="#正则表达式搜索-1" class="headerlink" title="正则表达式搜索"></a>正则表达式搜索</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls | rg ^App.*$</span><br></pre></td></tr></table></figure>
+<h3 id="指定文件搜索"><a href="#指定文件搜索" class="headerlink" title="指定文件搜索"></a>指定文件搜索</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rg  ^def.*$ 01_two-sum.py</span><br></pre></td></tr></table></figure>
 <p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/BurntSushi/ripgrep">https://github.com/BurntSushi/ripgrep</a></p>
 <h2 id="5-htop-和-glances"><a href="#5-htop-和-glances" class="headerlink" title="5 htop 和 glances"></a>5 htop 和 glances</h2><p>在 Linux 或 Mac 上显示进程运行状态信息最常用工具是我们熟悉的<code>top</code>，它是每位系统管理员的好帮手。而且，即使是像我一样主要从事网络开发，查看计算机的运行状况也很有用。你知道，只是看一下当前到底是 Docker 进程还是 Chrome 进程吃掉了你所有的 RAM，应该如何做吗？</p>
-<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220647892.jpeg" srcset="/img/loading.gif" alt="">  </p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220647892.jpeg" alt="">  </p>
 <p><code>htop</code>工具是<code>top</code>工具的绝佳替代品。</p>
 <p><code>top</code>工具是非常基础的监控工具，提供的功能有限，因此很多人转去使用 htop。<code>htop</code>比起<code>top</code>，优势很明显——除了功能更加完善以外，它的色彩搭配也很丰富，整体上使用起来更加友好。</p>
-<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220657583.jpeg" srcset="/img/loading.gif" alt="">  </p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220657583.jpeg" alt="">  </p>
 <p>借助 glances，还可以让你一目了然地快速了解系统当前状态。</p>
 <p>glances 是<code>htop</code>的补充工具。除了列出所有进程及其 CPU 和内存使用情况之外，它还可以显示有关系统的其他信息，比如：</p>
 <ul>
@@ -336,11 +257,11 @@
 <p>htop 下载地址：<a target="_blank" rel="noopener" href="https://hisham.hm/htop/">https://hisham.hm/htop/</a></p>
 <p>glances 下载地址：<a target="_blank" rel="noopener" href="https://nicolargo.github.io/glances/">https://nicolargo.github.io/glances/</a></p>
 <h2 id="6-virtualenv"><a href="#6-virtualenv" class="headerlink" title="6 virtualenv"></a>6 virtualenv</h2><p>Virtualenv 是用于在 Python 中创建虚拟环境的工具（比起内置的<code>venv</code>模块，我更喜欢 Virtualenv）。</p>
-<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220804528.jpeg" srcset="/img/loading.gif" alt="">  </p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220804528.jpeg" alt="">  </p>
 <p>virtualenvwrapper 是 virtualenv 的虚拟环境管理器。它提供了许多命令来执行快速创建、列出或删除虚拟环境等操作。</p>
 <p>virtualenv 下载地址：</p>
 <p><a target="_blank" rel="noopener" href="https://pypi.org/project/virtualenv/">https://pypi.org/project/virtualenv/</a></p>
-<h2 id="7-Homebrew"><a href="#7-Homebrew" class="headerlink" title="7 Homebrew"></a>7 Homebrew</h2><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220810324.jpeg" srcset="/img/loading.gif" alt=""></p>
+<h2 id="7-Homebrew"><a href="#7-Homebrew" class="headerlink" title="7 Homebrew"></a>7 Homebrew</h2><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220810324.jpeg" alt=""></p>
 <p>如果你使用的是 Mac，那我就无需再介绍 Homebrew 了。它是 macOS 上被业界普遍认可的软件包管理器。</p>
 <p>下载地址：<a target="_blank" rel="noopener" href="https://brew.sh/">https://brew.sh/</a>  </p>
 <p>在Mac下面安装Mysql、Redis、Node之类软件的时候，比较方便的方式是使用Homebrew（号称是The missing package manager for OS X）。不过Homebrew是命令行方式，用起来不是那么的友好，所以就有了Cakebrew。</p>
@@ -349,273 +270,29 @@
 <p>而LaunchRocket呢，则是一个帮助管理Homebrew安装的服务的软件，比如你使用Homebrew安装的Mysql、Redis、MongoDB，是让它自启动呢，还是手动启动，传统方式需要使用命令行的命令，而使用LaunchRocket则可以在图形界面中进行管理了！</p>
 <p>网站：<a target="_blank" rel="noopener" href="https://github.com/jimbojsb/launchrocket">https://github.com/jimbojsb/launchrocket</a></p>
 <h2 id="8-tree"><a href="#8-tree" class="headerlink" title="8 tree"></a>8 tree</h2><p>你可以通过<code>brew install tree</code>安装该工具。如果要查看给定目录的内容，那么 tree 是执行此操作的必备工具。它能以漂亮的树状结构显示所有子目录及文件：</p>
-<figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">$ tree .<br>.<br>├── recovery.md<br>├── <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">README</span>.</span></span>md<br>├── archive<br>├── automator<br>│   ├── Open\\ <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Iterm2</span>.</span></span>workflow<br>│   │   └── Contents<br>│   │       ├── <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Info</span>.</span></span>plist<br>│   │       ├── QuickLook<br>│   │       │   └── <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Thumbnail</span>.</span></span>png<br>│   │       └── document.wflow<br>│   └── Start\\ Screen\\ <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Saver</span>.</span></span>workflow<br>├── brew-cask.sh<br></code></pre></div></td></tr></table></figure>
-<h2 id="9-bat"><a href="#9-bat" class="headerlink" title="9 bat"></a>9 bat</h2><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220820634.jpeg" srcset="/img/loading.gif" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ tree .</span><br><span class="line">.</span><br><span class="line">├── recovery.md</span><br><span class="line">├── README.md</span><br><span class="line">├── archive</span><br><span class="line">├── automator</span><br><span class="line">│   ├── Open\\ Iterm2.workflow</span><br><span class="line">│   │   └── Contents</span><br><span class="line">│   │       ├── Info.plist</span><br><span class="line">│   │       ├── QuickLook</span><br><span class="line">│   │       │   └── Thumbnail.png</span><br><span class="line">│   │       └── document.wflow</span><br><span class="line">│   └── Start\\ Screen\\ Saver.workflow</span><br><span class="line">├── brew-cask.sh</span><br></pre></td></tr></table></figure>
+<h2 id="9-bat"><a href="#9-bat" class="headerlink" title="9 bat"></a>9 bat</h2><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220820634.jpeg" alt=""></p>
 <p>类似于在终端中常用的用于显示文件内容的<code>cat</code>命令，但是<code>bat</code>效果更佳。</p>
 <p>它增加了语法高亮显示，git gutter 标记（如果适用），自动分页（如果文件很大）等功能，并且使得输出的内容阅读起来更加友好。</p>
 <p>bat 下载地址：<a target="_blank" rel="noopener" href="https://github.com/sharkdp/bat">https://github.com/sharkdp/bat</a></p>
-<h2 id="10-httpie"><a href="#10-httpie" class="headerlink" title="10 httpie"></a>10 httpie</h2><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220827622.gif" srcset="/img/loading.gif" alt=""></p>
+<h2 id="10-httpie"><a href="#10-httpie" class="headerlink" title="10 httpie"></a>10 httpie</h2><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220827622.gif" alt=""></p>
 <p>如果你需要发送一些 HTTP 请求，但发现使用<code>curl</code>不够直观，那么请尝试一下<code>httpie</code>。这是一款非常好用的<code>curl</code>替代工具。合理的默认配置以及简洁的语法使它更易于使用，命令返回也是彩色输出，甚至支持为不同类型的身份验证安装相应的插件。</p>
 <p>httpie 下载地址：<a target="_blank" rel="noopener" href="https://httpie.org/">https://httpie.org/</a></p>
 <h2 id="11-tldr"><a href="#11-tldr" class="headerlink" title="11 tldr"></a>11 tldr</h2><p>简化版的命令帮助手册。“man pages” 包含了 Linux 软件的手册，这些手册解释了如何使用给定的命令。你可以尝试运行<code>man cat</code>或<code>man grep</code>来查看相关命令的帮助手册。它们描述的非常详细，有时可能难以掌握。因此，<code>tldr</code>社区的目的，就是将每个命令的帮助手册进行简化，方便用户查阅。</p>
 <p><code>tldr</code>适用于几乎所有的受欢迎的软件。正如我提到的，这是社区的努力和功劳，虽然不太可能包含所有的软件的简化帮助手册。但是当某个帮助手册被纳入管理并起作用时，它提供的信息通常就是你要查找的内容。</p>
 <p>比如，如果你要创建一些文件的 gzip 压缩存档，<code>man tar</code>可以为你提供可能的参数选择。而<code>tldr tar</code>会列出一些我们常见的示例——如图所示，第二个示例正是你要执行的操作：</p>
-<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220836708.jpeg" srcset="/img/loading.gif" alt="">  </p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220836708.jpeg" alt="">  </p>
 <p>“man pages” 展示的信息太全面了，但是很多时候使用<code>tldr</code>可以更快地帮你找到特定信息，这才是用户真正想要的。</p>
 <p>tldr 下载地址：<a target="_blank" rel="noopener" href="https://tldr.sh/">https://tldr.sh/</a></p>
-<h2 id="12-exa"><a href="#12-exa" class="headerlink" title="12 exa"></a>12 exa</h2><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220843370.jpeg" srcset="/img/loading.gif" alt=""></p>
+<h2 id="12-exa"><a href="#12-exa" class="headerlink" title="12 exa"></a>12 exa</h2><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220843370.jpeg" alt=""></p>
 <p><code>exa</code>是<code>ls</code>命令的一个可替代方案。</p>
 <p>它色彩艳丽，还可以显示 git 状态等其他信息，自动将文件大小转换为方便人们阅读的单位，并且所有这些都保持与<code>ls</code>几乎相同的执行速度。虽然我很喜欢这个工具并推荐给你们，但由于某种原因，我仍然坚持使用 ls。</p>
 <p>exa 下载地址：<a target="_blank" rel="noopener" href="https://the.exa.website/">https://the.exa.website/</a></p>
-<h2 id="13-litecli-和-mycli"><a href="#13-litecli-和-mycli" class="headerlink" title="13 litecli 和 mycli"></a>13 litecli 和 mycli</h2><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220850333.gif" srcset="/img/loading.gif" alt=""></p>
+<h2 id="13-litecli-和-mycli"><a href="#13-litecli-和-mycli" class="headerlink" title="13 litecli 和 mycli"></a>13 litecli 和 mycli</h2><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220850333.gif" alt=""></p>
 <p>这是我首选的 SQLite 和 mysql的解决方案。借助自动提示和语法突出显示，它们比默认的<code>sqlite3</code>和<code>mysql</code>工具要好用很多。</p>
 <p>litecli 下载地址：<a target="_blank" rel="noopener" href="https://litecli.com/">https://litecli.com/</a></p>
 <p>mycli 下载地址：<a target="_blank" rel="noopener" href="https://www.mycli.net/">https://www.mycli.net/</a></p>
-<h2 id="14-ncdu"><a href="#14-ncdu" class="headerlink" title="14 ncdu"></a>14 ncdu</h2><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220855650.jpeg" srcset="/img/loading.gif" alt=""></p>
+<h2 id="14-ncdu"><a href="#14-ncdu" class="headerlink" title="14 ncdu"></a>14 ncdu</h2><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220855650.jpeg" alt=""></p>
 <p>这是在终端进行磁盘分析时使用的工具，它使用起来简单快捷。当我需要释放一些硬盘空间时，会默认使用这款工具。</p>
 <p>ncdu 下载地址：<a target="_blank" rel="noopener" href="https://dev.yorhel.nl/ncdu">https://dev.yorhel.nl/ncdu</a></p>
-
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a>
-                    
-                      <a class="hover-with-bg" href="/categories/%E7%B3%BB%E7%BB%9F/Mac/">Mac</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/CLI/">CLI</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E7%BB%88%E7%AB%AF%E5%B7%A5%E5%85%B7/">终端工具</a>
-                    
-                  </div>
-                
-              </div>
-              
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
-              
-              
-                <div class="post-prevnext">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2021/01/23/django-2-shi-tu/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Django基础(二)-视图</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2020/12/27/vue-zu-jian-jian-tong-xin-liu-chong-fang-shi-wan-zheng-ban/">
-                        <span class="hidden-mobile">Vue组件间通信方式</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
-    </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-      </div>
-    
-  </div>
-</div>
-
-<!-- Custom -->
-
-
-    
-
-    
-      <a id="scroll-top-button" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-    
-
-    
-  </main>
-
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love">BookabdMusic</i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-  </div>
-  
-  <div class="statistics">
-    
-    
-
-    
-      
-        <!-- 不蒜子统计PV -->
-        <span id="busuanzi_container_site_pv" style="display: none">
-            总访问量 
-            <span id="busuanzi_value_site_pv"></span>
-             次
-          </span>
-      
-      
-        <!-- 不蒜子统计UV -->
-        <span id="busuanzi_container_site_uv" style="display: none">
-            总访客数 
-            <span id="busuanzi_value_site_uv"></span>
-             人
-          </span>
-      
-    
-  </div>
-
-
-  
-
-  
-</footer>
-
-<!-- SCRIPTS -->
-
-  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
-<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-<!-- Plugins -->
-
-
-  
-    <script  src="/js/lazyload.js" ></script>
-  
-
-
-
-  
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
-
-
-
-  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
-
-
-
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
-
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-      typing(title)
-      
-    })(window, document);
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
-    })()
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 主题的启动项 保持在最底部 -->
-<script  src="/js/boot.js" ></script>
-
-
-
-</body>
-</html>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">bookandmusic</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.bookandmusic.cn/2020/12/27/gong-ju-hao-yong-de-cli-gong-ju/">https://www.bookandmusic.cn/2020/12/27/gong-ju-hao-yong-de-cli-gong-ju/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.bookandmusic.cn" target="_blank">Bookandmusic</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CLI/">CLI</a><a class="post-meta__tags" href="/tags/%E7%BB%88%E7%AB%AF%E5%B7%A5%E5%85%B7/">终端工具</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/01/23/django-2-shi-tu/"><img class="prev-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Django基础(二)-视图</div></div></a></div><div class="next-post pull-right"><a href="/2020/12/27/vue-zu-jian-jian-tong-xin-liu-chong-fang-shi-wan-zheng-ban/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Vue组件间通信方式</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">bookandmusic</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">83</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">136</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">31</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Starship"><span class="toc-number">1.</span> <span class="toc-text">1 Starship</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-fzf"><span class="toc-number">2.</span> <span class="toc-text">2 fzf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-fd"><span class="toc-number">3.</span> <span class="toc-text">3 fd</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E6%90%9C%E7%B4%A2"><span class="toc-number">3.1.</span> <span class="toc-text">简单搜索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%90%9C%E7%B4%A2"><span class="toc-number">3.2.</span> <span class="toc-text">正则表达式搜索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E5%AE%9A%E6%A0%B9%E7%9B%AE%E5%BD%95"><span class="toc-number">3.3.</span> <span class="toc-text">指定根目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%85%E8%BF%90%E8%A1%8Cfd"><span class="toc-number">3.4.</span> <span class="toc-text">仅运行fd</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E7%89%B9%E5%AE%9A%E7%9A%84%E6%96%87%E4%BB%B6%E6%89%A9%E5%B1%95%E5%90%8D"><span class="toc-number">3.5.</span> <span class="toc-text">搜索特定的文件扩展名</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-ripgrep"><span class="toc-number">4.</span> <span class="toc-text">4 ripgrep</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E6%90%9C%E7%B4%A2-1"><span class="toc-number">4.1.</span> <span class="toc-text">简单搜索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%90%9C%E7%B4%A2-1"><span class="toc-number">4.2.</span> <span class="toc-text">正则表达式搜索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E6%90%9C%E7%B4%A2"><span class="toc-number">4.3.</span> <span class="toc-text">指定文件搜索</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-htop-%E5%92%8C-glances"><span class="toc-number">5.</span> <span class="toc-text">5 htop 和 glances</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-virtualenv"><span class="toc-number">6.</span> <span class="toc-text">6 virtualenv</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Homebrew"><span class="toc-number">7.</span> <span class="toc-text">7 Homebrew</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-tree"><span class="toc-number">8.</span> <span class="toc-text">8 tree</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-bat"><span class="toc-number">9.</span> <span class="toc-text">9 bat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-httpie"><span class="toc-number">10.</span> <span class="toc-text">10 httpie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-tldr"><span class="toc-number">11.</span> <span class="toc-text">11 tldr</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-exa"><span class="toc-number">12.</span> <span class="toc-text">12 exa</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-litecli-%E5%92%8C-mycli"><span class="toc-number">13.</span> <span class="toc-text">13 litecli 和 mycli</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-ncdu"><span class="toc-number">14.</span> <span class="toc-text">14 ncdu</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/07/15/web-fu-wu-bu-shu-liu-cheng/" title="web服务+gunicorn+supervisor+nginx"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="web服务+gunicorn+supervisor+nginx"/></a><div class="content"><a class="title" href="/2021/07/15/web-fu-wu-bu-shu-liu-cheng/" title="web服务+gunicorn+supervisor+nginx">web服务+gunicorn+supervisor+nginx</a><time datetime="2021-07-15T14:45:15.000Z" title="发表于 2021-07-15 22:45:15">2021-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/16/shu-ju-ku-mongodb-ji-chu-jiao-cheng/" title="MongoDB基础教程"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MongoDB基础教程"/></a><div class="content"><a class="title" href="/2021/06/16/shu-ju-ku-mongodb-ji-chu-jiao-cheng/" title="MongoDB基础教程">MongoDB基础教程</a><time datetime="2021-06-16T10:49:51.000Z" title="发表于 2021-06-16 18:49:51">2021-06-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/13/linux-wang-luo-chuan-shu-ming-ling/" title="Linux网络传输命令"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux网络传输命令"/></a><div class="content"><a class="title" href="/2021/06/13/linux-wang-luo-chuan-shu-ming-ling/" title="Linux网络传输命令">Linux网络传输命令</a><time datetime="2021-06-13T02:11:52.000Z" title="发表于 2021-06-13 10:11:52">2021-06-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/12/gong-ju-ban-ben-kong-zhi-gong-ju-git/" title="版本控制工具Git"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="版本控制工具Git"/></a><div class="content"><a class="title" href="/2021/06/12/gong-ju-ban-ben-kong-zhi-gong-ju-git/" title="版本控制工具Git">版本控制工具Git</a><time datetime="2021-06-12T14:29:36.000Z" title="发表于 2021-06-12 22:29:36">2021-06-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/10/web-jws-de-python-shi-xian-fang-an/" title="JWS的python实现方案"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JWS的python实现方案"/></a><div class="content"><a class="title" href="/2021/06/10/web-jws-de-python-shi-xian-fang-an/" title="JWS的python实现方案">JWS的python实现方案</a><time datetime="2021-06-10T15:00:11.000Z" title="发表于 2021-06-10 23:00:11">2021-06-10</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By bookandmusic</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><div class="search-dialog__title" id="algolia-search-title">Algolia</div><div id="algolia-input-panel"><div id="algolia-search-input"></div></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-stats"></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/algolia.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

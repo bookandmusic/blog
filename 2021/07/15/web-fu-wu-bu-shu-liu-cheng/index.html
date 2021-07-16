@@ -1,0 +1,238 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>web服务+gunicorn+supervisor+nginx | Bookandmusic</title><meta name="author" content="bookandmusic"><meta name="copyright" content="bookandmusic"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="在网站开发完成后，需要在服务器上线部署，而在这个过程中，需要借助一系列工具，以下借助flask服务演示部署上线的一系列步骤。  五者之间的关系   客户端 (client)  浏览器或者app。    web服务器 (如nginx)  Web服务器是指驻留于因特网上某种类型计算机的程序。 当Web浏览器（客户端）连到服务器上并请求文件时，服务器将处理该请求并将文件发送到该浏览器上，附带的信息会告诉">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web服务+gunicorn+supervisor+nginx">
+<meta property="og:url" content="https://www.bookandmusic.cn/2021/07/15/web-fu-wu-bu-shu-liu-cheng/index.html">
+<meta property="og:site_name" content="Bookandmusic">
+<meta property="og:description" content="在网站开发完成后，需要在服务器上线部署，而在这个过程中，需要借助一系列工具，以下借助flask服务演示部署上线的一系列步骤。  五者之间的关系   客户端 (client)  浏览器或者app。    web服务器 (如nginx)  Web服务器是指驻留于因特网上某种类型计算机的程序。 当Web浏览器（客户端）连到服务器上并请求文件时，服务器将处理该请求并将文件发送到该浏览器上，附带的信息会告诉">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2021-07-15T14:45:15.000Z">
+<meta property="article:modified_time" content="2021-07-15T16:18:42.267Z">
+<meta property="article:author" content="bookandmusic">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://www.bookandmusic.cn/2021/07/15/web-fu-wu-bu-shu-liu-cheng/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.5/dist/instantsearch.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.5/dist/instantsearch.min.js" defer></script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"ZMZD8LN6JF","apiKey":"c75e305c22fd4cf56b8f03aa6efec207","indexName":"Blog","hits":{"per_page":6},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'web服务+gunicorn+supervisor+nginx',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-07-16 00:18:42'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Bookandmusic" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">83</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">136</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">31</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Bookandmusic</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">web服务+gunicorn+supervisor+nginx</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-07-15T14:45:15.000Z" title="发表于 2021-07-15 22:45:15">2021-07-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-07-15T16:18:42.267Z" title="更新于 2021-07-16 00:18:42">2021-07-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B7%A5%E5%85%B7/Linux/">Linux</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="web服务+gunicorn+supervisor+nginx"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>在网站开发完成后，需要在服务器上线部署，而在这个过程中，需要借助一系列工具，以下借助flask服务演示部署上线的一系列步骤。</p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/07/20180503191942330.png" alt="20180503191942330"></p>
+<h2 id="五者之间的关系"><a href="#五者之间的关系" class="headerlink" title="五者之间的关系"></a>五者之间的关系</h2><blockquote>
+<p>  客户端 (<code>client</code>)</p>
+</blockquote>
+<p>浏览器或者app。</p>
+<blockquote>
+<p>  web服务器 (如<code>nginx</code>)</p>
+</blockquote>
+<p>Web服务器是指驻留于因特网上某种类型计算机的程序。</p>
+<p>当Web浏览器（客户端）连到服务器上并请求文件时，服务器将处理该请求并将文件发送到该浏览器上，附带的信息会告诉浏览器如何查看该文件（即文件类型）。服务器使用HTTP（超文本传输协议）进行信息交流，这就是人们常把它们称为HTTP服务器的原因。</p>
+<p><strong>严格意义上Web服务器只负责处理HTTP协议，用于处理静态页面的内容;而动态内容需要通过WSGI接口交给应用服务器去处理。</strong><br>Web服务器包括<strong>Nginx</strong>，<strong>Apache</strong>，<strong>IIS</strong>等。而优秀的web服务器在接收http请求时，还可以做<strong>负载均衡</strong>和<strong>反向代理</strong>等工作。</p>
+<blockquote>
+<p>  WSGI容器 (如<code>Gunicorn</code>)</p>
+</blockquote>
+<p>常见的WSGI容器有<code>Gunicorn</code>，<code>uWSGI</code>等。web框架和web服务器之间需要通信，这时候需要设计一套双方都遵守的接口。</p>
+<p><strong>PEP3333指出，WSGI(Web Server Gateway Interface)是WEB服务器和web框架或web应用之间建立的一种简单通用的接口规范。有了wsgi这份接口规范，在web开发的过程中，能更加自由的选择服务器端和框架；在服务器端和框架的开发过程能够分离开来，不用过多的考虑双方具体的实现，使得服务器端和框架开发者能够专心自己领域的开发工作。而WSGI容器就是根据这套接口写出来的。</strong></p>
+<p>WSGI容器的作用就是根据web服务器传递而来的参数构建一个让WSGI应用成功执行的环境，例如request，而且还得把WSGI应用上处理好的结果返回给web服务器。此外<strong>WSGI容器也叫应用服务器</strong>。<br>注： 一般应用服务器都集成了web服务器，主要是为了调试方便，出于性能和稳定性考虑，并不能在生产环境中使用。</p>
+<blockquote>
+<p>  web框架 (如<code>Django</code>)</p>
+</blockquote>
+<p>作用主要是方便我们开发 web应用程序，HTTP请求的动态数据就是由 web框架层来提供的。常见的 web框架有<em>Flask</em>，<em>Django</em>，<em>Tornado</em>等，而Tornado不光是一个web框架，还实现了WSGI容器的功能。单纯的flask 自带的web服务器做下测试，会看到压力大的时候出现socket的问题，因为他是单进程单线程的。使用gunicorn来启动，响应速度和能力提升显著。</p>
+<blockquote>
+<p>  守护进程 (如<code>Supervisor</code>)</p>
+</blockquote>
+<p><code>Supervisor</code>是一个用 Python 写的进程管理工具，可以很方便的用来启动、重启、关闭进程（不仅仅是 Python 进程）。</p>
+<p>除了对单个进程的控制，还可以同时启动、关闭多个进程，比如很不幸的服务器出问题导致所有应用程序都被杀死，此时可以用 supervisor 同时启动所有应用程序而不是一个一个地敲命令启动。</p>
+<h2 id="Gunicorn详解"><a href="#Gunicorn详解" class="headerlink" title="Gunicorn详解"></a>Gunicorn详解</h2><h3 id="Gunicorn是什么"><a href="#Gunicorn是什么" class="headerlink" title="Gunicorn是什么"></a>Gunicorn是什么</h3><blockquote>
+<p>  Gunicorn（绿色独角兽）是一个用于UNIX的Python WSGI HTTP服务器。它是一个前叉工作者模型，从Ruby的Unicorn项目移植而来。 Gunicorn服务器与许多Web框架广泛兼容，轻松服务器资源并且速度相当快。</p>
+</blockquote>
+<h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4><ul>
+<li>支持 WSGI，web2py，Django 和 Paster</li>
+<li>自动化工作流程管理</li>
+<li>简单的 Python 配置</li>
+<li>多个工人配置</li>
+<li>各种服务器挂钩，可扩展性</li>
+<li>兼容 Python 2.6+和 Python 3.2+</li>
+</ul>
+<p>Gunicorn 是一个 unix 上被广泛使用的高性能的 Python WSGI UNIX HTTP Server。和大多数的 web 框架兼容，并具有实现简单，轻量级，高性能等特点。</p>
+<p>Gunicorn 服务器作为 wsgi app 的容器，能够与各种 Web 框架兼容（flask，django 等）,得益于 gevent 等技术，使用 Gunicorn 能够在基本不改变 wsgi app 代码的前提下，大幅度提高 wsgi app 的性能。</p>
+<h4 id="服务模型-Server-Model"><a href="#服务模型-Server-Model" class="headerlink" title="服务模型(Server Model)"></a>服务模型(Server Model)</h4><p>Gunicorn 是基于 pre-fork 模型的。也就意味着有一个中心管理进程( master process )用来管理 worker 进程集合。Master 从不知道任何关于客户端的信息。所有的请求和响应处理都是由 worker 进程来处理的。</p>
+<h4 id="Master-管理者"><a href="#Master-管理者" class="headerlink" title="Master(管理者)"></a>Master(管理者)</h4><p>主程序是一个简单的循环,监听各种信号以及相应的响应进程。master 管理着正在运行的 worker 集合,通过监听各种信号比如 TTIN, TTOU, and CHLD. TTIN and TTOU 响应的增加和减少 worker 的数目。CHLD 信号表明一个子进程已经结束了,在这种情况下 master 会自动的重启失败的 worker。</p>
+<h4 id="worker"><a href="#worker" class="headerlink" title="worker"></a>worker</h4><p>woker 有很多种，包括：ggevent、geventlet、gtornado 等等。</p>
+<p>这里主要分析 ggevent。每个 ggevent worker 启动的时候会启动多个 server 对象：worker 首先为每个 listener 创建一个 server 对象（注：为什么是一组 listener,因为 gunicorn 可以绑定一组地址,每个地址对于一个 listener），每个 server 对象都有运行在一个单独的 gevent pool 对象中。真正等待链接和处理链接的操作是在 server 对象中进行的。</p>
+<h3 id="Gunicorn安装"><a href="#Gunicorn安装" class="headerlink" title="Gunicorn安装"></a>Gunicorn安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install gunicorn</span><br></pre></td></tr></table></figure>
+<h3 id="Gunicorn使用"><a href="#Gunicorn使用" class="headerlink" title="Gunicorn使用"></a>Gunicorn使用</h3><h4 id="命令运行"><a href="#命令运行" class="headerlink" title="命令运行"></a>命令运行</h4><p>使用gunicorn监听请求，运行以下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gunicorn -w 2 -b 0.0.0.0:8000 test.application</span><br></pre></td></tr></table></figure>
+<p><code>-w</code>:指定fork的worker进程数<br><code>-b</code>:指定绑定的端口<br><code>test</code>:模块名,python文件名<br><code>application</code>:变量名,python文件中可调用的wsgi接口名称</p>
+<h4 id="脚本运行"><a href="#脚本运行" class="headerlink" title="脚本运行"></a>脚本运行</h4><p>创建shell脚本，修改 运行权限，然后 <code>sudo ./bin/django_start.sh</code>启动服务即可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">NAME=<span class="string">&quot;djangoblog&quot;</span> <span class="comment"># Name of the application</span></span><br><span class="line">DJANGODIR=/root/DjangoBlog <span class="comment"># Django project directory</span></span><br><span class="line">SOCKFILE=/root/DjangoBlog/run/gunicorn.sock <span class="comment"># we will communicte using this unix socket</span></span><br><span class="line">USER=root <span class="comment"># the user to run as</span></span><br><span class="line">GROUP=admin <span class="comment"># the group to run as</span></span><br><span class="line">NUM_WORKERS=3 <span class="comment"># how many worker processes should Gunicorn spawn</span></span><br><span class="line">DJANGO_SETTINGS_MODULE=DjangoBlog.settings <span class="comment"># which settings file should Django use</span></span><br><span class="line">DJANGO_WSGI_MODULE=DjangoBlog.wsgi <span class="comment"># WSGI module name</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Starting <span class="variable">$NAME</span> as `whoami`&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Activate the virtual environment</span></span><br><span class="line"><span class="built_in">export</span> WORKON_HOME=<span class="variable">$HOME</span>/.virtualenvs</span><br><span class="line"><span class="built_in">export</span> VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3</span><br><span class="line"><span class="built_in">source</span> /usr/<span class="built_in">local</span>/bin/virtualenvwrapper.sh</span><br><span class="line">workon djangoblog</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> DJANGO_SETTINGS_MODULE=<span class="variable">$DJANGO_SETTINGS_MODULE</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Create the run directory if it doesn&#x27;t exist</span></span><br><span class="line">RUNDIR=$(dirname $ SOCKFILE)</span><br><span class="line"><span class="built_in">test</span> -d <span class="variable">$RUNDIR</span> || mkdir -p <span class="variable">$RUNDIR</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Start your Django Unicorn</span></span><br><span class="line"><span class="comment"># Programs meant to be run under supervisor should not daemonize themselves (do not use --daemon)</span></span><br><span class="line"><span class="built_in">exec</span> /root/.virtualenvs/djangoblog/bin/gunicorn <span class="variable">$&#123;DJANGO_WSGI_MODULE&#125;</span>:application \</span><br><span class="line">--name <span class="variable">$NAME</span> \</span><br><span class="line">--workers <span class="variable">$NUM_WORKERS</span> \</span><br><span class="line">--user=<span class="variable">$USER</span> --group=<span class="variable">$GROUP</span> \</span><br><span class="line">--log-level=debug \</span><br><span class="line">--log-file=-</span><br></pre></td></tr></table></figure>
+<h2 id="Supervisor详解"><a href="#Supervisor详解" class="headerlink" title="Supervisor详解"></a>Supervisor详解</h2><h3 id="Supervisor是什么"><a href="#Supervisor是什么" class="headerlink" title="Supervisor是什么"></a>Supervisor是什么</h3><p>Supervisor在百度百科上给的定义是超级用户，监管员。Supervisor是一个进程管理工具，当进程中断的时候Supervisor能自动重新启动它。可以运行在各种类unix的机器上，supervisor就是用Python开发的一套通用的进程管理程序，能将一个普通的命令行进程变为后台daemon，并监控进程状态，异常退出时能自动重启。</p>
+<p>supervisor主要包含以下四个部分：</p>
+<blockquote>
+<p>  <code>supervisord</code></p>
+</blockquote>
+<p>这个是supervisor服务的主要管理器，负责管理我们配置的子进程，包括重启崩溃或异常退出的子进程，同时也响应来自客户端的请求。</p>
+<blockquote>
+<p>  <code>supervisorctl</code></p>
+</blockquote>
+<p>supervisord服务的客户端命令行, 可以用来执行 stop、start、restart 等命令，来对这些子进程进行管理。</p>
+<blockquote>
+<p>  <code>Web Server</code></p>
+</blockquote>
+<p>和supervisorctl功能娉美。这个是通过web界面查看和控制进程状态。</p>
+<blockquote>
+<p>  <code>XML-RPC Interface</code></p>
+</blockquote>
+<p>服务于web UI的同一个HTTP服务器提供一个XML-RPC接口，可以用来询问和控制管理程序及其运行的程序</p>
+<h3 id="Supervisor安装"><a href="#Supervisor安装" class="headerlink" title="Supervisor安装"></a>Supervisor安装</h3><p>supervisor可以运行在大多数类UNIX系统，但是不能运行在任何windows系统，Supervisor运行在python3版本3.4或更高版本以及python2版本2.7上工作。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install supervisor</span><br></pre></td></tr></table></figure>
+<h3 id="Supervisor使用"><a href="#Supervisor使用" class="headerlink" title="Supervisor使用"></a>Supervisor使用</h3><h4 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h4><ul>
+<li>确定一个目录，生成基本的配置文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /etc/supervisor/</span><br><span class="line"></span><br><span class="line">echo_supervisord_conf &gt; /etc/supervisor/supervisord.conf</span><br></pre></td></tr></table></figure>
+<ul>
+<li>创建子目录，存放子进程的配置文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir  -p /etc/supervisor/supervisord.d/</span><br></pre></td></tr></table></figure>
+<ul>
+<li>修改主配置文件，指明子进程配置文件的路径</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># vi /etc/supervisor/supervisord.conf</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在文件最后，打开 include项</span></span><br><span class="line">[include]</span><br><span class="line">files = /etc/supervisor/supervisord.d/*.conf</span><br></pre></td></tr></table></figure>
+<ul>
+<li>创建子进程配置文件，启动上一步的 django服务</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># vi /etc/supervisor/supervisord.d/djangoblog.conf</span></span><br><span class="line"></span><br><span class="line">[program:djangoblog]</span><br><span class="line"><span class="built_in">command</span>=/root/DjangoBlog/bin/django_start.sh  <span class="comment"># 执行上一步的脚本，启动服务</span></span><br><span class="line">user=root  <span class="comment"># 启动用户身份</span></span><br><span class="line">autostart=<span class="literal">true</span></span><br><span class="line">autorestart=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line">redirect_stderr = <span class="literal">true</span></span><br><span class="line">stdout_logfile = /var/<span class="built_in">log</span>/djangoblog.log</span><br><span class="line">stderr_logfile=/var/<span class="built_in">log</span>/djangoblog.err</span><br></pre></td></tr></table></figure>
+<h4 id="启动命令"><a href="#启动命令" class="headerlink" title="启动命令"></a>启动命令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">supervisord -c /etc/supervisor/supervisord.conf  <span class="comment"># 启动主进程</span></span><br><span class="line"></span><br><span class="line">supervisorctl -c /etc/supervisor/supervisord.conf <span class="comment"># 查看当前进程</span></span><br><span class="line">djangoblog                       RUNNING   pid 45163, uptime 0:00:09</span><br><span class="line">supervisor&gt; stop all <span class="comment"># 停止所有服务</span></span><br><span class="line">djangoblog: stopped</span><br><span class="line">supervisor&gt; shutdown <span class="comment"># 移除服务</span></span><br><span class="line">Really shut the remote supervisord process down y/N? y</span><br><span class="line">Shut down</span><br><span class="line">supervisor&gt; status <span class="comment"># 查看状态</span></span><br><span class="line">unix:///tmp/supervisor.sock no such file</span><br><span class="line">supervisor&gt; <span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+<h2 id="Nginx代理"><a href="#Nginx代理" class="headerlink" title="Nginx代理"></a>Nginx代理</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       <span class="number">80</span>;</span><br><span class="line">    listen       [::]:<span class="number">80</span>;</span><br><span class="line">    server_name  _;</span><br><span class="line">    root         /root/DjangoBlog/;</span><br><span class="line"></span><br><span class="line">    location /static/ &#123;</span><br><span class="line">        alias /root/DjangoBlog/collectedstatic/;</span><br><span class="line">        expires <span class="built_in">max</span>;</span><br><span class="line">        access_log        off;</span><br><span class="line">        log_not_found     off;</span><br><span class="line">    &#125;</span><br><span class="line">    location /media &#123;</span><br><span class="line">        # 静态文件配置</span><br><span class="line">        alias /root/DjangoBlog/uploads/;</span><br><span class="line">        expires <span class="built_in">max</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    location ~ \.py$ &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">403</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">        proxy_set_header Host $http_host;</span><br><span class="line">        proxy_set_header X-NginX-Proxy <span class="literal">true</span>;</span><br><span class="line">        proxy_redirect off;</span><br><span class="line">        <span class="keyword">if</span> (!-f $request_filename) &#123;</span><br><span class="line">            proxy_pass http://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8000</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;	</span><br><span class="line"></span><br><span class="line">     # Load configuration files <span class="keyword">for</span> the default server block.</span><br><span class="line">     include /etc/nginx/default.d/*.conf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">bookandmusic</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.bookandmusic.cn/2021/07/15/web-fu-wu-bu-shu-liu-cheng/">https://www.bookandmusic.cn/2021/07/15/web-fu-wu-bu-shu-liu-cheng/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.bookandmusic.cn" target="_blank">Bookandmusic</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/06/16/shu-ju-ku-mongodb-ji-chu-jiao-cheng/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">MongoDB基础教程</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">bookandmusic</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">83</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">136</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">31</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E8%80%85%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">1.</span> <span class="toc-text">五者之间的关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gunicorn%E8%AF%A6%E8%A7%A3"><span class="toc-number">2.</span> <span class="toc-text">Gunicorn详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Gunicorn%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">2.1.</span> <span class="toc-text">Gunicorn是什么</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD"><span class="toc-number">2.1.1.</span> <span class="toc-text">功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9E%8B-Server-Model"><span class="toc-number">2.1.2.</span> <span class="toc-text">服务模型(Server Model)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Master-%E7%AE%A1%E7%90%86%E8%80%85"><span class="toc-number">2.1.3.</span> <span class="toc-text">Master(管理者)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#worker"><span class="toc-number">2.1.4.</span> <span class="toc-text">worker</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gunicorn%E5%AE%89%E8%A3%85"><span class="toc-number">2.2.</span> <span class="toc-text">Gunicorn安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gunicorn%E4%BD%BF%E7%94%A8"><span class="toc-number">2.3.</span> <span class="toc-text">Gunicorn使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%BF%90%E8%A1%8C"><span class="toc-number">2.3.1.</span> <span class="toc-text">命令运行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%84%9A%E6%9C%AC%E8%BF%90%E8%A1%8C"><span class="toc-number">2.3.2.</span> <span class="toc-text">脚本运行</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Supervisor%E8%AF%A6%E8%A7%A3"><span class="toc-number">3.</span> <span class="toc-text">Supervisor详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Supervisor%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">3.1.</span> <span class="toc-text">Supervisor是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Supervisor%E5%AE%89%E8%A3%85"><span class="toc-number">3.2.</span> <span class="toc-text">Supervisor安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Supervisor%E4%BD%BF%E7%94%A8"><span class="toc-number">3.3.</span> <span class="toc-text">Supervisor使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">3.3.1.</span> <span class="toc-text">配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">3.3.2.</span> <span class="toc-text">启动命令</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx%E4%BB%A3%E7%90%86"><span class="toc-number">4.</span> <span class="toc-text">Nginx代理</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/07/15/web-fu-wu-bu-shu-liu-cheng/" title="web服务+gunicorn+supervisor+nginx"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="web服务+gunicorn+supervisor+nginx"/></a><div class="content"><a class="title" href="/2021/07/15/web-fu-wu-bu-shu-liu-cheng/" title="web服务+gunicorn+supervisor+nginx">web服务+gunicorn+supervisor+nginx</a><time datetime="2021-07-15T14:45:15.000Z" title="发表于 2021-07-15 22:45:15">2021-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/16/shu-ju-ku-mongodb-ji-chu-jiao-cheng/" title="MongoDB基础教程"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MongoDB基础教程"/></a><div class="content"><a class="title" href="/2021/06/16/shu-ju-ku-mongodb-ji-chu-jiao-cheng/" title="MongoDB基础教程">MongoDB基础教程</a><time datetime="2021-06-16T10:49:51.000Z" title="发表于 2021-06-16 18:49:51">2021-06-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/13/linux-wang-luo-chuan-shu-ming-ling/" title="Linux网络传输命令"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux网络传输命令"/></a><div class="content"><a class="title" href="/2021/06/13/linux-wang-luo-chuan-shu-ming-ling/" title="Linux网络传输命令">Linux网络传输命令</a><time datetime="2021-06-13T02:11:52.000Z" title="发表于 2021-06-13 10:11:52">2021-06-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/12/gong-ju-ban-ben-kong-zhi-gong-ju-git/" title="版本控制工具Git"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="版本控制工具Git"/></a><div class="content"><a class="title" href="/2021/06/12/gong-ju-ban-ben-kong-zhi-gong-ju-git/" title="版本控制工具Git">版本控制工具Git</a><time datetime="2021-06-12T14:29:36.000Z" title="发表于 2021-06-12 22:29:36">2021-06-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/10/web-jws-de-python-shi-xian-fang-an/" title="JWS的python实现方案"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JWS的python实现方案"/></a><div class="content"><a class="title" href="/2021/06/10/web-jws-de-python-shi-xian-fang-an/" title="JWS的python实现方案">JWS的python实现方案</a><time datetime="2021-06-10T15:00:11.000Z" title="发表于 2021-06-10 23:00:11">2021-06-10</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By bookandmusic</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><div class="search-dialog__title" id="algolia-search-title">Algolia</div><div id="algolia-input-panel"><div id="algolia-search-input"></div></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-stats"></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/algolia.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
