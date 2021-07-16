@@ -57,7 +57,7 @@
       
         
         
-          &lt;h2 id=&quot;基本概念&quot;&gt;&lt;a class=&quot;header-anchor&quot;
+          &lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot;
         
       
     
@@ -90,8 +90,7 @@
       
         
         
-          &lt;h2 id=&quot;名词解释&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#名词解释&quot;&gt;¶&lt;/a&gt;名词解释&lt;/h2&gt;
-&lt;h3 id=&quot;FTP&quot;&gt;&lt;a class=&quot;header-anchor&quot;
+          &lt;h2 id=&quot;名词解释&quot;&gt;&lt;a href=&quot;#名词解释&quot; class=&quot;headerlink&quot; title=&quot;名词解释&quot;&gt;&lt;/a&gt;名词解释&lt;/h2&gt;&lt;h3 id=&quot;FTP&quot;&gt;&lt;a href=&quot;#FTP&quot; class=&quot;headerlink&quot;
         
       
     
@@ -129,7 +128,7 @@
         
         
           &lt;p&gt;Git是目前世界上最先进的分布式版本控制系统，可以有效、高速的处理从很小到非常大的项目版本管理。也就是用来管理你的hexo博客文章，上传到GitHub的工具。Git非常强大，开发人员必备技能。&lt;/p&gt;
-&lt;h2 id=&quot;环境配置&quot;&gt;&lt;a
+&lt;h2 id=&quot;环境配置&quot;&gt;&lt;a href=&quot;#环境配置&quot;
         
       
     
@@ -160,9 +159,8 @@
       
         
         
-          &lt;h2 id=&quot;JWS&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#JWS&quot;&gt;¶&lt;/a&gt;JWS&lt;/h2&gt;
-&lt;p&gt;在python中的 jws实现方案有以下两种：&lt;/p&gt;
-&lt;h3 id=&quot;pyjwt&quot;&gt;&lt;a class=&quot;header-anchor&quot;
+          &lt;h2 id=&quot;JWS&quot;&gt;&lt;a href=&quot;#JWS&quot; class=&quot;headerlink&quot; title=&quot;JWS&quot;&gt;&lt;/a&gt;JWS&lt;/h2&gt;&lt;p&gt;在python中的 jws实现方案有以下两种：&lt;/p&gt;
+&lt;h3 id=&quot;pyjwt&quot;&gt;&lt;a href=&quot;#pyjwt&quot;
         
       
     
@@ -199,8 +197,7 @@
       
         
         
-          &lt;h2 id=&quot;项目配置&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#项目配置&quot;&gt;¶&lt;/a&gt;项目配置&lt;/h2&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td
+          &lt;h2 id=&quot;项目配置&quot;&gt;&lt;a href=&quot;#项目配置&quot; class=&quot;headerlink&quot; title=&quot;项目配置&quot;&gt;&lt;/a&gt;项目配置&lt;/h2&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td
         
       
     
@@ -232,10 +229,7 @@
         
         
           &lt;blockquote&gt;
-&lt;p&gt;写好了一个项目之后，要确定各个模块是不是稳定运行，有没有bug，比如一个项目有100个路由，可以手动一个一个URL的输入，查看响应有没有毛病，但这样不符合程序员的逼格。&lt;br&gt;
-由此，诞生了单元测试与集成测试。&lt;/p&gt;
-&lt;/blockquote&gt;
-
+&lt;p&gt;  写好了一个项目之后，要确定各个模块是不是稳定运行，有没有bug，比如一个项目有100个路由，可以手动一个一个URL的输入，查看响应有没有毛病，但这样不符合程序员的逼格。&lt;br&gt; 
         
       
     
@@ -270,8 +264,7 @@
       
         
         
-          &lt;h2 id=&quot;流程分析&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#流程分析&quot;&gt;¶&lt;/a&gt;流程分析&lt;/h2&gt;
-&lt;p&gt;在前后端分离开发中，当上传图片时，一般不会直接把图片等文件资源，直接传到django服务器,
+          &lt;h2 id=&quot;流程分析&quot;&gt;&lt;a href=&quot;#流程分析&quot; class=&quot;headerlink&quot; title=&quot;流程分析&quot;&gt;&lt;/a&gt;流程分析&lt;/h2&gt;&lt;p&gt;在前后端分离开发中，当上传图片时，一般不会直接把图片等文件资源，直接传到django服务器,
         
       
     
@@ -304,8 +297,7 @@
       
         
         
-          &lt;h2 id=&quot;ssh服务器&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#ssh服务器&quot;&gt;¶&lt;/a&gt;ssh服务器&lt;/h2&gt;
-&lt;h3 id=&quot;安装ssh-server&quot;&gt;&lt;a class=&quot;header-anchor&quot;
+          &lt;h2 id=&quot;ssh服务器&quot;&gt;&lt;a href=&quot;#ssh服务器&quot; class=&quot;headerlink&quot; title=&quot;ssh服务器&quot;&gt;&lt;/a&gt;ssh服务器&lt;/h2&gt;&lt;h3 id=&quot;安装ssh-server&quot;&gt;&lt;a href=&quot;#安装ssh-server&quot;
         
       
     
@@ -328,7 +320,7 @@
       
         
         
-          &lt;h2 id=&quot;搜索引擎原理&quot;&gt;&lt;a class=&quot;header-anchor&quot;
+          &lt;h2 id=&quot;搜索引擎原理&quot;&gt;&lt;a href=&quot;#搜索引擎原理&quot; class=&quot;headerlink&quot;
         
       
     
@@ -398,8 +390,7 @@
       
         
         
-          &lt;h2 id=&quot;模型类&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#模型类&quot;&gt;¶&lt;/a&gt;模型类&lt;/h2&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span
+          &lt;h2 id=&quot;模型类&quot;&gt;&lt;a href=&quot;#模型类&quot; class=&quot;headerlink&quot; title=&quot;模型类&quot;&gt;&lt;/a&gt;模型类&lt;/h2&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td
         
       
     
@@ -453,8 +444,7 @@
       
         
         
-          &lt;h2 id=&quot;1-Starship&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#1-Starship&quot;&gt;¶&lt;/a&gt;1 Starship&lt;/h2&gt;
-&lt;p&gt;如果必须要从本篇文章中选择一个我最喜欢的终端工具——那非 &lt;code&gt;Starship&lt;/code&gt;
+          &lt;h2 id=&quot;1-Starship&quot;&gt;&lt;a href=&quot;#1-Starship&quot; class=&quot;headerlink&quot; title=&quot;1 Starship&quot;&gt;&lt;/a&gt;1 Starship&lt;/h2&gt;&lt;p&gt;如果必须要从本篇文章中选择一个我最喜欢的终端工具——那非
         
       
     
@@ -485,8 +475,7 @@
       
         
         
-          &lt;h2 id=&quot;前言&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#前言&quot;&gt;¶&lt;/a&gt;前言&lt;/h2&gt;
-&lt;p&gt;组件是 vue.js
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;组件是 vue.js
         
       
     
@@ -517,7 +506,7 @@
       
         
         
-          &lt;h1&gt;1
+          &lt;h1 id=&quot;1-中间件介绍&quot;&gt;&lt;a href=&quot;#1-中间件介绍&quot; class=&quot;headerlink&quot; title=&quot;1 中间件介绍&quot;&gt;&lt;/a&gt;1
         
       
     
@@ -572,7 +561,7 @@
         
         
           &lt;p&gt;我们常常会用到一些发送邮件的功能，比如：有人注册网站之后，需要向其邮箱中发送激活链接，只有点击激活链接，激活账户之后，才允许登录。&lt;/p&gt;
-&lt;h2 id=&quot;配置相关参数&quot;&gt;&lt;a class=&quot;header-anchor&quot;
+&lt;h2 id=&quot;配置相关参数&quot;&gt;&lt;a href=&quot;#配置相关参数&quot; class=&quot;headerlink&quot;
         
       
     
@@ -603,7 +592,7 @@
       
         
         
-          &lt;h2 id=&quot;缓存简介&quot;&gt;&lt;a class=&quot;header-anchor&quot;
+          &lt;h2 id=&quot;缓存简介&quot;&gt;&lt;a href=&quot;#缓存简介&quot; class=&quot;headerlink&quot;
         
       
     
