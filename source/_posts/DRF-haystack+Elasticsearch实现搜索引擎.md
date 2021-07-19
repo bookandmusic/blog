@@ -2,7 +2,6 @@
 title: haystack+Elasticsearch实现搜索引擎
 date: 2021-03-02 20:24:18
 categories:
-  - 技术
   - python
   - DRF
 tags:

@@ -2,7 +2,6 @@
 title: Axios(二):API说明
 date: 2020-03-03 13:30:05
 categories:
-    - 技术
     - vue
 tags:
     - vue

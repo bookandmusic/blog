@@ -2,8 +2,6 @@
 title: JWT浅析
 date: 2020-10-24 20:38:26
 categories:
-  - 技术
-  - python
   - web
 tags:
   - JWT

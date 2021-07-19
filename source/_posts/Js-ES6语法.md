@@ -2,8 +2,8 @@
 title: ES6语法
 date: 2020-04-12 23:13:05
 categories:
-- 技术
 - JS
+- ES6
 tags:
 - ES6
 - var

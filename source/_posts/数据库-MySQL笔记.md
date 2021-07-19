@@ -1,7 +1,6 @@
 ---
 title: 数据库笔记
 categories:
-  - 技术
   - 数据库
   - mysql
 tags:

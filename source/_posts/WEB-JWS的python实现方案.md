@@ -2,9 +2,7 @@
 title: JWS的python实现方案
 date: 2021-06-10 23:00:11
 categories:
-  - 技术
   - python
-  - web
 tags:
   - JWT
   - JWS

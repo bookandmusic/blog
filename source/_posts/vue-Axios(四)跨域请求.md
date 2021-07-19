@@ -2,7 +2,6 @@
 title: Axios(四):跨域请求
 date: 2020-03-03 17:55:30
 categories:
-    - 技术
     - vue
 tags:
     - vue

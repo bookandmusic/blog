@@ -2,8 +2,8 @@
 title: Git仓库密钥管理
 date: 2019-03-31 12:15:27
 categories:
-	- 工具
-	- Git
+	- 系统
+	- Linux
 tags:
 	- Git
 	- 密钥

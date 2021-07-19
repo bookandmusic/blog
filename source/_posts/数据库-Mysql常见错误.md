@@ -2,7 +2,6 @@
 title: Mysql常见错误
 date: 2020-04-21 22:27:42
 categories: 
-    - 技术
     - 数据库
     - mysql
 tags:

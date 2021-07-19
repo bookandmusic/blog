@@ -2,7 +2,6 @@
 title: Django-数据分页
 date: 2020-11-30 21:45:42
 categories:
-  - 技术
   - python
   - Django
 tags:

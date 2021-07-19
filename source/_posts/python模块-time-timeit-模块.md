@@ -2,9 +2,7 @@
 title: time与timeit 模块
 date:  2019-05-03 20:14:29
 categories:
-  - 技术
   - python
-  - 模块
 tags:
   - 时间模块
 ---

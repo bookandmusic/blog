@@ -1,9 +1,8 @@
 ---
 title: 02-简单介绍 HTTP 协议结构
 categories:
-  - 技术
   - 网络通信
-  - TCP
+  - HTTP
 tags:
   - HTTP
   - TCP

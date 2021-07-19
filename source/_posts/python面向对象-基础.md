@@ -2,9 +2,7 @@
 title: python面向对象
 date: 2019-11-04 22:36:03
 categories:
-  - 技术
   - python
-  - 基础
 tags:
   - 面向对象
 ---

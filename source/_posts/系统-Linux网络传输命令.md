@@ -2,7 +2,7 @@
 title: Linux网络传输命令
 date: 2021-06-13 10:11:52
 categories:
-	- 工具
+	- 系统
 	- Linux
 tags:
 	- ftp

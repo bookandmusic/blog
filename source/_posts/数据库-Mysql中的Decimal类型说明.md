@@ -2,7 +2,6 @@
 title: Mysql中的Decimal类型说明
 date: 2019-06-01 08:50:26
 categories:
-  - 技术
   - 数据库
   - mysql
 tags:

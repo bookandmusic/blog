@@ -1,7 +1,6 @@
 ---
 title: Django基础(四)-路由
 categories:
-  - 技术
   - python
   - Django
 tags:

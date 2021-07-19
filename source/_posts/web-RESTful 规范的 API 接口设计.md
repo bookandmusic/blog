@@ -2,8 +2,6 @@
 title: RESTful规范的API接口设计
 date: 2020-8-14 20:38:26
 categories:
-  - 技术
-  - python
   - web
 tags:
   - RESTful

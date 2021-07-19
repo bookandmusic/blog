@@ -2,9 +2,7 @@
 title: python变量作用域
 date: 2020-06-06 11:10:17
 categories:
-- 技术
 - python
-- 基础
 tags:
 - LEGB
 - 作用域

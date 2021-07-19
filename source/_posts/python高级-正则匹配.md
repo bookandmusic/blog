@@ -1,9 +1,7 @@
 ---
 title: python正则匹配
 categories:
-  - 技术
   - python
-  - 基础
 tags:
   - 正则表达式
 date: 2019-05-23 20:51:32

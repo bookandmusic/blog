@@ -2,9 +2,7 @@
 title: python魔法方法
 date: 2019-03-22 22:22:33
 categories:
-  - 技术
   - python
-  - 基础
 tags:
   - 魔法方法
 ---

@@ -1,7 +1,6 @@
 ---
 title: Django基础(一)-项目流程
 categories:
-  - 技术
   - python
   - Django
 tags:

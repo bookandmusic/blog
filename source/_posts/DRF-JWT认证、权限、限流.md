@@ -2,7 +2,6 @@
 title: DRF-JWT认证、权限、限流
 date: 2020-03-15 23:22:25
 categories:
-  - 技术
   - python
   - DRF
 tags:

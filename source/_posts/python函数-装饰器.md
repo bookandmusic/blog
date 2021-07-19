@@ -2,9 +2,7 @@
 title: 装饰器
 date: 2019-05-02 14:30:27
 categories: 
-- 技术
 - python
-- 基础
 tags:
   - 闭包
   - 装饰器

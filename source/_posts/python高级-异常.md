@@ -1,9 +1,7 @@
 ---
 title: python异常
 categories:
-  - 技术
   - python
-  - 基础
 tags:
   - 异常
 date: 2019-03-22 22:38:25

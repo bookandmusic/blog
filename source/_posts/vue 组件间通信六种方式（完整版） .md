@@ -2,7 +2,6 @@
 title: Vue组件间通信方式
 date: 2020-12-27 21:56:48
 categories:
-    - 技术
     - vue
 tags:
     - Vue

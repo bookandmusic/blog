@@ -2,7 +2,6 @@
 title: Vue事件绑定以及事件修饰符
 date: 2020-05-16 12:50:50
 categories:
-    - 技术
     - vue
 tags:
     - vue

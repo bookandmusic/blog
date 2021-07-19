@@ -2,7 +2,6 @@
 title: Celery异步任务
 date: 2021-02-28 21:39:31
 categories:
-  - 技术
   - python
   - Django
 tags:

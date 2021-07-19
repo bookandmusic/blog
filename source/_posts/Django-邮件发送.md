@@ -2,7 +2,6 @@
 title: Django-邮件发送
 date: 2020-12-03 22:07:31
 categories:
-  - 技术
   - python
   - Django
 tags:

@@ -2,7 +2,6 @@
 title: Axios(三):GET和POST提交数据
 date: 2020-03-03 17:05:24
 categories:
-    - 技术
     - vue
 tags:
     - vue

@@ -1,8 +1,8 @@
 ---
 title: win10 python2和python3共存问题
 categories:
-  - 工具
-  - python
+  - 系统
+  - Windows
 tags:
   - Windows
 date: 2019-05-25 10:45:27

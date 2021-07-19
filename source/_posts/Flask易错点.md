@@ -1,7 +1,6 @@
 ---
 title: Flask易错点
 categories:
-  - 技术
   - python
   - Flask
 tags:

@@ -2,8 +2,8 @@
 title: 版本控制工具Git
 date: 2021-06-12 22:29:36
 categories:
-	- 工具
-	- Git
+	- 系统
+	- Linux
 tags:
 	- Git
 	- 代码管理

@@ -2,7 +2,6 @@
 title: DRF-后端跨域
 date: 2020-03-17 18:19:28
 categories:
-  - 技术
   - python
   - DRF
 tags:

@@ -2,7 +2,6 @@
 title: Django-图片上传
 date: 2020-03-16 20:23:16
 categories:
-  - 技术
   - python
   - Django
 tags:

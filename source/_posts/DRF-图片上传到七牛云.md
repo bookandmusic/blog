@@ -2,7 +2,6 @@
 title: DRF-图片上传到七牛云
 date: 2021-05-03 20:18:19
 categories:
-  - 技术
   - python
   - DRF
 tags:

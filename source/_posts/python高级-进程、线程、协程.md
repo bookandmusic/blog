@@ -2,9 +2,7 @@
 title: python多任务机制
 date: 2019-05-17 20:53:32
 categories:
-  - 技术
   - python
-  - 系统
 tags:
   - 线程
   - 进程

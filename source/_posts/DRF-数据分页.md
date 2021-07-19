@@ -2,7 +2,6 @@
 title: DRF-数据分页
 date: 2020-03-16 20:23:36
 categories:
-  - 技术
   - python
   - DRF
 tags:

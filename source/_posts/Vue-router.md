@@ -2,7 +2,6 @@
 title: vue-router
 date: 2020-04-14 21:44:51
 categories:
-    - 技术
     - vue
 tags:
     - Vue

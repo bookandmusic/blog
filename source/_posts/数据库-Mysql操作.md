@@ -2,7 +2,6 @@
 title: Mysql操作
 date: 2019-12-12 08:33:14
 categories: 
-    - 技术
     - 数据库
     - mysql
 tags:

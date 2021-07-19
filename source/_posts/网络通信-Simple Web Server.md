@@ -2,7 +2,6 @@
 title: 网络通信-简单WEB服务器
 date: 2020-08-16 21:23:36
 categories:
-    - 技术
     - 网络通信
     - TCP
 tags:

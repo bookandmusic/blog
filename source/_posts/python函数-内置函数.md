@@ -2,9 +2,7 @@
 title: python内置函数
 date: 2019-05-25 10:45:27
 categories:
-  - 技术
   - python
-  - 基础
 tags:
   - 内置函数
 ---

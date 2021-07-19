@@ -123,7 +123,7 @@ feed:
   order_by: -date
   
 ## 主题配置
-theme: fluid
+theme: butterfly
 
 # # 代码高亮
 highlight: 
@@ -137,3 +137,10 @@ deploy:
   type: git   #类型，常用的git
   repository: git@github.com:bookandmusic/blog.git
   branch: master
+
+algolia:
+  applicationID: 'ZMZD8LN6JF'
+  apiKey: 'c75e305c22fd4cf56b8f03aa6efec207'
+  adminApiKey: '5e3db5734d58167a204af6e01e8e3ddc'
+  indexName: 'Blog'
+  chunkSize: 5000

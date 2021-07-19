@@ -2,9 +2,7 @@
 title: Json模块
 date: 2019-11-25 14:30:27
 categories: 
-  - 技术
   - python
-  - 模块
 tags:
   - Json
 ---

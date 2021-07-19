@@ -2,7 +2,6 @@
 title: Axios(一):axios在vue中的使用教程
 date: 2020-03-03 17:25:10
 categories:
-    - 技术
     - vue
 tags:
     - vue

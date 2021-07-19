@@ -2,7 +2,10 @@
 title: SSH安装与配置
 date: 2021-03-06 09:56:09
 categories:
+- 系统
+- Linux
 tags:
+- SSH
 ---
 
 ## ssh服务器

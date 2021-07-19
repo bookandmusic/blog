@@ -2,7 +2,6 @@
 title: Vue引入本地资源
 date: 2020-10-23 22:28:48
 categories:
-    - 技术
     - vue
 tags:
     - Vue

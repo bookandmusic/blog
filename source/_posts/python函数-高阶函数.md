@@ -2,9 +2,7 @@
 title: python高阶函数
 date: 2020-06-06 11:13:12
 categories:
-- 技术
 - python
-- 基础
 tags:
 - 高阶函数
 - sorted

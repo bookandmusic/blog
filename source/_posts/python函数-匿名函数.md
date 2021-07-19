@@ -2,9 +2,7 @@
 title: python匿名函数
 date: 2020-06-06 11:14:42
 categories:
-- 技术
 - python
-- 基础
 tags:
 - lambda
 - 匿名函数

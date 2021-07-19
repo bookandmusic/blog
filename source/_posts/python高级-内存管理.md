@@ -2,9 +2,7 @@
 title: python内存管理
 date: 2020-07-30 21:53:24
 categories:
-  - 技术
   - python
-  - 系统
 tags:
   - 引用计数
   - 分代回收

@@ -1,8 +1,8 @@
 ---
 title: Node.js环境配置
 categories:
-  - 工具
-  - NodeJs
+  - 系统
+  - Linux
 tags:
   - NodeJs
   - npm

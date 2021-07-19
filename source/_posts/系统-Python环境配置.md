@@ -2,8 +2,8 @@
 title: python环境配置
 date: 2020-04-11 00:00:27
 categories:
-  - 工具
-  - python
+  - 系统
+  - Linux
 tags:
   - virtualenv
   - pipenv

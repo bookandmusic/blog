@@ -2,7 +2,6 @@
 title: Django-中间件
 date: 2020-12-10 07:50:31
 categories:
-  - 技术
   - python
   - Django
 tags:

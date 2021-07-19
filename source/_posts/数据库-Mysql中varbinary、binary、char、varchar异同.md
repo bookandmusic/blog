@@ -2,7 +2,6 @@
 title: Mysql中varbinary、binary、char、varchar异同
 date: 2019-06-01 09:12:16
 categories:
-  - 技术
   - 数据库
   - mysql
 tags:

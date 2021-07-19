@@ -17,3 +17,4 @@ rm -rf ~/Library/Containers/com.microsoft.Excel/Data/Library/Preferences/com.mic
 
 rm -rf ~/Library/Containers/com.microsoft.Powerpoint/Data/Library/Preferences/com.microsoft.Powerpoint.securebookmarks.plist
 ```
+

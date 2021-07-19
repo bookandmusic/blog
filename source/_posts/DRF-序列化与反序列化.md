@@ -2,7 +2,6 @@
 title: DRF-序列化与反序列化
 date: 2020-07-08 10:26:57
 categories:
-  - 技术
   - python
   - DRF
 tags:

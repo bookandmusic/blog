@@ -2,7 +2,6 @@
 title: MongoDB基础教程
 date: 2021-06-16 18:49:51
 categories:
-	- 技术
 	- 数据库
 	- MongoDB
 tags:

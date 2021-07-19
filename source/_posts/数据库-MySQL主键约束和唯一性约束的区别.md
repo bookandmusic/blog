@@ -2,7 +2,6 @@
 title: 主键约束和唯一性约束的区别
 date: 2020-2-26 08:33:14
 categories: 
-    - 技术
     - 数据库
     - mysql
 tags:

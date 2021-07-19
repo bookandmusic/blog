@@ -1,7 +1,6 @@
 ---
 title: Django-用户认证
 categories:
-  - 技术
   - python
   - Django
 tags:

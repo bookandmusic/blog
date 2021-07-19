@@ -2,9 +2,7 @@
 title: python自动化测试
 date: 2021-05-15 18:48:25
 categories:
-  - 技术
   - python
-  - web
 tags:
   - unittest
   - django test

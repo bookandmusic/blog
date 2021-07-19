@@ -2,7 +2,6 @@
 title: Django-缓存
 date: 2020-12-01 21:49:38
 categories:
-  - 技术
   - python
   - Django
 tags:

@@ -2,7 +2,6 @@
 title: Redis命令
 date: 2020-05-23 20:54:16
 categories:
-    - 技术
     - 数据库
     - redis
 tags:

@@ -2,11 +2,10 @@
 title: XSS攻击和CSRF攻击
 date: 2020-05-24 20:38:26
 categories:
-  - 技术
-  - python
   - web
 tags:
   - CSRF
+  - XSS
 ---
 
 ## CSRF

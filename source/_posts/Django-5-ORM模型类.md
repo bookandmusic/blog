@@ -2,7 +2,6 @@
 title: Django基础(五)-ORM模型类
 date: 2020-05-24 20:38:26
 categories:
-  - 技术
   - python
   - Django
 tags:

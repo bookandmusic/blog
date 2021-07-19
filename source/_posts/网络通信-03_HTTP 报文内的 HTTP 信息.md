@@ -1,9 +1,8 @@
 ---
 title: 03-HTTP 报文内的 HTTP 信息
 categories:
-  - 技术
   - 网络通信
-  - TCP
+  - HTTP
 tags:
   - HTTP
   - TCP

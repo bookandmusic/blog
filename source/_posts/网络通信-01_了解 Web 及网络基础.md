@@ -1,9 +1,8 @@
 ---
 title: 01—了解web及网络基础
 categories:
-  - 技术
   - 网络通信
-  - TCP
+  - HTTP
 tags:
   - HTTP
   - TCP
