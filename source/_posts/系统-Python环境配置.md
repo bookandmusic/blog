@@ -335,7 +335,7 @@ pip install pip -U  # 升级pip包管理工具
 - 检查conda版本
 
   ```bash
-  conda --version
+  conda --version                                                                                                                     
   ```
 
 - 升级当前版本conda
