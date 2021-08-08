@@ -10,14 +10,9 @@ author: bookandmusic    #作者
 language: zh-CN       #语言
 timezone: Asia/Shanghai      #网站时区
 
-# 自动生成sitemap
-baidusitemap:
-path: baidusitemap.xml
-
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://www.bookandmusic.cn/
-# url: http://bookandmusic.gitee.io/  #你的站点Url
+url: https://www.bookandmusic.cn/ #你的站点Url
 root: /                     #站点的根目录
 permalink: :year/:month/:day/:title/      #文章的 永久链接 格式 
 permalink_defaults:                       #永久链接中各部分的默认值
@@ -70,7 +65,6 @@ pagination_dir: page
 # 插件/Extensions
 ## Plugins: https://hexo.io/plugins/
 plugin:
-- hexo-generator-feed # 生成RSS
 - hexo-deployer-git # hexo d 部署到服务器
 - hexo-permalink-pinyin # 中文链接转拼音
 - hexo-wordcount # 文章字数统计插件
@@ -98,29 +92,10 @@ markdown:
     permalinkClass: header-anchor
     permalinkSymbol: ¶
 
-# 搜索
-search:
-  path: search.xml
-  field: post
-  content: true
-
 # 中文链接转拼音
 permalink_pinyin:
   enable: true
   separator: '-'
-
-
-
-# RSS订阅
-feed:
-  type: atom
-  path: atom.xml
-  limit: 20
-  hub:
-  content:
-  content_limit: 140
-  content_limit_delim: ' '
-  order_by: -date
   
 ## 主题配置
 theme: butterfly
