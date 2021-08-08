@@ -76,11 +76,11 @@ katex:
 # --------------------------------------
 
 # Favicon（網站圖標）
-favicon: https://cdn.jsdelivr.net/gh/bookandmusic/blog@latest/img/imgs/favicon.jpeg
+favicon: https://cdn.jsdelivr.net/gh/bookandmusic/blog@20210717v1/img/imgs/favicon.jpeg
 
 # Avatar (頭像)
 avatar:
-  img: https://cdn.jsdelivr.net/gh/bookandmusic/blog@latest/img/imgs/avatar1.jpeg
+  img: https://cdn.jsdelivr.net/gh/bookandmusic/blog@20210717v1/img/imgs/avatar1.jpeg
   effect: false
 
 # Disable all banner image
@@ -122,12 +122,12 @@ cover:
   position: both
   # When cover is not set, the default cover is displayed (當沒有設置cover時，默認的封面顯示)
   default_cover:
-    - https://cdn.jsdelivr.net/gh/bookandmusic/blog@latest/img/imgs/1.jpg
-    - https://cdn.jsdelivr.net/gh/bookandmusic/blog@latest/img/imgs/2.jpg
-    - https://cdn.jsdelivr.net/gh/bookandmusic/blog@latest/img/imgs/3.jpg
-    - https://cdn.jsdelivr.net/gh/bookandmusic/blog@latest/img/imgs/6.jpg
-    - https://cdn.jsdelivr.net/gh/bookandmusic/blog@latest/img/imgs/7.jpg
-    - https://cdn.jsdelivr.net/gh/bookandmusic/blog@latest/img/imgs/8.jpg
+    - https://cdn.jsdelivr.net/gh/bookandmusic/blog@20210717v1/img/imgs/1.jpg
+    - https://cdn.jsdelivr.net/gh/bookandmusic/blog@20210717v1/img/imgs/2.jpg
+    - https://cdn.jsdelivr.net/gh/bookandmusic/blog@20210717v1/img/imgs/3.jpg
+    - https://cdn.jsdelivr.net/gh/bookandmusic/blog@20210717v1/img/imgs/6.jpg
+    - https://cdn.jsdelivr.net/gh/bookandmusic/blog@20210717v1/img/imgs/7.jpg
+    - https://cdn.jsdelivr.net/gh/bookandmusic/blog@20210717v1/img/imgs/8.jpg
 
 post_meta:
   page: # Home Page
