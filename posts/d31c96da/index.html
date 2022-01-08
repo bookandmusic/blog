@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bookandmusic.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"ZMZD8LN6JF","apiKey":"c75e305c22fd4cf56b8f03aa6efec207","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="HTTP 通信过程包括从客户端发往服务器端的请求以及从服务端返回客户端的响应。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP 报文内的 HTTP 信息">
+<meta property="og:url" content="https://bookandmusic.cn/posts/d31c96da/index.html">
+<meta property="og:site_name" content="Bookandmusic">
+<meta property="og:description" content="HTTP 通信过程包括从客户端发往服务器端的请求以及从服务端返回客户端的响应。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526112612-HTTP%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%84%20.png">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526112620-HTTP%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%8402%20.png">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526112630-HTTP%E6%8A%A5%E6%96%87%E5%AE%9E%E4%BE%8B%20.png">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526112655-%E5%A4%9A%E9%83%A8%E5%88%86%E5%AF%B9%E8%B1%A1%E9%9B%86%E5%90%88%20.png">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526112701-%E5%A4%9A%E9%83%A8%E5%88%86%E5%AF%B9%E8%B1%A1%E9%9B%86%E5%90%8802%20.png">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526112648-HTTP%E8%8C%83%E5%9B%B4%E8%AF%B7%E6%B1%82%20.png">
+<meta property="article:published_time" content="2019-05-09T11:56:09.000Z">
+<meta property="article:modified_time" content="2022-01-08T09:57:41.800Z">
+<meta property="article:author" content="bookandmusic">
+<meta property="article:tag" content="HTTP">
+<meta property="article:tag" content="WEB">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526112612-HTTP%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%84%20.png">
+
+<link rel="canonical" href="https://bookandmusic.cn/posts/d31c96da/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>HTTP 报文内的 HTTP 信息 | Bookandmusic</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Bookandmusic</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">踮起脚尖，另一种高度</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/d31c96da/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="bookandmusic">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bookandmusic">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HTTP 报文内的 HTTP 信息
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-09 19:56:09" itemprop="dateCreated datePublished" datetime="2019-05-09T19:56:09+08:00">2019-05-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>HTTP 通信过程包括从客户端发往服务器端的请求以及从服务端返回客户端的响应。</p>
+<span id="more"></span>
+
+<h2 id="HTTP-报文"><a href="#HTTP-报文" class="headerlink" title="HTTP 报文"></a>HTTP 报文</h2><p>就是一大串通信过程里经过 <code>HTTP</code> 处理后添加的报文。<br>其大致分为报文首部和报文主体两块。两者由最初出现的空行（<code>CR+LF</code>）来划分，通常并不一定要有报文主体。</p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526112612-HTTP%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%84%20.png" alt="20190526112612-HTTP报文结构"></p>
+<h2 id="编码提升传输速率"><a href="#编码提升传输速率" class="headerlink" title="编码提升传输速率"></a>编码提升传输速率</h2><h3 id="报文主体和实体主体的差异"><a href="#报文主体和实体主体的差异" class="headerlink" title="报文主体和实体主体的差异"></a>报文主体和实体主体的差异</h3><ul>
+<li><strong>报文：</strong>HTTP 通信的基本单位，8 位组字节流组成，通过 HTTP 通信传输。</li>
+<li><strong>实体：</strong>请求或响应的有效载荷数据被传输，内容由实体首部和实体主体组成。</li>
+</ul>
+<p>HTTP 报文主体用于传输请求或响应的实体主体。<br>一般情况，报文主体等于实体主体，但是传输中进行编码操作的时候，实体主体内容发生变化。</p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526112620-HTTP%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%8402%20.png" alt="20190526112620-HTTP报文结构02"><br><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526112630-HTTP%E6%8A%A5%E6%96%87%E5%AE%9E%E4%BE%8B%20.png" alt="20190526112630-HTTP报文实例"></p>
+<h3 id="压缩传输的内容编码"><a href="#压缩传输的内容编码" class="headerlink" title="压缩传输的内容编码"></a>压缩传输的内容编码</h3><p><code>HTTP</code> 协议中的内容编码功能就像用压缩软件压缩东西一样，对实体内容进行编码压缩，内容编码后的实体由客户端接受并解码。这可以压缩传输内容，加快传输速度。<br>常见的内容编码有 <code>gzip</code>、<code>compress</code>、<code>deflate</code>、<code>identity</code>（不编码）。</p>
+<h3 id="分割发送的分块传输编码"><a href="#分割发送的分块传输编码" class="headerlink" title="分割发送的分块传输编码"></a>分割发送的分块传输编码</h3><p><code>HTTP</code> 通信过程中，请求的编码实体资源尚未传输完成之前，浏览器无法显示请求页面，传输大容量数据时候，通过数据分割成多块，能让浏览器逐步显示页面。这就是分块传输编码（<code>Chunked</code> <code>Transfer</code> <code>Coding</code>）。它将实体主体分成多个部分，每一块用十六进制来标记，最后一块使用<code>0（CR+LF)</code>来标记。传输给客户端，由客户端进行解码恢复。</p>
+<h2 id="发送多种数据的多部分对象集合"><a href="#发送多种数据的多部分对象集合" class="headerlink" title="发送多种数据的多部分对象集合"></a>发送多种数据的多部分对象集合</h2><p><code>MIME</code>（<code>Multipurpose</code> <code>Internet</code> <code>Mail</code> <code>Extensions</code>, 多用途因特网邮件扩展），它允许邮件处理文本，图片，视频等多个不同类型的数据，这使我们可以在邮件里写入文字并添加多分附件成为了现实。例如：图片等二进制数据以 <code>ASCII</code> 码字符串编码方式表名，就是利用 <code>MIME</code> 来标记数据类型，在 <code>MIME</code> 扩展中会使用一种称为多部分对象集合（<code>Multipart</code>）的方法，来容纳多份不同类型的数据。<br>相应的，<code>HTTP</code> 协议中也采纳了多部分对象集合，发送的一份报文主体内可含有多类型实体，通常在图片或文本文件等上传时使用。<br>多部分对象集合包括：</p>
+<ul>
+<li><p><code>multipart</code>/<code>form-data</code> 在 <code>Web</code> 表单文件上传使用</p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526112655-%E5%A4%9A%E9%83%A8%E5%88%86%E5%AF%B9%E8%B1%A1%E9%9B%86%E5%90%88%20.png" alt="20190526112655-多部分对象集合"></p>
+</li>
+<li><p><code>multipart</code>/<code>byteranges</code> 状态码 206（<code>Partial</code> <code>Content</code>，部分内容）响应报文包含了多个范围的内容时使用。</p>
+</li>
+</ul>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526112701-%E5%A4%9A%E9%83%A8%E5%88%86%E5%AF%B9%E8%B1%A1%E9%9B%86%E5%90%8802%20.png" alt="20190526112701-多部分对象集合02"></p>
+<p><code>HTTP</code> 报文使用这个多部分对象集合的时候，需要在首部添加 <code>Content-type</code> 字段。<br>使用 <code>boundary</code> 字符串来划分多部分<br>在 <code>boundary</code> 字符串指定的各个实体的起始行之前插入<code>--</code>标记（<code>--AaB03x</code>、<code>--THis_STRING_SEPARATES</code>)<br>在多部分对象集合对应的字符串的最后插入<code>--</code>标记（<code>--AaB03x--</code>）</p>
+<p>多部分对象集合的每个部分类型中，都可以含有首部字段。另外，可以在部分中潜逃使用多部分对象集合。</p>
+<h2 id="获取部分内容的范围请求"><a href="#获取部分内容的范围请求" class="headerlink" title="获取部分内容的范围请求"></a>获取部分内容的范围请求</h2><p>过去，用户下载东西中断了必须要从头下载，为了解决这问题，要实现该功能需要指定下载的实体范围，指定范围发送的请求叫做范围请求（<code>Range</code> <code>Request</code>)<br>对一份 10000 字节大小的资源，如果使用范围请求，可以只请求 5001~10000 字节内的资源。这样就算中断了，也可以向服务端指明自己需要的资源字节范围，这些需要在首部字段中表名。<br>形式如下：</p>
+<p><code>Range</code> : <code>bytes</code> = 5001 - 10000<br>5001 到 10000 的<br><code>Range</code> : <code>bytes</code> = 5001 -<br>5001 到之后全部的<br><code>Range</code> : <code>bytes</code> = -3000, 5000 - 7000<br>从头到 3000， 5000 到 7000 的</p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526112648-HTTP%E8%8C%83%E5%9B%B4%E8%AF%B7%E6%B1%82%20.png" alt="20190526112648-HTTP范围请求"></p>
+<p>针对范围请求，响应会返回状态码为 <code>206 Partial Content</code> 的响应报文，另外，对于多重范围的范围请求，响应会在首部字段 <code>Content-Type</code> 标明 <code>multipart</code>/<code>byteranges</code> 后返回响应报文，如果服务器无法响应请求，返回状态码 <code>200 OK </code>和完整的实体内容。</p>
+<h5 id="5、内容协商返回最合适的内容"><a href="#5、内容协商返回最合适的内容" class="headerlink" title="5、内容协商返回最合适的内容"></a>5、内容协商返回最合适的内容</h5><p>同一个 Web 网站可能有存着多分相同内容的页面，如中文版和英文版，内容虽然相同，单语言不同。当浏览器默认语言为哪种，访问相同的 <code>URI</code> 的 <code>Web</code> 页面时，会对应返回哪种语言的 Web 页面，这样的机制就叫做内容协商（<code>Content</code> <code>Negotiation</code>）。<br>这协商的请求会包含在首部字段</p>
+<ul>
+<li><code>Accept</code></li>
+<li><code>Accept-Charset</code></li>
+<li><code>Accept-Encoding</code></li>
+<li><code>Accept-Language</code></li>
+<li><code>Content-Language</code></li>
+</ul>
+<p>类型：<br>服务器驱动协商（<code>Server-driven</code> <code>Negotiation</code>)<br>服务器通过请求的首部字段为参考自动处理，但以浏览器直接发送的信息不一定能筛选出最优的内容。<br>客户端驱动协商（<code>Agent-driven</code> <code>Negotiation</code>)<br>用户从浏览器显示的可选项列表中选择， 还可以利用 JS 脚本在 Web 页面自动进行上述选择。<br>透明协商（<code>Transparent</code> <code>Negotiation</code>)<br>上两种方法的结合体。</p>
+<h2 id="自我回顾"><a href="#自我回顾" class="headerlink" title="自我回顾"></a>自我回顾</h2><p>1、<code>HTTP</code> 报文是什么？大致分为哪两部分？<br>2、提升编码传输速率的方法有哪些？<br>3、如何发送多部分对象集合？<br>4、如何进行断点传输？<br>5、内容协商机制是什么？</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/HTTP/" rel="tag"># HTTP</a>
+              <a href="/tags/WEB/" rel="tag"># WEB</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/65a390c3/" rel="prev" title="简单介绍 HTTP 协议结构">
+      <i class="fa fa-chevron-left"></i> 简单介绍 HTTP 协议结构
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/1f6494d7/" rel="next" title="python多任务机制">
+      python多任务机制 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-%E6%8A%A5%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">HTTP 报文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E7%A0%81%E6%8F%90%E5%8D%87%E4%BC%A0%E8%BE%93%E9%80%9F%E7%8E%87"><span class="nav-number">2.</span> <span class="nav-text">编码提升传输速率</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%A5%E6%96%87%E4%B8%BB%E4%BD%93%E5%92%8C%E5%AE%9E%E4%BD%93%E4%B8%BB%E4%BD%93%E7%9A%84%E5%B7%AE%E5%BC%82"><span class="nav-number">2.1.</span> <span class="nav-text">报文主体和实体主体的差异</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9%E4%BC%A0%E8%BE%93%E7%9A%84%E5%86%85%E5%AE%B9%E7%BC%96%E7%A0%81"><span class="nav-number">2.2.</span> <span class="nav-text">压缩传输的内容编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%89%B2%E5%8F%91%E9%80%81%E7%9A%84%E5%88%86%E5%9D%97%E4%BC%A0%E8%BE%93%E7%BC%96%E7%A0%81"><span class="nav-number">2.3.</span> <span class="nav-text">分割发送的分块传输编码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E9%80%81%E5%A4%9A%E7%A7%8D%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A4%9A%E9%83%A8%E5%88%86%E5%AF%B9%E8%B1%A1%E9%9B%86%E5%90%88"><span class="nav-number">3.</span> <span class="nav-text">发送多种数据的多部分对象集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E9%83%A8%E5%88%86%E5%86%85%E5%AE%B9%E7%9A%84%E8%8C%83%E5%9B%B4%E8%AF%B7%E6%B1%82"><span class="nav-number">4.</span> <span class="nav-text">获取部分内容的范围请求</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5%E3%80%81%E5%86%85%E5%AE%B9%E5%8D%8F%E5%95%86%E8%BF%94%E5%9B%9E%E6%9C%80%E5%90%88%E9%80%82%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-number">4.0.0.1.</span> <span class="nav-text">5、内容协商返回最合适的内容</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E6%88%91%E5%9B%9E%E9%A1%BE"><span class="nav-number">5.</span> <span class="nav-text">自我回顾</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">bookandmusic</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备2021028097号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bookandmusic</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : '',
+      projectId: ''
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

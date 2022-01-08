@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bookandmusic.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"ZMZD8LN6JF","apiKey":"c75e305c22fd4cf56b8f03aa6efec207","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Starship如果必须要从本篇文章中选择一个我最喜欢的终端工具——那非 Starship 莫属。Starship 可以适用于任何 Shell。你只需要安装它，然后在相应的配置文件.bashrc&#x2F;.zshrc添加一行配置，剩下的工作交给它来完成就好了。   1eval &quot;$(starship init bash)&quot;  它可以做到：  根据你是否在代码仓库中添加了新文件、是否修改">
+<meta property="og:type" content="article">
+<meta property="og:title" content="好用的CLI工具">
+<meta property="og:url" content="https://bookandmusic.cn/posts/ae4bf99d/index.html">
+<meta property="og:site_name" content="Bookandmusic">
+<meta property="og:description" content="Starship如果必须要从本篇文章中选择一个我最喜欢的终端工具——那非 Starship 莫属。Starship 可以适用于任何 Shell。你只需要安装它，然后在相应的配置文件.bashrc&#x2F;.zshrc添加一行配置，剩下的工作交给它来完成就好了。   1eval &quot;$(starship init bash)&quot;  它可以做到：  根据你是否在代码仓库中添加了新文件、是否修改">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640.jpeg">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220059861.jpeg">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220618373.gif">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220647892.jpeg">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220657583.jpeg">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220804528.jpeg">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220810324.jpeg">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220820634.jpeg">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220827622.gif">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220836708.jpeg">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220843370.jpeg">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220850333.gif">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220855650.jpeg">
+<meta property="article:published_time" content="2020-12-27T14:10:35.000Z">
+<meta property="article:modified_time" content="2022-01-08T09:57:41.842Z">
+<meta property="article:author" content="bookandmusic">
+<meta property="article:tag" content="工具">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640.jpeg">
+
+<link rel="canonical" href="https://bookandmusic.cn/posts/ae4bf99d/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>好用的CLI工具 | Bookandmusic</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Bookandmusic</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">踮起脚尖，另一种高度</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/ae4bf99d/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="bookandmusic">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bookandmusic">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          好用的CLI工具
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-27 22:10:35" itemprop="dateCreated datePublished" datetime="2020-12-27T22:10:35+08:00">2020-12-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Starship"><a href="#Starship" class="headerlink" title="Starship"></a>Starship</h2><p>如果必须要从本篇文章中选择一个我最喜欢的终端工具——那非 <code>Starship</code> 莫属。<code>Starship</code> 可以适用于任何 Shell。你只需要安装它，然后在相应的配置文件<code>.bashrc</code>/<code>.zshrc</code>添加一行配置，剩下的工作交给它来完成就好了。  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(starship init bash)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>它可以做到：</p>
+<ul>
+<li>根据你是否在代码仓库中添加了新文件、是否修改了文件、是否暂存了文件等情况，用相应的符号表示 <code>git</code> 仓库的状态。</li>
+<li>根据你所在的 <code>Python</code> 项目目录，展示 Python 的版本号，这也适用于 <code>Go</code>/<code>Node</code>/<code>Rust</code>/<code>Elm</code> 等其他编程语言环境。</li>
+<li>展示上一个命令执行所用的时间，指令运行时间必须在毫秒级别。</li>
+<li>  如果上一个命令执行失败，会展示相应的错误提示符。</li>
+</ul>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640.jpeg">  </p>
+<p>还有不计其数的其他信息可以展示。但是，它能以更加友好的形式智能地给你呈现!</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># startship 个性化配置</span></span><br><span class="line">[character]      <span class="comment"># 正在配置的组件名称是“character”</span></span><br><span class="line">symbol = <span class="string">&quot;&gt;&quot;</span>  <span class="comment"># 提示符中在输入文本之前显示的符号</span></span><br><span class="line">error_symbol = <span class="string">&quot;✗&quot;</span> <span class="comment"># 如果上一条命令失败，提示符中在输入文本之前显示的符号</span></span><br><span class="line">use_symbol_for_status = <span class="literal">true</span> <span class="comment"># 指示是否改变显示符号来指出错误状态</span></span><br><span class="line">style_success = <span class="string">&quot;bold green&quot;</span>	<span class="comment"># 上次命令成功时使用的样式</span></span><br><span class="line">style_failure = <span class="string">&quot;bold red&quot;</span>	<span class="comment"># 上次命令失败时使用的样式</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 当 starship 扫描当前目录下的文件和文件夹时，最多使用 10 毫秒</span></span><br><span class="line">scan_timeout = 10</span><br><span class="line"></span><br><span class="line">[battery]</span><br><span class="line">full_symbol = <span class="string">&quot;🔋&quot;</span> <span class="comment"># 电量满标志</span></span><br><span class="line">charging_symbol = <span class="string">&quot;⚡️&quot;</span> <span class="comment"># 充电标志</span></span><br><span class="line">discharging_symbol = <span class="string">&quot;💀&quot;</span> <span class="comment"># 放电标志</span></span><br><span class="line"></span><br><span class="line">[[battery.display]]  <span class="comment"># 当电量在 0% 到 30% 时以 &quot;bold red&quot; 样式显示</span></span><br><span class="line">threshold = 30</span><br><span class="line">style = <span class="string">&quot;bold red&quot;</span></span><br><span class="line"></span><br><span class="line">[[battery.display]]  <span class="comment"># 当电量在 30% 到 100% 时以 &quot;bold yellow&quot; 样式显示</span></span><br><span class="line">threshold = 100</span><br><span class="line">style = <span class="string">&quot;bold yellow&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[cmd_duration]</span><br><span class="line">min_time = 100 <span class="comment"># 显示此组件所需的最短执行时长</span></span><br><span class="line">prefix = <span class="string">&quot;underwent &quot;</span> <span class="comment"># 直接在执行时长前显示的前缀</span></span><br><span class="line">style = <span class="string">&quot;bold yellow&quot;</span> <span class="comment"># 此组件的样式</span></span><br><span class="line"></span><br><span class="line">[directory] <span class="comment"># 显示当前目录的路径</span></span><br><span class="line">truncation_length = 8 <span class="comment"># 当前目录路径被截断后最多保留的父目录数量。</span></span><br><span class="line">truncate_to_repo = <span class="literal">true</span> <span class="comment"># 是否只截断到您当前处于的 git 仓库根目录下。</span></span><br><span class="line">prefix = <span class="string">&quot;in&quot;</span> <span class="comment"># 直接在显示路径前显示的前缀。</span></span><br><span class="line">style = <span class="string">&quot;bold cyan&quot;</span> <span class="comment"># 此组件的样式。</span></span><br><span class="line"></span><br><span class="line">[time]</span><br><span class="line">disabled = <span class="literal">false</span> <span class="comment"># 启用时间组件</span></span><br><span class="line">use_12hr = <span class="literal">false</span> <span class="comment"># 禁用12小时制</span></span><br><span class="line">format = <span class="string">&quot;🕙[ %T ]&quot;</span> <span class="comment"># 时间格式</span></span><br><span class="line">time_range = <span class="string">&quot;-&quot;</span> <span class="comment"># 显示时间的范围，必须是24小时制</span></span><br></pre></td></tr></table></figure>
+
+<p>官网地址：<a target="_blank" rel="noopener" href="https://starship.rs/">https://starship.rs/</a></p>
+<h2 id="fzf"><a href="#fzf" class="headerlink" title="fzf"></a>fzf</h2><p>fzf— fuzzy finder，即模糊查找器。它是一种通用工具，可让你使用模糊搜索来查找文件、历史命令、进程、git 提交等。你键入一些字母，它会尝试匹配结果列表中任何位置的字母。输入的字母越多，结果也就越准确。你可能在其他的代码编辑器中有过这种类型的搜索使用体验——当你想打开某个文件时，只键入文件名的一部分而不用输入完整路径就能进行查找——这就是模糊搜索。</p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220059861.jpeg">  </p>
+<p>我通过 fish fzf 插件插件使用它，因此我可以搜索命令历史记录或快速打开文件。这是可以每天为我节省不少时间的一个非常棒的工具。</p>
+<p>fzf默认会以“extened-search”模式启动， 这种模式下你可以输入多个以空格分隔的搜索关键词， 如<code>^music .mp3$</code>, <code>sbtrkt !fire</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Match type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sbtrkt</td>
+<td>fuzzy-match</td>
+<td>匹配sbtrkt</td>
+</tr>
+<tr>
+<td>^music</td>
+<td>prefix-exact-match</td>
+<td>以music开头</td>
+</tr>
+<tr>
+<td>.mp3^</td>
+<td>suffix-exact-match</td>
+<td>以.mp3结尾</td>
+</tr>
+<tr>
+<td>‘wild</td>
+<td>exact-match(quoted)</td>
+<td>精确包含wild</td>
+</tr>
+<tr>
+<td>!fire</td>
+<td>inverse-exact-match</td>
+<td>不包含fire</td>
+</tr>
+<tr>
+<td>!.mp3$</td>
+<td>inverse-suffix-exact-match</td>
+<td>不以.mp3结尾</td>
+</tr>
+</tbody></table>
+<p>如果你不想用fuzzy match， 可以用<code>fzf -e</code>做精确匹配<br>符号”|”可以做or匹配， 比如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^core go$|rb$|py$</span><br></pre></td></tr></table></figure>
+
+<p>表示以core开头，以go或rb或py结尾的</p>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/junegunn/fzf">https://github.com/junegunn/fzf</a></p>
+<h2 id="fd"><a href="#fd" class="headerlink" title="fd"></a>fd</h2><p>类似于系统自带的 <code>find</code> 命令，但使用起来更简单，查找速度更快，并且具有良好的默认设置。</p>
+<h3 id="简单搜索"><a href="#简单搜索" class="headerlink" title="简单搜索"></a>简单搜索</h3><p><em>fd</em>设计用于查找文件系统中的条目. 你可以执行的最基本的搜索就是运行一个参数:搜索模式的<em>fd</em>. 例如,假设您想查找您的旧脚本 (包括<code>netflix</code>) :</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; fd netfl</span><br><span class="line">Software/python/imdb-ratings/netflix-details.py</span><br></pre></td></tr></table></figure>
+
+<p>如果只调用一个这样的参数,<em>fd</em>递归检索当前目录中, <em>包含</em>模式<code>netfl</code>的任何条目.</p>
+<h3 id="正则表达式搜索"><a href="#正则表达式搜索" class="headerlink" title="正则表达式搜索"></a>正则表达式搜索</h3><p>搜索模式被视为正则表达式. 这里,我们搜索开始<code>x</code>并以<code>rc</code>结束的条目. :</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">cd</span> /etc</span><br><span class="line">&gt; fd <span class="string">&#x27;^x.*rc$&#x27;</span></span><br><span class="line">X11/xinit/xinitrc</span><br><span class="line">X11/xinit/xserverrc</span><br></pre></td></tr></table></figure>
+
+<h3 id="指定根目录"><a href="#指定根目录" class="headerlink" title="指定根目录"></a>指定根目录</h3><p>如果我们想搜索一个特定的目录,它可以作为第二个参数<em>fd</em>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; fd passwd /etc</span><br><span class="line">/etc/default/passwd</span><br><span class="line">/etc/pam.d/passwd</span><br><span class="line">/etc/passwd</span><br></pre></td></tr></table></figure>
+
+<h3 id="仅运行fd"><a href="#仅运行fd" class="headerlink" title="仅运行fd"></a>仅运行<em>fd</em></h3><p><em>fd</em>可以不带参数调用. 这是非常有用的,以便快速地查看当前目录中的所有条目,递归地 (类似于<code>ls -R</code>) :</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">cd</span> fd/tests</span><br><span class="line">&gt; fd</span><br><span class="line">testenv</span><br><span class="line">testenv/mod.rs</span><br><span class="line">tests.rs</span><br></pre></td></tr></table></figure>
+
+<h3 id="搜索特定的文件扩展名"><a href="#搜索特定的文件扩展名" class="headerlink" title="搜索特定的文件扩展名"></a>搜索特定的文件扩展名</h3><p>通常,我们对特定类型的所有文件感兴趣. 这可以用<code>-e</code> (或) <code>--extension</code>选择权. 在这里,我们搜索FD仓库中的所有md文件:</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">cd</span> fd</span><br><span class="line">&gt; fd -e md</span><br><span class="line">CONTRIBUTING.md</span><br><span class="line">README.md</span><br></pre></td></tr></table></figure>
+
+<p>这个<code>-e</code>选项可以与搜索模式结合使用:</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; fd -e rs mod</span><br><span class="line">src/fshelper/mod.rs</span><br><span class="line">src/lscolors/mod.rs</span><br><span class="line">tests/testenv/mod.rs</span><br></pre></td></tr></table></figure>
+
+<p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/sharkdp/fd">https://github.com/sharkdp/fd</a></p>
+<h2 id="ripgrep"><a href="#ripgrep" class="headerlink" title="ripgrep"></a>ripgrep</h2><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220618373.gif"></p>
+<p>上图为 grep（左）与 rg（右）命令执行时的对比。</p>
+<p>与上述<code>fd</code>指令类似，<code>ripgrep</code>是<code>grep</code>命令的替代方法， 不过<code>ripgrep</code>的执行速度更快，而且具有健全的默认配置以及丰富的彩色输出。</p>
+<p>它同样会跳过被<code>.gitignore</code>忽略以及隐藏的文件，因此如果有特殊需要，我们可以设置指令别名：<code>rga =&#39;rg -uuu&#39;</code>。它会禁用所有智能筛选，并使<code>ripgrep</code>的表现与标准的 grep 指令一致。</p>
+<h3 id="简单搜索-1"><a href="#简单搜索-1" class="headerlink" title="简单搜索"></a>简单搜索</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls | rg App</span><br></pre></td></tr></table></figure>
+
+<h3 id="正则表达式搜索-1"><a href="#正则表达式搜索-1" class="headerlink" title="正则表达式搜索"></a>正则表达式搜索</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls | rg ^App.*$</span><br></pre></td></tr></table></figure>
+
+<h3 id="指定文件搜索"><a href="#指定文件搜索" class="headerlink" title="指定文件搜索"></a>指定文件搜索</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rg  ^def.*$ 01_two-sum.py</span><br></pre></td></tr></table></figure>
+
+<p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/BurntSushi/ripgrep">https://github.com/BurntSushi/ripgrep</a></p>
+<h2 id="htop-和-glances"><a href="#htop-和-glances" class="headerlink" title="htop 和 glances"></a>htop 和 glances</h2><p>在 Linux 或 Mac 上显示进程运行状态信息最常用工具是我们熟悉的<code>top</code>，它是每位系统管理员的好帮手。而且，即使是像我一样主要从事网络开发，查看计算机的运行状况也很有用。你知道，只是看一下当前到底是 Docker 进程还是 Chrome 进程吃掉了你所有的 RAM，应该如何做吗？</p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220647892.jpeg">  </p>
+<p><code>htop</code>工具是<code>top</code>工具的绝佳替代品。</p>
+<p><code>top</code>工具是非常基础的监控工具，提供的功能有限，因此很多人转去使用 htop。<code>htop</code>比起<code>top</code>，优势很明显——除了功能更加完善以外，它的色彩搭配也很丰富，整体上使用起来更加友好。</p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220657583.jpeg">  </p>
+<p>借助 glances，还可以让你一目了然地快速了解系统当前状态。</p>
+<p>glances 是<code>htop</code>的补充工具。除了列出所有进程及其 CPU 和内存使用情况之外，它还可以显示有关系统的其他信息，比如：</p>
+<ul>
+<li>网络及磁盘使用情况</li>
+<li>文件系统已使用的空间和总空间</li>
+<li>来自不同传感器（例如电池）的数据</li>
+<li>  以及最近消耗过多资源的进程列表</li>
+</ul>
+<p>我选择使用<code>htop</code>来筛选和终止进程，因为对我来讲，效率提高了不少，我也使用 <code>glances</code>可以快速浏览一下计算机的运行状况。它提供 API 接口、Web UI 以及支持各种导出格式，因此你可以将系统监视提高到一个新 Level。因此我在这里强烈推荐一波！</p>
+<p>htop 下载地址：<a target="_blank" rel="noopener" href="https://hisham.hm/htop/">https://hisham.hm/htop/</a></p>
+<p>glances 下载地址：<a target="_blank" rel="noopener" href="https://nicolargo.github.io/glances/">https://nicolargo.github.io/glances/</a></p>
+<h2 id="virtualenv"><a href="#virtualenv" class="headerlink" title="virtualenv"></a>virtualenv</h2><p>Virtualenv 是用于在 Python 中创建虚拟环境的工具（比起内置的<code>venv</code>模块，我更喜欢 Virtualenv）。</p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220804528.jpeg">  </p>
+<p>virtualenvwrapper 是 virtualenv 的虚拟环境管理器。它提供了许多命令来执行快速创建、列出或删除虚拟环境等操作。</p>
+<p>virtualenv 下载地址：</p>
+<p><a target="_blank" rel="noopener" href="https://pypi.org/project/virtualenv/">https://pypi.org/project/virtualenv/</a></p>
+<h2 id="Homebrew"><a href="#Homebrew" class="headerlink" title="Homebrew"></a>Homebrew</h2><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220810324.jpeg"></p>
+<p>如果你使用的是 Mac，那我就无需再介绍 Homebrew 了。它是 macOS 上被业界普遍认可的软件包管理器。</p>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://brew.sh/">https://brew.sh/</a>  </p>
+<p>在Mac下面安装Mysql、Redis、Node之类软件的时候，比较方便的方式是使用Homebrew（号称是The missing package manager for OS X）。不过Homebrew是命令行方式，用起来不是那么的友好，所以就有了Cakebrew。</p>
+<p>网站：<a target="_blank" rel="noopener" href="https://www.cakebrew.com/">https://www.cakebrew.com/</a></p>
+<p>非常友好的图形界面，使用起来简单快捷。</p>
+<p>而LaunchRocket呢，则是一个帮助管理Homebrew安装的服务的软件，比如你使用Homebrew安装的Mysql、Redis、MongoDB，是让它自启动呢，还是手动启动，传统方式需要使用命令行的命令，而使用LaunchRocket则可以在图形界面中进行管理了！</p>
+<p>网站：<a target="_blank" rel="noopener" href="https://github.com/jimbojsb/launchrocket">https://github.com/jimbojsb/launchrocket</a></p>
+<h2 id="tree"><a href="#tree" class="headerlink" title="tree"></a>tree</h2><p>你可以通过<code>brew install tree</code>安装该工具。如果要查看给定目录的内容，那么 tree 是执行此操作的必备工具。它能以漂亮的树状结构显示所有子目录及文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ tree .</span><br><span class="line">.</span><br><span class="line">├── recovery.md</span><br><span class="line">├── README.md</span><br><span class="line">├── archive</span><br><span class="line">├── automator</span><br><span class="line">│   ├── Open\\ Iterm2.workflow</span><br><span class="line">│   │   └── Contents</span><br><span class="line">│   │       ├── Info.plist</span><br><span class="line">│   │       ├── QuickLook</span><br><span class="line">│   │       │   └── Thumbnail.png</span><br><span class="line">│   │       └── document.wflow</span><br><span class="line">│   └── Start\\ Screen\\ Saver.workflow</span><br><span class="line">├── brew-cask.sh</span><br></pre></td></tr></table></figure>
+
+<h2 id="bat"><a href="#bat" class="headerlink" title="bat"></a>bat</h2><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220820634.jpeg"></p>
+<p>类似于在终端中常用的用于显示文件内容的<code>cat</code>命令，但是<code>bat</code>效果更佳。</p>
+<p>它增加了语法高亮显示，git gutter 标记（如果适用），自动分页（如果文件很大）等功能，并且使得输出的内容阅读起来更加友好。</p>
+<p>bat 下载地址：<a target="_blank" rel="noopener" href="https://github.com/sharkdp/bat">https://github.com/sharkdp/bat</a></p>
+<h2 id="httpie"><a href="#httpie" class="headerlink" title="httpie"></a>httpie</h2><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220827622.gif"></p>
+<p>如果你需要发送一些 HTTP 请求，但发现使用<code>curl</code>不够直观，那么请尝试一下<code>httpie</code>。这是一款非常好用的<code>curl</code>替代工具。合理的默认配置以及简洁的语法使它更易于使用，命令返回也是彩色输出，甚至支持为不同类型的身份验证安装相应的插件。</p>
+<p>httpie 下载地址：<a target="_blank" rel="noopener" href="https://httpie.org/">https://httpie.org/</a></p>
+<h2 id="tldr"><a href="#tldr" class="headerlink" title="tldr"></a>tldr</h2><p>简化版的命令帮助手册。“man pages” 包含了 Linux 软件的手册，这些手册解释了如何使用给定的命令。你可以尝试运行<code>man cat</code>或<code>man grep</code>来查看相关命令的帮助手册。它们描述的非常详细，有时可能难以掌握。因此，<code>tldr</code>社区的目的，就是将每个命令的帮助手册进行简化，方便用户查阅。</p>
+<p><code>tldr</code>适用于几乎所有的受欢迎的软件。正如我提到的，这是社区的努力和功劳，虽然不太可能包含所有的软件的简化帮助手册。但是当某个帮助手册被纳入管理并起作用时，它提供的信息通常就是你要查找的内容。</p>
+<p>比如，如果你要创建一些文件的 gzip 压缩存档，<code>man tar</code>可以为你提供可能的参数选择。而<code>tldr tar</code>会列出一些我们常见的示例——如图所示，第二个示例正是你要执行的操作：</p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220836708.jpeg">  </p>
+<p>“man pages” 展示的信息太全面了，但是很多时候使用<code>tldr</code>可以更快地帮你找到特定信息，这才是用户真正想要的。</p>
+<p>tldr 下载地址：<a target="_blank" rel="noopener" href="https://tldr.sh/">https://tldr.sh/</a></p>
+<h2 id="exa"><a href="#exa" class="headerlink" title="exa"></a>exa</h2><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220843370.jpeg"></p>
+<p><code>exa</code>是<code>ls</code>命令的一个可替代方案。</p>
+<p>它色彩艳丽，还可以显示 git 状态等其他信息，自动将文件大小转换为方便人们阅读的单位，并且所有这些都保持与<code>ls</code>几乎相同的执行速度。虽然我很喜欢这个工具并推荐给你们，但由于某种原因，我仍然坚持使用 ls。</p>
+<p>exa 下载地址：<a target="_blank" rel="noopener" href="https://the.exa.website/">https://the.exa.website/</a></p>
+<h2 id="litecli-和-mycli"><a href="#litecli-和-mycli" class="headerlink" title="litecli 和 mycli"></a>litecli 和 mycli</h2><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220850333.gif"></p>
+<p>这是我首选的 SQLite 和 mysql的解决方案。借助自动提示和语法突出显示，它们比默认的<code>sqlite3</code>和<code>mysql</code>工具要好用很多。</p>
+<p>litecli 下载地址：<a target="_blank" rel="noopener" href="https://litecli.com/">https://litecli.com/</a></p>
+<p>mycli 下载地址：<a target="_blank" rel="noopener" href="https://www.mycli.net/">https://www.mycli.net/</a></p>
+<h2 id="ncdu"><a href="#ncdu" class="headerlink" title="ncdu"></a>ncdu</h2><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020/12/640-20201227220855650.jpeg"></p>
+<p>这是在终端进行磁盘分析时使用的工具，它使用起来简单快捷。当我需要释放一些硬盘空间时，会默认使用这款工具。</p>
+<p>ncdu 下载地址：<a target="_blank" rel="noopener" href="https://dev.yorhel.nl/ncdu">https://dev.yorhel.nl/ncdu</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag"># 工具</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/b8c2ae82/" rel="prev" title="Vue组件间通信方式">
+      <i class="fa fa-chevron-left"></i> Vue组件间通信方式
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/4fde75b3/" rel="next" title="Django基础-视图">
+      Django基础-视图 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Starship"><span class="nav-number">1.</span> <span class="nav-text">Starship</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fzf"><span class="nav-number">2.</span> <span class="nav-text">fzf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fd"><span class="nav-number">3.</span> <span class="nav-text">fd</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E6%90%9C%E7%B4%A2"><span class="nav-number">3.1.</span> <span class="nav-text">简单搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%90%9C%E7%B4%A2"><span class="nav-number">3.2.</span> <span class="nav-text">正则表达式搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E6%A0%B9%E7%9B%AE%E5%BD%95"><span class="nav-number">3.3.</span> <span class="nav-text">指定根目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%85%E8%BF%90%E8%A1%8Cfd"><span class="nav-number">3.4.</span> <span class="nav-text">仅运行fd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E7%89%B9%E5%AE%9A%E7%9A%84%E6%96%87%E4%BB%B6%E6%89%A9%E5%B1%95%E5%90%8D"><span class="nav-number">3.5.</span> <span class="nav-text">搜索特定的文件扩展名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ripgrep"><span class="nav-number">4.</span> <span class="nav-text">ripgrep</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E6%90%9C%E7%B4%A2-1"><span class="nav-number">4.1.</span> <span class="nav-text">简单搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%90%9C%E7%B4%A2-1"><span class="nav-number">4.2.</span> <span class="nav-text">正则表达式搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E6%90%9C%E7%B4%A2"><span class="nav-number">4.3.</span> <span class="nav-text">指定文件搜索</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#htop-%E5%92%8C-glances"><span class="nav-number">5.</span> <span class="nav-text">htop 和 glances</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#virtualenv"><span class="nav-number">6.</span> <span class="nav-text">virtualenv</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Homebrew"><span class="nav-number">7.</span> <span class="nav-text">Homebrew</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tree"><span class="nav-number">8.</span> <span class="nav-text">tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bat"><span class="nav-number">9.</span> <span class="nav-text">bat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#httpie"><span class="nav-number">10.</span> <span class="nav-text">httpie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tldr"><span class="nav-number">11.</span> <span class="nav-text">tldr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exa"><span class="nav-number">12.</span> <span class="nav-text">exa</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#litecli-%E5%92%8C-mycli"><span class="nav-number">13.</span> <span class="nav-text">litecli 和 mycli</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ncdu"><span class="nav-number">14.</span> <span class="nav-text">ncdu</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">bookandmusic</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备2021028097号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bookandmusic</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : '',
+      projectId: ''
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

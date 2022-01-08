@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"bookandmusic.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"ZMZD8LN6JF","apiKey":"c75e305c22fd4cf56b8f03aa6efec207","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"bookandmusic.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"ZMZD8LN6JF","apiKey":"c75e305c22fd4cf56b8f03aa6efec207","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta property="og:type" content="website">
@@ -125,6 +125,11 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -140,21 +145,18 @@
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
+  <div class="search-input-container"></div>
   <span class="popup-btn-close">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
-  </div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
 </div>
 
+      
     </div>
   </div>
 
@@ -179,7 +181,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2020/03/16/-zCK1qD29/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/7dd34d6c/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -193,7 +195,302 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/16/-zCK1qD29/" class="post-title-link" itemprop="url">Django-图片上传</a>
+            <a href="/posts/7dd34d6c/" class="post-title-link" itemprop="url">DRF-后端跨域</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-17 18:19:28" itemprop="dateCreated datePublished" datetime="2020-03-17T18:19:28+08:00">2020-03-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>前后端分离开发时，经常会遇到一个问题，那就是<code>跨域问题</code>,因为这时候前端和后端的代码是在不同机器上运行的，两个地址不在一个域名下，这个时候前端脚本在进行ajax访问的时候浏览器就会报跨域相关的错误。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/7dd34d6c/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/cf533a38/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="bookandmusic">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bookandmusic">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/cf533a38/" class="post-title-link" itemprop="url">DRF-数据分页</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-16 20:23:36" itemprop="dateCreated datePublished" datetime="2020-03-16T20:23:36+08:00">2020-03-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>当需要展示的数据过多时，就需要将全部数据分批显示，这就需要用到 <strong>分页</strong> 功能</p>
+</blockquote>
+<h2 id="Django内置分页"><a href="#Django内置分页" class="headerlink" title="Django内置分页"></a>Django内置分页</h2><p>在DRF提供的API视图中，并不支持 <code>pagination_class</code> 分页属性，因此，需要分页，只能使用django内置的分页器 <code>Paginator</code> 。</p>
+<p>Paginator 类的作用是将我们需要分页的数据分割成若干份。当我们实现化一个 Paginator 类的实例时，需要给 Paginator 传入两个参数。第一个参数是数据源，可以是<strong>一个列表、元组、以及查询结果集 QuerySet</strong>。第二个参数<strong>需要传入一个整数，表示每页显示数据条数</strong>。具体用法如下：</p>
+<h3 id="导入分页模块"><a href="#导入分页模块" class="headerlink" title="导入分页模块"></a>导入分页模块</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.core.paginator <span class="keyword">import</span> Paginator</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取queryset对象"><a href="#获取queryset对象" class="headerlink" title="获取queryset对象"></a>获取queryset对象</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">goods_list = Goods.objects.<span class="built_in">all</span>().order_by(<span class="string">&#x27;id&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例化分页类对象"><a href="#实例化分页类对象" class="headerlink" title="实例化分页类对象"></a>实例化分页类对象</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paginator = Paginator(goods_list, <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Paginator类对象的属性"><a href="#Paginator类对象的属性" class="headerlink" title="Paginator类对象的属性"></a>Paginator类对象的属性</h4><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>属性名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>num_pages</td>
+<td>返回分页之后的总页数</td>
+</tr>
+<tr>
+<td>2</td>
+<td>page_range</td>
+<td>返回分页后的页码列表</td>
+</tr>
+<tr>
+<td>3</td>
+<td>count</td>
+<td>需要分页的总记录数</td>
+</tr>
+</tbody></table>
+<h4 id="Paginator类对象的方法"><a href="#Paginator类对象的方法" class="headerlink" title="Paginator类对象的方法"></a>Paginator类对象的方法</h4><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>get_page(self, number)</td>
+<td>返回第number页的page类实例对象</td>
+</tr>
+</tbody></table>
+<h4 id="Page实例对象的属性"><a href="#Page实例对象的属性" class="headerlink" title="Page实例对象的属性"></a>Page实例对象的属性</h4><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>属性名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>number</td>
+<td>返回当前页的页码</td>
+</tr>
+<tr>
+<td>2</td>
+<td>object_list</td>
+<td>返回当前页的数据查询集</td>
+</tr>
+<tr>
+<td>3</td>
+<td>paginator</td>
+<td>返回对应的<strong>Paginator</strong>类对象</td>
+</tr>
+</tbody></table>
+<h4 id="page实例对象的方法"><a href="#page实例对象的方法" class="headerlink" title="page实例对象的方法"></a>page实例对象的方法</h4><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>has_previous</td>
+<td>判断当前页是否有前一页</td>
+</tr>
+<tr>
+<td>2</td>
+<td>has_next</td>
+<td>判断当前页是否有下一页</td>
+</tr>
+<tr>
+<td>3</td>
+<td>previous_page_number</td>
+<td>返回前一页的页码</td>
+</tr>
+<tr>
+<td>4</td>
+<td>next_page_number</td>
+<td>返回下一页的页码</td>
+</tr>
+</tbody></table>
+<h3 id="分页功能实现"><a href="#分页功能实现" class="headerlink" title="分页功能实现"></a>分页功能实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.response <span class="keyword">import</span> Response</span><br><span class="line"><span class="keyword">from</span> rest_framework.views <span class="keyword">import</span> APIView</span><br><span class="line"><span class="keyword">from</span> school.serializers <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudentsAPIView</span>(<span class="params">APIView</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">self, request</span>):</span></span><br><span class="line">        page_number = request.GET.get(<span class="string">&#x27;page&#x27;</span>, <span class="number">1</span>)  <span class="comment"># 获取客户端发送的页码，默认为1</span></span><br><span class="line">        page_size = request.GET.get(<span class="string">&#x27;page_size&#x27;</span>, <span class="number">2</span>)  <span class="comment"># 获取客户端发送的每页数量，默认为1</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            page_number = <span class="built_in">int</span>(page_number)  <span class="comment"># 处理页码， 过滤无效的数据</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            page_number = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        goods_set = Student.objects.<span class="built_in">all</span>().order_by(<span class="string">&#x27;id&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        paginator = Paginator(goods_set, page_size)  <span class="comment"># 得到分页器对象</span></span><br><span class="line">        page = paginator.get_page(page_number)  <span class="comment"># 得到当前页码对象</span></span><br><span class="line"></span><br><span class="line">        ser = StudentSerializer(page.object_list, many=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> Response(ser.data)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="DRF-分页"><a href="#DRF-分页" class="headerlink" title="DRF 分页"></a>DRF 分页</h2><blockquote>
+<p>  REST框架包括对可定制的分页样式的支持。</p>
+</blockquote>
+<h3 id="分页类"><a href="#分页类" class="headerlink" title="分页类"></a>分页类</h3><h4 id="PageNumberPagination："><a href="#PageNumberPagination：" class="headerlink" title="PageNumberPagination："></a>PageNumberPagination：</h4><p>可以进行直接的页码处理，返回某一页分页数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8000</span>/user/?page=<span class="number">2</span></span><br><span class="line"><span class="comment"># page：当前的页码</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>除了默认的分页样式之外，还可以通过继承分页类的方式重写分页样式</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.pagination <span class="keyword">import</span> PageNumberPagination</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">class</span> <span class="title">PagerPagination</span>(<span class="params">PageNumberPagination</span>):</span></span><br><span class="line">    max_page_size = <span class="number">3</span>  <span class="comment"># 每页最大数目</span></span><br><span class="line">    page_size = <span class="number">1</span>  <span class="comment"># 默认每页数目</span></span><br><span class="line">    page_query_param = <span class="string">&#x27;page&#x27;</span>  <span class="comment"># 页码关键字名， 默认为&quot;page&quot;</span></span><br><span class="line">    page_size_query_param = <span class="string">&#x27;size&#x27;</span>  <span class="comment"># 每页数目关键字名, ，默认为None</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="LimitOffsetPagination"><a href="#LimitOffsetPagination" class="headerlink" title="LimitOffsetPagination"></a>LimitOffsetPagination</h4><p>可以通过连接可选的参数进行分页单页数量大小的控制，分页数据偏移的选择</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8000</span>/path/?limit=<span class="number">2</span>&amp;offset=<span class="number">2</span></span><br><span class="line"><span class="comment"># limit：每页的数据大小</span></span><br><span class="line"><span class="comment"># offset：从某一个数据位置开始偏移</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>除了默认的分页样式之外，还可以通过继承分页类的方式重写分页样式</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.pagination <span class="keyword">import</span> LimitOffsetPagination</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LimitPagination</span>(<span class="params">LimitOffsetPagination</span>):</span></span><br><span class="line">    max_limit = <span class="number">2</span>  <span class="comment"># 最大limit限制，默认None</span></span><br><span class="line">    default_limit = <span class="number">1</span>  <span class="comment"># 默认限制，和page_size作用一样</span></span><br><span class="line">    limit_query_param = <span class="string">&#x27;limit&#x27;</span>  <span class="comment"># 参数名，默认limit</span></span><br><span class="line">    offset_query_param = <span class="string">&#x27;offset&#x27;</span>  <span class="comment"># 参数名，默认offset</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="自定义分页类"><a href="#自定义分页类" class="headerlink" title="自定义分页类"></a>自定义分页类</h4><blockquote>
+<p>  可以继承父类，并重写响应对象</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> OrderedDict</span><br><span class="line"><span class="keyword">from</span> rest_framework.pagination <span class="keyword">import</span> PageNumberPagination</span><br><span class="line"><span class="keyword">from</span> rest_framework.response <span class="keyword">import</span> Response</span><br><span class="line"><span class="keyword">from</span> rest_framework.utils.urls <span class="keyword">import</span> replace_query_param</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pagination</span>(<span class="params">PageNumberPagination</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_num_pages_link</span>(<span class="params">self</span>):</span></span><br><span class="line">        url = self.request.build_absolute_uri()</span><br><span class="line">        num_pages = self.page.paginator.num_pages</span><br><span class="line">        <span class="keyword">return</span> [replace_query_param(url, self.page_query_param, page) <span class="keyword">for</span> page <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, num_pages + <span class="number">1</span>)]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_paginated_response</span>(<span class="params">self, data</span>):</span></span><br><span class="line">        <span class="keyword">return</span> Response(OrderedDict([</span><br><span class="line">            (<span class="string">&#x27;count&#x27;</span>, self.page.paginator.count),</span><br><span class="line">            (<span class="string">&#x27;num_pages&#x27;</span>, self.page.paginator.num_pages),  <span class="comment"># 分页的总页码</span></span><br><span class="line">            (<span class="string">&#x27;next&#x27;</span>, self.get_next_link()),</span><br><span class="line">            (<span class="string">&#x27;previous&#x27;</span>, self.get_previous_link()),</span><br><span class="line">            (<span class="string">&#x27;pages&#x27;</span>, self.get_num_pages_link()),  <span class="comment"># 所有分页的链接</span></span><br><span class="line">            (<span class="string">&#x27;results&#x27;</span>, data)</span><br><span class="line">        ]))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="分页应用"><a href="#分页应用" class="headerlink" title="分页应用"></a>分页应用</h3><h4 id="全局分页"><a href="#全局分页" class="headerlink" title="全局分页"></a>全局分页</h4><blockquote>
+<p><strong>注意</strong>：需要修改Django的全局配置文件 <code>settings.py</code></p>
+</blockquote>
+<p>分页样式可以使用<code>DEFAULT_PAGINATION_CLASS</code>和<code>PAGE_SIZE</code>设置键进行全局设置。</p>
+<p>例如，要使用内置的限制/偏移分页，可以执行以下操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">REST_FRAMEWORK = &#123;</span><br><span class="line">    <span class="string">&#x27;DEFAULT_PAGINATION_CLASS&#x27;</span>:</span><br><span class="line">        <span class="string">&#x27;rest_framework.pagination.LimitOffsetPagination&#x27;</span>,  <span class="comment"># 指明分页类</span></span><br><span class="line">        <span class="comment"># &#x27;rest_framework.pagination.PageNumberPagination&#x27;,</span></span><br><span class="line">        <span class="comment"># &#x27;utils.pagination.Pagination&#x27;, # 自定义分页类</span></span><br><span class="line">    </span><br><span class="line">    <span class="string">&#x27;PAGE_SIZE&#x27;</span>: <span class="number">2</span>  <span class="comment"># 每页数目</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>请注意，您需要同时设置分页类和应使用的页面大小。</p>
+<h4 id="局部分页"><a href="#局部分页" class="headerlink" title="局部分页"></a>局部分页</h4><p>您还可以使用<code>pagination_class</code>属性在单个视图上设置分页类。配置完了，如果不想用，那么就直接在视图类下使用如下属性关闭全局分页功能</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.generics <span class="keyword">import</span> ListCreateAPIView</span><br><span class="line"><span class="keyword">from</span> .serializer <span class="keyword">import</span> BookSerializer</span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> BookModel</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookListView</span>(<span class="params">ListCreateAPIView</span>):</span></span><br><span class="line">    serializer_class = BookSerializer</span><br><span class="line">    queryset = BookModel.objects.<span class="built_in">all</span>()</span><br><span class="line">    pagination_class = <span class="literal">None</span>  <span class="comment"># 指定分页类，为None，即当前视图不分页</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/6be4f145/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="bookandmusic">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bookandmusic">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/6be4f145/" class="post-title-link" itemprop="url">Django-图片上传</a>
         </h2>
 
         <div class="post-meta">
@@ -210,7 +507,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-27 22:17:18" itemprop="dateModified" datetime="2021-09-27T22:17:18+08:00">2021-09-27</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -234,7 +531,7 @@
           <p>static 和 media 都是存放文件的地方，但是又有区别，以下是两个文件夹的区别和用法</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/03/16/-zCK1qD29/#more" rel="contents">
+              <a class="btn" href="/posts/6be4f145/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -258,7 +555,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2020/03/15/47DG30ipa/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/35e7e8f2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -272,7 +569,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/15/47DG30ipa/" class="post-title-link" itemprop="url">DRF-JWT认证、权限、限流</a>
+            <a href="/posts/35e7e8f2/" class="post-title-link" itemprop="url">DRF-JWT认证、权限、限流</a>
         </h2>
 
         <div class="post-meta">
@@ -289,7 +586,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-27 22:17:52" itemprop="dateModified" datetime="2021-09-27T22:17:52+08:00">2021-09-27</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -313,7 +610,7 @@
           <p>DRF框架的一系列功能：认证、权限、限流，都是依赖于JWT。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/03/15/47DG30ipa/#more" rel="contents">
+              <a class="btn" href="/posts/35e7e8f2/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -337,7 +634,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2020/03/10/PMVipp31T/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/b13609c0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -351,7 +648,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/10/PMVipp31T/" class="post-title-link" itemprop="url">Django-用户认证</a>
+            <a href="/posts/b13609c0/" class="post-title-link" itemprop="url">Django-用户认证</a>
         </h2>
 
         <div class="post-meta">
@@ -368,7 +665,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-01 22:36:17" itemprop="dateModified" datetime="2021-10-01T22:36:17+08:00">2021-10-01</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -392,7 +689,7 @@
           <p>django中的用户认证一系列机制，帮助开发者可以更快速的上手。以下demo简单对django的用户认证做一个演示。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/03/10/PMVipp31T/#more" rel="contents">
+              <a class="btn" href="/posts/b13609c0/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -416,7 +713,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2020/03/03/hwID7EtN7/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/344f12ee/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -430,7 +727,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/03/hwID7EtN7/" class="post-title-link" itemprop="url">Axios(四):跨域请求</a>
+            <a href="/posts/344f12ee/" class="post-title-link" itemprop="url">Axios(四):跨域请求</a>
         </h2>
 
         <div class="post-meta">
@@ -447,7 +744,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-25 23:24:12" itemprop="dateModified" datetime="2021-09-25T23:24:12+08:00">2021-09-25</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -471,7 +768,7 @@
           <p>在前后端开发过程中一直会伴随我们的问题就是跨域问题，因为这时候前端和后端的代码是在不同机器上运行的，两个地址不在一个域名下，这个时候前端脚本在进行axios访问的时候浏览器就会报跨域相关的错误。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/03/03/hwID7EtN7/#more" rel="contents">
+              <a class="btn" href="/posts/344f12ee/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -495,7 +792,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2020/03/03/pmj69YWqE/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/1e3d7e67/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -509,7 +806,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/03/pmj69YWqE/" class="post-title-link" itemprop="url">Axios(三):GET和POST提交数据</a>
+            <a href="/posts/1e3d7e67/" class="post-title-link" itemprop="url">Axios(三):GET和POST提交数据</a>
         </h2>
 
         <div class="post-meta">
@@ -526,7 +823,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-25 23:47:10" itemprop="dateModified" datetime="2021-09-25T23:47:10+08:00">2021-09-25</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -550,7 +847,7 @@
           <p>在处理http请求方面，经常需要前端向后端提交参数，本文以vue中axios处理http发送请求的的两种方式（Post和Get）为例，简单说明一下不同请求方式下参数的提交方式。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/03/03/pmj69YWqE/#more" rel="contents">
+              <a class="btn" href="/posts/1e3d7e67/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -574,7 +871,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2020/03/03/c2doD9K-a/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/9030a39c/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -588,7 +885,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/03/c2doD9K-a/" class="post-title-link" itemprop="url">Axios(二):API说明</a>
+            <a href="/posts/9030a39c/" class="post-title-link" itemprop="url">Axios(二):API说明</a>
         </h2>
 
         <div class="post-meta">
@@ -605,7 +902,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-25 23:53:04" itemprop="dateModified" datetime="2021-09-25T23:53:04+08:00">2021-09-25</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -629,7 +926,7 @@
           <p>以下对axios的使用方式做一个简单说明，详细细节可以参数 axios中文文档。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/03/03/c2doD9K-a/#more" rel="contents">
+              <a class="btn" href="/posts/9030a39c/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -653,7 +950,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2020/03/03/FBYpWqwfB/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/9ad6c9ea/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -667,7 +964,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/03/FBYpWqwfB/" class="post-title-link" itemprop="url">Axios(一):axios在vue中的使用教程</a>
+            <a href="/posts/9ad6c9ea/" class="post-title-link" itemprop="url">Axios(一):axios在vue中的使用教程</a>
         </h2>
 
         <div class="post-meta">
@@ -684,7 +981,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-25 23:53:27" itemprop="dateModified" datetime="2021-09-25T23:53:27+08:00">2021-09-25</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -708,7 +1005,7 @@
           <p>在 vue项目中使用axios分为局部使用和全局使用</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/03/03/FBYpWqwfB/#more" rel="contents">
+              <a class="btn" href="/posts/9ad6c9ea/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -732,7 +1029,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2020/02/26/EgOgbNSVu/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/927fbb2b/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -746,7 +1043,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/02/26/EgOgbNSVu/" class="post-title-link" itemprop="url">主键约束和唯一性约束的区别</a>
+            <a href="/posts/927fbb2b/" class="post-title-link" itemprop="url">主键约束和唯一性约束的区别</a>
         </h2>
 
         <div class="post-meta">
@@ -763,7 +1060,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-27 21:32:13" itemprop="dateModified" datetime="2021-09-27T21:32:13+08:00">2021-09-27</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -787,7 +1084,7 @@
           <p>主键必然是唯一且不为空，但是唯一不一定是主键，而且主键只能有一个，但是唯一约束仅仅是为了保持某些列具有唯一性而已。所以可以有多列<br>一张表里只能有一个主键约束，可以有多个唯一约束<br>主键约束的字段不能为null，而唯一约束的字段可以为null值</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/02/26/EgOgbNSVu/#more" rel="contents">
+              <a class="btn" href="/posts/927fbb2b/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -811,7 +1108,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2019/12/12/vf8YY9pvr/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/5bd820ec/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -825,7 +1122,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/12/12/vf8YY9pvr/" class="post-title-link" itemprop="url">Mysql用户管理</a>
+            <a href="/posts/5bd820ec/" class="post-title-link" itemprop="url">Mysql用户管理</a>
         </h2>
 
         <div class="post-meta">
@@ -842,7 +1139,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-04 23:03:49" itemprop="dateModified" datetime="2022-01-04T23:03:49+08:00">2022-01-04</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -866,7 +1163,7 @@
           <p>介绍如何在 Ubuntu系统上 安装mysql软件、以及如何创建用户信息。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/12/12/vf8YY9pvr/#more" rel="contents">
+              <a class="btn" href="/posts/5bd820ec/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -890,7 +1187,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2019/11/25/y0Nt6uhob/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/99719ac0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -904,7 +1201,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/25/y0Nt6uhob/" class="post-title-link" itemprop="url">Json介绍</a>
+            <a href="/posts/99719ac0/" class="post-title-link" itemprop="url">Json介绍</a>
         </h2>
 
         <div class="post-meta">
@@ -921,7 +1218,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-25 23:54:04" itemprop="dateModified" datetime="2021-09-25T23:54:04+08:00">2021-09-25</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -946,166 +1243,7 @@
 <p>是存储和交换文本信息的语法。类似 XML，不过它比 XML 更小、更快，更易解析</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/11/25/y0Nt6uhob/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2019/11/04/fyjn92kth/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="bookandmusic">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bookandmusic">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/04/fyjn92kth/" class="post-title-link" itemprop="url">python面向对象</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-11-04 22:36:03" itemprop="dateCreated datePublished" datetime="2019-11-04T22:36:03+08:00">2019-11-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-27 22:21:30" itemprop="dateModified" datetime="2021-09-27T22:21:30+08:00">2021-09-27</time>
-              </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>面向对象最重要的概念就是类（<code>Class</code>）和实例（<code>Instance</code>），必须牢记类是抽象的模板，比如Student类，而实例是根据类创建出来的一个个具体的“对象”，每个对象都拥有相同的方法，但各自的数据可能不同。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/04/fyjn92kth/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2019/06/01/EyYEluWEY/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="bookandmusic">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bookandmusic">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/06/01/EyYEluWEY/" class="post-title-link" itemprop="url">Mysql中varbinary、binary、char、varchar异同</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-06-01 09:12:16" itemprop="dateCreated datePublished" datetime="2019-06-01T09:12:16+08:00">2019-06-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-27 21:34:23" itemprop="dateModified" datetime="2021-09-27T21:34:23+08:00">2021-09-27</time>
-              </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>binary 与 varbinary 类型和char与varchar类型是相似的，只是他们存储的是二进制数据，也就是说他们是包含字节流而不是字符流，他们有二进制字符的集合和顺序，他们的对比，排序是基于字节的数值进行的</p>
-<p>binary与varbinary的最大长度和char与varchar是一样的，只不过他们是定义<strong>字节长度</strong>，而char和varchar对应的是<strong>字符长度</strong>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/06/01/EyYEluWEY/#more" rel="contents">
+              <a class="btn" href="/posts/99719ac0/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1128,7 +1266,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1194,7 +1332,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-count">98</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1238,26 +1376,6 @@
 </div>
 
         
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
 
 
 
@@ -1365,7 +1483,10 @@
 
 
   
-<script src="/js/local-search.js"></script>
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
 
 
 

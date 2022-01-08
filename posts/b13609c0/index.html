@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bookandmusic.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"ZMZD8LN6JF","apiKey":"c75e305c22fd4cf56b8f03aa6efec207","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="django中的用户认证一系列机制，帮助开发者可以更快速的上手。以下demo简单对django的用户认证做一个演示。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django-用户认证">
+<meta property="og:url" content="https://bookandmusic.cn/posts/b13609c0/index.html">
+<meta property="og:site_name" content="Bookandmusic">
+<meta property="og:description" content="django中的用户认证一系列机制，帮助开发者可以更快速的上手。以下demo简单对django的用户认证做一个演示。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-10T13:34:46.000Z">
+<meta property="article:modified_time" content="2022-01-08T09:57:41.853Z">
+<meta property="article:author" content="bookandmusic">
+<meta property="article:tag" content="PYTHON">
+<meta property="article:tag" content="Django">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://bookandmusic.cn/posts/b13609c0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Django-用户认证 | Bookandmusic</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Bookandmusic</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">踮起脚尖，另一种高度</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/b13609c0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="bookandmusic">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bookandmusic">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Django-用户认证
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-10 21:34:46" itemprop="dateCreated datePublished" datetime="2020-03-10T21:34:46+08:00">2020-03-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>django中的用户认证一系列机制，帮助开发者可以更快速的上手。以下demo简单对django的用户认证做一个演示。</p>
+<span id="more"></span>
+
+<h2 id="项目框架"><a href="#项目框架" class="headerlink" title="项目框架"></a>项目框架</h2><ol>
+<li><p>项目结构</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── users</span><br><span class="line">│    ├── __init__.py</span><br><span class="line">│    ├── admin.py</span><br><span class="line">│    ├── apps.py</span><br><span class="line">│    ├── migrations</span><br><span class="line">│    │   └── __init__.py</span><br><span class="line">│    ├── models.py</span><br><span class="line">│    ├── tests.py</span><br><span class="line">│    ├── urls.py</span><br><span class="line">│    └── views.py</span><br><span class="line">├── db.sqlite3</span><br><span class="line">├── manage.py</span><br><span class="line">├── django_demo</span><br><span class="line">│    ├── __init__.py</span><br><span class="line">│    ├── settings.py</span><br><span class="line">│    ├── urls.py</span><br><span class="line">│    └── wsgi.py</span><br><span class="line">└── templates</span><br><span class="line">    ├── base.html</span><br><span class="line">    ├── index.html</span><br><span class="line">    ├── login.html</span><br><span class="line">    ├── register.html</span><br><span class="line">    └── user.html</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h3><p>通过终端命令,创建项目</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django_admin startproject django_demo</span><br></pre></td></tr></table></figure>
+
+<h3 id="生成应用"><a href="#生成应用" class="headerlink" title="生成应用"></a>生成应用</h3><p>通过终端命令,生成users应用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 此时在项目文件夹之下执行命令</span></span><br><span class="line">python manage.py startapp users</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改配置信息"><a href="#修改配置信息" class="headerlink" title="修改配置信息"></a>修改配置信息</h3><p>在<code>settings.py</code>修改配置</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 注册app</span></span><br><span class="line">INSTALLED_APPS = [</span><br><span class="line">    <span class="string">&#x27;django.contrib.admin&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.auth&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.contenttypes&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.sessions&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.messages&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.staticfiles&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;users.apps.UsersConfig&#x27;</span> <span class="comment"># 注册users应用</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置模板路径</span></span><br><span class="line">TEMPLATES = [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&#x27;BACKEND&#x27;</span>: <span class="string">&#x27;django.template.backends.django.DjangoTemplates&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;DIRS&#x27;</span>: [os.path.join(BASE_DIR, <span class="string">&quot;templates&quot;</span>)],</span><br><span class="line">        <span class="string">&#x27;APP_DIRS&#x27;</span>: <span class="literal">True</span>,</span><br><span class="line">        <span class="string">&#x27;OPTIONS&#x27;</span>: &#123;</span><br><span class="line">            <span class="string">&#x27;context_processors&#x27;</span>: [</span><br><span class="line">                <span class="string">&#x27;django.template.context_processors.debug&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;django.template.context_processors.request&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;django.contrib.auth.context_processors.auth&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;django.contrib.messages.context_processors.messages&#x27;</span>,</span><br><span class="line">            ],</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 语言设置和时区设置</span></span><br><span class="line">LANGUAGE_CODE = <span class="string">&#x27;zh-hans&#x27;</span></span><br><span class="line">TIME_ZONE = <span class="string">&#x27;Asia/Shanghai&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="拓展User模型类"><a href="#拓展User模型类" class="headerlink" title="拓展User模型类"></a>拓展User模型类</h2><p>Django 用户认证系统提供了一个内置的 User 对象，用于记录用户的用户名，密码等个人信息。对于 Django 内置的 <code>User</code> 模型， 仅包含以下一些主要的属性：</p>
+<ul>
+<li>  username，即用户名</li>
+<li>  password，密码</li>
+<li>  email，邮箱</li>
+<li>  first_name，名</li>
+<li>  last_name，姓</li>
+</ul>
+<p>对于一些网站来说，用户可能还包含有昵称、头像、个性签名等等其它属性，因此仅仅使用 Django 内置的 User 模型是不够。好在 Django 用户系统遵循可拓展的设计原则，我们可以方便地拓展 User 模型。</p>
+<blockquote>
+<p>  继承 AbstractUser 拓展用户模型</p>
+</blockquote>
+<p>这是推荐做法。事实上，查看 <code>User</code> 模型的源码就知道，User 也是继承自 <code>AbstractUser</code> 抽象基类，而且仅仅就是继承了 <code>AbstractUser</code>，没有对 <code>AbstractUser</code> 做任何的拓展。</p>
+<p>所以，如果我们继承 <code>AbstractUser</code>，将获得 <code>User</code> 的全部特性，而且还可以根据自己的需求进行拓展。</p>
+<p>我们之前新建了一个 users 应用，通常我们把和数据库模型相关的代码写在 models.py 文件里。打开 <code>users/models.py</code> 文件，写上我们自定义的用户模型代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"><span class="keyword">from</span> django.contrib.auth.models <span class="keyword">import</span> AbstractUser</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create your models here.</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span>(<span class="params">AbstractUser</span>):</span></span><br><span class="line">    phone = models.CharField(max_length=<span class="number">11</span>, unique=<span class="literal">True</span>, verbose_name=<span class="string">&quot;手机号&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>(<span class="params">AbstractUser.Meta</span>):</span></span><br><span class="line">        db_table = <span class="string">&#x27;tb_users&#x27;</span>  <span class="comment"># 指定表名</span></span><br><span class="line">        verbose_name = <span class="string">&#x27;用户&#x27;</span>  <span class="comment"># 后台显示表名</span></span><br><span class="line">        verbose_name_plural = verbose_name</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.username</span><br></pre></td></tr></table></figure>
+
+<p>我们给自定义的用户模型新增了一个 phone（手机号）属性，用来记录用户的联系方式，设置 <code>unique=True</code> 的目的是让用户在注册时，一个手机号只能注册一次。根据你的需求可以自己进一步拓展，例如增加用户头像、个性签名等等，添加多少属性字段没有任何限制。</p>
+<p>同时，我们继承了 <code>AbstractUser</code> 的内部类属性 <code>Meta</code> 。在这里继承 <code>Meta</code> 的原因是在你的项目中可能需要设置一些 <code>Meta</code> 类的属性值，不要忘记继承 <code>AbstractUser.Meta</code> 中已有的属性。</p>
+<p>此外，<code>AbstractUser</code> 类又继承自 <code>AbstractBaseUser</code>，前者在后者的基础上拓展了一套用户权限（Permission）系统。因此如非特殊需要，尽量不要从 <code>AbstractBaseUser</code> 拓展，否则你需要做更多的额外工作。</p>
+<p>为了让 Django 用户认证系统使用我们自定义的用户模型，必须在 <code>settings.py</code> 里通过 <code>AUTH_USER_MODEL</code> 指定自定义用户模型所在的位置，即需要如下设置：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置规则：AUTH_USER_MODEL = &#x27;应用名.模型类名&#x27;</span></span><br><span class="line">AUTH_USER_MODEL = <span class="string">&#x27;users.User&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>设置好自定义用户模型后，生成数据库迁移文件，并且迁移数据库以生成各个应用必要的数据库表。即运行如下两条命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python manage.py makemigrations</span><br><span class="line">$ python manage.py migrate</span><br></pre></td></tr></table></figure>
+
+<p>OK，现在 Django 用户系统使用的用户模型就是自定义的 <code>User</code> 模型了。</p>
+<p><strong>注意：</strong>一定要在设置好 <code>AUTH_USER_MODEL = &#39;users.User&#39;</code> 后在第一次迁移数据库，即指定好自定义的用户模型后再执行数据库迁移命令。</p>
+<h2 id="创建基础模板"><a href="#创建基础模板" class="headerlink" title="创建基础模板"></a>创建基础模板</h2><p>在项目根路径下,创建<code>templates</code>,在目录下创建<code>base.html</code>文件,以便后面复用</p>
+<p>对于一个网站来说，比较好的用户体验是登录、注册和注销后跳转回用户之前访问的页面。否则用户在你的网站东跳转西跳转好不容易找到了想看的内容，结果他已登录给他跳转回了首页，这会使用户非常愤怒。接下来我们看看如何让登录、注册和注销后跳转回用户之前访问的页面。</p>
+<p>其实现的原理是，在登录和注销的流程中，始终传递一个 <code>next</code> 参数记录用户之前访问页面的 URL。因此，我们需要做的就是在用户访问登录或者注销的页面时，在 URL 中传递一个 <code>next</code> 参数给视图函数，具体做法如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;% block nav %&#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;&#123;% url &#x27;users:index&#x27; %&#125;&quot;</span>&gt;</span>Index<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        &#123;% if user.is_authenticated %&#125;</span><br><span class="line">            Hello, <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;&#123;% url &#x27;users:user&#x27; %&#125;&quot;</span>&gt;</span>&#123;&#123; user.username &#125;&#125; <span class="tag">&lt;/<span class="name">a</span>&gt;</span> .</span><br><span class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;&#123;% url &#x27;users:logout&#x27; %&#125;?next=&#123;&#123; request.path &#125;&#125;&quot;</span>&gt;</span>退出<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">        &#123;% else %&#125;</span><br><span class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;&#123;% url &#x27;users:register&#x27; %&#125;?next=&#123;&#123; request.path &#125;&#125;&quot;</span>&gt;</span>注册<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;&#123;% url &#x27;users:login&#x27; %&#125;?next=&#123;&#123; request.path &#125;&#125;&quot;</span>&gt;</span>登录<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">        &#123;% endif %&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block err %&#125;</span><br><span class="line">    &#123;% if account_msg %&#125;</span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;account_msg&#125;&#125;. Please try again.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block body %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，我们在注册、登录和注销的 URL 后加了 <code>next</code> 参数，其值为 <code>&#123;&#123; request.path &#125;&#125;</code>。<code>request.path</code> 是用户当前访问页面的 URL。在 URL 中传递参数的方法就是在要传递的参数前加一个 ？然后写上传递的参数名和参数值，用等号链接。关于在 URL 中传递参数具体请 HTTP 的相关协议。</p>
+<p>为了在整个登录流程中记录 next 的值，还需要在表单中增加一个表单控件，用于传递 next 值。</p>
+<h2 id="自定义认证后台"><a href="#自定义认证后台" class="headerlink" title="自定义认证后台"></a>自定义认证后台</h2><p>Django auth 应用默认支持用户名（username）进行登录。但是在实践中，网站可能还需要邮箱、手机号、身份证号等进行登录，这就需要我们自己写一个认证后台，用于验证用户输入的用户信息是否正确，从而对拥有正确凭据的用户进行登录认证。</p>
+<p>Django 对用户登录的验证工作均在一个被称作认证后台（Authentication Backend）的类中进行。这个类是一个普通的 Python 类，它有一个 <code>authenticate</code> 方法，接收登录用户提供的凭据（如用户名或者邮箱以及密码）作为参数，并根据这些凭据判断用户是否合法（即是否是已注册用户，密码是否正确等）。</p>
+<p>可以定义多个认证后台，Django 内部会逐一调用这些后台的 <code>authenticate</code> 方法来验证用户提供登录凭据的合法性，一旦通过某个后台的验证，表明用户提供的凭据合法，从而允许登录该用户。</p>
+<h3 id="自定义Backend"><a href="#自定义Backend" class="headerlink" title="自定义Backend"></a>自定义Backend</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> UserModel</span><br><span class="line"><span class="keyword">from</span> django.contrib.auth.backends <span class="keyword">import</span> ModelBackend</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EmailBackend</span>(<span class="params">ModelBackend</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;user验证&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">authenticate</span>(<span class="params">self, request, username=<span class="literal">None</span>, password=<span class="literal">None</span>, **kwargs</span>):</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            user = UserModel.objects.get(email=username)</span><br><span class="line">        <span class="keyword">except</span> UserModel.DoesNotExist:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 校验用户密码，且用户为激活用户</span></span><br><span class="line">        <span class="keyword">if</span> user.check_password(password) <span class="keyword">and</span> self.user_can_authenticate(user):</span><br><span class="line">            <span class="keyword">return</span> user</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置-Backend"><a href="#配置-Backend" class="headerlink" title="配置 Backend"></a>配置 Backend</h3><p>接下来就要告诉 Django，需要使用哪些 Backends 对用户的凭据信息进行验证，这需要在 <code>settings.py</code> 中设置：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">AUTHENTICATION_BACKENDS = (</span><br><span class="line">    <span class="string">&#x27;django.contrib.auth.backends.ModelBackend&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;users.backends.EmailBackend&#x27;</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>第一个 Backend 是 Django 内置的 Backend，当用户提供的是用户名和正确的密码时该 Backend 会通过验证；第二个 Backend 是刚刚自定义的 Backend，当用户提供的是 Email 和正确的密码时该 Backend 会通过验证。</p>
+<h2 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h2><p>用户注册就是创建用户对象，将用户的个人信息保存到数据库里。回顾一下 Django 的 MVT 经典开发流程，对用户注册功能来说，首先创建用户模型（M），这一步我们已经完成了。编写注册视图函数（V），并将为视图函数绑定对应的 URL。编写注册模板（T），模板中提供一个注册表单给用户。Django 用户系统内置了登录、修改密码、找回密码等视图，但是唯独用户注册的视图函数没有提供，这一部分需要我们自己来写。</p>
+<h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><p>首先来分析一下注册函数的逻辑。</p>
+<ul>
+<li><p>  首先用户请求注册表单，然后服务器的视图函数给用户提供注册表单；</p>
+</li>
+<li><p>  用户在注册表单里填写注册信息，然后通过表单将这些信息提交给服务器。</p>
+</li>
+<li><p>  视图函数从用户提交的数据提取用户的注册信息，然后验证这些数据的合法性。</p>
+</li>
+<li><p>  如果数据合法，就新建一个用户对象，将用户的数据保存到数据库，否则就将错误信息返回给用户，提示用户对提交的信息进行修改。</p>
+</li>
+<li><p>  注册成功，跳转到登录页面</p>
+</li>
+</ul>
+<p>过程就是这么简单，下面是对应的代码（视图函数的代码通常写在 <code>views.py</code> 文件里）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib.auth.hashers <span class="keyword">import</span> make_password</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> django.views <span class="keyword">import</span> View</span><br><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render, reverse, redirect</span><br><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponseForbidden</span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> User</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RegisterView</span>(<span class="params">View</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">self, request</span>):</span></span><br><span class="line">        <span class="built_in">next</span> = request.GET.get(<span class="string">&#x27;next&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 判断用户是否登录(属性) user.is_authenticated</span></span><br><span class="line">        <span class="keyword">if</span> request.user.is_authenticated:</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">next</span>:</span><br><span class="line">                <span class="keyword">return</span> redirect(<span class="built_in">next</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">            	<span class="keyword">return</span> redirect(reverse(<span class="string">&#x27;users:index&#x27;</span>))</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 1. 提供注册页面</span></span><br><span class="line">        <span class="keyword">return</span> render(request, <span class="string">&#x27;register.html&#x27;</span>, context=&#123;<span class="string">&#x27;next&#x27;</span>: <span class="built_in">next</span>&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post</span>(<span class="params">self, request</span>):</span></span><br><span class="line">        <span class="comment"># 2.1 获取用户的注册信息</span></span><br><span class="line">        username = request.POST.get(<span class="string">&quot;username&quot;</span>)</span><br><span class="line">        password = request.POST.get(<span class="string">&quot;password&quot;</span>)</span><br><span class="line">        password2 = request.POST.get(<span class="string">&quot;password2&quot;</span>)</span><br><span class="line">        phone = request.POST.get(<span class="string">&quot;phone&quot;</span>)</span><br><span class="line">        <span class="built_in">next</span> = request.POST.get(<span class="string">&#x27;next&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">		</span><br><span class="line">        <span class="comment"># 2.2 验证数据的合法性</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">all</span>([username, password, password2, phone]):</span><br><span class="line">            <span class="keyword">return</span> render(request, <span class="string">&#x27;index.html&#x27;</span>,context=&#123;<span class="string">&#x27;next&#x27;</span>: <span class="built_in">next</span>, <span class="string">&#x27;err_msg&#x27;</span>: <span class="string">&#x27;缺少必要参数&#x27;</span>&#125;)</span><br><span class="line">            </span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> password != password2:</span><br><span class="line">            <span class="keyword">return</span> render(request, <span class="string">&#x27;index.html&#x27;</span>, context=&#123;<span class="string">&#x27;next&#x27;</span>: <span class="built_in">next</span>, <span class="string">&#x27;pwd_msg&#x27;</span>: <span class="string">&#x27;密码不一致&#x27;</span>&#125;)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> re.match(<span class="string">&#x27;^(13\d|14[5|7]|15\d|166|17[3|6|7]|18\d)\d&#123;8&#125;$&#x27;</span>):</span><br><span class="line">            <span class="keyword">return</span> render(request, <span class="string">&#x27;index.html&#x27;</span>, context=&#123;<span class="string">&#x27;next&#x27;</span>: <span class="built_in">next</span>, <span class="string">&#x27;phone_msg&#x27;</span>: <span class="string">&#x27;手机号不合法&#x27;</span>&#125;)</span><br><span class="line">		</span><br><span class="line">        <span class="comment"># 2.3 新建用户对象</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 此时 手动加密密码</span></span><br><span class="line">        <span class="comment"># hash_password = make_password(password)</span></span><br><span class="line">        <span class="comment"># try:</span></span><br><span class="line">        <span class="comment">#   user = User(username=username, password=hash_password, phone=phone)</span></span><br><span class="line">        <span class="comment">#   user.save()</span></span><br><span class="line">        <span class="comment"># except Exception as e:</span></span><br><span class="line">        <span class="comment">#     return HttpResponseForbidden(&quot;创建失败&quot;)</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="comment"># Django认证系统用户模型类提供的 create_user() 方法创建新的用户。</span></span><br><span class="line">            <span class="comment"># create_user() 方法中封装了 set_password() 方法加密密码</span></span><br><span class="line">            user = User.objects.create_user(username=username, password=password, phone=phone)</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="keyword">return</span> render(request, <span class="string">&#x27;index.html&#x27;</span>, context=&#123;<span class="string">&#x27;next&#x27;</span>: <span class="built_in">next</span>, <span class="string">&#x27;err_msg&#x27;</span>: <span class="string">&#x27;创建失败&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 2.4 注册成功，跳转回注册前页面</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">next</span>:</span><br><span class="line">            <span class="keyword">return</span> redirect(<span class="built_in">next</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> redirect(<span class="string">&#x27;/&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><p>在表单中增加了一个隐藏的 <code>input</code> 控件，其值为 <code>&#123;&#123; next &#125;&#125;</code>，即之前通过 <code>URL</code> 参数传递给注册视图函数的，然后注册视图函数又将该值传递给了 <code>index.html</code> 模板。这样在整个注册流程中，始终有一个记录着用户在注册前页面 URL 的变量 <code>next</code> 在视图和模板间来回传递，知道用户注册成功后再跳转回 <code>next</code> 记录的页面 URL。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;base.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block body %&#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;&#123;% url &#x27;users:register&#x27; %&#125;&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">        用户名:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span>&gt;</span> <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">        密码:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span>&gt;</span>  <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">        确认密码:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">name</span>=<span class="string">&quot;password2&quot;</span>&gt;</span> &#123;&#123;pwd_msg&#125;&#125; <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">        手机号: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;phone&quot;</span> <span class="attr">name</span>=<span class="string">&quot;phone&quot;</span>&gt;</span> &#123;&#123;phone_msg&#125;&#125;  <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;next&quot;</span> <span class="attr">value</span>=<span class="string">&quot;&#123;&#123; next &#125;&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">            &#123;&#123;err_msg&#125;&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><h3 id="视图-1"><a href="#视图-1" class="headerlink" title="视图"></a>视图</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoginView</span>(<span class="params">View</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">self, request</span>):</span></span><br><span class="line">		<span class="built_in">next</span> = request.GET.get(<span class="string">&#x27;next&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 判断用户是否登录(属性) user.is_authenticated</span></span><br><span class="line">        <span class="keyword">if</span> request.user.is_authenticated:</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">next</span>:</span><br><span class="line">                <span class="keyword">return</span> redirect(<span class="built_in">next</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">            	<span class="keyword">return</span> redirect(reverse(<span class="string">&#x27;users:login&#x27;</span>))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> render(request, <span class="string">&quot;login.html&quot;</span>, context=&#123;<span class="string">&#x27;next&#x27;</span>: <span class="built_in">next</span>&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post</span>(<span class="params">self, request</span>):</span></span><br><span class="line">        username = request.POST.get(<span class="string">&quot;username&quot;</span>)</span><br><span class="line">        password = request.POST.get(<span class="string">&quot;password&quot;</span>)</span><br><span class="line">        remembered = request.POST.get(<span class="string">&quot;remembered&quot;</span>)</span><br><span class="line">        <span class="built_in">next</span> = request.POST.get(<span class="string">&#x27;next&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">all</span>([username, password]):</span><br><span class="line">            <span class="comment"># return JsonResponse(&#123;&quot;account_msg&quot;: &quot;缺少必要参数&quot;, &quot;code&quot;: 403&#125;)</span></span><br><span class="line">            <span class="keyword">return</span> render(request, <span class="string">&#x27;login.html&#x27;</span>, &#123;<span class="string">&#x27;account_msg&#x27;</span>: <span class="string">&#x27;缺少必要参数&#x27;</span>, <span class="string">&quot;next&quot;</span>: <span class="built_in">next</span>&#125;)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 校验用户信息，成功返回user对象，否则为None</span></span><br><span class="line">        user = authenticate(username=username, password=password)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> user <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> render(request, <span class="string">&#x27;login.html&#x27;</span>, &#123;<span class="string">&#x27;account_msg&#x27;</span>: <span class="string">&#x27;用户名或密码错误&#x27;</span>, <span class="string">&quot;next&quot;</span>: <span class="built_in">next</span>&#125;)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 实现状态保持</span></span><br><span class="line">        login(request, user)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 设置状态保持的周期</span></span><br><span class="line">        <span class="keyword">if</span> remembered != <span class="string">&#x27;on&#x27;</span>:</span><br><span class="line">            <span class="comment"># 没有记住用户：浏览器会话结束就过期</span></span><br><span class="line">            request.session.set_expiry(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 记住用户：None表示两周后过期</span></span><br><span class="line">            request.session.set_expiry(<span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 响应登录结果</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">next</span>:</span><br><span class="line">            <span class="keyword">return</span> redirect(<span class="built_in">next</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> redirect(reverse(<span class="string">&#x27;users:index&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<h3 id="模板-1"><a href="#模板-1" class="headerlink" title="模板"></a>模板</h3><p>类似注册流程中，有next变量始终保留跳转前的地址，在模板和视图之间传递</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;base.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block body %&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span> <span class="attr">action</span>=<span class="string">&quot;&#123;% url &#x27;users:login&#x27; %&#125;&quot;</span>&gt;</span></span><br><span class="line">        &#123;% csrf_token %&#125;</span><br><span class="line">        用户名:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span>&gt;</span></span><br><span class="line">        密码:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span>&gt;</span></span><br><span class="line">        记住登录 <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;remembered&quot;</span> <span class="attr">value</span>=<span class="string">&#x27;on&#x27;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">name</span>=<span class="string">&quot;submit&quot;</span>&gt;</span>login<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;next&quot;</span> <span class="attr">value</span>=<span class="string">&quot;&#123;&#123; next &#125;&#125;&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"></span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="注销"><a href="#注销" class="headerlink" title="注销"></a>注销</h2><h3 id="视图-2"><a href="#视图-2" class="headerlink" title="视图"></a>视图</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LogoutView</span>(<span class="params">View</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">self, request</span>):</span></span><br><span class="line">        index = reverse(<span class="string">&#x27;users:index&#x27;</span>)</span><br><span class="line">        <span class="built_in">next</span> = request.GET.get(<span class="string">&#x27;next&#x27;</span>, index)</span><br><span class="line">        </span><br><span class="line">        <span class="string">&quot;&quot;&quot;实现退出登录逻辑&quot;&quot;&quot;</span></span><br><span class="line">        <span class="comment"># 清理session</span></span><br><span class="line">        logout(request)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 退出登录，重定向到首页</span></span><br><span class="line">        response = redirect(<span class="built_in">next</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 退出登录时清除cookie中的username</span></span><br><span class="line">        response.delete_cookie(<span class="string">&#x27;username&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> response</span><br></pre></td></tr></table></figure>
+
+<h2 id="用户信息"><a href="#用户信息" class="headerlink" title="用户信息"></a>用户信息</h2><h3 id="视图-3"><a href="#视图-3" class="headerlink" title="视图"></a>视图</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserView</span>(<span class="params">View</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">self, requset</span>):</span></span><br><span class="line">        <span class="comment"># 如果用户没有登陆就访问本应登陆才能访问的页面时会直接跳转到登陆页面</span></span><br><span class="line">        user = requset.user</span><br><span class="line">        <span class="keyword">if</span> user.is_authenticated:</span><br><span class="line">            <span class="keyword">return</span> render(requset, <span class="string">&#x27;user.html&#x27;</span>, context=&#123;<span class="string">&#x27;user&#x27;</span>: user&#125;)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> redirect(reverse(<span class="string">&#x27;users:login&#x27;</span>, kwargs=&#123;<span class="string">&quot;next&quot;</span>: request.path&#125;))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post</span>(<span class="params">self, request</span>):</span></span><br><span class="line">        user = requset.user</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> user.is_authenticated:</span><br><span class="line">            <span class="keyword">return</span> redirect(reverse(<span class="string">&#x27;users:login&#x27;</span>, kwargs=&#123;<span class="string">&quot;next&quot;</span>: request.path&#125;))</span><br><span class="line">        </span><br><span class="line">        old_password = request.POST.get(<span class="string">&quot;old_password&quot;</span>)</span><br><span class="line">        new_password = request.POST.get(<span class="string">&quot;new_password&quot;</span>)</span><br><span class="line">        conf_password = request.POST.get(<span class="string">&quot;conf_password&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">all</span>([old_password, new_password, conf_password]):</span><br><span class="line">            <span class="keyword">return</span> render(request, <span class="string">&#x27;user.html&#x27;</span>, &#123;<span class="string">&#x27;user&#x27;</span>: user, <span class="string">&#x27;account_msg&#x27;</span>: <span class="string">&#x27;缺少必要参数&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> new_password != conf_password:</span><br><span class="line">            <span class="keyword">return</span> render(request, <span class="string">&#x27;user.html&#x27;</span>, &#123;<span class="string">&#x27;user&#x27;</span>: user, <span class="string">&#x27;account_msg&#x27;</span>: <span class="string">&#x27;密码不一致&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 校验密码  check_password()</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> request.user.check_password(old_password):</span><br><span class="line">            <span class="keyword">return</span> render(request, <span class="string">&#x27;user.html&#x27;</span>, &#123;<span class="string">&#x27;user&#x27;</span>: user, <span class="string">&#x27;account_msg&#x27;</span>: <span class="string">&#x27;密码不正确&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line">        user = request.user</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 修改密码</span></span><br><span class="line">        user.set_password(new_password)</span><br><span class="line">        <span class="comment"># user.password = make_password(new_password)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 保存修改</span></span><br><span class="line">        user.save()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 状态保持</span></span><br><span class="line">        login(request, user)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> render(requset, <span class="string">&#x27;user.html&#x27;</span>, context=&#123;<span class="string">&#x27;user&#x27;</span>: user&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="模板-2"><a href="#模板-2" class="headerlink" title="模板"></a>模板</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &#x27;base.html&#x27; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block body %&#125;</span><br><span class="line">	<span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">       用户名： &#123;&#123;user.username&#125;&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">       邮箱： &#123;&#123;user.email&#125;&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">       手机号： &#123;&#123;user.phone&#125;&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;&#123;% url &#x27;users:user&#x27; %&#125;&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">        旧密码: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">name</span>=<span class="string">&quot;old_password&quot;</span>&gt;</span></span><br><span class="line">        新密码: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">name</span>=<span class="string">&quot;new_password&quot;</span>&gt;</span></span><br><span class="line">        确认密码: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">name</span>=<span class="string">&quot;conf_password&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">name</span>=<span class="string">&quot;submit&quot;</span>&gt;</span>确认修改<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;next&quot;</span> <span class="attr">value</span>=<span class="string">&quot;&#123;% url &#x27;users:index&#x27; %&#125;&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="首页"><a href="#首页" class="headerlink" title="首页"></a>首页</h2><h3 id="视图-4"><a href="#视图-4" class="headerlink" title="视图"></a>视图</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IndexView</span>(<span class="params">View</span>):</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">self, request</span>):</span></span><br><span class="line">    <span class="keyword">return</span> render(request, <span class="string">&#x27;index.html&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="模板-3"><a href="#模板-3" class="headerlink" title="模板"></a>模板</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &#x27;base.html&#x27; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block body %&#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>欢迎来到首页<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p><code>django_demo\urls.py</code>中配置总路由</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path,include</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;admin/&#x27;</span>, admin.site.urls),</span><br><span class="line">    path(<span class="string">&#x27;users/&#x27;</span>, include(<span class="string">&quot;users.urls&quot;</span>,<span class="string">&quot;users&quot;</span>))</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p><code>users\urls.py</code>中配置子路由</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path</span><br><span class="line"><span class="keyword">from</span> .views <span class="keyword">import</span> RegisterView, LoginView, IndexView, LogoutView, UserView</span><br><span class="line"></span><br><span class="line">app_name = <span class="string">&quot;users&quot;</span></span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;register/&#x27;</span>, RegisterView.as_view(), name=<span class="string">&quot;register&quot;</span>),</span><br><span class="line">    path(<span class="string">&#x27;login/&#x27;</span>, LoginView.as_view(), name=<span class="string">&quot;login&quot;</span>),</span><br><span class="line">    path(<span class="string">&#x27;logout/&#x27;</span>, LogoutView.as_view(), name=<span class="string">&quot;logout&quot;</span>),</span><br><span class="line">    path(<span class="string">&quot;user/&quot;</span>, UserView.as_view(), name=<span class="string">&#x27;user&#x27;</span>),</span><br><span class="line">    path(<span class="string">&#x27;&#x27;</span>, IndexView.as_view(), name=<span class="string">&quot;index&quot;</span>)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PYTHON/" rel="tag"># PYTHON</a>
+              <a href="/tags/Django/" rel="tag"># Django</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/344f12ee/" rel="prev" title="Axios(四):跨域请求">
+      <i class="fa fa-chevron-left"></i> Axios(四):跨域请求
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/35e7e8f2/" rel="next" title="DRF-JWT认证、权限、限流">
+      DRF-JWT认证、权限、限流 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E6%A1%86%E6%9E%B6"><span class="nav-number">1.</span> <span class="nav-text">项目框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">2.1.</span> <span class="nav-text">创建项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%BA%94%E7%94%A8"><span class="nav-number">2.2.</span> <span class="nav-text">生成应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="nav-number">2.3.</span> <span class="nav-text">修改配置信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E5%B1%95User%E6%A8%A1%E5%9E%8B%E7%B1%BB"><span class="nav-number">3.</span> <span class="nav-text">拓展User模型类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%9F%BA%E7%A1%80%E6%A8%A1%E6%9D%BF"><span class="nav-number">4.</span> <span class="nav-text">创建基础模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AE%A4%E8%AF%81%E5%90%8E%E5%8F%B0"><span class="nav-number">5.</span> <span class="nav-text">自定义认证后台</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89Backend"><span class="nav-number">5.1.</span> <span class="nav-text">自定义Backend</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-Backend"><span class="nav-number">5.2.</span> <span class="nav-text">配置 Backend</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C"><span class="nav-number">6.</span> <span class="nav-text">注册</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE"><span class="nav-number">6.1.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF"><span class="nav-number">6.2.</span> <span class="nav-text">模板</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%99%BB%E5%BD%95"><span class="nav-number">7.</span> <span class="nav-text">登录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE-1"><span class="nav-number">7.1.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF-1"><span class="nav-number">7.2.</span> <span class="nav-text">模板</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E9%94%80"><span class="nav-number">8.</span> <span class="nav-text">注销</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE-2"><span class="nav-number">8.1.</span> <span class="nav-text">视图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF"><span class="nav-number">9.</span> <span class="nav-text">用户信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE-3"><span class="nav-number">9.1.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF-2"><span class="nav-number">9.2.</span> <span class="nav-text">模板</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A6%96%E9%A1%B5"><span class="nav-number">10.</span> <span class="nav-text">首页</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE-4"><span class="nav-number">10.1.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF-3"><span class="nav-number">10.2.</span> <span class="nav-text">模板</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1"><span class="nav-number">11.</span> <span class="nav-text">路由</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">bookandmusic</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备2021028097号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bookandmusic</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : '',
+      projectId: ''
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bookandmusic.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"ZMZD8LN6JF","apiKey":"c75e305c22fd4cf56b8f03aa6efec207","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="DRF内置的序列化类，可以对整个模型类进行序列化与反序列化，简化了繁杂的工作。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DRF-序列化与反序列化">
+<meta property="og:url" content="https://bookandmusic.cn/posts/15e35a25/index.html">
+<meta property="og:site_name" content="Bookandmusic">
+<meta property="og:description" content="DRF内置的序列化类，可以对整个模型类进行序列化与反序列化，简化了繁杂的工作。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-08T02:26:57.000Z">
+<meta property="article:modified_time" content="2022-01-08T09:57:41.776Z">
+<meta property="article:author" content="bookandmusic">
+<meta property="article:tag" content="PYTHON">
+<meta property="article:tag" content="DRF">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://bookandmusic.cn/posts/15e35a25/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>DRF-序列化与反序列化 | Bookandmusic</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Bookandmusic</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">踮起脚尖，另一种高度</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/15e35a25/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="bookandmusic">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bookandmusic">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DRF-序列化与反序列化
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-08 10:26:57" itemprop="dateCreated datePublished" datetime="2020-07-08T10:26:57+08:00">2020-07-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>DRF内置的序列化类，可以对整个模型类进行序列化与反序列化，简化了繁杂的工作。</p>
+<span id="more"></span>
+
+<h2 id="内置字段序列化"><a href="#内置字段序列化" class="headerlink" title="内置字段序列化"></a>内置字段序列化</h2><h3 id="模型类"><a href="#模型类" class="headerlink" title="模型类"></a>模型类</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Create your models here.</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Authors</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    name = models.CharField(max_length=<span class="number">10</span>, verbose_name=<span class="string">&#x27;姓名&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.name</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        db_table = <span class="string">&#x27;db_authors&#x27;</span></span><br><span class="line">        verbose_name = <span class="string">&#x27;作者&#x27;</span></span><br><span class="line">        verbose_name_plural = <span class="string">&#x27;作者&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Books</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    title = models.CharField(max_length=<span class="number">10</span>, verbose_name=<span class="string">&#x27;标题&#x27;</span>)</span><br><span class="line">    price = models.DecimalField(max_digits=<span class="number">7</span>, decimal_places=<span class="number">2</span>, verbose_name=<span class="string">&#x27;单价&#x27;</span>)</span><br><span class="line">    publish = models.CharField(max_length=<span class="number">20</span>, verbose_name=<span class="string">&#x27;出版社&#x27;</span>)</span><br><span class="line">    author = models.ForeignKey(Authors, on_delete=models.CASCADE)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.title</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        db_table = <span class="string">&#x27;db_books&#x27;</span></span><br><span class="line">        verbose_name = <span class="string">&#x27;图书&#x27;</span></span><br><span class="line">        verbose_name_plural = <span class="string">&#x27;图书&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="序列化类"><a href="#序列化类" class="headerlink" title="序列化类"></a>序列化类</h3><h4 id="字段默认方式序列化"><a href="#字段默认方式序列化" class="headerlink" title="字段默认方式序列化"></a>字段默认方式序列化</h4><blockquote>
+<p>  全部字段都采用 <code>ModelSerializer</code>的默认方式实现<strong>序列化</strong>与<strong>反序列化</strong>，外键对应的序列化值是外键id</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.serializers <span class="keyword">import</span> ModelSerializer</span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> Books, Authors</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AuthorsSerializer</span>(<span class="params">ModelSerializer</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        model = Authors</span><br><span class="line">        fields = <span class="string">&#x27;__all__&#x27;</span></span><br><span class="line"></span><br><span class="line">        </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BooksSerializer</span>(<span class="params">ModelSerializer</span>):</span></span><br><span class="line">   </span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        model = Books</span><br><span class="line">        fields = <span class="string">&#x27;__all__&#x27;</span></span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+
+<h4 id="字段指定方式序列化"><a href="#字段指定方式序列化" class="headerlink" title="字段指定方式序列化"></a>字段指定方式序列化</h4><blockquote>
+<p>  对模型类的外键关联字段通过 其他方式，实现<strong>序列化</strong>，其他字段仍然使用 默认方式实现序列化</p>
+</blockquote>
+<h5 id="外键字段内置方式序列化"><a href="#外键字段内置方式序列化" class="headerlink" title="外键字段内置方式序列化"></a>外键字段内置方式序列化</h5><p><strong>图书类序列化</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.serializers <span class="keyword">import</span> ModelSerializer</span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> Books, Authors</span><br><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> serializers</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BooksSerializer</span>(<span class="params">ModelSerializer</span>):</span></span><br><span class="line">    <span class="comment"># author = serializers.PrimaryKeyRelatedField(read_only=True)  # 内置关联字段，默认序列化方式，关联对象的主键</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># author = serializers.StringRelatedField(read_only=True)  # 内置关联字段，此字段将被序列化为关联对象的字符串表示方式（即__str__方法的返回值）</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># author = serializers.HyperlinkedRelatedField(view_name=&#x27;authors-detail&#x27;, read_only=True)  # 内置关联字段，此字段被序列化为关联对象的路由地址</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># author = serializers.SlugRelatedField(read_only=True, slug_field=&#x27;id&#x27;)  # 内置关联字段，指定关联对象的字段</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># author = serializers.CharField(source=&#x27;author.name&#x27;, read_only=True)  # 指定关联对象的字段</span></span><br><span class="line">    </span><br><span class="line">    author = AuthorsSerializer()  <span class="comment"># 将关联对象所有字段全部序列化</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        model = Books</span><br><span class="line">        fields = <span class="string">&#x27;__all__&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>作者类序列化</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.serializers <span class="keyword">import</span> ModelSerializer</span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> Books, Authors</span><br><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> serializers</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AuthorsSerializer</span>(<span class="params">ModelSerializer</span>):</span></span><br><span class="line">    <span class="comment"># books_set = serializers.PrimaryKeyRelatedField(read_only=True, many=True)</span></span><br><span class="line">    <span class="comment"># books_set = serializers.StringRelatedField(read_only=True, many=True)</span></span><br><span class="line">    <span class="comment"># books_set = serializers.HyperlinkedRelatedField(view_name=&#x27;books-detail&#x27;, read_only=True, many=True)</span></span><br><span class="line">    <span class="comment"># books_set = BookSerializer(read_only=True, many=True)</span></span><br><span class="line">    <span class="comment"># books_set = BookRelateField(read_only=True, many=True)  # 自定义关联字段</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        model = Authors</span><br><span class="line">        fields = <span class="string">&#x27;__all__&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="外键字段自定义方式序列化"><a href="#外键字段自定义方式序列化" class="headerlink" title="外键字段自定义方式序列化"></a>外键字段自定义方式序列化</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.serializers <span class="keyword">import</span> ModelSerializer</span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> Books, Authors</span><br><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> serializers</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookRelateField</span>(<span class="params">serializers.RelatedField</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">to_representation</span>(<span class="params">self, value</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;Author: &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(value)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AuthorsSerializer</span>(<span class="params">ModelSerializer</span>):</span></span><br><span class="line">    books_set = BookRelateField(read_only=<span class="literal">True</span>, many=<span class="literal">True</span>)  <span class="comment"># 自定义关联字段</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        model = Authors</span><br><span class="line">        fields = <span class="string">&#x27;__all__&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AuthorRelateField</span>(<span class="params">serializers.RelatedField</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">to_representation</span>(<span class="params">self, value</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;Author: &#123;&#125; &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(value.<span class="built_in">id</span>, value.name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BooksSerializer</span>(<span class="params">ModelSerializer</span>):</span></span><br><span class="line">    author = AuthorRelateField(read_only=<span class="literal">True</span>) <span class="comment"># 自定义关联字段</span></span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        model = Books</span><br><span class="line">        fields = <span class="string">&#x27;__all__&#x27;</span></span><br><span class="line">       </span><br></pre></td></tr></table></figure>
+
+<p>以上序列化方式，任选其一均可，但是注意，此时只能保证<strong>序列化成功</strong>，不能保证反序列化</p>
+<h2 id="自定义字段序列化"><a href="#自定义字段序列化" class="headerlink" title="自定义字段序列化"></a>自定义字段序列化</h2><blockquote>
+<p>通过上面的例子可以看出：将外键字段通过其他方式序列化，可以得到不通类型的数据；但是大多数情况，不能实现反序列化。因此，可以在序列化时，不修改外键字段，而是自己构建新字段。最大好处, 在于将序列化字段与反序列化字段分离，互不影响。</p>
+</blockquote>
+<h3 id="修改模型类"><a href="#修改模型类" class="headerlink" title="修改模型类"></a>修改模型类</h3><p>需要在模型类中用<code>@property</code>来实现，可插拔</p>
+<h4 id="模型类-1"><a href="#模型类-1" class="headerlink" title="模型类"></a>模型类</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Books</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    title = models.CharField(max_length=<span class="number">10</span>, verbose_name=<span class="string">&#x27;标题&#x27;</span>)</span><br><span class="line">    price = models.DecimalField(max_digits=<span class="number">7</span>, decimal_places=<span class="number">2</span>, verbose_name=<span class="string">&#x27;单价&#x27;</span>)</span><br><span class="line">    publish = models.CharField(max_length=<span class="number">20</span>, verbose_name=<span class="string">&#x27;出版社&#x27;</span>)</span><br><span class="line">    author = models.ForeignKey(Authors, on_delete=models.CASCADE)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property  </span><span class="comment"># 插拔字段 - 默认为read_only(不需要考虑反序列化)，且不能修改</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">author_name</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.author.name</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">author_info</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">from</span> .serializers <span class="keyword">import</span> AuthorsSerializer</span><br><span class="line">        <span class="keyword">return</span> AuthorsSerializer(self.author).data</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.title</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="序列化类-1"><a href="#序列化类-1" class="headerlink" title="序列化类"></a>序列化类</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BooksSerializer</span>(<span class="params">ModelSerializer</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        model = Books</span><br><span class="line">        fields = (<span class="string">&#x27;id&#x27;</span>, <span class="string">&#x27;title&#x27;</span>, <span class="string">&#x27;price&#x27;</span>, <span class="string">&#x27;author&#x27;</span>, <span class="string">&#x27;author_name&#x27;</span>, <span class="string">&#x27;author_info&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        extra_kwargs = &#123;</span><br><span class="line">            <span class="string">&#x27;author&#x27;</span>: &#123;</span><br><span class="line">                <span class="string">&#x27;write_only&#x27;</span>: <span class="literal">True</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="修改序列化类"><a href="#修改序列化类" class="headerlink" title="修改序列化类"></a>修改序列化类</h3><blockquote>
+<p>模型类不变，只在序列化器中添加序列化字段</p>
+</blockquote>
+<h4 id="序列化类-2"><a href="#序列化类-2" class="headerlink" title="序列化类"></a>序列化类</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BooksSerializer</span>(<span class="params">ModelSerializer</span>):</span></span><br><span class="line">    author_url = serializers.HyperlinkedIdentityField(view_name=<span class="string">&#x27;authors-detail&#x27;</span>, read_only=<span class="literal">True</span>)  <span class="comment"># 内置序列化方式，关联对象的路由地址</span></span><br><span class="line">    </span><br><span class="line">    author_name = serializers.SerializerMethodField()</span><br><span class="line">    <span class="comment"># author_name 字段在数据库中不能存在，下面写方法的时候前面加 get_  就可以，这样就得到我们需要的数据了。</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_author_name</span>(<span class="params">obj</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        固定写法,obj代表Books实例对象,模型类配置了反向引用author代表作者对象</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">return</span> obj.author.<span class="built_in">id</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        model = Books</span><br><span class="line">        fields = (<span class="string">&#x27;id&#x27;</span>, <span class="string">&#x27;title&#x27;</span>, <span class="string">&#x27;price&#x27;</span>, <span class="string">&#x27;author&#x27;</span>, <span class="string">&#x27;author_name&#x27;</span>, <span class="string">&#x27;author_url&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        extra_kwargs = &#123;</span><br><span class="line">            <span class="string">&#x27;author&#x27;</span>: &#123;</span><br><span class="line">                <span class="string">&#x27;write_only&#x27;</span>: <span class="literal">True</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PYTHON/" rel="tag"># PYTHON</a>
+              <a href="/tags/DRF/" rel="tag"># DRF</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/993ce3af/" rel="prev" title="递归函数">
+      <i class="fa fa-chevron-left"></i> 递归函数
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/39fbd324/" rel="next" title="python内存管理">
+      python内存管理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E7%BD%AE%E5%AD%97%E6%AE%B5%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">内置字段序列化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E7%B1%BB"><span class="nav-number">1.1.</span> <span class="nav-text">模型类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E7%B1%BB"><span class="nav-number">1.2.</span> <span class="nav-text">序列化类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%E9%BB%98%E8%AE%A4%E6%96%B9%E5%BC%8F%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">1.2.1.</span> <span class="nav-text">字段默认方式序列化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%E6%8C%87%E5%AE%9A%E6%96%B9%E5%BC%8F%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">1.2.2.</span> <span class="nav-text">字段指定方式序列化</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%96%E9%94%AE%E5%AD%97%E6%AE%B5%E5%86%85%E7%BD%AE%E6%96%B9%E5%BC%8F%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">外键字段内置方式序列化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%96%E9%94%AE%E5%AD%97%E6%AE%B5%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%B9%E5%BC%8F%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">外键字段自定义方式序列化</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AD%97%E6%AE%B5%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">自定义字段序列化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%A8%A1%E5%9E%8B%E7%B1%BB"><span class="nav-number">2.1.</span> <span class="nav-text">修改模型类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E7%B1%BB-1"><span class="nav-number">2.1.1.</span> <span class="nav-text">模型类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E7%B1%BB-1"><span class="nav-number">2.1.2.</span> <span class="nav-text">序列化类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%BA%8F%E5%88%97%E5%8C%96%E7%B1%BB"><span class="nav-number">2.2.</span> <span class="nav-text">修改序列化类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E7%B1%BB-2"><span class="nav-number">2.2.1.</span> <span class="nav-text">序列化类</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">bookandmusic</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备2021028097号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bookandmusic</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : '',
+      projectId: ''
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

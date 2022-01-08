@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bookandmusic.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"ZMZD8LN6JF","apiKey":"c75e305c22fd4cf56b8f03aa6efec207","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="ORM 全拼Object-Relation Mapping，中文意为 **对象-关系映射**。在MVC&#x2F;MVT设计模式中的Model模块中都包括ORM。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django基础-ORM模型类">
+<meta property="og:url" content="https://bookandmusic.cn/posts/69385da1/index.html">
+<meta property="og:site_name" content="Bookandmusic">
+<meta property="og:description" content="ORM 全拼Object-Relation Mapping，中文意为 **对象-关系映射**。在MVC&#x2F;MVT设计模式中的Model模块中都包括ORM。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/ORM%E7%A4%BA%E6%84%8F%E5%9B%BE%20.png">
+<meta property="article:published_time" content="2020-05-24T12:38:26.000Z">
+<meta property="article:modified_time" content="2022-01-08T09:57:41.859Z">
+<meta property="article:author" content="bookandmusic">
+<meta property="article:tag" content="PYTHON">
+<meta property="article:tag" content="Django">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/ORM%E7%A4%BA%E6%84%8F%E5%9B%BE%20.png">
+
+<link rel="canonical" href="https://bookandmusic.cn/posts/69385da1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Django基础-ORM模型类 | Bookandmusic</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Bookandmusic</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">踮起脚尖，另一种高度</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/69385da1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="bookandmusic">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bookandmusic">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Django基础-ORM模型类
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-24 20:38:26" itemprop="dateCreated datePublished" datetime="2020-05-24T20:38:26+08:00">2020-05-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><strong><code>ORM</code></strong> 全拼<code>Object-Relation Mapping</code>，中文意为 **<code>对象-关系映射</code>**。在<code>MVC</code>/<code>MVT</code>设计模式中的<code>Model</code>模块中都包括<code>ORM</code>。</p>
+<span id="more"></span>
+<h2 id="ORM介绍"><a href="#ORM介绍" class="headerlink" title="ORM介绍"></a>ORM介绍</h2><h3 id="ORM-优势"><a href="#ORM-优势" class="headerlink" title="ORM 优势"></a>ORM 优势</h3><p>（1）只需要面向对象编程, 不需要面向数据库编写代码.</p>
+<ul>
+<li>对数据库的操作都转化成对类属性和方法的操作.</li>
+<li>不用编写各种数据库的 sql 语句.</li>
+</ul>
+<p>（2）实现了数据模型与数据库的解耦, 屏蔽了不同数据库操作上的差异.</p>
+<ul>
+<li>不在关注用的是<code>mysql</code>、<code>oracle</code>… 等.</li>
+<li>通过简单的配置就可以轻松更换数据库, 而不需要修改代码.</li>
+</ul>
+<h3 id="ORM-劣势"><a href="#ORM-劣势" class="headerlink" title="ORM 劣势"></a>ORM 劣势</h3><ul>
+<li>相比较直接使用 SQL 语句操作数据库, 有性能损失.</li>
+<li>根据对象的操作转换成 SQL 语句, 根据查询的结果转化成对象, 在映射过程中有性能损失.</li>
+</ul>
+<h3 id="ORM-和数据库关系："><a href="#ORM-和数据库关系：" class="headerlink" title="ORM 和数据库关系："></a>ORM 和数据库关系：</h3><p>在 Django 中 model 是你数据的单一、明确的信息来源。它包含了你存储的数据的重要字段和行为。通常，一个模型（model）映射到一个数据库表.</p>
+<p>基本情况：</p>
+<p>每个模型都是一个 Python 类，它是 django.db.models.Model 的子类。</p>
+<p>模型的每个属性都代表一个数据库字段。</p>
+<p>综上所述，Django 为您提供了一个自动生成的数据库访问 API。</p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/ORM%E7%A4%BA%E6%84%8F%E5%9B%BE%20.png" alt="ORM示意图"></p>
+<h2 id="Django配置使用mysql数据库"><a href="#Django配置使用mysql数据库" class="headerlink" title="Django配置使用mysql数据库"></a>Django配置使用mysql数据库</h2><h3 id="settings-py配置DATABASES"><a href="#settings-py配置DATABASES" class="headerlink" title="settings.py配置DATABASES"></a><code>settings.py</code>配置<code>DATABASES</code></h3><p>默认:<code>&#123;&#125;</code>(空字典)</p>
+<p>一个字典，包含Django使用的所有数据库的设置。它是一个嵌套的字典，其内容将数据库别名映射到包含单个数据库选项的字典。</p>
+<p>数据库设置必须配置一个默认数据库;还可以指定任意数量的其他数据库。</p>
+<p>最简单的设置文件是针对使用SQLite的单数据库设置的。这可以配置使用以下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DATABASES = &#123;</span><br><span class="line">    <span class="string">&#x27;default&#x27;</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;ENGINE&#x27;</span>: <span class="string">&#x27;django.db.backends.sqlite3&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;NAME&#x27;</span>: os.path.join(BASE_DIR, <span class="string">&#x27;db.sqlite3&#x27;</span>),</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当连接到其他数据库后端(如<code>MySQL</code>、<code>Oracle</code>或<code>PostgreSQL</code>)时，需要额外的连接参数。有关如何指定其他数据库类型，请参阅下面的引擎设置。这个例子是为<code>MySQL</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">DATABASES = &#123;</span><br><span class="line">    <span class="string">&#x27;default&#x27;</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;ENGINE&#x27;</span>: <span class="string">&#x27;django.db.backends.mysql&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;NAME&#x27;</span>: <span class="string">&#x27;django_test&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;USER&#x27;</span>: <span class="string">&#x27;root&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;PASSWORD&#x27;</span>: <span class="string">&#x27;mysqlroot&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;HOST&#x27;</span>: <span class="string">&#x27;127.0.0.1&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;PORT&#x27;</span>: <span class="number">3306</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="MySQL连接工具"><a href="#MySQL连接工具" class="headerlink" title="MySQL连接工具"></a><code>MySQL</code>连接工具</h3><ol>
+<li><p>需要安装<code>pymysql</code>模块</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pymysql</span><br></pre></td></tr></table></figure></li>
+<li><p>在项目的<code>__init__.py</code>初始化文件,添加如下信息:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line">pymysql.install_as_MySQLdb()</span><br></pre></td></tr></table></figure></li>
+<li><p>在django最新版本中，提示”Django需要mysqlclient 1.3.13或更高版本”。要么在报错时，将抛出版本异常的代码注释掉,仍然使用<code>pymysql</code>；要么直接使用<code>mysqlclient</code>,不建议直接<code>pip</code>命令安装，可以使用<code>conda</code>创建虚拟环境，使用<code>conda</code>安装<code>mysqlclient</code>。</p>
+</li>
+</ol>
+<h2 id="字段属性和选项"><a href="#字段属性和选项" class="headerlink" title="字段属性和选项"></a>字段属性和选项</h2><h3 id="模型类属性命名限制"><a href="#模型类属性命名限制" class="headerlink" title="模型类属性命名限制"></a>模型类属性命名限制</h3><ul>
+<li><p>不能是python的保留关键字。</p>
+</li>
+<li><p><strong>不允许使用连续的下划线，这是由django的查询方式决定的。</strong></p>
+</li>
+<li><p>定义属性时需要指定字段类型，通过字段类型的参数指定选项，语法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">属性名=models.字段类型(选项)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="字段类型"><a href="#字段类型" class="headerlink" title="字段类型"></a>字段类型</h3><h4 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h4><h5 id="AutoField"><a href="#AutoField" class="headerlink" title="AutoField"></a><code>AutoField</code></h5><p>根据可用id自动递增的一个32位(<code>4 byte</code>)的整数(<code>Integer</code>)字段,它的适用范围为:<code>1</code>到<code>2147483647</code>之间。</p>
+<p>你通常不需要直接使用它;如果不进行其他指定，主键字段将自动添加到模型中。</p>
+<p>默认情况下， Django 会给每一个模型添加下面的字段：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">id</span> = models.AutoField(primary_key=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这是一个自增的主键。</p>
+<p>如果你想自己指定主键， 在你想要设置为主键的字段上设置参数 <code>primary_key=True</code>。如果 Django 看到你显式地设置了 <code>Field.primary_key</code>，将不会自动在表（模型）中添加 <code>id</code> 列。</p>
+<p>每个模型都需要拥有一个设置了 <code>primary_key=True</code> 的字段（无论是显式的设置还是 Django 自动设置）</p>
+<h5 id="BigAutoField"><a href="#BigAutoField" class="headerlink" title="BigAutoField"></a><code>BigAutoField</code></h5><p>一个64位(<code>8 byte</code>)的整数，类似于<code>AutoField</code>，除了它的适用范围为:<code>1</code>到<code>9223372036854775807</code>之间。</p>
+<h5 id="IntegerField"><a href="#IntegerField" class="headerlink" title="IntegerField"></a><code>IntegerField</code></h5><p>一个32位(<code>4 byte</code>)的整数。在Django支持的所有数据库中，<code>-2147483648</code>到<code>2147483647</code>之间的值都是安全的。</p>
+<h5 id="BigIntegerField"><a href="#BigIntegerField" class="headerlink" title="BigIntegerField"></a><code>BigIntegerField</code></h5><p>一个64位(<code>8 byte</code>)的整数，类似于<code>IntegerField</code>，除了它保证适合从<code>-9223372036854775808</code>到<code>9223372036854775807</code>的数字。</p>
+<h5 id="SmallIntegerField"><a href="#SmallIntegerField" class="headerlink" title="SmallIntegerField"></a><code>SmallIntegerField</code></h5><p>一个8位(<code>2 byte</code>)的整数，类似于<code>IntegerField</code>,在Django支持的所有数据库中，<code>-32768</code>到<code>32767</code>之间的值都是安全的。</p>
+<h5 id="PositiveIntegerField"><a href="#PositiveIntegerField" class="headerlink" title="PositiveIntegerField"></a><code>PositiveIntegerField</code></h5><p>一个32位(<code>4 byte</code>)的整数，类似于<code>IntegerField</code>，但必须是正数或零(0)。在Django支持的所有数据库中，<code>0</code>到<code>2147483647</code>之间的值都是安全的。由于向后兼容的原因，接受值<code>0</code>。</p>
+<h5 id="PositiveSmallIntegerField"><a href="#PositiveSmallIntegerField" class="headerlink" title="PositiveSmallIntegerField"></a><code>PositiveSmallIntegerField</code></h5><p>一个8位(<code>2 byte</code>)的整数，类似于<code>PositiveIntegerField</code>，在Django支持的所有数据库中，<code>0</code>到<code>32767</code>之间的值都是安全的</p>
+<h4 id="小数"><a href="#小数" class="headerlink" title="小数"></a>小数</h4><h5 id="FloatField"><a href="#FloatField" class="headerlink" title="FloatField"></a><code>FloatField</code></h5><p>在Python中由 <code>float</code> 实例表示的浮点数。</p>
+<h5 id="DecimalField"><a href="#DecimalField" class="headerlink" title="DecimalField"></a><code>DecimalField</code></h5><p>一种固定精度的十进制数，在Python中用<code> Decimal</code>实例表示。它使用<code>DecimalValidator</code>验证输入。</p>
+<p>有两个必要的参数:</p>
+<h6 id="DecimalField-max-digits"><a href="#DecimalField-max-digits" class="headerlink" title="DecimalField.max_digits"></a><code>DecimalField.max_digits</code></h6><p>数字中允许的最大位数。注意，这个数字必须大于或等于<code>decimal_places</code>。</p>
+<h6 id="DecimalField-decimal-places"><a href="#DecimalField-decimal-places" class="headerlink" title="DecimalField.decimal_places"></a><code>DecimalField.decimal_places</code></h6><p>要与该数字一起存储的小数位数。</p>
+<p>例如，要存储分辨率为两位小数的999以内的数字，需要使用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">models.DecimalField(..., max_digits=<span class="number">5</span>, decimal_places=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p><code>FloatField</code> <strong>vs.</strong> <code>DecimalField</code></p>
+<p><code>FloatField</code>类有时会与<code>DecimalField</code>类混在一起。虽然它们都表示实数，但它们表示的是不同的数。<code>FloatField</code>在内部使用Python的<code>float</code>类型，而<code>DecimalField</code>使用Python的<code>Decimal</code>类型。有关两者之间差异的信息，请参阅Python的 <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/decimal.html#module-decimal"><code>decimal</code></a> 模块文档。</p>
+</blockquote>
+<h4 id="布尔"><a href="#布尔" class="headerlink" title="布尔"></a>布尔</h4><h5 id="BooleanField"><a href="#BooleanField" class="headerlink" title="BooleanField"></a><code>BooleanField</code></h5><p>一个<code>true</code>/<code>false</code>字段。</p>
+<p>当<code>Field.default</code>未定义时，<code>BooleanField</code>的默认值为<code>None</code></p>
+<blockquote>
+<p>Django 2.1:<br>在旧版本中，这个字段不允许<code>null=True</code>，因此必须使用<code>NullBooleanField</code>。现在不建议使用后者，因为在Django的未来版本中可能会弃用它。</p>
+<p>在较早的版本中，该字段隐式地具有<code>blank=True</code>。您可以通过设置blank=True来恢复前面的行为。</p>
+</blockquote>
+<h5 id="NullBooleanField"><a href="#NullBooleanField" class="headerlink" title="NullBooleanField"></a><code>NullBooleanField</code></h5><p>类似<code>BooleanField</code>的<code>null=True</code>。使用<code>BooleanField</code>这个字段而不是<code>NullBooleanField</code>这个字段，因为在Django的未来版本中<code>NullBooleanField</code>可能会被弃用</p>
+<h4 id="字符"><a href="#字符" class="headerlink" title="字符"></a>字符</h4><h5 id="CharField"><a href="#CharField" class="headerlink" title="CharField"></a><code>CharField</code></h5><p>字符串字段，用于小型到大型字符串。<code>CharField</code>有一个额外的必要参数:</p>
+<h6 id="CharField-max-length"><a href="#CharField-max-length" class="headerlink" title="CharField.max_length"></a><code>CharField.max_length</code></h6><p>字段的最大长度(以字符为单位)。<code>max_length</code>在数据库标准和Django的验证中使用<code>MaxLengthValidator</code>执行。</p>
+<p>对于大量文本，使用<code>TextField</code>。</p>
+<h5 id="TextField"><a href="#TextField" class="headerlink" title="TextField"></a><code>TextField</code></h5><p>一个大的文本字段。这个字段的默认表单小部件是一个<code>Textarea</code>。</p>
+<p>如果指定max_length属性，它将反映在自动生成表单字段的<code>Textarea</code>小部件中。然而，它并没有在模型或数据库级别强制执行。</p>
+<h5 id="URLField"><a href="#URLField" class="headerlink" title="URLField"></a><code>URLField</code></h5><p>一个有关<code>URL</code>的<code>CharField</code>，由<code>URLValidator</code>验证该值是否为有效的<code>URL</code>地址。</p>
+<p>与所有<code>CharField</code>子类一样，<code>URLField</code>接受可选的<code>max_length</code>参数。如果不指定<code>max_length</code>，则使用默认值200。</p>
+<h5 id="EmailField"><a href="#EmailField" class="headerlink" title="EmailField"></a><code>EmailField</code></h5><p>一个有关<code>Email</code>的<code>CharField</code>,由<code>EmailValidator</code>验证该值是否为有效的电子邮件地址。</p>
+<p>与所有<code>CharField</code>子类一样，<code>EmailField</code>接受可选的<code>max_length</code>参数。如果不指定<code>max_length</code>，则使用默认值254。</p>
+<h5 id="UUIDField"><a href="#UUIDField" class="headerlink" title="UUIDField"></a><code>UUIDField</code></h5><p>用于存储通用唯一标识符的字段。使用Python的<code>UUID</code>类。当在<code>PostgreSQL</code>上使用时，它以<code>uuid</code>数据类型存储，否则以<code>char(32)</code>存储。</p>
+<p>全局惟一标识符是<code>primary_key</code>的<code>AutoField</code>的一个很好的替代方案。数据库不会为你生成<strong>UUID</strong>，建议使用默认:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> uuid</span><br><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyUUIDModel</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    <span class="built_in">id</span> = models.UUIDField(primary_key=<span class="literal">True</span>, default=uuid.uuid4, editable=<span class="literal">False</span>)</span><br><span class="line">    <span class="comment"># other fields</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意，一个回调函数(省略括号)被传递到<code>default</code>，而不是<strong>UUID</strong>的一个实例。</p>
+</blockquote>
+<h4 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h4><h5 id="FileField"><a href="#FileField" class="headerlink" title="FileField"></a><code>FileField</code></h5><p>一个文件上传字段。有两个可选参数:</p>
+<h6 id="FileField-upload-to"><a href="#FileField-upload-to" class="headerlink" title="FileField.upload_to"></a><code>FileField.upload_to</code></h6><p>这个属性提供了一种设置上传目录和文件名的方法，可以通过两种方式进行设置。在这两种情况下，值都被传递到<code>Storage.save()</code>方法。</p>
+<p>如果您指定一个字符串值，它可能包含<code>strftime()</code>格式，它将被文件上传的日期/时间所取代(这样上传的文件就不会填满给定的目录)。例如:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyModel</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    <span class="comment"># 文件将被上传至 MEDIA_ROOT/uploads</span></span><br><span class="line">    upload = models.FileField(upload_to=<span class="string">&#x27;uploads/&#x27;</span>)</span><br><span class="line">    <span class="comment"># or...</span></span><br><span class="line">    <span class="comment"># 文件将被上传至 MEDIA_ROOT/uploads/2015/01/30</span></span><br><span class="line">    upload = models.FileField(upload_to=<span class="string">&#x27;uploads/%Y/%m/%d/&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>如果使用默认的<code>FileSystemStorage</code>，字符串值将追加到<code>MEDIA_ROOT</code>路径，以形成本地文件系统上的位置，上传的文件将存储在此位置。如果使用不同的存储，请检查该存储的文档，以了解它如何处理<code>upload_to</code>。</p>
+<p><code>upload_to</code>也可以是一个可调用的函数。这个函数将被调用以获得上传路径，包括文件名。这个可调用函数必须接受两个参数，并返回一个<code>unix</code>风格的路径(带有斜杠)，以便传递给存储系统。这两个参数是:</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>instance</code></td>
+<td>定义FileField的模型的一个实例。更具体地说，这是附加当前文件的特定实例。<br/>在大多数情况下，这个对象还没有保存到数据库中，所以如果它使用默认的<code>AutoField</code>，那么它的主键字段可能还没有值。</td>
+</tr>
+<tr>
+<td><code>filename</code></td>
+<td>原给定给该文件的文件名。在确定最终目的地路径时，可能会考虑这一点，也可能不考虑这一点。</td>
+</tr>
+</tbody></table>
+<p>例子:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">user_directory_path</span>(<span class="params">instance, filename</span>):</span></span><br><span class="line">    <span class="comment"># file will be uploaded to MEDIA_ROOT/user_&lt;id&gt;/&lt;filename&gt;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;user_&#123;0&#125;/&#123;1&#125;&#x27;</span>.<span class="built_in">format</span>(instance.user.<span class="built_in">id</span>, filename)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyModel</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    upload = models.FileField(upload_to=user_directory_path)</span><br></pre></td></tr></table></figure>
+
+<h6 id="FileField-storage"><a href="#FileField-storage" class="headerlink" title="FileField.storage"></a><code>FileField.storage</code></h6><p>一个存储对象，它处理文件的存储和检索。有关如何提供此对象的详细信息，请参见 <a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/2.2/topics/files/">管理文件</a> 。</p>
+<p>在模型中使用<code>FileField</code>或<code>ImageField</code>需要几个步骤:</p>
+<ol>
+<li>在设置文件中，需要将<code>MEDIA_ROOT</code>定义为一个目录的完整路径，您希望<code>Django</code>在这个目录中存储上传的文件。(为了提高性能，这些文件不存储在数据库中。)将<code>MEDIA_URL</code>定义为该目录的基本公共<code>URL</code>。确保此目录可由<code>Web</code>服务器的用户帐户写入。</li>
+<li>将<code>FileField</code>或<code>ImageField</code>添加到模型中，定义<code>upload_to</code>选项，以指定<code>MEDIA_ROOT</code>的子目录，用于上传文件。</li>
+<li>所有将存储在数据库中的内容都是文件的路径(相对于<code>MEDIA_ROOT</code>)。您很可能希望使用Django提供的便利url属性。例如，如果 <code>ImageField</code>被称为 <code>mug_shot</code> ，可以获取模板中图像的绝对路径 <code>&#123;&#123; object.mug_shot.url &#125;&#125;</code> </li>
+</ol>
+<p>例如，假设<code>MEDIA_ROOT</code>设置为<code>&#39;/home/media&#39;</code>， <code>upload_to</code>设置为<code>&#39;photos/%Y/%m/%d&#39;</code>。<code>upload_to</code>的<code>&#39;%Y/%m/%d&#39;</code>部分是<code>strftime()</code>格式;<code>&#39;%Y&#39;</code>是四位数的年份，<code>&#39;%m&#39;是</code>两位数的月份，<code>&#39;%d&#39;</code>是两位数的日期。如果你在2007年1月15日上传了一个文件，它将被保存在<code>/home/media/photos/2007/01/15</code>目录下。</p>
+<p>如果要检索上传文件的磁盘上文件名或文件大小，可以分别使用<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/2.2/ref/files/file/#django.core.files.File.name"><code>名称</code></a> 和<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/2.2/ref/files/file/#django.core.files.File.size"><code>大小</code></a> 属性;有关可用属性和方法的更多信息，请参见 <a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/2.2/ref/files/file/#django.core.files.File"><code>文件</code></a>类引用和 <a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/2.2/topics/files/">管理文件</a>主题指南。</p>
+<blockquote>
+<p>文件作为模型保存在数据库中的一部分保存，因此在保存模型之前，不能依赖于磁盘上使用的实际文件名。</p>
+</blockquote>
+<p>请注意，无论何时处理上传的文件，都应该密切注意上传文件的位置和文件类型，以避免安全漏洞。验证所有上传的文件，以确保这些文件是您所认为的。例如，如果您盲目地让某人在未经验证的情况下将文件上传到Web服务器的文档根目录中，那么某人就可以上传一个<strong>CGI</strong>或<strong>PHP</strong>脚本，并通过访问该脚本在您的站点上的<strong>URL</strong>来执行该脚本。不要允许这样的操作。</p>
+<p>还要注意，即使是上传的<strong>HTML</strong>文件，由于它可以由浏览器执行(但不能由服务器执行)，也会造成相当于<strong>XSS</strong>或请注意，无论何时处理上传的文件，都应该密切注意上传文件的位置和文件类型，以避免安全漏洞。验证所有上传的文件，以确保这些文件是您所认为的。例如，如果您盲目地让某人在未经验证的情况下将文件上传到Web服务器的文档根目录中，那么某人就可以上传到<strong>CGI</strong>或<strong>PHP</strong>脚本，并通过访问该脚本在您的站点上的URL来执行该脚本。不要允许这样的操作。</p>
+<p>还要注意，即使是上传的HTML文件，由于它可以由浏览器执行(但不能由服务器执行)，也会造成相当于<strong>XSS</strong>或<strong>CSRF</strong>攻击的安全威胁。攻击的安全威胁。</p>
+<blockquote>
+<p><code>FileField</code>实例在数据库中创建为<code>varchar</code>列，默认最大长度为100个字符。与其他字段一样，可以使用<code>max_length</code>参数更改最大长度。</p>
+</blockquote>
+<h5 id="ImageField"><a href="#ImageField" class="headerlink" title="ImageField"></a><code>ImageField</code></h5><p>从<code>FileField</code>继承所有属性和方法，但也验证上传的对象是有效的图像。</p>
+<p>除了可用于<code>FileField</code>的特殊属性之外，<code>ImageField</code>还具有高度和宽度属性。</p>
+<p>为了方便查询这些属性，<code>ImageField</code>有两个额外的可选参数:</p>
+<h6 id="ImageField-height-field"><a href="#ImageField-height-field" class="headerlink" title="ImageField.height_field"></a><code>ImageField.height_field</code></h6><p>一个模型字段的名称，该字段将在每次保存模型实例时自动填充映像的高度。</p>
+<h6 id="ImageField-width-field"><a href="#ImageField-width-field" class="headerlink" title="ImageField.width_field"></a><code>ImageField.width_field</code></h6><p>一个模型字段的名称，该字段将在每次保存模型实例时自动填充图像的宽度。</p>
+<p>需要 <a target="_blank" rel="noopener" href="https://pillow.readthedocs.io/en/latest/">Pillow</a> 库。</p>
+<blockquote>
+<p><code>ImageField</code>实例在数据库中创建为<code>varchar</code>列，默认最大长度为100个字符。与其他字段一样，可以使用<code>max_length</code>参数更改最大长度。</p>
+</blockquote>
+<h5 id="FilePathField"><a href="#FilePathField" class="headerlink" title="FilePathField"></a><code>FilePathField</code></h5><p>一个<code>CharField</code>，它的选择仅限于文件系统上某个目录中的文件名。有三个特殊的参数，其中第一个是必需的:</p>
+<h6 id="FilePathField-path"><a href="#FilePathField-path" class="headerlink" title="FilePathField.path"></a><code>FilePathField.path</code></h6><p>必需的。这个<code>FilePathField</code>应该从中获得其选择的目录的绝对文件系统路径。例如:<code>&quot;/ home /images&quot;</code>。</p>
+<h6 id="FilePathField-match"><a href="#FilePathField-match" class="headerlink" title="FilePathField.match"></a><code>FilePathField.match</code></h6><p>可选的。一个正则表达式，作为一个字符串，<code>FilePathField</code>将使用它来过滤文件名。注意，正则表达式将应用于基本文件名，而不是完整路径。示例:**<code>foo.*\.txt$</code>**。它将匹配一个名为<code>foo23.txt</code>的文件，但不匹配<code>bar.txt</code>或<code>foo23.png</code>。</p>
+<h6 id="FilePathField-recursive"><a href="#FilePathField-recursive" class="headerlink" title="FilePathField.recursive"></a><code>FilePathField.recursive</code></h6><p>可选的。非真即假。默认是假的。指定是否应该包括<code>path</code>的所有子目录</p>
+<h6 id="FilePathField-allow-files"><a href="#FilePathField-allow-files" class="headerlink" title="FilePathField.allow_files"></a><code>FilePathField.allow_files</code></h6><p>可选的。非真即假。默认是正确的。指定是否应包括位于指定位置的文件。这个或<code>allow_folders</code>必须为真。</p>
+<h6 id="FilePathField-allow-folders"><a href="#FilePathField-allow-folders" class="headerlink" title="FilePathField.allow_folders"></a><code>FilePathField.allow_folders</code></h6><p>可选的。非真即假。默认是假的。指定是否应包括指定位置的文件夹。这个或allow_files必须为真。</p>
+<p>当然，这些参数可以一起使用。</p>
+<p>一个潜在的问题是，match应用于基本文件名，而不是完整路径。所以,这个例子:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FilePathField(path=<span class="string">&quot;/home/images&quot;</span>, match=<span class="string">&quot;foo.*&quot;</span>, recursive=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p>将匹配<code>/home/images/foo.png</code>，但不匹配<code>/home/images/foo/bar.png</code>，因为匹配应用于基本文件名(<code>foo.png</code>和<code>bar.png</code>)。</p>
+<blockquote>
+<p><code>FilePathField</code>实例在数据库中创建为<code>varchar</code>列，默认最大长度为100个字符。与其他字段一样，可以使用<code>max_length</code>参数更改最大长度。</p>
+</blockquote>
+<h5 id="BinaryField"><a href="#BinaryField" class="headerlink" title="BinaryField"></a><code>BinaryField</code></h5><p>存储原始二进制数据的字段。可以为它分配字节、字节数组或内存视图。</p>
+<p>默认情况下，<code>BinaryField</code>将<code>editable</code>设置为<code>False</code>，在这种情况下，它不能包含在ModelForm中。</p>
+<p><code>BinaryField</code>有一个额外的可选参数:</p>
+<h6 id="BinaryField-max-length"><a href="#BinaryField-max-length" class="headerlink" title="BinaryField.max_length"></a><code>BinaryField.max_length</code></h6><p>字段的最大长度(以字符为单位)。最大长度在Django的验证中使用MaxLengthValidator实现。</p>
+<blockquote>
+<p>Django 2.1:<br>旧版本不允许将editable设置为True。</p>
+</blockquote>
+<h4 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h4><h5 id="DateField"><a href="#DateField" class="headerlink" title="DateField"></a><code>DateField</code></h5><p>日期，在Python中用<code>datetime.date</code>实例表示。有一些额外的，可选的参数:</p>
+<h6 id="DateField-auto-now"><a href="#DateField-auto-now" class="headerlink" title="DateField.auto_now"></a><code>DateField.auto_now</code></h6><p>每次保存对象时自动将字段值设置为当前时间，用于“最后修改”时间戳。</p>
+<p>该字段只在调用<code>Model.save()</code>时自动更新。当以其他方式(如<code>QuerySet.update()</code>)更新其他字段时，该字段不会更新，不过可以在这样的更新中为该字段指定自定义值。</p>
+<h6 id="DateField-auto-now-add"><a href="#DateField-auto-now-add" class="headerlink" title="DateField.auto_now_add"></a><code>DateField.auto_now_add</code></h6><p>在第一次创建对象时自动将字段设置为当前时间。用于创建时间戳。</p>
+<p>即使在创建对象时为这个字段设置了值，它也会被忽略。如果您希望能够修改该字段，请将<code>auto_now_add=True</code>设置为以下内容:</p>
+<ul>
+<li>For <code>DateField</code>: <code>default=date.today</code> - from <code>datetime.date.today()</code></li>
+<li>For <code>DateTimeField</code>: <code>default=timezone.now</code> - from <code>django.utils.timezone.now()</code></li>
+</ul>
+<p><code>auto_now_add</code>、<code>auto_now</code>和<code>default</code>选项是互斥的。这些选项的任何组合都将导致错误。</p>
+<h5 id="DateTimeField"><a href="#DateTimeField" class="headerlink" title="DateTimeField"></a><code>DateTimeField</code></h5><p>日期和时间，在Python中用<code>datetime.datetime</code>实例表示。接受与<code>DateField</code>相同的额外参数。</p>
+<h5 id="TimeField"><a href="#TimeField" class="headerlink" title="TimeField"></a><code>TimeField</code></h5><p>时间，在Python中用<code>datetime.time</code>实例表示。接受与<code>DateField</code>相同的额外参数。</p>
+<h3 id="字段选项"><a href="#字段选项" class="headerlink" title="字段选项"></a>字段选项</h3><blockquote>
+<p>以下参数对所有字段类型均有效，且是可选的。</p>
+</blockquote>
+<h4 id="null"><a href="#null" class="headerlink" title="null"></a><code>null</code></h4><p>如果设置为 <code>True</code>， 当该字段为空时，Django 会将数据库中该字段设置为 <code>NULL</code>，默认为 <code>False</code>。</p>
+<p>避免在基于字符串的字段（例如 <code>CharField</code>和 <code>TextField</code>）上使用 <code>null</code>。如果字符串字段的 <code>null=True</code>，那意味着对于“无数据”有两个可能的值：<code>NULL</code> 和空字符串。在大多数情况下，对于“无数据”声明两个值是赘余的，Django 的惯例是使用空字符串而不是 <code>NULL</code>。 一个例外是当 <code>CharField</code>同时具有 <code>unique=True</code> 和 <code>blank=True</code> 时。 在这种情况下，需要设置 <code>null=True</code>，以便在使用空白值保存多个对象时避免唯一的约束违规。</p>
+<p>对于基于字符串和非基于字符串的字段，如果希望在表单中允许空值，还需要设置<code>blank=True</code>，因为<code>null</code>参数只影响数据库存储(参见<code>blank</code>)。</p>
+<h4 id="blank"><a href="#blank" class="headerlink" title="blank"></a><code>blank</code></h4><p>如果设置为 <code>True</code> ，该字段允许为空。默认为 <code>False</code> 。</p>
+<p>注意，这与<code>null</code>不同。<code>null</code>纯粹是与数据库相关的，而<code>blank</code>则是与验证相关的。如果字段为<code>blank=True</code>，表单验证将允许输入空值。</p>
+<blockquote>
+<p>blank和null的用法区别</p>
+</blockquote>
+<ul>
+<li><p>null纯粹是与数据库相关的，而blank则是与表单验证相关的。</p>
+</li>
+<li><p>避免在基于字符串的字段（例如 <code>CharField</code>和 <code>TextField</code>）上使用 <code>null</code>。如果字符串字段的 <code>null=True</code>，那意味着对于“无数据”有两个可能的值：<code>NULL</code> 和<code>空字符串</code>。在大多数情况下，对于“无数据”声明两个值是赘余的，Django 的惯例是使用空字符串而不是 <code>NULL</code>。 一个例外是当 <code>CharField</code>同时具有 <code>unique=True</code> 和 <code>blank=True</code> 时。 在这种情况下，需要设置 <code>null=True</code>，以便在使用空白值保存多个对象时避免唯一的约束违规。</p>
+</li>
+<li><p>当存在两个参数时，总共会有四种设定组合</p>
+<ul>
+<li><code>blank=True</code>、<code>null=True</code>。统一的表明了该字段（列）是可以为空的。</li>
+<li><code>blank=False</code>、<code>null=False</code>。统一的表面了该字段（列）不可以为空。</li>
+<li><code>blank=True</code>、<code>null=False</code>。这个设定的意义在于，某些字段并不希望用户在表单中创建，而是通过在<code>save</code>方法中根据其他字段生成。</li>
+<li><code>blank=False</code>、<code>null=True</code>。这个设定不允许表单中该字段为空，但是允许在更新时或者通过shell等非表单方式插入数据该字段为空。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>只设定了<code>blank=True</code>而没有设定<code>null=True</code>的时候，通过<code>Admin</code>站点表单创建模型实例并且表单在该字段上没有值时数据库不报错呢？？？</p>
+</blockquote>
+<ul>
+<li>当没有设定<code>null=True</code>时，该列在数据库中就存在<code>NOT NULL</code>的约束，如果插入数据时这一列没有值，按理说数据库应该会报错才对</li>
+<li>出现这种情况的原因在于，<code>django</code>在处理某些在数据库中实际的存储值为字符串的<code>Field</code>时（如<code>CharField</code>, <code>TextField</code>, <code>ImageField</code>（图片文件的路径）），永远不会向数据库中填入空值。如果表单中某个<code>CharField</code>或者<code>TextField</code>字段为空，那么<code>django</code>会在数据库中填入<code>&quot;&quot;</code>，而不是<code>null</code>. </li>
+</ul>
+<h4 id="choices"><a href="#choices" class="headerlink" title="choices"></a><code>choices</code></h4><p>一个序列，它由两个元素(例如[(A, B)， (A, B)…])的迭代组成，作为这个字段的选择。如果提供了选择，则通过模型验证强制执行，默认的表单小部件将是一个包含这些选择的选择框，而不是标准的文本字段。</p>
+<p>每个元组中的第一个元素是要在模型上设置的实际值，第二个元素是人类可读的名称。例如:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">YEAR_IN_SCHOOL_CHOICES = [</span><br><span class="line">    (<span class="string">&#x27;FR&#x27;</span>, <span class="string">&#x27;Freshman&#x27;</span>),</span><br><span class="line">    (<span class="string">&#x27;SO&#x27;</span>, <span class="string">&#x27;Sophomore&#x27;</span>),</span><br><span class="line">    (<span class="string">&#x27;JR&#x27;</span>, <span class="string">&#x27;Junior&#x27;</span>),</span><br><span class="line">    (<span class="string">&#x27;SR&#x27;</span>, <span class="string">&#x27;Senior&#x27;</span>),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>通常，最好在模型类中定义选项，并为每个值定义一个适当命名的常量:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    FRESHMAN = <span class="string">&#x27;FR&#x27;</span></span><br><span class="line">    SOPHOMORE = <span class="string">&#x27;SO&#x27;</span></span><br><span class="line">    JUNIOR = <span class="string">&#x27;JR&#x27;</span></span><br><span class="line">    SENIOR = <span class="string">&#x27;SR&#x27;</span></span><br><span class="line">    YEAR_IN_SCHOOL_CHOICES = [</span><br><span class="line">        (FRESHMAN, <span class="string">&#x27;Freshman&#x27;</span>),</span><br><span class="line">        (SOPHOMORE, <span class="string">&#x27;Sophomore&#x27;</span>),</span><br><span class="line">        (JUNIOR, <span class="string">&#x27;Junior&#x27;</span>),</span><br><span class="line">        (SENIOR, <span class="string">&#x27;Senior&#x27;</span>),</span><br><span class="line">    ]</span><br><span class="line">    year_in_school = models.CharField(</span><br><span class="line">        max_length=<span class="number">2</span>,</span><br><span class="line">        choices=YEAR_IN_SCHOOL_CHOICES,</span><br><span class="line">        default=FRESHMAN,</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">is_upperclass</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.year_in_school <span class="keyword">in</span> (self.JUNIOR, self.SENIOR)</span><br></pre></td></tr></table></figure>
+
+<p>虽然您可以在模型类的外部定义一个选择列表，然后引用它，但是在模型类内部定义每个选择的选择和名称，可以将所有信息与使用它的类一起保存，并使选择易于引用(例如：<strong>Student.SOPHOMORE</strong> 可以在导入<strong>Student</strong>模型类的任何地方使用)。</p>
+<p>您还可以将可用的选项收集到指定的组中，这些组可用于组织目的:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Media</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    MEDIA_CHOICES = [</span><br><span class="line">        (<span class="string">&#x27;Audio&#x27;</span>, (</span><br><span class="line">            (<span class="string">&#x27;vinyl&#x27;</span>, <span class="string">&#x27;Vinyl&#x27;</span>),</span><br><span class="line">            (<span class="string">&#x27;cd&#x27;</span>, <span class="string">&#x27;CD&#x27;</span>),</span><br><span class="line">        )</span><br><span class="line">         ),</span><br><span class="line">        (<span class="string">&#x27;Video&#x27;</span>, (</span><br><span class="line">            (<span class="string">&#x27;vhs&#x27;</span>, <span class="string">&#x27;VHS Tape&#x27;</span>),</span><br><span class="line">            (<span class="string">&#x27;dvd&#x27;</span>, <span class="string">&#x27;DVD&#x27;</span>),</span><br><span class="line">        )</span><br><span class="line">         ),</span><br><span class="line">        (<span class="string">&#x27;unknown&#x27;</span>, <span class="string">&#x27;Unknown&#x27;</span>),</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">    media = models.CharField(</span><br><span class="line">        max_length=<span class="number">10</span>,</span><br><span class="line">        choices=MEDIA_CHOICES,</span><br><span class="line">        default=<span class="string">&#x27;cd&#x27;</span></span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+
+<p>每个元组中的第一个元素是应用于组的名称。第二个元素是二元组的迭代，每个二元组包含一个值和一个可读的选项名。分组选项可以与单个列表中的未分组选项组合在一起(例如本例中的未知选项)。</p>
+<p>注意，选择可以是任何序列对象–不一定是列表或元组。这允许您动态地构造选择。但是，如果您发现自己的选择是动态的，那么最好使用一个带有 <code>ForeignKey</code>的数据库表。但是静态数据不会有太大的变化。</p>
+<p>对于每个设置了选项的字段，对象都有一个<code>get_FOO_display()</code>方法，其中<code>FOO</code>是字段的名称。该方法返回字段的”人易读”值。</p>
+<p>例子:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    SHIRT_SIZES = (</span><br><span class="line">        (<span class="string">&#x27;S&#x27;</span>, <span class="string">&#x27;Small&#x27;</span>),</span><br><span class="line">        (<span class="string">&#x27;M&#x27;</span>, <span class="string">&#x27;Medium&#x27;</span>),</span><br><span class="line">        (<span class="string">&#x27;L&#x27;</span>, <span class="string">&#x27;Large&#x27;</span>),</span><br><span class="line">    )</span><br><span class="line">    name = models.CharField(max_length=<span class="number">60</span>)</span><br><span class="line">    shirt_size = models.CharField(max_length=<span class="number">2</span>, choices=SHIRT_SIZES)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; p = Person(name=<span class="string">&quot;Fred Flintstone&quot;</span>, shirt_size=<span class="string">&quot;L&quot;</span>)</span><br><span class="line">&gt;&gt;&gt; p.save()</span><br><span class="line">&gt;&gt;&gt; p.shirt_size</span><br><span class="line"><span class="string">&#x27;L&#x27;</span></span><br><span class="line">&gt;&gt;&gt; p.get_shirt_size_display()</span><br><span class="line"><span class="string">&#x27;Large&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="db-column"><a href="#db-column" class="headerlink" title="db_column"></a><code>db_column</code></h4><p>要用于此字段的数据库列的名称。如果没有给出，Django将使用字段的名称。</p>
+<h4 id="db-index"><a href="#db-index" class="headerlink" title="db_index"></a><code>db_index</code></h4><p>如果为真，将为此字段创建一个数据库索引。</p>
+<h4 id="default"><a href="#default" class="headerlink" title="default"></a><code>default</code></h4><p>该字段的默认值。可以是一个值或者是个可调用的对象，如果是个可调用对象，每次实例化模型时都会调用该对象。</p>
+<p>默认值不能是一个可变的对象(模型实例、列表、集合等)，因为对该对象的同一个实例的引用将被用作所有模型实例的默认值。反而，可以在回调函数中打包处理所需的默认值。例如，如果要为<code>JSONField</code>指定默认<code>dict</code>，可以使用一个函数:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">contact_default</span>():</span></span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">&quot;email&quot;</span>: <span class="string">&quot;to1@example.com&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">contact_info = JSONField(<span class="string">&quot;ContactInfo&quot;</span>, default=contact_default)</span><br></pre></td></tr></table></figure>
+
+<p><strong>lambda</strong>表达式不能用于像<strong>default</strong>这样的字段选项，因为它们不能被迁移序列化。</p>
+<p>对于像映射模型实例的<code>ForeignKey</code>这样的字段，默认值应该是它们引用的字段的值(<code>pk</code>，除非设置<code>to_field</code>)，而不是模型实例。</p>
+<p>当创建新的模型实例并且没有为字段提供值时，将使用默认值。当字段是主键时，当字段设置为<code>None</code>时也会使用默认值。</p>
+<h4 id="help-text"><a href="#help-text" class="headerlink" title="help_text"></a><code>help_text</code></h4><p>额外的“帮助”文本，随表单控件一同显示。即便你的字段未用于表单，它对于生成文档也是很有用的。</p>
+<p>注意，这个值不会在自动生成的表单中进行<code>html</code>转义的。如果您愿意，可以在<code>help_text</code>中包含<strong>HTML</strong>。例如:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">help_text=<span class="string">&quot;Please use the following format: &lt;em&gt;YYYY-MM-DD&lt;/em&gt;.&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>或者，您可以使用纯文本和<code>django.utils.html.escape()</code>来转义任何<strong>HTML</strong>特殊字符。确保转义任何来自不可信用户的帮助文本，以避免跨站点脚本攻击。</p>
+<h4 id="primary-key"><a href="#primary-key" class="headerlink" title="primary_key"></a><code>primary_key</code></h4><p>如果设置为 <code>True</code> ，将该字段设置为该模型的主键。</p>
+<p>如果您没有为模型中的任何字段指定<code>primary_key=True</code>, <strong>Django</strong>将自动添加一个<code>AutoField</code>来保存主键，所以您不需要在任何字段上设置<code>primary_key=True</code>，除非您想覆盖默认的主键行为。</p>
+<p><code>primary_key=True</code>意味着<code>null=False</code>和<code>unique=True</code>。对象上只允许有一个主键。</p>
+<p>主键字段是只读的。如果更改现有对象上的主键值并保存它，则将在旧对象旁边创建一个新对象。</p>
+<h4 id="unique"><a href="#unique" class="headerlink" title="unique"></a><code>unique</code></h4><p>如果设置为 <code>True</code>，这个字段必须在整个表中保持值唯一。</p>
+<p>这是在数据库级和通过模型验证实现的。如果试图在惟一字段中保存具有重复值的模型，则模型的<code>save()</code>方法会产生一个<code>django.db.IntegrityError</code>。</p>
+<p>这个选项对除了<code>ManyToManyField</code>和<code>OneToOneField</code>以外的所有字段类型都有效。</p>
+<p>注意，当<code>unique</code>为真时，不需要指定<code>db_index</code>，因为<code>unique</code>意味着创建索引。</p>
+<h4 id="verbose-name"><a href="#verbose-name" class="headerlink" title="verbose_name"></a><code>verbose_name</code></h4><p>字段的可读名称。如果没有给出详细的名称，Django将使用字段的属性名自动创建它，将下划线转换为空格。</p>
+<p>除了 <code>ForeignKey</code>， <code>ManyToManyField</code> 和 <code>OneToOneField</code>，任何字段类型都接收一个可选位置的参数 <code>verbose_name</code>，如果未指定该参数值， Django 会自动使用字段的属性名作为该参数值，并且把下划线转换为空格。</p>
+<p>在该例中：备注名为 <code>&quot;person&#39;s first name&quot;</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">first_name = models.CharField(<span class="string">&quot;person&#x27;s first name&quot;</span>, max_length=<span class="number">30</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在该例中：备注名为 <code>&quot;first name&quot;</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">first_name = models.CharField(max_length=<span class="number">30</span>)</span><br></pre></td></tr></table></figure>
+
+<p> <code>ForeignKey</code>， <code>ManyToManyField</code> 和 <code>OneToOneField</code>接收的第一个参数为模型的类名，后面可以添加一个 <code>verbose_name</code>参数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">poll = models.ForeignKey(</span><br><span class="line">    Poll,</span><br><span class="line">    on_delete=models.CASCADE,</span><br><span class="line">    verbose_name=<span class="string">&quot;the related poll&quot;</span>,</span><br><span class="line">)</span><br><span class="line">sites = models.ManyToManyField(Site, verbose_name=<span class="string">&quot;list of sites&quot;</span>)</span><br><span class="line">place = models.OneToOneField(</span><br><span class="line">    Place,</span><br><span class="line">    on_delete=models.CASCADE,</span><br><span class="line">    verbose_name=<span class="string">&quot;related place&quot;</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>惯例是不将<code>verbose_name</code> 的首字母大写，必要时 <strong>Djanog</strong> 会自动把首字母转换为大写。</p>
+<h4 id="validators"><a href="#validators" class="headerlink" title="validators"></a><code>validators</code></h4><p>要为此字段运行的验证器列表。</p>
+<h5 id="编写验证器"><a href="#编写验证器" class="headerlink" title="编写验证器"></a>编写验证器</h5><p><code>validator</code>是一个可调用的函数，它接受一个值，如果它不满足某些条件，就会引发<code>ValidationError</code>。验证器对于在不同类型的字段之间重用验证逻辑非常有用。</p>
+<p>例如，这里有一个验证器，它只允许偶数:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.core.exceptions <span class="keyword">import</span> ValidationError</span><br><span class="line"><span class="keyword">from</span> django.utils.translation <span class="keyword">import</span> gettext_lazy <span class="keyword">as</span> _</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">validate_even</span>(<span class="params">value</span>):</span></span><br><span class="line">    <span class="keyword">if</span> value % <span class="number">2</span> != <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">raise</span> ValidationError(</span><br><span class="line">            _(<span class="string">&#x27;%(value)s is not an even number&#x27;</span>),</span><br><span class="line">            params=&#123;<span class="string">&#x27;value&#x27;</span>: value&#125;,</span><br><span class="line">        )</span><br></pre></td></tr></table></figure>
+
+<p>您可以通过字段的<code>validators</code>参数将其添加到模型字段:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyModel</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    even_field = models.IntegerField(validators=[validate_even])</span><br></pre></td></tr></table></figure>
+
+<p>因为值在运行验证器之前就转换成了Python，你甚至可以对表单使用相同的验证器:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django <span class="keyword">import</span> forms</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyForm</span>(<span class="params">forms.Form</span>):</span></span><br><span class="line">    even_field = forms.IntegerField(validators=[validate_even])</span><br></pre></td></tr></table></figure>
+
+<p>对于更复杂或可配置的验证器，您还可以使用带有<code>__call__()</code>方法的类。例如， <code>RegexValidator</code>这类验证器。如果在<code>validators</code> <code>model</code>字段选项中使用基于类的验证器,应该添加<code>deconstruct()</code>装饰器和 <code>__eq__()</code> 方法让它可以被迁移框架序列化。</p>
+<p> <a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/2.2/ref/validators/#built-in-validators"><code>django.core.validators</code></a>模块包含一组可调用的验证器，用于模型和表单字段，可以在内部使用它们。</p>
+<h3 id="Meta-选项"><a href="#Meta-选项" class="headerlink" title="Meta 选项"></a><code>Meta</code> 选项</h3><p>使用内部 <code>Meta类</code> 来给模型赋予元数据，就像：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ox</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    horn_length = models.IntegerField()</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        ordering = [<span class="string">&quot;horn_length&quot;</span>]</span><br><span class="line">        verbose_name_plural = <span class="string">&quot;oxen&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="abstract"><a href="#abstract" class="headerlink" title="abstract"></a><code>abstract</code></h4><p>抽象基类在你要将公共信息放入很多模型时会很有用。编写你的基类，并在 <strong>Meta</strong> 类中填入 <code>abstract=True</code>。该模型将不会创建任何数据表。当其用作其它模型类的基类时，它的字段会自动添加至子类。</p>
+<p>一个例子:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CommonInfo</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    name = models.CharField(max_length=<span class="number">100</span>)</span><br><span class="line">    age = models.PositiveIntegerField()</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        abstract = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params">CommonInfo</span>):</span></span><br><span class="line">    home_group = models.CharField(max_length=<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>Student</code> 模型拥有3个字段： <code>name</code>， <code>age</code> 和 <code>home_group</code>。 <code>CommonInfo</code> 模型不能用作普通的 Django 模型，因为它是一个抽象基类。它不会生成数据表，也没有管理器，也不能被实例化和保存。</p>
+<p>从抽象基类继承来的字段可被其它字段或值重写，或用 <code>None</code> 删除。</p>
+<p>对很多用户来说，这种继承可能就是你想要的。它提供了一种在 Python 级抽出公共信息的方法，但仍会在子类模型中创建数据表。</p>
+<h4 id="app-label"><a href="#app-label" class="headerlink" title="app_label"></a><code>app_label</code></h4><p>如果一个模型是在<code>INSTALLED_APPS</code>中注册的<strong>APP</strong>外部定义的，它必须声明它属于哪个应用程序:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app_label = <span class="string">&#x27;myapp&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="db-table"><a href="#db-table" class="headerlink" title="db_table"></a><code>db_table</code></h4><p>要用于模型的数据库表的名称:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db_table = <span class="string">&#x27;music_album&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>为了节省时间，Django自动从模型类和包含它的应用程序的名称派生数据库表的名称。模型的数据库表名是通过将模型的**”app label”**(您在<code>manage.py startapp</code>中使用的名称)与模型的类名连接在一起，并在它们之间加一个下划线来构造的。</p>
+<p>例如，如果您有一个应用<strong>bookstore</strong>(由 <code>manage.py startapp bookstore</code>创建)，定义为<strong>Book</strong>的模型类将有一个名为<code>bookstore_book</code>的数据库表。</p>
+<p>要覆盖数据库表名，请使用类元中的db_table参数。</p>
+<blockquote>
+<p>强烈建议在通过db_table覆盖表名时使用小写的表名，特别是在使用MySQL后端时。</p>
+</blockquote>
+<h4 id="ordering"><a href="#ordering" class="headerlink" title="ordering"></a><code>ordering</code></h4><p>对象的默认顺序，用于获取对象列表:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ordering = [<span class="string">&#x27;-order_date&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>这是一个 包含由字符串和/或构成的查询表达式的元组或列表。每个字符串都是一个带有可选<code>&quot;-&quot;</code>前缀的字段名，表示按降序排列。没有前缀<code>&quot;-&quot;</code>的字段将按升序排列。使用字符串<code>&quot;?&quot;</code>随机排序。</p>
+<p>例如，要按<code>pub_date</code>字段升序排序，可以使用以下命令:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ordering = [<span class="string">&#x27;pub_date&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>要按pub_date降序排列，请使用以下命令:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ordering = [<span class="string">&#x27;-pub_date&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>按pub_date降序排列，然后按author升序排列，使用以下命令:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ordering = [<span class="string">&#x27;-pub_date&#x27;</span>, <span class="string">&#x27;author&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>您还可以使用查询表达式。要按作者升序排序并使空值排序持续，请使用以下命令:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db.models <span class="keyword">import</span> F</span><br><span class="line"></span><br><span class="line">ordering = [F(<span class="string">&#x27;author&#x27;</span>).asc(nulls_last=<span class="literal">True</span>)]</span><br></pre></td></tr></table></figure>
+
+<h4 id="permissions"><a href="#permissions" class="headerlink" title="permissions"></a><code>permissions</code></h4><p>创建此对象时进入权限表的额外权限。为每个模型自动创建添加、更改、删除和视图权限。这个例子指定了一个额外的权限<code>can_deliver_pizzas</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">permissions = [(<span class="string">&#x27;can_deliver_pizzas&#x27;</span>, <span class="string">&#x27;Can deliver pizzas&#x27;</span>)]</span><br></pre></td></tr></table></figure>
+
+<p>这是一个格式为**(permission_code,** **human_readable_permission_name)**的二元列表或元组。</p>
+<h4 id="indexes"><a href="#indexes" class="headerlink" title="indexes"></a><code>indexes</code></h4><p>要在模型上定义的索引列表:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Customer</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    first_name = models.CharField(max_length=<span class="number">100</span>)</span><br><span class="line">    last_name = models.CharField(max_length=<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        indexes = [</span><br><span class="line">            models.Index(fields=[<span class="string">&#x27;last_name&#x27;</span>, <span class="string">&#x27;first_name&#x27;</span>]),</span><br><span class="line">            models.Index(fields=[<span class="string">&#x27;first_name&#x27;</span>], name=<span class="string">&#x27;first_name_idx&#x27;</span>),</span><br><span class="line">        ]</span><br></pre></td></tr></table></figure>
+
+<h4 id="verbose-name-1"><a href="#verbose-name-1" class="headerlink" title="verbose_name"></a><code>verbose_name</code></h4><p>模型对象的人类可读的单数名称:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">verbose_name = <span class="string">&quot;pizza&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果没有给出这个值，Django将使用类名的一个简化版本:<code>CamelCase</code>变成<code>camel case</code>。</p>
+<h4 id="verbose-name-plural"><a href="#verbose-name-plural" class="headerlink" title="verbose_name_plural"></a><code>verbose_name_plural</code></h4><p>对象的复数名称:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">verbose_name_plural = <span class="string">&quot;stories&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果没有给出，Django将使用 <code>verbose_name</code>+ <code>&quot;s&quot;</code></p>
+<h3 id="关联关系"><a href="#关联关系" class="headerlink" title="关联关系"></a>关联关系</h3><p>显然，关系型数据库的强大之处在于各表之间的关联关系。 Django 提供了定义三种最常见的数据库关联关系的方法：多对一，多对多，一对一。                                                                </p>
+<h4 id="ForeignKey-多对一"><a href="#ForeignKey-多对一" class="headerlink" title="ForeignKey(多对一)"></a>ForeignKey(多对一)</h4><p>定义一个多对一的关联关系，使用 <code>django.db.models.ForeignKey</code> 类。就和其它 <code>Field</code>字段类型一样，只需要在你模型中添加一个值为该类的属性。</p>
+<p><code>ForeignKey</code> 类需要添加一个位置参数，即你想要关联的模型类名。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 关键字ForeignKey</span></span><br><span class="line">publish = models.ForeignKey(to=<span class="string">&#x27;Publish&#x27;</span>)  <span class="comment"># to用来指代跟哪张表有关系 默认关联的就是表的主键字段</span></span><br><span class="line"><span class="comment"># 外键字段名在创建时会自动加上_id后缀</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="字段参数"><a href="#字段参数" class="headerlink" title="字段参数"></a>字段参数</h5><ol>
+<li><p><code>to</code>:设置要关联的表</p>
+</li>
+<li><p><code>to_field</code>:设置要关联的表的字段(一般不设置，默认使用主键id关联)</p>
+</li>
+<li><p><code>related_name</code>:反向操作时，使用的字段名，用于代替原反向查询时的<code>&#39;表名_set&#39;</code></p>
+</li>
+<li><p><code>related_query_name</code>:反向查询操作时，使用的连接前缀，用于替换表名</p>
+</li>
+<li><p><code>db_constraint</code>:是否在数据库中创建外键约束，默认为True。</p>
+</li>
+<li><p><code>on_delete</code>:当删除关联表中的数据时，当前表与其关联的行的行为。</p>
+<ol>
+<li><p><code>models.CASCADE</code>:删除关联数据，与之关联的数据也删联(<code>on_delete=models.CASCADE</code>)</p>
+</li>
+<li><p>抛出异常(错误)</p>
+<ol>
+<li><code>models.DO_NOTHING</code>:删除关联数据，引发错误<code>IntegrityError</code>       </li>
+<li><code>models.PROTECT</code><br>删除关联数据，引发错误<code>ProtectedError </code></li>
+</ol>
+</li>
+<li><p><code>models.SET_NULL</code>:删除关联数据，与之关联的值设置为<code>null</code>（前提FK字段需要设置为可空）</p>
+</li>
+<li><p><code>models.SET_DEFAULT</code>:删除关联数据，与之关联的值设置为默认值（前提FK字段需要设置默认值）</p>
+</li>
+<li><p><code>models.SET</code>:删除关联数据</p>
+<ol>
+<li>与之关联的值设置为指定值，设置：<code>models.SET(值)</code></li>
+<li>与之关联的值设置为可执行对象的返回值，设置：<code>models.SET(可执行对象)</code></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="OneToOneField-一对一"><a href="#OneToOneField-一对一" class="headerlink" title="OneToOneField(一对一)"></a>OneToOneField(一对一)</h4><blockquote>
+<p>外键字段创建在任意一张表都可以，建议外键添加在查询频率较高的一方</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 关键字OneToOneField</span></span><br><span class="line">author_detail = models.OneToOneField(to=<span class="string">&#x27;Author_detail&#x27;</span>)  <span class="comment"># 外键本质fk + unique</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="字段参数-1"><a href="#字段参数-1" class="headerlink" title="字段参数"></a>字段参数</h5><ol>
+<li><p><code>to</code> :设置要关联的表。</p>
+</li>
+<li><p><code>to_field</code>:设置要关联的字段。</p>
+</li>
+<li><p><code>on_delete</code>:同ForeignKey字段。</p>
+</li>
+</ol>
+<h4 id="ManyToManyField-多对多"><a href="#ManyToManyField-多对多" class="headerlink" title="ManyToManyField(多对多)"></a>ManyToManyField(多对多)</h4><blockquote>
+<p>用于表示多对多的关联关系。在数据库中通过第三张表来建立关联关系。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 关键字ManyToManyField</span></span><br><span class="line">author = models.ManyToManyField(to=<span class="string">&#x27;Author&#x27;</span>)  </span><br><span class="line"><span class="comment"># django orm会自动帮你创建第三张关系表，表名为两个关联的表名用_连接</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="字段参数-2"><a href="#字段参数-2" class="headerlink" title="字段参数"></a>字段参数</h5><ol>
+<li><p><code>to</code>:设置要关联的表</p>
+</li>
+<li><p><code>related_name</code>:同<code>ForeignKey</code>字段(反向操作时，使用的字段名，用于代替原反向查询时的<code>&#39;表名_set&#39;</code>)</p>
+</li>
+<li><p><code>related_query_name</code>:同<code>ForeignKey</code>字段(反向查询操作时，使用的连接前缀，用于替换表名)</p>
+</li>
+<li><p><code>symmetric</code>:仅用于多对多自关联时，指定内部是否创建反向操作的字段。默认为<code>True</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    name = models.CharField(max_length=<span class="number">16</span>)</span><br><span class="line">    friends = models.ManyToManyField(<span class="string">&quot;self&quot;</span>)</span><br><span class="line">    <span class="comment"># 此时，person对象就没有person_set属性。</span></span><br><span class="line">   </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    name = models.CharField(max_length=<span class="number">16</span>)</span><br><span class="line">    friends = models.ManyToManyField(<span class="string">&quot;self&quot;</span>,symmetrical=<span class="literal">False</span>)</span><br><span class="line">    <span class="comment"># 此时，person对象现在就可以使用person_set属性进行反向查询。</span></span><br></pre></td></tr></table></figure></li>
+<li><p><code>through</code>:在使用<code>ManyToManyField</code>字段时，<code>Django</code>将自动生成一张表        来管理多对多的关联关系。但我们也可以手动创建第三张表来管理多对多关系，此时就需要通过<code>through</code>来指定第三张表的表名。</p>
+</li>
+<li><p><code>through_fields</code>:设置关联的字段。</p>
+</li>
+<li><p><code>db_table</code>:默认创建第三张表时，数据库中表的名称。</p>
+</li>
+</ol>
+<h5 id="多对多的三种创建方式"><a href="#多对多的三种创建方式" class="headerlink" title="多对多的三种创建方式"></a>多对多的三种创建方式</h5><ol>
+<li><p>自己建立第三张关系表，外键分别关联两个表</p>
+<ul>
+<li><p>优点:可以扩充第三张关系标的字段</p>
+</li>
+<li><p>缺点:自己做连表查询</p>
+</li>
+<li><p>建表例子</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Book</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    title = models.CharField(max_length=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">Author</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">     name = models.CharField(max_length=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"> <span class="comment"># 1. 多对多第一种创建方式：自己创建第三张关系表</span></span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">Author2Book</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">     <span class="built_in">id</span> = models.AutoField(primary_key=<span class="literal">True</span>)</span><br><span class="line">     author_id = models.ForeignKey(to=<span class="string">&#x27;Author&#x27;</span>)</span><br><span class="line">     book_id = models.ForeignKey(to=<span class="string">&#x27;Book&#x27;</span>)</span><br><span class="line">     price = models.IntegerField()  <span class="comment"># 可以自己扩充需要的字段</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>通过ORM内置的ManyToManyField，自动创建第三张关系表</p>
+<ul>
+<li><p>优点:提供了很多连表操作的快捷方法,<code>all()</code>, <code>add()</code>, <code>set()</code>, <code>clear()</code>, <code>remove()</code></p>
+</li>
+<li><p>缺点:无法扩展第三张关系表</p>
+</li>
+<li><p>建表例子</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Book</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    title = models.CharField(max_length=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">Author</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">     name = models.CharField(max_length=<span class="number">12</span>)</span><br><span class="line">     books = models.ManyToManyField(to=<span class="string">&#x27;Book&#x27;</span>)  <span class="comment"># 字段就这些，无法扩充其他字段</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>自己创建第三张关系表，通过ManyToManyField关联</p>
+<ul>
+<li><p>优点：</p>
+<ul>
+<li>既能够使用多对多查询的快捷方法all()(只能用all，不能使用add,set等)</li>
+<li>还能够自己扩展第三张关系表的字段</li>
+</ul>
+</li>
+<li><p>建表例子</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Book</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    title = models.CharField(max_length=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Author</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">     name = models.CharField(max_length=<span class="number">12</span>)</span><br><span class="line">     <span class="comment"># 告诉ManyToManyField通过(through)Author2Book这张表进行关联，不使用ORM自动创建的第三张表，而是使用我自己创建的表</span></span><br><span class="line">     <span class="comment"># through_fields告诉ORM通过哪几个字段进行多对多关联</span></span><br><span class="line">     books = models.ManyToManyField(to=<span class="string">&#x27;Book&#x27;</span>, through=<span class="string">&#x27;Author2Book&#x27;</span>, through_fields=(<span class="string">&#x27;author&#x27;</span>, <span class="string">&#x27;book&#x27;</span>))</span><br><span class="line"></span><br><span class="line"> <span class="comment"># 1. 多对多第三种创建方式：自己创建第三张关系表，此时外键不需要添加_id了，因为ORM会默认帮你在外键后面加_id</span></span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">Author2Book</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">     <span class="built_in">id</span> = models.AutoField(primary_key=<span class="literal">True</span>)</span><br><span class="line">     author = models.ForeignKey(to=<span class="string">&#x27;Author&#x27;</span>)</span><br><span class="line">     book = models.ForeignKey(to=<span class="string">&#x27;Book&#x27;</span>)</span><br><span class="line">     price = models.IntegerField(null=<span class="literal">True</span>)</span><br><span class="line"> </span><br><span class="line">     <span class="comment"># author_id和book_id要联合唯一</span></span><br><span class="line">     <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">         unique_together = ((<span class="string">&#x27;author&#x27;</span>, <span class="string">&#x27;book&#x27;</span>),)</span><br></pre></td></tr></table></figure></li>
+<li><p>操作例子</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 多对多的第三张方式也支持all查询</span></span><br><span class="line">author_obj = Author.objects.first()</span><br><span class="line"><span class="comment"># 第一个作者的所有书籍</span></span><br><span class="line">ret = author_obj.books.<span class="built_in">all</span>()</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 给第一个作者添加一本书</span></span><br><span class="line"><span class="comment"># author_obj.books.add(4) # 报错</span></span><br><span class="line">Author2Book.objects.create(author_id=<span class="number">1</span>, book_id=<span class="number">4</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PYTHON/" rel="tag"># PYTHON</a>
+              <a href="/tags/Django/" rel="tag"># Django</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/e32a5224/" rel="prev" title="Redis基础教程">
+      <i class="fa fa-chevron-left"></i> Redis基础教程
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/bfc39cfe/" rel="next" title="浅析：XSS攻击、SQL注入攻击和CSRF攻击">
+      浅析：XSS攻击、SQL注入攻击和CSRF攻击 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ORM%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">ORM介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ORM-%E4%BC%98%E5%8A%BF"><span class="nav-number">1.1.</span> <span class="nav-text">ORM 优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ORM-%E5%8A%A3%E5%8A%BF"><span class="nav-number">1.2.</span> <span class="nav-text">ORM 劣势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ORM-%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E5%85%B3%E7%B3%BB%EF%BC%9A"><span class="nav-number">1.3.</span> <span class="nav-text">ORM 和数据库关系：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Django%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8mysql%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">2.</span> <span class="nav-text">Django配置使用mysql数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#settings-py%E9%85%8D%E7%BD%AEDATABASES"><span class="nav-number">2.1.</span> <span class="nav-text">settings.py配置DATABASES</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL%E8%BF%9E%E6%8E%A5%E5%B7%A5%E5%85%B7"><span class="nav-number">2.2.</span> <span class="nav-text">MySQL连接工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%E5%B1%9E%E6%80%A7%E5%92%8C%E9%80%89%E9%A1%B9"><span class="nav-number">3.</span> <span class="nav-text">字段属性和选项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E7%B1%BB%E5%B1%9E%E6%80%A7%E5%91%BD%E5%90%8D%E9%99%90%E5%88%B6"><span class="nav-number">3.1.</span> <span class="nav-text">模型类属性命名限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.2.</span> <span class="nav-text">字段类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B4%E6%95%B0"><span class="nav-number">3.2.1.</span> <span class="nav-text">整数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#AutoField"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">AutoField</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#BigAutoField"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">BigAutoField</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#IntegerField"><span class="nav-number">3.2.1.3.</span> <span class="nav-text">IntegerField</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#BigIntegerField"><span class="nav-number">3.2.1.4.</span> <span class="nav-text">BigIntegerField</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SmallIntegerField"><span class="nav-number">3.2.1.5.</span> <span class="nav-text">SmallIntegerField</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PositiveIntegerField"><span class="nav-number">3.2.1.6.</span> <span class="nav-text">PositiveIntegerField</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PositiveSmallIntegerField"><span class="nav-number">3.2.1.7.</span> <span class="nav-text">PositiveSmallIntegerField</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E6%95%B0"><span class="nav-number">3.2.2.</span> <span class="nav-text">小数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#FloatField"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">FloatField</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DecimalField"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">DecimalField</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#DecimalField-max-digits"><span class="nav-number">3.2.2.2.1.</span> <span class="nav-text">DecimalField.max_digits</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#DecimalField-decimal-places"><span class="nav-number">3.2.2.2.2.</span> <span class="nav-text">DecimalField.decimal_places</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%83%E5%B0%94"><span class="nav-number">3.2.3.</span> <span class="nav-text">布尔</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#BooleanField"><span class="nav-number">3.2.3.1.</span> <span class="nav-text">BooleanField</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#NullBooleanField"><span class="nav-number">3.2.3.2.</span> <span class="nav-text">NullBooleanField</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6"><span class="nav-number">3.2.4.</span> <span class="nav-text">字符</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#CharField"><span class="nav-number">3.2.4.1.</span> <span class="nav-text">CharField</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#CharField-max-length"><span class="nav-number">3.2.4.1.1.</span> <span class="nav-text">CharField.max_length</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#TextField"><span class="nav-number">3.2.4.2.</span> <span class="nav-text">TextField</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#URLField"><span class="nav-number">3.2.4.3.</span> <span class="nav-text">URLField</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#EmailField"><span class="nav-number">3.2.4.4.</span> <span class="nav-text">EmailField</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#UUIDField"><span class="nav-number">3.2.4.5.</span> <span class="nav-text">UUIDField</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.5.</span> <span class="nav-text">文件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#FileField"><span class="nav-number">3.2.5.1.</span> <span class="nav-text">FileField</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#FileField-upload-to"><span class="nav-number">3.2.5.1.1.</span> <span class="nav-text">FileField.upload_to</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#FileField-storage"><span class="nav-number">3.2.5.1.2.</span> <span class="nav-text">FileField.storage</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ImageField"><span class="nav-number">3.2.5.2.</span> <span class="nav-text">ImageField</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#ImageField-height-field"><span class="nav-number">3.2.5.2.1.</span> <span class="nav-text">ImageField.height_field</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#ImageField-width-field"><span class="nav-number">3.2.5.2.2.</span> <span class="nav-text">ImageField.width_field</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#FilePathField"><span class="nav-number">3.2.5.3.</span> <span class="nav-text">FilePathField</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#FilePathField-path"><span class="nav-number">3.2.5.3.1.</span> <span class="nav-text">FilePathField.path</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#FilePathField-match"><span class="nav-number">3.2.5.3.2.</span> <span class="nav-text">FilePathField.match</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#FilePathField-recursive"><span class="nav-number">3.2.5.3.3.</span> <span class="nav-text">FilePathField.recursive</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#FilePathField-allow-files"><span class="nav-number">3.2.5.3.4.</span> <span class="nav-text">FilePathField.allow_files</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#FilePathField-allow-folders"><span class="nav-number">3.2.5.3.5.</span> <span class="nav-text">FilePathField.allow_folders</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#BinaryField"><span class="nav-number">3.2.5.4.</span> <span class="nav-text">BinaryField</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#BinaryField-max-length"><span class="nav-number">3.2.5.4.1.</span> <span class="nav-text">BinaryField.max_length</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%B6%E9%97%B4"><span class="nav-number">3.2.6.</span> <span class="nav-text">时间</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#DateField"><span class="nav-number">3.2.6.1.</span> <span class="nav-text">DateField</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#DateField-auto-now"><span class="nav-number">3.2.6.1.1.</span> <span class="nav-text">DateField.auto_now</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#DateField-auto-now-add"><span class="nav-number">3.2.6.1.2.</span> <span class="nav-text">DateField.auto_now_add</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DateTimeField"><span class="nav-number">3.2.6.2.</span> <span class="nav-text">DateTimeField</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#TimeField"><span class="nav-number">3.2.6.3.</span> <span class="nav-text">TimeField</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%E9%80%89%E9%A1%B9"><span class="nav-number">3.3.</span> <span class="nav-text">字段选项</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">3.3.1.</span> <span class="nav-text">null</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#blank"><span class="nav-number">3.3.2.</span> <span class="nav-text">blank</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#choices"><span class="nav-number">3.3.3.</span> <span class="nav-text">choices</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#db-column"><span class="nav-number">3.3.4.</span> <span class="nav-text">db_column</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#db-index"><span class="nav-number">3.3.5.</span> <span class="nav-text">db_index</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#default"><span class="nav-number">3.3.6.</span> <span class="nav-text">default</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#help-text"><span class="nav-number">3.3.7.</span> <span class="nav-text">help_text</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#primary-key"><span class="nav-number">3.3.8.</span> <span class="nav-text">primary_key</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#unique"><span class="nav-number">3.3.9.</span> <span class="nav-text">unique</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#verbose-name"><span class="nav-number">3.3.10.</span> <span class="nav-text">verbose_name</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#validators"><span class="nav-number">3.3.11.</span> <span class="nav-text">validators</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E9%AA%8C%E8%AF%81%E5%99%A8"><span class="nav-number">3.3.11.1.</span> <span class="nav-text">编写验证器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Meta-%E9%80%89%E9%A1%B9"><span class="nav-number">3.4.</span> <span class="nav-text">Meta 选项</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#abstract"><span class="nav-number">3.4.1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#app-label"><span class="nav-number">3.4.2.</span> <span class="nav-text">app_label</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#db-table"><span class="nav-number">3.4.3.</span> <span class="nav-text">db_table</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ordering"><span class="nav-number">3.4.4.</span> <span class="nav-text">ordering</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#permissions"><span class="nav-number">3.4.5.</span> <span class="nav-text">permissions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#indexes"><span class="nav-number">3.4.6.</span> <span class="nav-text">indexes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#verbose-name-1"><span class="nav-number">3.4.7.</span> <span class="nav-text">verbose_name</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#verbose-name-plural"><span class="nav-number">3.4.8.</span> <span class="nav-text">verbose_name_plural</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E8%81%94%E5%85%B3%E7%B3%BB"><span class="nav-number">3.5.</span> <span class="nav-text">关联关系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ForeignKey-%E5%A4%9A%E5%AF%B9%E4%B8%80"><span class="nav-number">3.5.1.</span> <span class="nav-text">ForeignKey(多对一)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%E5%8F%82%E6%95%B0"><span class="nav-number">3.5.1.1.</span> <span class="nav-text">字段参数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OneToOneField-%E4%B8%80%E5%AF%B9%E4%B8%80"><span class="nav-number">3.5.2.</span> <span class="nav-text">OneToOneField(一对一)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%E5%8F%82%E6%95%B0-1"><span class="nav-number">3.5.2.1.</span> <span class="nav-text">字段参数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ManyToManyField-%E5%A4%9A%E5%AF%B9%E5%A4%9A"><span class="nav-number">3.5.3.</span> <span class="nav-text">ManyToManyField(多对多)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%E5%8F%82%E6%95%B0-2"><span class="nav-number">3.5.3.1.</span> <span class="nav-text">字段参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%9A%E5%AF%B9%E5%A4%9A%E7%9A%84%E4%B8%89%E7%A7%8D%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F"><span class="nav-number">3.5.3.2.</span> <span class="nav-text">多对多的三种创建方式</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">bookandmusic</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备2021028097号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bookandmusic</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : '',
+      projectId: ''
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

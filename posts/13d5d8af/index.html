@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bookandmusic.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"ZMZD8LN6JF","apiKey":"c75e305c22fd4cf56b8f03aa6efec207","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="通过搜索引擎进行数据查询时，搜索引擎并不是直接在数据库中进行查询，而是搜索引擎会对数据库中的数据进行一遍预处理，单独建立起一份索引结构数据。 我们可以将索引结构数据想象成是字典书籍的索引检索页，里面包含了关键词与词条的对应关系，并记录词条的位置。 我们在通过搜索引擎搜索时，搜索引擎将关键字在索引数据中进行快速对比查找，进而找到数据的真实存储位置。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="haystack+Elasticsearch实现搜索引擎">
+<meta property="og:url" content="https://bookandmusic.cn/posts/13d5d8af/index.html">
+<meta property="og:site_name" content="Bookandmusic">
+<meta property="og:description" content="通过搜索引擎进行数据查询时，搜索引擎并不是直接在数据库中进行查询，而是搜索引擎会对数据库中的数据进行一遍预处理，单独建立起一份索引结构数据。 我们可以将索引结构数据想象成是字典书籍的索引检索页，里面包含了关键词与词条的对应关系，并记录词条的位置。 我们在通过搜索引擎搜索时，搜索引擎将关键字在索引数据中进行快速对比查找，进而找到数据的真实存储位置。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/03/image-20210307155255273.png">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/03/image-20210307155506003.png">
+<meta property="article:published_time" content="2021-03-02T12:24:18.000Z">
+<meta property="article:modified_time" content="2022-01-08T09:57:41.822Z">
+<meta property="article:author" content="bookandmusic">
+<meta property="article:tag" content="PYTHON">
+<meta property="article:tag" content="DRF">
+<meta property="article:tag" content="Elasticsearch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/03/image-20210307155255273.png">
+
+<link rel="canonical" href="https://bookandmusic.cn/posts/13d5d8af/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>haystack+Elasticsearch实现搜索引擎 | Bookandmusic</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Bookandmusic</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">踮起脚尖，另一种高度</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/13d5d8af/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="bookandmusic">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bookandmusic">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          haystack+Elasticsearch实现搜索引擎
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-02 20:24:18" itemprop="dateCreated datePublished" datetime="2021-03-02T20:24:18+08:00">2021-03-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>通过搜索引擎进行数据查询时，搜索引擎并不是直接在数据库中进行查询，而是搜索引擎会对数据库中的数据进行一遍预处理，单独建立起一份索引结构数据。</p>
+<p>我们可以将索引结构数据想象成是字典书籍的索引检索页，里面包含了关键词与词条的对应关系，并记录词条的位置。</p>
+<p>我们在通过搜索引擎搜索时，搜索引擎将关键字在索引数据中进行快速对比查找，进而找到数据的真实存储位置。</p>
+<span id="more"></span>
+
+<h2 id="Elasticsearch"><a href="#Elasticsearch" class="headerlink" title="Elasticsearch"></a>Elasticsearch</h2><p>开源的 <a target="_blank" rel="noopener" href="https://www.elastic.co/">Elasticsearch </a>是目前全文搜索引擎的首选。</p>
+<p>它可以快速地储存、搜索和分析海量数据。维基百科、Stack Overflow、Github 都采用它。</p>
+<p>Elasticsearch 的底层是开源库 <a target="_blank" rel="noopener" href="https://lucene.apache.org/">Lucene</a>。但是，你没法直接用 Lucene，必须自己写代码去调用它的接口。Elastic 是 Lucene 的封装，提供了 REST API 的操作接口，开箱即用。</p>
+<p>Elasticsearch 是用Java实现的。</p>
+<p>搜索引擎在对数据构建索引时，需要进行分词处理。分词是指将一句话拆解成多个单字或词，这些字或词便是这句话的关键词。如: <code>我在广州</code></p>
+<p><code>我</code>、<code>在</code>、<code>广</code>、<code>州</code>、<code>广州</code> 等都可以是这句话的关键词。</p>
+<p>Elasticsearch 不支持对中文进行分词建立索引，需要配合扩展<strong>elasticsearch-analysis-ik</strong>来实现中文分词处理。</p>
+<h2 id="Docker安装Elasticsearch及其扩展"><a href="#Docker安装Elasticsearch及其扩展" class="headerlink" title="Docker安装Elasticsearch及其扩展"></a>Docker安装Elasticsearch及其扩展</h2><blockquote>
+<p>  注意： haystack 支持 Elasticsearch 1.x、2.x、5.x，所以不能安装Elasticsearch7.x</p>
+</blockquote>
+<h3 id="创建文件夹-elasticsearch"><a href="#创建文件夹-elasticsearch" class="headerlink" title="创建文件夹  elasticsearch"></a>创建文件夹  <code>elasticsearch</code></h3><p>下载中文分词插件 <a target="_blank" rel="noopener" href="https://github.91chifun.workers.dev//https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v5.6.16/elasticsearch-analysis-ik-5.6.16.zip">elasticsearch-analysis-ik-5.6.16.zip</a>， 注意：插件需要和elasticsearch版本对应</p>
+<p>解压到当前文件夹，并将文件夹重命名为<code>elasticsearch-analysis-ik</code></p>
+<h3 id="创建-DockerFile"><a href="#创建-DockerFile" class="headerlink" title="创建 DockerFile"></a>创建 <code>DockerFile</code></h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> elasticsearch:<span class="number">5.6</span>.<span class="number">16</span></span><br><span class="line"><span class="keyword">ADD</span><span class="bash"> elasticsearch-analysis-ik /usr/share/elasticsearch/plugins/elasticsearch-analysis-ik</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="创建镜像"><a href="#创建镜像" class="headerlink" title="创建镜像"></a>创建镜像</h3><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -f Dockerfile -t bookandmusic/elasticsearch-ik:5.6.16 .</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看镜像"><a href="#查看镜像" class="headerlink" title="查看镜像"></a>查看镜像</h3><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建容器"><a href="#创建容器" class="headerlink" title="创建容器"></a>创建容器</h3><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 9200:9200 -p 9300:9300 -e <span class="string">&quot;discovery.type=single-node&quot;</span> --name elasticsearch -e ES_JAVA_OPTS=<span class="string">&quot;-Xms64m -Xmx512m&quot;</span> -d bookandmusic/elasticsearch-ik:5.6.16</span><br><span class="line"></span><br><span class="line"><span class="comment"># docker run --name elasticsearch 创建一个es容器并起一个名字；</span></span><br><span class="line"><span class="comment"># -p 9200:9200 将主机的9200端口映射到docker容器的9200端口，用来给es发送http请求</span></span><br><span class="line"><span class="comment"># -p 9300:9300 9300是es在分布式集群状态下节点之间的通信端口  \ 换行符</span></span><br><span class="line"><span class="comment"># -e 指定一个参数，当前es以单节点模式运行</span></span><br><span class="line"><span class="comment"># *注意，ES_JAVA_OPTS非常重要，指定开发时es运行时的最小和最大内存占用为64M和512M，否则就会占用全部可用内存</span></span><br><span class="line"><span class="comment"># -d 后台启动服务</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  注意： 创建容器时，一定要指定内存，否则，则直接闪退</p>
+</blockquote>
+<h3 id="使用postman测试IK分词"><a href="#使用postman测试IK分词" class="headerlink" title="使用postman测试IK分词"></a>使用postman测试IK分词</h3><p>IK分词效果有两种,一种是ik_max_word（最大分词）和ik_smart（最小分词）</p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/03/image-20210307155255273.png" alt="image-20210307155255273"></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;tokens&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;token&quot;</span>: <span class="string">&quot;今天是&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;start_offset&quot;</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">&quot;end_offset&quot;</span>: <span class="number">3</span>,</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;CN_WORD&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;position&quot;</span>: <span class="number">0</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;token&quot;</span>: <span class="string">&quot;今天&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;start_offset&quot;</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">&quot;end_offset&quot;</span>: <span class="number">2</span>,</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;CN_WORD&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;position&quot;</span>: <span class="number">1</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;token&quot;</span>: <span class="string">&quot;是&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;start_offset&quot;</span>: <span class="number">2</span>,</span><br><span class="line">            <span class="attr">&quot;end_offset&quot;</span>: <span class="number">3</span>,</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;CN_CHAR&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;position&quot;</span>: <span class="number">2</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;token&quot;</span>: <span class="string">&quot;个&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;start_offset&quot;</span>: <span class="number">3</span>,</span><br><span class="line">            <span class="attr">&quot;end_offset&quot;</span>: <span class="number">4</span>,</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;CN_CHAR&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;position&quot;</span>: <span class="number">3</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;token&quot;</span>: <span class="string">&quot;好日子&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;start_offset&quot;</span>: <span class="number">4</span>,</span><br><span class="line">            <span class="attr">&quot;end_offset&quot;</span>: <span class="number">7</span>,</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;CN_WORD&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;position&quot;</span>: <span class="number">4</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;token&quot;</span>: <span class="string">&quot;日子&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;start_offset&quot;</span>: <span class="number">5</span>,</span><br><span class="line">            <span class="attr">&quot;end_offset&quot;</span>: <span class="number">7</span>,</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;CN_WORD&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;position&quot;</span>: <span class="number">5</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/03/image-20210307155506003.png" alt="image-20210307155506003"></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;tokens&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;token&quot;</span>: <span class="string">&quot;今天是&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;start_offset&quot;</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">&quot;end_offset&quot;</span>: <span class="number">3</span>,</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;CN_WORD&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;position&quot;</span>: <span class="number">0</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;token&quot;</span>: <span class="string">&quot;个&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;start_offset&quot;</span>: <span class="number">3</span>,</span><br><span class="line">            <span class="attr">&quot;end_offset&quot;</span>: <span class="number">4</span>,</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;CN_CHAR&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;position&quot;</span>: <span class="number">1</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;token&quot;</span>: <span class="string">&quot;好日子&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;start_offset&quot;</span>: <span class="number">4</span>,</span><br><span class="line">            <span class="attr">&quot;end_offset&quot;</span>: <span class="number">7</span>,</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;CN_WORD&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;position&quot;</span>: <span class="number">2</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="使用haystack对接Elasticsearch"><a href="#使用haystack对接Elasticsearch" class="headerlink" title="使用haystack对接Elasticsearch"></a>使用haystack对接Elasticsearch</h2><p>Haystack为Django提供了模块化的搜索。它的特点是统一的，熟悉的API，可以让你在不修改代码的情况下使用不同的搜索后端（比如 Solr, Elasticsearch, Whoosh, Xapian 等等）。</p>
+<p>我们在django中可以通过使用haystack来调用Elasticsearch搜索引擎。</p>
+<h3 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h3><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install django-haystack</span><br><span class="line">pip install drf-haystack </span><br><span class="line">pip install <span class="string">&quot;elasticsearch&gt;=5,&lt;6&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://drf-haystack.readthedocs.io/en/latest/index.html">drf-haystack</a>是为了在REST framework中使用haystack而进行的封装（如果在Django中使用haystack，则安装<a target="_blank" rel="noopener" href="https://django-haystack.readthedocs.io/en/master/toc.html">django-haystack</a>即可）。</p>
+<h3 id="注册应用"><a href="#注册应用" class="headerlink" title="注册应用"></a>注册应用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">INSTALLED_APPS = [</span><br><span class="line">    ...</span><br><span class="line">    <span class="string">&#x27;haystack&#x27;</span>,</span><br><span class="line">    ...</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>在配置文件 <code>settings.py</code> 中配置haystack使用的搜索引擎后端</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 全文搜索引擎haystack 配置</span></span><br><span class="line"><span class="comment"># 不同的搜索引擎，配置不同，详情见官方文档</span></span><br><span class="line">HAYSTACK_CONNECTIONS = &#123;</span><br><span class="line">    <span class="string">&#x27;default&#x27;</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;ENGINE&#x27;</span>: <span class="string">&#x27;haystack.backends.elasticsearch5_backend.Elasticsearch5SearchEngine&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;URL&#x27;</span>: <span class="string">&#x27;http://127.0.0.1:9200/&#x27;</span>,  <span class="comment"># 此处为elasticsearch运行的服务器ip地址和端口</span></span><br><span class="line">        <span class="string">&#x27;INDEX_NAME&#x27;</span>: <span class="string">&#x27;meiduo&#x27;</span>,  <span class="comment"># 指定elasticserach建立的索引库名称</span></span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索结果每页显示数量</span></span><br><span class="line"><span class="comment"># HAYSTACK_SEARCH_RESULTS_PER_PAGE = 5</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 当添加、修改、删除数据时,实时更新index</span></span><br><span class="line">HAYSTACK_SIGNAL_PROCESSOR = <span class="string">&#x27;haystack.signals.RealtimeSignalProcessor&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="数据模型类"><a href="#数据模型类" class="headerlink" title="数据模型类"></a>数据模型类</h3><p>假设有一个商品模型类SKU</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SKU</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;商品SKU&quot;&quot;&quot;</span></span><br><span class="line">    name = models.CharField(max_length=<span class="number">50</span>, verbose_name=<span class="string">&#x27;名称&#x27;</span>)</span><br><span class="line">    caption = models.CharField(max_length=<span class="number">100</span>, verbose_name=<span class="string">&#x27;副标题&#x27;</span>)</span><br><span class="line">    <span class="comment"># 当前SKU商品从属的分类</span></span><br><span class="line">    <span class="comment"># 隐藏字段category_id是关联的分类的主键id</span></span><br><span class="line">    category = models.ForeignKey(GoodsCategory, related_name=<span class="string">&#x27;sku&#x27;</span>, on_delete=models.PROTECT, verbose_name=<span class="string">&#x27;从属类别&#x27;</span>)</span><br><span class="line">    price = models.DecimalField(max_digits=<span class="number">10</span>, decimal_places=<span class="number">2</span>, verbose_name=<span class="string">&#x27;单价&#x27;</span>)</span><br><span class="line">    stock = models.IntegerField(default=<span class="number">0</span>, verbose_name=<span class="string">&#x27;库存&#x27;</span>)</span><br><span class="line">    sales = models.IntegerField(default=<span class="number">0</span>, verbose_name=<span class="string">&#x27;销量&#x27;</span>)</span><br><span class="line">    comments = models.IntegerField(default=<span class="number">0</span>, verbose_name=<span class="string">&#x27;评价数&#x27;</span>)</span><br><span class="line">    is_launched = models.BooleanField(default=<span class="literal">True</span>, verbose_name=<span class="string">&#x27;是否上架销售&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        db_table = <span class="string">&#x27;tb_sku&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;%s: %s&#x27;</span> % (self.<span class="built_in">id</span>, self.name)</span><br></pre></td></tr></table></figure>
+
+<h3 id="索引类"><a href="#索引类" class="headerlink" title="索引类"></a>索引类</h3><p>通过创建索引类，来指明让搜索引擎对哪些字段建立索引，也就是可以通过哪些字段的关键字来检索数据。</p>
+<p>在应用中新建<code>search_indexes.py</code>文件，用于存放索引类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> haystack <span class="keyword">import</span> indexes</span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> SKU</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SKUIndex</span>(<span class="params">indexes.SearchIndex, indexes.Indexable</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;SKU索引数据模型类&quot;&quot;&quot;</span></span><br><span class="line">    text = indexes.CharField(document=<span class="literal">True</span>, use_template=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    name = indexes.CharField(model_attr=<span class="string">&#x27;name&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    caption = indexes.CharField(model_attr=<span class="string">&#x27;caption&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    category = indexes.CharField(model_attr=<span class="string">&#x27;category&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_model</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;返回建立索引的模型类&quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">return</span> SKU</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">index_queryset</span>(<span class="params">self, using=<span class="literal">None</span></span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;返回要建立索引的数据查询集&quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">return</span> self.get_model().objects.<span class="built_in">filter</span>(is_launched=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="序列化器"><a href="#序列化器" class="headerlink" title="序列化器"></a>序列化器</h3><h4 id="SkuSerializer"><a href="#SkuSerializer" class="headerlink" title="SkuSerializer"></a>SkuSerializer</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> serializers</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SkuSerializer</span>(<span class="params">ModelSerializer</span>):</span></span><br><span class="line">    category = StringRelatedField(read_only=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        model = SKU</span><br><span class="line">        fields = [<span class="string">&#x27;id&#x27;</span>, <span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;caption&#x27;</span>, <span class="string">&#x27;price&#x27;</span>, <span class="string">&#x27;stock&#x27;</span>, <span class="string">&#x27;comments&#x27;</span>, <span class="string">&#x27;category&#x27;</span>, <span class="string">&#x27;default_image&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="HaystackSerializer"><a href="#HaystackSerializer" class="headerlink" title="HaystackSerializer"></a>HaystackSerializer</h4><p><code>HaystackSerializer</code>:根据<code>SearchQueryset</code>中可用的模型填充字段,进行序列化解析;此时，API返回的数据仅包含 Elasticsearch检索出匹配关键词的搜索结果。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> drf_haystack.serializers <span class="keyword">import</span> HaystackSerializer</span><br><span class="line"><span class="keyword">from</span> goods.search_indexes <span class="keyword">import</span> SKUIndex</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SKUHaystackSerializer</span>(<span class="params">HaystackSerializer</span>):</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        SKU索引结果数据序列化器</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        index_classes = [SKUIndex]</span><br><span class="line">        fields = (<span class="string">&#x27;text&#x27;</span>, <span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;caption&#x27;</span>, <span class="string">&#x27;category&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>但是Haystack通过<code>Elasticsearch</code>检索出匹配关键词的搜索结果后，还会在数据库中取出完整的数据库模型类对象，放到搜索结果的<code>object</code>属性中，并将结果通过<code>SKUIndexSerializer</code>序列化器进行序列化。所以我们可以通过声明搜索结果的<code>object</code>字段以<code>SkuSerializer</code>序列化的形式进行处理，明确要返回的搜索结果中每个数据对象包含哪些字段。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> drf_haystack.serializers <span class="keyword">import</span> HaystackSerializer</span><br><span class="line"><span class="keyword">from</span> goods.search_indexes <span class="keyword">import</span> SKUIndex</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SKUHaystackSerializer</span>(<span class="params">HaystackSerializer</span>):</span></span><br><span class="line">    <span class="built_in">object</span> = SkuSerializer(read_only=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        SKU索引结果数据序列化器:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        index_classes = [SKUIndex]</span><br><span class="line">        fields = (<span class="string">&#x27;text&#x27;</span>, <span class="string">&#x27;object&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="HaystackSerializerMixin"><a href="#HaystackSerializerMixin" class="headerlink" title="HaystackSerializerMixin"></a>HaystackSerializerMixin</h4><p><code>HaystackSerializerMixin</code>：可以将此<code>mixin</code>混入类添加到序列化器中，以将实际对象用作序列化的数据源，而不是使用存储在搜索索引字段中的数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> drf_haystack.serializers <span class="keyword">import</span> HaystackSerializerMixin</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SKUHaystackSerializer</span>(<span class="params">HaystackSerializerMixin, SkuSerializer</span>):</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>(<span class="params">SkuSerializer.Meta</span>):</span></span><br><span class="line">        search_fields = [<span class="string">&quot;text&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Page</span>(<span class="params">PageNumberPagination</span>):</span></span><br><span class="line">    page_size = <span class="number">10</span></span><br><span class="line">    page_size_query_param = <span class="string">&#x27;size&#x27;</span></span><br><span class="line">    page_query_param = <span class="string">&#x27;page&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SKUSearchView</span>(<span class="params">HaystackViewSet</span>):</span></span><br><span class="line">    index_models = [SKU]</span><br><span class="line">    serializer_class = SKUHaystackSerializer</span><br><span class="line">    pagination_class = Page</span><br></pre></td></tr></table></figure>
+
+<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path, include</span><br><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> routers</span><br><span class="line"><span class="keyword">from</span> goods.views <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">router = routers.DefaultRouter()</span><br><span class="line">router.register(<span class="string">r&quot;search&quot;</span>, SKUSearchView, basename=<span class="string">&quot;search&quot;</span>)</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;&#x27;</span>, include(router.urls))</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PYTHON/" rel="tag"># PYTHON</a>
+              <a href="/tags/DRF/" rel="tag"># DRF</a>
+              <a href="/tags/Elasticsearch/" rel="tag"># Elasticsearch</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/8c6492e5/" rel="prev" title="Celery异步任务">
+      <i class="fa fa-chevron-left"></i> Celery异步任务
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/96412218/" rel="next" title="DRF-图片上传到七牛云">
+      DRF-图片上传到七牛云 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Elasticsearch"><span class="nav-number">1.</span> <span class="nav-text">Elasticsearch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker%E5%AE%89%E8%A3%85Elasticsearch%E5%8F%8A%E5%85%B6%E6%89%A9%E5%B1%95"><span class="nav-number">2.</span> <span class="nav-text">Docker安装Elasticsearch及其扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9-elasticsearch"><span class="nav-number">2.1.</span> <span class="nav-text">创建文件夹  elasticsearch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-DockerFile"><span class="nav-number">2.2.</span> <span class="nav-text">创建 DockerFile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F"><span class="nav-number">2.3.</span> <span class="nav-text">创建镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E9%95%9C%E5%83%8F"><span class="nav-number">2.4.</span> <span class="nav-text">查看镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AE%B9%E5%99%A8"><span class="nav-number">2.5.</span> <span class="nav-text">创建容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8postman%E6%B5%8B%E8%AF%95IK%E5%88%86%E8%AF%8D"><span class="nav-number">2.6.</span> <span class="nav-text">使用postman测试IK分词</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8haystack%E5%AF%B9%E6%8E%A5Elasticsearch"><span class="nav-number">3.</span> <span class="nav-text">使用haystack对接Elasticsearch</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%E5%8C%85"><span class="nav-number">3.1.</span> <span class="nav-text">安装依赖包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C%E5%BA%94%E7%94%A8"><span class="nav-number">3.2.</span> <span class="nav-text">注册应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">3.3.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E7%B1%BB"><span class="nav-number">3.4.</span> <span class="nav-text">数据模型类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E7%B1%BB"><span class="nav-number">3.5.</span> <span class="nav-text">索引类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E5%99%A8"><span class="nav-number">3.6.</span> <span class="nav-text">序列化器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SkuSerializer"><span class="nav-number">3.6.1.</span> <span class="nav-text">SkuSerializer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HaystackSerializer"><span class="nav-number">3.6.2.</span> <span class="nav-text">HaystackSerializer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HaystackSerializerMixin"><span class="nav-number">3.6.3.</span> <span class="nav-text">HaystackSerializerMixin</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE"><span class="nav-number">3.7.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1"><span class="nav-number">3.8.</span> <span class="nav-text">路由</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">bookandmusic</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备2021028097号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bookandmusic</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : '',
+      projectId: ''
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

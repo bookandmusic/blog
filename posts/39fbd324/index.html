@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bookandmusic.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"ZMZD8LN6JF","apiKey":"c75e305c22fd4cf56b8f03aa6efec207","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Python中不但变量名无需事先声明，而且也无需类型声明。在Python语言中，对象的类型和内存占用都是运行时确定的。在赋值时解释器会根据语法和右侧的操作数来决定新对象的类型。在对象创建后，一个该对象的引用会被赋值给左侧的变量。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python内存管理">
+<meta property="og:url" content="https://bookandmusic.cn/posts/39fbd324/index.html">
+<meta property="og:site_name" content="Bookandmusic">
+<meta property="og:description" content="Python中不但变量名无需事先声明，而且也无需类型声明。在Python语言中，对象的类型和内存占用都是运行时确定的。在赋值时解释器会根据语法和右侧的操作数来决定新对象的类型。在对象创建后，一个该对象的引用会被赋值给左侧的变量。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/python%E9%92%88%E5%AF%B9%E5%8F%98%E9%87%8F%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6%20.png">
+<meta property="article:published_time" content="2020-07-30T13:53:24.000Z">
+<meta property="article:modified_time" content="2022-01-08T09:57:41.825Z">
+<meta property="article:author" content="bookandmusic">
+<meta property="article:tag" content="PYTHON">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/python%E9%92%88%E5%AF%B9%E5%8F%98%E9%87%8F%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6%20.png">
+
+<link rel="canonical" href="https://bookandmusic.cn/posts/39fbd324/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>python内存管理 | Bookandmusic</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Bookandmusic</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">踮起脚尖，另一种高度</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/39fbd324/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="bookandmusic">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bookandmusic">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python内存管理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-30 21:53:24" itemprop="dateCreated datePublished" datetime="2020-07-30T21:53:24+08:00">2020-07-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>Python中不但变量名无需事先声明，而且也无需类型声明。在Python语言中，对象的类型和内存占用都是运行时确定的。在赋值时解释器会根据语法和右侧的操作数来决定新对象的类型。在对象创建后，一个该对象的引用会被赋值给左侧的变量。</p>
+</blockquote>
+<span id="more"></span>
+
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/python%E9%92%88%E5%AF%B9%E5%8F%98%E9%87%8F%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6%20.png" alt="python针对变量的内存管理机制"></p>
+<h2 id="值和引用"><a href="#值和引用" class="headerlink" title="值和引用"></a>值和引用</h2><p>在讲is和==这两种运算符区别之前，首先要知道Python中对象包含的三个基本要素，分别是：<code>id</code>(身份标识)、<code>type</code>(数据类型)和<code>value</code>(值)。</p>
+<p> <code>id()</code>可以用来查看对象的内存地址</p>
+<p><code>is</code>也被叫做同一性运算符，这个运算符比较判断的是对象间的唯一身份标识，也就是<code>id</code>是否相同。</p>
+<p><code>==</code>是python标准操作符中的比较操作符，用来比较判断两个对象的<code>value</code>(值)是否相等</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">58</span>]: a = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">59</span>]: b = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">60</span>]: <span class="built_in">id</span>(a)</span><br><span class="line">Out[<span class="number">60</span>]: <span class="number">4553015712</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">61</span>]: <span class="built_in">id</span>(b)</span><br><span class="line">Out[<span class="number">61</span>]: <span class="number">4553015712</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">62</span>]: a == b</span><br><span class="line">Out[<span class="number">62</span>]: <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">63</span>]: a <span class="keyword">is</span> b</span><br><span class="line">Out[<span class="number">63</span>]: <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">64</span>]: alist = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">In [<span class="number">65</span>]: blist = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">In [<span class="number">66</span>]: <span class="built_in">id</span>(alist)</span><br><span class="line">Out[<span class="number">66</span>]: <span class="number">4615610448</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">67</span>]: <span class="built_in">id</span>(blist)</span><br><span class="line">Out[<span class="number">67</span>]: <span class="number">4608370160</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">70</span>]: alist == blist</span><br><span class="line">Out[<span class="number">70</span>]: <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">71</span>]: alist <span class="keyword">is</span> blist</span><br><span class="line">Out[<span class="number">71</span>]: <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="可变与不可变"><a href="#可变与不可变" class="headerlink" title="可变与不可变"></a>可变与不可变</h2><ol>
+<li><code>list</code>、<code>dict</code>、<code>set</code>属于可变类型</li>
+<li><code>number</code>、<code>str</code>、<code>tuple</code>、<code>bool</code>属于不可变类型</li>
+</ol>
+<p>不可变数据类型在第一次声明赋值声明的时候, 会在内存中开辟一块空间, 用来存放这个变量被赋的值, 而这个变量实际上存储的, 并不是被赋予的这个值, 而是存放这个值所在空间的内存地址, 通过这个地址, 变量就可以在内存中取出数据了. 所谓不可变就是说, 我们不能改变这个数据在内存中的值, 所以当我们改变这个变量的赋值时, 只是在内存中重新开辟了一块空间, 将这一条新的数据存放在这一个新的内存地址里, 而原来的那个变量就不在引用原数据的内存地址而转为引用新数据的内存地址了。</p>
+<p>结合不可变数据类型，可变数据类型就很好理解来，可变数据类型是指变量所指向的内存地址处的值是可以被改变的。</p>
+<p><strong>从另外一个角度来看：</strong></p>
+<p>可变类型：当该数据类型的对应变量的值发生了改变，那么它对应的内存地址也会发生改变，对于这种数据类型，就称不可变数据类型。</p>
+<p>可变数据类型：当该数据类型的对应变量的值发生了改变，那么它对应的内存地址不发生改变，对于这种数据类型，就称可变数据类型。</p>
+<h2 id="内存优化"><a href="#内存优化" class="headerlink" title="内存优化"></a>内存优化</h2><p>Python采用基于值的内存管理模式，相同的值在内存中只有一份。这是很多Python教程上都会提到的一句话，但实际情况要复杂的多。什么才是值？什么样的值才会在内存中只保存一份？这是个非常复杂的问题。</p>
+<h3 id="在python交互环境中"><a href="#在python交互环境中" class="headerlink" title="在python交互环境中"></a>在python交互环境中</h3><p>首先明确一点，整数、实数、字符串是真正意义上的值，而上面那句话中的“值”主要指<strong>不可变类型</strong>中的整数和字符串。对于列表、元组、字典、集合以及range对象、map对象等容器类对象，它们不是普通的“值”，即使看起来是一样的，在内存中也不会只保存一份。</p>
+<blockquote>
+<p>  整数</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">51</span>]: a = <span class="number">12</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">52</span>]: b = <span class="number">12</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">53</span>]: a <span class="keyword">is</span> b</span><br><span class="line">Out[<span class="number">53</span>]: <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<p>python中对于小的整数存在一个缓存池。为了避免因创建相同的值而重复申请内存空间所带来的效率问题， Python解释器会在启动时创建出小整数池，范围是<code>[-5,256]</code>，该范围内的小整数对象是全局解释器范围内被重复使用，永远不会被垃圾回收机制回收。</p>
+<blockquote>
+<p>实数</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">8</span>]: a = <span class="number">12.5</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">9</span>]: b = <span class="number">12.5</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">10</span>]: a <span class="keyword">is</span> b</span><br><span class="line">Out[<span class="number">10</span>]: <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p>对于实数，由于计算机存储实数会有精度问题，很难精确存储，所以不进行缓存，也就是说，即使看起来是一样的实数，在内存中也不是一份。</p>
+<blockquote>
+<p>  字符串</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">63</span>]: a = <span class="string">&quot;abc123_&quot;</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">64</span>]: b = <span class="string">&quot;abc123_&quot;</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">65</span>]: a <span class="keyword">is</span> b</span><br><span class="line">Out[<span class="number">65</span>]: <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">66</span>]: a = <span class="string">&quot;12 3&quot;</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">67</span>]: b = <span class="string">&quot;12 3&quot;</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">68</span>]: a <span class="keyword">is</span> b</span><br><span class="line">Out[<span class="number">68</span>]: <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p>由于变量的存储机制，python增加了字符串的<code>intern</code>机制。也就是说，值同样的字符串对象（<strong>整数也使用</strong>）仅仅会保存一份，是共用的，这也决定了字符串必须是不可变对象。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">70</span>]: c = <span class="string">&quot;a&quot;</span> + <span class="string">&quot;b&quot;</span>  <span class="comment"># 在 compile-time（编译时）已经求完值，被替换成了&#x27;ab&#x27;, </span></span><br><span class="line"></span><br><span class="line">In [<span class="number">71</span>]: <span class="built_in">id</span>(c)</span><br><span class="line">Out[<span class="number">71</span>]: <span class="number">4489029232</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">72</span>]: d = <span class="string">&quot;ab&quot;</span>  <span class="comment"># 此时，内存中已经有 &#x27;ab&#x27;, 因此直接引用即可</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">73</span>]: <span class="built_in">id</span>(d)</span><br><span class="line">Out[<span class="number">73</span>]: <span class="number">4489029232</span></span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">In [<span class="number">74</span>]: <span class="built_in">id</span>(a + <span class="string">&quot;b&quot;</span>)  <span class="comment"># 在run-time（运行时）拼接的，导致没有被主动intern</span></span><br><span class="line">Out[<span class="number">74</span>]: <span class="number">4519083312</span></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">In [<span class="number">75</span>]: a = <span class="string">&#x27;hello world&#x27;</span></span><br><span class="line">In [<span class="number">76</span>]: b = <span class="string">&#x27;hello world&#x27;</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">77</span>]: a <span class="keyword">is</span> b  <span class="comment"># intern机制仅仅对那些看起来像是Python标识符的字符串对象才会触发</span></span><br><span class="line">Out[<span class="number">77</span>]: <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  <strong>intern机制</strong></p>
+</blockquote>
+<p>　　<strong>优点</strong>：在创建新的字符对象时，如果内存中已经存在，则直接引用，避免频繁的创建和销毁内存，提升效率。</p>
+<p>　　<strong>缺点</strong>：在拼接字符串时，或者在改动字符串时会极大的影响性能。原因是字符串在Python当中是不可变对象，所以对字符串的改动不是inplace（原地）操作，需要新开辟内存地址，新建对象。这也是为什么拼接字符串的时候不建议用<code>+</code>而是用<code>join()</code>。<code>join()</code>是先计算出全部字符串的长度，然后再一一拷贝，仅仅创建一次对象。</p>
+<p><strong>总结</strong></p>
+<ol>
+<li>单词，即<strong>Python标识符</strong>，不可修改，默认开启intern机制，共用对象，引用计数为0时自动被回收。</li>
+<li>字符串（包含了除Python标识符以外的字符），不可修改，默认没有开启intern机制，引用计数为0时自动被回收。</li>
+<li>特殊情况下（动态拼接），不会被主动intern。</li>
+</ol>
+<blockquote>
+<p>  元组</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">4</span>]: a = (<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">5</span>]: b = (<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">6</span>]: a <span class="keyword">is</span> b</span><br><span class="line">Out[<span class="number">6</span>]: <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p>对于元组等容器类对象，它们不是普通的“值”，即使看起来是一样的，在内存中也不会只保存一份。</p>
+<h3 id="在Python代码中"><a href="#在Python代码中" class="headerlink" title="在Python代码中"></a>在Python代码中</h3><p>在同一模块文件中，不可变类型的数字、字符串、元组， 在值相同时，只会保存一份;而不同模块中的不同值，才会重新生成。</p>
+<p><strong>模块 <code>bbb.py</code></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">c1 = <span class="number">1000</span></span><br><span class="line">c2 = <span class="string">&quot;hello world % &quot;</span></span><br><span class="line">c3 = (<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">c4 = <span class="number">12.3</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>模块 <code>aaa.py</code></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> bbb <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">a = <span class="number">1000</span></span><br><span class="line">b = <span class="number">1000</span></span><br><span class="line"><span class="built_in">print</span>(a <span class="keyword">is</span> b)  <span class="comment"># True</span></span><br><span class="line"><span class="built_in">print</span>(a <span class="keyword">is</span> c1)  <span class="comment"># False</span></span><br><span class="line"></span><br><span class="line">a = <span class="string">&quot;hello world % &quot;</span></span><br><span class="line">b = <span class="string">&quot;hello world % &quot;</span></span><br><span class="line"><span class="built_in">print</span>(a <span class="keyword">is</span> b)  <span class="comment"># True</span></span><br><span class="line"><span class="built_in">print</span>(a <span class="keyword">is</span> c2)  <span class="comment"># False</span></span><br><span class="line"></span><br><span class="line">a = (<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">b = (<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(a <span class="keyword">is</span> b)  <span class="comment"># True</span></span><br><span class="line"><span class="built_in">print</span>(a <span class="keyword">is</span> c3)  <span class="comment"># False</span></span><br><span class="line"></span><br><span class="line">a = <span class="number">12.3</span></span><br><span class="line">b = <span class="number">12.3</span></span><br><span class="line"><span class="built_in">print</span>(a <span class="keyword">is</span> b)  <span class="comment"># True</span></span><br><span class="line"><span class="built_in">print</span>(a <span class="keyword">is</span> c4)  <span class="comment"># False</span></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PYTHON/" rel="tag"># PYTHON</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/15e35a25/" rel="prev" title="DRF-序列化与反序列化">
+      <i class="fa fa-chevron-left"></i> DRF-序列化与反序列化
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/87ba84dd/" rel="next" title="RESTful规范的API接口设计">
+      RESTful规范的API接口设计 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%80%BC%E5%92%8C%E5%BC%95%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">值和引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E5%8F%98%E4%B8%8E%E4%B8%8D%E5%8F%AF%E5%8F%98"><span class="nav-number">2.</span> <span class="nav-text">可变与不可变</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">内存优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8python%E4%BA%A4%E4%BA%92%E7%8E%AF%E5%A2%83%E4%B8%AD"><span class="nav-number">3.1.</span> <span class="nav-text">在python交互环境中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8Python%E4%BB%A3%E7%A0%81%E4%B8%AD"><span class="nav-number">3.2.</span> <span class="nav-text">在Python代码中</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">bookandmusic</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备2021028097号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bookandmusic</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : '',
+      projectId: ''
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

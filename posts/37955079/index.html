@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bookandmusic.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"ZMZD8LN6JF","apiKey":"c75e305c22fd4cf56b8f03aa6efec207","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="es5和es6对于前端开发来说是经常都会使用的方法，他们为我们开发提供了很多便利的方法和写法，使我们的代码更加的优雅，以下简单总结一下es5与es6的不同。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6语法">
+<meta property="og:url" content="https://bookandmusic.cn/posts/37955079/index.html">
+<meta property="og:site_name" content="Bookandmusic">
+<meta property="og:description" content="es5和es6对于前端开发来说是经常都会使用的方法，他们为我们开发提供了很多便利的方法和写法，使我们的代码更加的优雅，以下简单总结一下es5与es6的不同。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-12T15:13:05.000Z">
+<meta property="article:modified_time" content="2022-01-08T09:57:41.792Z">
+<meta property="article:author" content="bookandmusic">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://bookandmusic.cn/posts/37955079/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ES6语法 | Bookandmusic</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Bookandmusic</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">踮起脚尖，另一种高度</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/37955079/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="bookandmusic">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bookandmusic">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ES6语法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-12 23:13:05" itemprop="dateCreated datePublished" datetime="2020-04-12T23:13:05+08:00">2020-04-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>es5和es6对于前端开发来说是经常都会使用的方法，他们为我们开发提供了很多便利的方法和写法，使我们的代码更加的优雅，以下简单总结一下es5与es6的不同。</p>
+<span id="more"></span>
+
+<h2 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h2><h3 id="关键字介绍"><a href="#关键字介绍" class="headerlink" title="关键字介绍"></a>关键字介绍</h3><h4 id="let"><a href="#let" class="headerlink" title="let"></a><code>let</code></h4><p><code>let</code>作用域只局限于当前代码块</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   <span class="keyword">var</span> a = <span class="number">10</span></span><br><span class="line">   <span class="keyword">let</span> b = <span class="number">20</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a)  <span class="comment">// 输出 10</span></span><br><span class="line"><span class="built_in">console</span>.log(b)  <span class="comment">// 报错 b is not defined</span></span><br></pre></td></tr></table></figure>
+
+<p>使用<code>let</code>声明的变量作用域不会提前</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a)  <span class="comment">// 输出 undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(b)  <span class="comment">// 报错 Cannot access &#x27;b&#x27; before initialization</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">10</span></span><br><span class="line"><span class="keyword">let</span> b = <span class="number">20</span></span><br></pre></td></tr></table></figure>
+
+<p>在相同的作用域下不能声明相同的变量</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">     &#123;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">10</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> a = <span class="number">20</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">10</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">20</span>  <span class="comment">// 报错 Identifier &#x27;a&#x27; has already been declared</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="const"><a href="#const" class="headerlink" title="const"></a><code>const</code></h4><ul>
+<li><p>声明一个只读的常量。一旦声明，常量的值就不能改变</p>
+</li>
+<li><p><code>const</code>只声明，不赋值，就会报错，这意味着<code>const</code>一旦声明常量，就必须立即初始化</p>
+</li>
+<li><p><code>const</code>作用域与<code>let</code>相同，只在所在的块级作用域内有效</p>
+</li>
+<li><p><code>const</code>声明的常量不支持提升，和<code>let</code>一样，只能在声明后使用</p>
+</li>
+<li><p><code>const</code>声明的常量，也与<code>let</code>一样， 不可重复声明</p>
+</li>
+<li><p><code>const</code>实际保证的并不是常量的值不变，而是常量指向的内存地址不得改变</p>
+<ul>
+<li>对于简单的数据类型(数字、字符串、布尔值),值就保存在常量指向的地址，因此等同常量</li>
+<li>对于复合类型的数据(数组、对象)，常量指向的内存地址保存的只是一个指针，const只能保证指针是固定的，但是指针指向的数据结构是不是可变的，并不能保证</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">5</span></span><br><span class="line"><span class="comment">// a = 10 // 报错 Assignment to constant variable</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123;&#125;</span><br><span class="line">obj.a = <span class="number">20</span> <span class="comment">// 可执行</span></span><br><span class="line"><span class="built_in">console</span>.log(obj) <span class="comment">// 可执行 &#123;a: 20&#125;</span></span><br><span class="line"><span class="comment">// obj = &#123;&#125; // 报错</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> arry = []</span><br><span class="line">arry.push(<span class="number">1</span>) <span class="comment">// 可执行</span></span><br><span class="line">arry.length = <span class="number">0</span> <span class="comment">// 可执行</span></span><br><span class="line"><span class="comment">// arry = [] // 报错 Assignment to constant variable</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="关键字适用场景"><a href="#关键字适用场景" class="headerlink" title="关键字适用场景"></a>关键字适用场景</h3><p>使用var声明循环变量，会导致全局共用一个变量</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span>&gt;</span>按钮<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span>&gt;</span>按钮<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span>&gt;</span>按钮<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span>&gt;</span>按钮<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span>&gt;</span>按钮<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> btns = <span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;button&#x27;</span>)</span></span><br><span class="line"><span class="javascript">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; btns.length; i++) &#123;</span></span><br><span class="line"><span class="javascript">        btns[i].onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="string">`这是第<span class="subst">$&#123;i&#125;</span>个按钮`</span>)</span></span><br><span class="line"><span class="javascript">        &#125;</span></span><br><span class="line"><span class="javascript">    &#125;</span></span><br><span class="line"><span class="javascript">    <span class="comment">// 此时点击任何按钮，输出都是&quot;这是第5个按钮&quot;</span></span></span><br><span class="line"><span class="javascript"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; btns.length; j++) &#123;</span></span><br><span class="line"><span class="javascript">        btns[j].onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="string">`这是第<span class="subst">$&#123;j&#125;</span>个按钮`</span>)</span></span><br><span class="line"><span class="javascript">        &#125;</span></span><br><span class="line"><span class="javascript">    &#125;</span></span><br><span class="line"><span class="javascript">    <span class="comment">// 把循环中的var改为let,则为正确的结果，即输出对应的按钮序号</span></span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>下面的例子也是for循环中全局共用同一变量的弊端</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">1</span>;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i) <span class="comment">// 输出 10个9</span></span><br><span class="line">    &#125;, <span class="number">100</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i) <span class="comment">// 9</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">1</span>;j&lt;<span class="number">10</span>;j++)&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(j) <span class="comment">// 输出 0-9</span></span><br><span class="line">    &#125;, <span class="number">100</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(j) <span class="comment">// 报错 j is not defined</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>==解释==</p>
+</blockquote>
+<ul>
+<li><p>var是全局作用域，有变量提升的作用，所以在for中定义一个变量，全局可以使用，循环中的每一次给变量i赋值都是给全局变量i赋值。</p>
+</li>
+<li><p>let是块级作用域,只能在代码块中起作用，在js中一个{}中的语句我们也称为叫一个代码块，每次循环会产生一个代码块，每个代码块中的都是一个新的变量j</p>
+</li>
+</ul>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<li><code>const</code>一般用在需要一个模块时使用或者定义一些全局常量时使用</li>
+<li><code>let</code>限制了变量的作用域，保证变量不会影响全局变量，所以尽量将<code>var</code>改为<code>let</code></li>
+</ul>
+<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><h3 id="箭头函数介绍"><a href="#箭头函数介绍" class="headerlink" title="箭头函数介绍"></a>箭头函数介绍</h3><p>ES6标准新增了一种新的函数：Arrow Function（箭头函数）。</p>
+<p>为什么叫Arrow Function？因为它的定义用的就是一个箭头</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x =&gt; x * x</span><br></pre></td></tr></table></figure>
+
+<p>上面的箭头函数相当于：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x * x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>箭头函数相当于匿名函数，并且简化了函数定义。箭头函数有两种格式。一种像上面的，只包含一个表达式，连<code>&#123; ... &#125;</code>和<code>return</code>都省略掉了。还有一种可以包含多条语句，这时候就不能省略<code>&#123; ... &#125;</code>和<code>return</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">x =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (x &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> x * x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> - x * x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果参数不是一个，就需要用括号()括起来：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 两个参数:</span></span><br><span class="line">(x, y) =&gt; x * x + y * y</span><br><span class="line"></span><br><span class="line"><span class="comment">// 无参数:</span></span><br><span class="line">() =&gt; <span class="number">3.14</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 可变参数:</span></span><br><span class="line">(x, y, ...rest) =&gt; &#123;</span><br><span class="line">    <span class="keyword">var</span> i, sum = x + y;</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">0</span>; i&lt;rest.length; i++) &#123;</span><br><span class="line">        sum += rest[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果要返回一个对象，就要注意，如果是单表达式，这么写的话会报错：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SyntaxError:</span></span><br><span class="line">x =&gt; &#123; <span class="attr">foo</span>: x &#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为和函数体的{ … }有语法冲突，所以要改为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ok:</span></span><br><span class="line">x =&gt; (&#123; <span class="attr">foo</span>: x &#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="箭头函数与匿名函数异同"><a href="#箭头函数与匿名函数异同" class="headerlink" title="箭头函数与匿名函数异同"></a>箭头函数与匿名函数异同</h3><p>箭头函数看上去是匿名函数的一种简写，但实际上，箭头函数和匿名函数有个明显的区别:</p>
+<p>箭头函数的提出，主要是为了解决多层函数嵌套中this指代混乱的问题；箭头函数内部的this是词法作用域，由上下文确定。</p>
+<ul>
+<li><p>使用普通函数嵌套会产生this指代混乱的问题</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">    <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">    <span class="attr">getBirth</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> bth = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="comment">// 多层嵌套函数中，this优先寻找父级作用域对象，不存在，即指向全局window对象</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>().getFullYear() - <span class="built_in">this</span>.age  <span class="comment">// this.age   undefined</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> bth()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(person.getBirth()) <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure></li>
+<li><p>使用箭头函数即可解决问题</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">    <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">    <span class="attr">getBirth</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> bth = <span class="function">()=&gt;</span>&#123;</span><br><span class="line">          <span class="comment">// 在箭头函数中 this会寻找父级作用域的对象，找到为止</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>().getFullYear() - <span class="built_in">this</span>.age  <span class="comment">// this.age  18</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> bth()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(person.getBirth()) <span class="comment">// 2002</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="箭头函数不适用的场景"><a href="#箭头函数不适用的场景" class="headerlink" title="箭头函数不适用的场景"></a>箭头函数不适用的场景</h3><p>==作为对象的属性==</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>); <span class="comment">// window</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>作为对象的属性时，this的指向则不再是对象本身了，这就造成了意想不到的结果</p>
+<p>==不可以作为构造函数来使用==</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Person = <span class="function">(<span class="params">name</span>) =&gt;</span> &#123; <span class="comment">// Uncaught TypeError: Person is not a constructor</span></span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person(<span class="string">&#x27;Jack&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这个特性很容易测试，如果上一条明白的话也很容易理解： 箭头函数压根就没有this，当然不能作为构造函数（如果明白构造函数new的过程的话，插一句： new的过程其实就是创建一个对象，将this指向该对象，然后执行代码初始化这个对象，最后返回）</p>
+<p>==不可以作为原型方法==</p>
+<p>同样的规则适用于原型方法（prototype method）的定义，使用箭头函数会导致运行时的执行上下文错误</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Cat.prototype.sayCatName = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span> === <span class="built_in">window</span>); <span class="comment">// =&gt; true</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cat = <span class="keyword">new</span> Cat(<span class="string">&#x27;Mew&#x27;</span>);</span><br><span class="line">cat.sayCatName(); <span class="comment">// =&gt; undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>使用传统的函数表达式就能解决问题：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Cat.prototype.sayCatName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span> === cat); <span class="comment">// =&gt; true</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cat = <span class="keyword">new</span> Cat(<span class="string">&#x27;Mew&#x27;</span>);</span><br><span class="line">cat.sayCatName(); <span class="comment">// =&gt; &#x27;Mew&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>sayCatName 变成普通函数之后，被调用时的执行上下文就会指向新创建的 cat 实例。</p>
+<p>==不绑定arguments==（如果有要使用arguments的时候可以使用rest参数代替）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>); <span class="comment">// Uncaught ReferenceError: arguments is not defined</span></span><br><span class="line">&#125;;</span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
+
+<p>这个特性也很好测试，但是实在要使用<code>arguments</code>对象要怎么办呢？我们可以使用es6的另一个新特性rest参数，完美替代</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="function">(<span class="params">...args</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(args); <span class="comment">// [1, 2, 3]</span></span><br><span class="line">&#125;;</span><br><span class="line">foo(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="JS对象嵌套函数"><a href="#JS对象嵌套函数" class="headerlink" title="JS对象嵌套函数"></a>JS对象嵌套函数</h2><p>在 <code>js</code> 的语法规则中，如果一个对象内存在方法，则该方法 <code>this</code> 指向当前对象。<br>如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attr">age</span>: <span class="number">10</span>,</span><br><span class="line">    <span class="attr">getAge</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; </span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.age)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.getAge();<span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
+
+<p>若方法中再次包含函数方法，则该嵌套函数指向全局。不能获取到本对象中的属性。<br>如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attr">age</span>: <span class="number">10</span>,</span><br><span class="line">    <span class="attr">getAge</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; </span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; alert(<span class="built_in">this</span>.age)&#125;, <span class="number">1000</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.getAge();<span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>可以通过如下几种办法来解决此问题：  </p>
+<ol>
+<li>  定义变量，保存对象 <code>this</code></li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">getAge: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; </span><br><span class="line">		<span class="keyword">let</span> self = <span class="built_in">this</span>;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; alert(self.age)&#125;, <span class="number">1000</span>)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>  通过箭头函数的方式 </li>
+</ol>
+<p>由于箭头函数具有默认指向父级调用对象 obj 的特点，因此也可以解决本问题</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">getAge: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; </span><br><span class="line">		<span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123; alert(<span class="built_in">this</span>.age)&#125;, <span class="number">1000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h2><h3 id="解构赋值介绍"><a href="#解构赋值介绍" class="headerlink" title="解构赋值介绍"></a>解构赋值介绍</h3><p>解构赋值允许你使用类似数组或对象字面量的语法将数组和对象的属性赋给各种变量。这种赋值语法极度简洁，同时还比传统的属性访问方法更为清晰。</p>
+<p>通常来说，你很可能这样访问数组中的前三个元素：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> first = someArray[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">var</span> second = someArray[<span class="number">1</span>];</span><br><span class="line"><span class="keyword">var</span> third = someArray[<span class="number">2</span>];</span><br></pre></td></tr></table></figure>
+
+<p>如果使用解构赋值的特性，将会使等效的代码变得更加简洁并且可读性更高：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> [first, second, third] = someArray;</span><br></pre></td></tr></table></figure>
+
+<p><code>SpiderMonkey</code>（Firefox 的 JavaScript 引擎）已经支持解构的大部分功能，但是仍不健全。你可以通过 <a target="_blank" rel="noopener" href="https://bugzilla.mozilla.org/show_bug.cgi?id=694100">bug 694100</a> 跟踪解构和其它 ES6 特性在 <code>SpiderMonkey</code> 中的支持情况。</p>
+<h3 id="数组与迭代器的解构"><a href="#数组与迭代器的解构" class="headerlink" title="数组与迭代器的解构"></a>数组与迭代器的解构</h3><p>以上是数组解构赋值的一个简单示例，其语法的一般形式为：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ variable1, variable2, ..., variableN ] = array;</span><br></pre></td></tr></table></figure>
+
+<p>这将为 variable1 到 variableN 的变量赋予数组中相应元素项的值。如果你想在赋值的同时声明变量，可在赋值语句前加入<code>var</code>、<code>let</code>或<code>const</code>关键字，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> [ variable1, variable2, ..., variableN ] = array;</span><br><span class="line"><span class="keyword">let</span> [ variable1, variable2, ..., variableN ] = array;</span><br><span class="line"><span class="keyword">const</span> [ variable1, variable2, ..., variableN ] = array;</span><br></pre></td></tr></table></figure>
+
+<p>事实上，用<code>变量</code>来描述并不恰当，因为你可以对任意深度的嵌套数组进行解构：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> [foo, [[bar], baz]] = [<span class="number">1</span>, [[<span class="number">2</span>], <span class="number">3</span>]];</span><br><span class="line"><span class="built_in">console</span>.log(foo);  <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(bar);  <span class="comment">// 2</span></span><br><span class="line"><span class="built_in">console</span>.log(baz);  <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+<p>此外，你可以在对应位留空来跳过被解构数组中的某些元素：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> [,,third] = [<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>, <span class="string">&quot;baz&quot;</span>];</span><br><span class="line"><span class="built_in">console</span>.log(third);  <span class="comment">// &quot;baz&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>而且你还可以通过 “<a target="_blank" rel="noopener" href="http://www.infoq.com/cn/articles/es6-in-depth-rest-parameters-and-defaults">不定参数</a>” 模式捕获数组中的所有尾随元素：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> [head, ...tail] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line"><span class="built_in">console</span>.log(tail); <span class="comment">// [2, 3, 4]</span></span><br></pre></td></tr></table></figure>
+
+<p>当访问空数组或越界访问数组时，对其解构与对其索引的行为一致，最终得到的结果都是：<code>undefined</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log([][<span class="number">0</span>]);   <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">var</span> [missing] = [];</span><br><span class="line"><span class="built_in">console</span>.log(missing); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>请注意，数组解构赋值的模式同样适用于任意迭代器：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">fibs</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> a = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">var</span> b = <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="keyword">yield</span> a;</span><br><span class="line">        [a, b] = [b, a + b];</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> [first, second, third, fourth, fifth, sixth] = fibs();</span><br><span class="line"><span class="built_in">console</span>.log(sixth);  <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="对象的解构"><a href="#对象的解构" class="headerlink" title="对象的解构"></a>对象的解构</h3><p>通过解构对象，你可以把它的每个属性与不同的变量绑定，首先指定被绑定的属性，然后紧跟一个要解构的变量。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> robotA = &#123; <span class="attr">name</span>: <span class="string">&quot;Bender&quot;</span> &#125;;</span><br><span class="line"><span class="keyword">var</span> robotB = &#123; <span class="attr">name</span>: <span class="string">&quot;Flexo&quot;</span> &#125;;</span><br><span class="line"><span class="keyword">var</span> &#123; <span class="attr">name</span>: nameA &#125; = robotA;</span><br><span class="line"><span class="keyword">var</span> &#123; <span class="attr">name</span>: nameB &#125; = robotB;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(nameA);  <span class="comment">// &quot;Bender&quot;</span></span><br><span class="line"><span class="built_in">console</span>.log(nameB);  <span class="comment">// &quot;Flexo&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>当属性名与变量名一致时，可以通过一种实用的句法简写：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> &#123; foo, bar &#125; = &#123; <span class="attr">foo</span>: <span class="string">&quot;lorem&quot;</span>, <span class="attr">bar</span>: <span class="string">&quot;ipsum&quot;</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(foo);  <span class="comment">// &quot;lorem&quot;</span></span><br><span class="line"><span class="built_in">console</span>.log(bar);  <span class="comment">// &quot;ipsum&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>与数组解构一样，你可以随意嵌套并进一步组合对象解构：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> complicatedObj = &#123;</span><br><span class="line">  <span class="attr">arrayProp</span>: [</span><br><span class="line">    <span class="string">&quot;Zapp&quot;</span>,</span><br><span class="line">    &#123; <span class="attr">second</span>: <span class="string">&quot;Brannigan&quot;</span> &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> &#123; <span class="attr">arrayProp</span>: [first, &#123; second &#125;] &#125; = complicatedObj;</span><br><span class="line"><span class="built_in">console</span>.log(first);</span><br><span class="line"><span class="comment">// &quot;Zapp&quot;</span></span><br><span class="line"><span class="built_in">console</span>.log(second);</span><br><span class="line"><span class="comment">// &quot;Brannigan&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>当你解构一个未定义的属性时，得到的值为<code>undefined</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> &#123; missing &#125; = &#123;&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(missing);</span><br><span class="line"><span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>请注意，当你解构对象并赋值给变量时，如果你已经声明或不打算声明这些变量（亦即赋值语句前没有<code>let</code>、<code>const</code>或<code>var</code>关键字），你应该注意这样一个潜在的语法错误：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123; blowUp &#125; = &#123; <span class="attr">blowUp</span>: <span class="number">10</span> &#125;;</span><br><span class="line"><span class="comment">// Syntax error 语法错误</span></span><br></pre></td></tr></table></figure>
+
+<p>为什么会出错？这是因为 JavaScript 语法通知解析引擎将任何以 {开始的语句解析为一个块语句（例如，<code>&#123;console&#125;</code>是一个合法块语句）。解决方案是将整个表达式用一对小括号包裹：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(&#123; safe &#125; = &#123;&#125;);</span><br><span class="line"><span class="comment">// No errors 没有语法错误</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="解构值不是对象、数组或迭代器"><a href="#解构值不是对象、数组或迭代器" class="headerlink" title="解构值不是对象、数组或迭代器"></a>解构值不是对象、数组或迭代器</h3><p>当你尝试解构<code>null</code>或<code>undefined</code>时，你会得到一个类型错误：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> &#123;blowUp&#125; = <span class="literal">null</span>;</span><br><span class="line"><span class="comment">// TypeError: null has no properties（null没有属性）</span></span><br></pre></td></tr></table></figure>
+
+<p>然而，你可以解构其它原始类型，例如：<code>布尔值</code>、<code>数值</code>、<code>字符串</code>，但是你将得到<code>undefined</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> &#123;wtf&#125; = <span class="literal">NaN</span>;</span><br><span class="line"><span class="built_in">console</span>.log(wtf);</span><br><span class="line"><span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>你可能对此感到意外，但经过进一步审查你就会发现，原因其实非常简单。当使用对象赋值模式时，被解构的值<a target="_blank" rel="noopener" href="https://people.mozilla.org/~jorendorff/es6-draft.html#sec-requireobjectcoercible">需要被强制转换为对象</a>。大多数类型都可以被转换为对象，但<code>null</code>和<code>undefined</code>却无法进行转换。当使用数组赋值模式时，被解构的值一定要<a target="_blank" rel="noopener" href="https://people.mozilla.org/~jorendorff/es6-draft.html#sec-getiterator">包含一个迭代器</a>。</p>
+<h3 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h3><p>当你要解构的属性未定义时你可以提供一个默认值：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> [missing = <span class="literal">true</span>] = [];</span><br><span class="line"><span class="built_in">console</span>.log(missing);</span><br><span class="line"><span class="comment">// true</span></span><br><span class="line"><span class="keyword">var</span> &#123; <span class="attr">message</span>: msg = <span class="string">&quot;Something went wrong&quot;</span> &#125; = &#123;&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(msg);</span><br><span class="line"><span class="comment">// &quot;Something went wrong&quot;</span></span><br><span class="line"><span class="keyword">var</span> &#123; x = <span class="number">3</span> &#125; = &#123;&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(x);</span><br><span class="line"><span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/f8e57889/" rel="prev" title="python环境配置">
+      <i class="fa fa-chevron-left"></i> python环境配置
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/6098be36/" rel="next" title="vue-router">
+      vue-router <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">变量声明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E5%AD%97%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.1.</span> <span class="nav-text">关键字介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#let"><span class="nav-number">1.1.1.</span> <span class="nav-text">let</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#const"><span class="nav-number">1.1.2.</span> <span class="nav-text">const</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E5%AD%97%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.2.</span> <span class="nav-text">关键字适用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">1.3.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">箭头函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.1.</span> <span class="nav-text">箭头函数介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E4%B8%8E%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%E5%BC%82%E5%90%8C"><span class="nav-number">2.2.</span> <span class="nav-text">箭头函数与匿名函数异同</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E4%B8%8D%E9%80%82%E7%94%A8%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">2.3.</span> <span class="nav-text">箭头函数不适用的场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS%E5%AF%B9%E8%B1%A1%E5%B5%8C%E5%A5%97%E5%87%BD%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">JS对象嵌套函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC"><span class="nav-number">4.</span> <span class="nav-text">解构赋值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC%E4%BB%8B%E7%BB%8D"><span class="nav-number">4.1.</span> <span class="nav-text">解构赋值介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%9A%84%E8%A7%A3%E6%9E%84"><span class="nav-number">4.2.</span> <span class="nav-text">数组与迭代器的解构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%A7%A3%E6%9E%84"><span class="nav-number">4.3.</span> <span class="nav-text">对象的解构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%9E%84%E5%80%BC%E4%B8%8D%E6%98%AF%E5%AF%B9%E8%B1%A1%E3%80%81%E6%95%B0%E7%BB%84%E6%88%96%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-number">4.4.</span> <span class="nav-text">解构值不是对象、数组或迭代器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">4.5.</span> <span class="nav-text">默认值</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">bookandmusic</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备2021028097号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bookandmusic</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : '',
+      projectId: ''
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

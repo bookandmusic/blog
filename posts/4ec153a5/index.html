@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bookandmusic.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"ZMZD8LN6JF","apiKey":"c75e305c22fd4cf56b8f03aa6efec207","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="持久化就是 程序数据在 持久状态 和 瞬时状态 间转换的机制  通俗地讲，就是 瞬时数据(比如内存中的数据，是不能永久保存的)持久化为持久数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对象持久化">
+<meta property="og:url" content="https://bookandmusic.cn/posts/4ec153a5/index.html">
+<meta property="og:site_name" content="Bookandmusic">
+<meta property="og:description" content="持久化就是 程序数据在 持久状态 和 瞬时状态 间转换的机制  通俗地讲，就是 瞬时数据(比如内存中的数据，是不能永久保存的)持久化为持久数据">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-08T11:18:27.000Z">
+<meta property="article:modified_time" content="2022-01-08T09:57:41.843Z">
+<meta property="article:author" content="bookandmusic">
+<meta property="article:tag" content="PYTHON">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://bookandmusic.cn/posts/4ec153a5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>对象持久化 | Bookandmusic</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Bookandmusic</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">踮起脚尖，另一种高度</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/4ec153a5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="bookandmusic">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bookandmusic">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          对象持久化
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-08 19:18:27" itemprop="dateCreated datePublished" datetime="2021-08-08T19:18:27+08:00">2021-08-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>持久化就是 程序数据在 <strong>持久状态</strong> 和 <strong>瞬时状态</strong> 间转换的机制</p>
+</blockquote>
+<p>通俗地讲，就是 <strong>瞬时数据</strong>(比如内存中的数据，是不能永久保存的)<strong>持久化为持久数据</strong></p>
+<span id="more"></span>
+
+<p>比如常见的持久化方式就是将这些内存数据写到磁盘文件内，这样就可以让数据存活的更长</p>
+<p>存入数据库也是持久化的一种方式</p>
+<p>在python中实现数据的持久化可以采用以下方式：</p>
+<ul>
+<li><code>pickle</code>: python自带的模块</li>
+<li><code>cPickle</code>: c语言版本的Pickle，比pickle快很多</li>
+<li><code>json</code>: Json是一种文件格式，也可以用来对 对象持久化</li>
+<li><code>ujson</code>: 第三方模块，和json类似，比其他模块快很多，尤其是数据比较大的时候</li>
+</ul>
+<blockquote>
+<p>  pickle：持久化后的数据格式是bytes字符串</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">10</span>]: stu = &#123;<span class="string">&#x27;name&#x27;</span>:<span class="string">&#x27;小米&#x27;</span>, <span class="string">&#x27;age&#x27;</span>:<span class="number">23</span>, <span class="string">&#x27;gender&#x27;</span>:<span class="literal">True</span>&#125;</span><br><span class="line"></span><br><span class="line">In [<span class="number">11</span>]: <span class="keyword">import</span> pickle</span><br><span class="line"></span><br><span class="line">In [<span class="number">12</span>]: s = pickle.dumps(stu)</span><br><span class="line"></span><br><span class="line">In [<span class="number">13</span>]: s</span><br><span class="line">Out[<span class="number">13</span>]: <span class="string">b&#x27;\x80\x03&#125;q\x00(X\x04\x00\x00\x00nameq\x01X\x06\x00\x00\x00\xe5\xb0\x8f\xe7\xb1\xb3q\x02X\x03\x00\x00\x00ageq\x03K\x17X\x06\x00\x00\x00genderq\x04\x88u.&#x27;</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">14</span>]: pickle.loads(s)</span><br><span class="line">Out[<span class="number">14</span>]: &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;小米&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">23</span>, <span class="string">&#x27;gender&#x27;</span>: <span class="literal">True</span>&#125;</span><br><span class="line"></span><br><span class="line">In [<span class="number">14</span>]: pickle.loads(s)</span><br><span class="line">Out[<span class="number">14</span>]: &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;小米&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">23</span>, <span class="string">&#x27;gender&#x27;</span>: <span class="literal">True</span>&#125;</span><br><span class="line"></span><br><span class="line">In [<span class="number">15</span>]: <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;stu.json&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    ...:     pickle.dump(stu, f)</span><br><span class="line">    ...:</span><br><span class="line"></span><br><span class="line">In [<span class="number">16</span>]: <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;stu.json&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    ...:     data = pickle.load(f)</span><br><span class="line">    ...:</span><br><span class="line"></span><br><span class="line">In [<span class="number">17</span>]: data</span><br><span class="line">Out[<span class="number">17</span>]: &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;小米&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">23</span>, <span class="string">&#x27;gender&#x27;</span>: <span class="literal">True</span>&#125; </span><br></pre></td></tr></table></figure>
+
+
+
+
+<blockquote>
+<p>cPickle：持久化后的数据格式是bytes字符串</p>
+</blockquote>
+<p>在python2.x中,<code>cPickle</code>是附带的标准库;在python3.x上，<code>cPickle</code>已经从<code>cPickle</code>变成了<code>cPickle_pickle</code>。因此，在python3.x中，如果要使用<code>cPickle</code>，可以执行以下操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">18</span>]: stu = &#123;<span class="string">&#x27;name&#x27;</span>:<span class="string">&#x27;小米&#x27;</span>, <span class="string">&#x27;age&#x27;</span>:<span class="number">23</span>, <span class="string">&#x27;gender&#x27;</span>:<span class="literal">True</span>&#125;</span><br><span class="line"></span><br><span class="line">In [<span class="number">19</span>]: <span class="keyword">import</span> _pickle <span class="keyword">as</span> cPickle</span><br><span class="line"></span><br><span class="line">In [<span class="number">20</span>]: s = cPickle.dumps(stu)</span><br><span class="line"></span><br><span class="line">In [<span class="number">21</span>]: s</span><br><span class="line">Out[<span class="number">21</span>]: <span class="string">b&#x27;\x80\x03&#125;q\x00(X\x04\x00\x00\x00nameq\x01X\x06\x00\x00\x00\xe5\xb0\x8f\xe7\xb1\xb3q\x02X\x03\x00\x00\x00ageq\x03K\x17X\x06\x00\x00\x00genderq\x04\x88u.&#x27;</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">22</span>]: cPickle.loads(s)</span><br><span class="line">Out[<span class="number">22</span>]: &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;小米&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">23</span>, <span class="string">&#x27;gender&#x27;</span>: <span class="literal">True</span>&#125;</span><br><span class="line"></span><br><span class="line">In [<span class="number">23</span>]: <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;stu.json&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    ...:     cPickle.dump(stu, f)</span><br><span class="line">    ...:</span><br><span class="line"></span><br><span class="line">In [<span class="number">24</span>]: <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;stu.json&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    ...:     data = cPickle.load(f)</span><br><span class="line">    ...:</span><br><span class="line"></span><br><span class="line">In [<span class="number">26</span>]: data</span><br><span class="line">Out[<span class="number">26</span>]: &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;小米&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">23</span>, <span class="string">&#x27;gender&#x27;</span>: <span class="literal">True</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  Json: 持久化后的数据格式是str字符串</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">18</span>]: stu = &#123;<span class="string">&#x27;name&#x27;</span>:<span class="string">&#x27;小米&#x27;</span>, <span class="string">&#x27;age&#x27;</span>:<span class="number">23</span>, <span class="string">&#x27;gender&#x27;</span>:<span class="literal">True</span>&#125;</span><br><span class="line"></span><br><span class="line">In [<span class="number">19</span>]: <span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line">In [<span class="number">20</span>]: s = json.dumps(stu)</span><br><span class="line"></span><br><span class="line">In [<span class="number">21</span>]: s</span><br><span class="line">Out[<span class="number">21</span>]: <span class="string">&#x27;&#123;&quot;name&quot;:&quot;\\u5c0f\\u7c73&quot;,&quot;age&quot;:23,&quot;gender&quot;:true&#125;&#x27;</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">In [22]: json.loads(s)</span></span><br><span class="line"><span class="string">Out[22]: &#123;&#x27;</span>name<span class="string">&#x27;: &#x27;</span>小米<span class="string">&#x27;, &#x27;</span>age<span class="string">&#x27;: 23, &#x27;</span>gende<span class="string">r&#x27;: True&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">In [23]: with open(&#x27;</span>stu.json<span class="string">&#x27;, &#x27;</span>w<span class="string">&#x27;) as f:</span></span><br><span class="line"><span class="string">    ...:     json.dump(stu, f)</span></span><br><span class="line"><span class="string">    ...:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">In [24]: with open(&#x27;</span>stu.json<span class="string">&#x27;, &#x27;</span><span class="string">r&#x27;) as f:</span></span><br><span class="line"><span class="string">    ...:     data = json.load(f)</span></span><br><span class="line"><span class="string">    ...:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">In [26]: data</span></span><br><span class="line"><span class="string">Out[26]: &#123;&#x27;</span>name<span class="string">&#x27;: &#x27;</span>小米<span class="string">&#x27;, &#x27;</span>age<span class="string">&#x27;: 23, &#x27;</span>gende<span class="string">r&#x27;: True&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>  uJson：持久化后的数据格式是str字符串</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">18</span>]: stu = &#123;<span class="string">&#x27;name&#x27;</span>:<span class="string">&#x27;小米&#x27;</span>, <span class="string">&#x27;age&#x27;</span>:<span class="number">23</span>, <span class="string">&#x27;gender&#x27;</span>:<span class="literal">True</span>&#125;</span><br><span class="line"></span><br><span class="line">In [<span class="number">19</span>]: <span class="keyword">import</span> ujson</span><br><span class="line"></span><br><span class="line">In [<span class="number">20</span>]: s = ujson.dumps(stu)</span><br><span class="line"></span><br><span class="line">In [<span class="number">21</span>]: s</span><br><span class="line">Out[<span class="number">21</span>]: <span class="string">&#x27;&#123;&quot;name&quot;:&quot;\\u5c0f\\u7c73&quot;,&quot;age&quot;:23,&quot;gender&quot;:true&#125;&#x27;</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">In [22]: ujson.loads(s)</span></span><br><span class="line"><span class="string">Out[22]: &#123;&#x27;</span>name<span class="string">&#x27;: &#x27;</span>小米<span class="string">&#x27;, &#x27;</span>age<span class="string">&#x27;: 23, &#x27;</span>gende<span class="string">r&#x27;: True&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">In [23]: with open(&#x27;</span>stu.json<span class="string">&#x27;, &#x27;</span>w<span class="string">&#x27;) as f:</span></span><br><span class="line"><span class="string">    ...:     ujson.dump(stu, f)</span></span><br><span class="line"><span class="string">    ...:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">In [24]: with open(&#x27;</span>stu.json<span class="string">&#x27;, &#x27;</span><span class="string">r&#x27;) as f:</span></span><br><span class="line"><span class="string">    ...:     data = ujson.load(f)</span></span><br><span class="line"><span class="string">    ...:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">In [26]: data</span></span><br><span class="line"><span class="string">Out[26]: &#123;&#x27;</span>name<span class="string">&#x27;: &#x27;</span>小米<span class="string">&#x27;, &#x27;</span>age<span class="string">&#x27;: 23, &#x27;</span>gende<span class="string">r&#x27;: True&#125;</span></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PYTHON/" rel="tag"># PYTHON</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/1cbe9829/" rel="prev" title="CPython的内存概念:栈、堆和引用">
+      <i class="fa fa-chevron-left"></i> CPython的内存概念:栈、堆和引用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/418c3602/" rel="next" title="GIL全局解释器锁">
+      GIL全局解释器锁 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">bookandmusic</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备2021028097号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bookandmusic</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : '',
+      projectId: ''
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"bookandmusic.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"ZMZD8LN6JF","apiKey":"c75e305c22fd4cf56b8f03aa6efec207","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"bookandmusic.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"ZMZD8LN6JF","apiKey":"c75e305c22fd4cf56b8f03aa6efec207","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta property="og:type" content="website">
@@ -125,6 +125,11 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -140,21 +145,18 @@
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
+  <div class="search-input-container"></div>
   <span class="popup-btn-close">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
-  </div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
 </div>
 
+      
     </div>
   </div>
 
@@ -179,7 +181,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2020/10/23/m6N3Z1SCX/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/231391c9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -193,7 +195,173 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/10/23/m6N3Z1SCX/" class="post-title-link" itemprop="url">Vue引入本地资源</a>
+            <a href="/posts/231391c9/" class="post-title-link" itemprop="url">Django-数据分页</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-30 21:45:42" itemprop="dateCreated datePublished" datetime="2020-11-30T21:45:42+08:00">2020-11-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>当页面因需要展示的数据条目过多，导致无法在一个页面全部显示。这时，页面经常会采用分页形式进行展示，然后每页显示 20 或者 50 等条数据。分页经常在网站上随处可见，</p>
+<p>分页的实现不仅提高了用户体验，还是减轻数据库读取数据的压力。Django 自带名为 Paginator 的分页工具， 方便我们实现分页功能。本文就讲解如何使用 Paginator 实现分页功能。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/231391c9/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/55d30b7c/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="bookandmusic">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bookandmusic">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/55d30b7c/" class="post-title-link" itemprop="url">JWT浅析</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-24 20:38:26" itemprop="dateCreated datePublished" datetime="2020-10-24T20:38:26+08:00">2020-10-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li><p>  Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于 JSON 的开放标准（<a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=https://tools.ietf.org/html/rfc7519">(RFC 7519</a>). </p>
+</li>
+<li><p>  token 被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。</p>
+</li>
+<li><p>  JWT 的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该 token 也可直接被用于认证，也可被加密。</p>
+</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/55d30b7c/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/18635ed5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="bookandmusic">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bookandmusic">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/18635ed5/" class="post-title-link" itemprop="url">Vue引入本地资源</a>
         </h2>
 
         <div class="post-meta">
@@ -210,7 +378,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-04 22:57:50" itemprop="dateModified" datetime="2022-01-04T22:57:50+08:00">2022-01-04</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -234,7 +402,7 @@
           <p>简单介绍一下在Vue项目中引入本地资源的实现方式:
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/10/23/m6N3Z1SCX/#more" rel="contents">
+              <a class="btn" href="/posts/18635ed5/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -258,7 +426,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2020/09/03/dS3-4LSfK/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/dc53538f/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -272,7 +440,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/09/03/dS3-4LSfK/" class="post-title-link" itemprop="url">Deepin OS 安装 NVIDIA驱动</a>
+            <a href="/posts/dc53538f/" class="post-title-link" itemprop="url">Deepin OS 安装 NVIDIA驱动</a>
         </h2>
 
         <div class="post-meta">
@@ -289,7 +457,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-02 12:14:42" itemprop="dateModified" datetime="2021-10-02T12:14:42+08:00">2021-10-02</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -313,7 +481,7 @@
           <p>本文介绍在Deepin操作系统中安装英伟达NVIDIA显卡驱动的方法。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/09/03/dS3-4LSfK/#more" rel="contents">
+              <a class="btn" href="/posts/dc53538f/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -337,7 +505,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2020/08/16/8EYyM3zPT/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/4bc6fe71/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -351,7 +519,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/16/8EYyM3zPT/" class="post-title-link" itemprop="url">多种方式实现并发 Web Server</a>
+            <a href="/posts/4bc6fe71/" class="post-title-link" itemprop="url">多种方式实现并发 Web Server</a>
         </h2>
 
         <div class="post-meta">
@@ -368,7 +536,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-02 12:19:36" itemprop="dateModified" datetime="2021-10-02T12:19:36+08:00">2021-10-02</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -392,7 +560,7 @@
           <p>下面我们使用 <code>Python</code> 来实现并发的 <code>Web Server</code>，其中采用了多进程、多线程、协程、单进程单线程非阻塞、<code>select</code>、<code>epoll</code>的方式。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/08/16/8EYyM3zPT/#more" rel="contents">
+              <a class="btn" href="/posts/4bc6fe71/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -416,7 +584,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2020/08/16/QsYVFOoY0/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/7648f4c2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -430,7 +598,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/16/QsYVFOoY0/" class="post-title-link" itemprop="url">简单WEB服务器</a>
+            <a href="/posts/7648f4c2/" class="post-title-link" itemprop="url">简单WEB服务器</a>
         </h2>
 
         <div class="post-meta">
@@ -447,7 +615,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-02 12:21:17" itemprop="dateModified" datetime="2021-10-02T12:21:17+08:00">2021-10-02</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -471,7 +639,7 @@
           <p>本篇文章介绍如何实现一个简单 的Web Server 以及对应的问题解决方案。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/08/16/QsYVFOoY0/#more" rel="contents">
+              <a class="btn" href="/posts/7648f4c2/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -495,7 +663,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2020/08/16/NAB75ADvd/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/97529371/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -509,7 +677,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/16/NAB75ADvd/" class="post-title-link" itemprop="url">网络通信-长连接与短连接</a>
+            <a href="/posts/97529371/" class="post-title-link" itemprop="url">网络通信-长连接与短连接</a>
         </h2>
 
         <div class="post-meta">
@@ -526,7 +694,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-02 12:21:55" itemprop="dateModified" datetime="2021-10-02T12:21:55+08:00">2021-10-02</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -550,7 +718,7 @@
           <p>简单介绍长连接与短连接的优缺点。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/08/16/NAB75ADvd/#more" rel="contents">
+              <a class="btn" href="/posts/97529371/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -574,7 +742,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2020/08/14/spjWLylms/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/87ba84dd/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -588,7 +756,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/14/spjWLylms/" class="post-title-link" itemprop="url">RESTful规范的API接口设计</a>
+            <a href="/posts/87ba84dd/" class="post-title-link" itemprop="url">RESTful规范的API接口设计</a>
         </h2>
 
         <div class="post-meta">
@@ -605,7 +773,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-27 22:49:35" itemprop="dateModified" datetime="2021-09-27T22:49:35+08:00">2021-09-27</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -629,7 +797,7 @@
           <p>在项目中，需要为 APP 撰写 API。刚开始接触的时候，并没有考虑太多，就想提供 URL，APP 端通过该 URL 进行查询、创建、更新等操作即可。但再对相关规范进行了解后，才发现，API 的设计并没有那么简单，远远不是 URL 的问题，而是一个通信协议的整体架构。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/08/14/spjWLylms/#more" rel="contents">
+              <a class="btn" href="/posts/87ba84dd/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -653,7 +821,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2020/07/30/WeSgToGIO/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/39fbd324/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -667,7 +835,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/07/30/WeSgToGIO/" class="post-title-link" itemprop="url">python内存管理</a>
+            <a href="/posts/39fbd324/" class="post-title-link" itemprop="url">python内存管理</a>
         </h2>
 
         <div class="post-meta">
@@ -684,7 +852,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-27 22:03:49" itemprop="dateModified" datetime="2021-09-27T22:03:49+08:00">2021-09-27</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -710,7 +878,7 @@
 </blockquote>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/07/30/WeSgToGIO/#more" rel="contents">
+              <a class="btn" href="/posts/39fbd324/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -734,7 +902,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2020/07/08/XQTRP0_wd/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/15e35a25/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -748,7 +916,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/07/08/XQTRP0_wd/" class="post-title-link" itemprop="url">DRF-序列化与反序列化</a>
+            <a href="/posts/15e35a25/" class="post-title-link" itemprop="url">DRF-序列化与反序列化</a>
         </h2>
 
         <div class="post-meta">
@@ -765,7 +933,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-27 22:04:14" itemprop="dateModified" datetime="2021-09-27T22:04:14+08:00">2021-09-27</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -789,7 +957,7 @@
           <p>DRF内置的序列化类，可以对整个模型类进行序列化与反序列化，简化了繁杂的工作。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/07/08/XQTRP0_wd/#more" rel="contents">
+              <a class="btn" href="/posts/15e35a25/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -813,7 +981,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2020/06/06/sDLc_6uUh/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/993ce3af/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -827,7 +995,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/06/06/sDLc_6uUh/" class="post-title-link" itemprop="url">递归函数</a>
+            <a href="/posts/993ce3af/" class="post-title-link" itemprop="url">递归函数</a>
         </h2>
 
         <div class="post-meta">
@@ -844,7 +1012,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-06 16:52:37" itemprop="dateModified" datetime="2021-10-06T16:52:37+08:00">2021-10-06</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -869,7 +1037,7 @@
 <p>递归函数使用过程中，需要找到<code>不变的规律</code>和停止递归的<code>边界条件</code>，因为函数自身调用自身，函数本身的结构不变，只是<code>每次传的参数改变</code>啦</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/06/06/sDLc_6uUh/#more" rel="contents">
+              <a class="btn" href="/posts/993ce3af/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -893,7 +1061,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2020/06/06/lo-vE2u5F/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/a7726326/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -907,7 +1075,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/06/06/lo-vE2u5F/" class="post-title-link" itemprop="url">python匿名函数</a>
+            <a href="/posts/a7726326/" class="post-title-link" itemprop="url">python匿名函数</a>
         </h2>
 
         <div class="post-meta">
@@ -924,7 +1092,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-02 12:25:15" itemprop="dateModified" datetime="2021-10-02T12:25:15+08:00">2021-10-02</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -975,199 +1143,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2020/06/06/lVRaOCcfZ/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="bookandmusic">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bookandmusic">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/06/lVRaOCcfZ/" class="post-title-link" itemprop="url">python高阶函数</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-06 11:13:12" itemprop="dateCreated datePublished" datetime="2020-06-06T11:13:12+08:00">2020-06-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-02 12:33:08" itemprop="dateModified" datetime="2021-10-02T12:33:08+08:00">2021-10-02</time>
-              </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-
-<h2 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h2><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><blockquote>
-<p>当一个函数 接收 另一个函数作为参数， 它就是 <code>高阶函数</code></p>
-</blockquote>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span>(<span class="params">a, x, y</span>):</span></span><br><span class="line">    a(x, y)  <span class="comment"># a就是传递的 函数参数f，  执行 a 相当于 执行  f</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(x + y)</span><br><span class="line"></span><br><span class="line">func(f, <span class="number">1</span>, <span class="number">2</span>)  <span class="comment"># 3， 在函数f执行过程中，输出 3</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h2><h3 id="map"><a href="#map" class="headerlink" title="map"></a><code>map</code></h3><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">map</span>(func, iterable)</span><br></pre></td></tr></table></figure>
-
-<h4 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h4><p>将 <strong>可迭代对象</strong> 中的每个值 按照 第一个参数( <strong>函数</strong>)的 规则 依次 处理， 得到一个 新的 <strong>迭代器</strong> 对象</p>
-<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span>(<span class="params">alist</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    :param alist: 接收列表作为参数</span></span><br><span class="line"><span class="string">    :return: 将列表中每个数字，求平方之后，返回一个新列表</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sqr</span>(<span class="params">x</span>):</span></span><br><span class="line">        <span class="keyword">return</span> x * x</span><br><span class="line"></span><br><span class="line">    r = <span class="built_in">map</span>(sqr, alist) <span class="comment"># r是迭代器对象</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span>(r)  <span class="comment"># 将迭代器对象转换为列表</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">r = func([<span class="number">11</span>, <span class="number">22</span>, <span class="number">33</span>, <span class="number">44</span>, <span class="number">55</span>])</span><br><span class="line"><span class="built_in">print</span>(r)</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义函数， 接收 列表 作为参数 ， 返回一个 包含 绝对值  的新列表</span></span><br><span class="line"><span class="comment"># abs()：python内置函数，求一个数的绝对值</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span>(<span class="params">alist</span>):</span></span><br><span class="line">    <span class="comment"># map 高阶函数需要的参数，不用管是内置的，还是自定义的</span></span><br><span class="line">    r = <span class="built_in">map</span>(<span class="built_in">abs</span>, alist)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span>(r)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">r = func([-<span class="number">12</span>, <span class="number">34</span>, <span class="number">56</span>, -<span class="number">98</span>])</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(r)  <span class="comment"># [12, 34, 56, 98]</span></span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义函数，接收 一个 包含 单词的字符串， 返回 一个 每个单词 首字母大写 的字符串</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span>(<span class="params">astr</span>):</span></span><br><span class="line">    <span class="comment"># 将字符串切分为单词列表</span></span><br><span class="line">    wlist = astr.split()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">toUpper</span>(<span class="params">x</span>):</span></span><br><span class="line">        <span class="keyword">return</span> x.title()</span><br><span class="line"></span><br><span class="line">    r = <span class="built_in">map</span>(toUpper, wlist)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将单词拼接为字符串</span></span><br><span class="line">    s = <span class="string">&quot; &quot;</span>.join(r)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">r = func(<span class="string">&quot;a good  fruit apple&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(r)  <span class="comment"># &quot; A Good  Fruit Apple&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提示： 可以考虑 将 字符串按照 单词 切分， map处理之后， 再 重新拼接为字符串</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a><code>reduce</code></h3><h4 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reduce(func, iterable)</span><br></pre></td></tr></table></figure>
-
-<h4 id="描述-2"><a href="#描述-2" class="headerlink" title="描述"></a>描述</h4><p>将可迭代对象中所有的元素，按照第一个 函数的规则， 连续操作，得到一个  <strong>具体的数据</strong></p>
-<h4 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 自定义一个Mysum()函数，接收一个列表作为参数， 返回列表中所有元素之和</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mysum</span>(<span class="params">alist</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">x, y</span>):</span></span><br><span class="line">        <span class="keyword">return</span> x + y</span><br><span class="line"></span><br><span class="line">    r = reduce(add, alist) <span class="comment"># reduce 的结果是一个具体的值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> r</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">r = mysum([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line"><span class="built_in">print</span>(r)  <span class="comment"># 15</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="filter"><a href="#filter" class="headerlink" title="filter"></a><code>filter</code></h3><h4 id="语法-2"><a href="#语法-2" class="headerlink" title="语法"></a>语法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">filter</span>(func, iterable)</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="描述-3"><a href="#描述-3" class="headerlink" title="描述"></a>描述</h4><p>按照第一个 函数的 <strong>返回值</strong> 对 可迭代对象 中 所有的数据 进行 过滤， 得到一个 包含过滤后结果的 <strong>迭代器对象</strong></p>
-<h4 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 自定义一个filterNumber()函数，接收一个列表作为参数， 返回一个 包含偶数 的列表</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">filterNumber</span>(<span class="params">alist</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">is_even</span>(<span class="params">x</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;如果函数的返回结果为True, 对应的元素可以得到&quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> x % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    r = <span class="built_in">filter</span>(is_even, alist)  <span class="comment"># r也是迭代器对象</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span>(r)  <span class="comment"># 通过类型转换，将迭代器中数据取出</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">r = filterNumber([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>])</span><br><span class="line"><span class="built_in">print</span>(r)  <span class="comment"># [2, 4, 6]]</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 自定义一个函数 sevenNumber()函数，接收一个列表作为参数， 返回一个 包含 &quot;逢7必过&quot; 数字的新列表</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sevenNumber</span>(<span class="params">alist</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">x</span>):</span></span><br><span class="line">        <span class="comment"># 判断为7的倍数，返回True</span></span><br><span class="line">        <span class="keyword">if</span> x % <span class="number">7</span> == <span class="number">0</span> <span class="keyword">or</span> <span class="string">&#x27;7&#x27;</span> <span class="keyword">in</span> <span class="built_in">str</span>(x):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    r = <span class="built_in">filter</span>(f, alist)  <span class="comment"># r是迭代器对象</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span>(r)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">r = sevenNumber(<span class="built_in">range</span>(<span class="number">1</span>, <span class="number">101</span>))</span><br><span class="line"><span class="built_in">print</span>(r)</span><br></pre></td></tr></table></figure>
-
-<h3 id="sorted"><a href="#sorted" class="headerlink" title="sorted"></a><code>sorted</code></h3><h4 id="语法-3"><a href="#语法-3" class="headerlink" title="语法"></a>语法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sorted</span>(iterable, key=func, reverse=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-
-<h4 id="描述-4"><a href="#描述-4" class="headerlink" title="描述"></a>描述</h4><p>将可迭代对象 按照某种规则 排序，升序和降序均可。</p>
-<h4 id="实例-3"><a href="#实例-3" class="headerlink" title="实例"></a>实例</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">alist = [<span class="number">21</span>, <span class="number">14</span>, -<span class="number">67</span>, -<span class="number">34</span>, <span class="number">19</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按照 数字大小 升序 排序</span></span><br><span class="line">r = <span class="built_in">sorted</span>(alist)</span><br><span class="line"><span class="built_in">print</span>(r)  <span class="comment"># [-67, -34, 14, 19, 21]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 按照 数字大小 降序 排序</span></span><br><span class="line">r = <span class="built_in">sorted</span>(alist, reverse=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(r)  <span class="comment"># [21, 19, 14, -34, -67]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 按照每 个数字的绝对值 升序 排序</span></span><br><span class="line">r = <span class="built_in">sorted</span>(alist, key=<span class="built_in">abs</span>)</span><br><span class="line"><span class="built_in">print</span>(r)  <span class="comment"># [14, 19, 21, -34, -67]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 按照 每个数字的绝对值 降序 排序</span></span><br><span class="line">r = <span class="built_in">sorted</span>(alist, key=<span class="built_in">abs</span>, reverse=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(r)  <span class="comment"># [-67, -34, 21, 19, 14]</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2020/06/06/1H2TACG4d/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="bookandmusic">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bookandmusic">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/06/1H2TACG4d/" class="post-title-link" itemprop="url">python变量作用域</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-06 11:10:17" itemprop="dateCreated datePublished" datetime="2020-06-06T11:10:17+08:00">2020-06-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-27 22:07:55" itemprop="dateModified" datetime="2021-09-27T22:07:55+08:00">2021-09-27</time>
-              </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>在Python程序中创建、改变、查找变量名时，都是在一个保存变量名的空间中进行，我们称之为命名空间，也被称之为作用域。</p>
-<p>Python的作用域是静态的，在源代码中变量名被赋值的位置决定了该变量能被访问的范围。即Python变量的作用域由变量所在源代码中的位置决定。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/06/06/1H2TACG4d/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1233,7 +1212,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-count">98</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1277,26 +1256,6 @@
 </div>
 
         
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
 
 
 
@@ -1404,7 +1363,10 @@
 
 
   
-<script src="/js/local-search.js"></script>
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
 
 
 

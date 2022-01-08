@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bookandmusic.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"ZMZD8LN6JF","apiKey":"c75e305c22fd4cf56b8f03aa6efec207","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="写好了一个项目之后，要确定各个模块是不是稳定运行，有没有bug，比如一个项目有100个路由，可以手动一个一个URL的输入，查看响应有没有毛病，但这样不符合程序员的逼格。  由此，诞生了单元测试与集成测试。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python自动化测试">
+<meta property="og:url" content="https://bookandmusic.cn/posts/b459a401/index.html">
+<meta property="og:site_name" content="Bookandmusic">
+<meta property="og:description" content="写好了一个项目之后，要确定各个模块是不是稳定运行，有没有bug，比如一个项目有100个路由，可以手动一个一个URL的输入，查看响应有没有毛病，但这样不符合程序员的逼格。  由此，诞生了单元测试与集成测试。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-15T10:48:25.000Z">
+<meta property="article:modified_time" content="2022-01-08T09:57:41.834Z">
+<meta property="article:author" content="bookandmusic">
+<meta property="article:tag" content="PYTHON">
+<meta property="article:tag" content="测试">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://bookandmusic.cn/posts/b459a401/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>python自动化测试 | Bookandmusic</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Bookandmusic</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">踮起脚尖，另一种高度</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/b459a401/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="bookandmusic">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bookandmusic">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python自动化测试
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-15 18:48:25" itemprop="dateCreated datePublished" datetime="2021-05-15T18:48:25+08:00">2021-05-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>  写好了一个项目之后，要确定各个模块是不是稳定运行，有没有bug，比如一个项目有100个路由，可以手动一个一个URL的输入，查看响应有没有毛病，但这样不符合程序员的逼格。<br>  由此，诞生了单元测试与集成测试。</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="python-unittest"><a href="#python-unittest" class="headerlink" title="python unittest"></a>python unittest</h2><p><a target="_blank" rel="noopener" href="https://docs.python.org/3.7/library/unittest.html">unittest</a>是python内置的用于测试代码的模块，无需安装， 使用简单方便。</p>
+<h3 id="unittest-简介"><a href="#unittest-简介" class="headerlink" title="unittest 简介"></a>unittest 简介</h3><blockquote>
+<p>  <code>unittest</code>中最核心的部分是：<code>TestFixture</code>、<code>TestCase</code>、<code>TestSuite</code>、<code>TestRunner</code></p>
+</blockquote>
+<p><code>unittest case</code>的运行流程：</p>
+<ul>
+<li>  写好一个完整的<code>TestCase</code></li>
+<li>  多个<code>TestCase</code> 由<code>TestLoder</code>被加载到<code>TestSuite</code>里面, <code>TestSuite</code>也可以嵌套<code>TestSuite</code></li>
+<li>  由<code>TextTestRunner</code>来执行<code>TestSuite</code>，测试的结果保存在<code>TextTestResult</code>中</li>
+<li>  <code>TestFixture</code>指的是环境准备和恢复</li>
+</ul>
+<h4 id="Test-Fixture"><a href="#Test-Fixture" class="headerlink" title="Test Fixture"></a>Test Fixture</h4><p>用于测试环境的准备和恢复还原, 一般用到下面几个函数。</p>
+<ul>
+<li>  <code>setUp()</code>：准备环境，执行每个测试用例的前置条件</li>
+<li>  <code>tearDown()</code>：环境还原，执行每个测试用例的后置条件</li>
+<li>  <code>setUpClass()</code>：必须使用<code>@classmethod</code>装饰器，所有<code>case</code>执行的前置条件，只运行一次</li>
+<li>  <code>tearDownClass()</code>：必须使用<code>@classmethod</code>装饰器，所有<code>case</code>运行完后只运行一次</li>
+</ul>
+<hr>
+<h4 id="Test-Case"><a href="#Test-Case" class="headerlink" title="Test Case"></a>Test Case</h4><ul>
+<li>参数<code>verbosity</code>可以控制错误报告的详细程度：<code>默认为1</code>。<ul>
+<li>  <code>Verbosity=0</code>，表示不输出每一个用例的执行结果；</li>
+<li>  <code>Verbosity=1</code>情况下<code>成功是 .</code>，失败是 F，出错是 E，跳过是 S；</li>
+<li>  <code>Verbosity=2</code>情况下会打印测试的注释,显示详细的执行报告结；</li>
+</ul>
+</li>
+<li>  测试的执行跟方法的顺序没有关系, <strong>默认按字母顺序</strong></li>
+<li>  每个测试方法均以 <code>test_</code> 开头</li>
+</ul>
+<hr>
+<h4 id="Test-Suite"><a href="#Test-Suite" class="headerlink" title="Test Suite"></a>Test Suite</h4><ul>
+<li>  一般通过<code>addTest()</code>或者<code>addTests()</code>向<code>suite</code>中添加</li>
+<li>  <code>case</code>的执行顺序与添加到Suite中的顺序是一致的</li>
+<li>使用<strong>装饰器</strong>的方式来实现跳过测试与预计的失败，常用的主要有3种:<ul>
+<li>  <code>@unittest.skip()</code>：直接跳过测试用例；</li>
+<li>  <code>@unittest.skipIf(condition,reason)</code>：当满足条件时跳过测试用例；</li>
+<li>  <code>@unittest.skipUnless(condition,reason)</code>：只有满足某一条件时不跳过，其他的都跳过；</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="Test-Loder"><a href="#Test-Loder" class="headerlink" title="Test Loder"></a>Test Loder</h4><ul>
+<li><p>  <code>TestLoadder</code>用来加载<code>TestCase</code>到<code>TestSuite</code>中</p>
+</li>
+<li><p>  <code>loadTestsFrom*()</code>方法从各个地方寻找<code>testcase</code>，创建实例，然后<code>addTestSuite</code>，再返回一个<code>TestSuite</code>实例</p>
+</li>
+<li><p><code>defaultTestLoader()</code> 与 <code>TestLoader()</code>功能差不多，复用原有实例</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">unittest.TestLoader().loadTestsFromTestCase(testCaseClass)</span><br><span class="line">unittest.TestLoader().loadTestsFromModule(module)</span><br><span class="line">unittest.TestLoader().loadTestsFromName(name, module=<span class="literal">None</span>)</span><br><span class="line">unittest.TestLoader().loadTestsFromNames(names, module=<span class="literal">None</span>)</span><br><span class="line">unittest.TestLoader().discover()</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="测试用例"><a href="#测试用例" class="headerlink" title="测试用例"></a>测试用例</h3><blockquote>
+<p>  定义实现<strong>测试用例</strong>，然后调用即可</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestCaseDemo</span>(<span class="params">unittest.TestCase</span>):</span></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setUpClass</span>(<span class="params">cls</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;this setupclass() method only called once.\n&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">tearDownClass</span>(<span class="params">cls</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;this tear_down_class() method only called once too.\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setUp</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;do something before test : prepare environment.\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">tearDown</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;do something after test : clean up.\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_goods_list</span>(<span class="params">self</span>):</span></span><br><span class="line">        r = requests.get(<span class="string">&#x27;http://127.0.0.1:8000/goods/&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 断言</span></span><br><span class="line">        self.assertEqual(<span class="number">200</span>, r.status_code, <span class="string">&#x27;查询商品失败&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        result = r.json()</span><br><span class="line">        self.assertEqual(<span class="built_in">list</span>, <span class="built_in">type</span>(result), <span class="string">&#x27;查询商品，结果不对&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_goods_create</span>(<span class="params">self</span>):</span></span><br><span class="line">        r = requests.post(<span class="string">&#x27;http://127.0.0.1:8000/goods/&#x27;</span>)</span><br><span class="line">        <span class="comment"># 断言</span></span><br><span class="line">        self.assertEqual(<span class="number">405</span>, r.status_code, <span class="string">&#x27;不应该允许添加商品&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    unittest.main(verbosity=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="测试套件"><a href="#测试套件" class="headerlink" title="测试套件"></a>测试套件</h3><p>上述演示了一种比较基础、简单的测试用例的使用方法，但是这样比较固化，只能自动的去查找以<em>test</em>开头的测试方法，然后顺序的去执行测试方法，这样显然是有点僵化的，不能按照重要程度或者我们的意愿去执行测试方法，而且遇到多个测试用例是会比较混乱。<br>这里要讲的测试套件能够归档测试用例，能够让我们按照指定的顺序去执行测试方法。</p>
+<ul>
+<li>  创建测试实例</li>
+<li>  创建测试套件</li>
+<li>  加载测试实例</li>
+<li>  添加测试实例到测试套件</li>
+<li>  创建测试运行组件，加载测试套件</li>
+<li>  运行测试套件</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">└── testcase</span><br><span class="line">    ├── __init__.py</span><br><span class="line">    ├── test.py  <span class="comment"># 测试套件</span></span><br><span class="line">    └── test_demo_class.py  <span class="comment"># 测试实例</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> HTMLReport</span><br><span class="line"><span class="keyword">from</span> unittest <span class="keyword">import</span> TestLoader, TestSuite, TextTestRunner</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> test_demo_class  <span class="comment"># 导入测试模块</span></span><br><span class="line"><span class="keyword">from</span> test_demo_class <span class="keyword">import</span> TestCaseDemo</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="comment"># 2. 创建测试套件</span></span><br><span class="line">    suite = TestSuite()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 3.加载测试实例</span></span><br><span class="line">    <span class="comment"># test1 = TestCaseDemo(&quot;test_goods_list&quot;)</span></span><br><span class="line">    <span class="comment"># test2 = TestCaseDemo(&#x27;test_goods_create&#x27;)</span></span><br><span class="line">    tests = [</span><br><span class="line">        TestCaseDemo(<span class="string">&quot;test_goods_list&quot;</span>), </span><br><span class="line">        TestCaseDemo(<span class="string">&quot;test_goods_create&quot;</span>)</span><br><span class="line">    ]</span><br><span class="line">    <span class="comment"># tests = TestLoader().loadTestsFromModule(test_demo_class)</span></span><br><span class="line">    <span class="comment"># tests = TestLoader().loadTestsFromTestCase(TestCaseDemo)</span></span><br><span class="line">    <span class="comment"># tests = TestLoader().loadTestsFromName(&#x27;test_demo_class.TestCaseDemo.test_goods_list&#x27;)</span></span><br><span class="line">    <span class="comment"># tests = TestLoader().loadTestsFromNames([</span></span><br><span class="line">    <span class="comment">#     &#x27;test_demo_class.TestCaseDemo.test_goods_list&#x27;,</span></span><br><span class="line">    <span class="comment">#     &#x27;test_demo_class.TestCaseDemo.test_goods_create&#x27;</span></span><br><span class="line">    <span class="comment"># ])</span></span><br><span class="line">    <span class="comment"># tests = TestLoader().discover(&#x27;.&#x27;, &#x27;test_*.py&#x27;, top_level_dir=None)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 4. 添加测试实例到测试套件</span></span><br><span class="line">    <span class="comment"># suite.addTest(test1)</span></span><br><span class="line">    <span class="comment"># suite.addTest(test2)</span></span><br><span class="line">    suite.addTests(tests)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 5. 创建运行套件，并运行</span></span><br><span class="line">    runner = TextTestRunner(verbosity=<span class="number">2</span>)  <span class="comment"># 输出到终端</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># runner = HTMLReport.TestRunner(report_file_name=&#x27;test&#x27;,</span></span><br><span class="line">    <span class="comment">#                                 output_path=&#x27;report&#x27;,</span></span><br><span class="line">    <span class="comment">#                                 title=&#x27;测试报告&#x27;,</span></span><br><span class="line">    <span class="comment">#                                 description=&#x27;测试描述&#x27;,</span></span><br><span class="line">    <span class="comment">#                                 sequential_execution=True</span></span><br><span class="line">    <span class="comment">#                                 )  # 输出到HTML网页</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    runner.run(suite)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># with open(&#x27;ut_log.txt&#x27;, &#x27;a&#x27;) as fp:  # 输出到txt文件</span></span><br><span class="line">    <span class="comment">#     runner = TextTestRunner(stream=fp, verbosity=2)</span></span><br><span class="line">    <span class="comment">#     runner.run(suite)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="django-test"><a href="#django-test" class="headerlink" title="django test"></a>django test</h2><h3 id="数据库配置"><a href="#数据库配置" class="headerlink" title="数据库配置"></a>数据库配置</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">DATABASES = &#123;</span><br><span class="line">    <span class="string">&#x27;default&#x27;</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;ENGINE&#x27;</span> : <span class="string">&#x27;django.db.backends.mysql&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;HOST&#x27;</span>: <span class="string">&#x27;localhost&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;PORT&#x27;</span>: <span class="string">&#x27;3306&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;NAME&#x27;</span>: <span class="string">&#x27;django_db1&#x27;</span>, <span class="comment"># 真实的数据库</span></span><br><span class="line">        <span class="string">&#x27;USER&#x27;</span>: <span class="string">&#x27;root&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;PASSWORD&#x27;</span>: <span class="string">&#x27;123456&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;TEST&#x27;</span>:&#123;</span><br><span class="line">            <span class="string">&#x27;NAME&#x27;</span>:<span class="string">&#x27;django_db_test&#x27;</span> <span class="comment"># 用于单元测试的数据库</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="单元测试文件"><a href="#单元测试文件" class="headerlink" title="单元测试文件"></a>单元测试文件</h3><blockquote>
+<p>  在每个APP里面，都有一个<code>test.py</code>文件，可以在里面去定义测试类，并可以直接运行</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.test <span class="keyword">import</span> TestCase, Client</span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> Goods</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Create your tests here.</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GoodsTestCase</span>(<span class="params">TestCase</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_goods_list</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment"># 创建一个客户端</span></span><br><span class="line">        client = Client()</span><br><span class="line">        <span class="comment"># 模拟客户端访问首页</span></span><br><span class="line">        response = client.get(<span class="string">&#x27;/goods/&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 测试，self.assertEqual接收3个参数(被测试对象，正确的测试结果，如果不正确输出什么）</span></span><br><span class="line">        <span class="comment"># 如果第一个参数的返回值不等于第二个参数，输出第三个参数</span></span><br><span class="line">        self.assertEqual(</span><br><span class="line">            response.status_code,</span><br><span class="line">            <span class="number">200</span>,</span><br><span class="line">            <span class="string">&#x27;商品查询失败&#x27;</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        result = response.json()</span><br><span class="line">        self.assertEqual(</span><br><span class="line">            <span class="built_in">type</span>(result),</span><br><span class="line">            <span class="built_in">list</span>,</span><br><span class="line">            <span class="string">&#x27;商品查询结果不对&#x27;</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    userTestCase = GoodsTestCase()</span><br><span class="line">    userTestCase.test_goods_list()</span><br></pre></td></tr></table></figure>
+
+<h2 id="mock"><a href="#mock" class="headerlink" title="mock"></a>mock</h2><p>在单元测试进行的同时，就离不开<code>mock</code>模块的存在，初次接触这个概念的时候会有这样的疑问：把要测的东西都模拟掉了还测试什么呢？<br>但在，实际生产中的项目是非常复杂的，对其进行单元测试的时候，会遇到以下问题：</p>
+<ul>
+<li>  接口的依赖</li>
+<li>  外部接口调用</li>
+<li>  测试环境非常复杂</li>
+</ul>
+<p>单元测试应该只针对当前单元进行测试, 所有的内部或外部的依赖应该是稳定的, 已经在别处进行测试过的。使用<code>mock</code> 就可以对外部依赖组件实现进行模拟并且替换掉, 从而使得单元测试将焦点只放在当前的单元功能。</p>
+<p>因为在为代码进行单元测试的同时，会发现该模块依赖于其他的模块，例如数据库，网络，或者第三方模块的存在，而我们对一个模块进行单元测试的目的，是测试当前模块正常工作，这样就要避开对其他模块的依赖，而mock主要作用便在于，专注于待测试的代码。而在但与测试中，如何灵活的使用mock模块是核心所在。下面便以mock为核心，结合最近所写的代码，阐述mock模块的使用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> unittest <span class="keyword">import</span> mock</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">request_lemonfix</span>():</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    res = requests.get(<span class="string">&#x27;http://www.lemonfix.com&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> res.status_code.encode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    request_lemonfix = mock.Mock(return_value=<span class="string">&quot;这里会显示论坛主页&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(request_lemonfix())</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PYTHON/" rel="tag"># PYTHON</a>
+              <a href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag"># 测试</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/96412218/" rel="prev" title="DRF-图片上传到七牛云">
+      <i class="fa fa-chevron-left"></i> DRF-图片上传到七牛云
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/49b22dd0/" rel="next" title="Flask图片上传与展示">
+      Flask图片上传与展示 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#python-unittest"><span class="nav-number">1.</span> <span class="nav-text">python unittest</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#unittest-%E7%AE%80%E4%BB%8B"><span class="nav-number">1.1.</span> <span class="nav-text">unittest 简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Test-Fixture"><span class="nav-number">1.1.1.</span> <span class="nav-text">Test Fixture</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Test-Case"><span class="nav-number">1.1.2.</span> <span class="nav-text">Test Case</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Test-Suite"><span class="nav-number">1.1.3.</span> <span class="nav-text">Test Suite</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Test-Loder"><span class="nav-number">1.1.4.</span> <span class="nav-text">Test Loder</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B"><span class="nav-number">1.2.</span> <span class="nav-text">测试用例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E5%A5%97%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">测试套件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#django-test"><span class="nav-number">2.</span> <span class="nav-text">django test</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE"><span class="nav-number">2.1.</span> <span class="nav-text">数据库配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E6%96%87%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text">单元测试文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mock"><span class="nav-number">3.</span> <span class="nav-text">mock</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">bookandmusic</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备2021028097号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bookandmusic</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : '',
+      projectId: ''
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

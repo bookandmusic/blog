@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"bookandmusic.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"ZMZD8LN6JF","apiKey":"c75e305c22fd4cf56b8f03aa6efec207","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"bookandmusic.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"ZMZD8LN6JF","apiKey":"c75e305c22fd4cf56b8f03aa6efec207","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta property="og:type" content="website">
@@ -125,6 +125,11 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -140,21 +145,18 @@
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
+  <div class="search-input-container"></div>
   <span class="popup-btn-close">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
-  </div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
 </div>
 
+      
     </div>
   </div>
 
@@ -179,7 +181,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2019/06/01/nc2dzXil_/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/503bd682/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -193,7 +195,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/06/01/nc2dzXil_/" class="post-title-link" itemprop="url">Mysql中的Decimal类型说明</a>
+            <a href="/posts/503bd682/" class="post-title-link" itemprop="url">python面向对象</a>
         </h2>
 
         <div class="post-meta">
@@ -203,14 +205,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-06-01 08:50:26" itemprop="dateCreated datePublished" datetime="2019-06-01T08:50:26+08:00">2019-06-01</time>
+              <time title="创建时间：2019-11-04 22:36:03" itemprop="dateCreated datePublished" datetime="2019-11-04T22:36:03+08:00">2019-11-04</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-27 21:34:43" itemprop="dateModified" datetime="2021-09-27T21:34:43+08:00">2021-09-27</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -231,10 +233,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>我们在Mysql中存字段的时候，比如，一些与金钱有关的数据。这个时候就会对精确到的要求非常高。那么这个时候，就会发现我们之前所学的八大基本类型不再能够满足需求，无论是整形还是浮点型，有人会说存整形有什么不可，但是你要知道不是每个人的金额都是整数的；这样不行的话，存浮点型的就可以了嘛，对于银行存钱来说，一个小数点的问题都会将一笔钱的金额变得很大或者很小……So，这个时候你可以尝试一下Decimal类型，你会发现能够很好地解决你的问题。</p>
+          <p>面向对象最重要的概念就是类（<code>Class</code>）和实例（<code>Instance</code>），必须牢记类是抽象的模板，比如Student类，而实例是根据类创建出来的一个个具体的“对象”，每个对象都拥有相同的方法，但各自的数据可能不同。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/06/01/nc2dzXil_/#more" rel="contents">
+              <a class="btn" href="/posts/503bd682/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -258,7 +260,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2019/05/27/bjym70Ac6/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/ac603ae1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -272,7 +274,166 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/05/27/bjym70Ac6/" class="post-title-link" itemprop="url">MySQL基础教程</a>
+            <a href="/posts/ac603ae1/" class="post-title-link" itemprop="url">Mysql中varbinary、binary、char、varchar异同</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-01 09:12:16" itemprop="dateCreated datePublished" datetime="2019-06-01T09:12:16+08:00">2019-06-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>binary 与 varbinary 类型和char与varchar类型是相似的，只是他们存储的是二进制数据，也就是说他们是包含字节流而不是字符流，他们有二进制字符的集合和顺序，他们的对比，排序是基于字节的数值进行的</p>
+<p>binary与varbinary的最大长度和char与varchar是一样的，只不过他们是定义<strong>字节长度</strong>，而char和varchar对应的是<strong>字符长度</strong>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/ac603ae1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/b22d7b27/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="bookandmusic">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bookandmusic">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/b22d7b27/" class="post-title-link" itemprop="url">Mysql中的Decimal类型说明</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-01 08:50:26" itemprop="dateCreated datePublished" datetime="2019-06-01T08:50:26+08:00">2019-06-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>我们在Mysql中存字段的时候，比如，一些与金钱有关的数据。这个时候就会对精确到的要求非常高。那么这个时候，就会发现我们之前所学的八大基本类型不再能够满足需求，无论是整形还是浮点型，有人会说存整形有什么不可，但是你要知道不是每个人的金额都是整数的；这样不行的话，存浮点型的就可以了嘛，对于银行存钱来说，一个小数点的问题都会将一笔钱的金额变得很大或者很小……So，这个时候你可以尝试一下Decimal类型，你会发现能够很好地解决你的问题。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/b22d7b27/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/9cdcd989/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="bookandmusic">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bookandmusic">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/9cdcd989/" class="post-title-link" itemprop="url">MySQL基础教程</a>
         </h2>
 
         <div class="post-meta">
@@ -289,7 +450,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-02 11:41:36" itemprop="dateModified" datetime="2021-10-02T11:41:36+08:00">2021-10-02</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -1149,7 +1310,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2019/05/25/AOiiztLHK/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/e6a7d7b5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1163,7 +1324,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/05/25/AOiiztLHK/" class="post-title-link" itemprop="url">Django基础-路由</a>
+            <a href="/posts/e6a7d7b5/" class="post-title-link" itemprop="url">Django基础-路由</a>
         </h2>
 
         <div class="post-meta">
@@ -1180,7 +1341,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-04 23:36:34" itemprop="dateModified" datetime="2022-01-04T23:36:34+08:00">2022-01-04</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -1204,7 +1365,7 @@
           <p>在视图完成之后，想要让客户端的请求可以正常匹配到对应的视图函数，就需要给每个视图函数做对应的路由映射。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/05/25/AOiiztLHK/#more" rel="contents">
+              <a class="btn" href="/posts/e6a7d7b5/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1228,7 +1389,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2019/05/25/66tuBphUD/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/d54e39a5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1242,7 +1403,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/05/25/66tuBphUD/" class="post-title-link" itemprop="url">常见函数的时间复杂度</a>
+            <a href="/posts/d54e39a5/" class="post-title-link" itemprop="url">O标记法与常见时间复杂度</a>
         </h2>
 
         <div class="post-meta">
@@ -1259,87 +1420,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-27 22:23:05" itemprop="dateModified" datetime="2021-09-27T22:23:05+08:00">2021-09-27</time>
-              </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>很多函数都有自己的很多方法，其中有些方法的功能类似，但是其复杂度有时却大不相同</p>
-<p>本节我们将引入一个新模块 <code>timeit</code> ，其功能是来测试一小段 <code>Python</code> 代码的执行速度。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/05/25/66tuBphUD/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2019/05/25/cYMAcCCWI/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="bookandmusic">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bookandmusic">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/25/cYMAcCCWI/" class="post-title-link" itemprop="url">O标记法与常见时间复杂度</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-05-25 19:54:09" itemprop="dateCreated datePublished" datetime="2019-05-25T19:54:09+08:00">2019-05-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-29 22:21:21" itemprop="dateModified" datetime="2021-09-29T22:21:21+08:00">2021-09-29</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -1365,7 +1446,7 @@
 </blockquote>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/05/25/cYMAcCCWI/#more" rel="contents">
+              <a class="btn" href="/posts/d54e39a5/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1389,7 +1470,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2019/05/25/FmX7wRaIi/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/b4e401cd/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1403,7 +1484,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/05/25/FmX7wRaIi/" class="post-title-link" itemprop="url">win10设置开机自启</a>
+            <a href="/posts/b4e401cd/" class="post-title-link" itemprop="url">常见函数的时间复杂度</a>
         </h2>
 
         <div class="post-meta">
@@ -1413,14 +1494,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-05-25 10:45:27" itemprop="dateCreated datePublished" datetime="2019-05-25T10:45:27+08:00">2019-05-25</time>
+              <time title="创建时间：2019-05-25 19:54:09" itemprop="dateCreated datePublished" datetime="2019-05-25T19:54:09+08:00">2019-05-25</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-27 22:38:49" itemprop="dateModified" datetime="2021-09-27T22:38:49+08:00">2021-09-27</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -1441,10 +1522,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>刚开始接触 win10 的朋友肯定不知道在哪里把自己常用的软件设置成开机启动，因为你根本找不到前面的 xp、win7、win8，等里面的启动文件夹。</p>
+          <p>很多函数都有自己的很多方法，其中有些方法的功能类似，但是其复杂度有时却大不相同</p>
+<p>本节我们将引入一个新模块 <code>timeit</code> ，其功能是来测试一小段 <code>Python</code> 代码的执行速度。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/05/25/FmX7wRaIi/#more" rel="contents">
+              <a class="btn" href="/posts/b4e401cd/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1468,7 +1550,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2019/05/25/xm047BTzy/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/e0301953/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1482,7 +1564,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/05/25/xm047BTzy/" class="post-title-link" itemprop="url">win10 python2和python3共存问题</a>
+            <a href="/posts/e0301953/" class="post-title-link" itemprop="url">win10 python2和python3共存问题</a>
         </h2>
 
         <div class="post-meta">
@@ -1499,7 +1581,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-27 22:23:26" itemprop="dateModified" datetime="2021-09-27T22:23:26+08:00">2021-09-27</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -1525,7 +1607,7 @@
 </blockquote>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/05/25/xm047BTzy/#more" rel="contents">
+              <a class="btn" href="/posts/e0301953/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1549,7 +1631,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2019/05/25/OxyPhv4sv/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/86a91b75/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1563,7 +1645,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/05/25/OxyPhv4sv/" class="post-title-link" itemprop="url">python内置函数</a>
+            <a href="/posts/86a91b75/" class="post-title-link" itemprop="url">win10设置开机自启</a>
         </h2>
 
         <div class="post-meta">
@@ -1580,7 +1662,86 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-01 22:30:22" itemprop="dateModified" datetime="2021-10-01T22:30:22+08:00">2021-10-01</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>刚开始接触 win10 的朋友肯定不知道在哪里把自己常用的软件设置成开机启动，因为你根本找不到前面的 xp、win7、win8，等里面的启动文件夹。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/86a91b75/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/88dc5553/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="bookandmusic">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bookandmusic">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/88dc5553/" class="post-title-link" itemprop="url">python内置函数</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-25 10:45:27" itemprop="dateCreated datePublished" datetime="2019-05-25T10:45:27+08:00">2019-05-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -1607,7 +1768,7 @@
 <p>那么，接下来就来谈一谈 python 里的内置函数</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/05/25/OxyPhv4sv/#more" rel="contents">
+              <a class="btn" href="/posts/88dc5553/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1631,7 +1792,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2019/05/23/c--BJoCGn/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/77e7addf/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1645,7 +1806,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/05/23/c--BJoCGn/" class="post-title-link" itemprop="url">python正则匹配</a>
+            <a href="/posts/77e7addf/" class="post-title-link" itemprop="url">python正则匹配</a>
         </h2>
 
         <div class="post-meta">
@@ -1662,7 +1823,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-27 22:24:44" itemprop="dateModified" datetime="2021-09-27T22:24:44+08:00">2021-09-27</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -1686,7 +1847,7 @@
           <p>现公司要开发一个业务管理系统，要求注册环节的密码需要提示用户其安全等级，密码按如下规则进行计分，并根据不同的得分为密码进行安全等级划分；此外，密码的组成可以由字母，数字，以及符号构成。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/05/23/c--BJoCGn/#more" rel="contents">
+              <a class="btn" href="/posts/77e7addf/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1710,7 +1871,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2019/05/17/yFD_0DCBA/">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/posts/1f6494d7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1724,7 +1885,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/05/17/yFD_0DCBA/" class="post-title-link" itemprop="url">python多任务机制</a>
+            <a href="/posts/1f6494d7/" class="post-title-link" itemprop="url">python多任务机制</a>
         </h2>
 
         <div class="post-meta">
@@ -1741,7 +1902,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-29 22:14:00" itemprop="dateModified" datetime="2021-09-29T22:14:00+08:00">2021-09-29</time>
+                <time title="修改时间：2022-01-08 17:57:41" itemprop="dateModified" datetime="2022-01-08T17:57:41+08:00">2022-01-08</time>
               </span>
 
           
@@ -1770,165 +1931,7 @@
 </ul>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/05/17/yFD_0DCBA/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2019/05/09/x5FXdEy2v/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="bookandmusic">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bookandmusic">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/09/x5FXdEy2v/" class="post-title-link" itemprop="url">HTTP 报文内的 HTTP 信息</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-05-09 19:56:09" itemprop="dateCreated datePublished" datetime="2019-05-09T19:56:09+08:00">2019-05-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-29 22:20:37" itemprop="dateModified" datetime="2021-09-29T22:20:37+08:00">2021-09-29</time>
-              </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>HTTP 通信过程包括从客户端发往服务器端的请求以及从服务端返回客户端的响应。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/05/09/x5FXdEy2v/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2019/05/09/EPkgInV6X/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="bookandmusic">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bookandmusic">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/09/EPkgInV6X/" class="post-title-link" itemprop="url">简单介绍 HTTP 协议结构</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-05-09 19:55:09" itemprop="dateCreated datePublished" datetime="2019-05-09T19:55:09+08:00">2019-05-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-29 22:20:08" itemprop="dateModified" datetime="2021-09-29T22:20:08+08:00">2021-09-29</time>
-              </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>首先，应用 <code>HTTP</code> 协议时，必定有客户端和服务器端。<br>其中，发起请求的是客户端，响应请求并返回的是服务端。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/05/09/EPkgInV6X/#more" rel="contents">
+              <a class="btn" href="/posts/1f6494d7/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1951,7 +1954,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2017,7 +2020,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-count">98</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -2061,26 +2064,6 @@
 </div>
 
         
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
 
 
 
@@ -2188,7 +2171,10 @@
 
 
   
-<script src="/js/local-search.js"></script>
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
 
 
 
