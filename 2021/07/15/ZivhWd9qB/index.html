@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bookandmusic.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"ZMZD8LN6JF","apiKey":"c75e305c22fd4cf56b8f03aa6efec207","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="在网站开发完成后，需要在服务器上线部署，而在这个过程中，需要借助一系列工具，以下借助flask服务演示部署上线的一系列步骤。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WEB服务部署">
+<meta property="og:url" content="https://bookandmusic.cn/2021/07/15/ZivhWd9qB/index.html">
+<meta property="og:site_name" content="Bookandmusic">
+<meta property="og:description" content="在网站开发完成后，需要在服务器上线部署，而在这个过程中，需要借助一系列工具，以下借助flask服务演示部署上线的一系列步骤。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/07/20180503191942330.png">
+<meta property="article:published_time" content="2021-07-15T14:45:15.000Z">
+<meta property="article:modified_time" content="2021-09-29T13:32:19.750Z">
+<meta property="article:author" content="bookandmusic">
+<meta property="article:tag" content="Nginx">
+<meta property="article:tag" content="Supervisor">
+<meta property="article:tag" content="Gunicorn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/07/20180503191942330.png">
+
+<link rel="canonical" href="https://bookandmusic.cn/2021/07/15/ZivhWd9qB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>WEB服务部署 | Bookandmusic</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Bookandmusic</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">踮起脚尖，另一种高度</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2021/07/15/ZivhWd9qB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="bookandmusic">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bookandmusic">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          WEB服务部署
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-07-15 22:45:15" itemprop="dateCreated datePublished" datetime="2021-07-15T22:45:15+08:00">2021-07-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-29 21:32:19" itemprop="dateModified" datetime="2021-09-29T21:32:19+08:00">2021-09-29</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在网站开发完成后，需要在服务器上线部署，而在这个过程中，需要借助一系列工具，以下借助flask服务演示部署上线的一系列步骤。</p>
+<span id="more"></span>
+
+
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2021/07/20180503191942330.png" alt="20180503191942330"></p>
+<h2 id="五者之间的关系"><a href="#五者之间的关系" class="headerlink" title="五者之间的关系"></a>五者之间的关系</h2><blockquote>
+<p>  客户端 (<code>client</code>)</p>
+</blockquote>
+<p>浏览器或者app。</p>
+<blockquote>
+<p>  web服务器 (如<code>nginx</code>)</p>
+</blockquote>
+<p>Web服务器是指驻留于因特网上某种类型计算机的程序。</p>
+<p>当Web浏览器（客户端）连到服务器上并请求文件时，服务器将处理该请求并将文件发送到该浏览器上，附带的信息会告诉浏览器如何查看该文件（即文件类型）。服务器使用HTTP（超文本传输协议）进行信息交流，这就是人们常把它们称为HTTP服务器的原因。</p>
+<p><strong>严格意义上Web服务器只负责处理HTTP协议，用于处理静态页面的内容;而动态内容需要通过WSGI接口交给应用服务器去处理。</strong><br>Web服务器包括<strong>Nginx</strong>，<strong>Apache</strong>，<strong>IIS</strong>等。而优秀的web服务器在接收http请求时，还可以做<strong>负载均衡</strong>和<strong>反向代理</strong>等工作。</p>
+<blockquote>
+<p>  WSGI容器 (如<code>Gunicorn</code>)</p>
+</blockquote>
+<p>常见的WSGI容器有<code>Gunicorn</code>，<code>uWSGI</code>等。web框架和web服务器之间需要通信，这时候需要设计一套双方都遵守的接口。</p>
+<p><strong>PEP3333指出，WSGI(Web Server Gateway Interface)是WEB服务器和web框架或web应用之间建立的一种简单通用的接口规范。有了wsgi这份接口规范，在web开发的过程中，能更加自由的选择服务器端和框架；在服务器端和框架的开发过程能够分离开来，不用过多的考虑双方具体的实现，使得服务器端和框架开发者能够专心自己领域的开发工作。而WSGI容器就是根据这套接口写出来的。</strong></p>
+<p>WSGI容器的作用就是根据web服务器传递而来的参数构建一个让WSGI应用成功执行的环境，例如request，而且还得把WSGI应用上处理好的结果返回给web服务器。此外<strong>WSGI容器也叫应用服务器</strong>。<br>注： 一般应用服务器都集成了web服务器，主要是为了调试方便，出于性能和稳定性考虑，并不能在生产环境中使用。</p>
+<blockquote>
+<p>  web框架 (如<code>Django</code>)</p>
+</blockquote>
+<p>作用主要是方便我们开发 web应用程序，HTTP请求的动态数据就是由 web框架层来提供的。常见的 web框架有<em>Flask</em>，<em>Django</em>，<em>Tornado</em>等，而Tornado不光是一个web框架，还实现了WSGI容器的功能。单纯的flask 自带的web服务器做下测试，会看到压力大的时候出现socket的问题，因为他是单进程单线程的。使用gunicorn来启动，响应速度和能力提升显著。</p>
+<blockquote>
+<p>  守护进程 (如<code>Supervisor</code>)</p>
+</blockquote>
+<p><code>Supervisor</code>是一个用 Python 写的进程管理工具，可以很方便的用来启动、重启、关闭进程（不仅仅是 Python 进程）。</p>
+<p>除了对单个进程的控制，还可以同时启动、关闭多个进程，比如很不幸的服务器出问题导致所有应用程序都被杀死，此时可以用 supervisor 同时启动所有应用程序而不是一个一个地敲命令启动。</p>
+<h2 id="Gunicorn详解"><a href="#Gunicorn详解" class="headerlink" title="Gunicorn详解"></a>Gunicorn详解</h2><h3 id="Gunicorn是什么"><a href="#Gunicorn是什么" class="headerlink" title="Gunicorn是什么"></a>Gunicorn是什么</h3><blockquote>
+<p>  Gunicorn（绿色独角兽）是一个用于UNIX的Python WSGI HTTP服务器。它是一个前叉工作者模型，从Ruby的Unicorn项目移植而来。 Gunicorn服务器与许多Web框架广泛兼容，轻松服务器资源并且速度相当快。</p>
+</blockquote>
+<h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4><ul>
+<li>  支持 WSGI，web2py，Django 和 Paster</li>
+<li>  自动化工作流程管理</li>
+<li>  简单的 Python 配置</li>
+<li>  多个工人配置</li>
+<li>  各种服务器挂钩，可扩展性</li>
+<li>  兼容 Python 2.6+和 Python 3.2+</li>
+</ul>
+<p>Gunicorn 是一个 unix 上被广泛使用的高性能的 Python WSGI UNIX HTTP Server。和大多数的 web 框架兼容，并具有实现简单，轻量级，高性能等特点。</p>
+<p>Gunicorn 服务器作为 wsgi app 的容器，能够与各种 Web 框架兼容（flask，django 等）,得益于 gevent 等技术，使用 Gunicorn 能够在基本不改变 wsgi app 代码的前提下，大幅度提高 wsgi app 的性能。</p>
+<h4 id="服务模型-Server-Model"><a href="#服务模型-Server-Model" class="headerlink" title="服务模型(Server Model)"></a>服务模型(Server Model)</h4><p>Gunicorn 是基于 pre-fork 模型的。也就意味着有一个中心管理进程( master process )用来管理 worker 进程集合。Master 从不知道任何关于客户端的信息。所有的请求和响应处理都是由 worker 进程来处理的。</p>
+<h4 id="Master-管理者"><a href="#Master-管理者" class="headerlink" title="Master(管理者)"></a>Master(管理者)</h4><p>主程序是一个简单的循环,监听各种信号以及相应的响应进程。master 管理着正在运行的 worker 集合,通过监听各种信号比如 TTIN, TTOU, and CHLD. TTIN and TTOU 响应的增加和减少 worker 的数目。CHLD 信号表明一个子进程已经结束了,在这种情况下 master 会自动的重启失败的 worker。</p>
+<h4 id="worker"><a href="#worker" class="headerlink" title="worker"></a>worker</h4><p>woker 有很多种，包括：ggevent、geventlet、gtornado 等等。</p>
+<p>这里主要分析 ggevent。每个 ggevent worker 启动的时候会启动多个 server 对象：worker 首先为每个 listener 创建一个 server 对象（注：为什么是一组 listener,因为 gunicorn 可以绑定一组地址,每个地址对于一个 listener），每个 server 对象都有运行在一个单独的 gevent pool 对象中。真正等待链接和处理链接的操作是在 server 对象中进行的。</p>
+<h3 id="Gunicorn安装"><a href="#Gunicorn安装" class="headerlink" title="Gunicorn安装"></a>Gunicorn安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install gunicorn</span><br></pre></td></tr></table></figure>
+
+<h3 id="Gunicorn使用"><a href="#Gunicorn使用" class="headerlink" title="Gunicorn使用"></a>Gunicorn使用</h3><h4 id="命令运行"><a href="#命令运行" class="headerlink" title="命令运行"></a>命令运行</h4><p>使用gunicorn监听请求，运行以下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gunicorn -w 2 -b 0.0.0.0:8000 test.application</span><br></pre></td></tr></table></figure>
+
+<p><code>-w</code>:指定fork的worker进程数<br><code>-b</code>:指定绑定的端口<br><code>test</code>:模块名,python文件名<br><code>application</code>:变量名,python文件中可调用的wsgi接口名称</p>
+<h4 id="脚本运行"><a href="#脚本运行" class="headerlink" title="脚本运行"></a>脚本运行</h4><p>创建shell脚本，修改 运行权限，然后 <code>sudo ./bin/django_start.sh</code>启动服务即可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">NAME=<span class="string">&quot;djangoblog&quot;</span> <span class="comment"># Name of the application</span></span><br><span class="line">DJANGODIR=/root/DjangoBlog <span class="comment"># Django project directory</span></span><br><span class="line">SOCKFILE=/root/DjangoBlog/run/gunicorn.sock <span class="comment"># we will communicte using this unix socket</span></span><br><span class="line">USER=root <span class="comment"># the user to run as</span></span><br><span class="line">GROUP=admin <span class="comment"># the group to run as</span></span><br><span class="line">NUM_WORKERS=3 <span class="comment"># how many worker processes should Gunicorn spawn</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$DJANGODIR</span></span><br><span class="line">DJANGO_SETTINGS_MODULE=DjangoBlog.settings <span class="comment"># which settings file should Django use</span></span><br><span class="line">DJANGO_WSGI_MODULE=DjangoBlog.wsgi <span class="comment"># WSGI module name</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Starting <span class="variable">$NAME</span> as `whoami`&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Activate the virtual environment</span></span><br><span class="line"><span class="built_in">export</span> WORKON_HOME=<span class="variable">$HOME</span>/.virtualenvs</span><br><span class="line"><span class="built_in">export</span> VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3</span><br><span class="line"><span class="built_in">source</span> /usr/<span class="built_in">local</span>/bin/virtualenvwrapper.sh</span><br><span class="line">workon djangoblog</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> DJANGO_SETTINGS_MODULE=<span class="variable">$DJANGO_SETTINGS_MODULE</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Create the run directory if it doesn&#x27;t exist</span></span><br><span class="line">RUNDIR=$(dirname $ SOCKFILE)</span><br><span class="line"><span class="built_in">test</span> -d <span class="variable">$RUNDIR</span> || mkdir -p <span class="variable">$RUNDIR</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Start your Django Unicorn</span></span><br><span class="line"><span class="comment"># Programs meant to be run under supervisor should not daemonize themselves (do not use --daemon)</span></span><br><span class="line"><span class="built_in">exec</span> /root/.virtualenvs/djangoblog/bin/gunicorn <span class="variable">$&#123;DJANGO_WSGI_MODULE&#125;</span>:application \</span><br><span class="line">--name <span class="variable">$NAME</span> \</span><br><span class="line">--workers <span class="variable">$NUM_WORKERS</span> \</span><br><span class="line">--user=<span class="variable">$USER</span> --group=<span class="variable">$GROUP</span> \</span><br><span class="line">--log-level=debug \</span><br><span class="line">--log-file=-</span><br></pre></td></tr></table></figure>
+
+<h2 id="Supervisor详解"><a href="#Supervisor详解" class="headerlink" title="Supervisor详解"></a>Supervisor详解</h2><h3 id="Supervisor是什么"><a href="#Supervisor是什么" class="headerlink" title="Supervisor是什么"></a>Supervisor是什么</h3><p>Supervisor在百度百科上给的定义是超级用户，监管员。Supervisor是一个进程管理工具，当进程中断的时候Supervisor能自动重新启动它。可以运行在各种类unix的机器上，supervisor就是用Python开发的一套通用的进程管理程序，能将一个普通的命令行进程变为后台daemon，并监控进程状态，异常退出时能自动重启。</p>
+<p>supervisor主要包含以下四个部分：</p>
+<blockquote>
+<p>  <code>supervisord</code></p>
+</blockquote>
+<p>这个是supervisor服务的主要管理器，负责管理我们配置的子进程，包括重启崩溃或异常退出的子进程，同时也响应来自客户端的请求。</p>
+<blockquote>
+<p>  <code>supervisorctl</code></p>
+</blockquote>
+<p>supervisord服务的客户端命令行, 可以用来执行 stop、start、restart 等命令，来对这些子进程进行管理。</p>
+<blockquote>
+<p>  <code>Web Server</code></p>
+</blockquote>
+<p>和supervisorctl功能娉美。这个是通过web界面查看和控制进程状态。</p>
+<blockquote>
+<p>  <code>XML-RPC Interface</code></p>
+</blockquote>
+<p>服务于web UI的同一个HTTP服务器提供一个XML-RPC接口，可以用来询问和控制管理程序及其运行的程序</p>
+<h3 id="Supervisor安装"><a href="#Supervisor安装" class="headerlink" title="Supervisor安装"></a>Supervisor安装</h3><p>supervisor可以运行在大多数类UNIX系统，但是不能运行在任何windows系统，Supervisor运行在python3版本3.4或更高版本以及python2版本2.7上工作。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install supervisor</span><br></pre></td></tr></table></figure>
+
+<h3 id="Supervisor使用"><a href="#Supervisor使用" class="headerlink" title="Supervisor使用"></a>Supervisor使用</h3><h4 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h4><ul>
+<li>  确定一个目录，生成基本的配置文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo_supervisord_conf &gt; /etc/supervisord.conf</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  创建子目录，存放子进程的配置文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /etc/supervisord.d/</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  修改主配置文件，指明子进程配置文件的路径</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># vi /etc/supervisord.conf</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在文件最后，打开 include项</span></span><br><span class="line">[include]</span><br><span class="line">files = /etc/supervisord.d/*.conf</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  创建子进程配置文件，启动上一步的 django服务</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># vi /etc/supervisor/supervisord.d/djangoblog.conf</span></span><br><span class="line"></span><br><span class="line">[program:djangoblog]</span><br><span class="line"><span class="built_in">command</span>=/root/DjangoBlog/bin/django_start.sh  <span class="comment"># 执行上一步的脚本，启动服务</span></span><br><span class="line">user=root  <span class="comment"># 启动用户身份</span></span><br><span class="line">autostart=<span class="literal">true</span></span><br><span class="line">autorestart=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line">redirect_stderr = <span class="literal">true</span></span><br><span class="line">stdout_logfile = /var/<span class="built_in">log</span>/djangoblog.log</span><br><span class="line">stderr_logfile=/var/<span class="built_in">log</span>/djangoblog.err</span><br></pre></td></tr></table></figure>
+
+<h4 id="启动命令"><a href="#启动命令" class="headerlink" title="启动命令"></a>启动命令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># supervisord服务</span></span><br><span class="line">supervisord -c /etc/supervisord.conf  <span class="comment"># 启动服务</span></span><br><span class="line">supervisorctl -c /etc/supervisord.conf  shutdown <span class="comment"># 关闭服务</span></span><br><span class="line">supervisorctl  -c /etc/supervisord.conf  reload  <span class="comment"># 重启服务</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># supervisor子进程</span></span><br><span class="line">supervisorctl -c /etc/supervisord.conf <span class="comment"># 进入交互环境，可以管理子进程</span></span><br><span class="line">djangoblog                       RUNNING   pid 45163, uptime 0:00:09  </span><br><span class="line">supervisor&gt; update <span class="comment"># 更新配置后必须执行更新命令才生效</span></span><br><span class="line">supervisor&gt; start xxxx  <span class="comment"># 启动某个supervisor进程</span></span><br><span class="line">supervisor&gt; restart xxxx <span class="comment"># 重启某个supervisor进程</span></span><br><span class="line">supervisor&gt; start all <span class="comment"># 开启所有服务</span></span><br><span class="line">supervisor&gt; stop xxxx  <span class="comment"># 停止某个supervisor进程</span></span><br><span class="line">supervisor&gt; stop all <span class="comment"># 停止所有服务</span></span><br><span class="line">supervisor&gt; status <span class="comment"># 查看状态</span></span><br><span class="line">supervisor&gt; <span class="built_in">exit</span>  <span class="comment"># 退出交互环境</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Nginx代理"><a href="#Nginx代理" class="headerlink" title="Nginx代理"></a>Nginx代理</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       <span class="number">80</span>;</span><br><span class="line">    listen       [::]:<span class="number">80</span>;</span><br><span class="line">    server_name  _;</span><br><span class="line">    root         /root/DjangoBlog/;</span><br><span class="line"></span><br><span class="line">    location /static/ &#123;</span><br><span class="line">        alias /root/DjangoBlog/collectedstatic/;</span><br><span class="line">        expires <span class="built_in">max</span>;</span><br><span class="line">        access_log        off;</span><br><span class="line">        log_not_found     off;</span><br><span class="line">    &#125;</span><br><span class="line">    location /media &#123;</span><br><span class="line">        # 静态文件配置</span><br><span class="line">        alias /root/DjangoBlog/uploads/;</span><br><span class="line">        expires <span class="built_in">max</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    location ~ \.py$ &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">403</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">        proxy_set_header Host $http_host;</span><br><span class="line">        proxy_set_header X-NginX-Proxy <span class="literal">true</span>;</span><br><span class="line">        proxy_redirect off;</span><br><span class="line">        <span class="keyword">if</span> (!-f $request_filename) &#123;</span><br><span class="line">            proxy_pass http://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8000</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     # Load configuration files <span class="keyword">for</span> the default server block.</span><br><span class="line">     include /etc/nginx/default.d/*.conf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Nginx/" rel="tag"># Nginx</a>
+              <a href="/tags/Supervisor/" rel="tag"># Supervisor</a>
+              <a href="/tags/Gunicorn/" rel="tag"># Gunicorn</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/16/35nW9iWbx/" rel="prev" title="MongoDB基础教程">
+      <i class="fa fa-chevron-left"></i> MongoDB基础教程
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/07/21/05fD5_2kL/" rel="next" title="Nginx实例">
+      Nginx实例 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E8%80%85%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">1.</span> <span class="nav-text">五者之间的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gunicorn%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">Gunicorn详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Gunicorn%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">2.1.</span> <span class="nav-text">Gunicorn是什么</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD"><span class="nav-number">2.1.1.</span> <span class="nav-text">功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9E%8B-Server-Model"><span class="nav-number">2.1.2.</span> <span class="nav-text">服务模型(Server Model)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Master-%E7%AE%A1%E7%90%86%E8%80%85"><span class="nav-number">2.1.3.</span> <span class="nav-text">Master(管理者)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#worker"><span class="nav-number">2.1.4.</span> <span class="nav-text">worker</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gunicorn%E5%AE%89%E8%A3%85"><span class="nav-number">2.2.</span> <span class="nav-text">Gunicorn安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gunicorn%E4%BD%BF%E7%94%A8"><span class="nav-number">2.3.</span> <span class="nav-text">Gunicorn使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%BF%90%E8%A1%8C"><span class="nav-number">2.3.1.</span> <span class="nav-text">命令运行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC%E8%BF%90%E8%A1%8C"><span class="nav-number">2.3.2.</span> <span class="nav-text">脚本运行</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Supervisor%E8%AF%A6%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">Supervisor详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Supervisor%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">3.1.</span> <span class="nav-text">Supervisor是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Supervisor%E5%AE%89%E8%A3%85"><span class="nav-number">3.2.</span> <span class="nav-text">Supervisor安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Supervisor%E4%BD%BF%E7%94%A8"><span class="nav-number">3.3.</span> <span class="nav-text">Supervisor使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">3.3.1.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">3.3.2.</span> <span class="nav-text">启动命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx%E4%BB%A3%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">Nginx代理</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">bookandmusic</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备2021028097号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bookandmusic</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : '',
+      projectId: ''
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

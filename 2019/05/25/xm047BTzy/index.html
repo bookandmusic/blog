@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bookandmusic.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"ZMZD8LN6JF","apiKey":"c75e305c22fd4cf56b8f03aa6efec207","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="特别说明，本文是在 Windows64 位系统下进行的，32 位系统请下载相应版本的安装包，安装方法类似。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="win10 python2和python3共存问题">
+<meta property="og:url" content="https://bookandmusic.cn/2019/05/25/xm047BTzy/index.html">
+<meta property="og:site_name" content="Bookandmusic">
+<meta property="og:description" content="特别说明，本文是在 Windows64 位系统下进行的，32 位系统请下载相应版本的安装包，安装方法类似。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526103726-win10_download_py%20.png">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526103746-win10_download_py3%20.png">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526103737-win10_download_py2%20.png">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526104125-py3_%E5%AE%89%E8%A3%85_01%20.png">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526104133-py3_%E5%AE%89%E8%A3%85_02%20.png">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526104141-py3_%E5%AE%89%E8%A3%85_03%20.png">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526104253-py3_%E5%AE%89%E8%A3%85_04%20.png">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526104257-py3_%E5%AE%89%E8%A3%85_05%20.png">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526104443-py3_%E5%AE%89%E8%A3%85_06%20.png">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526104627-py2_%E5%AE%89%E8%A3%85_01%20.png">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526104634-py2_%E5%AE%89%E8%A3%85_02%20.png">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526104643-py2_%E5%AE%89%E8%A3%85_03%20.png">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526104936-py2_test%20.png">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526104944-py3_test%20.png">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526105211-pip3%E5%AE%89%E8%A3%85%20.png">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526105206-pip2%E5%AE%89%E8%A3%85%20.png">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526105218-pip%E5%AE%89%E8%A3%85%E5%8C%85%20.png">
+<meta property="article:published_time" content="2019-05-25T02:45:27.000Z">
+<meta property="article:modified_time" content="2021-09-27T14:23:26.926Z">
+<meta property="article:author" content="bookandmusic">
+<meta property="article:tag" content="工具">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526103726-win10_download_py%20.png">
+
+<link rel="canonical" href="https://bookandmusic.cn/2019/05/25/xm047BTzy/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>win10 python2和python3共存问题 | Bookandmusic</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Bookandmusic</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">踮起脚尖，另一种高度</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2019/05/25/xm047BTzy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="bookandmusic">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bookandmusic">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          win10 python2和python3共存问题
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-25 10:45:27" itemprop="dateCreated datePublished" datetime="2019-05-25T10:45:27+08:00">2019-05-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-27 22:23:26" itemprop="dateModified" datetime="2021-09-27T22:23:26+08:00">2021-09-27</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p><strong>特别说明</strong>，本文是在 <strong>Windows64 位系统</strong>下进行的，32 位系统请下载相应版本的安装包，安装方法类似。</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="下载python安装包"><a href="#下载python安装包" class="headerlink" title="下载python安装包"></a>下载python安装包</h2><p>进入 python 官网，链接 <a target="_blank" rel="noopener" href="https://www.python.org/">https://www.python.org/</a></p>
+<p>选择 Downloads—&gt;Windows，点击进入就可以看到寻找想要的 python 版本</p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526103726-win10_download_py%20.png" alt="win10_download_py"></p>
+<p>本文选择的是：</p>
+<p>Python3.5.2, 点击后面链接可直接下载，<a target="_blank" rel="noopener" href="https://www.python.org/ftp/python/3.5.2/python-3.5.2rc1-amd64.exe">https://www.python.org/ftp/python/3.5.2/python-3.5.2rc1-amd64.exe</a></p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526103746-win10_download_py3%20.png" alt="20190526103746-win10_download_py3"></p>
+<p>Python2.7.9, 点击后面链接可直接下载，<a target="_blank" rel="noopener" href="https://www.python.org/ftp/python/2.7.9/python-2.7.9.amd64.msi">https://www.python.org/ftp/python/2.7.9/python-2.7.9.amd64.msi</a></p>
+<p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526103737-win10_download_py2%20.png" alt="20190526103737-win10_download_py2"></p>
+<h2 id="python3-安装"><a href="#python3-安装" class="headerlink" title="python3 安装"></a>python3 安装</h2><blockquote>
+<p><strong>说明:</strong> 本文先安装 python3，然后安装 python2</p>
+</blockquote>
+<p>首先选择安装目录，本文安装路径为 D:\Python\python35，然后点击下载好的 python3 软件包进行安装，具体流程如下：</p>
+<ol>
+<li><p>在下图红色标记的地方 Add Python3.5 to PATH 前勾选，可以直接将 python3 添加到系统环境变量，然后在 Customize installation 中自定义安装路径。<br> <img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526104125-py3_%E5%AE%89%E8%A3%85_01%20.png" alt="20190526104125-py3_安装_01"></p>
+</li>
+<li><p>直接 next 即可<br> <img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526104133-py3_%E5%AE%89%E8%A3%85_02%20.png" alt="20190526104133-py3_安装_02"></p>
+</li>
+<li><p>下图中 Advanced Options 中没有默认勾选的根据自己的需要进行勾选，黄色标记为 VS 2015 及其以后版本需要的，如果你以后打算在 VS 2015 中配置 python 环境请勾选此项，点击 Browse 选择安装目录，然后点击 Install 进行安装。<br><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526104141-py3_%E5%AE%89%E8%A3%85_03%20.png" alt="20190526104141-py3_安装_03"></p>
+</li>
+<li><p>等待如下安装过程<br><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526104253-py3_%E5%AE%89%E8%A3%85_04%20.png" alt="20190526104253-py3_安装_04"></p>
+</li>
+<li><p>安装成功<br><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526104257-py3_%E5%AE%89%E8%A3%85_05%20.png" alt="20190526104257-py3_安装_05"></p>
+</li>
+<li><p>点击关闭，查看 python3 安装情况，按 “Win + R” 快捷键，在打开的 “运行” 对话框中，输入 “cmd” 按回车，进入如下界面，输入 python 查看 python3 安装情况，显示 python 3.5.2 的版本信息，则安装成功，可以输入语句 print(1 + 1)进行测试。<br><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526104443-py3_%E5%AE%89%E8%A3%85_06%20.png" alt="20190526104443-py3_安装_06"></p>
+</li>
+</ol>
+<h2 id="python2-安装"><a href="#python2-安装" class="headerlink" title="python2 安装"></a>python2 安装</h2><ol>
+<li><p>点击 python2 安装包，点击运行，next，选择安装目录，本文安装路径为 D:\Python\python27，然后 next<br><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526104627-py2_%E5%AE%89%E8%A3%85_01%20.png" alt="20190526104627-py2_安装_01"></p>
+</li>
+<li><p>下图黄色圈出的部分，显示不能够添加路径到系统变量，不能够直接使用 python 命令没有关系，先点击 next 进行安装，后面专门解决。<br><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526104634-py2_%E5%AE%89%E8%A3%85_02%20.png" alt="20190526104634-py2_安装_02"><br><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526104643-py2_%E5%AE%89%E8%A3%85_03%20.png" alt="20190526104643-py2_安装_03"></p>
+</li>
+<li><p>点击 finish 完成安装。<br> 至此，python2 和 python3 安装完毕。</p>
+</li>
+</ol>
+<blockquote>
+<p>特别说明：此时运行 “cmd” 命令进入 DOS 命令提示框，输入 python 仍然显示 python3 版本。</p>
+</blockquote>
+<h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p>打开，控制面板 \ 系统和安全 \ 系统，选择高级系统设置，环境变量，选择 Path，点击编辑，新建，分别添加 D:\Python\python27 和 D:\Python\python27\Scripts 到环境变量。</p>
+<blockquote>
+<p><strong>注意：</strong> python3 安装时可以选择自动添加到系统环境变量，如未选择，方法和 python2 添加过程相同。</p>
+</blockquote>
+<h2 id="重命名-python-exe"><a href="#重命名-python-exe" class="headerlink" title="重命名 python.exe"></a>重命名 python.exe</h2><ol>
+<li><p>找到 python2 和 python3 的安装目录，修改 python2.7.9 和 python3.5.2 中 python.exe 和 pythonw.exe 的名称为 python2.exe、pythonw2.exe 和 python3.exe、pythonw3.exe。</p>
+</li>
+<li><p>然后在运行 cmd 命令，输入 python2 即可运行 python2.7.9 版本<br> <img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526104936-py2_test%20.png" alt="20190526104936-py2_test"></p>
+</li>
+<li><p>输入 python3 即可运行 python3.5.2 版本<br> <img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526104944-py3_test%20.png" alt="20190526104944-py3_test"></p>
+</li>
+<li><p>至此，python2 和 python3 安装完毕。</p>
+</li>
+</ol>
+<h2 id="pip2-和-pip3-设置"><a href="#pip2-和-pip3-设置" class="headerlink" title="pip2 和 pip3 设置"></a>pip2 和 pip3 设置</h2><ol>
+<li><p>Python 安装包需要用到包管理工具 pip，但是当同时安装 python2 和 python3 的时候，pip 只是其中一个版本，以下将提供一个修改方式，即重新安装两个版本的 pip，使得两个 python 版本的 pip 能够共存。<br> <img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526105211-pip3%E5%AE%89%E8%A3%85%20.png" alt="20190526105211-pip3安装"></p>
+</li>
+<li><p>在 DOS 命令框输入命令，python2-m pip install –upgrade pip –force-reinstall，显示重新安装成功。<br> <img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526105206-pip2%E5%AE%89%E8%A3%85%20.png" alt="20190526105206-pip2安装"></p>
+</li>
+<li><p>现在可以通过 pip2 -V 和 pip3-V 查看两个版本的 pip 信息，以后只需运行 pip2install XXX 和 pip3 install XXX 即可安装各自的 python 包。<br> <img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2005/20190526105218-pip%E5%AE%89%E8%A3%85%E5%8C%85%20.png" alt="20190526105218-pip安装包"></p>
+</li>
+<li><p>至此，pip2 和 pip3 修改成功。</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag"># 工具</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/05/25/OxyPhv4sv/" rel="prev" title="python内置函数">
+      <i class="fa fa-chevron-left"></i> python内置函数
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/05/25/FmX7wRaIi/" rel="next" title="win10设置开机自启">
+      win10设置开机自启 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BDpython%E5%AE%89%E8%A3%85%E5%8C%85"><span class="nav-number">1.</span> <span class="nav-text">下载python安装包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python3-%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">python3 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python2-%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">python2 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">4.</span> <span class="nav-text">配置环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%91%BD%E5%90%8D-python-exe"><span class="nav-number">5.</span> <span class="nav-text">重命名 python.exe</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pip2-%E5%92%8C-pip3-%E8%AE%BE%E7%BD%AE"><span class="nav-number">6.</span> <span class="nav-text">pip2 和 pip3 设置</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">bookandmusic</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备2021028097号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bookandmusic</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : '',
+      projectId: ''
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

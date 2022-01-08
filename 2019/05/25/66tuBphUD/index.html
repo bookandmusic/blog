@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bookandmusic.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"ZMZD8LN6JF","apiKey":"c75e305c22fd4cf56b8f03aa6efec207","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="很多函数都有自己的很多方法，其中有些方法的功能类似，但是其复杂度有时却大不相同 本节我们将引入一个新模块 timeit ，其功能是来测试一小段 Python 代码的执行速度。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常见函数的时间复杂度">
+<meta property="og:url" content="https://bookandmusic.cn/2019/05/25/66tuBphUD/index.html">
+<meta property="og:site_name" content="Bookandmusic">
+<meta property="og:description" content="很多函数都有自己的很多方法，其中有些方法的功能类似，但是其复杂度有时却大不相同 本节我们将引入一个新模块 timeit ，其功能是来测试一小段 Python 代码的执行速度。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526105816-timeit%E6%B5%8B%E8%AF%95%E7%A4%BA%E4%BE%8B%20.png">
+<meta property="og:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526105825-timeit%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C%20.png">
+<meta property="article:published_time" content="2019-05-25T11:54:09.000Z">
+<meta property="article:modified_time" content="2021-09-27T14:23:05.640Z">
+<meta property="article:author" content="bookandmusic">
+<meta property="article:tag" content="PYTHON">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526105816-timeit%E6%B5%8B%E8%AF%95%E7%A4%BA%E4%BE%8B%20.png">
+
+<link rel="canonical" href="https://bookandmusic.cn/2019/05/25/66tuBphUD/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>常见函数的时间复杂度 | Bookandmusic</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Bookandmusic</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">踮起脚尖，另一种高度</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2019/05/25/66tuBphUD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="bookandmusic">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bookandmusic">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          常见函数的时间复杂度
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-25 19:54:09" itemprop="dateCreated datePublished" datetime="2019-05-25T19:54:09+08:00">2019-05-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-27 22:23:05" itemprop="dateModified" datetime="2021-09-27T22:23:05+08:00">2021-09-27</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>很多函数都有自己的很多方法，其中有些方法的功能类似，但是其复杂度有时却大不相同</p>
+<p>本节我们将引入一个新模块 <code>timeit</code> ，其功能是来测试一小段 <code>Python</code> 代码的执行速度。</p>
+<span id="more"></span>
+
+<h3 id="1、timeit"><a href="#1、timeit" class="headerlink" title="1、timeit"></a>1、timeit</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">timeit</span>.<span class="title">Timer</span>(<span class="params">stmt=<span class="string">&#x27;pass&#x27;</span>, setup=<span class="string">&#x27;pass&#x27;</span>,timer=&lt;timer function&gt;</span>)</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>Timer</code> 是测量小段代码执行速度的类</p>
+</li>
+<li><p><code>stmt</code> 是要测试的代码语句 (<code>statment</code>), 字符串类型,</p>
+</li>
+<li><p><code>setup</code> 是运行代码时需要的设置 , 字符串类型, 就是从 <code>__main__</code> 引入需要的是的方法名</p>
+</li>
+<li><p><code>timer</code> 参数是一个定时器函数, 与平台有关, 不用去管</p>
+</li>
+<li><p><code>timeit.Timer.timeit(numer=1000000)</code>，<code>numer</code>-&gt; 测算次数, 返回平均耗时, 一个 <code>float</code> 类型的秒数</p>
+</li>
+</ul>
+<h4 id="部分测试示例"><a href="#部分测试示例" class="headerlink" title="部分测试示例"></a>部分测试示例</h4><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526105816-timeit%E6%B5%8B%E8%AF%95%E7%A4%BA%E4%BE%8B%20.png" alt="20190526105816-timeit测试示例"></p>
+<h4 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h4><p><img src="https://gitee.com/bookandmusic/imgs/raw/master/uPic/2020%2006/20190526105825-timeit%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C%20.png" alt="20190526105825-timeit测试结果"></p>
+<h3 id="2、list-的内置函数时间复杂度"><a href="#2、list-的内置函数时间复杂度" class="headerlink" title="2、list 的内置函数时间复杂度"></a>2、list 的内置函数时间复杂度</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>复杂度</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>index[x]</td>
+<td>O(1)</td>
+<td>索引</td>
+</tr>
+<tr>
+<td>index assignment</td>
+<td>O(1)</td>
+<td>索引赋值</td>
+</tr>
+<tr>
+<td>append</td>
+<td>O(1)</td>
+<td>尾部追加</td>
+</tr>
+<tr>
+<td>pop()</td>
+<td>O(1)</td>
+<td>尾部弹出</td>
+</tr>
+<tr>
+<td>pop(i)</td>
+<td>O(n)</td>
+<td>指定位置弹出 n 列表长度, 最坏时间复杂度</td>
+</tr>
+<tr>
+<td>insert(i, item)</td>
+<td>O(n)</td>
+<td>指定位置添加</td>
+</tr>
+<tr>
+<td>del operator</td>
+<td>O(n)</td>
+<td>删除, 代表一个一个元素去清空</td>
+</tr>
+<tr>
+<td>iteration</td>
+<td>O(n)</td>
+<td>迭代</td>
+</tr>
+<tr>
+<td>contains(in)</td>
+<td>O(n)</td>
+<td>看谁是否在列表中, 需要遍历</td>
+</tr>
+<tr>
+<td>get slice[x:y]</td>
+<td>O(k)</td>
+<td>取切片, 从 x 取到 y, 一次定位到 x, 然后取到 y ,x 和 y 之间有多少就是 k</td>
+</tr>
+<tr>
+<td>del slice</td>
+<td>O(n)</td>
+<td>删除切片 删除位置之后, 后面的元素都需要往前移动</td>
+</tr>
+<tr>
+<td>set slice</td>
+<td>O(k)</td>
+<td>设置切片, li[0:3] = [1, 2, 3, 4]k 是补充的东西数量</td>
+</tr>
+<tr>
+<td>reverse</td>
+<td>O(n)</td>
+<td>置返</td>
+</tr>
+<tr>
+<td>concatenate</td>
+<td>O(k)</td>
+<td>代表使用的 +, 把两个列表加到一起, k 是第二个列表中的元素</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>O(nlogn)</td>
+<td>排序</td>
+</tr>
+<tr>
+<td>multiply</td>
+<td>O(nk)</td>
+<td>相乘 li=[1, 2] -&gt; n li * 10 -&gt; k</td>
+</tr>
+</tbody></table>
+<h3 id="3、dict-的内置函数时间复杂度"><a href="#3、dict-的内置函数时间复杂度" class="headerlink" title="3、dict 的内置函数时间复杂度"></a>3、dict 的内置函数时间复杂度</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>复杂度</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>copy</td>
+<td>O(n)</td>
+<td>复制</td>
+</tr>
+<tr>
+<td>get item</td>
+<td>O(1)</td>
+<td>取</td>
+</tr>
+<tr>
+<td>set item</td>
+<td>O(1)</td>
+<td>设置</td>
+</tr>
+<tr>
+<td>delete item</td>
+<td>O(1)</td>
+<td>删除键</td>
+</tr>
+<tr>
+<td>contains(in)</td>
+<td>O(1)</td>
+<td>包含</td>
+</tr>
+<tr>
+<td>iteration</td>
+<td>O(n)</td>
+<td>迭代</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PYTHON/" rel="tag"># PYTHON</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/05/25/cYMAcCCWI/" rel="prev" title="O标记法与常见时间复杂度">
+      <i class="fa fa-chevron-left"></i> O标记法与常见时间复杂度
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/05/25/AOiiztLHK/" rel="next" title="Django基础-路由">
+      Django基础-路由 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81timeit"><span class="nav-number">1.</span> <span class="nav-text">1、timeit</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%83%A8%E5%88%86%E6%B5%8B%E8%AF%95%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.1.</span> <span class="nav-text">部分测试示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C"><span class="nav-number">1.2.</span> <span class="nav-text">测试结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81list-%E7%9A%84%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">2.</span> <span class="nav-text">2、list 的内置函数时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81dict-%E7%9A%84%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">3.</span> <span class="nav-text">3、dict 的内置函数时间复杂度</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">bookandmusic</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备2021028097号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bookandmusic</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : '',
+      projectId: ''
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bookandmusic.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"ZMZD8LN6JF","apiKey":"c75e305c22fd4cf56b8f03aa6efec207","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="本篇文章将介绍如何在本地搭建Python开发环境。 Python可应用于多平台包括 Linux 和 Mac OS X。 你可以通过终端窗口输入 “python” 命令来查看本地是否已经安装Python以及Python的安装版本。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python环境配置">
+<meta property="og:url" content="https://bookandmusic.cn/2020/04/11/gJvDJfEV1/index.html">
+<meta property="og:site_name" content="Bookandmusic">
+<meta property="og:description" content="本篇文章将介绍如何在本地搭建Python开发环境。 Python可应用于多平台包括 Linux 和 Mac OS X。 你可以通过终端窗口输入 “python” 命令来查看本地是否已经安装Python以及Python的安装版本。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-10T16:00:27.000Z">
+<meta property="article:modified_time" content="2021-09-25T15:25:44.875Z">
+<meta property="article:author" content="bookandmusic">
+<meta property="article:tag" content="PYTHON">
+<meta property="article:tag" content="环境搭建">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://bookandmusic.cn/2020/04/11/gJvDJfEV1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>python环境配置 | Bookandmusic</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Bookandmusic</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">踮起脚尖，另一种高度</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2020/04/11/gJvDJfEV1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="bookandmusic">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bookandmusic">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python环境配置
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-11 00:00:27" itemprop="dateCreated datePublished" datetime="2020-04-11T00:00:27+08:00">2020-04-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-25 23:25:44" itemprop="dateModified" datetime="2021-09-25T23:25:44+08:00">2021-09-25</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本篇文章将介绍如何在本地搭建Python开发环境。</p>
+<p>Python可应用于多平台包括 Linux 和 Mac OS X。</p>
+<p>你可以通过终端窗口输入 “python” 命令来查看本地是否已经安装Python以及Python的安装版本。</p>
+<span id="more"></span>
+
+
+<h2 id="Python环境配置"><a href="#Python环境配置" class="headerlink" title="Python环境配置"></a>Python环境配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ubuntu</span></span><br><span class="line">sudo apt-get install python3-pip</span><br><span class="line">sudo apt-get install python-pip</span><br><span class="line"></span><br><span class="line"><span class="comment"># windows</span></span><br><span class="line">python3 -m pip install --upgrade pip --force-reinstall</span><br><span class="line">python2 -m pip install --upgrade pip --force-reinstall</span><br><span class="line"></span><br><span class="line"><span class="comment"># mac</span></span><br><span class="line">brew install python  <span class="comment"># 这一步安装了python3和pip3</span></span><br><span class="line">brew install python@2 <span class="comment"># 这一步安装了python2和pip2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ipython2</span></span><br><span class="line">pip install ipython </span><br><span class="line"><span class="comment"># ipython3</span></span><br><span class="line">pip3 install ipython </span><br></pre></td></tr></table></figure>
+
+<h2 id="pip镜像源"><a href="#pip镜像源" class="headerlink" title="pip镜像源"></a>pip镜像源</h2><h3 id="镜像源"><a href="#镜像源" class="headerlink" title="镜像源"></a>镜像源</h3><ul>
+<li>清华：<code>https://pypi.tuna.tsinghua.edu.cn/simple</code></li>
+<li>阿里云：<code>http://mirrors.aliyun.com/pypi/simple/</code></li>
+<li>中国科技大学 <code>https://pypi.mirrors.ustc.edu.cn/simple/</code></li>
+<li>华中理工大学：<code>http://pypi.hustunique.com/</code></li>
+<li>山东理工大学：<code>http://pypi.sdutlinux.org/</code></li>
+<li>豆瓣：<code>http://pypi.douban.com/simple/</code></li>
+</ul>
+<h3 id="文件修改"><a href="#文件修改" class="headerlink" title="文件修改"></a>文件修改</h3><h4 id="Linux-Mac"><a href="#Linux-Mac" class="headerlink" title="Linux/Mac"></a>Linux/Mac</h4><p>修改 <code>~/.pip/pip.conf</code> (没有就创建一个文件夹及文件。文件夹要加<code>.</code>，表示是隐藏文件夹)</p>
+<blockquote>
+<p>内容如下</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url = https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line">[install]</span><br><span class="line">trusted-host=mirrors.aliyun.com</span><br></pre></td></tr></table></figure>
+
+<h4 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h4><p>直接在 user 目录中创建一个 pip 目录，如：<code>C:\Users\xx\pip</code>，新建文件<code>pip.ini</code>。内容同上。</p>
+<h3 id="终端修改"><a href="#终端修改" class="headerlink" title="终端修改"></a>终端修改</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip config <span class="built_in">set</span> global.index-url http://mirrors.aliyun.com/pypi/simple/ <span class="comment"># 终端使用命令设置pip镜像</span></span><br><span class="line">pip install pip -U  <span class="comment"># 升级pip包管理工具</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="虚拟环境之pipenv"><a href="#虚拟环境之pipenv" class="headerlink" title="虚拟环境之pipenv"></a>虚拟环境之pipenv</h2><ol>
+<li><p>安装<code>pipenv</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pipenv</span><br></pre></td></tr></table></figure></li>
+<li><p>使用<code>pipenv</code>创建虚拟环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment"># 尽量在一个项目目录下创建虚拟环境</span></span><br><span class="line"><span class="built_in">cd</span> youfolder</span><br><span class="line">pipenv install</span><br></pre></td></tr></table></figure></li>
+<li><p>激活虚拟环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在创建虚拟环境的位置运行命令</span></span><br><span class="line">pipenv shell</span><br></pre></td></tr></table></figure></li>
+<li><p>修改虚拟环境的镜像源</p>
+<p> 打开虚拟环境下的配置文件: <code>Pipfile</code></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="built_in">source</span>]</span><br><span class="line">name = <span class="string">&quot;pypi&quot;</span></span><br><span class="line">url = <span class="string">&quot;https://pypi.org/simple&quot;</span></span><br><span class="line">verify_ssl = <span class="literal">true</span></span><br><span class="line">    </span><br><span class="line">[dev-packages]</span><br><span class="line">    </span><br><span class="line">[packages]</span><br><span class="line">    </span><br><span class="line">[requires]</span><br><span class="line">python_version = <span class="string">&quot;3.7&quot;</span></span><br></pre></td></tr></table></figure>
+<p> 修改<code>url</code>为国内镜像源:</p>
+</li>
+</ol>
+<ol start="5">
+<li><p>在虚拟环境安装第三方包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pipenv install django</span><br></pre></td></tr></table></figure></li>
+<li><p>使用pipenv卸载第三方模块</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pipev uninstall django</span><br></pre></td></tr></table></figure></li>
+<li><p>查看依赖</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pipenv graph</span><br></pre></td></tr></table></figure></li>
+<li><p>将安装的模块打包到一个文件内</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt</span><br></pre></td></tr></table></figure></li>
+<li><p>将一个文件内的第三方扩展安装到虚拟环境中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure></li>
+<li><p>退出虚拟环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure></li>
+<li><p>删除虚拟环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pipenv --rm</span><br></pre></td></tr></table></figure></li>
+<li><p>不激活虚拟环境，直接运行命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pipenv run django-amdin start project djangodemo</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="虚拟环境之virtualenv"><a href="#虚拟环境之virtualenv" class="headerlink" title="虚拟环境之virtualenv"></a>虚拟环境之virtualenv</h2><ol>
+<li><p>安装<code>virtualenv</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install virtualenv <span class="comment"># 虚拟环境</span></span><br><span class="line">pip install virtualenvwrappern <span class="comment"># mac/linux系统</span></span><br><span class="line">pip install virtualenvwrapper-win <span class="comment"># windows系统</span></span><br></pre></td></tr></table></figure></li>
+<li><p>创建虚拟环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkvirtualenv django</span><br></pre></td></tr></table></figure></li>
+<li><p>激活虚拟环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在创建虚拟环境后会默认激活</span></span><br><span class="line">workon django  <span class="comment"># 激活django虚拟环境</span></span><br><span class="line">workon  <span class="comment"># 查看所有虚拟环境</span></span><br></pre></td></tr></table></figure></li>
+<li><p>修改虚拟环境的镜像源</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip config <span class="built_in">set</span> global.index-url http://mirrors.aliyun.com/pypi/simple/ <span class="comment"># 终端使用命令设置pip镜像</span></span><br><span class="line">pip install pip -U  <span class="comment"># 升级pip包管理工具</span></span><br></pre></td></tr></table></figure></li>
+<li><p>在虚拟环境安装第三方包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install django  <span class="comment"># 先激活虚拟环境</span></span><br></pre></td></tr></table></figure></li>
+<li><p>卸载第三方模块</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip uninstall django <span class="comment"># 先激活虚拟环境</span></span><br></pre></td></tr></table></figure></li>
+<li><p>将安装的模块打包到一个文件内</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt</span><br></pre></td></tr></table></figure></li>
+<li><p>将一个文件内的第三方扩展安装到虚拟环境中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure></li>
+<li><p>退出虚拟环境</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure></li>
+<li><p>删除虚拟环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rmvirtualenv django</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="虚拟环境之conda"><a href="#虚拟环境之conda" class="headerlink" title="虚拟环境之conda"></a>虚拟环境之conda</h2><h3 id="1-Anaconda简介"><a href="#1-Anaconda简介" class="headerlink" title="1. Anaconda简介"></a>1. Anaconda简介</h3><ul>
+<li><p>Anaconda是一个方便的python包管理和环境管理软件，一般用来配置不同的项目环境。</p>
+</li>
+<li><p>Anaconda通过管理工具包、开发环境、Python版本，大大简化了你的工作流程。不仅可以方便地安装、更新、卸载工具包，而且安装时能自动安装相应的依赖包，同时还能使用不同的虚拟环境隔离不同要求的项目。</p>
+</li>
+<li><p>Anaconda 镜像使用帮助</p>
+<ul>
+<li><p>Anaconda 是一个用于科学计算的 Python 发行版，支持 Linux, Mac, Windows, 包含了众多流行的科学计算、数据分析的 Python 包。</p>
+</li>
+<li><p>Anaconda 安装包可以到 <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/</a> 下载。</p>
+</li>
+</ul>
+</li>
+<li><p>Miniconda 镜像使用帮助</p>
+<ul>
+<li><p>Miniconda 是一个 Anaconda 的轻量级替代，默认只包含了 python 和 conda，但是可以通过 pip 和 conda 来安装所需要的包。</p>
+</li>
+<li><p>Miniconda 安装包可以到 <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/</a> 下载。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-Anaconda安装"><a href="#2-Anaconda安装" class="headerlink" title="2. Anaconda安装"></a>2. Anaconda安装</h3><ul>
+<li><p>Windows安装</p>
+<ul>
+<li><p>点击安装文件<code>Anaconda3-2019.07-Windows-x86_64.exe</code>,选择安装路径,如<code>D:\python\Anaconda</code>,然后一直next即可。</p>
+</li>
+<li><p><strong>配置环境变量:</strong> 将安装的根路径,如<code>D:\python\Anaconda</code>和<code>scripts</code>文件夹路径<code>D:\python\Anaconda\scripts</code>添加到电脑环境变量之中</p>
+</li>
+</ul>
+</li>
+<li><p>Linux/Mac安装</p>
+<ul>
+<li><p>将安装文件<code>Anaconda3-2019.07-Linux-x86_64.sh</code>移动到用户家目录</p>
+</li>
+<li><p>在用户家目录,打开终端,执行<code>./Anaconda3-2019.07-Linux-x86_64.sh</code>,然后输入yes,一路回车即可。</p>
+</li>
+<li><p><strong>配置环境变量:</strong></p>
+<ul>
+<li><p>打开.bashrc 文件,在终端执行如下命令:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi ~/.bashrc</span><br></pre></td></tr></table></figure></li>
+<li><p>输入G，跳转到文件末尾,在文件最后一行新增环境变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=~/anaconda3/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure></li>
+<li><p>修改完成,先按esc键进入命令行模式，然后按<code>shift+：</code>进入末行模式，输入<code>wq</code>,保存退出</p>
+</li>
+<li><p>在终端执行如下命令,使其立即生效</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>注意：在Mac中，修改文件<code>.bash_profile</code>,其余和Linux操作一样</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-修改Anaconda镜像源"><a href="#3-修改Anaconda镜像源" class="headerlink" title="3. 修改Anaconda镜像源"></a>3. 修改Anaconda镜像源</h3><ul>
+<li><p>Anaconda默认访问国外服务器，网速较慢，故需要修改默认镜像</p>
+</li>
+<li><p>TUNA 还提供了 Anaconda 仓库与第三方源（conda-forge、msys2、pytorch等，查看完整列表）的镜像，各系统都可以通过修改用户目录下的 .condarc 文件:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">channels:</span><br><span class="line">  - defaults</span><br><span class="line">show_channel_urls: <span class="literal">true</span></span><br><span class="line">channel_alias: https://mirrors.tuna.tsinghua.edu.cn/anaconda</span><br><span class="line">default_channels:</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/pro</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2</span><br><span class="line">custom_channels:</span><br><span class="line">  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br></pre></td></tr></table></figure>
+
+<p>即可添加 Anaconda Python 免费仓库。Windows 用户无法直接创建名为 <code>.condarc</code> 的文件，可先执行 <code>conda config --set show_channel_urls yes</code> 生成该文件之后再修改。</p>
+</li>
+</ul>
+<h3 id="4-Anconda基本使用"><a href="#4-Anconda基本使用" class="headerlink" title="4. Anconda基本使用"></a>4. Anconda基本使用</h3><h4 id="管理环境"><a href="#管理环境" class="headerlink" title="管理环境"></a>管理环境</h4><ul>
+<li><p>检查conda版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda --version                                                                                                                     </span><br></pre></td></tr></table></figure></li>
+<li><p>升级当前版本conda</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda update conda</span><br></pre></td></tr></table></figure></li>
+<li><p>管理（虚拟）环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个名为python37的环境，指定Python版本是3.7（不用管是3.7.x，conda会为我们自动寻找3.7.x中的最新版本）</span></span><br><span class="line">conda create --name python37 python=3.7</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装好后，使用activate激活某个环境</span></span><br><span class="line">activate python37 <span class="comment"># for Windows</span></span><br><span class="line"><span class="built_in">source</span> activate python37 <span class="comment"># for Linux &amp; Mac</span></span><br><span class="line"><span class="comment"># 激活后，会发现terminal输入的地方多了python37的字样</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果想返回默认的python环境，运行</span></span><br><span class="line">deactivate python37 <span class="comment"># for Windows</span></span><br><span class="line"><span class="built_in">source</span> deactivate python37 <span class="comment"># for Linux &amp; Mac</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除一个已有的环境</span></span><br><span class="line">conda remove --name python37 --all</span><br><span class="line"></span><br><span class="line"><span class="comment"># 另外，我们可以使用conda命令替换source命令用来激活和关闭环境</span></span><br><span class="line">conda activate python37</span><br><span class="line">conda deactivate</span><br><span class="line"></span><br><span class="line"><span class="comment"># 取消每次打开终端，默认激活bash环境</span></span><br><span class="line">conda config --<span class="built_in">set</span> auto_activate_base <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 重新激活每次打开终端，默认进入base环境</span></span><br><span class="line">conda config --<span class="built_in">set</span> auto_activate_base <span class="literal">true</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>新的开发环境会被默认安装在你conda目录下的envs文件目录下。</p>
+<p>如果我们没有指定安装python的版本，conda会安装我们最初安装conda时所装的那个版本的python。</p>
+</li>
+<li><p>列出所有环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda info -e</span><br><span class="line">conda info –-envs</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意:conda会对当前活动的环境追加星号标记。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">macdeMacBook-Pro:~ mac$ conda info -e</span><br><span class="line"><span class="comment"># conda environments:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">base                  *  /Users/mac/anaconda3</span><br><span class="line">myenv                    /Users/mac/anaconda3/envs/myenv</span><br><span class="line">py3                      /Users/mac/anaconda3/envs/py3</span><br></pre></td></tr></table></figure></li>
+<li><p>复制一个环境<br>通过克隆来复制一个环境。这儿将通过克隆py3来创建一个称为py32的副本。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n py32 --<span class="built_in">clone</span> py3</span><br></pre></td></tr></table></figure>
+
+<p>通过</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda info –-envs</span><br></pre></td></tr></table></figure>
+
+<p>来检查环境。</p>
+</li>
+<li><p>重命名env</p>
+<p>conda是没有重命名环境的功能的, 要实现这个基本需求, 只能通过愚蠢的克隆-删除的过程。</p>
+<p>切记不要直接mv移动环境的文件夹来重命名, 会导致一系列无法想象的错误的发生!</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda create --name newname --<span class="built_in">clone</span> oldname      <span class="comment"># 克隆环境</span></span><br><span class="line">conda remove --name oldname --all      <span class="comment"># 彻底删除旧环境</span></span><br></pre></td></tr></table></figure></li>
+<li><p>分享环境</p>
+<p>如果你想把你当前的环境配置与别人分享，这样ta可以快速建立一个与你一模一样的环境（同一个版本的python及各种包）来共同开发/进行新的实验。</p>
+<p><strong>一个分享环境的快速方法就是给ta一个你的环境的.yml文件。</strong></p>
+<p>首先通过activate target_env要分享的环境target_env，然后输入下面的命令会在当前工作目录下生成一个environment.yml文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda env <span class="built_in">export</span> &gt; environment.yml</span><br></pre></td></tr></table></figure>
+
+<p>小伙伴拿到environment.yml文件后，将该文件放在工作目录下，可以通过以下命令从该文件创建环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda env create -f environment.yml</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="管理包"><a href="#管理包" class="headerlink" title="管理包"></a>管理包</h4><ul>
+<li><p>conda安装和管理python包非常方便，可以在指定的python环境中安装包，且自动安装所需要的依赖包，避免了很多拓展包冲突兼容问题。</p>
+</li>
+<li><p><strong>不建议使用easy_install安装包</strong>。大部分包都可以使用conda安装，无法使用conda和anaconda.org安装的包可以通过pip命令安装</p>
+</li>
+<li><p>使用合适的源可以提升安装的速度</p>
+</li>
+<li><p>查看已安装包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda list</span><br></pre></td></tr></table></figure>
+
+<p>使用这条命令来查看哪个版本的python或其他程序安装在了该环境中，或者确保某些包已经被安装了或被删除了。</p>
+</li>
+<li><p>向指定环境安装包<br>我们在指定环境中安装requests包，有两种方式:</p>
+<ul>
+<li><p>直接通过-n选项指定安装环境的名字</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install --name py3 requests</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>提示：你必须告诉conda你要安装环境的名字（-n py3）否则它将会被安装到当前环境中。</p>
+</blockquote>
+</li>
+<li><p>激活py3环境，再使用conda install命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda activate py3</span><br><span class="line">conda install requests</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>通过pip命令</p>
+<p>对于那些无法通过conda安装或者从Anaconda.org获得的包，我们通常可以用pip命令来安装包。</p>
+<p>可以上pypi网站查询要安装的包，查好以后输入pip install命令就可以安装这个包了。</p>
+<p>我们激活想要放置程序的python环境，然后通过pip安装一个叫“PyMysql”的包。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Linux, OS X</span></span><br><span class="line"><span class="built_in">source</span> activate bunnies</span><br><span class="line"></span><br><span class="line"><span class="comment"># Windows</span></span><br><span class="line">activate py3</span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">pip install pymysql</span><br></pre></td></tr></table></figure>
+
+<p>pip只是一个包管理器，所以它不能为你管理环境。pip甚至不能升级python，因为它不像conda一样把python当做包来处理。但是它可以安装一些conda安装不了的包。</p>
+<blockquote>
+<p>小技巧：在任何时候你可以通过在命令后边跟上-help来获得该命令的完整文档。很多跟在–后边常用的命令选项，可以被略写为一个短线加命令首字母。所以–name选项和-n的作用是一样的。通过conda -h或conda –-help来看大量的缩写。</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="移除包、环境、或者conda"><a href="#移除包、环境、或者conda" class="headerlink" title="移除包、环境、或者conda"></a>移除包、环境、或者conda</h4><ul>
+<li><p>移除包</p>
+<p>假设你决定不再使用包pymysql。你可以在py3环境中移除它。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda remove -n py3 pymysql</span><br></pre></td></tr></table></figure></li>
+<li><p>移除环境</p>
+<p>我们不再需要snakes环境了，可以输入以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda remove -n myenv --all</span><br></pre></td></tr></table></figure></li>
+<li><p>删除conda</p>
+<ul>
+<li><p>Linux/OS X：</p>
+<p>移除Anaconda 或 Miniconda 安装文件夹</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rm -rf ~/miniconda</span><br><span class="line"><span class="comment"># OR</span></span><br><span class="line">rm -rf ~/anaconda</span><br></pre></td></tr></table></figure></li>
+<li><p>Windows：<br>去控制面板，点击“添加或删除程序”，选择“Python2.7/3.6（Anaconda）”或“Python2.7/3.6（Miniconda）”并点击删除程序。</p>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PYTHON/" rel="tag"># PYTHON</a>
+              <a href="/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" rel="tag"># 环境搭建</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/17/2i1TCdCOP/" rel="prev" title="DRF-后端跨域">
+      <i class="fa fa-chevron-left"></i> DRF-后端跨域
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/12/svcQHfnZH/" rel="next" title="ES6语法">
+      ES6语法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Python%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">Python环境配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pip%E9%95%9C%E5%83%8F%E6%BA%90"><span class="nav-number">2.</span> <span class="nav-text">pip镜像源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%9C%E5%83%8F%E6%BA%90"><span class="nav-number">2.1.</span> <span class="nav-text">镜像源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9"><span class="nav-number">2.2.</span> <span class="nav-text">文件修改</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux-Mac"><span class="nav-number">2.2.1.</span> <span class="nav-text">Linux&#x2F;Mac</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#windows"><span class="nav-number">2.2.2.</span> <span class="nav-text">windows</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%88%E7%AB%AF%E4%BF%AE%E6%94%B9"><span class="nav-number">2.3.</span> <span class="nav-text">终端修改</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E4%B9%8Bpipenv"><span class="nav-number">3.</span> <span class="nav-text">虚拟环境之pipenv</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E4%B9%8Bvirtualenv"><span class="nav-number">4.</span> <span class="nav-text">虚拟环境之virtualenv</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E4%B9%8Bconda"><span class="nav-number">5.</span> <span class="nav-text">虚拟环境之conda</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Anaconda%E7%AE%80%E4%BB%8B"><span class="nav-number">5.1.</span> <span class="nav-text">1. Anaconda简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Anaconda%E5%AE%89%E8%A3%85"><span class="nav-number">5.2.</span> <span class="nav-text">2. Anaconda安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BF%AE%E6%94%B9Anaconda%E9%95%9C%E5%83%8F%E6%BA%90"><span class="nav-number">5.3.</span> <span class="nav-text">3. 修改Anaconda镜像源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Anconda%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">5.4.</span> <span class="nav-text">4. Anconda基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E7%8E%AF%E5%A2%83"><span class="nav-number">5.4.1.</span> <span class="nav-text">管理环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E5%8C%85"><span class="nav-number">5.4.2.</span> <span class="nav-text">管理包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%BB%E9%99%A4%E5%8C%85%E3%80%81%E7%8E%AF%E5%A2%83%E3%80%81%E6%88%96%E8%80%85conda"><span class="nav-number">5.4.3.</span> <span class="nav-text">移除包、环境、或者conda</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">bookandmusic</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备2021028097号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bookandmusic</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : '',
+      projectId: ''
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

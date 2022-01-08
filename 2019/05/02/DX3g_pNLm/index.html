@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bookandmusic.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"ZMZD8LN6JF","apiKey":"c75e305c22fd4cf56b8f03aa6efec207","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="函数复习返回函数 python的常识，函数和其他任何东西一样，都是对象。这意味着可以将函数当做实参传递给函数，或者在函数中将函数作为返回值返回。  123456789def lazy_sum(*args):    def sum():        ax &#x3D; 0        for n in args:            ax &#x3D; ax + n        return ax    r">
+<meta property="og:type" content="article">
+<meta property="og:title" content="装饰器基础">
+<meta property="og:url" content="https://bookandmusic.cn/2019/05/02/DX3g_pNLm/index.html">
+<meta property="og:site_name" content="Bookandmusic">
+<meta property="og:description" content="函数复习返回函数 python的常识，函数和其他任何东西一样，都是对象。这意味着可以将函数当做实参传递给函数，或者在函数中将函数作为返回值返回。  123456789def lazy_sum(*args):    def sum():        ax &#x3D; 0        for n in args:            ax &#x3D; ax + n        return ax    r">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-05-02T06:30:27.000Z">
+<meta property="article:modified_time" content="2021-10-06T08:58:42.932Z">
+<meta property="article:author" content="bookandmusic">
+<meta property="article:tag" content="PYTHON">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://bookandmusic.cn/2019/05/02/DX3g_pNLm/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>装饰器基础 | Bookandmusic</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Bookandmusic</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">踮起脚尖，另一种高度</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bookandmusic.cn/2019/05/02/DX3g_pNLm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="bookandmusic">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bookandmusic">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          装饰器基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-02 14:30:27" itemprop="dateCreated datePublished" datetime="2019-05-02T14:30:27+08:00">2019-05-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-06 16:58:42" itemprop="dateModified" datetime="2021-10-06T16:58:42+08:00">2021-10-06</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <span id="more"></span>
+
+<h2 id="函数复习"><a href="#函数复习" class="headerlink" title="函数复习"></a>函数复习</h2><h3 id="返回函数"><a href="#返回函数" class="headerlink" title="返回函数"></a>返回函数</h3><blockquote>
+<p><code>python</code>的常识，函数和其他任何东西一样，都是对象。这意味着可以将<code>函数</code>当做<code>实参</code>传递给函数，或者在函数中将<code>函数</code>作为<code>返回值</code>返回。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lazy_sum</span>(<span class="params">*args</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sum</span>():</span></span><br><span class="line">        ax = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> n <span class="keyword">in</span> args:</span><br><span class="line">            ax = ax + n</span><br><span class="line">        <span class="keyword">return</span> ax</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span></span><br><span class="line">f = lazy_sum(<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>)</span><br><span class="line">f()</span><br></pre></td></tr></table></figure>
+
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>闭包是“返回函数”的一个典型应用</p>
+<p>闭包的定义：</p>
+<blockquote>
+<ul>
+<li><p>  在一个外函数(<code>outer</code>)中定义了一个内函数(<code>inner</code>)</p>
+</li>
+<li><p>   内函数里运用了外函数的临时变量</p>
+</li>
+<li><p>  并且外函数的返回值是内函数的引用</p>
+</li>
+</ul>
+</blockquote>
+<p>闭包的使用，可以隐藏内部函数的工作细节，只给外部使用者提供一个可以执行的内部函数的引用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#闭包函数的实例</span></span><br><span class="line">  <span class="comment"># outer是外部函数 a和b都是外函数的临时变量</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">outer</span>(<span class="params"> a </span>):</span></span><br><span class="line">    b = <span class="number">10</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span>():</span>  <span class="comment"># inner是内函数</span></span><br><span class="line">        <span class="built_in">print</span>(a+b)  <span class="comment">#在内函数中 用到了外函数的临时变量</span></span><br><span class="line">    <span class="keyword">return</span> inner  <span class="comment"># 外函数的返回值是内函数的引用</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 在这里我们调用外函数传入参数5</span></span><br><span class="line">  <span class="comment">#此时外函数两个临时变量 a是5 b是10 ，并创建了内函数，然后把内函数的引用返回存给了demo</span></span><br><span class="line">  <span class="comment"># 外函数结束的时候发现内部函数将会用到自己的临时变量，这两个临时变量就不会释放，会绑定给这个内部函数</span></span><br><span class="line">  demo = outer(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 我们调用内部函数，看一看内部函数是不是能使用外部函数的临时变量</span></span><br><span class="line">  <span class="comment"># demo存了外函数的返回值，也就是inner函数的引用，这里相当于执行inner函数</span></span><br><span class="line">  demo() <span class="comment"># 15</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>inner</code>函数修改<code>outer</code>函数变量</p>
+</blockquote>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">createCounter</span>():</span></span><br><span class="line">  i = <span class="number">0</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">counter</span>():</span></span><br><span class="line">     <span class="keyword">nonlocal</span> i <span class="comment"># 指定外部函数的局部变量</span></span><br><span class="line">     i = i + <span class="number">1</span></span><br><span class="line">     <span class="keyword">return</span> i</span><br><span class="line">  <span class="keyword">return</span> counter</span><br><span class="line"></span><br><span class="line">counterA = createCounter()</span><br><span class="line"><span class="built_in">print</span>(counterA(), counterA(), counterA(), counterA(), counterA()) <span class="comment"># 1 2 3 4 5</span></span><br><span class="line">counterB = createCounter()</span><br><span class="line"><span class="keyword">if</span> [counterB(), counterB(), counterB(), counterB()] == [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]:</span><br><span class="line">   <span class="built_in">print</span>(<span class="string">&#x27;测试通过!&#x27;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">   <span class="built_in">print</span>(<span class="string">&#x27;测试失败!&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="装饰器介绍"><a href="#装饰器介绍" class="headerlink" title="装饰器介绍"></a>装饰器介绍</h2><p>要了解python中<code>@</code>装饰器的作用，首先要记住这么几点：</p>
+<blockquote>
+<p>  装饰器符号<code>@</code>属于语法糖</p>
+</blockquote>
+<p>什么意思呢？</p>
+<ul>
+<li>就是说，我不按照<code>@</code>装饰器的语法要求来写，而是按照一般<code>python</code>的语法要求来写完全可以。</li>
+<li>那么用<code>@</code>装饰器的格式来写的目的就是为了书写简单方便</li>
+</ul>
+<p><strong>注意：装饰器是用于拓展已有函数功能的一种函数，这个函数的特殊之处在于它的返回值也是一个函数，实际上就是利用闭包语法实现的。</strong></p>
+<h2 id="装饰器语法"><a href="#装饰器语法" class="headerlink" title="装饰器语法"></a>装饰器语法</h2><p>装饰器的作用是什么呢？ 简单的理解就是：装饰原有的函数。什么意思呢？</p>
+<p>比如有一个函数<code>func(a, b)</code>，它的功能是求<code>a</code>,<code>b</code>的差值</p>
+<p>现在有一个新需求，就是想对函数功能再装饰下，求完差值后再取绝对值，但是不能能修改原有函数，这时候就需要装饰器装饰函数     </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">函数闭包实现求差值之后，再求绝对值</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span>(<span class="params">a, b</span>):</span></span><br><span class="line">    <span class="keyword">return</span> a- b</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">abs_num</span>(<span class="params">func</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span>(<span class="params">a, b</span>):</span></span><br><span class="line">        ret = func(a, b)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">abs</span>(ret)</span><br><span class="line">    <span class="keyword">return</span> inner</span><br><span class="line"></span><br><span class="line"><span class="meta">@abs_num</span></span><br><span class="line">func(<span class="number">2</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>当<code>abs_num</code>装饰函数<code>func</code>时，类似于将函数<code>func</code>作为参数传给<code>abs_num</code>,并将返回值即内层函数(<code>inner</code>)名重新赋值给变量<code>func</code></p>
+</li>
+<li><p>当调用函数<code>func</code>时，实质是调用内层函数<code>inner</code>，在内层函数中执行<code>func</code>函数，即最原始的函数<code>func</code></p>
+</li>
+</ul>
+<h2 id="装饰器分类"><a href="#装饰器分类" class="headerlink" title="装饰器分类"></a>装饰器分类</h2><h3 id="被装饰函数有参数"><a href="#被装饰函数有参数" class="headerlink" title="被装饰函数有参数"></a>被装饰函数有参数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span>(<span class="params">func</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span>(<span class="params">x, y</span>):</span></span><br><span class="line">        func(x, y)  <span class="comment"># 新版的 func  才是 原来的 add</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> inner</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@outer</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(x + y)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">add(<span class="number">1</span>, <span class="number">2</span>)  <span class="comment"># 新版的 add  是 内层 inner</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># add(1, 2)   ====&gt;  inner(1, 2)  ====&gt;  func(1, 2)  ===&gt; 3</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>被装饰函数 有参数，<code>inner</code>和 <code>func </code>需要同样的参数</p>
+</blockquote>
+<h3 id="被装饰的函数有不定长参数"><a href="#被装饰的函数有不定长参数" class="headerlink" title="被装饰的函数有不定长参数"></a>被装饰的函数有不定长参数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_func</span>(<span class="params">func</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">call_func</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># func(args, kwargs),此时得到的是元组和字典</span></span><br><span class="line">        <span class="comment"># func(*args, **kwargs),此时则是把元素拆包为单个数值和键值对</span></span><br><span class="line">        <span class="keyword">return</span> func(*args, **kwargs)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> call_func</span><br><span class="line"></span><br><span class="line"><span class="meta">@set_func</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">s</span>(<span class="params">a, b, *args, **kwargs</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(a, b, args, kwargs)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">s(<span class="number">12</span>, <span class="number">50</span>, <span class="number">34</span>, c=<span class="number">20</span>, d=<span class="number">56</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>形参<ul>
+<li><code>*args</code>：接收多余的参数，得到元组(args)</li>
+<li><code>**kwargs</code>:接收多余的关键字参数，得到字典(kwargs)</li>
+</ul>
+</li>
+<li>实参<ul>
+<li><code>*args</code>：对元组(args)进行拆包，得到单个数值</li>
+<li><code>**kwargs</code>：对字典(kwargs)拆包，得到单个的键值对</li>
+</ul>
+</li>
+</ul>
+<h3 id="被装饰函数有返回值"><a href="#被装饰函数有返回值" class="headerlink" title="被装饰函数有返回值"></a>被装饰函数有返回值</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span>(<span class="params">func</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span>(<span class="params">x, y</span>):</span></span><br><span class="line"></span><br><span class="line">        r = func(x, y)  <span class="comment"># 装饰器装饰之后， func才是真正的add求和函数</span></span><br><span class="line">        </span><br><span class="line">        r += <span class="number">10</span>  <span class="comment"># 将两数之和再加 10</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> r</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> inner</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@outer</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    <span class="keyword">return</span> x + y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在装饰器中 对函数的执行结果 加10 处理</span></span><br><span class="line">r = add(<span class="number">10</span>, <span class="number">200</span>)  <span class="comment"># add实际是inner</span></span><br><span class="line"><span class="built_in">print</span>(r)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>被装饰函数有返回值， <code>inner</code>需要将 <code>func</code> 的结果 返回</p>
+</blockquote>
+<h3 id="多个装饰器装饰函数"><a href="#多个装饰器装饰函数" class="headerlink" title="多个装饰器装饰函数"></a>多个装饰器装饰函数</h3><ul>
+<li><p>多个装饰器装饰同一个函数，装饰顺序和执行顺序正好相反</p>
+</li>
+<li><p>装饰器函数的执行顺序和装饰器的顺序有关</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_func1</span>(<span class="params">func</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;这是测试1...&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">call_func1</span>():</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;这是装饰器1...&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> func()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> call_func1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_func2</span>(<span class="params">func</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;这是测试2...&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">call_func2</span>():</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;这是装饰器2...&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> func()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> call_func2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@set_func1</span></span><br><span class="line"><span class="meta">@set_func2</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">s</span>():</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;hello...&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">s()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>代码从上到下，依次执行，同时装饰器是用来装饰函数的</p>
+<ul>
+<li><p>执行到装饰器set_func1时，无法装饰，先跳过</p>
+</li>
+<li><p>执行装饰器set_func2时，装饰原始函数s，</p>
+<ul>
+<li>先执行set_func2,输出”这是测试2…”，</li>
+<li>然后得到s = call_func2(s)，此时的s是原始函数s</li>
+</ul>
+</li>
+<li><p>然后装饰器set_func1装饰新得到的函数s = call_func2(s)</p>
+<ul>
+<li>先执行set_func1,输出”这是测试1…”</li>
+<li>然后得到s = call_func1(s)，此时的s是新得到的函数s = call_func2(s)</li>
+</ul>
+</li>
+<li><p>最后得到函数s = call_func1(call_func(s))</p>
+</li>
+<li><p>最后执行函数s</p>
+<ul>
+<li>先执行call_func1,输出”这是装饰器1…”</li>
+<li>再执行call_func2,输出”这是装饰器2…”</li>
+<li>最后执行原始函数s，输出”hello…”</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="装饰器带参"><a href="#装饰器带参" class="headerlink" title="装饰器带参"></a>装饰器带参</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_pars</span>(<span class="params">pars</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_func</span>(<span class="params">func</span>):</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">call_func</span>():</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;這是測試級別%d&quot;</span> % pars)</span><br><span class="line">            <span class="keyword">return</span> func()</span><br><span class="line">        <span class="keyword">return</span> call_func</span><br><span class="line">    <span class="keyword">return</span> set_func</span><br><span class="line"></span><br><span class="line"><span class="meta">@set_pars(<span class="params"><span class="number">10</span></span>) </span><span class="comment"># 装饰分两步</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">s</span>():</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;hello...&quot;</span>)</span><br><span class="line"></span><br><span class="line">s()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>装饰器带参时，装饰函数过程分两步：<ul>
+<li>将参数传给函数set_pars，进行执行</li>
+<li>将函数返回结果作为函数s的装饰器进行装饰</li>
+</ul>
+</li>
+</ul>
+<h3 id="类作为装饰器"><a href="#类作为装饰器" class="headerlink" title="类作为装饰器"></a>类作为装饰器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, func</span>):</span></span><br><span class="line">        self.func = func</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span>(<span class="params">self, *args, **kwargs</span>):</span>  </span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        魔法方法__call__可以将对象设置为可调用对象（callable）,允许一个类的实例像函数一样被调用 </span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;这是类装饰器...&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> self.func(*args, **kwargs)</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test  </span><span class="comment"># s = Test(s)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">s</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;hello python...&quot;</span>)</span><br><span class="line"></span><br><span class="line">s()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>自定义的函数、内置函数和类都属于可调用对象，但凡是可以把一对括号()应用到某个对象身上都可称之为可调用对象</li>
+<li>判断对象是否为可调用对象可以用函数 callable</li>
+<li>如果在类中实现了 <code>__call__</code> 方法，那么实例对象也将成为一个可调用对象</li>
+</ul>
+<h3 id="装饰类的装饰器"><a href="#装饰类的装饰器" class="headerlink" title="装饰类的装饰器"></a>装饰类的装饰器</h3><h4 id="装饰类方法"><a href="#装饰类方法" class="headerlink" title="装饰类方法"></a>装饰类方法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">godme</span>(<span class="params">fun</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__godme</span>(<span class="params">self,message</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;before&#x27;</span>)</span><br><span class="line">        fun(self,message)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;after&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> __godme</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">show</span>(<span class="params">self,message</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(message)</span><br><span class="line"><span class="meta">    @godme</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">say</span>(<span class="params">self,message</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(message)</span><br><span class="line"> </span><br><span class="line">person = Person()</span><br><span class="line">person.say(<span class="string">&#x27;happy&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>此时装饰器和一般的函数装饰器类似，只是多了一个参数：<code>self</code>， 并且<code>self</code>可以调用实例对象的属性和方法</p>
+<h4 id="装饰类"><a href="#装饰类" class="headerlink" title="装饰类"></a>装饰类</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">singleton</span>(<span class="params">cls, *args, **kwargs</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_instance</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">hasattr</span>(cls, <span class="string">&#x27;__instance&#x27;</span>):</span><br><span class="line">            <span class="built_in">setattr</span>(cls, <span class="string">&#x27;__instance&#x27;</span>, cls(*args, **kwargs))</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">getattr</span>(cls, <span class="string">&#x27;__instance&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> get_instance</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@singleton</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, a</span>):</span></span><br><span class="line">        self.a = a</span><br></pre></td></tr></table></figure>
+
+<p>其实此时和普通的装饰函数的用法类似，就是将cls作为参数，传递给装饰器即可。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PYTHON/" rel="tag"># PYTHON</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/03/31/PPHtakYw7/" rel="prev" title="Git仓库密钥管理">
+      <i class="fa fa-chevron-left"></i> Git仓库密钥管理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/05/03/R8lT7eyY5/" rel="next" title="time与timeit 模块">
+      time与timeit 模块 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">函数复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">返回函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AD%E5%8C%85"><span class="nav-number">1.2.</span> <span class="nav-text">闭包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">装饰器介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8%E8%AF%AD%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">装饰器语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8%E5%88%86%E7%B1%BB"><span class="nav-number">4.</span> <span class="nav-text">装饰器分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A2%AB%E8%A3%85%E9%A5%B0%E5%87%BD%E6%95%B0%E6%9C%89%E5%8F%82%E6%95%B0"><span class="nav-number">4.1.</span> <span class="nav-text">被装饰函数有参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A2%AB%E8%A3%85%E9%A5%B0%E7%9A%84%E5%87%BD%E6%95%B0%E6%9C%89%E4%B8%8D%E5%AE%9A%E9%95%BF%E5%8F%82%E6%95%B0"><span class="nav-number">4.2.</span> <span class="nav-text">被装饰的函数有不定长参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A2%AB%E8%A3%85%E9%A5%B0%E5%87%BD%E6%95%B0%E6%9C%89%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">4.3.</span> <span class="nav-text">被装饰函数有返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E4%B8%AA%E8%A3%85%E9%A5%B0%E5%99%A8%E8%A3%85%E9%A5%B0%E5%87%BD%E6%95%B0"><span class="nav-number">4.4.</span> <span class="nav-text">多个装饰器装饰函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8%E5%B8%A6%E5%8F%82"><span class="nav-number">4.5.</span> <span class="nav-text">装饰器带参</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E4%BD%9C%E4%B8%BA%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="nav-number">4.6.</span> <span class="nav-text">类作为装饰器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A3%85%E9%A5%B0%E7%B1%BB%E7%9A%84%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="nav-number">4.7.</span> <span class="nav-text">装饰类的装饰器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A3%85%E9%A5%B0%E7%B1%BB%E6%96%B9%E6%B3%95"><span class="nav-number">4.7.1.</span> <span class="nav-text">装饰类方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A3%85%E9%A5%B0%E7%B1%BB"><span class="nav-number">4.7.2.</span> <span class="nav-text">装饰类</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">bookandmusic</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备2021028097号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bookandmusic</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : '',
+      projectId: ''
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
